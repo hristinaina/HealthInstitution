@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HealthInstitution.MVVM.Models;
+using HealthInstitution.Stores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +10,18 @@ namespace HealthInstitution.MVVM.ViewModels
 {
     class MainViewModel : BaseViewModel
     {
-        public BaseViewModel CurrentViewModel { get; }
-   
-        public MainViewModel()
+        private readonly NavigationStore _navigationStore;
+        public BaseViewModel CurrentViewModel
         {
-            CurrentViewModel = new LoginViewModel();         }
+            get { return _navigationStore.CurrentViewModel; }
+        }
+        public MainViewModel(NavigationStore navigation)
+        {
+            _navigationStore = navigation;
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+        }
+        private void OnCurrentViewModelChanged() {
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
     }
 }

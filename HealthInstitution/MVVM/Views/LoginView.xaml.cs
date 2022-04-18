@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace HealthInstitution.MVVM.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class LogInView : UserControl
     {
-        public LoginView()
+        public LogInView()
         {
             InitializeComponent();
         }

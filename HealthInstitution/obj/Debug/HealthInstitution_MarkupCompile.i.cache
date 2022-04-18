@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\App.xaml
-2144038419
+3-613085147
 
-10-1478068752
+161799484991
 15-519532633
-MainWindow.xaml;MVVM\Views\LoginView.xaml;
+MainWindow.xaml;MVVM\Views\LogInView.xaml;MVVM\Views\PatientMainView.xaml;
 
-False
+True
 

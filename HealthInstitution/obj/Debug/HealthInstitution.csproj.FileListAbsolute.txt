@@ -1,9 +1,3 @@
-C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\MainWindow.g.cs
-C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\MVVM\Views\LoginView.g.cs
-C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\App.g.cs
-C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution_MarkupCompile.cache
-C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution_MarkupCompile.lref
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\bin\Debug\HealthInstitution.exe.config
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\bin\Debug\HealthInstitution.exe
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\bin\Debug\HealthInstitution.pdb
@@ -12,9 +6,16 @@ C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\bin\
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\bin\Debug\MaterialDesignColors.pdb
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution.csproj.AssemblyReference.cache
+C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\MainWindow.g.cs
+C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\MVVM\Views\LogInView.g.cs
+C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\App.g.cs
+C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution_MarkupCompile.cache
+C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution_MarkupCompile.lref
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\App.baml
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\MainWindow.baml
-C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\MVVM\Views\LoginView.baml
+C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\MVVM\Views\LogInView.baml
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution.g.resources
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution.Properties.Resources.resources
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution.csproj.GenerateResource.cache
@@ -22,4 +23,5 @@ C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution.csproj.CopyComplete
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution.exe
 C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution.pdb
-C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\HealthInstitution.csproj.AssemblyReference.cache
+C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\MVVM\Views\PatientMainView.g.cs
+C:\Users\Milica\Desktop\Desktop\ftn\predmeti\USI\Projekat\HealthInstitution\obj\Debug\MVVM\Views\PatientMainView.baml

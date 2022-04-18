@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HealthInstitution.Commands;
+using HealthInstitution.Stores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,12 @@ namespace HealthInstitution.MVVM.ViewModels
             set { _password = value; OnPropertyChanged(nameof(Password)); }
         }
 
-            public ICommand LogInCommand { get; }
+            public ICommand Submit { get; }
+
+
+        public LoginViewModel(NavigationStore navigationStore)
+        {
+            Submit = new LogInCommand(navigationStore);
+        }
     }
 }

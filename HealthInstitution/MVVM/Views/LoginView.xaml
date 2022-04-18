@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="HealthInstitution.MVVM.Views.LoginView"
+﻿<UserControl x:Class="HealthInstitution.MVVM.Views.LogInView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -73,7 +73,7 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
                 Background="#6680DEEA" 
                 BorderBrush="#6680DEEA"
-                Command="{Binding LogInCommand}"/>
+                Command="{Binding Submit}"/>
 
     </Grid>
 
