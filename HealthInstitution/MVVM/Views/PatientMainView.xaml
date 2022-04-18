@@ -13,24 +13,57 @@
              d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2.5*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="0.5*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="7*"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Image HorizontalAlignment="Right" Grid.RowSpan="6" Margin="0,76,75,94.545" Width="428" RenderTransformOrigin="0.5,0.5" Opacity="0.2" Grid.Column="1">
-            <Image.Source>
-                <BitmapImage  UriSource="/Style/Images/cardiology.png" />
-            </Image.Source>
-        </Image>
+        <materialDesign:Card>
+            <TabControl
+                    materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+                    SnapsToDevicePixels="True"
+                    Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+                    TabStripPlacement="Left" RenderTransformOrigin="0.523,0.505">
+                <TabItem Width="172">
+                    <TabItem.Header>
+                        <StackPanel Width="auto" Height="auto">
+                            <TextBlock
+                                        HorizontalAlignment="Center"
+                                        Text="My medical record" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
+                <TabItem Width="172">
+                    <TabItem.Header>
+                        <StackPanel Width="auto" Height="auto">
+                            <TextBlock
+                                        HorizontalAlignment="Center"
+                                        Text="My appointments" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
+                <TabItem Width="172">
+                    <TabItem.Header>
+                        <StackPanel Width="auto" Height="auto">
+                            <TextBlock
+                                            HorizontalAlignment="Center"
+                                            Text="Search for a doctor" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
+                <TabItem Width="172">
+                    <TabItem.Header>
+                        <StackPanel Width="auto" Height="auto">
+                            <TextBlock
+                                            HorizontalAlignment="Center"
+                                            Text="Fill out a survey" />
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
+            </TabControl>
+        </materialDesign:Card>
 
     </Grid>
 </UserControl>
