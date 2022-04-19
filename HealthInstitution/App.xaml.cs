@@ -21,7 +21,7 @@ namespace HealthInstitution
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            _navigation.CurrentViewModel = new LoginViewModel(_institution, _navigation);
+            _navigation.CurrentViewModel = new LoginViewModel();
             MainWindow = new MainWindow()
             {
                 DataContext = new MainViewModel(_navigation)

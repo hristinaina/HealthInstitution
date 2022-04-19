@@ -9,10 +9,10 @@ namespace HealthInstitution.Commands
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
 
-        public LogInCommand(Institution institution, NavigationStore navigationStore)
+        public LogInCommand()
         {
-            _institution = institution;
-            _navigationStore = navigationStore;
+            _institution = Institution.Instance();
+            _navigationStore = NavigationStore.Instance();
         }
 
         public override void Execute(object parameter)
