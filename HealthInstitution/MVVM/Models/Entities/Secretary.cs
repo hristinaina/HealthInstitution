@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HealthInstitution.MVVM.Models.Entities
+﻿namespace HealthInstitution.MVVM.Models.Entities
 {
-    class Secretary : User
+    public class Secretary : User
     {
     }
 }

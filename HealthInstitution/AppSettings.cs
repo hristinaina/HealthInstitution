@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HealthInstitution
 {
 	// class that stores the names of the files that store app data
-	class AppSettings
+	public class AppSettings
     {
 		private readonly string patientFileName;
 		private readonly string doctorFileName;

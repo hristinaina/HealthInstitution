@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             xmlns:viewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
+             xmlns:viewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels" xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Commands"
+             d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
              mc:Ignorable="d"
              Height="600" 
              Width="1200"
@@ -46,7 +47,8 @@
                     MaxWidth="300"
                     FontSize="12"
                     materialDesign:HintAssist.Hint="Username"
-                    Background="#A5FFFFFF">
+                    Background="#A5FFFFFF"
+                    Text="{Binding Email}">
 
                 <!--IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}"-->
                 <TextBox.SelectionBrush>
@@ -55,13 +57,9 @@
             </TextBox>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1" Width="300" Height="50" Margin="0,60,0,0">
-            <PasswordBox
-                    Style="{StaticResource MaterialDesignFilledPasswordBox}"
-                    VerticalAlignment="Top"
-                    MaxWidth="300"
-                    FontSize="12"
-                    materialDesign:HintAssist.Hint="Password" 
-                    Background="#A5FFFFFF"/>
+
+            <components:BindablePasswordBox Grid.Column="1"
+                    Password="{Binding Password}"/>
         </StackPanel>
 
         <Button 
@@ -74,7 +72,7 @@
                 Background="#6680DEEA" 
                 BorderBrush="#6680DEEA"
                 Command="{Binding Submit}"/>
-                <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"--> 
+                <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"--> 
 
     </Grid>
 

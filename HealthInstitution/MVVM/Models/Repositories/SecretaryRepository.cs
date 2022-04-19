@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.MVVM.Models.Entities.Secretary;
+﻿using System.Collections.Generic;
+using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.Models.Repositories
 {
-    class SecretaryRepository
+    public class SecretaryRepository
     {
         private string _secretaryFileName;
         private List<Secretary> _secretaries;

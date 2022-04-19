@@ -97,6 +97,9 @@
     <Compile Include="MVVM\Models\Repositories\SecretaryRepository.cs" />
     <Compile Include="MVVM\Models\Entities\User.cs" />
     <Compile Include="MVVM\ViewModels\PatientMainViewModel.cs" />
+    <Compile Include="MVVM\Views\Commands\BindablePasswordBox.xaml.cs">
+      <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Views\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
     </Compile>
@@ -104,8 +107,7 @@
       <DependentUpon>PatientMainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Models\Repositories\DoctorRepository.cs" />
-    <Compile Include="MVVM\Models\Services\UserService.cs" />
-    <Compile Include="Stores\NavigationStore.cs" />
+    <Compile Include="MVVM\ViewModels\Stores\NavigationStore.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -114,12 +116,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\CommandBase.cs" />
-    <Compile Include="Commands\LogInCommand.cs" />
+    <Compile Include="MVVM\ViewModels\Commands\CommandBase.cs" />
+    <Compile Include="MVVM\ViewModels\Commands\LogInCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\Views\Commands\BindablePasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\Views\LogInView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -150,6 +156,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\admin.json" />
+    <None Include="Data\doctor.json" />
+    <None Include="Data\patient.json" />
+    <None Include="Data\secretary.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

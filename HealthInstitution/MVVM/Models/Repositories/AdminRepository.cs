@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.MVVM.Models.Entities.Admin;
+﻿using System.Collections.Generic;
+using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.Models.Repositories
 {
-    class AdminRepository
+    public class AdminRepository
     {
         private string _adminFileName;
         private List<Admin> _administrators;

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.MVVM.Models.Entities.Doctor;
+﻿using System.Collections.Generic;
+using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.Repositories
 {
-    class DoctorRepository
+    public class DoctorRepository
     {
         private string _doctorFileName;
         private List<Doctor> _doctors;

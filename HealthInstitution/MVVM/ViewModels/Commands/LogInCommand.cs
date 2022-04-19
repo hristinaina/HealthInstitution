@@ -19,8 +19,10 @@ namespace HealthInstitution.Commands
 
         public override void Execute(object parameter)
         {
-            Institution.Login(_loginVM.Email,_loginVM.Password);
-            _navigationStore.CurrentViewModel = new PatientMainViewModel();
+            if (_institution.Login(_loginVM.Email, _loginVM.Password))
+            {
+                _navigationStore.CurrentViewModel = new PatientMainViewModel();
+            }
         }
 
         public override bool CanExecute(object parameter)
