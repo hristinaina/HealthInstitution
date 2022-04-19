@@ -1,12 +1,6 @@
 ﻿using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.Stores;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace HealthInstitution
@@ -14,24 +8,26 @@ namespace HealthInstitution
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application {
+    public partial class App : Application
+    {
 
         private readonly Institution _institution;
-        private readonly NavigationStore _navigationStore;
+        private readonly NavigationStore _navigation;
         public App()
         {
-            _institution = new Institution();
-            _navigationStore = new NavigationStore();
+            _institution = Institution.Instance();
+            _navigation = NavigationStore.Instance();
         }
 
-        protected override void OnStartup(StartupEventArgs e) {
-            _navigationStore.CurrentViewModel = new LoginViewModel(_navigationStore);
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            _navigation.CurrentViewModel = new LoginViewModel(_institution, _navigation);
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_navigationStore)
+                DataContext = new MainViewModel(_navigation)
             };
             MainWindow.Show();
             base.OnStartup(e);
-    }
+        }
     }
 }

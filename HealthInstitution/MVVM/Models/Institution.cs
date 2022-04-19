@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HealthInstitution.MVVM.Models
+﻿namespace HealthInstitution.MVVM.Models
 {
-    class Institution
+    public class Institution
     {
+        private static Institution s_instance;
+
+        protected Institution() { }
+
+        public static Institution Instance()
+        {
+            if (s_instance == null)
+            {
+                s_instance = new Institution();
+            }
+            return s_instance;
+        }
     }
 }

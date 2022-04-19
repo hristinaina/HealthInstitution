@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HealthInstitution.Commands
@@ -16,9 +12,10 @@ namespace HealthInstitution.Commands
             return true;
         }
 
-        public abstract void Execute(object parameter); 
+        public abstract void Execute(object parameter);
 
-        protected void OnCanExecutedChanged() {
+        protected void OnCanExecutedChanged()
+        {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }

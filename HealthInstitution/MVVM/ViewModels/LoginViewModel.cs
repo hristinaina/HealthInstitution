@@ -1,10 +1,6 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.MVVM.Models;
 using HealthInstitution.Stores;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels
@@ -13,24 +9,24 @@ namespace HealthInstitution.MVVM.ViewModels
     {
         private string _username;
         private string _password;
-    
-        public string Username {
-            get { return _username; }
+
+        public string Username
+        {
+            get => _username;
             set { _username = value; OnPropertyChanged(nameof(Username)); }
         }
 
         public string Password
         {
-            get { return _password; }
+            get => _password;
             set { _password = value; OnPropertyChanged(nameof(Password)); }
         }
 
-            public ICommand Submit { get; }
+        public ICommand Submit { get; }
 
-
-        public LoginViewModel(NavigationStore navigationStore)
+        public LoginViewModel(Institution institution, NavigationStore navigationStore)
         {
-            Submit = new LogInCommand(navigationStore);
+            Submit = new LogInCommand(institution, navigationStore);
         }
     }
 }

@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:viewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
              mc:Ignorable="d"
              Height="600" 
              Width="1200"
@@ -45,8 +46,9 @@
                     MaxWidth="300"
                     FontSize="12"
                     materialDesign:HintAssist.Hint="Username"
-                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}" 
                     Background="#A5FFFFFF">
+
+                <!--IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxEnabledComboBox}"-->
                 <TextBox.SelectionBrush>
                     <ImageBrush/>
                 </TextBox.SelectionBrush>
@@ -58,7 +60,6 @@
                     VerticalAlignment="Top"
                     MaxWidth="300"
                     FontSize="12"
-                    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledPasswordBoxEnabledComboBox}"
                     materialDesign:HintAssist.Hint="Password" 
                     Background="#A5FFFFFF"/>
         </StackPanel>
@@ -70,10 +71,10 @@
                 Width="100"
                 ToolTip="Log in to your account"
                 Content="Log in"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
                 Background="#6680DEEA" 
                 BorderBrush="#6680DEEA"
                 Command="{Binding Submit}"/>
+                <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"--> 
 
     </Grid>
 
