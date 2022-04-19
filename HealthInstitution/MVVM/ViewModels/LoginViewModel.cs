@@ -26,7 +26,7 @@ namespace HealthInstitution.MVVM.ViewModels
 
         public LoginViewModel()
         {
-            Submit = new LogInCommand();
+            Submit = new LogInCommand(this);
         }
     }
 }

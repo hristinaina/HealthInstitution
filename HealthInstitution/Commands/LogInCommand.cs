@@ -8,15 +8,18 @@ namespace HealthInstitution.Commands
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
+        private readonly LoginViewModel _loginVM;
 
-        public LogInCommand()
+        public LogInCommand(LoginViewModel loginVM)
         {
+            _loginVM = loginVM;
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();
         }
 
         public override void Execute(object parameter)
         {
+            Institution.Login(_loginVM.Email,_loginVM.Password);
             _navigationStore.CurrentViewModel = new PatientMainViewModel();
         }
 
