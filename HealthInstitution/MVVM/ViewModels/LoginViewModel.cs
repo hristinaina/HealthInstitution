@@ -7,13 +7,13 @@ namespace HealthInstitution.MVVM.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        private string _username;
+        private string _email;
         private string _password;
 
-        public string Username
+        public string Email
         {
-            get => _username;
-            set { _username = value; OnPropertyChanged(nameof(Username)); }
+            get => _email;
+            set { _email = value; OnPropertyChanged(nameof(Email)); }
         }
 
         public string Password
@@ -24,9 +24,9 @@ namespace HealthInstitution.MVVM.ViewModels
 
         public ICommand Submit { get; }
 
-        public LoginViewModel(Institution institution, NavigationStore navigationStore)
+        public LoginViewModel()
         {
-            Submit = new LogInCommand(institution, navigationStore);
+            Submit = new LogInCommand();
         }
     }
 }
