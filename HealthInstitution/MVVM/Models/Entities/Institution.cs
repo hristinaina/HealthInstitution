@@ -35,54 +35,6 @@ namespace HealthInstitution.MVVM.Models
             // TODO: add other repositories
         }
 
-        public bool Login(string email, string password)
-        {
-
-            if (String.IsNullOrEmpty(email) | String.IsNullOrEmpty(password))
-            {
-                Console.WriteLine("Niste popunili sva polja.");
-                //TODO prikazati kao MessageDialog
-                return false;
-            }
-
-            Patient userPat = User.FindUser(PatientRepository.GetPatients(), email, password);
-            if (userPat != null)
-            {
-                Console.WriteLine("Uspjesno ste se ulogovali!");
-                Console.WriteLine("GLAVNI MENI PACIJENTA");
-                return true;
-            }
-
-            Doctor userDoc = User.FindUser(DoctorRepository.GetDoctors(), email, password);
-            if (userDoc != null)
-            {
-                Console.WriteLine("Uspjesno ste se ulogovali!");
-                Console.WriteLine("GLAVNI MENI DOKTORA");
-                return true;
-            }
-
-            Secretary userSec = User.FindUser(SecretaryRepository.GetSecretaries(), email, password);
-            if (userSec != null)
-            {
-                Console.WriteLine("Uspjesno ste se ulogovali!");
-                Console.WriteLine("GLAVNI MENI SEKRETARA");
-                return true;
-            }
-
-
-            Admin userAdm = User.FindUser(AdminRepository.GetAdministrators(), email, password);
-            if (userAdm != null)
-            {
-                Console.WriteLine("Uspjesno ste se ulogovali!");
-                Console.WriteLine("GLAVNI MENI UPRAVNIKA");
-                return true;
-            }
-
-            Console.WriteLine("Ne postoji korisnik sa unesenim podacima!");
-            //TODO: prikazati kao MessageDialog
-            return false;
-        }
-
         public void LoadAll()
         {
             AdminRepository.LoadFromFile();

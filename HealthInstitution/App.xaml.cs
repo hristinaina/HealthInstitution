@@ -26,25 +26,25 @@ namespace HealthInstitution
             _navigation = NavigationStore.Instance();
 
 
-            //Patient p1 = new Patient();
-            //p1.Email = "nestolol@gmail.com";
-            //p1.Password = "pitajKonobara";
-            //Institution.Instance().PatientRepository.GetPatients().Add(p1);
+            Patient p1 = new Patient();
+            p1.Email = "p";
+            p1.Password = "p";
+            Institution.Instance().PatientRepository.GetPatients().Add(p1);
 
-            //Doctor p2 = new Doctor();
-            //p2.Email = "nestolol2@gmail.com";
-            //p2.Password = "pitajKonobara2";
-            //Institution.Instance().DoctorRepository.GetDoctors().Add(p2);
+            Secretary s1 = new Secretary();
+            s1.Email = "s";
+            s1.Password = "s";
+            Institution.Instance().SecretaryRepository.GetSecretaries().Add(s1);
 
-            //Patient p3 = new Patient();
-            //p3.Email = "nestolol3@gmail.com";
-            //p3.Password = "pitajKonobara3";
-            //Institution.Instance().PatientRepository.GetPatients().Add(p3);
+            Admin a1 = new Admin();
+            a1.Email = "a";
+            a1.Password = "a";
+            Institution.Instance().AdminRepository.GetAdministrators().Add(a1);
 
-            Patient p4 = new Patient();
-            p4.Email = "a";
-            p4.Password = "a";
-            Institution.Instance().PatientRepository.GetPatients().Add(p4);
+            Doctor d1 = new Doctor();
+            d1.Email = "d";
+            d1.Password = "d";
+            Institution.Instance().DoctorRepository.GetDoctors().Add(d1);
 
 
         }
