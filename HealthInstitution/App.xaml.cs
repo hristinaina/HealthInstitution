@@ -40,10 +40,10 @@ namespace HealthInstitution
             //p3.Password = "pitajKonobara3";
             //Institution.Instance().PatientRepository.GetPatients().Add(p3);
 
-            //Patient p4 = new Patient();
-            //p4.Email = "a";
-            //p4.Password = "a";
-            //Institution.Instance().PatientRepository.GetPatients().Add(p4);
+            Patient p4 = new Patient();
+            p4.Email = "a";
+            p4.Password = "a";
+            Institution.Instance().PatientRepository.GetPatients().Add(p4);
 
 
         }
