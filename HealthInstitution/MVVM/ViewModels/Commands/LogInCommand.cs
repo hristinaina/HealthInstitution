@@ -1,10 +1,11 @@
 ﻿using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels;
+using HealthInstitution.MVVM.ViewModels.MainPageViewModels;
 using HealthInstitution.Stores;
 
 namespace HealthInstitution.Commands
 {
-    class LogInCommand : CommandBase
+    public class LogInCommand : CommandBase
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
@@ -21,7 +22,8 @@ namespace HealthInstitution.Commands
         {
             if (_institution.Login(_loginVM.Email, _loginVM.Password))
             {
-                _navigationStore.CurrentViewModel = new PatientMainViewModel();
+                // TODO : check which user type it is and redirect on the right main page
+                _navigationStore.CurrentViewModel = new SecretaryMainPageViewModel();
             }
         }
 
