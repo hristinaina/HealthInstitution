@@ -1,6 +1,4 @@
 ﻿using HealthInstitution.Commands;
-using HealthInstitution.MVVM.Models;
-using HealthInstitution.Stores;
 using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels
@@ -26,7 +24,7 @@ namespace HealthInstitution.MVVM.ViewModels
 
         public LoginViewModel()
         {
-            Submit = new LogInCommand();
+            Submit = new LogInCommand(this);
         }
     }
 }

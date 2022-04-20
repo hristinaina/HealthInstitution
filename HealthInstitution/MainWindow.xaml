@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:HealthInstitution"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:views="clr-namespace:HealthInstitution.MVVM.Views"
+        xmlns:viewmains="clr-namespace:HealthInstitution.MVVM.Views.MainPageViews"
         xmlns:viewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels"
+        xmlns:viewmodelmains="clr-namespace:HealthInstitution.MVVM.ViewModels.MainPageViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="NMK - Log in" 
@@ -21,8 +23,17 @@
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
                 <views:LogInView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:PatientMainViewModel}">
-                <views:PatientMainView/>
+            <DataTemplate DataType="{x:Type viewmodelmains:PatientMainPageViewModel}">
+                <viewmains:PatientMainPageView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelmains:DoctorMainPageViewModel}">
+                <viewmains:DoctorMainPageView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelmains:SecretaryMainPageViewModel}">
+                <viewmains:SecretaryMainPageView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelmains:AdminMainPageViewModel}">
+                <viewmains:AdminMainPageView/>
             </DataTemplate>
         </Grid.Resources>
         <ContentControl Content="{Binding CurrentViewModel}"/>
