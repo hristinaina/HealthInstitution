@@ -17,10 +17,11 @@ namespace HealthInstitution
         public App()
         {
             // * appSettings kao parametre prima putanje do fajlova gdje su smjesteni podaci za rad Zdravstvene Ustanove 
-            AppSettings appSettings = new AppSettings("./Data/patient.json", "./Data/doctor.json", "./Data/secretary.json",
+            AppSettings appSettings = AppSettings.Instance();
+            appSettings.AddFilePaths("./Data/patient.json", "./Data/doctor.json", "./Data/secretary.json",
                 "./Data/admin.json");
-            _institution = Institution.Instance(appSettings);
-            _institution.loadAll();
+            _institution = Institution.Instance();
+            _institution.LoadAll();
 
             _navigation = NavigationStore.Instance();
 

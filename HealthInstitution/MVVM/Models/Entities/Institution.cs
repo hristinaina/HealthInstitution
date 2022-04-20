@@ -5,29 +5,18 @@ using System;
 
 namespace HealthInstitution.MVVM.Models
 {
-    // Institution is implemented with Singleton pattern
+    // class through which all system entities can be accessed
+    // implemented using Singleton pattern
     public sealed class Institution
     {
-        private AppSettings appSettings;
         public PatientRepository PatientRepository;
         public DoctorRepository DoctorRepository;
         public SecretaryRepository SecretaryRepository;
         public AdminRepository AdminRepository;
-        // TODO: dodati ostale repozitorijume
+        // TODO: add other repositories
 
         private static Institution s_instance = null;
 
-        // used in Main>Program to create an instance (only one) of RepositoryFactory class
-        public static Institution Instance(AppSettings appSettings)
-        {
-            if (s_instance == null)
-            {
-                s_instance = new Institution(appSettings);
-            }
-            return s_instance;
-        }
-
-        // used anywhere else to get that instance
         public static Institution Instance()
         {
             if (s_instance == null)
@@ -39,14 +28,11 @@ namespace HealthInstitution.MVVM.Models
 
         private Institution()
         {
-        }
-
-        private Institution(AppSettings appSettings)
-        {
-            // TODO: dodati za ostale repozitorijume
-            this.appSettings = appSettings;
-            createRepositories();
-
+            AdminRepository = new AdminRepository(AppSettings.Instance().GetAdminFileName());
+            SecretaryRepository = new SecretaryRepository(AppSettings.Instance().GetSecretaryFileName());
+            PatientRepository = new PatientRepository(AppSettings.Instance().GetPatientFileName());
+            DoctorRepository = new DoctorRepository(AppSettings.Instance().GetDoctorFileName());
+            // TODO: add other repositories
         }
 
         public bool Login(string email, string password)
@@ -63,9 +49,7 @@ namespace HealthInstitution.MVVM.Models
             if (userPat != null)
             {
                 Console.WriteLine("Uspjesno ste se ulogovali!");
-
                 Console.WriteLine("GLAVNI MENI PACIJENTA");
-
                 return true;
             }
 
@@ -75,7 +59,6 @@ namespace HealthInstitution.MVVM.Models
                 Console.WriteLine("Uspjesno ste se ulogovali!");
                 Console.WriteLine("GLAVNI MENI DOKTORA");
                 return true;
-
             }
 
             Secretary userSec = User.FindUser(SecretaryRepository.GetSecretaries(), email, password);
@@ -100,32 +83,22 @@ namespace HealthInstitution.MVVM.Models
             return false;
         }
 
-        public void loadAll()
+        public void LoadAll()
         {
             AdminRepository.LoadFromFile();
             PatientRepository.LoadFromFile();
             DoctorRepository.LoadFromFile();
             SecretaryRepository.LoadFromFile();
-            // TODO: dodati ostalo
+            // TODO: add other repositories
         }
 
-        public void saveAll()
+        public void SaveAll()
         {
             AdminRepository.SaveToFile();
             PatientRepository.SaveToFile();
             DoctorRepository.SaveToFile();
             SecretaryRepository.SaveToFile();
-            // TODO: dodati ostalo
+            // TODO: add other repositories
         }
-
-        private void createRepositories()
-        {
-
-            AdminRepository = new AdminRepository(this.appSettings.GetAdminFileName());
-            SecretaryRepository = new SecretaryRepository(this.appSettings.GetSecretaryFileName());
-            PatientRepository = new PatientRepository(this.appSettings.GetPatientFileName());
-            DoctorRepository = new DoctorRepository(this.appSettings.GetDoctorFileName());
-        }
-
     }
 }
