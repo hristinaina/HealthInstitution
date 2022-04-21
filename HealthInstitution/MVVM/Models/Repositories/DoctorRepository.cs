@@ -6,15 +6,15 @@ namespace HealthInstitution.Repositories
     public class DoctorRepository
     {
         private string _doctorFileName;
-        private List<Doctor> _doctors;
+        private List<DoctorController> _doctors;
 
         public DoctorRepository(string doctorFileName)
         {
             this._doctorFileName = doctorFileName;
-            this._doctors = new List<Doctor>();
+            this._doctors = new List<DoctorController>();
         }
 
-        public List<Doctor> GetDoctors()
+        public List<DoctorController> GetDoctors()
         {
             return this._doctors;
         }

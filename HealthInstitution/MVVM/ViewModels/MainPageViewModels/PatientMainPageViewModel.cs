@@ -5,9 +5,9 @@ namespace HealthInstitution.MVVM.ViewModels.MainPageViewModels
     public class PatientMainPageViewModel : BaseViewModel
     {
 
-        protected Patient patient;
+        protected PatientController patient;
 
-        public PatientMainPageViewModel(Patient patient)
+        public PatientMainPageViewModel(PatientController patient)
         {
             this.patient = patient;
 

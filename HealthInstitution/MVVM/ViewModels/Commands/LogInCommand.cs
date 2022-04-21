@@ -7,16 +7,16 @@ using HealthInstitution.Stores;
 
 namespace HealthInstitution.Commands
 {
-    public class LogInCommand : CommandBase
+    public class LogInCommand : BaseCommand
     {
-        private readonly Institution _institution;
+        private readonly InstitutionController _institution;
         private readonly NavigationStore _navigationStore;
         private readonly LoginViewModel _loginVM;
 
         public LogInCommand(LoginViewModel loginVM)
         {
             _loginVM = loginVM;
-            _institution = Institution.Instance();
+            _institution = InstitutionController.Instance();
             _navigationStore = NavigationStore.Instance();
         }
 
@@ -44,28 +44,28 @@ namespace HealthInstitution.Commands
 
         private bool Login(string email, string password)
         {
-            Patient userPatient = User.FindUser(_institution.PatientRepository.GetPatients(), email, password);
+            PatientController userPatient = MVVM.Models.User.FindUser(_institution.PatientRepository.GetPatients(), email, password);
             if (userPatient != null)
             {
                 _navigationStore.CurrentViewModel = new PatientMainPageViewModel(userPatient);
                 return true;
             }
 
-            Doctor userDoctor = User.FindUser(_institution.DoctorRepository.GetDoctors(), email, password);
+            DoctorController userDoctor = MVVM.Models.User.FindUser(_institution.DoctorRepository.GetDoctors(), email, password);
             if (userDoctor != null)
             {
                 _navigationStore.CurrentViewModel = new DoctorMainPageViewModel(userDoctor);
                 return true;
             }
 
-            Secretary userSecretary = User.FindUser(_institution.SecretaryRepository.GetSecretaries(), email, password);
+            SecretaryController userSecretary = MVVM.Models.User.FindUser(_institution.SecretaryRepository.GetSecretaries(), email, password);
             if (userSecretary != null)
             {
                 _navigationStore.CurrentViewModel = new SecretaryMainPageViewModel(userSecretary);
                 return true;
             }
 
-            Admin userAdmin = User.FindUser(_institution.AdminRepository.GetAdministrators(), email, password);
+            AdminController userAdmin = MVVM.Models.User.FindUser(_institution.AdminRepository.GetAdministrators(), email, password);
             if (userAdmin != null)
             {
                 _navigationStore.CurrentViewModel = new AdminMainPageViewModel(userAdmin);

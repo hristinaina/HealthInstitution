@@ -12,7 +12,7 @@ namespace HealthInstitution
     public partial class App : Application
     {
 
-        private readonly Institution _institution;
+        private readonly InstitutionController _institution;
         private readonly NavigationStore _navigation;
         public App()
         {
@@ -20,31 +20,31 @@ namespace HealthInstitution
             AppSettings appSettings = AppSettings.Instance();
             appSettings.AddFilePaths("./Data/patient.json", "./Data/doctor.json", "./Data/secretary.json",
                 "./Data/admin.json");
-            _institution = Institution.Instance();
+            _institution = InstitutionController.Instance();
             _institution.LoadAll();
 
             _navigation = NavigationStore.Instance();
 
 
-            Patient p1 = new Patient();
+            PatientController p1 = new PatientController();
             p1.Email = "p";
             p1.Password = "p";
-            Institution.Instance().PatientRepository.GetPatients().Add(p1);
+            InstitutionController.Instance().PatientRepository.GetPatients().Add(p1);
 
-            Secretary s1 = new Secretary();
+            SecretaryController s1 = new SecretaryController();
             s1.Email = "s";
             s1.Password = "s";
-            Institution.Instance().SecretaryRepository.GetSecretaries().Add(s1);
+            InstitutionController.Instance().SecretaryRepository.GetSecretaries().Add(s1);
 
-            Admin a1 = new Admin();
+            AdminController a1 = new AdminController();
             a1.Email = "a";
             a1.Password = "a";
-            Institution.Instance().AdminRepository.GetAdministrators().Add(a1);
+            InstitutionController.Instance().AdminRepository.GetAdministrators().Add(a1);
 
-            Doctor d1 = new Doctor();
+            DoctorController d1 = new DoctorController();
             d1.Email = "d";
             d1.Password = "d";
-            Institution.Instance().DoctorRepository.GetDoctors().Add(d1);
+            InstitutionController.Instance().DoctorRepository.GetDoctors().Add(d1);
 
 
         }
