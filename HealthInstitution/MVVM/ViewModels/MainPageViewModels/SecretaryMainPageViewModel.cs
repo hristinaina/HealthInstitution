@@ -4,9 +4,9 @@ namespace HealthInstitution.MVVM.ViewModels.MainPageViewModels
 {
     public class SecretaryMainPageViewModel : BaseViewModel
     {
-        protected SecretaryController secretary;
+        protected Secretary secretary;
 
-        public SecretaryMainPageViewModel(SecretaryController secretary)
+        public SecretaryMainPageViewModel(Secretary secretary)
         {
             this.secretary = secretary;
 

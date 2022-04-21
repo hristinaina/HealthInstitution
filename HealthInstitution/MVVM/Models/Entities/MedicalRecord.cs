@@ -11,7 +11,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         public double Height;
         public double Weight;
         // history of sickness !?
-        public List<Alergen> Alergens;
+        public List<Allergen> Allergens;
         public List<Appointment> Appointments;
 
 

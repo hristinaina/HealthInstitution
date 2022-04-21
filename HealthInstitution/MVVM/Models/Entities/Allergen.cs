@@ -1,6 +1,6 @@
 ﻿namespace HealthInstitution.MVVM.Models.Entities
 {
-    public class Alergen
+    public class Allergen
     {
     }
 }

@@ -6,15 +6,16 @@ namespace HealthInstitution.MVVM.Models.Repositories
     public class SecretaryRepository
     {
         private string _secretaryFileName;
-        private List<SecretaryController> _secretaries;
+        private List<Secretary> _secretaries;
 
         public SecretaryRepository(string secretaryFileName)
         {
             this._secretaryFileName = secretaryFileName;
-            this._secretaries = new List<SecretaryController>();
+            this._secretaries = new List<Secretary
+                >();
         }
 
-        public List<SecretaryController> GetSecretaries()
+        public List<Secretary> GetSecretaries()
         {
             return this._secretaries;
         }

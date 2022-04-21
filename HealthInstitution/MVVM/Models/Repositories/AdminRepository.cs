@@ -6,15 +6,16 @@ namespace HealthInstitution.MVVM.Models.Repositories
     public class AdminRepository
     {
         private string _adminFileName;
-        private List<AdminController> _administrators;
+        private List<Admin
+            > _administrators;
 
         public AdminRepository(string adminFileName)
         {
             this._adminFileName = adminFileName;
-            this._administrators = new List<AdminController>();
+            this._administrators = new List<Admin>();
         }
 
-        public List<AdminController> GetAdministrators()
+        public List<Admin> GetAdministrators()
         {
             return this._administrators;
         }

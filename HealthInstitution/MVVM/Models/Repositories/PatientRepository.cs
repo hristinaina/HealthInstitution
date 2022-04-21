@@ -5,15 +5,15 @@ namespace HealthInstitution.MVVM.Models.Repositories
     public class PatientRepository
     {
         private string _patientFileName;
-        private List<PatientController> _patients;
+        private List<Patient> _patients;
 
         public PatientRepository(string patientFileName)
         {
             this._patientFileName = patientFileName;
-            this._patients = new List<PatientController>();
+            this._patients = new List<Patient>();
         }
 
-        public List<PatientController> GetPatients()
+        public List<Patient> GetPatients()
         {
             return this._patients;
         }

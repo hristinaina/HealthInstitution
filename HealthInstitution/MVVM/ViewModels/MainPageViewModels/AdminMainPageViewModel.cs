@@ -9,9 +9,9 @@ namespace HealthInstitution.MVVM.ViewModels.MainPageViewModels
 {
     public class AdminMainPageViewModel : BaseViewModel
     {
-        protected AdminController admin;
+        protected Admin admin;
 
-        public AdminMainPageViewModel(AdminController admin)
+        public AdminMainPageViewModel(Admin admin)
         {
             this.admin = admin;
 
