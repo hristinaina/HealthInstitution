@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
-    class PatientService
+    public class PatientService
     {
+        
     }
 }

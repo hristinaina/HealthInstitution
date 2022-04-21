@@ -6,7 +6,8 @@ namespace HealthInstitution.MVVM.Models.Repositories
     public class AdminRepository
     {
         private string _adminFileName;
-        private List<Admin> _administrators;
+        private List<Admin
+            > _administrators;
 
         public AdminRepository(string adminFileName)
         {
