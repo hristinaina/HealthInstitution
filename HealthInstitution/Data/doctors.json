@@ -1,3 +1,50 @@
-{
-
-}
+[
+  {
+    "id": 1,
+    "email": "doctor@gmail.com",
+    "firstName": "Doctor",
+    "lastName": "Someone",
+    "password": "doctor",
+    "specialization": 0
+  },
+  {
+    "id": 2,
+    "email": "jovo@gmail.com",
+    "firstName": "Jovan",
+    "lastName": "Guzinic",
+    "password": "doctor",
+    "specialization": 7
+  },
+  {
+    "id": 3,
+    "email": "bogomoljka@gmail.com",
+    "firstName": "Bogo",
+    "lastName": "Moljka",
+    "password": "skakavac",
+    "specialization": 8
+  },
+  {
+    "id": 4,
+    "email": "lili@gmail.com",
+    "firstName": "Lili",
+    "lastName": "Muha",
+    "password": "doctor123",
+    "specialization": 9
+  },
+  {
+    "id": 5,
+    "email": "veljko.zec@gmail.com",
+    "firstName": "Veljko",
+    "lastName": "Zec",
+    "password": "velja1985",
+    "specialization": 4
+  },
+  {
+    "id": 6,
+    "email": "mirko19750@gmail.com",
+    "firstName": "Mirko",
+    "lastName": "Vrabec",
+    "password": "vrabac321",
+    "specialization": 2
+  }
+]
