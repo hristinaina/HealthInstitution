@@ -1,4 +1,530 @@
 ﻿[
-
+  {
+    "id": 1,
+    "doctorId": 1,
+    "patientId": 1,
+    "roomId": 1,
+    "date": "25-04-2022",
+    "time": "7:20",
+    "emergency": false,
+    "done": true,
+    "anamnesis": "bla bla bla ...",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": 2
+        },
+        {
+          "medicineId": 5
+        }
+      ],
+      "when": "morning, noon and evening",
+      "howManyTimes": 3,
+      "therapyMealDependency": 3
+    }
+  },
+  {
+    "id": 2,
+    "doctorId": 1,
+    "patientId": 5,
+    "roomId": 1,
+    "date": "25-04-2022",
+    "time": "7:40",
+    "emergency": true,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 3,
+    "doctorId": 1,
+    "patientId": 3,
+    "roomId": 1,
+    "date": "27-04-2022",
+    "time": "8:20",
+    "emergency": true,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 4,
+    "doctorId": 1,
+    "patientId": 7,
+    "roomId": 1,
+    "date": "28-04-2022",
+    "time": "9:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 5,
+    "doctorId": 1,
+    "patientId": 11,
+    "roomId": 1,
+    "date": "28-04-2022",
+    "time": "9:40",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 6,
+    "doctorId": 2,
+    "patientId": 2,
+    "roomId": 2,
+    "date": "20-04-2022",
+    "time": "12:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 7,
+    "doctorId": 2,
+    "patientId": 4,
+    "roomId": 2,
+    "date": "20-04-2022",
+    "time": "14:40",
+    "emergency": true,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 8,
+    "doctorId": 2,
+    "patientId": 3,
+    "roomId": 2,
+    "date": "20-04-2022",
+    "time": "15:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 9,
+    "doctorId": 2,
+    "patientId": 6,
+    "roomId": 2,
+    "date": "21-04-2022",
+    "time": "19:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 10,
+    "doctorId": 2,
+    "patientId": 9,
+    "roomId": 2,
+    "date": "22-04-2022",
+    "time": "9:40",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 11,
+    "doctorId": 2,
+    "patientId": 7,
+    "roomId": 2,
+    "date": "25-04-2022",
+    "time": "7:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 12,
+    "doctorId": 2,
+    "patientId": 8,
+    "roomId": 2,
+    "date": "25-04-2022",
+    "time": "7:40",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 13,
+    "doctorId": 2,
+    "patientId": 12,
+    "roomId": 2,
+    "date": "27-04-2022",
+    "time": "8:35",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 14,
+    "doctorId": 2,
+    "patientId": 14,
+    "roomId": 3,
+    "date": "28-04-2022",
+    "time": "9:15",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 15,
+    "doctorId": 2,
+    "patientId": 11,
+    "roomId": 5,
+    "date": "28-04-2022",
+    "time": "9:40",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 16,
+    "doctorId": 3,
+    "patientId": 10,
+    "roomId": 3,
+    "date": "30-04-2022",
+    "time": "7:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 17,
+    "doctorId": 3,
+    "patientId": 5,
+    "roomId": 6,
+    "date": "25-04-2022",
+    "time": "7:40",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 18,
+    "doctorId": 3,
+    "patientId": 3,
+    "roomId": 6,
+    "date": "27-04-2022",
+    "time": "8:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 19,
+    "doctorId": 3,
+    "patientId": 7,
+    "roomId": 6,
+    "date": "28-04-2022",
+    "time": "9:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 20,
+    "doctorId": 3,
+    "patientId": 11,
+    "roomId": 6,
+    "date": "28-04-2022",
+    "time": "9:40",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 21,
+    "doctorId": 4,
+    "patientId": 10,
+    "roomId": 4,
+    "date": "30-04-2022",
+    "time": "7:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 22,
+    "doctorId": 4,
+    "patientId": 5,
+    "roomId": 4,
+    "date": "25-04-2022",
+    "time": "7:40",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 23,
+    "doctorId": 5,
+    "patientId": 3,
+    "roomId": 3,
+    "date": "27-04-2022",
+    "time": "8:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 24,
+    "doctorId": 5,
+    "patientId": 7,
+    "roomId": 3,
+    "date": "28-04-2022",
+    "time": "9:20",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  },
+  {
+    "id": 25,
+    "doctorId": 6,
+    "patientId": 11,
+    "roomId": 4,
+    "date": "28-04-2022",
+    "time": "9:40",
+    "emergency": false,
+    "done": false,
+    "anamnesis": "",
+    "prescription": {
+      "medicines": [
+        {
+          "medicineId": -1
+        }
+      ],
+      "when": "",
+      "howManyTimes": -1,
+      "therapyMealDependency": 0
+    }
+  }
 ]
-
