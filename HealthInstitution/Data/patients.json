@@ -1,3 +1,54 @@
-{
-
-}
+[
+  {
+    "id": 5,
+    "email": "email@gmail.com",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "password": "sifra",
+    "blocked": false,
+    "refferals": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 5,
+    "email": "email@gmail.com",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "password": "sifra",
+    "blocked": false,
+    "refferals": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 5,
+    "email": "email@gmail.com",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "password": "sifra",
+    "blocked": false,
+    "refferals": [
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "id": 5,
+    "email": "email@gmail.com",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "password": "sifra",
+    "blocked": false,
+    "refferals": [
+      1,
+      2,
+      3
+    ]
+  }
+]
