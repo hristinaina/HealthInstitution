@@ -5,7 +5,8 @@
     "firstName": "Doctor",
     "lastName": "Someone",
     "password": "doctor",
-    "specialization": 0
+    "specialization": 0,
+    "rating": 0
   },
   {
     "id": 2,
@@ -13,7 +14,9 @@
     "firstName": "Jovan",
     "lastName": "Guzinic",
     "password": "doctor",
-    "specialization": 7
+    "specialization": 7,
+    "rating": 0
+
   },
   {
     "id": 3,
@@ -21,7 +24,8 @@
     "firstName": "Bogo",
     "lastName": "Moljka",
     "password": "skakavac",
-    "specialization": 8
+    "specialization": 8,
+    "rating": 0
   },
   {
     "id": 4,
@@ -29,7 +33,8 @@
     "firstName": "Lili",
     "lastName": "Muha",
     "password": "doctor123",
-    "specialization": 9
+    "specialization": 9,
+    "rating": 0
   },
   {
     "id": 5,
@@ -37,7 +42,8 @@
     "firstName": "Veljko",
     "lastName": "Zec",
     "password": "velja1985",
-    "specialization": 4
+    "specialization": 4,
+    "rating": 0
   },
   {
     "id": 6,
@@ -45,6 +51,7 @@
     "firstName": "Mirko",
     "lastName": "Vrabec",
     "password": "vrabac321",
-    "specialization": 2
+    "specialization": 2,
+    "rating": 0
   }
 ]
