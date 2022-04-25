@@ -8,8 +8,11 @@ namespace HealthInstitution.MVVM.Models.Entities
 {
     public class Doctor : User
     {
-        public Specialization Specialization { get; set; }
+        private Specialization _specialization;
 
-        public Doctor(Specialization specialization) => Specialization = specialization;
+        public Doctor(Specialization specialization) => _specialization = specialization;
+
+        public Specialization GetSpecialization() => _specialization;
+        public void SetSpecialization(Specialization specialization) => _specialization = specialization;
     }
 }
