@@ -3,7 +3,7 @@ using HealthInstitution.MVVM.Models.Repositories;
 using HealthInstitution.Repositories;
 using System;
 using System.Collections.Generic;
-using Baza;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models
 {

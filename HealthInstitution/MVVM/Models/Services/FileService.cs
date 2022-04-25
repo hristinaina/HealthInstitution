@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Baza
+namespace HealthInstitution.MVVM.Models.Services
 {
     class FileService
     {
