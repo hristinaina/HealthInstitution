@@ -72,5 +72,29 @@ namespace HealthInstitution
 		{
 			return this._secretaryFileName;
 		}
+		public string GetAppointmentFileName()
+		{
+			return this._appoinmentFileName;
+		}
+		public string GetEquipmentFileName()
+		{
+			return this._equipmentFileName;
+		}
+		public string GetOperationFileName()
+		{
+			return this._operationFileName;
+		}
+		public string GetRoomFileName()
+		{
+			return this._roomFileName;
+		}
+		public string GetMedicineFileName()
+		{
+			return this._medicineFileName;
+		}
+		public string GetDayOffFileName()
+		{
+			return this._dayOffFileName;
+		}
 	}
 }
