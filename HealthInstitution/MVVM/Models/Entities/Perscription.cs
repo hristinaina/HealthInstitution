@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Entities
 {
-    public class Doctor : User
+    public class Perscription
     {
-        public Specialization Specialization { get; set; }
-
-        public Doctor(Specialization specialization) => Specialization = specialization;
     }
 }
