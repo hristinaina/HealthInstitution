@@ -1,0 +1,23 @@
+[
+  {
+    "patientId": 1,
+    "appointmentId": 5,
+    "changeStatus": 0,
+    "changeDate": "2022-04-25T18:43:37.0931955+02:00",
+    "resolved": false
+  },
+  {
+    "patientId": 1,
+    "appointmentId": 2,
+    "changeStatus": 0,
+    "changeDate": "2022-04-25T18:43:37.0931955+02:00",
+    "resolved": false
+  },
+  {
+    "patientId": 1,
+    "appointmentId": 3,
+    "changeStatus": 0,
+    "changeDate": "2022-04-25T18:43:37.0931955+02:00",
+    "resolved": false
+  }
+]
