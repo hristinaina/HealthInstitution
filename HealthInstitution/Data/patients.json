@@ -1,7 +1,12 @@
 [
   {
     "Blocked": false,
-    "Record": null,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0,
+      "Allergens": null,
+      "Appointments": null
+    },
     "ID": 1,
     "FirstName": "Ime",
     "LastName": "Prezime",
@@ -10,7 +15,12 @@
   },
   {
     "Blocked": false,
-    "Record": null,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0,
+      "Allergens": null,
+      "Appointments": null
+    },
     "ID": 2,
     "FirstName": "Ime",
     "LastName": "Prezime",

@@ -1,17 +1,17 @@
 [
   {
-    "id": 1,
-    "name": "Ime",
-    "quantity": 50
+    "Id": 1,
+    "Name": "Ime",
+    "Quantity": 50
   },
   {
-    "id": 1,
-    "name": "Ime",
-    "quantity": 50
+    "Id": 1,
+    "Name": "Ime",
+    "Quantity": 50
   },
   {
-    "id": 1,
-    "name": "Ime",
-    "quantity": 50
+    "Id": 1,
+    "Name": "Ime",
+    "Quantity": 50
   }
 ]

@@ -1,14 +1,14 @@
 [
   {
-    "id": 1,
-    "equipmentId": 1,
-    "date": "27-04-2022",
-    "quantity": 20
+    "Id": 1,
+    "EquipmentId": 1,
+    "Date": "27-04-2022",
+    "Quantity": 20
   },
   {
-    "id": 2,
-    "equipmentId": 2,
-    "date": "28-04-2022",
-    "quantity": 10
+    "Id": 2,
+    "EquipmentId": 2,
+    "Date": "28-04-2022",
+    "Quantity": 10
   }
 ]

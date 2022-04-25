@@ -1,10 +1,14 @@
 [
   {
-    "id": 5,
-    "name": "Ime"
+    "Id": !,
+    "Name": "Ime"
   },
   {
-    "id": 5,
-    "name": "Ime"
+    "Id": 2,
+    "Name": "Ime"
+  },
+  {
+    "Id": 3,
+    "Name": "Ime"
   }
 ]
