@@ -1,54 +1,47 @@
 [
   {
-    "id": 5,
-    "email": "email@gmail.com",
-    "firstName": "Ime",
-    "lastName": "Prezime",
-    "password": "sifra",
-    "blocked": false,
-    "refferals": [
-      1,
-      2,
-      3
-    ]
+    "ID": 1,
+    "Blocked": false,
+    "Record": null,
+    "FirstName": "Ime",
+    "LastName": "Prezime",
+    "Email": "email@gmail.com",
+    "Password": "sifra"
   },
   {
-    "id": 5,
-    "email": "email@gmail.com",
-    "firstName": "Ime",
-    "lastName": "Prezime",
-    "password": "sifra",
-    "blocked": false,
-    "refferals": [
-      1,
-      2,
-      3
-    ]
+    "ID": 2,
+    "Blocked": false,
+    "Record": null,
+    "FirstName": "Ime",
+    "LastName": "Prezime",
+    "Email": "email@gmail.com",
+    "Password": "sifra"
   },
   {
-    "id": 5,
-    "email": "email@gmail.com",
-    "firstName": "Ime",
-    "lastName": "Prezime",
-    "password": "sifra",
-    "blocked": false,
-    "refferals": [
-      1,
-      2,
-      3
-    ]
+    "ID": 3,
+    "Blocked": false,
+    "Record": null,
+    "FirstName": "Ime",
+    "LastName": "Prezime",
+    "Email": "email@gmail.com",
+    "Password": "sifra"
   },
   {
-    "id": 5,
-    "email": "email@gmail.com",
-    "firstName": "Ime",
-    "lastName": "Prezime",
-    "password": "sifra",
-    "blocked": false,
-    "refferals": [
-      1,
-      2,
-      3
-    ]
+    "ID": 4,
+    "Blocked": false,
+    "Record": null,
+    "FirstName": "Ime",
+    "LastName": "Prezime",
+    "Email": "email@gmail.com",
+    "Password": "sifra"
+  },
+  {
+    "ID": 5,
+    "Blocked": false,
+    "Record": null,
+    "FirstName": null,
+    "LastName": null,
+    "Email": "p",
+    "Password": "p"
   }
 ]
