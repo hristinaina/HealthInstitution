@@ -1,27 +1,11 @@
 ﻿[
   {
     "id": 1,
-    "doctorId": 1,
-    "patientId": 1,
-    "roomId": 1,
     "date": "25-04-2022",
     "time": "7:20",
     "emergency": false,
     "done": true,
     "anamnesis": "bla bla bla ...",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": 2
-        },
-        {
-          "medicineId": 5
-        }
-      ],
-      "when": [ "00:00", "06:00", "12:00", "18:00" ],
-      "howManyTimes": 3,
-      "therapyMealDependency": 3
-    },
     "review": {
       "rating": 5.0,
       "comment": "good"
@@ -29,24 +13,11 @@
   },
   {
     "id": 2,
-    "doctorId": 1,
-    "patientId": 5,
-    "roomId": 1,
     "date": "25-04-2022",
     "time": "7:40",
     "emergency": true,
     "done": false,
     "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
     "review": {
       "rating": 0.0,
       "comment": ""
@@ -54,24 +25,11 @@
   },
   {
     "id": 3,
-    "doctorId": 1,
-    "patientId": 3,
-    "roomId": 1,
     "date": "27-04-2022",
     "time": "8:20",
     "emergency": true,
     "done": false,
     "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
     "review": {
       "rating": 0.0,
       "comment": ""
@@ -79,349 +37,10 @@
   },
   {
     "id": 4,
-    "doctorId": 1,
-    "patientId": 7,
-    "roomId": 1,
     "date": "28-04-2022",
     "time": "9:20",
     "emergency": false,
     "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 5,
-    "doctorId": 1,
-    "patientId": 11,
-    "roomId": 1,
-    "date": "28-04-2022",
-    "time": "9:40",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 6,
-    "doctorId": 2,
-    "patientId": 2,
-    "roomId": 2,
-    "date": "20-04-2022",
-    "time": "12:20",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 7,
-    "doctorId": 2,
-    "patientId": 4,
-    "roomId": 2,
-    "date": "20-04-2022",
-    "time": "14:40",
-    "emergency": true,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 8,
-    "doctorId": 2,
-    "patientId": 3,
-    "roomId": 2,
-    "date": "20-04-2022",
-    "time": "15:20",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 9,
-    "doctorId": 2,
-    "patientId": 6,
-    "roomId": 2,
-    "date": "21-04-2022",
-    "time": "19:20",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 10,
-    "doctorId": 2,
-    "patientId": 9,
-    "roomId": 2,
-    "date": "22-04-2022",
-    "time": "9:40",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 11,
-    "doctorId": 2,
-    "patientId": 7,
-    "roomId": 2,
-    "date": "25-04-2022",
-    "time": "7:20",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 12,
-    "doctorId": 2,
-    "patientId": 8,
-    "roomId": 2,
-    "date": "25-04-2022",
-    "time": "7:40",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 13,
-    "doctorId": 2,
-    "patientId": 12,
-    "roomId": 2,
-    "date": "27-04-2022",
-    "time": "8:35",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 14,
-    "doctorId": 2,
-    "patientId": 14,
-    "roomId": 3,
-    "date": "28-04-2022",
-    "time": "9:15",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 15,
-    "doctorId": 2,
-    "patientId": 11,
-    "roomId": 5,
-    "date": "28-04-2022",
-    "time": "9:40",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 16,
-    "doctorId": 3,
-    "patientId": 10,
-    "roomId": 3,
-    "date": "30-04-2022",
-    "time": "7:20",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
-    "review": {
-      "rating": 0.0,
-      "comment": ""
-    }
-  },
-  {
-    "id": 17,
-    "doctorId": 3,
-    "patientId": 5,
-    "roomId": 6,
-    "date": "25-04-2022",
-    "time": "7:40",
-    "emergency": false,
-    "done": false,
-    "anamnesis": "",
-    "prescription": {
-      "medicines": [
-        {
-          "medicineId": -1
-        }
-      ],
-      "when": [],
-      "howManyTimes": -1,
-      "therapyMealDependency": 0
-    },
     "review": {
       "rating": 0.0,
       "comment": ""
