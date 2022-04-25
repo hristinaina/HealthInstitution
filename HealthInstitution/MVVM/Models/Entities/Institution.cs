@@ -2,6 +2,8 @@
 using HealthInstitution.MVVM.Models.Repositories;
 using HealthInstitution.Repositories;
 using System;
+using System.Collections.Generic;
+using Baza;
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -9,10 +11,16 @@ namespace HealthInstitution.MVVM.Models
     // implemented using Singleton pattern
     public sealed class Institution
     {
-        public PatientRepository PatientRepository;
-        public DoctorRepository DoctorRepository;
-        public SecretaryRepository SecretaryRepository;
-        public AdminRepository AdminRepository;
+        public List<Patient> Patients;
+        public List<Doctor> Doctors;
+        public List<Secretary> Secretaries;
+        public List<Admin> Admins;
+        public List<Appointment> Appointments;
+        public List<Equipment> Equipments;
+        public List<Operation> Operations;
+        public List<Room> Rooms;
+        public List<Medicine> Medicines;
+        public List<DayOff> DaysOff;
         // TODO: add other repositories
 
         private static Institution s_instance = null;
@@ -28,28 +36,50 @@ namespace HealthInstitution.MVVM.Models
 
         private Institution()
         {
-            AdminRepository = new AdminRepository(AppSettings.Instance().GetAdminFileName());
+/*          AdminRepository = new AdminRepository(AppSettings.Instance().GetAdminFileName());
             SecretaryRepository = new SecretaryRepository(AppSettings.Instance().GetSecretaryFileName());
             PatientRepository = new PatientRepository(AppSettings.Instance().GetPatientFileName());
-            DoctorRepository = new DoctorRepository(AppSettings.Instance().GetDoctorFileName());
+            DoctorRepository = new DoctorRepository(AppSettings.Instance().GetDoctorFileName());*/
+            Admins = new List<Admin>();
+            Patients = new List<Patient>();
+            Doctors = new List<Doctor>();
+            Secretaries = new List<Secretary>();
+            Appointments = new List<Appointment>();
+            Equipments = new List<Equipment>();
+            Operations = new List<Operation>();
+            Rooms = new List<Room>();
+            Medicines = new List<Medicine>();
+            DaysOff = new List<DayOff>();
             // TODO: add other repositories
         }
 
         public void LoadAll()
         {
-            AdminRepository.LoadFromFile();
-            PatientRepository.LoadFromFile();
-            DoctorRepository.LoadFromFile();
-            SecretaryRepository.LoadFromFile();
+            Admins = FileService.Deserialize<Admin>("");
+            Patients = FileService.Deserialize<Patient>("");
+            Doctors = FileService.Deserialize<Doctor>("");
+            Secretaries = FileService.Deserialize<Secretary>("");
+            Appointments = FileService.Deserialize<Appointment>("");
+            Equipments = FileService.Deserialize<Equipment>("");
+            Operations = FileService.Deserialize<Operation>("");
+            Rooms = FileService.Deserialize<Room>("");
+            Medicines = FileService.Deserialize<Medicine>("");
+            DaysOff = FileService.Deserialize<DayOff>("");
             // TODO: add other repositories
         }
 
         public void SaveAll()
         {
-            AdminRepository.SaveToFile();
-            PatientRepository.SaveToFile();
-            DoctorRepository.SaveToFile();
-            SecretaryRepository.SaveToFile();
+            FileService.Serialize<Admin>("", Admins);
+            FileService.Serialize<Patient>("", Patients);
+            FileService.Serialize<Doctor>("", Doctors);
+            FileService.Serialize<Secretary>("", Secretaries);
+            FileService.Serialize<Appointment>("", Appointments);
+            FileService.Serialize<Equipment>("", Equipments);
+            FileService.Serialize<Operation>("", Operations);
+            FileService.Serialize<Room>("", Rooms);
+            FileService.Serialize<Medicine>("", Medicines);
+            FileService.Serialize<DayOff>("", DaysOff);
             // TODO: add other repositories
         }
     }
