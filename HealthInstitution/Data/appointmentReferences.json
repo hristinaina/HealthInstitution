@@ -1,0 +1,30 @@
+[
+  {
+    "appointmentId": 1,
+    "doctorId": 1,
+    "patinetId": 1,
+    "roomId": 1,
+    "perscriptionId": 1
+  },
+  {
+    "appointmentId": 2,
+    "doctorId": 1,
+    "patinetId": 1,
+    "roomId": 1,
+    "perscriptionId": 1
+  },
+  {
+    "appointmentId": 3,
+    "doctorId": 1,
+    "patinetId": 1,
+    "roomId": 1,
+    "perscriptionId": 2
+  },
+  {
+    "appointmentId": 4,
+    "doctorId": 1,
+    "patinetId": 1,
+    "roomId": 1,
+    "perscriptionId": 2
+  }
+]

@@ -1,9 +1,6 @@
 [
   {
     "id": 1,
-    "doctorId": 2,
-    "patientId": 5,
-    "roomId": 1,
     "date": "28-04-2022",
     "time": "7:40",
     "emergency": false,
@@ -12,9 +9,6 @@
   },
   {
     "id": 2,
-    "doctorId": 3,
-    "patientId": 2,
-    "roomId": 2,
     "date": "28-04-2022",
     "time": "7:40",
     "emergency": false,

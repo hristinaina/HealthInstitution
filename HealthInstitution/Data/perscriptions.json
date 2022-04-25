@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "longitudeInDays": 2,
+    "timesADay": 4,
+    "therapyMealDependency": 3
+  },
+  {
+    "id": 2,
+    "longitudeInDays": 7,
+    "timesADay": 3,
+    "therapyMealDependency": 3
+  }
+]
+
