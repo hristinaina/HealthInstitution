@@ -1,18 +1,18 @@
 [
   {
-    "perscriptionId": 1,
-    "medicineId": 1
+    "PerscriptionID": 1,
+    "MedicineId": 1
   },
   {
-    "perscriptionId": 1,
-    "medicineId": 2
+    "PerscriptionID": 1,
+    "MedicineId": 2
   },
   {
-    "perscriptionId": 2,
-    "medicineId": 1
+    "PerscriptionID": 2,
+    "MedicineId": 1
   },
   {
-    "perscriptionId": 1,
-    "medicineId": 3
+    "PerscriptionID": 1,
+    "MedicineId": 3
   }
 ]

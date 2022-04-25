@@ -1,15 +1,14 @@
 [
   {
-    "id": 1,
-    "longitudeInDays": 2,
-    "timesADay": 4,
-    "therapyMealDependency": 3
+    "ID": 1,
+    "LongitudeInDays": 2,
+    "TimesADay": 4,
+    "TherapyMealDependency": 3
   },
   {
-    "id": 2,
-    "longitudeInDays": 7,
-    "timesADay": 3,
-    "therapyMealDependency": 3
+    "ID": 2,
+    "LongitudeInDays": 7,
+    "TimesADay": 3,
+    "TherapyMealDependency": 3
   }
 ]
-

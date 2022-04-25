@@ -1,57 +1,57 @@
 [
   {
-    "id": 1,
-    "email": "doctor@gmail.com",
-    "firstName": "Doctor",
-    "lastName": "Someone",
-    "password": "doctor",
-    "specialization": 0,
-    "rating": 0
+    "ID": 1,
+    "Email": "doctor@gmail.com",
+    "FirstName": "Doctor",
+    "LastName": "Someone",
+    "Password": "doctor",
+    "Specialization": 0,
+    "Rating": 0
   },
   {
-    "id": 2,
-    "email": "jovo@gmail.com",
-    "firstName": "Jovan",
-    "lastName": "Guzinic",
-    "password": "doctor",
-    "specialization": 7,
-    "rating": 0
+    "ID": 2,
+    "Email": "jovo@gmail.com",
+    "FirstName": "Jovan",
+    "LastName": "Guzinic",
+    "Password": "doctor",
+    "Specialization": 7,
+    "Rating": 0
 
   },
   {
-    "id": 3,
-    "email": "bogomoljka@gmail.com",
-    "firstName": "Bogo",
-    "lastName": "Moljka",
-    "password": "skakavac",
-    "specialization": 8,
-    "rating": 0
+    "ID": 3,
+    "Email": "bogomoljka@gmail.com",
+    "FirstName": "Bogo",
+    "LastName": "Moljka",
+    "Password": "skakavac",
+    "Specialization": 8,
+    "Rating": 0
   },
   {
-    "id": 4,
-    "email": "lili@gmail.com",
-    "firstName": "Lili",
-    "lastName": "Muha",
-    "password": "doctor123",
-    "specialization": 9,
-    "rating": 0
+    "ID": 4,
+    "Email": "lili@gmail.com",
+    "FirstName": "Lili",
+    "LastName": "Muha",
+    "Password": "doctor123",
+    "Specialization": 9,
+    "Rating": 0
   },
   {
-    "id": 5,
-    "email": "veljko.zec@gmail.com",
-    "firstName": "Veljko",
-    "lastName": "Zec",
-    "password": "velja1985",
-    "specialization": 4,
-    "rating": 0
+    "ID": 5,
+    "Email": "veljko.zec@gmail.com",
+    "FirstName": "Veljko",
+    "LastName": "Zec",
+    "Password": "velja1985",
+    "Specialization": 4,
+    "Rating": 0
   },
   {
-    "id": 6,
-    "email": "mirko19750@gmail.com",
-    "firstName": "Mirko",
-    "lastName": "Vrabec",
-    "password": "vrabac321",
-    "specialization": 2,
-    "rating": 0
+    "ID": 6,
+    "Email": "mirko19750@gmail.com",
+    "FirstName": "Mirko",
+    "LastName": "Vrabec",
+    "Password": "vrabac321",
+    "Specialization": 2,
+    "Rating": 0
   }
 ]

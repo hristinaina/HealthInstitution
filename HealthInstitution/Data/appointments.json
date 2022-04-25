@@ -1,49 +1,45 @@
 ﻿[
   {
-    "id": 1,
-    "date": "25-04-2022",
-    "time": "7:20",
-    "emergency": false,
-    "done": true,
-    "anamnesis": "bla bla bla ...",
-    "review": {
-      "rating": 5.0,
-      "comment": "good"
+    "ID": 1,
+    "Date": "2022-04-25T18:43:37.0931955+02:00",
+    "Emergency": false,
+    "Done": true,
+    "Anamnesis": "bla bla bla ...",
+    "Review": {
+      "Rating": 5.0,
+      "Comment": "good"
     }
   },
   {
-    "id": 2,
-    "date": "25-04-2022",
-    "time": "7:40",
-    "emergency": true,
-    "done": false,
-    "anamnesis": "",
-    "review": {
-      "rating": 0.0,
-      "comment": ""
+    "ID": 2,
+    "Date": "2022-04-25T18:43:37.0931955+02:00",
+    "Emergency": true,
+    "Done": false,
+    "Anamnesis": "",
+    "Review": {
+      "Rating": 0.0,
+      "Comment": ""
     }
   },
   {
-    "id": 3,
-    "date": "27-04-2022",
-    "time": "8:20",
-    "emergency": true,
-    "done": false,
-    "anamnesis": "",
-    "review": {
-      "rating": 0.0,
-      "comment": ""
+    "ID": 3,
+    "Date": "2022-04-25T18:43:37.0931955+02:00",
+    "Emergency": true,
+    "Done": false,
+    "Anamnesis": "",
+    "Review": {
+      "Rating": 0.0,
+      "Comment": ""
     }
   },
   {
-    "id": 4,
-    "date": "28-04-2022",
-    "time": "9:20",
-    "emergency": false,
-    "done": false,
-    "review": {
-      "rating": 0.0,
-      "comment": ""
+    "ID": 4,
+    "Date": "2022-04-25T18:43:37.0931955+02:00",
+    "Emergency": false,
+    "Done": false,
+    "Review": {
+      "Rating": 0.0,
+      "Comment": ""
     }
   }
 ]

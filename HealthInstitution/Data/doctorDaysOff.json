@@ -1,14 +1,14 @@
 [
   {
-    "doctorId": 5,
-    "daysOffId": 1
+    "DoctorID": 5,
+    "DaysOffId": 1
   },
   {
-    "doctorId": 6,
-    "daysOffId": 2
+    "DoctorID": 6,
+    "DaysOffId": 2
   },
   {
-    "doctorId": 4,
-    "daysOffId": 3
+    "DoctorID": 4,
+    "DaysOffId": 3
   }
 ]

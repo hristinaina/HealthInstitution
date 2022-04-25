@@ -1,26 +1,26 @@
 [
   {
-    "id": 1,
-    "beginDate": "30-05-2022",
-    "endDate": "06-06-2022",
-    "emergency": false,
-    "reason": "travel",
-    "state": 0
+    "ID": 1,
+    "BeginDate": "30-05-2022",
+    "EndDate": "06-06-2022",
+    "Emergency": false,
+    "Reason": "travel",
+    "State": 0
   },
   {
-    "id": 2,
-    "beginDate": "31-05-2022",
-    "endDate": "06-06-2022",
-    "emergency": false,
-    "reason": "travel",
-    "state": 2
+    "ID": 2,
+    "BeginDate": "31-05-2022",
+    "EndDate": "06-06-2022",
+    "Emergency": false,
+    "Reason": "travel",
+    "State": 2
   },
   {
-    "id": 3,
-    "beginDate": "30-05-2022",
-    "endDate": "04-06-2022",
-    "emergency": false,
-    "reason": "travel",
-    "state": 1
+    "ID": 3,
+    "BeginDate": "30-05-2022",
+    "EndDate": "04-06-2022",
+    "Emergency": false,
+    "Reason": "travel",
+    "State": 1
   }
 ]
