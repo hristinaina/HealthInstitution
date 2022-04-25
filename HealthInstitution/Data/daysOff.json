@@ -1,7 +1,6 @@
 [
   {
     "id": 1,
-    "doctorId": 5,
     "beginDate": "30-05-2022",
     "endDate": "06-06-2022",
     "emergency": false,
@@ -10,16 +9,14 @@
   },
   {
     "id": 2,
-    "doctorId": 6,
     "beginDate": "31-05-2022",
     "endDate": "06-06-2022",
     "emergency": false,
-    "reason": "personal reasons",
+    "reason": "travel",
     "state": 2
   },
   {
     "id": 3,
-    "doctorId": 4,
     "beginDate": "30-05-2022",
     "endDate": "04-06-2022",
     "emergency": false,
