@@ -44,21 +44,21 @@ namespace HealthInstitution.Commands
 
         private bool Login(string email, string password)
         {
-            Patient userPatient = MVVM.Models.User.FindUser(_institution.PatientRepository.GetPatients(), email, password);
+            Patient userPatient = User.FindUser(_institution.PatientRepository.GetPatients(), email, password);
             if (userPatient != null)
             {
                 _navigationStore.CurrentViewModel = new PatientMainPageViewModel(userPatient);
                 return true;
             }
 
-            Doctor userDoctor = MVVM.Models.User.FindUser(_institution.DoctorRepository.GetDoctors(), email, password);
+            Doctor userDoctor = User.FindUser(_institution.DoctorRepository.GetDoctors(), email, password);
             if (userDoctor != null)
             {
                 _navigationStore.CurrentViewModel = new DoctorMainPageViewModel(userDoctor);
                 return true;
             }
 
-            Secretary userSecretary = MVVM.Models.User.FindUser(_institution.SecretaryRepository.GetSecretaries(), email, password);
+            Secretary userSecretary = User.FindUser(_institution.SecretaryRepository.GetSecretaries(), email, password);
             if (userSecretary != null)
             {
                 _navigationStore.CurrentViewModel = new SecretaryMainPageViewModel(userSecretary);
@@ -66,7 +66,7 @@ namespace HealthInstitution.Commands
             }
 
             Admin
-                userAdmin = MVVM.Models.User.FindUser(_institution.AdminRepository.GetAdministrators(), email, password);
+                userAdmin = User.FindUser(_institution.AdminRepository.GetAdministrators(), email, password);
             if (userAdmin != null)
             {
                 _navigationStore.CurrentViewModel = new AdminMainPageViewModel(userAdmin);

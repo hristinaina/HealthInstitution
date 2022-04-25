@@ -64,6 +64,22 @@
                         </StackPanel>
                     </TabItem.Header>
                 </TabItem>
+
+                <TabItem Width="100" Height="32">
+                    <TabItem.Header>
+                        <StackPanel Width="auto" Height="auto">
+                            <Button
+                                Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}"
+                                Width="100"
+                                ToolTip="Log out from your account"
+                                Content="Log out"
+                                Background="#6680DEEA" 
+                                BorderBrush="#6680DEEA"
+                                Command="{Binding LogOut}" Height="32"/>
+                            <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+                        </StackPanel>
+                    </TabItem.Header>
+                </TabItem>
             </TabControl>
         </materialDesign:Card>
 
