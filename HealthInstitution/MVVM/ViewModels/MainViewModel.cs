@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Stores;
+
 namespace HealthInstitution.MVVM.ViewModels
 {
     public class MainViewModel : BaseViewModel

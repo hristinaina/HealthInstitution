@@ -3,6 +3,7 @@ using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.MVVM.ViewModels.MainPageViewModels;
+using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.Stores;
 
 namespace HealthInstitution.Commands
@@ -11,9 +12,9 @@ namespace HealthInstitution.Commands
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
-        private readonly LoginViewModel _loginVM;
+        private readonly LogInViewModel _loginVM;
 
-        public LogInCommand(LoginViewModel loginVM)
+        public LogInCommand(LogInViewModel loginVM)
         {
             _loginVM = loginVM;
             _institution = Institution.Instance();
@@ -47,7 +48,7 @@ namespace HealthInstitution.Commands
             Patient userPatient = User.FindUser(_institution.PatientRepository.GetPatients(), email, password);
             if (userPatient != null)
             {
-                _navigationStore.CurrentViewModel = new PatientMainPageViewModel(userPatient);
+                _navigationStore.CurrentViewModel = new PatientRecordViewModel(userPatient);
                 return true;
             }
 

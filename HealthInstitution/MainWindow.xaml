@@ -9,6 +9,8 @@
         xmlns:viewmains="clr-namespace:HealthInstitution.MVVM.Views.MainPageViews"
         xmlns:viewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels"
         xmlns:viewmodelmains="clr-namespace:HealthInstitution.MVVM.ViewModels.MainPageViewModels"
+        xmlns:viewmodelsPatient="clr-namespace:HealthInstitution.MVVM.ViewModels.PatientViewModels"
+        xmlns:viewsPatient="clr-namespace:HealthInstitution.MVVM.Views.PatientViews"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="NMK - Log in" 
@@ -20,11 +22,17 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Resources>
-            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+            <DataTemplate DataType="{x:Type viewmodels:LogInViewModel}">
                 <views:LogInView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodelmains:PatientMainPageViewModel}">
-                <viewmains:PatientMainPageView/>
+            <DataTemplate DataType="{x:Type viewmodelsPatient:PatientRecordViewModel}">
+                <viewsPatient:PatientRecordView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsPatient:PatientSearchViewModel}">
+                <viewsPatient:PatientSearchView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsPatient:PatientAppointmentViewModel}">
+                <viewsPatient:PatientAppointmentView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelmains:DoctorMainPageViewModel}">
                 <viewmains:DoctorMainPageView/>

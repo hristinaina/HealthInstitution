@@ -8,14 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthInstitution.MVVM.ViewModels.Commands
+namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
-    class LogOutCommand : BaseCommand
+    public class PatientRecordCommand : BaseCommand
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
 
-        public LogOutCommand()
+        public PatientRecordCommand()
         {
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();
@@ -23,7 +23,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new PatientAppointmentViewModel(null);
+            _navigationStore.CurrentViewModel = new PatientRecordViewModel(null);
         }
+
     }
 }

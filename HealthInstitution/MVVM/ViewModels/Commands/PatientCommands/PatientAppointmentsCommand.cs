@@ -8,14 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthInstitution.MVVM.ViewModels.Commands
+namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
-    class LogOutCommand : BaseCommand
+    public class PatientAppointmentsCommand : BaseCommand
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
 
-        public LogOutCommand()
+        public PatientAppointmentsCommand()
         {
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();
