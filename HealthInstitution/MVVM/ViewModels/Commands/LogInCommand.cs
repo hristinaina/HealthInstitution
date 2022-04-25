@@ -45,6 +45,7 @@ namespace HealthInstitution.Commands
         private bool Login(string email, string password)
         {
             Patient userPatient = MVVM.Models.User.FindUser(_institution.GetPatients(), email, password);
+
             if (userPatient != null)
             {
                 _navigationStore.CurrentViewModel = new PatientMainPageViewModel(userPatient);
@@ -52,6 +53,7 @@ namespace HealthInstitution.Commands
             }
 
             Doctor userDoctor = MVVM.Models.User.FindUser(_institution.GetDoctors(), email, password);
+
             if (userDoctor != null)
             {
                 _navigationStore.CurrentViewModel = new DoctorMainPageViewModel(userDoctor);
@@ -59,6 +61,7 @@ namespace HealthInstitution.Commands
             }
 
             Secretary userSecretary = MVVM.Models.User.FindUser(_institution.GetSecretaries(), email, password);
+
             if (userSecretary != null)
             {
                 _navigationStore.CurrentViewModel = new SecretaryMainPageViewModel(userSecretary);
@@ -67,6 +70,7 @@ namespace HealthInstitution.Commands
 
             Admin
                 userAdmin = MVVM.Models.User.FindUser(_institution.GetAdmins(), email, password);
+
             if (userAdmin != null)
             {
                 _navigationStore.CurrentViewModel = new AdminMainPageViewModel(userAdmin);
