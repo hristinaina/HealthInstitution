@@ -3,9 +3,7 @@
     "Blocked": false,
     "Record": {
       "Height": 0.0,
-      "Weight": 0.0,
-      "Allergens": null,
-      "Appointments": null
+      "Weight": 0.0
     },
     "ID": 1,
     "FirstName": "Ime",
@@ -17,9 +15,7 @@
     "Blocked": false,
     "Record": {
       "Height": 0.0,
-      "Weight": 0.0,
-      "Allergens": null,
-      "Appointments": null
+      "Weight": 0.0
     },
     "ID": 2,
     "FirstName": "Ime",
@@ -31,9 +27,7 @@
     "Blocked": false,
     "Record": {
       "Height": 0.0,
-      "Weight": 0.0,
-      "Allergens": null,
-      "Appointments": null
+      "Weight": 0.0
     },
     "ID": 3,
     "FirstName": "Ime",
@@ -45,9 +39,7 @@
     "Blocked": false,
     "Record": {
       "Height": 0.0,
-      "Weight": 0.0,
-      "Allergens": null,
-      "Appointments": null
+      "Weight": 0.0
     },
     "ID": 4,
     "FirstName": "Ime",
@@ -59,9 +51,7 @@
     "Blocked": false,
     "Record": {
       "Height": 0.0,
-      "Weight": 0.0,
-      "Allergens": null,
-      "Appointments": null
+      "Weight": 0.0
     },
     "ID": 5,
     "FirstName": null,
@@ -73,9 +63,7 @@
     "Blocked": false,
     "Record": {
       "Height": 0.0,
-      "Weight": 0.0,
-      "Allergens": null,
-      "Appointments": null
+      "Weight": 0.0
     },
     "ID": 0,
     "FirstName": null,
