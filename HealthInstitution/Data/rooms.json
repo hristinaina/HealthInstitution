@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 1,
+    "Name": "Ime",
+    "Type": 0
+  },
+  {
+    "Id": 2,
+    "Name": "Ime",
+    "Type": 0
+  },
+  {
+    "Id": 3,
+    "name": "Ime",
+    "type": 0
+  },
+  {
+    "Id": 5,
+    "name": "Ime",
+    "type": 0
+  }
+]

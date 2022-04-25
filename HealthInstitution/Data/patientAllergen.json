@@ -1,0 +1,18 @@
+[
+  {
+    "PatientId": 1,
+    "IngredientId": 1
+  },
+  {
+    "PatientId": 1,
+    "IngredientId": 3
+  },
+  {
+    "PatientId": 2,
+    "IngredientId": 2
+  },
+  {
+    "PatientId": 2,
+    "IngredientId": 3
+  }
+]

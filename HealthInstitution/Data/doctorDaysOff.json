@@ -1,0 +1,14 @@
+[
+  {
+    "DoctorID": 5,
+    "DaysOffId": 1
+  },
+  {
+    "DoctorID": 6,
+    "DaysOffId": 2
+  },
+  {
+    "DoctorID": 4,
+    "DaysOffId": 3
+  }
+]
