@@ -31,6 +31,7 @@ namespace HealthInstitution
             Patient p1 = new Patient();
             p1.Email = "p";
             p1.Password = "p";
+            p1.Record = new MedicalRecord();
             Institution.Instance().GetPatients().Add(p1);
 
             Secretary s1 = new Secretary();

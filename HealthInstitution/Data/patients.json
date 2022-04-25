@@ -1,44 +1,73 @@
 [
   {
+    "Blocked": false,
+    "Record": null,
     "ID": 1,
-    "Blocked": false,
-    "Record": null,
     "FirstName": "Ime",
     "LastName": "Prezime",
     "Email": "email@gmail.com",
     "Password": "sifra"
   },
   {
+    "Blocked": false,
+    "Record": null,
     "ID": 2,
-    "Blocked": false,
-    "Record": null,
     "FirstName": "Ime",
     "LastName": "Prezime",
     "Email": "email@gmail.com",
     "Password": "sifra"
   },
   {
+    "Blocked": false,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0,
+      "Allergens": null,
+      "Appointments": null
+    },
     "ID": 3,
-    "Blocked": false,
-    "Record": null,
     "FirstName": "Ime",
     "LastName": "Prezime",
     "Email": "email@gmail.com",
     "Password": "sifra"
   },
   {
+    "Blocked": false,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0,
+      "Allergens": null,
+      "Appointments": null
+    },
     "ID": 4,
-    "Blocked": false,
-    "Record": null,
     "FirstName": "Ime",
     "LastName": "Prezime",
     "Email": "email@gmail.com",
     "Password": "sifra"
   },
   {
-    "ID": 5,
     "Blocked": false,
-    "Record": null,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0,
+      "Allergens": null,
+      "Appointments": null
+    },
+    "ID": 5,
+    "FirstName": null,
+    "LastName": null,
+    "Email": "p",
+    "Password": "p"
+  },
+  {
+    "Blocked": false,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0,
+      "Allergens": null,
+      "Appointments": null
+    },
+    "ID": 0,
     "FirstName": null,
     "LastName": null,
     "Email": "p",
