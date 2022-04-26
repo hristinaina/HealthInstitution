@@ -11,5 +11,9 @@ namespace HealthInstitution.MVVM.Models.Entities
     {
         public bool Blocked { get; set; }
         public MedicalRecord Record { get; set; }
+
+        public Patient() {
+            Record = new MedicalRecord();
+        }
     }
 }

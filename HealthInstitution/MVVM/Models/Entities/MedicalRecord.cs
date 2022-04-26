@@ -14,6 +14,10 @@ namespace HealthInstitution.MVVM.Models.Entities
         public List<Allergen> Allergens;
         public List<Appointment> Appointments;
 
+        public MedicalRecord()
+        {
+            Appointments = new List<Appointment>();
+        }
 
     }
 }

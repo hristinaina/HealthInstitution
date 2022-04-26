@@ -113,7 +113,64 @@
         </materialDesign:Card>
 
         <materialDesign:Card Grid.Column="1">
-            <TextBox Text="TBA"/>
+            <Grid HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="7*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <materialDesign:DialogHost Grid.Row="0"
+                                           Grid.Column="1"
+                                           DialogTheme="Inherit" VerticalAlignment="Center">
+                    <materialDesign:DialogHost.DialogContent>
+                        <StackPanel
+                            VerticalAlignment="Center">
+                            <Button
+                                Command="{Binding RunDialogCommand}"
+                                Width="128"
+                                Content="CREATE" />
+                            <Button
+                                Command="{Binding RunExtendedDialogCommand}"
+                                Width="128"
+                                Margin="0 32 0 0"
+                                Content="CLOSE" />
+                        </StackPanel>
+                    </materialDesign:DialogHost.DialogContent>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                            Width="170"
+                            ToolTip="Create a new appointment"
+                            Content="New appointment"
+                            Background="#6680DEEA" 
+                            BorderBrush="#6680DEEA"
+                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                            Height="32" VerticalAlignment="Center"/>
+                </materialDesign:DialogHost>
+                <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+                <ListView
+                          Grid.Column="1"
+                          ItemsSource="{Binding Appointments}" 
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          HorizontalAlignment="Center" Margin="0,64,0,64" Grid.RowSpan="3" Width="520">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="130" Header="Date" />
+                            <GridViewColumn Width="130" Header="Time" />
+                            <GridViewColumn Width="130" Header="Doctor" />
+                            <GridViewColumn Width="130" Header="Room">
+
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+               
+                  
+            </Grid>
+
         </materialDesign:Card>
     </Grid>
 </UserControl>

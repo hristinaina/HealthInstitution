@@ -23,7 +23,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new PatientAppointmentViewModel(null);
+            _navigationStore.CurrentViewModel = new LogInViewModel();
         }
     }
 }

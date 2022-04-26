@@ -24,5 +24,6 @@ namespace HealthInstitution.MVVM.Views.PatientViews
         {
             InitializeComponent();
         }
+
     }
 }

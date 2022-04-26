@@ -1,5 +1,6 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.Stores;
 using System;
@@ -23,7 +24,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new PatientAppointmentViewModel(null);
+            _navigationStore.CurrentViewModel = new PatientAppointmentViewModel(new Patient());
         }
     }
 }
