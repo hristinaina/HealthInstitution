@@ -32,65 +32,70 @@ namespace HealthInstitution.MVVM.Models.Entities
             return list;
         }
 
-        // returns list with 2 lists, first (0) list is when appoinments start
-        // and second (1) list is when appointments end
-        private List<List<DateTime>> GetBusyTime(DateTime date)
+        public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
         {
-            List<List<DateTime>> busyTime = new();
-            List<DateTime> examinationsStart = new();
-            List<DateTime> examinationsEnd = new();
 
-            foreach (Examination examination in _examinations)
+            for (int i = 0; i < _examinations.Count(); i++)
             {
-                if (DateTime.Compare(examination.GetDateTime().Date, date) == 0)
-                {
-                    DateTime startDateTime = examination.GetDateTime();
-                    DateTime endDateTime = startDateTime.AddMinutes(15);
-                    examinationsStart.Add(startDateTime);
-                    examinationsEnd.Add(endDateTime);
-                }
+                DateTime examinationStart = _examinations[i].GetDateTime();
+                DateTime examinationEnd = examinationStart.AddMinutes(15);
+                if (DateTime.Compare(_examinations[i].GetDateTime().Date, dateTime.Date) != 0) continue;
+                if (DateTime.Compare(dateTime, examinationStart) >= 0 &&
+                    DateTime.Compare(dateTime, examinationEnd) < 0) return false;
+                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationStart) > 0 &&
+                    DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationEnd) <= 0) 
+                    return false;
             }
 
-            foreach (Operation operation in _operations)
+            for (int i = 0; i < _operations.Count(); i++)
             {
-                if (DateTime.Compare(operation.GetDateTime().Date, date) == 0)
-                {
-                    DateTime startDateTime = operation.GetDateTime();
-                    DateTime endDateTime = startDateTime.AddMinutes(operation.GetDurationInMin());
-                    examinationsStart.Add(startDateTime);
-                    examinationsEnd.Add(endDateTime);
-                }
+                DateTime operationStart = _operations[i].GetDateTime();
+                DateTime operationEnd = operationStart.AddMinutes(_operations[i].GetDurationInMin());
+                if (DateTime.Compare(_operations[i].GetDateTime().Date, dateTime.Date) != 0) continue;
+                if (DateTime.Compare(dateTime, operationStart) >= 0 &&
+                    DateTime.Compare(dateTime, operationEnd) < 0) return false;
+                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), operationStart) > 0 &&
+                    DateTime.Compare(dateTime.AddMinutes(durationInMin), operationEnd) <= 0)
+                    return false;
             }
 
-            examinationsStart = SortAscending(examinationsStart);
-            examinationsEnd = SortAscending(examinationsEnd);
-            busyTime.Add(examinationsStart);
-            busyTime.Add(examinationsEnd);
-            return busyTime;
+            return true;
         }
 
-        private (bool, DateTime) IsAvailable(List<DateTime> appointmentsStart, List<DateTime> appointmentsEnd,
-                                 DateTime dateTime, int durationInMin)
+        private Appointment CheckAvailability(DateTime dateTime, int durationInMin = 15)
+            // returns null if appointment can be reserved
+            // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
         {
-            for (int i = 0; i < appointmentsStart.Count(); i++)
+            for (int i = 0; i < _examinations.Count(); i++)
             {
-                if (DateTime.Compare(dateTime, appointmentsStart[i]) >= 0 &&
-                    DateTime.Compare(dateTime, appointmentsEnd[i]) < 0) return (false, appointmentsEnd[i]);
-                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentsStart[i]) > 0 &&
-                    DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentsEnd[i]) <= 0) 
-                    return (false, appointmentsEnd[i]);
+                DateTime examinationStart = _examinations[i].GetDateTime();
+                DateTime examinationEnd = examinationStart.AddMinutes(15);
+                if (DateTime.Compare(_examinations[i].GetDateTime().Date, dateTime.Date) != 0) continue;
+                if (DateTime.Compare(dateTime, examinationStart) >= 0 &&
+                    DateTime.Compare(dateTime, examinationEnd) < 0) return _examinations[i];  
+                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationStart) > 0 &&
+                    DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationEnd) <= 0)
+                    return _examinations[i];
             }
-            
-            return (true, DateTime.Today);
+
+            for (int i = 0; i < _operations.Count(); i++)
+            {
+                DateTime operationStart = _operations[i].GetDateTime();
+                DateTime operationEnd = operationStart.AddMinutes(_operations[i].GetDurationInMin());
+                if (DateTime.Compare(_operations[i].GetDateTime().Date, dateTime.Date) != 0) continue;
+                if (DateTime.Compare(dateTime, operationStart) >= 0 &&
+                    DateTime.Compare(dateTime, operationEnd) < 0) return _operations[i];
+                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), operationStart) > 0 &&
+                    DateTime.Compare(dateTime.AddMinutes(durationInMin), operationEnd) <= 0)
+                    return _operations[i];
+            }
+
+            return null; 
         }
 
-        public List<DateTime> FindFreeTime( DateTime date, int durationInMin = 15)  // TODO : add for other dates, not just for today
+        public List<DateTime> FindFreeTime(DateTime date, int durationInMin = 15) 
         {
-            List<List<DateTime>> busyTime = GetBusyTime(date);
             List<DateTime> availableTime = new();
-            
-            List<DateTime> appointmentsStart = busyTime[0];
-            List<DateTime> appointmentsEnd = busyTime[1];
             
             DateTime dateTime = date;
             dateTime = dateTime.AddHours(8);       // date == today, time == 8:00
@@ -99,14 +104,23 @@ namespace HealthInstitution.MVVM.Models.Entities
 
             while (DateTime.Compare(dateTime.AddMinutes(durationInMin), borderTime) <= 0) 
             {
-                (bool isAvailable, DateTime newDateTime) = IsAvailable(appointmentsStart, appointmentsEnd, dateTime, durationInMin);
-                if (isAvailable)
+                Appointment interruptingAppointment = CheckAvailability(dateTime, durationInMin);
+                if (interruptingAppointment == null)
                 {
                     availableTime.Add(dateTime);
                     dateTime = dateTime.AddMinutes(durationInMin);
+                    continue;
                 }
 
-                else dateTime = newDateTime;
+                if (interruptingAppointment.GetType().Equals(typeof(Examination)))
+                {
+                    dateTime = interruptingAppointment.GetDateTime().AddMinutes(15);  // continuing at the end of 
+                }                                                                     // interrupting appointment  
+                else
+                {
+                    Operation scheduledOperation = (Operation) interruptingAppointment;
+                    dateTime = scheduledOperation.GetDateTime().AddMinutes(scheduledOperation.GetDurationInMin());
+                }
             }
 
             return availableTime;
