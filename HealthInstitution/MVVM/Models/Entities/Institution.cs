@@ -15,7 +15,7 @@ namespace HealthInstitution.MVVM.Models
         private List<Doctor> _doctors;
         private List<Secretary> _secretaries; 
         private List<Admin> _admins;
-        private List<Appointment> _appointments;
+        private List<Examination> _examinations;
         private List<Equipment> _equipment;
         private List<Operation> _operations;
         private List<Room> _rooms;
@@ -40,7 +40,7 @@ namespace HealthInstitution.MVVM.Models
             _patients = new List<Patient>();
             _doctors = new List<Doctor>();
             _secretaries = new List<Secretary>();
-            _appointments = new List<Appointment>();
+            _examinations = new List<Examination>();
             _equipment = new List<Equipment>();
             _operations = new List<Operation>();
             _rooms = new List<Room>();
@@ -55,7 +55,7 @@ namespace HealthInstitution.MVVM.Models
             _patients = FileService.Deserialize<Patient>(AppSettings.Instance().GetPatientFileName());
             _doctors = FileService.Deserialize<Doctor>(AppSettings.Instance().GetDoctorFileName());
             _secretaries = FileService.Deserialize<Secretary>(AppSettings.Instance().GetSecretaryFileName());
-            _appointments = FileService.Deserialize<Appointment>(AppSettings.Instance().GetAdminFileName());
+            _examinations = FileService.Deserialize<Examination>(AppSettings.Instance().GetAppointmentFileName());
             _equipment = FileService.Deserialize<Equipment>(AppSettings.Instance().GetEquipmentFileName());
             _operations = FileService.Deserialize<Operation>(AppSettings.Instance().GetOperationFileName());
             _rooms = FileService.Deserialize<Room>(AppSettings.Instance().GetRoomFileName());
@@ -70,7 +70,7 @@ namespace HealthInstitution.MVVM.Models
             FileService.Serialize<Patient>(AppSettings.Instance().GetPatientFileName(), _patients);
             FileService.Serialize<Doctor>(AppSettings.Instance().GetDoctorFileName(), _doctors);
             FileService.Serialize<Secretary>(AppSettings.Instance().GetSecretaryFileName(), _secretaries);
-            FileService.Serialize<Appointment>(AppSettings.Instance().GetAppointmentFileName(), _appointments);
+            FileService.Serialize<Examination>(AppSettings.Instance().GetAppointmentFileName(), _examinations);
             FileService.Serialize<Equipment>(AppSettings.Instance().GetEquipmentFileName(), _equipment);
             FileService.Serialize<Operation>(AppSettings.Instance().GetOperationFileName(), _operations);
             FileService.Serialize<Room>(AppSettings.Instance().GetOperationFileName(), _rooms);
@@ -95,9 +95,9 @@ namespace HealthInstitution.MVVM.Models
         {
             return _secretaries;
         }
-        public List<Appointment> GetAppointments()
+        public List<Examination> GetExaminations()
         {
-            return _appointments;
+            return _examinations;
         }
         public List<Equipment> GetEquipment()
         {

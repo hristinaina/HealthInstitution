@@ -1,8 +1,10 @@
 ﻿using System.Windows;
+using System;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.Stores;
+using System.Collections.Generic;
 
 namespace HealthInstitution
 {
@@ -47,8 +49,29 @@ namespace HealthInstitution
             Doctor d1 = new Doctor();
             d1.Email = "d";
             d1.Password = "d";
-            Institution.Instance().GetDoctors().Add(d1);
 
+            // test
+            System.Diagnostics.Debug.WriteLine("Nesto......");
+            List<Examination> appointments = new();
+            DateTime date = DateTime.Today;
+            date = date.AddHours(12);
+            date = date.AddMinutes(30);
+            System.Diagnostics.Debug.WriteLine(date);
+            System.Diagnostics.Debug.WriteLine(".....");
+            Examination appointment = new Examination(1, date, false, false, "", null);  // 12:30 - 12:45 
+            appointments.Add(appointment);
+            date = date.AddMinutes(45);  
+            appointment = new Examination(2, date, false, false, "", null);   // 13:15 - 13:30
+            appointments.Add(appointment);
+
+            d1.SetExaminations(appointments);
+            List<DateTime> available = d1.FindFreeTime(30);
+            foreach(DateTime i in available)
+            {
+                System.Diagnostics.Debug.WriteLine(i);
+            }
+            // test
+            Institution.Instance().GetDoctors().Add(d1);
 
         }
 
@@ -60,7 +83,9 @@ namespace HealthInstitution
             {
                 DataContext = new MainViewModel(_navigation)
             };
-            MainWindow.Show();
+            //MainWindow.Show();
+
+            System.Diagnostics.Debug.WriteLine("Nesto");
             base.OnStartup(e);
         }
     }
