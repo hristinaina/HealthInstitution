@@ -32,7 +32,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             return list;
         }
 
-        // returns list with 2 lists, first (0) list is when appoinments starts
+        // returns list with 2 lists, first (0) list is when appoinments start
         // and second (1) list is when appointments end
         private List<List<DateTime>> GetBusyTime()
         {
@@ -65,7 +65,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             return busyTime;
         }
 
-        public (bool, DateTime) IsAvailable(List<DateTime> appointmentsStart, List<DateTime> appointmentsEnd,
+        private (bool, DateTime) IsAvailable(List<DateTime> appointmentsStart, List<DateTime> appointmentsEnd,
                                  DateTime dateTime, int durationInMin)
         {
             for (int i = 0; i < appointmentsStart.Count(); i++)
@@ -80,8 +80,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             return (true, DateTime.Today);
         }
 
-
-
         public List<DateTime> FindFreeTime(int durationInMin = 15)  // TODO : add for other dates, not just for today
         {
             List<List<DateTime>> busyTime = GetBusyTime();
@@ -91,12 +89,11 @@ namespace HealthInstitution.MVVM.Models.Entities
             List<DateTime> appointmentsEnd = busyTime[1];
             
             DateTime dateTime = DateTime.Today;
-            dateTime = dateTime.AddHours(7);  // date == today, time == 8:00
-            dateTime = dateTime.AddMinutes(45);
+            dateTime = dateTime.AddHours(8);       // date == today, time == 8:00
             DateTime borderTime = DateTime.Today;
-            borderTime = borderTime.AddHours(20);
+            borderTime = borderTime.AddHours(20);  // doctor works till 20 pm
 
-            while (DateTime.Compare(dateTime.AddMinutes(durationInMin), borderTime) <= 0)
+            while (DateTime.Compare(dateTime.AddMinutes(durationInMin), borderTime) <= 0) 
             {
                 (bool isAvailable, DateTime newDateTime) = IsAvailable(appointmentsStart, appointmentsEnd, dateTime, durationInMin);
                 if (isAvailable)
