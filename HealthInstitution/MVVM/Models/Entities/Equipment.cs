@@ -27,14 +27,19 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
                 }
 
-        public Equipment(int id, string name, int quantity)
+        public Equipment()
+        {
+
+        }
+        public Equipment(int id, string name, int quantity, EquipmentType type)
         {
             this.ID = id;
             this.Name = name;
             this.Quantity = quantity;
+            this.Type = type;
         }
 
-        public Equipment(int id, string name, int quantity, Dictionary<Room, int> arragment) : this(id, name, quantity)
+        public Equipment(int id, string name, int quantity, EquipmentType type, Dictionary<Room, int> arragment) : this(id, name, quantity, type)
         {
             this.ArrangmentByRoom = arragment;
         }
@@ -62,7 +67,7 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public static List<Equipment> FilterByQuantity()
         {
-
+            return new List<Equipment>();
         }
     }
 }

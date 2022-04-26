@@ -14,6 +14,10 @@ namespace HealthInstitution.MVVM.Models.Entities
         public int Number { get; set; }
         public RoomType Type { get; set; }
         
+        public Room()
+        {
+
+        }
         private Room(int id, int number, string name, RoomType type)
         {
             this.ID = id;
