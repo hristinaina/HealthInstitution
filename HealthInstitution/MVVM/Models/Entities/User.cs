@@ -11,7 +11,17 @@ namespace HealthInstitution.MVVM.Models
 
         // ostali entiteti i getteri i setteri
         // ..........
+        public User() { }
+        public User(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+        }
 
+        public string GetFullName()
+        {
+            return FirstName + " " + LastName;
+        }
 
 
         // function that searches the collection to find the corresponding user
@@ -27,6 +37,8 @@ namespace HealthInstitution.MVVM.Models
             }
             return null;
         }
+
+
 
     }
 }

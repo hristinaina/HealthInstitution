@@ -182,14 +182,9 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="5*"></RowDefinition>
+                            <RowDefinition Height="7*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition  Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="7*"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
                         <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="170"
                                 ToolTip="Create a new appointment"
@@ -200,30 +195,55 @@
                                 Height="32"
                                 VerticalAlignment="Center"
                                 Grid.Row="0"
-                                Grid.Column="1"
                                 HorizontalAlignment="Center" />
 
                         <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
 
                         <ListView ItemsSource="{Binding Appointments}"
                                   HorizontalAlignment="Center"
-                                  Grid.Column="1"
-                                  Width="520"
+                                  Width="666"
                                   VerticalAlignment="Center"
-                                  Height="322"
-                                  Grid.Row="1"
-                                  Grid.IsSharedSizeScope="True">
+                                  Height="358"
+                                  Grid.Row="1">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="130"
-                                                    Header="Date" />
+                                                    Header="Date">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="Center"
+                                                           Text="{Binding Date}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
                                     <GridViewColumn Width="130"
-                                                    Header="Time" />
+                                                    Header="Time">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="Center"
+                                                           Text="{Binding Time}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
                                     <GridViewColumn Width="130"
-                                                    Header="Doctor" />
+                                                    Header="Doctor">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="
+                                                    Center"
+                                                           Text="{Binding Doctor}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
                                     <GridViewColumn Width="130"
                                                     Header="Room">
-
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="
+                                                    Center"
+                                                           Text="{Binding Room}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                 </GridView>
                             </ListView.View>

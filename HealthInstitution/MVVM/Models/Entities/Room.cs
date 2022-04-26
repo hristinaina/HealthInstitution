@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Entities
 {
-    public class Doctor : User
+    public class Room
     {
-        public Doctor()
-        {
+        private string _name;
+
+        public Room(string name) {
+            _name = name;
         }
-        public Doctor(string firstName, string lastName) : base(firstName, lastName)
+
+        public string GetName()
         {
+            return _name;
         }
     }
 }
