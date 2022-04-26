@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HealthInstitution.MVVM.Models.Enumerations;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         public int ID { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
+        public EquipmentType Type { get; set; }
+        [JsonIgnore]
         public Dictionary<Room, int> ArrangmentByRoom {
             get 
             {
