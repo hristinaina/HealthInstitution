@@ -65,7 +65,8 @@ namespace HealthInstitution
             appointments.Add(appointment);
 
             d1.SetExaminations(appointments);
-            List<DateTime> available = d1.FindFreeTime(30);
+            DateTime datet = DateTime.Today;
+            List<DateTime> available = d1.FindFreeTime(datet, 30);
             foreach(DateTime i in available)
             {
                 System.Diagnostics.Debug.WriteLine(i);

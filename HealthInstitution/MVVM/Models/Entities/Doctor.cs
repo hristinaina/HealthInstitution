@@ -34,7 +34,7 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         // returns list with 2 lists, first (0) list is when appoinments start
         // and second (1) list is when appointments end
-        private List<List<DateTime>> GetBusyTime()
+        private List<List<DateTime>> GetBusyTime(DateTime date)
         {
             List<List<DateTime>> busyTime = new();
             List<DateTime> examinationsStart = new();
@@ -42,20 +42,24 @@ namespace HealthInstitution.MVVM.Models.Entities
 
             foreach (Examination examination in _examinations)
             {
-                DateTime startDateTime = examination.GetDateTime();
-                DateTime endDateTime = startDateTime.AddMinutes(15);
-                examinationsStart.Add(startDateTime);
-                examinationsEnd.Add(endDateTime);
-
+                if (DateTime.Compare(examination.GetDateTime().Date, date) == 0)
+                {
+                    DateTime startDateTime = examination.GetDateTime();
+                    DateTime endDateTime = startDateTime.AddMinutes(15);
+                    examinationsStart.Add(startDateTime);
+                    examinationsEnd.Add(endDateTime);
+                }
             }
 
             foreach (Operation operation in _operations)
             {
-                DateTime startDateTime = operation.GetDateTime();
-                DateTime endDateTime = startDateTime.AddMinutes(operation.GetDurationInMin());
-                examinationsStart.Add(startDateTime);
-                examinationsEnd.Add(endDateTime);
-
+                if (DateTime.Compare(operation.GetDateTime().Date, date) == 0)
+                {
+                    DateTime startDateTime = operation.GetDateTime();
+                    DateTime endDateTime = startDateTime.AddMinutes(operation.GetDurationInMin());
+                    examinationsStart.Add(startDateTime);
+                    examinationsEnd.Add(endDateTime);
+                }
             }
 
             examinationsStart = SortAscending(examinationsStart);
@@ -80,17 +84,17 @@ namespace HealthInstitution.MVVM.Models.Entities
             return (true, DateTime.Today);
         }
 
-        public List<DateTime> FindFreeTime(int durationInMin = 15)  // TODO : add for other dates, not just for today
+        public List<DateTime> FindFreeTime( DateTime date, int durationInMin = 15)  // TODO : add for other dates, not just for today
         {
-            List<List<DateTime>> busyTime = GetBusyTime();
+            List<List<DateTime>> busyTime = GetBusyTime(date);
             List<DateTime> availableTime = new();
             
             List<DateTime> appointmentsStart = busyTime[0];
             List<DateTime> appointmentsEnd = busyTime[1];
             
-            DateTime dateTime = DateTime.Today;
+            DateTime dateTime = date;
             dateTime = dateTime.AddHours(8);       // date == today, time == 8:00
-            DateTime borderTime = DateTime.Today;
+            DateTime borderTime = date;
             borderTime = borderTime.AddHours(20);  // doctor works till 20 pm
 
             while (DateTime.Compare(dateTime.AddMinutes(durationInMin), borderTime) <= 0) 
@@ -102,10 +106,7 @@ namespace HealthInstitution.MVVM.Models.Entities
                     dateTime = dateTime.AddMinutes(durationInMin);
                 }
 
-                else
-                {
-                    dateTime = newDateTime;
-                }
+                else dateTime = newDateTime;
             }
 
             return availableTime;
