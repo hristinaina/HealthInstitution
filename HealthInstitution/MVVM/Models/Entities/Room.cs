@@ -89,6 +89,15 @@ namespace HealthInstitution.MVVM.Models.Entities
             return true;
         }
 
+
+        public static Room GetById(List<Room> rooms, int id)
+        {
+            foreach (Room r in rooms)
+            {
+                if (r.ID == id) return r;
+            }
+            return null;
+        }
         public override string ToString()
         {
             return "Id: " + this.ID + "; Number: " + this.Number + "; Name: " + this.Name + "; Tip: " + this.Type;
