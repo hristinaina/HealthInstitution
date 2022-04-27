@@ -14,6 +14,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _fileName;
         private List<Operation> _operations;
 
+
         public OperationRepository(string filePath)
         {
             _fileName = filePath;

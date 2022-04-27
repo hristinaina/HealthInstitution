@@ -12,12 +12,14 @@ namespace HealthInstitution.MVVM.Models.Entities
         private List<Examination> _examinations;
         private List<Operation> _operations;
 
+
         public Doctor(Specialization specialization = Specialization.NONE)
         {
             _specialization = specialization;
             _examinations = new List<Examination>();
             _operations = new List<Operation>();
         }
+
 
         public Specialization GetSpecialization() => _specialization;
         public void SetSpecialization(Specialization specialization) => _specialization = specialization;
