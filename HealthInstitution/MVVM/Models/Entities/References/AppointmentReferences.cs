@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Entities
 {
-    public class AppointmentRefference
+    public class AppointmentReferences
     {
         private int _appoinmentId;
         private int _doctorId;
@@ -14,7 +14,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private int _roomId;
         private int _perscriptionId;
 
-        public AppointmentRefference(int appointmentId, int doctoriId, int patientId,
+        public AppointmentReferences(int appointmentId, int doctoriId, int patientId,
                                      int roomId, int perscriptionId)
         {
             _appoinmentId = appointmentId;
