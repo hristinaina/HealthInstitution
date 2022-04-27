@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Entities
 {
-    public class Operation
+    public class Operation : Appointment
     {
+        private int _durationInMin;
+
+        public Operation(int id, DateTime date, bool isEmergency, bool done, int duration) 
+                         : base(id, date, isEmergency, done)
+        {
+            _durationInMin = duration;
+        }
+
+        public int GetDurationInMin() => _durationInMin;
+        public void SetDurationInMin(int duration) => _durationInMin = duration;
     }
 }

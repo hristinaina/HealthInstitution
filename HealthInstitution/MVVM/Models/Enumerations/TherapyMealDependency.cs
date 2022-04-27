@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Enumerations
 {
-    enum TherapyMealDependency
+    public enum TherapyMealDependency
     {
         NOT_IMPORTANT,
         BEFORE,
