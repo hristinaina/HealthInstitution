@@ -10,13 +10,19 @@ namespace HealthInstitution.MVVM.Models.Entities
 {
     public class Room
     {
-        public int ID { get; }
-        public string Name { get; set; }
-        public int Number { get; set; }
-        public RoomType Type { get; set; }
+        private int _id;
+        private string _name;
+        private int _number;
+        private RoomType _type;
+        private Dictionary<Equipment, int> _equipment;
+
+        public int ID { get => this._id; }
+        public string Name { get => this._name; set { this._name = value; } }
+        public int Number { get => this._number; set { this._number = value; } }
+        public RoomType Type { get => this._type; set { this._type = value; } }
 
         [JsonIgnore]
-        public Dictionary<Equipment, int> Equipment;
+        public Dictionary<Equipment, int> Equipment { get => this._equipment; set { this._equipment = value; } }
         
         public Room()
         {
@@ -25,10 +31,10 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         private Room(int id, int number, string name, RoomType type) : this()
         {
-            this.ID = id;
-            this.Number = number;
-            this.Name = name;
-            this.Type = type;
+            this._id = id;
+            this._number = number;
+            this._name = name;
+            this._type = type;
         }
 
         public static Room Create(int id, int number, string name, RoomType type)
@@ -67,7 +73,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         public void ChangeNumber(List<Room> rooms, int newNumber)
         {
             if (CheckNumber(rooms, newNumber)) this.Number = newNumber;
-            //Ovde dodati Exception da se broj vec koristi
+            //Add RoomNumberAlreadyInUseException
             else throw new Exception();
         }
 
@@ -96,10 +102,10 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             if (this.Type == RoomType.OPERATING_ROOM)
             {
-                //provera da li se nalazi u operacijama
+                //Check exams
             } else if (this.Type == RoomType.EXAM_ROOM)
             {
-                //provera da li se nalazi u pregledima
+                //Check operations
             }
             return true;
         }
@@ -127,7 +133,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             if (!this.Equipment.ContainsKey(e))
             {
-                //baciti exception da ne postoji u sobi
+                //add NotInRoomException
             }
             this.Equipment[e] -= quantity;
         }

@@ -10,20 +10,26 @@ namespace HealthInstitution.MVVM.Models.Entities
 {
     public class Equipment
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public int Quantity { get; set; }
-        public EquipmentType Type { get; set; }
+        private int _id;
+        private string _name;
+        private int _quantity;
+        private EquipmentType _type;
+        private Dictionary<Room, int> _arrangmentByRooms;
+
+        public int ID { get => _id; }
+        public string Name { get => this._name; set { this._name = value; } }
+        public int Quantity { get => this._quantity; set { this._quantity = value; } }
+        public EquipmentType Type { get => this._type; set { this._type = value; } }
         [JsonIgnore]
-        public Dictionary<Room, int> ArrangmentByRoom {
+        public Dictionary<Room, int> ArrangmentByRooms {
             get 
             {
-                if (ArrangmentByRoom == null) ArrangmentByRoom = new Dictionary<Room, int>();
-                return ArrangmentByRoom;
+                if (this._arrangmentByRooms == null) this._arrangmentByRooms = new Dictionary<Room, int>();
+                return this._arrangmentByRooms;
             }
             set
             {
-                ArrangmentByRoom = value;
+                this._arrangmentByRooms = value;
             }
                 }
 
@@ -34,24 +40,24 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public Equipment(int id, string name, int quantity, EquipmentType type)
         {
-            this.ID = id;
-            this.Name = name;
-            this.Quantity = quantity;
-            this.Type = type;
+            this._id = id;
+            this._name = name;
+            this._quantity = quantity;
+            this._type = type;
         }
 
         public Equipment(int id, string name, int quantity, EquipmentType type, Dictionary<Room, int> arragment) : this(id, name, quantity, type)
         {
-            this.ArrangmentByRoom = arragment;
+            this._arrangmentByRooms = arragment;
         }
 
         public void ArrangeInRoom(Room r, int quantity)
         {
-            if (!this.ArrangmentByRoom.ContainsKey(r))
+            if (!this._arrangmentByRooms.ContainsKey(r))
             {
-                this.ArrangmentByRoom[r] = 0;
+                this._arrangmentByRooms[r] = 0;
             }
-            this.ArrangmentByRoom[r] += quantity;
+            this._arrangmentByRooms[r] += quantity;
         }
 
         public static Equipment GetById(List<Equipment> equipment, int id)
@@ -78,7 +84,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             Dictionary<Room, Equipment> filteredEquipment = new Dictionary<Room, Equipment>();
             foreach (Equipment e in allEquipment)
             {
-                if (e.ArrangmentByRoom[r] >= minQuantity && e.ArrangmentByRoom[r] <= maxQuantity) filteredEquipment[r] = e;
+                if (e.ArrangmentByRooms[r] >= minQuantity && e.ArrangmentByRooms[r] <= maxQuantity) filteredEquipment[r] = e;
             }
             return filteredEquipment;
         }

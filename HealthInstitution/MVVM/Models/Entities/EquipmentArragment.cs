@@ -22,7 +22,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         public static List<EquipmentArragment> LoadData(string filename)
         {
             List<EquipmentArragment> allArragments = FileService.Deserialize<EquipmentArragment>(filename);
-            //promeni ime
+            //rethink about name
             List<EquipmentArragment> activeArragments = new List<EquipmentArragment>();
 
             foreach (EquipmentArragment a in allArragments)
