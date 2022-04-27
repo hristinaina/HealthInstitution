@@ -15,31 +15,31 @@ namespace HealthInstitution.MVVM.Models.Entities
         private List<Appointment> _appointments;
         // TODO: add refferals
 
-        public double Height { get => this._height; set { this._height = value; } }
-        public double Weight { get => this._weight; set { this._weight = value; } }
+        public double Height { get => _height; set { _height = value; } }
+        public double Weight { get => _weight; set { _weight = value; } }
         // history of sickness !?
         [JsonIgnore]
         public List<Allergen> Allergens{
             get
             {
-                if (this._allergens == null) this._allergens = new List<Allergen>();
-                return this._allergens;
+                if (_allergens == null) _allergens = new List<Allergen>();
+                return _allergens;
             }
             set
             {
-                this._allergens = value;
+                _allergens = value;
             }
         }
         [JsonIgnore]
         public List<Appointment> Appointments{
             get
             {
-                if (this._appointments == null) this._appointments = new List<Appointment>();
-                return this._appointments;
+                if (_appointments == null) _appointments = new List<Appointment>();
+                return _appointments;
             }
             set
             {
-                this._appointments = value;
+                _appointments = value;
             }
         }
 
@@ -47,15 +47,11 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
         }
 
-        public MedicalRecord(double height, double weight)
+        public MedicalRecord(double height, double weight, List<Allergen> allergens)
         {
-            this._height = height;
-            this._weight = weight;
-        }
-
-        public MedicalRecord(double height, double weight, List<Allergen> allergens) : this(height, weight)
-        {
-            this._allergens = allergens;
+            _height = height;
+            _weight = weight;
+            _allergens = allergens;
         }
     }
 }
