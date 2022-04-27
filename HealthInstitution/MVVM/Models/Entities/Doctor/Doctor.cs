@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,12 @@ namespace HealthInstitution.MVVM.Models.Entities
         private Specialization _specialization;
         private List<Examination> _examinations;
         private List<Operation> _operations;
+        private double _rating;
 
+        [JsonProperty("Specialization")]
+        public Specialization Specialization { get => _specialization; set { _specialization = value; } }
+        [JsonProperty("Rating")]
+        public double Rating { get => _rating; set { _rating = value; } }
 
         public Doctor(Specialization specialization = Specialization.NONE)
         {
@@ -27,6 +33,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         public void SetExaminations(List<Examination> examinations) => _examinations = examinations;
         public List<Operation> GetOperations() => _operations;
         public void SetOperations(List<Operation> operations) => _operations = operations;
+        public double GetRating() => _rating;
+        public void SetRating(double rating) => _rating = rating;
 
         public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
         {
