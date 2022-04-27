@@ -26,6 +26,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         public TherapyMealDependency TherapyMealDependency { get => _therapyMealDependency;
                                                              set { _therapyMealDependency = value; } }
 
+        public Medicine Medicine { get => _medicine; set { _medicine = value; } }
+
 
         public Perscription(Medicine medicine, int longitudeInDays, int dailyFrequency,
                             TherapyMealDependency mealDependency)
@@ -35,18 +37,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             _dailyFrequency = dailyFrequency;
             _therapyMealDependency = mealDependency;
         }
-
-        public int GetID() => _id;
-        public void SetID(int id) => _id = id;
-        public Medicine GetMedicine() => _medicine;
-        public void SetMedicine(Medicine medicine) => _medicine = medicine;
-        public int GetLongitudeInDays() => _longitudeInDays;
-        public void SetLongitudeInDays(int numberOfDays) => _longitudeInDays = numberOfDays;
-        public int GetDailyFrequency() => _dailyFrequency;
-        public void SetDailyFrequency(int dailyFrequency) => _dailyFrequency = dailyFrequency;
-        public TherapyMealDependency GetTherapyMealDependency() => _therapyMealDependency;
-        public void SetTherapyMealDependency(TherapyMealDependency mealDependency) 
-                                             => _therapyMealDependency = mealDependency;
-
+       
     }
 }

@@ -22,10 +22,5 @@ namespace HealthInstitution.MVVM.Models.Entities
             _rating = rating;
             _comment = comment;
         }
-
-        public double GetRating() => _rating;
-        public void SetRating(double rating) => _rating = rating;
-        public string GetComment() => _comment;
-        public void SetComment(string comment) => _comment = comment;
     }
 }

@@ -18,6 +18,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         public Specialization Specialization { get => _specialization; set { _specialization = value; } }
         [JsonProperty("Rating")]
         public double Rating { get => _rating; set { _rating = value; } }
+        public List<Examination> Examinations { get => _examinations; set { _examinations = value; } }
+        public List<Operation> Operations { get => _operations; set { _operations = value; } }
 
         public Doctor(Specialization specialization = Specialization.NONE)
         {
@@ -25,16 +27,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             _examinations = new List<Examination>();
             _operations = new List<Operation>();
         }
-
-
-        public Specialization GetSpecialization() => _specialization;
-        public void SetSpecialization(Specialization specialization) => _specialization = specialization;
-        public List<Examination> GetExaminations() => _examinations;
-        public void SetExaminations(List<Examination> examinations) => _examinations = examinations;
-        public List<Operation> GetOperations() => _operations;
-        public void SetOperations(List<Operation> operations) => _operations = operations;
-        public double GetRating() => _rating;
-        public void SetRating(double rating) => _rating = rating;
 
         public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
         {
@@ -50,9 +42,9 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             for (int i = 0; i < _examinations.Count(); i++)
             {
-                DateTime examinationStart = _examinations[i].GetDateTime();
+                DateTime examinationStart = _examinations[i].Date;
                 DateTime examinationEnd = examinationStart.AddMinutes(15);
-                if (DateTime.Compare(_examinations[i].GetDateTime().Date, dateTime.Date) != 0) continue;
+                if (DateTime.Compare(_examinations[i].Date.Date, dateTime.Date) != 0) continue;
                 if (DateTime.Compare(dateTime, examinationStart) >= 0 &&
                     DateTime.Compare(dateTime, examinationEnd) < 0) return _examinations[i];  
                 if (DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationStart) > 0 &&
@@ -62,9 +54,9 @@ namespace HealthInstitution.MVVM.Models.Entities
 
             for (int i = 0; i < _operations.Count(); i++)
             {
-                DateTime operationStart = _operations[i].GetDateTime();
-                DateTime operationEnd = operationStart.AddMinutes(_operations[i].GetDurationInMin());
-                if (DateTime.Compare(_operations[i].GetDateTime().Date, dateTime.Date) != 0) continue;
+                DateTime operationStart = _operations[i].Date;
+                DateTime operationEnd = operationStart.AddMinutes(_operations[i].Duration);
+                if (DateTime.Compare(_operations[i].Date.Date, dateTime.Date) != 0) continue;
                 if (DateTime.Compare(dateTime, operationStart) >= 0 &&
                     DateTime.Compare(dateTime, operationEnd) < 0) return _operations[i];
                 if (DateTime.Compare(dateTime.AddMinutes(durationInMin), operationStart) > 0 &&
@@ -96,12 +88,12 @@ namespace HealthInstitution.MVVM.Models.Entities
 
                 if (interruptingAppointment.GetType().Equals(typeof(Examination)))
                 {
-                    dateTime = interruptingAppointment.GetDateTime().AddMinutes(15);  // continuing at the end of 
+                    dateTime = interruptingAppointment.Date.AddMinutes(15);  // continuing at the end of 
                 }                                                                     // interrupting appointment  
                 else
                 {
                     Operation scheduledOperation = (Operation) interruptingAppointment;
-                    dateTime = scheduledOperation.GetDateTime().AddMinutes(scheduledOperation.GetDurationInMin());
+                    dateTime = scheduledOperation.Date.AddMinutes(scheduledOperation.Duration);
                 }
             }
 

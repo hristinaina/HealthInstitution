@@ -20,8 +20,5 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             _durationInMin = duration;
         }
-
-        public int GetDurationInMin() => _durationInMin;
-        public void SetDurationInMin(int duration) => _durationInMin = duration;
     }
 }

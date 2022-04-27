@@ -15,6 +15,7 @@ namespace HealthInstitution
         private string _secretaryFileName;
         private string _adminFileName;
         private string _examinationFileName;
+        private string _perscriptionFileName;
         private string _operationFileName;
         private string _examinationReferenceFileName;
         private string _operationReferenceFileName;
@@ -42,58 +43,64 @@ namespace HealthInstitution
 
         public void AddFilePaths(string patientFileName, string doctorFileName, string secretaryFileName, string adminFileName,
                                  string examinationFileName, string operationFileName, string examinationReferenceFileName, string operationReferenceFileName, string equipmentFileName,
-                                 string roomFileName, string medicineFileName, string dayOffFileName)
+                                 string roomFileName, string medicineFileName, string dayOffFileName, string perscriptionFileName)
         {
-            this._patientFileName = patientFileName;
-            this._doctorFileName = doctorFileName;
-            this._secretaryFileName = secretaryFileName;
-            this._adminFileName = adminFileName;
+            _patientFileName = patientFileName;
+            _doctorFileName = doctorFileName;
+            _secretaryFileName = secretaryFileName;
+            _adminFileName = adminFileName;
 
-            this._examinationFileName = examinationFileName;
-            this._operationFileName = operationFileName;
+            _examinationFileName = examinationFileName;
+            _perscriptionFileName = perscriptionFileName;
+            _operationFileName = operationFileName;
             _examinationReferenceFileName = examinationReferenceFileName;
             _operationReferenceFileName = examinationReferenceFileName;
 
-            this._roomFileName = roomFileName;
-            this._equipmentFileName = equipmentFileName;
+            _roomFileName = roomFileName;
+            _equipmentFileName = equipmentFileName;
 
-            this._medicineFileName = medicineFileName;
+            _medicineFileName = medicineFileName;
 
-            this._dayOffFileName = dayOffFileName;
+            _dayOffFileName = dayOffFileName;
 
             // TODO add the rest of the class attributes
         }
 
         public string GetAdminFileName()
         {
-            return this._adminFileName;
+            return _adminFileName;
         }
 
         public string GetPatientFileName()
         {
-            return this._patientFileName;
+            return _patientFileName;
         }
 
         public string GetDoctorFileName()
         {
-            return this._doctorFileName;
+            return _doctorFileName;
         }
 
         public string GetSecretaryFileName()
         {
-            return this._secretaryFileName;
+            return _secretaryFileName;
         }
         public string GetAppointmentFileName()
         {
-            return this._examinationFileName;
+            return _examinationFileName;
         }
 
         public string GetExationFileName() {
             return _examinationFileName;
         }
+
+        public string GetPerscriptionFileName()
+        {
+            return _perscriptionFileName;
+        }
         public string GetOperationFileName()
         {
-            return this._operationFileName;
+            return _operationFileName;
         }
 
         public string GetExaminationReferenceFileName()
@@ -106,19 +113,19 @@ namespace HealthInstitution
         }
         public string GetEquipmentFileName()
         {
-            return this._equipmentFileName;
+            return _equipmentFileName;
         }
         public string GetRoomFileName()
         {
-            return this._roomFileName;
+            return _roomFileName;
         }
         public string GetMedicineFileName()
         {
-            return this._medicineFileName;
+            return _medicineFileName;
         }
         public string GetDayOffFileName()
         {
-            return this._dayOffFileName;
+            return _dayOffFileName;
         }
     }
 }

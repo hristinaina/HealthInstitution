@@ -18,6 +18,7 @@ namespace HealthInstitution.MVVM.Models
         private SecretaryRepository _secretaryRepository;
         private AdminRepository _adminRepository;
 
+        private PerscriptionRepository _perscriptionRepository;
         private ExaminationRepository _examinationRepository;
         private OperationRepository _operationRepository;
         private ExaminationReferencesRepository _examinationReferencesRepository;
@@ -49,6 +50,7 @@ namespace HealthInstitution.MVVM.Models
             _patientRepository = new PatientRepository(_appSettings.GetPatientFileName());
             _doctorRepository = new DoctorRepository(_appSettings.GetDoctorFileName());
 
+            _perscriptionRepository = new PerscriptionRepository(_appSettings.GetPerscriptionFileName());
             _operationRepository = new OperationRepository(_appSettings.GetOperationFileName());
             _examinationRepository = new ExaminationRepository(_appSettings.GetExationFileName());
             _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.GetExaminationReferenceFileName());
@@ -103,13 +105,14 @@ namespace HealthInstitution.MVVM.Models
                 Examination examination = _examinationRepository.FindByID(reference.GetExaminationId());
                 Doctor doctor = _doctorRepository.FindByID(reference.GetDoctorId());
                 Patient patient = _patientRepository.FindByID(reference.GetPatientId());
+                Perscription perscription = _perscriptionRepository.FindByID(reference.GetPerscriptionId());
                 // TODO -- room
-                // TODO -- perscription
+ 
 
                 examination.SetDoctor(doctor);
                 examination.SetPatient(patient);
+                examination.SetPerscription(perscription);
                 // TODO -- set room
-                // TODO -- set perscription
 
                 doctor.GetExaminations().Add(examination);
                 patient.GetExaminations().Add(examination);
@@ -134,5 +137,19 @@ namespace HealthInstitution.MVVM.Models
                 patient.GetOperations().Add(operation);
             }
         }
+
+        public PatientRepository GetPatientRepository() => _patientRepository;
+        public DoctorRepository GetDoctorRepository() => _doctorRepository;
+        public SecretaryRepository GetSecretaryRepository() => _secretaryRepository;
+        public AdminRepository GetAdminRepository() => _adminRepository;
+        public PerscriptionRepository GetPerscriptionRepository() => _perscriptionRepository;
+        public ExaminationRepository GetExaminationRepository() => _examinationRepository;
+        public OperationRepository GetOperationRepository() => _operationRepository;
+        public ExaminationReferencesRepository GetExaminationReferencesRepository() => _examinationReferencesRepository;
+        public OperationReferencesRepository GetOperationReferencesRepository() => _operationReferencesRepository;
+        public EquipmentRepository GetEquipmentRepository() => _equipmentRepository;
+        public RoomRepository GetRoomRepository() => _roomRepository;
+        public MedicineRepository GetMedicineRepository() => _medicineRepository;
+        public DayOffRepository GetOffRepository() => _dayOffRepository;
     }
 }

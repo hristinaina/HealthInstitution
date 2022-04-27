@@ -15,8 +15,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         private int _roomId;
         private int _perscriptionId;
 
-        [JsonProperty("AppointmentID")]
-        public int AppointmentID { get => _examinationID; set { _examinationID = value; } }
+        [JsonProperty("ExaminationID")]
+        public int ExaminationID { get => _examinationID; set { _examinationID = value; } }
         [JsonProperty ("DoctorID")]
         public int DoctorID { get => _doctorId; set { _doctorId = value; } }
         [JsonProperty("PatientID")]
@@ -36,31 +36,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             _patientId = patientId;
             _roomId = roomId;
             _perscriptionId = perscriptionId;
-        }
-
-        public int GetExaminationId()
-        {
-            return _examinationID;
-        }
-
-        public int GetDoctorId()
-        {
-            return _doctorId;
-        }
-
-        public int GetPatientId()
-        {
-            return _patientId;
-        }
-
-        public int GetRoomId()
-        {
-            return _roomId;
-        }
-
-        public int GetPerscriptionId()
-        {
-            return _perscriptionId;
         }
     }
 }
