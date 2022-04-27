@@ -17,6 +17,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         public string Anamnesis { get => _anamnesis; set { _anamnesis = value; } }
         [JsonProperty("Review")]
         public ExaminationReview Review { get => _review; set { _review = value; } }
+        [JsonIgnore]
         public Perscription Perscription { get => _perscription; set { _perscription = value; } }
 
         public Examination(int id, DateTime date, bool isEmergency, bool done,

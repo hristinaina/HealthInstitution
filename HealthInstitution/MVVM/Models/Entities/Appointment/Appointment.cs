@@ -20,8 +20,11 @@ namespace HealthInstitution.MVVM.Models.Entities
         public bool Emergency { get => _isEmergency; set { _isEmergency = value; } }
         [JsonProperty("Done")]
         public bool Done { get => _isDone; set { _isDone = value; } }
+        [JsonIgnore]
         public Doctor Doctor { get => _doctor; set { _doctor = value; } }
+        [JsonIgnore]
         public Patient Patient { get => _patient; set { _patient = value; } }
+        [JsonIgnore]
         public Room Room { get => _room; set { _room = value; } }
 
         public Appointment(int id, DateTime dateTime, bool isEmergency, bool done)

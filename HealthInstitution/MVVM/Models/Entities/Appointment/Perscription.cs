@@ -25,6 +25,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonProperty("TherapyMealDependency")]
         public TherapyMealDependency TherapyMealDependency { get => _therapyMealDependency;
                                                              set { _therapyMealDependency = value; } }
+        [JsonIgnore]
 
         public Medicine Medicine { get => _medicine; set { _medicine = value; } }
 

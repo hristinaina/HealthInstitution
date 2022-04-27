@@ -18,7 +18,9 @@ namespace HealthInstitution.MVVM.Models.Entities
         public Specialization Specialization { get => _specialization; set { _specialization = value; } }
         [JsonProperty("Rating")]
         public double Rating { get => _rating; set { _rating = value; } }
+        [JsonIgnore]
         public List<Examination> Examinations { get => _examinations; set { _examinations = value; } }
+        [JsonIgnore]
         public List<Operation> Operations { get => _operations; set { _operations = value; } }
 
         public Doctor(Specialization specialization = Specialization.NONE)

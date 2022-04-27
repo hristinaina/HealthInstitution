@@ -27,6 +27,8 @@ namespace HealthInstitution.MVVM.Models
         public string Reason { get => _reason; set { _reason = value; } }
         [JsonProperty("State")]
         public State State { get => _state; set { _state = value; } }
+        [JsonIgnore]
+        public Doctor Doctor { get => _doctor; set { _doctor = value; } }
 
 
         public DayOff(int id, DateTime beginDate, DateTime endDate, bool emergency,
