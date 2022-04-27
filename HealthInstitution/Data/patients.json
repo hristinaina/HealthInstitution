@@ -9,7 +9,8 @@
     "FirstName": "Ime",
     "LastName": "Prezime",
     "Email": "email@gmail.com",
-    "Password": "sifra"
+    "Password": "sifra",
+    "Gender": 0
   },
   {
     "Blocked": false,
@@ -21,7 +22,8 @@
     "FirstName": "Ime",
     "LastName": "Prezime",
     "Email": "email@gmail.com",
-    "Password": "sifra"
+    "Password": "sifra",
+    "Gender": 1
   },
   {
     "Blocked": false,
@@ -33,7 +35,8 @@
     "FirstName": "Ime",
     "LastName": "Prezime",
     "Email": "email@gmail.com",
-    "Password": "sifra"
+    "Password": "sifra",
+    "Gender": 1
   },
   {
     "Blocked": false,
@@ -45,7 +48,8 @@
     "FirstName": "Ime",
     "LastName": "Prezime",
     "Email": "email@gmail.com",
-    "Password": "sifra"
+    "Password": "sifra",
+    "Gender": 1
   },
   {
     "Blocked": false,
@@ -57,7 +61,8 @@
     "FirstName": null,
     "LastName": null,
     "Email": "p",
-    "Password": "p"
+    "Password": "p",
+    "Gender": 0
   },
   {
     "Blocked": false,
@@ -69,6 +74,7 @@
     "FirstName": null,
     "LastName": null,
     "Email": "p",
-    "Password": "p"
+    "Password": "p",
+    "Gender": 1
   }
 ]
