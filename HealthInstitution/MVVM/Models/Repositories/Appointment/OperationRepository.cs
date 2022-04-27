@@ -39,7 +39,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             foreach (Operation operation in _operations)
             {
-                if (operation.GetId() == id) return operation;
+                if (operation.ID == id) return operation;
             }
             return null;
         }

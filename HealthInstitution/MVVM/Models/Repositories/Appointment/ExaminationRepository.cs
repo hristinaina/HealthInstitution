@@ -34,7 +34,7 @@ namespace HealthInstitution.MVVM.Models
         {
             foreach (Examination examination in _examinations)
             {
-                if (examination.GetId() == id) return examination;
+                if (examination.ID == id) return examination;
             }
             return null;
         }

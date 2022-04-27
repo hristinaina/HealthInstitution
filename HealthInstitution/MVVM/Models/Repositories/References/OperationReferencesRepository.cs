@@ -37,7 +37,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             foreach (OperationReference reference in _references)
             {
-                if (reference.GetOperationId() == id) return reference;
+                if (reference.OperationId == id) return reference;
             }
             return null;
         }

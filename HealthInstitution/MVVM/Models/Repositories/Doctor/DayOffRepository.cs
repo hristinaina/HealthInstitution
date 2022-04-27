@@ -37,7 +37,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             foreach (DayOff dayOff in _daysOff)
             {
-                if (dayOff.GetId() == id) return dayOff;
+                if (dayOff.ID == id) return dayOff;
             }
             return null;
         }

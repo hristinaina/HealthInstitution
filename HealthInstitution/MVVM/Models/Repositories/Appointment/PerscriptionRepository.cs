@@ -38,7 +38,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             foreach (Perscription perscription in _perscriptions)
             {
-                if (perscription.GetID() == id) return perscription;
+                if (perscription.ID == id) return perscription;
             }
             return null;
         }

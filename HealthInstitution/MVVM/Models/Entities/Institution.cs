@@ -102,19 +102,19 @@ namespace HealthInstitution.MVVM.Models
         {
             foreach (ExaminationReference reference in _examinationReferencesRepository.GetReferences())
             {
-                Examination examination = _examinationRepository.FindByID(reference.GetExaminationId());
-                Doctor doctor = _doctorRepository.FindByID(reference.GetDoctorId());
-                Patient patient = _patientRepository.FindByID(reference.GetPatientId());
-                Perscription perscription = _perscriptionRepository.FindByID(reference.GetPerscriptionId());
+                Examination examination = _examinationRepository.FindByID(reference.ExaminationID);
+                Doctor doctor = _doctorRepository.FindByID(reference.DoctorID);
+                Patient patient = _patientRepository.FindByID(reference.PatientID);
+                Perscription perscription = _perscriptionRepository.FindByID(reference.PerscriptionID);
                 // TODO -- room
- 
 
-                examination.SetDoctor(doctor);
-                examination.SetPatient(patient);
-                examination.SetPerscription(perscription);
+
+                examination.Doctor = doctor;
+                examination.Patient = patient;
+                examination.Perscription = perscription;
                 // TODO -- set room
 
-                doctor.GetExaminations().Add(examination);
+                doctor.Examinations.Add(examination);
                 patient.GetExaminations().Add(examination);
             }
         }
@@ -124,32 +124,32 @@ namespace HealthInstitution.MVVM.Models
         {
             foreach (OperationReference reference in _operationReferencesRepository.GetReferences())
             {
-                Operation operation = _operationRepository.FindByID(reference.GetOperationId());
-                Doctor doctor = _doctorRepository.FindByID(reference.GetDoctorId());
-                Patient patient = _patientRepository.FindByID(reference.GetPatientId());
+                Operation operation = _operationRepository.FindByID(reference.OperationId);
+                Doctor doctor = _doctorRepository.FindByID(reference.DoctorID);
+                Patient patient = _patientRepository.FindByID(reference.PatientID);
                 // TODO -- room
 
-                operation.SetDoctor(doctor);
-                operation.SetPatient(patient);
+                operation.Doctor = doctor;
+                operation.Patient = patient;
                 // TODO -- set room
 
-                doctor.GetOperations().Add(operation);
+                doctor.Operations.Add(operation);
                 patient.GetOperations().Add(operation);
             }
         }
 
-        public PatientRepository GetPatientRepository() => _patientRepository;
-        public DoctorRepository GetDoctorRepository() => _doctorRepository;
-        public SecretaryRepository GetSecretaryRepository() => _secretaryRepository;
-        public AdminRepository GetAdminRepository() => _adminRepository;
-        public PerscriptionRepository GetPerscriptionRepository() => _perscriptionRepository;
-        public ExaminationRepository GetExaminationRepository() => _examinationRepository;
-        public OperationRepository GetOperationRepository() => _operationRepository;
-        public ExaminationReferencesRepository GetExaminationReferencesRepository() => _examinationReferencesRepository;
-        public OperationReferencesRepository GetOperationReferencesRepository() => _operationReferencesRepository;
-        public EquipmentRepository GetEquipmentRepository() => _equipmentRepository;
-        public RoomRepository GetRoomRepository() => _roomRepository;
-        public MedicineRepository GetMedicineRepository() => _medicineRepository;
-        public DayOffRepository GetOffRepository() => _dayOffRepository;
+        public PatientRepository PatientRepository { get => _patientRepository; }
+        public DoctorRepository DoctorRepository { get => _doctorRepository; }
+        public SecretaryRepository SecretaryRepository { get => _secretaryRepository; }
+        public AdminRepository AdminRepository { get => _adminRepository; }
+        public PerscriptionRepository PerscriptionRepository { get => _perscriptionRepository; }
+        public ExaminationRepository ExaminationRepository { get => _examinationRepository; }
+        public OperationRepository OperationRepository { get => _operationRepository; }
+        public ExaminationReferencesRepository ExaminationReferencesRepository { get => _examinationReferencesRepository; }
+        public OperationReferencesRepository OperationReferencesRepository { get => _operationReferencesRepository; }
+        public EquipmentRepository EquipmentRepository { get => _equipmentRepository; }
+        public RoomRepository RoomRepository { get => _roomRepository; }
+        public MedicineRepository MedicineRepository { get => _medicineRepository; }
+        public DayOffRepository DayOffRepository { get => _dayOffRepository; }
     }
 }
