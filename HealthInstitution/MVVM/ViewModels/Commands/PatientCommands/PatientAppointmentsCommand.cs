@@ -24,7 +24,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new PatientAppointmentViewModel(new Patient());
+            _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
         }
     }
 }

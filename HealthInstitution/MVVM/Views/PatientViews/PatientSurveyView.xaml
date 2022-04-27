@@ -28,7 +28,7 @@
                         TabStripPlacement="Left"
                         RenderTransformOrigin="0.523,0.505"
                         BorderBrush="#00ACACAC"
-                        SelectedIndex="0">
+                        SelectedIndex="3">
                 <TabItem Width="170">
                     <TabItem.Header>
                         <StackPanel Width="auto"
@@ -116,7 +116,7 @@
         </materialDesign:Card>
 
         <materialDesign:Card Grid.Column="1">
-            <TextBox Text="Comming soon" />
+            <TextBox Text="Comming soon.." />
         </materialDesign:Card>
     </Grid>
 </UserControl>
