@@ -21,7 +21,7 @@ namespace HealthInstitution
             // * appSettings kao parametre prima putanje do fajlova gdje su smjesteni podaci za rad Zdravstvene Ustanove 
             AppSettings appSettings = AppSettings.Instance();
             appSettings.AddFilePaths("../../../Data/patients.json", "../../../Data/doctors.json", "../../../Data/secretaries.json",
-                                     "../../../Data/admins.json", "../../../Data/appointments.json", "../../../Data/equipment.json",
+                                     "../../../Data/admins.json", "../../../Data/examinations.json", "../../../Data/equipment.json",
                                      "../../../Data/operations.json", "../../../Data/rooms.json", "../../../Data/medicine.json",
                                      "../../../Data/daysOff.json");
             _institution = Institution.Instance();
