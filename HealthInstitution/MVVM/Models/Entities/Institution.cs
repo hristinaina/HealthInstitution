@@ -13,20 +13,20 @@ namespace HealthInstitution.MVVM.Models
     {
         private AppSettings _appSettings;
 
-        public PatientRepository PatientRepository;
-        public DoctorRepository DoctorRepository;
-        public SecretaryRepository SecretaryRepository;
-        public AdminRepository AdminRepository;
+        private PatientRepository _patientRepository;
+        private DoctorRepository _doctorRepository;
+        private SecretaryRepository _secretaryRepository;
+        private AdminRepository _adminRepository;
 
-        public ExaminationRepository ExaminationRepository;
-        public OperationRepository OperationRepository;
+        private ExaminationRepository _examinationRepository;
+        private OperationRepository _operationRepository;
         private ExaminationReferencesRepository _examinationReferencesRepository;
         private OperationReferencesRepository _operationReferencesRepository;
 
-        public EquipmentRepository EquipmentRepository;
-        public RoomRepository RoomRepository;
-        public MedicineRepository MedicineRepository;
-        public DayOffRepository DayOffRepository;
+        private EquipmentRepository _equipmentRepository;
+        private RoomRepository _roomRepository;
+        private MedicineRepository _medicineRepository;
+        private DayOffRepository _dayOffRepository;
         // TODO: add other repositories
 
         private static Institution s_instance = null;
@@ -44,17 +44,17 @@ namespace HealthInstitution.MVVM.Models
         {
             _appSettings = AppSettings.Instance();
 
-            AdminRepository = new AdminRepository(_appSettings.GetAdminFileName());
-            SecretaryRepository = new SecretaryRepository(_appSettings.GetSecretaryFileName());
-            PatientRepository = new PatientRepository(_appSettings.GetPatientFileName());
-            DoctorRepository = new DoctorRepository(_appSettings.GetDoctorFileName());
+            _adminRepository = new AdminRepository(_appSettings.GetAdminFileName());
+            _secretaryRepository = new SecretaryRepository(_appSettings.GetSecretaryFileName());
+            _patientRepository = new PatientRepository(_appSettings.GetPatientFileName());
+            _doctorRepository = new DoctorRepository(_appSettings.GetDoctorFileName());
 
-            OperationRepository = new OperationRepository(_appSettings.GetOperationFileName());
-            ExaminationRepository = new ExaminationRepository(_appSettings.GetExationFileName());
+            _operationRepository = new OperationRepository(_appSettings.GetOperationFileName());
+            _examinationRepository = new ExaminationRepository(_appSettings.GetExationFileName());
             _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.GetExaminationReferenceFileName());
             _operationReferencesRepository = new OperationReferencesRepository(_appSettings.GetOperationReferenceFileName());
 
-            DayOffRepository = new DayOffRepository(_appSettings.GetDayOffFileName());
+            _dayOffRepository = new DayOffRepository(_appSettings.GetDayOffFileName());
             // TODO: add other repositories
 
             LoadAll();
@@ -63,29 +63,29 @@ namespace HealthInstitution.MVVM.Models
 
         private void LoadAll()
         {
-            AdminRepository.LoadFromFile();
-            PatientRepository.LoadFromFile();
-            DoctorRepository.LoadFromFile();
-            SecretaryRepository.LoadFromFile();
-            ExaminationRepository.LoadFromFile();
-            OperationRepository.LoadFromFile();
+            _adminRepository.LoadFromFile();
+            _patientRepository.LoadFromFile();
+            _doctorRepository.LoadFromFile();
+            _secretaryRepository.LoadFromFile();
+            _examinationRepository.LoadFromFile();
+            _operationRepository.LoadFromFile();
             _examinationReferencesRepository.LoadFromFile();
             _operationReferencesRepository.LoadFromFile();
-            DayOffRepository.LoadFromFile();
+            _dayOffRepository.LoadFromFile();
             // TODO: add other repositories
         }
 
         public void SaveAll()
         {
-            AdminRepository.SaveToFile();
-            PatientRepository.SaveToFile();
-            DoctorRepository.SaveToFile();
-            SecretaryRepository.SaveToFile();
-            ExaminationRepository.SaveToFile();
-            OperationRepository.SaveToFile();
+            _adminRepository.SaveToFile();
+            _patientRepository.SaveToFile();
+            _doctorRepository.SaveToFile();
+            _secretaryRepository.SaveToFile();
+            _examinationRepository.SaveToFile();
+            _operationRepository.SaveToFile();
             _examinationReferencesRepository.SaveToFile();
             _operationReferencesRepository.SaveToFile();
-            DayOffRepository.SaveToFile();
+            _dayOffRepository.SaveToFile();
             // TODO: add other repositories
         }
 
@@ -100,9 +100,9 @@ namespace HealthInstitution.MVVM.Models
         {
             foreach (ExaminationReference reference in _examinationReferencesRepository.GetReferences())
             {
-                Examination examination = ExaminationRepository.FindByID(reference.GetExaminationId());
-                Doctor doctor = DoctorRepository.FindByID(reference.GetDoctorId());
-                Patient patient = PatientRepository.FindByID(reference.GetPatientId());
+                Examination examination = _examinationRepository.FindByID(reference.GetExaminationId());
+                Doctor doctor = _doctorRepository.FindByID(reference.GetDoctorId());
+                Patient patient = _patientRepository.FindByID(reference.GetPatientId());
                 // TODO -- room
                 // TODO -- perscription
 
@@ -121,9 +121,9 @@ namespace HealthInstitution.MVVM.Models
         {
             foreach (OperationReference reference in _operationReferencesRepository.GetReferences())
             {
-                Operation operation = OperationRepository.FindByID(reference.GetOperationId());
-                Doctor doctor = DoctorRepository.FindByID(reference.GetDoctorId());
-                Patient patient = PatientRepository.FindByID(reference.GetPatientId());
+                Operation operation = _operationRepository.FindByID(reference.GetOperationId());
+                Doctor doctor = _doctorRepository.FindByID(reference.GetDoctorId());
+                Patient patient = _patientRepository.FindByID(reference.GetPatientId());
                 // TODO -- room
 
                 operation.SetDoctor(doctor);
