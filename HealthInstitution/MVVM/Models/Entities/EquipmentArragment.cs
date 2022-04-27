@@ -41,5 +41,16 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
             return currentArragments;
         }
+
+        public static void ArrangeEquipment(List<Room> rooms, List<Equipment> equipment, List<EquipmentArragment> arragments)
+        {
+            foreach (EquipmentArragment a in arragments)
+            {
+                Room r = Room.GetById(rooms, a.RoomId);
+                Equipment e = Equipment.GetById(equipment, a.EquipmentId);
+                r.AddEquipment(e, a.Quantity);
+                e.ArrangeInRoom(r, a.Quantity);
+            }
+        }
     }
 }
