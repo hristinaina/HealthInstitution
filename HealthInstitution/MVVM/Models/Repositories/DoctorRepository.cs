@@ -29,5 +29,13 @@ namespace HealthInstitution.Repositories
         {
             FileService.Serialize<Doctor>(_doctorFileName, _doctors);
         }
+        public Doctor FindByID(int id)
+        {
+            foreach(Doctor doctor in _doctors)
+            {
+                if (doctor.ID == id) return doctor;
+            }
+            return null;
+        }
     }
 }

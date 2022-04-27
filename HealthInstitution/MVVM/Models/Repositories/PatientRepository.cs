@@ -29,5 +29,13 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             FileService.Serialize<Patient>(_patientFileName, _patients);
         }
+        public Patient FindByID(int id)
+        {
+            foreach (Patient patient in _patients)
+            {
+                if (patient.ID == id) return patient;
+            }
+            return null;
+        }
     }
 }
