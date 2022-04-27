@@ -26,43 +26,15 @@ namespace HealthInstitution.MVVM.Models.Entities
         public List<Operation> GetOperations() => _operations;
         public void SetOperations(List<Operation> operations) => _operations = operations;
 
-        private static List<DateTime> SortAscending(List<DateTime> list)
-        {
-            list.Sort((a, b) => a.CompareTo(b));
-            return list;
-        }
-
         public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
         {
 
-            for (int i = 0; i < _examinations.Count(); i++)
-            {
-                DateTime examinationStart = _examinations[i].GetDateTime();
-                DateTime examinationEnd = examinationStart.AddMinutes(15);
-                if (DateTime.Compare(_examinations[i].GetDateTime().Date, dateTime.Date) != 0) continue;
-                if (DateTime.Compare(dateTime, examinationStart) >= 0 &&
-                    DateTime.Compare(dateTime, examinationEnd) < 0) return false;
-                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationStart) > 0 &&
-                    DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationEnd) <= 0) 
-                    return false;
-            }
-
-            for (int i = 0; i < _operations.Count(); i++)
-            {
-                DateTime operationStart = _operations[i].GetDateTime();
-                DateTime operationEnd = operationStart.AddMinutes(_operations[i].GetDurationInMin());
-                if (DateTime.Compare(_operations[i].GetDateTime().Date, dateTime.Date) != 0) continue;
-                if (DateTime.Compare(dateTime, operationStart) >= 0 &&
-                    DateTime.Compare(dateTime, operationEnd) < 0) return false;
-                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), operationStart) > 0 &&
-                    DateTime.Compare(dateTime.AddMinutes(durationInMin), operationEnd) <= 0)
-                    return false;
-            }
-
-            return true;
+            Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
+            if (interruptingAppointment == null) return true;
+            return false;
         }
 
-        private Appointment CheckAvailability(DateTime dateTime, int durationInMin = 15)
+        private Appointment FindInterruptingAppointment(DateTime dateTime, int durationInMin = 15)
             // returns null if appointment can be reserved
             // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
         {
@@ -104,7 +76,7 @@ namespace HealthInstitution.MVVM.Models.Entities
 
             while (DateTime.Compare(dateTime.AddMinutes(durationInMin), borderTime) <= 0) 
             {
-                Appointment interruptingAppointment = CheckAvailability(dateTime, durationInMin);
+                Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
                 if (interruptingAppointment == null)
                 {
                     availableTime.Add(dateTime);
