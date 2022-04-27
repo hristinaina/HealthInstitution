@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.MVVM.Models.Enumerations;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,16 @@ namespace HealthInstitution.MVVM.Models.Entities
         public string Name { get; set; }
         public int Number { get; set; }
         public RoomType Type { get; set; }
+
+        [JsonIgnore]
+        public Dictionary<Equipment, int> Equipment;
         
         public Room()
         {
-
+            this.Equipment = new Dictionary<Equipment, int>();
         }
-        private Room(int id, int number, string name, RoomType type)
+
+        private Room(int id, int number, string name, RoomType type) : this()
         {
             this.ID = id;
             this.Number = number;
@@ -75,9 +80,15 @@ namespace HealthInstitution.MVVM.Models.Entities
         //    return true;
         //}
 
-        public void ChangeType(List<Operation> operations, List<Appointment> appointments, RoomType newType)
+        public void ChangeType(List<Operation> operations, List<Appointment> exams, RoomType newType)
         {
-            //Ako je operaciona sala, proveri operacije. Ako je sala za reglede, proveri preglede.
+            if (this.Type == RoomType.EXAM_ROOM)
+            {
+                //Check exams
+            } else if (this.Type == RoomType.OPERATING_ROOM)
+            {
+                //Check operations
+            }
             this.Type = newType;
         }
 
@@ -102,6 +113,35 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
             return null;
         }
+
+        public void AddEquipment(Equipment e, int quantity)
+        {
+            if (!this.Equipment.ContainsKey(e))
+            {
+                this.Equipment[e] = 0;
+            }
+            this.Equipment[e] += quantity;
+        }
+
+        public void RemoveEquipment(Equipment e, int quantity)
+        {
+            if (!this.Equipment.ContainsKey(e))
+            {
+                //baciti exception da ne postoji u sobi
+            }
+            this.Equipment[e] -= quantity;
+        }
+
+        public static List<Room> FilterByRoomType(List<Room> allRooms, RoomType type)
+        {
+            List<Room> filteredRooms = new List<Room>();
+            foreach (Room r in allRooms)
+            {
+                if (r.Type == type) filteredRooms.Add(r);
+            }
+            return filteredRooms;
+        }
+
         public override string ToString()
         {
             return "Id: " + this.ID + "; Number: " + this.Number + "; Name: " + this.Name + "; Tip: " + this.Type;

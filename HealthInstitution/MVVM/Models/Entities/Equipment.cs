@@ -31,6 +31,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
 
         }
+
         public Equipment(int id, string name, int quantity, EquipmentType type)
         {
             this.ID = id;
@@ -44,15 +45,22 @@ namespace HealthInstitution.MVVM.Models.Entities
             this.ArrangmentByRoom = arragment;
         }
 
-        public void ArrangeByRooms(List<Room> rooms, List<EquipmentArragment> arragments)
+        public void ArrangeInRoom(Room r, int quantity)
         {
-            foreach (EquipmentArragment a in arragments)
+            if (!this.ArrangmentByRoom.ContainsKey(r))
             {
-                if (a.EquipmentId == this.ID)
-                {
-                    this.ArrangmentByRoom[Room.GetById(rooms, a.RoomId)] = a.Quantity;
-                }
+                this.ArrangmentByRoom[r] = 0;
             }
+            this.ArrangmentByRoom[r] += quantity;
+        }
+
+        public static Equipment GetById(List<Equipment> equipment, int id)
+        {
+            foreach (Equipment e in equipment)
+            {
+                if (e.ID == id) return e;
+            }
+            return null;
         }
 
         public static List<Equipment> Search(List<Equipment> equipment, string phrase)
@@ -65,9 +73,30 @@ namespace HealthInstitution.MVVM.Models.Entities
             return matchingEquipment;
         }
 
-        public static List<Equipment> FilterByQuantity()
+        public static Dictionary<Room, Equipment> FilterByQuantity(Room r, List<Equipment> allEquipment, int minQuantity, int maxQuantity)
         {
-            return new List<Equipment>();
+            Dictionary<Room, Equipment> filteredEquipment = new Dictionary<Room, Equipment>();
+            foreach (Equipment e in allEquipment)
+            {
+                if (e.ArrangmentByRoom[r] >= minQuantity && e.ArrangmentByRoom[r] <= maxQuantity) filteredEquipment[r] = e;
+            }
+            return filteredEquipment;
+        }
+
+        //public static List<Equipment> FilterByRoomType(List<Equipment> allEquipment, RoomType type)
+        //{
+        //    return new List<Equipment>();
+        //}
+
+        public static List<Equipment> FilterByEquipmentType(List<Equipment> allEquipment, EquipmentType type)
+        {
+            List<Equipment> filteredEquipment = new List<Equipment>();
+
+            foreach (Equipment e in allEquipment)
+            {
+                if (e.Type == type) filteredEquipment.Add(e);
+            }
+            return filteredEquipment;
         }
     }
 }
