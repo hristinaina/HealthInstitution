@@ -90,7 +90,7 @@ namespace HealthInstitution
             {
                 DataContext = new MainViewModel(_navigation)
             };
-            //MainWindow.Show();
+            MainWindow.Show();
 
             System.Diagnostics.Debug.WriteLine("Nesto");
             base.OnStartup(e);
