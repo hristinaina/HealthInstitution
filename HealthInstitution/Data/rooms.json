@@ -1,21 +1,21 @@
 [
   {
-    "Id": 1,
+    "ID": 1,
     "Name": "Ime",
     "Type": 0
   },
   {
-    "Id": 2,
+    "ID": 2,
     "Name": "Ime",
     "Type": 0
   },
   {
-    "Id": 3,
+    "ID": 3,
     "name": "Ime",
     "type": 0
   },
   {
-    "Id": 5,
+    "ID": 5,
     "name": "Ime",
     "type": 0
   }
