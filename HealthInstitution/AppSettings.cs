@@ -22,6 +22,7 @@ namespace HealthInstitution
 
         private string _equipmentFileName;
         private string _roomFileName;
+        private string _equipmentArragmentFileName;
         private string _medicineFileName;
         private string _dayOffFileName;
         // TODO add the rest of the class attributes that will store the name of the corresponding files
@@ -43,7 +44,7 @@ namespace HealthInstitution
 
         public void AddFilePaths(string patientFileName, string doctorFileName, string secretaryFileName, string adminFileName,
                                  string examinationFileName, string operationFileName, string examinationReferenceFileName, string operationReferenceFileName, string equipmentFileName,
-                                 string roomFileName, string medicineFileName, string dayOffFileName, string perscriptionFileName)
+                                 string roomFileName, string equipmentArragmentFileName, string medicineFileName, string dayOffFileName, string perscriptionFileName)
         {
             _patientFileName = patientFileName;
             _doctorFileName = doctorFileName;
@@ -58,6 +59,7 @@ namespace HealthInstitution
 
             _roomFileName = roomFileName;
             _equipmentFileName = equipmentFileName;
+            _equipmentArragmentFileName = equipmentArragmentFileName;
 
             _medicineFileName = medicineFileName;
 
@@ -85,6 +87,12 @@ namespace HealthInstitution
         {
             return _secretaryFileName;
         }
+
+        internal string GetEquipmentArragmentFileName()
+        {
+            return this._equipmentArragmentFileName;
+        }
+
         public string GetAppointmentFileName()
         {
             return _examinationFileName;

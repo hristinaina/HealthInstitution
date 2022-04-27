@@ -4,6 +4,8 @@ using HealthInstitution.Repositories;
 using System;
 using System.Collections.Generic;
 using HealthInstitution.MVVM.Models.Services;
+using HealthInstitution.MVVM.Models.Repositories.Room;
+using HealthInstitution.MVVM.Models.Entities.References;
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -25,6 +27,7 @@ namespace HealthInstitution.MVVM.Models
         private OperationReferencesRepository _operationReferencesRepository;
 
         private EquipmentRepository _equipmentRepository;
+        private EquipmentArragmentRepository _equipmentArragmentRepository;
         private RoomRepository _roomRepository;
         private MedicineRepository _medicineRepository;
         private DayOffRepository _dayOffRepository;
@@ -55,6 +58,9 @@ namespace HealthInstitution.MVVM.Models
             _examinationRepository = new ExaminationRepository(_appSettings.GetExationFileName());
             _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.GetExaminationReferenceFileName());
             _operationReferencesRepository = new OperationReferencesRepository(_appSettings.GetOperationReferenceFileName());
+            _roomRepository = new RoomRepository(_appSettings.GetRoomFileName());
+            _equipmentRepository = new EquipmentRepository(_appSettings.GetEquipmentFileName());
+            _equipmentArragmentRepository = new EquipmentArragmentRepository(_appSettings.GetEquipmentArragmentFileName());
 
             _dayOffRepository = new DayOffRepository(_appSettings.GetDayOffFileName());
             // TODO: add other repositories
@@ -74,6 +80,8 @@ namespace HealthInstitution.MVVM.Models
             _examinationReferencesRepository.LoadFromFile();
             _operationReferencesRepository.LoadFromFile();
             _dayOffRepository.LoadFromFile();
+            _roomRepository.LoadFromFile();
+            _equipmentRepository.LoadFromFile();
             // TODO: add other repositories
         }
 
@@ -88,6 +96,8 @@ namespace HealthInstitution.MVVM.Models
             _examinationReferencesRepository.SaveToFile();
             _operationReferencesRepository.SaveToFile();
             _dayOffRepository.SaveToFile();
+            _roomRepository.SaveToFile();
+            _equipmentRepository.SaveToFile();
             // TODO: add other repositories
         }
 
@@ -95,6 +105,7 @@ namespace HealthInstitution.MVVM.Models
         {
             ConnectExaminationReferences();
             ConnectExaminationReferences();
+            ArrangeEquipment();
 
         }
 
@@ -135,6 +146,17 @@ namespace HealthInstitution.MVVM.Models
 
                 doctor.Operations.Add(operation);
                 patient.GetOperations().Add(operation);
+            }
+        }
+
+        public void ArrangeEquipment()
+        {
+            foreach (EquipmentArragment a in this._equipmentArragmentRepository.Equipment)
+            {
+                Room r = this.RoomRepository.GetById(a.RoomId);
+                Equipment e = this.EquipmentRepository.GetById(a.EquipmentId);
+                r.AddEquipment(e, a.Quantity);
+                e.ArrangeInRoom(r, a.Quantity);
             }
         }
 
