@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels;
@@ -20,12 +19,14 @@ namespace HealthInstitution
         {
             // * appSettings kao parametre prima putanje do fajlova gdje su smjesteni podaci za rad Zdravstvene Ustanove 
             AppSettings appSettings = AppSettings.Instance();
-            appSettings.AddFilePaths("../../../Data/patients.json", "../../../Data/doctors.json", "../../../Data/secretaries.json",
-                                     "../../../Data/admins.json", "../../../Data/examinations.json", "../../../Data/equipment.json",
-                                     "../../../Data/operations.json", "../../../Data/rooms.json", "../../../Data/medicine.json",
+            appSettings.AddFilePaths("../../../Data/patients.json", "../../../Data/doctors.json",
+                                     "../../../Data/secretaries.json", "../../../Data/admins.json",
+                                     "../../../Data/examinations.json", "../../../Data/operations.json",
+                                     "../../../Data/examinationsReferences.json", "../../../Data/operationsReferences.json",
+                                     "../../../Data/equipment.json", "../../../Data/rooms.json",
+                                     "../../../Data/medicine.json",
                                      "../../../Data/daysOff.json");
             _institution = Institution.Instance();
-            _institution.LoadAll();
 
             _navigation = NavigationStore.Instance();
 
@@ -33,7 +34,6 @@ namespace HealthInstitution
             Patient p1 = new Patient();
             p1.Email = "p";
             p1.Password = "p";
-            p1.Record = new MedicalRecord();
             Institution.Instance().PatientRepository.GetPatients().Add(p1);
 
             Secretary s1 = new Secretary();
@@ -51,6 +51,10 @@ namespace HealthInstitution
             d1.Password = "d";
 
             Institution.Instance().DoctorRepository.GetDoctors().Add(d1);
+
+            //List<Examination> l = _institution.PatientRepository.FindByID(1).GetExaminations();
+
+
 
         }
 

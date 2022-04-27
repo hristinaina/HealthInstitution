@@ -23,6 +23,7 @@ namespace HealthInstitution.MVVM.Models
         public void LoadFromFile()
         {
             _examinations = FileService.Deserialize<Examination>(_fileName);
+
         }
 
         public void SaveToFile()

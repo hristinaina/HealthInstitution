@@ -11,13 +11,19 @@ namespace HealthInstitution.MVVM.Models
     // implemented using Singleton pattern
     public sealed class Institution
     {
+        private AppSettings _appSettings;
+
         public PatientRepository PatientRepository;
         public DoctorRepository DoctorRepository;
         public SecretaryRepository SecretaryRepository;
         public AdminRepository AdminRepository;
+
         public ExaminationRepository ExaminationRepository;
-        public EquipmentRepository EquipmentRepository;
         public OperationRepository OperationRepository;
+        private ExaminationReferencesRepository _examinationReferencesRepository;
+        private OperationReferencesRepository _operationReferencesRepository;
+
+        public EquipmentRepository EquipmentRepository;
         public RoomRepository RoomRepository;
         public MedicineRepository MedicineRepository;
         public DayOffRepository DayOffRepository;
@@ -36,24 +42,35 @@ namespace HealthInstitution.MVVM.Models
 
         private Institution()
         {
-            AdminRepository = new AdminRepository(AppSettings.Instance().GetAdminFileName());
-            SecretaryRepository = new SecretaryRepository(AppSettings.Instance().GetSecretaryFileName());
-            PatientRepository = new PatientRepository(AppSettings.Instance().GetPatientFileName());
-            DoctorRepository = new DoctorRepository(AppSettings.Instance().GetDoctorFileName());
-            OperationRepository = new OperationRepository(AppSettings.Instance().GetOperationFileName());
-            ExaminationRepository = new ExaminationRepository(AppSettings.Instance().GetOperationFileName());
-            DayOffRepository = new DayOffRepository(AppSettings.Instance().GetDayOffFileName());
+            _appSettings = AppSettings.Instance();
+
+            AdminRepository = new AdminRepository(_appSettings.GetAdminFileName());
+            SecretaryRepository = new SecretaryRepository(_appSettings.GetSecretaryFileName());
+            PatientRepository = new PatientRepository(_appSettings.GetPatientFileName());
+            DoctorRepository = new DoctorRepository(_appSettings.GetDoctorFileName());
+
+            OperationRepository = new OperationRepository(_appSettings.GetOperationFileName());
+            ExaminationRepository = new ExaminationRepository(_appSettings.GetExationFileName());
+            _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.GetExaminationReferenceFileName());
+            _operationReferencesRepository = new OperationReferencesRepository(_appSettings.GetOperationReferenceFileName());
+
+            DayOffRepository = new DayOffRepository(_appSettings.GetDayOffFileName());
             // TODO: add other repositories
+
+            LoadAll();
+            ConnectReferences();
         }
 
-        public void LoadAll()
+        private void LoadAll()
         {
             AdminRepository.LoadFromFile();
             PatientRepository.LoadFromFile();
             DoctorRepository.LoadFromFile();
             SecretaryRepository.LoadFromFile();
-            OperationRepository.LoadFromFile();
             ExaminationRepository.LoadFromFile();
+            OperationRepository.LoadFromFile();
+            _examinationReferencesRepository.LoadFromFile();
+            _operationReferencesRepository.LoadFromFile();
             DayOffRepository.LoadFromFile();
             // TODO: add other repositories
         }
@@ -64,10 +81,58 @@ namespace HealthInstitution.MVVM.Models
             PatientRepository.SaveToFile();
             DoctorRepository.SaveToFile();
             SecretaryRepository.SaveToFile();
-            OperationRepository.SaveToFile();
             ExaminationRepository.SaveToFile();
+            OperationRepository.SaveToFile();
+            _examinationReferencesRepository.SaveToFile();
+            _operationReferencesRepository.SaveToFile();
             DayOffRepository.SaveToFile();
             // TODO: add other repositories
+        }
+
+        private void ConnectReferences()
+        {
+            ConnectExaminationReferences();
+            ConnectExaminationReferences();
+
+        }
+
+        private void ConnectExaminationReferences()
+        {
+            foreach (ExaminationReference reference in _examinationReferencesRepository.GetReferences())
+            {
+                Examination examination = ExaminationRepository.FindByID(reference.GetExaminationId());
+                Doctor doctor = DoctorRepository.FindByID(reference.GetDoctorId());
+                Patient patient = PatientRepository.FindByID(reference.GetPatientId());
+                // TODO -- room
+                // TODO -- perscription
+
+                examination.SetDoctor(doctor);
+                examination.SetPatient(patient);
+                // TODO -- set room
+                // TODO -- set perscription
+
+                doctor.GetExaminations().Add(examination);
+                patient.GetExaminations().Add(examination);
+            }
+        }
+
+
+        private void ConnectOperationReferences()
+        {
+            foreach (OperationReference reference in _operationReferencesRepository.GetReferences())
+            {
+                Operation operation = OperationRepository.FindByID(reference.GetOperationId());
+                Doctor doctor = DoctorRepository.FindByID(reference.GetDoctorId());
+                Patient patient = PatientRepository.FindByID(reference.GetPatientId());
+                // TODO -- room
+
+                operation.SetDoctor(doctor);
+                operation.SetPatient(patient);
+                // TODO -- set room
+
+                doctor.GetOperations().Add(operation);
+                patient.GetOperations().Add(operation);
+            }
         }
     }
 }
