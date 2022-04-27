@@ -91,5 +91,4 @@
     <Folder Include="MVVM\Models\Enumerations\" />
   </ItemGroup>
 
-
 </Project>
