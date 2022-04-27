@@ -119,6 +119,5 @@ namespace HealthInstitution.MVVM.Models
         {
             return _daysOff;
         }
-
     }
 }
