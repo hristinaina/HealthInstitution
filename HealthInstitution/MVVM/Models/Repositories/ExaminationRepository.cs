@@ -6,12 +6,12 @@ namespace HealthInstitution.MVVM.Models
 {
     public class ExaminationRepository
     {
-        private string _examinationFileName;
+        private string _fileName;
         private List<Examination> _examinations;
 
-        public ExaminationRepository(string examinationFilePath)
+        public ExaminationRepository(string filePath)
         {
-            _examinationFileName = examinationFilePath;
+            _fileName = filePath;
             _examinations = new List<Examination>();
         }
 
@@ -22,12 +22,12 @@ namespace HealthInstitution.MVVM.Models
 
         public void LoadFromFile()
         {
-            _examinations = FileService.Deserialize<Examination>(_examinationFileName);
+            _examinations = FileService.Deserialize<Examination>(_fileName);
         }
 
         public void SaveToFile()
         {
-            FileService.Serialize<Examination>(_examinationFileName, _examinations);
+            FileService.Serialize<Examination>(_fileName, _examinations);
         }
         public Examination FindByID(int id)
         {

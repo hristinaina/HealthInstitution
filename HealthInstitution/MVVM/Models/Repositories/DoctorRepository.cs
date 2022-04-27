@@ -6,12 +6,12 @@ namespace HealthInstitution.Repositories
 {
     public class DoctorRepository
     {
-        private string _doctorFileName;
+        private string _fileName;
         private List<Doctor> _doctors;
 
-        public DoctorRepository(string doctorFileName)
+        public DoctorRepository(string fileName)
         {
-            this._doctorFileName = doctorFileName;
+            this._fileName = fileName;
             this._doctors = new List<Doctor>();
         }
 
@@ -22,12 +22,12 @@ namespace HealthInstitution.Repositories
 
         public void LoadFromFile()
         {
-            _doctors = FileService.Deserialize<Doctor>(_doctorFileName);
+            _doctors = FileService.Deserialize<Doctor>(_fileName);
         }
 
         public void SaveToFile()
         {
-            FileService.Serialize<Doctor>(_doctorFileName, _doctors);
+            FileService.Serialize<Doctor>(_fileName, _doctors);
         }
         public Doctor FindByID(int id)
         {

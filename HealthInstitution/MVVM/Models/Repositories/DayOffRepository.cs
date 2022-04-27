@@ -3,10 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthInstitution.MVVM.Models.Services;
+using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class DayOffRepository
     {
+        private string _fileName;
+        private List<DayOff> _daysOff;
+
+        public DayOffRepository(string filePath)
+        {
+            this._fileName = filePath;
+            this._daysOff = new List<DayOff>();
+        }
+
+        public List<DayOff> GetDaysOff()
+        {
+            return this._daysOff;
+        }
+
+        public void LoadFromFile()
+        {
+            _daysOff = FileService.Deserialize<DayOff>(_fileName);
+        }
+
+        public void SaveToFile()
+        {
+            FileService.Serialize<DayOff>(_fileName, _daysOff);
+        }
+        public DayOff FindByID(int id)
+        {
+            foreach (DayOff dayOff in _daysOff)
+            {
+                if (dayOff.GetId() == id) return dayOff;
+            }
+            return null;
+        }
     }
 }

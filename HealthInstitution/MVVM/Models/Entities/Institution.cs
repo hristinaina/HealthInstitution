@@ -40,6 +40,9 @@ namespace HealthInstitution.MVVM.Models
             SecretaryRepository = new SecretaryRepository(AppSettings.Instance().GetSecretaryFileName());
             PatientRepository = new PatientRepository(AppSettings.Instance().GetPatientFileName());
             DoctorRepository = new DoctorRepository(AppSettings.Instance().GetDoctorFileName());
+            OperationRepository = new OperationRepository(AppSettings.Instance().GetOperationFileName());
+            ExaminationRepository = new ExaminationRepository(AppSettings.Instance().GetOperationFileName());
+            DayOffRepository = new DayOffRepository(AppSettings.Instance().GetDayOffFileName());
             // TODO: add other repositories
         }
 
@@ -49,6 +52,9 @@ namespace HealthInstitution.MVVM.Models
             PatientRepository.LoadFromFile();
             DoctorRepository.LoadFromFile();
             SecretaryRepository.LoadFromFile();
+            OperationRepository.LoadFromFile();
+            ExaminationRepository.LoadFromFile();
+            DayOffRepository.LoadFromFile();
             // TODO: add other repositories
         }
 
@@ -58,6 +64,9 @@ namespace HealthInstitution.MVVM.Models
             PatientRepository.SaveToFile();
             DoctorRepository.SaveToFile();
             SecretaryRepository.SaveToFile();
+            OperationRepository.SaveToFile();
+            ExaminationRepository.SaveToFile();
+            DayOffRepository.SaveToFile();
             // TODO: add other repositories
         }
     }

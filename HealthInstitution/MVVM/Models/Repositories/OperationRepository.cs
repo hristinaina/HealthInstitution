@@ -11,12 +11,12 @@ namespace HealthInstitution.MVVM.Models.Repositories
     public class OperationRepository
     {
 
-        private string _operationFileName;
+        private string _fileName;
         private List<Operation> _operations;
 
-        public OperationRepository(string operationFilePath)
+        public OperationRepository(string filePath)
         {
-            _operationFileName = operationFilePath;
+            _fileName = filePath;
             _operations = new List<Operation>();
         }
 
@@ -27,12 +27,12 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         public void LoadFromFile()
         {
-            _operations = FileService.Deserialize<Operation>(_operationFileName);
+            _operations = FileService.Deserialize<Operation>(_fileName);
         }
 
         public void SaveToFile()
         {
-            FileService.Serialize<Operation>(_operationFileName, _operations);
+            FileService.Serialize<Operation>(_fileName, _operations);
         }
         public Operation FindByID(int id)
         {

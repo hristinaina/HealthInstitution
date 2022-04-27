@@ -6,12 +6,12 @@ namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class PatientRepository
     {
-        private string _patientFileName;
+        private string _fileName;
         private List<Patient> _patients;
 
         public PatientRepository(string patientFileName)
         {
-            this._patientFileName = patientFileName;
+            this._fileName = patientFileName;
             this._patients = new List<Patient>();
         }
 
@@ -22,12 +22,12 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         public void LoadFromFile()
         {
-            _patients = FileService.Deserialize<Patient>(_patientFileName);
+            _patients = FileService.Deserialize<Patient>(_fileName);
         }
 
         public void SaveToFile()
         {
-            FileService.Serialize<Patient>(_patientFileName, _patients);
+            FileService.Serialize<Patient>(_fileName, _patients);
         }
         public Patient FindByID(int id)
         {

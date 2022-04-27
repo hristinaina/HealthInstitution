@@ -25,5 +25,7 @@ namespace HealthInstitution.MVVM.Models
             _state = (State)state;
             _doctor = null;
         }
+
+        public int GetId() => _id;
     }
 }
