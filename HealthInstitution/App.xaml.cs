@@ -50,34 +50,6 @@ namespace HealthInstitution
             d1.Email = "d";
             d1.Password = "d";
 
-            // test
-            System.Diagnostics.Debug.WriteLine("Nesto......");
-            List<Examination> appointments = new();
-            DateTime date = DateTime.Today;
-            date = date.AddHours(12);
-            date = date.AddMinutes(30);
-            System.Diagnostics.Debug.WriteLine(date);
-            System.Diagnostics.Debug.WriteLine(".....");
-            Examination appointment = new Examination(1, date, false, false, "", null);  // 12:30 - 12:45 
-            appointments.Add(appointment);
-            date = date.AddMinutes(40);
-            appointment = new Examination(2, date, false, false, "", null);   // 13:10 - 13:25
-            appointments.Add(appointment);
-
-            date = date.AddMinutes(45);
-            Operation operation = new Operation(3, date, false, false, 60);  // 14:00 - 15:00
-            List<Operation> operations = new List<Operation>();
-            operations.Add(operation);
-            
-            d1.SetOperations(operations);
-            d1.SetExaminations(appointments);
-            DateTime datet = DateTime.Today;
-            List<DateTime> available = d1.FindFreeTime(datet, 30);
-            foreach(DateTime i in available)
-            {
-                System.Diagnostics.Debug.WriteLine(i);
-            }
-            // test
             Institution.Instance().GetDoctors().Add(d1);
 
         }
@@ -90,9 +62,8 @@ namespace HealthInstitution
             {
                 DataContext = new MainViewModel(_navigation)
             };
-            //MainWindow.Show();
+            MainWindow.Show();
 
-            System.Diagnostics.Debug.WriteLine("Nesto");
             base.OnStartup(e);
         }
     }
