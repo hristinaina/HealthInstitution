@@ -16,7 +16,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private RoomType _type;
         private Dictionary<Equipment, int> _equipment;
 
-        public int ID { get => this._id; }
+        public int ID { get => this._id; set { this._id = value; } }
         public string Name { get => this._name; set { this._name = value; } }
         public int Number { get => this._number; set { this._number = value; } }
         public RoomType Type { get => this._type; set { this._type = value; } }
