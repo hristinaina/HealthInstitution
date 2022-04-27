@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services;
+
 namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class PatientRepository
@@ -18,16 +20,14 @@ namespace HealthInstitution.MVVM.Models.Repositories
             return this._patients;
         }
 
-        public bool LoadFromFile()
+        public void LoadFromFile()
         {
-            // TODO: implementirati funkciju za ucitavanje podataka iz fajla
-            return false;
+            _patients = FileService.Deserialize<Patient>(_patientFileName);
         }
 
-        public bool SaveToFile()
+        public void SaveToFile()
         {
-            // TODO: implementirati funkciju za cuvanje podataka u fajl
-            return false;
+            FileService.Serialize<Patient>(_patientFileName, _patients);
         }
     }
 }

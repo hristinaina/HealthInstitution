@@ -11,16 +11,16 @@ namespace HealthInstitution.MVVM.Models
     // implemented using Singleton pattern
     public sealed class Institution
     {
-        private List<Patient> _patients;
-        private List<Doctor> _doctors;
-        private List<Secretary> _secretaries; 
-        private List<Admin> _admins;
-        private List<Examination> _examinations;
-        private List<Equipment> _equipment;
-        private List<Operation> _operations;
-        private List<Room> _rooms;
-        private List<Medicine> _medicines;
-        private List<DayOff> _daysOff;
+        public PatientRepository PatientRepository;
+        public DoctorRepository DoctorRepository;
+        public SecretaryRepository SecretaryRepository;
+        public AdminRepository AdminRepository;
+        public ExaminationRepository ExaminationRepository;
+        public EquipmentRepository EquipmentRepository;
+        public OperationRepository OperationRepository;
+        public RoomRepository RoomRepository;
+        public MedicineRepository MedicineRepository;
+        public DayOffRepository DayOffRepository;
         // TODO: add other repositories
 
         private static Institution s_instance = null;
@@ -36,88 +36,29 @@ namespace HealthInstitution.MVVM.Models
 
         private Institution()
         {
-            _admins = new List<Admin>();
-            _patients = new List<Patient>();
-            _doctors = new List<Doctor>();
-            _secretaries = new List<Secretary>();
-            _examinations = new List<Examination>();
-            _equipment = new List<Equipment>();
-            _operations = new List<Operation>();
-            _rooms = new List<Room>();
-            _medicines = new List<Medicine>();
-            _daysOff = new List<DayOff>();
+            AdminRepository = new AdminRepository(AppSettings.Instance().GetAdminFileName());
+            SecretaryRepository = new SecretaryRepository(AppSettings.Instance().GetSecretaryFileName());
+            PatientRepository = new PatientRepository(AppSettings.Instance().GetPatientFileName());
+            DoctorRepository = new DoctorRepository(AppSettings.Instance().GetDoctorFileName());
             // TODO: add other repositories
         }
 
         public void LoadAll()
         {
-            _admins = FileService.Deserialize<Admin>(AppSettings.Instance().GetAdminFileName());
-            _patients = FileService.Deserialize<Patient>(AppSettings.Instance().GetPatientFileName());
-            _doctors = FileService.Deserialize<Doctor>(AppSettings.Instance().GetDoctorFileName());
-            _secretaries = FileService.Deserialize<Secretary>(AppSettings.Instance().GetSecretaryFileName());
-            _examinations = FileService.Deserialize<Examination>(AppSettings.Instance().GetAppointmentFileName());
-            _equipment = FileService.Deserialize<Equipment>(AppSettings.Instance().GetEquipmentFileName());
-            _operations = FileService.Deserialize<Operation>(AppSettings.Instance().GetOperationFileName());
-            _rooms = FileService.Deserialize<Room>(AppSettings.Instance().GetRoomFileName());
-            _medicines = FileService.Deserialize<Medicine>(AppSettings.Instance().GetMedicineFileName());
-            _daysOff = FileService.Deserialize<DayOff>(AppSettings.Instance().GetDayOffFileName());
+            AdminRepository.LoadFromFile();
+            PatientRepository.LoadFromFile();
+            DoctorRepository.LoadFromFile();
+            SecretaryRepository.LoadFromFile();
             // TODO: add other repositories
         }
 
         public void SaveAll()
         {
-            FileService.Serialize<Admin>(AppSettings.Instance().GetAdminFileName(), _admins);
-            FileService.Serialize<Patient>(AppSettings.Instance().GetPatientFileName(), _patients);
-            FileService.Serialize<Doctor>(AppSettings.Instance().GetDoctorFileName(), _doctors);
-            FileService.Serialize<Secretary>(AppSettings.Instance().GetSecretaryFileName(), _secretaries);
-            FileService.Serialize<Examination>(AppSettings.Instance().GetAppointmentFileName(), _examinations);
-            FileService.Serialize<Equipment>(AppSettings.Instance().GetEquipmentFileName(), _equipment);
-            FileService.Serialize<Operation>(AppSettings.Instance().GetOperationFileName(), _operations);
-            FileService.Serialize<Room>(AppSettings.Instance().GetOperationFileName(), _rooms);
-            FileService.Serialize<Medicine>(AppSettings.Instance().GetMedicineFileName(), _medicines);
-            FileService.Serialize<DayOff>(AppSettings.Instance().GetDayOffFileName(), _daysOff);
+            AdminRepository.SaveToFile();
+            PatientRepository.SaveToFile();
+            DoctorRepository.SaveToFile();
+            SecretaryRepository.SaveToFile();
             // TODO: add other repositories
-        }
-
-        public List<Patient> GetPatients()
-        {
-            return _patients;
-        }
-        public List<Admin> GetAdmins()
-        {
-            return _admins;
-        }
-        public List<Doctor> GetDoctors()
-        {
-            return _doctors;
-        }
-        public List<Secretary> GetSecretaries()
-        {
-            return _secretaries;
-        }
-        public List<Examination> GetExaminations()
-        {
-            return _examinations;
-        }
-        public List<Equipment> GetEquipment()
-        {
-            return _equipment;
-        }
-        public List<Operation> GetOperations()
-        {
-            return _operations;
-        }
-        public List<Room> GetRooms()
-        {
-            return _rooms;
-        }
-        public List<Medicine> GetMedicines()
-        {
-            return _medicines;
-        }
-        public List<DayOff> GetDayOff()
-        {
-            return _daysOff;
         }
     }
 }

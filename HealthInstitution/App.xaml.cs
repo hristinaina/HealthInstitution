@@ -34,23 +34,23 @@ namespace HealthInstitution
             p1.Email = "p";
             p1.Password = "p";
             p1.Record = new MedicalRecord();
-            Institution.Instance().GetPatients().Add(p1);
+            Institution.Instance().PatientRepository.GetPatients().Add(p1);
 
             Secretary s1 = new Secretary();
             s1.Email = "s";
             s1.Password = "s";
-            Institution.Instance().GetSecretaries().Add(s1);
+            Institution.Instance().SecretaryRepository.GetSecretaries().Add(s1);
 
             Admin a1 = new Admin();
             a1.Email = "a";
             a1.Password = "a";
-            Institution.Instance().GetAdmins().Add(a1);
+            Institution.Instance().AdminRepository.GetAdministrators().Add(a1);
 
             Doctor d1 = new Doctor();
             d1.Email = "d";
             d1.Password = "d";
 
-            Institution.Instance().GetDoctors().Add(d1);
+            Institution.Instance().DoctorRepository.GetDoctors().Add(d1);
 
         }
 
