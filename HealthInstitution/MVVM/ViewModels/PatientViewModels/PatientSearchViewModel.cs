@@ -1,6 +1,8 @@
-﻿using HealthInstitution.MVVM.Models.Entities;
+﻿using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
+using HealthInstitution.MVVM.Views.PatientViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,27 +14,19 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     public class PatientSearchViewModel : BaseViewModel
     {
-        protected Patient patient;
-        public ICommand Record { get; }
-        public ICommand Appointments { get; }
-        public ICommand LogOut { get; }
+        private Institution _institution;
+        protected Patient _patient;
+        public PatientNavigationViewModel Navigation { get; }
 
 
-        public PatientSearchViewModel(Patient patient)
+        public PatientSearchViewModel()
         {
-            this.patient = patient;
-            LogOut = new LogOutCommand();
-            Record = new PatientRecordCommand();
-            Appointments = new PatientAppointmentsCommand();
+            _institution = Institution.Instance();
+            _patient = (Patient)_institution.CurrentUser;
+            Navigation = new PatientNavigationViewModel();
 
             // ..............
         }
 
-        public PatientSearchViewModel()
-        {
-            LogOut = new LogOutCommand();
-            Record = new PatientRecordCommand();
-            Appointments = new PatientAppointmentsCommand();
-        }
     }
 }

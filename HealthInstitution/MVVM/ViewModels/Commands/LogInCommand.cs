@@ -45,32 +45,31 @@ namespace HealthInstitution.Commands
 
         private bool Login(string email, string password)
         {
-            Patient userPatient = User.FindUser(_institution.PatientRepository.GetPatients(), email, password);
-            if (userPatient != null)
+            _institution.CurrentUser = User.FindUser(_institution.PatientRepository.GetPatients(), email, password);
+            if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new PatientRecordViewModel(userPatient);
+                _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
                 return true;
             }
 
-            Doctor userDoctor = User.FindUser(_institution.DoctorRepository.GetDoctors(), email, password);
-            if (userDoctor != null)
+            _institution.CurrentUser = User.FindUser(_institution.DoctorRepository.GetDoctors(), email, password);
+            if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new DoctorMainPageViewModel(userDoctor);
+                _navigationStore.CurrentViewModel = new DoctorMainPageViewModel();
                 return true;
             }
 
-            Secretary userSecretary = User.FindUser(_institution.SecretaryRepository.GetSecretaries(), email, password);
-            if (userSecretary != null)
+            _institution.CurrentUser = User.FindUser(_institution.SecretaryRepository.GetSecretaries(), email, password);
+            if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new SecretaryMainPageViewModel(userSecretary);
+                _navigationStore.CurrentViewModel = new SecretaryMainPageViewModel();
                 return true;
             }
 
-            Admin
-                userAdmin = User.FindUser(_institution.AdminRepository.GetAdministrators(), email, password);
-            if (userAdmin != null)
+            _institution.CurrentUser = User.FindUser(_institution.AdminRepository.GetAdministrators(), email, password);
+            if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new AdminMainPageViewModel(userAdmin);
+                _navigationStore.CurrentViewModel = new AdminMainPageViewModel();
                 return true;
             }
 

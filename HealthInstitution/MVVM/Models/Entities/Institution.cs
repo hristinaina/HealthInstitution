@@ -13,7 +13,10 @@ namespace HealthInstitution.MVVM.Models
         public DoctorRepository DoctorRepository;
         public SecretaryRepository SecretaryRepository;
         public AdminRepository AdminRepository;
+
         // TODO: add other repositories
+        private User _currentUser;
+        public User CurrentUser { get => _currentUser; set { _currentUser = value; } }
 
         private static Institution s_instance = null;
 

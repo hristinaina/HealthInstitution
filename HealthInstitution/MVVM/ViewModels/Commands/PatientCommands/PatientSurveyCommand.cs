@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
-    public class PatientRecordCommand : BaseCommand
+    class PatientSurveyCommand : BaseCommand
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
 
-        public PatientRecordCommand()
+        public PatientSurveyCommand()
         {
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();
@@ -23,8 +23,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new PatientRecordViewModel();
+            _navigationStore.CurrentViewModel = new PatientSurveyViewModel();
         }
-
     }
 }
