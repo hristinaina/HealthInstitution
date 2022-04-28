@@ -13,9 +13,9 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _fileName;
         private List<OperationReference> _references;
 
-        public OperationReferencesRepository(string patientFileName)
+        public OperationReferencesRepository(string FileName)
         {
-            _fileName = patientFileName;
+            _fileName = FileName;
             _references = new List<OperationReference>();
         }
         public List<OperationReference> GetReferences()

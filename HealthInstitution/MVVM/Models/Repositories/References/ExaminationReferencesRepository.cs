@@ -13,9 +13,9 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _fileName;
         private List<ExaminationReference> _references;
 
-        public ExaminationReferencesRepository(string patientFileName)
+        public ExaminationReferencesRepository(string FileName)
         {
-            _fileName = patientFileName;
+            _fileName = FileName;
             _references = new List<ExaminationReference>();
         }
         public List<ExaminationReference> GetReferences()
