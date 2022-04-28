@@ -10,7 +10,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class DoctorDaysOffRepository
     {
-        private string _fileName;
+        private readonly string _fileName;
         private List<DoctorDaysOff> _references;
 
         public List<DoctorDaysOff> DoctorDaysOff { get => _references; }

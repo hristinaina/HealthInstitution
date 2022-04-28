@@ -6,14 +6,14 @@ namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class PatientRepository
     {
-        private string _fileName;
+        private readonly string _fileName;
         private List<Patient> _patients;
 
         public List<Patient> Patients { get => _patients; }
         public PatientRepository(string patientFileName)
         {
-            this._fileName = patientFileName;
-            this._patients = new List<Patient>();
+            _fileName = patientFileName;
+            _patients = new List<Patient>();
         }
 
         public void LoadFromFile()

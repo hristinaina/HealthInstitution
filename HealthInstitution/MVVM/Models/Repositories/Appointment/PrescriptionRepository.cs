@@ -10,7 +10,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class PrescriptionRepository
     {
-        private string _fileName;
+        private readonly string _fileName;
         private List<Prescription> _prescriptions;
 
         public List<Prescription> Prescriptions { get => _prescriptions; }

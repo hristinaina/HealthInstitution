@@ -6,7 +6,7 @@ namespace HealthInstitution.Repositories
 {
     public class DoctorRepository
     {
-        private string _fileName;
+        private readonly string _fileName;
         private List<Doctor> _doctors;
 
         public List<Doctor> Doctors { get => _doctors; }

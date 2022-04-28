@@ -10,31 +10,31 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
 {
     public class EquipmentOrderRepository
     {
-        private string _fileName;
+        private readonly string _fileName;
         private List<EquipmentOrder> _orders;
 
-        public List<EquipmentOrder> Rooms { get => this._orders; }
+        public List<EquipmentOrder> Rooms { get => _orders; }
 
         public EquipmentOrderRepository(string roomsFileName)
         {
-            this._fileName = roomsFileName;
-            this._orders = new List<EquipmentOrder>();
+            _fileName = roomsFileName;
+            _orders = new List<EquipmentOrder>();
         }
 
         public void LoadFromFile()
         {
-            this._orders = FileService.Deserialize<EquipmentOrder>(this._fileName);
+            _orders = FileService.Deserialize<EquipmentOrder>(_fileName);
         }
 
         public void SaveToFile()
         {
 
-            FileService.Serialize<EquipmentOrder>(this._fileName, this._orders);
+            FileService.Serialize<EquipmentOrder>(_fileName, _orders);
         }
 
         public EquipmentOrder FindById(int id)
         {
-            foreach (EquipmentOrder o in this._orders)
+            foreach (EquipmentOrder o in _orders)
             {
                 if (o.ID == id) return o;
             }
@@ -45,7 +45,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
         {
             List<EquipmentOrder> futureOrders = new List<EquipmentOrder>();
 
-            foreach (EquipmentOrder o in this._orders)
+            foreach (EquipmentOrder o in _orders)
             {
                 if (o.isDelivered())
                 {
@@ -54,7 +54,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
                 }
                 else futureOrders.Add(o);
             }
-            this._orders = futureOrders;
+            _orders = futureOrders;
         }
     }
 }

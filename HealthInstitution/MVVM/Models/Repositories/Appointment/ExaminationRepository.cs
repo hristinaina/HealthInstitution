@@ -6,7 +6,7 @@ namespace HealthInstitution.MVVM.Models
 {
     public class ExaminationRepository
     {
-        private string _fileName;
+        private readonly string _fileName;
         private List<Examination> _examinations;
 
         public List<Examination> Examinations { get => _examinations; }
