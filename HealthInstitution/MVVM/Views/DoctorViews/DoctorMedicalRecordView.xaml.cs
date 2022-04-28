@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace HealthInstitution.MVVM.Views.DoctorViews
 {
     /// <summary>
-    /// Interaction logic for DoctorExaminationPerformance.xaml
+    /// Interaction logic for DoctorMedicalRecord.xaml
     /// </summary>
-    public partial class DoctorExaminationPerformance : UserControl
+    public partial class DoctorMedicalRecordView : UserControl
     {
-        public DoctorExaminationPerformance()
+        public DoctorMedicalRecordView()
         {
             InitializeComponent();
         }

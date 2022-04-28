@@ -28,7 +28,7 @@
                 <viewmains:PatientMainPageView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelmains:DoctorMainPageViewModel}">
-                <viewsdoctor:DoctorExaminationPerformance/>
+                <viewsdoctor:DoctorMedicalRecordView/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelmains:SecretaryMainPageViewModel}">
                 <viewmains:SecretaryMainPageView/>
