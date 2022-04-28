@@ -61,21 +61,10 @@ namespace HealthInstitution.MVVM.Models.Entities
             this._arrangmentByRooms[r] += quantity;
         }
 
-        public static List<Equipment> Search(List<Equipment> equipment, string phrase)
+        public int GetQuantityInRoom(Room r)
         {
-            List<Equipment> matchingEquipment = new List<Equipment>();
-            foreach (Equipment e in equipment)
-            {
-                if (e.Name.Contains(phrase)) matchingEquipment.Add(e);
-            }
-            return matchingEquipment;
+            return this._arrangmentByRooms[r];
         }
-
-
-        //public static List<Equipment> FilterByRoomType(List<Equipment> allEquipment, RoomType type)
-        //{
-        //    return new List<Equipment>();
-        //}
 
     }
 }
