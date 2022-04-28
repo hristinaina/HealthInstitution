@@ -17,7 +17,6 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         [JsonProperty("Blocked")]
         public bool Blocked { get => _blocked; set { _blocked = value; } }
-        [JsonIgnore]
         public MedicalRecord Record { get => _record; set { _record = value; } }
 
 

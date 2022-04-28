@@ -25,7 +25,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             get
             {
-                if (this._arrangmentByRooms == null) this._arrangmentByRooms = new Dictionary<Room, int>();
+                if (this._arrangmentByRooms is null) this._arrangmentByRooms = new Dictionary<Room, int>();
                 return this._arrangmentByRooms;
             }
             set

@@ -25,7 +25,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             get
             {
-                if (_allergens == null) _allergens = new List<Allergen>();
+                if (_allergens is null) _allergens = new List<Allergen>();
                 return _allergens;
             }
             set
@@ -38,7 +38,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             get
             {
-                if (_appointments == null) _appointments = new List<Appointment>();
+                if (_appointments is null) _appointments = new List<Appointment>();
                 return _appointments;
             }
             set
@@ -51,7 +51,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             get
             {
-                if (_refferals == null) _refferals = new List<Refferal>();
+                if (_refferals is null) _refferals = new List<Refferal>();
                 return _refferals;
             }
             set

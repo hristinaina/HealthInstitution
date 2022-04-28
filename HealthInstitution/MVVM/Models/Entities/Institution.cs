@@ -40,7 +40,7 @@ namespace HealthInstitution.MVVM.Models
 
         public static Institution Instance()
         {
-            if (s_instance == null)
+            if (s_instance is null)
             {
                 s_instance = new Institution();
             }
@@ -50,23 +50,21 @@ namespace HealthInstitution.MVVM.Models
         private Institution()
         {
             _appSettings = AppSettings.Instance();
+            _adminRepository = new AdminRepository(_appSettings.AdminsFileName);
+            _secretaryRepository = new SecretaryRepository(_appSettings.SecretariesFileName);
+            _patientRepository = new PatientRepository(_appSettings.PatientsFileName);
+            _doctorRepository = new DoctorRepository(_appSettings.DoctorsFileName);
 
-            _adminRepository = new AdminRepository(_appSettings.GetAdminFileName());
-            _secretaryRepository = new SecretaryRepository(_appSettings.GetSecretaryFileName());
-            _patientRepository = new PatientRepository(_appSettings.GetPatientFileName());
-            _doctorRepository = new DoctorRepository(_appSettings.GetDoctorFileName());
+            _perscriptionRepository = new PerscriptionRepository(_appSettings.PerscriptionsFileName);
+            _examinationRepository = new ExaminationRepository(_appSettings.ExaminationsFileName);
+            _operationRepository = new OperationRepository(_appSettings.OperationsFileName);
+            _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.ExaminationReferencesFileName);
+            _operationReferencesRepository = new OperationReferencesRepository(_appSettings.OperationsReferencesFileName);
+            _roomRepository = new RoomRepository(_appSettings.RoomsFileName);
+            _equipmentRepository = new EquipmentRepository(_appSettings.EquipmentFileName);
 
-            _perscriptionRepository = new PerscriptionRepository(_appSettings.GetPerscriptionFileName());
-            _operationRepository = new OperationRepository(_appSettings.GetOperationFileName());
-            _examinationRepository = new ExaminationRepository(_appSettings.GetExationFileName());
-            _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.GetExaminationReferenceFileName());
-            _operationReferencesRepository = new OperationReferencesRepository(_appSettings.GetOperationReferenceFileName());
-            _roomRepository = new RoomRepository(_appSettings.GetRoomFileName());
-            _equipmentRepository = new EquipmentRepository(_appSettings.GetEquipmentFileName());
-            _equipmentArragmentRepository = new EquipmentArragmentRepository(_appSettings.GetEquipmentArragmentFileName());
-
-            _dayOffRepository = new DayOffRepository(_appSettings.GetDayOffFileName());
-            _refferalRepository = new RefferalRepository(_appSettings.GetRefferalFileName());
+            _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
+            _refferalRepository = new RefferalRepository(_appSettings.RefferalsFileName);
             // TODO: add other repositories
 
             LoadAll();
@@ -110,7 +108,6 @@ namespace HealthInstitution.MVVM.Models
         {
             ConnectExaminationReferences();
             ConnectOperationReferences();
-            ArrangeEquipment();
             ConnectRefferals();
         }
 
