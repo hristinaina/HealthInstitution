@@ -17,9 +17,13 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         [JsonProperty("Blocked")]
         public bool Blocked { get => _blocked; set { _blocked = value; } }
+        [JsonIgnore]
+        public MedicalRecord Record { get => _record; set { _record = value; } }
+
 
         public Patient() { 
         }
+
         public Patient(bool blocked)
         {
             _blocked = blocked;
@@ -27,12 +31,10 @@ namespace HealthInstitution.MVVM.Models.Entities
             _operations = new List<Operation>();
         }
 
-
         public List<Examination> GetExaminations()
         {
             if (_examinations is null) {
                 _examinations = new List<Examination>();
-
             }
             return _examinations;
         }
@@ -42,7 +44,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             if (_operations is null)
             {
                 _operations = new List<Operation>();
-
             }
 
             return _operations;
