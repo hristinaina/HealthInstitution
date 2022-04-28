@@ -1,4 +1,5 @@
-﻿using HealthInstitution.MVVM.Models.Enumerations;
+﻿using HealthInstitution.MVVM.Models.Entities.References;
+using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.Models.Services;
 using Newtonsoft.Json;
 using System;
@@ -16,6 +17,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private MedicalRecord _record;
         private List<Examination> _examinations;
         private List<Operation> _operations;
+        private List<ExaminationChange> _examinationChanges;
 
         [JsonProperty("Blocked")]
         public bool Blocked { get => _blocked; set { _blocked = value; } }
@@ -49,7 +51,19 @@ namespace HealthInstitution.MVVM.Models.Entities
                 _operations = value;
             }
         }
-
+        [JsonIgnore]
+        public List<ExaminationChange> ExaminationChanges
+        {
+            get
+            {
+                if (_examinationChanges == null) _examinationChanges = new List<ExaminationChange>();
+                return _examinationChanges;
+            }
+            set
+            {
+                _examinationChanges = value;
+            }
+        }
         public Patient()
         {
         }

@@ -29,14 +29,14 @@ namespace HealthInstitution.MVVM.Models.Entities
         public Doctor()
         {
             _daysOff = new List<DayOff>();
-        }
-
-        public Doctor(Specialization specialization = Specialization.NONE)
-        {
-            _specialization = specialization;
             _examinations = new List<Examination>();
             _operations = new List<Operation>();
             _daysOff = new List<DayOff>();
+        }
+
+        public Doctor(Specialization specialization = Specialization.NONE) : this()
+        {
+            _specialization = specialization;
         }
 
         public bool IsAvailable(DateTime dateTime, int durationInMin = 15)

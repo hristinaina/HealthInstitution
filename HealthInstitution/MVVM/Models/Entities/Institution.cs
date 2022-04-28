@@ -41,6 +41,7 @@ namespace HealthInstitution.MVVM.Models
 
         private readonly DoctorDaysOffRepository _doctorDaysOffRepository;
         private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
+        private ExaminationChangeRepository _examinationChangeRepository;
         // TODO: add other repositories
 
         private static Institution s_instance = null;
@@ -83,6 +84,7 @@ namespace HealthInstitution.MVVM.Models
 
             _doctorDaysOffRepository = new DoctorDaysOffRepository(_appSettings.DoctorDaysOffFileName);
             _prescriptionMedicineRepository = new PrescriptionMedicineRepository(_appSettings.PrescriptionMedicineFileName);
+            _examinationChangeRepository = new ExaminationChangeRepository(_appSettings.ExaminationChangeFileName);
             // TODO: add other repositories
 
             LoadAll();
@@ -110,6 +112,7 @@ namespace HealthInstitution.MVVM.Models
             _pendingMedicineRepository.LoadFromFile();
             _doctorDaysOffRepository.LoadFromFile();
             _prescriptionMedicineRepository.LoadFromFile();
+            _examinationChangeRepository.LoadFromFile();
             // TODO: add other repositories
         }
 
@@ -134,6 +137,7 @@ namespace HealthInstitution.MVVM.Models
             _pendingMedicineRepository.SaveToFile();
             _doctorDaysOffRepository.SaveToFile();
             _prescriptionMedicineRepository.SaveToFile();
+            // TODO: Add other repositories
         }
 
         private void ConnectReferences()
@@ -145,6 +149,16 @@ namespace HealthInstitution.MVVM.Models
             ConnectMedicineAllergens();
             ConnectDoctorDaysOff();
             ConnectPrescriptionRepository();
+            ConnectExaminationChanges();
+        }
+
+        private void ConnectExaminationChanges()
+        {
+            foreach (ExaminationChange change in _examinationChangeRepository.Changes)
+            {
+                Patient p = _patientRepository.FindByID(change.PatientID);
+                p.ExaminationChanges.Add(change);
+            }
         }
 
         private void ConnectExaminationReferences()
@@ -273,7 +287,7 @@ namespace HealthInstitution.MVVM.Models
         public PendingMedicineRepository PendingMedicineRepository { get => _pendingMedicineRepository; }
         public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
         public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
-
+        public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
 
     }
 }
