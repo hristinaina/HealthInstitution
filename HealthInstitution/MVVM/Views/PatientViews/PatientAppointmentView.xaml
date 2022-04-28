@@ -27,62 +27,6 @@
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
                                        Grid.Row="0">
-                <materialDesign:DialogHost.DialogContent>
-                    <StackPanel Height="350"
-                                Width="320"
-                                Margin="40 20 40 20">
-                        <TextBlock Text="Schedule appointment"
-                                   HorizontalAlignment="Center"
-                                   Margin="10"
-                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                        <ComboBox Margin="0 20 0 0"
-                                  Width="250"
-                                  HorizontalAlignment="Center"
-                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                  materialDesign:HintAssist.Hint="Search for a doctor"
-                                  materialDesign:HintAssist.HintOpacity=".26"
-                                  IsEditable="True">
-                            <ComboBoxItem Content="Doctor 1" />
-                            <ComboBoxItem Content="Doctor 2" />
-                            <ComboBoxItem Content="Doctor 3" />
-                            <ComboBoxItem Content="Doctor 4" />
-                        </ComboBox>
-                        <DatePicker Width="250"
-                                    Margin="0 20 0 0"
-                                    materialDesign:HintAssist.Hint="Pick Date"
-                                    Style="{StaticResource MaterialDesignFilledDatePicker}" />
-                        <materialDesign:TimePicker Width="250"
-                                                   Margin="0 20 0 0"
-                                                   Is24Hours="True"
-                                                   Style="{StaticResource MaterialDesignFilledTimePicker}"
-                                                   materialDesign:HintAssist.Hint="Pick time" />
-                        <StackPanel Orientation="Horizontal"
-                                    HorizontalAlignment="Center">
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsDefault="True"
-                                    Margin="0 30 0 0"
-                                    Content="CREATE"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                <Button.CommandParameter>
-                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                        True
-                                    </system:Boolean>
-                                </Button.CommandParameter>
-                            </Button>
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsCancel="True"
-                                    Margin="0 30 0 0"
-                                    Content="CANCEL"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                <Button.CommandParameter>
-                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                        False
-                                    </system:Boolean>
-                                </Button.CommandParameter>
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>
-                </materialDesign:DialogHost.DialogContent>
                 <materialDesign:Card>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -164,18 +108,59 @@
                                     Grid.Row="0"
                                     HorizontalAlignment="Left">
                                 <Button.CommandParameter>
-                                    <StackPanel Margin="16">
-                                        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
-                                                     HorizontalAlignment="Center"
-                                                     Margin="16"
-                                                     IsIndeterminate="True"
-                                                     Value="0" />
-                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsCancel="True"
-                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                                CommandParameter="Sample2Cancel"
-                                                HorizontalAlignment="Center"
-                                                Content="CANCEL" />
+                                    <StackPanel Height="350"
+                                                Width="320"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Schedule appointment"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <ComboBox Margin="0 20 0 0"
+                                                  Width="250"
+                                                  HorizontalAlignment="Center"
+                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                  materialDesign:HintAssist.Hint="Search for a doctor"
+                                                  materialDesign:HintAssist.HintOpacity=".26"
+                                                  IsEditable="True">
+                                            <ComboBoxItem Content="Doctor 1" />
+                                            <ComboBoxItem Content="Doctor 2" />
+                                            <ComboBoxItem Content="Doctor 3" />
+                                            <ComboBoxItem Content="Doctor 4" />
+                                        </ComboBox>
+                                        <DatePicker Width="250"
+                                                    Margin="0 20 0 0"
+                                                    materialDesign:HintAssist.Hint="Pick Date"
+                                                    Style="{StaticResource MaterialDesignFilledDatePicker}" />
+                                        <materialDesign:TimePicker Width="250"
+                                                                   Margin="0 20 0 0"
+                                                                   Is24Hours="True"
+                                                                   Style="{StaticResource MaterialDesignFilledTimePicker}"
+                                                                   materialDesign:HintAssist.Hint="Pick time" />
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="CREATE"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="CANCEL"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Button.CommandParameter>
                             </Button>
