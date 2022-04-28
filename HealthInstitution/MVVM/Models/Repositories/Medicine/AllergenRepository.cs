@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Repositories
 {
-    class AllergenRepository
+    public class AllergenRepository
     {
         private string _fileName;
         private List<Allergen> _allergen;
@@ -36,6 +37,26 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 if (allergen.Id == id) return allergen;
             }
             return null;
+        }
+
+        public List<Allergen> PatientAllergenToAllergen (List<PatientAllergen> patientAllergens)
+        {
+            List<Allergen> allergens = new();
+            foreach (PatientAllergen reference in patientAllergens)
+            {
+                allergens.Add(FindByID(reference.IngredientId));
+            }
+            return allergens;
+        }
+
+        public List<Allergen> MedicineAllergenToAllergen(List<MedicineAllergen> medicineAllergens)
+        {
+            List<Allergen> allergens = new();
+            foreach (MedicineAllergen reference in medicineAllergens)
+            {
+                allergens.Add(FindByID(reference.IngredientId));
+            }
+            return allergens;
         }
     }
 }
