@@ -116,7 +116,7 @@
         </materialDesign:Card>
 
         <materialDesign:Card Grid.Column="1">
-            <TextBox Text="Comming soon" />
+            <TextBox Text="Comming soon..." />
         </materialDesign:Card>
     </Grid>
 </UserControl>

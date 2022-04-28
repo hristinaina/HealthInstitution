@@ -125,7 +125,7 @@
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel Height="320"
                                 Width="350"
-                                Margin="50">
+                                Margin="50 20 50 20">
                         <TextBlock Text="Create a new appointment"
                                    HorizontalAlignment="Center"
                                    Margin="10"
@@ -200,10 +200,9 @@
                         <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
 
                         <ListView ItemsSource="{Binding Appointments}"
-                                  HorizontalAlignment="Center"
-                                  Width="666"
+                                  Width="650"
                                   VerticalAlignment="Center"
-                                  Height="358"
+                                  Height="400"
                                   Grid.Row="1">
                             <ListView.View>
                                 <GridView>
@@ -211,8 +210,9 @@
                                                     Header="Date">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock HorizontalAlignment="Center"
-                                                           Text="{Binding Date}" />
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Date}"
+                                                           Width="130" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -220,18 +220,9 @@
                                                     Header="Time">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock HorizontalAlignment="Center"
-                                                           Text="{Binding Time}" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Width="130"
-                                                    Header="Doctor">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock HorizontalAlignment="
-                                                    Center"
-                                                           Text="{Binding Doctor}" />
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Time}"
+                                                           Width="130"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -239,9 +230,19 @@
                                                     Header="Room">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock HorizontalAlignment="
-                                                    Center"
-                                                           Text="{Binding Room}" />
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Room}"
+                                                           Width="130" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="170"
+                                                    Header="Doctor">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Doctor}"
+                                                           Width="170" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

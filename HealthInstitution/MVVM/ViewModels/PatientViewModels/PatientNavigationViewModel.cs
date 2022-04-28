@@ -15,7 +15,7 @@ namespace HealthInstitution.MVVM.Views.PatientViews
         public ICommand Record { get; }
         public ICommand Appointments { get; }
         public ICommand Search { get; }
-        public ICommand Survey { get; set; }
+        public ICommand Survey { get; }
         public ICommand LogOut { get; }
 
         public PatientNavigationViewModel() {

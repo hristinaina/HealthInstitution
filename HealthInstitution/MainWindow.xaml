@@ -35,7 +35,7 @@
                 <viewsPatient:PatientAppointmentView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelsPatient:PatientSurveyViewModel}">
-                <viewsPatient:PatientSearchView />
+                <viewsPatient:PatientSurveyView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelmains:DoctorMainPageViewModel}">
                 <viewmains:DoctorMainPageView />
