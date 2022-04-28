@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Repositories
 {
@@ -8,28 +9,22 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _secretaryFileName;
         private List<Secretary> _secretaries;
 
+        public List<Secretary> Secretaries { get => _secretaries; }
         public SecretaryRepository(string secretaryFileName)
         {
-            this._secretaryFileName = secretaryFileName;
-            this._secretaries = new List<Secretary
+            _secretaryFileName = secretaryFileName;
+            _secretaries = new List<Secretary
                 >();
         }
 
-        public List<Secretary> GetSecretaries()
+        public void LoadFromFile()
         {
-            return this._secretaries;
+            _secretaries = FileService.Deserialize<Secretary>(_secretaryFileName);
         }
 
-        public bool LoadFromFile()
+        public void SaveToFile()
         {
-            // TODO: implementirati funkciju za ucitavanje podataka iz fajla
-            return false;
-        }
-
-        public bool SaveToFile()
-        {
-            // TODO: implementirati funkciju za cuvanje podataka u fajl
-            return false;
+            FileService.Serialize<Secretary>(_secretaryFileName, _secretaries);
         }
     }
 }

@@ -1,35 +1,29 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class AdminRepository
     {
         private string _adminFileName;
-        private List<Admin
-            > _administrators;
+        private List<Admin> _administrators;
 
+        public List<Admin> Administrators { get => _administrators; }
         public AdminRepository(string adminFileName)
         {
             this._adminFileName = adminFileName;
             this._administrators = new List<Admin>();
         }
 
-        public List<Admin> GetAdministrators()
+        public void LoadFromFile()
         {
-            return this._administrators;
+            _administrators = FileService.Deserialize<Admin>(_adminFileName);
         }
 
-        public bool LoadFromFile()
+        public void SaveToFile()
         {
-            // TODO: implementirati funkciju za ucitavanje podataka iz fajla
-            return false;
-        }
-
-        public bool SaveToFile()
-        {
-            // TODO: implementirati funkciju za cuvanje podataka u fajl
-            return false;
+            FileService.Serialize<Admin>(_adminFileName, _administrators);
         }
     }
 }

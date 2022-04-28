@@ -1,34 +1,48 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.Repositories
 {
     public class DoctorRepository
     {
-        private string _doctorFileName;
+        private string _fileName;
         private List<Doctor> _doctors;
 
-        public DoctorRepository(string doctorFileName)
+        public List<Doctor> Doctors { get => _doctors; }
+        public DoctorRepository(string fileName)
         {
-            this._doctorFileName = doctorFileName;
-            this._doctors = new List<Doctor>();
+            _fileName = fileName;
+            _doctors = new List<Doctor>();
         }
 
-        public List<Doctor> GetDoctors()
+        public void LoadFromFile()
         {
-            return this._doctors;
+            _doctors = FileService.Deserialize<Doctor>(_fileName);
         }
 
-        public bool LoadFromFile()
+        public void SaveToFile()
         {
-            // TODO: implementirati funkciju za ucitavanje podataka iz fajla
-            return false;
+            FileService.Serialize<Doctor>(_fileName, _doctors);
         }
-
-        public bool SaveToFile()
+        public Doctor FindByID(int id)
         {
-            // TODO: implementirati funkciju za cuvanje podataka u fajl
-            return false;
+            foreach(Doctor doctor in _doctors)
+            {
+                if (doctor.ID == id) return doctor;
+            }
+            return null;
+        }
+        public List<Doctor> GetGeneralPractitioners()
+        {
+            List<Doctor> generalPractitioners = new();
+
+            foreach (Doctor doctor in _doctors)
+            {
+                if (doctor.Specialization == Specialization.NONE) generalPractitioners.Add(doctor);
+            }
+
+            return generalPractitioners;
         }
     }
 }

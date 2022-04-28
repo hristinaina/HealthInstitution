@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.MVVM.Models.Enumerations;
+using HealthInstitution.MVVM.Models.Repositories;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,26 +16,31 @@ namespace HealthInstitution.MVVM.Models.Entities
         private int _number;
         private RoomType _type;
         private Dictionary<Equipment, int> _equipment;
+        private List<Appointment> _appointments;
 
-        public int ID { get => this._id; set { this._id = value; } }
-        public string Name { get => this._name; set { this._name = value; } }
-        public int Number { get => this._number; set { this._number = value; } }
-        public RoomType Type { get => this._type; set { this._type = value; } }
+        public int ID { get => _id; set => _id = value; }
+        public string Name { get => _name; set => _name = value; }
+        public int Number { get => _number; set => _number = value;  }
+        public RoomType Type { get => _type; set => _type = value;  }
 
         [JsonIgnore]
-        public Dictionary<Equipment, int> Equipment { get => this._equipment; set { this._equipment = value; } }
-        
+        public Dictionary<Equipment, int> Equipment { get => _equipment; set => _equipment = value;  }
+
+        [JsonIgnore]
+        public List<Appointment> Appointments { get => _appointments; set => _appointments = value; }
+
         public Room()
         {
             this.Equipment = new Dictionary<Equipment, int>();
+            this.Appointments = new List<Appointment>();
         }
 
         private Room(int id, int number, string name, RoomType type) : this()
         {
-            this._id = id;
-            this._number = number;
-            this._name = name;
-            this._type = type;
+            _id = id;
+            _number = number;
+            _name = name;
+            _type = type;
         }
 
         public static Room Create(int id, int number, string name, RoomType type)
@@ -61,96 +67,61 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
         }
 
-        public static bool CheckNumber(List<Room> rooms, int number)
-        {
-            foreach (Room r in rooms)
-            {
-                if (r.Number == number) return false;
-            }
-            return true;
-        }
 
-        public void ChangeNumber(List<Room> rooms, int newNumber)
+        public void ChangeNumber(RoomRepository repository, int newNumber)
         {
-            if (CheckNumber(rooms, newNumber)) this.Number = newNumber;
+            if (repository.CheckNumber(newNumber)) Number = newNumber;
             //Add RoomNumberAlreadyInUseException
             else throw new Exception();
         }
 
-        //private bool CheckType<T>(List<T> schedule)
-        //{
-        //    foreach (T t in schedule)
-        //    {
-        //        if (t.ID == this.ID) return false;
-        //    }
-        //    return true;
-        //}
-
-        public void ChangeType(List<Operation> operations, List<Appointment> exams, RoomType newType)
+        private bool IsChangeble()
         {
-            if (this.Type == RoomType.EXAM_ROOM)
-            {
-                //Check exams
-            } else if (this.Type == RoomType.OPERATING_ROOM)
-            {
-                //Check operations
-            }
-            this.Type = newType;
+            return (_appointments == null || _appointments.Count == 0);
         }
 
-        public bool DeletionCheck(List<Operation> operations, List<Appointment> appointments)
+        public void ChangeType(OperationRepository operations, ExaminationRepository examinations, RoomType newType)
         {
-            if (this.Type == RoomType.OPERATING_ROOM)
+            bool availableForChange = true;
+            if (_type == RoomType.EXAM_ROOM || _type == RoomType.OPERATING_ROOM)
             {
-                //Check exams
-            } else if (this.Type == RoomType.EXAM_ROOM)
-            {
-                //Check operations
+                availableForChange = this.IsChangeble();
             }
-            return true;
+            if (availableForChange)
+            {
+                _type = newType;
+            } else
+            {
+                //throw cannotChangeException
+            }
         }
 
-
-        public static Room GetById(List<Room> rooms, int id)
+        public bool IsDeletable()
         {
-            foreach (Room r in rooms)
-            {
-                if (r.ID == id) return r;
-            }
-            return null;
+            return IsChangeble();
         }
 
         public void AddEquipment(Equipment e, int quantity)
         {
-            if (!this.Equipment.ContainsKey(e))
+            if (!_equipment.ContainsKey(e))
             {
-                this.Equipment[e] = 0;
+                _equipment[e] = 0;
             }
-            this.Equipment[e] += quantity;
+            _equipment[e] += quantity;
         }
 
         public void RemoveEquipment(Equipment e, int quantity)
         {
-            if (!this.Equipment.ContainsKey(e))
+            if (!_equipment.ContainsKey(e))
             {
                 //add NotInRoomException
             }
-            this.Equipment[e] -= quantity;
-        }
-
-        public static List<Room> FilterByRoomType(List<Room> allRooms, RoomType type)
-        {
-            List<Room> filteredRooms = new List<Room>();
-            foreach (Room r in allRooms)
-            {
-                if (r.Type == type) filteredRooms.Add(r);
-            }
-            return filteredRooms;
+            _equipment[e] -= quantity;
         }
 
         public override string ToString()
         {
-            return "Id: " + this.ID + "; Number: " + this.Number + "; Name: " + this.Name + "; Tip: " + this.Type;
+            return "Id: " + _id + "; Number: " + _number + "; Name: " + _name + "; Tip: " + _type;
         }
     }
 }
