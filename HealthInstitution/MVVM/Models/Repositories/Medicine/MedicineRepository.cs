@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Repositories
@@ -32,6 +33,17 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 if (medicine.ID == id) return medicine;
             }
             return null;
+        }
+
+        public List<Medicine> PrescriptionMedicineToMedicine(List<PrescriptionMedicine> prescriptionMedicines)
+        {
+            List<Medicine> medicines = new();
+            foreach (PrescriptionMedicine reference in prescriptionMedicines)
+            {
+                medicines.Add(FindByID(reference.MedicineId));
+
+            }
+            return medicines;
         }
     }
 }

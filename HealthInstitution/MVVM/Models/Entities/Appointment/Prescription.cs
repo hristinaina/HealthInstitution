@@ -8,10 +8,10 @@ using HealthInstitution.MVVM.Models.Enumerations;
 
 namespace HealthInstitution.MVVM.Models.Entities
 {
-    public class Perscription
+    public class Prescription
     {
         private int _id;
-        private Medicine _medicine;
+        private List<Medicine> _medicines;
         private int _longitudeInDays;     // how long to take the medicine
         private int _dailyFrequency;      // how many times a day to take a medicine
         private TherapyMealDependency _therapyMealDependency;
@@ -26,17 +26,31 @@ namespace HealthInstitution.MVVM.Models.Entities
         public TherapyMealDependency TherapyMealDependency { get => _therapyMealDependency;
                                                              set { _therapyMealDependency = value; } }
         [JsonIgnore]
-
-        public Medicine Medicine { get => _medicine; set { _medicine = value; } }
-
-
-        public Perscription(Medicine medicine, int longitudeInDays, int dailyFrequency,
-                            TherapyMealDependency mealDependency)
+        public List<Medicine> Medicines
         {
-            _medicine = medicine;
+            get
+            {
+                if (_medicines == null) _medicines = new List<Medicine>();
+                return _medicines;
+            }
+            set
+            {
+                _medicines = value;
+            }
+        }
+        public Prescription()
+        {
+
+        }
+
+        public Prescription(int id, int longitudeInDays, int dailyFrequency,
+                            TherapyMealDependency mealDependency, List<Medicine> medicines=null)
+        {
+            _id = id;
             _longitudeInDays = longitudeInDays;
             _dailyFrequency = dailyFrequency;
             _therapyMealDependency = mealDependency;
+            _medicines = medicines;
         }
        
     }

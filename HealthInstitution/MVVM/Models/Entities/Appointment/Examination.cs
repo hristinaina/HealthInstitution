@@ -10,7 +10,7 @@ namespace HealthInstitution.MVVM.Models.Entities
     public class Examination : Appointment
     {
         private string _anamnesis;
-        private Perscription _perscription;
+        private Prescription _perscription;
         private ExaminationReview _review;
 
         [JsonProperty("Anamnesis")]
@@ -18,7 +18,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonProperty("Review")]
         public ExaminationReview Review { get => _review; set { _review = value; } }
         [JsonIgnore]
-        public Perscription Perscription { get => _perscription; set { _perscription = value; } }
+        public Prescription Perscription { get => _perscription; set { _perscription = value; } }
 
         public Examination(int id, DateTime date, bool isEmergency, bool done,
                             string anamnesis, ExaminationReview review)

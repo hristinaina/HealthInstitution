@@ -8,35 +8,35 @@ using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Repositories
 {
-    public class PerscriptionRepository
+    public class PrescriptionRepository
     {
         private string _fileName;
-        private List<Perscription> _perscriptions;
+        private List<Prescription> _prescriptions;
 
-        public PerscriptionRepository(string filePath)
+        public PrescriptionRepository(string filePath)
         {
             _fileName = filePath;
-            _perscriptions = new List<Perscription>();
+            _prescriptions = new List<Prescription>();
         }
 
-        public List<Perscription> GetPerscriptions()
+        public List<Prescription> GetPrescriptions()
         {
-            return _perscriptions;
+            return _prescriptions;
         }
 
         public void LoadFromFile()
         {
-            _perscriptions = FileService.Deserialize<Perscription>(_fileName);
+            _prescriptions = FileService.Deserialize<Prescription>(_fileName);
 
         }
 
         public void SaveToFile()
         {
-            FileService.Serialize<Perscription>(_fileName, _perscriptions);
+            FileService.Serialize<Prescription>(_fileName, _prescriptions);
         }
-        public Perscription FindByID(int id)
+        public Prescription FindByID(int id)
         {
-            foreach (Perscription perscription in _perscriptions)
+            foreach (Prescription perscription in _prescriptions)
             {
                 if (perscription.ID == id) return perscription;
             }

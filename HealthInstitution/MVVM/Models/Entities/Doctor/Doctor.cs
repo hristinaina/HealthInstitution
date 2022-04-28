@@ -26,6 +26,11 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonIgnore]
         public List<DayOff> DaysOff { get => _daysOff; set { _daysOff = value; } }
 
+        public Doctor()
+        {
+            _daysOff = new List<DayOff>();
+        }
+
         public Doctor(Specialization specialization = Specialization.NONE)
         {
             _specialization = specialization;

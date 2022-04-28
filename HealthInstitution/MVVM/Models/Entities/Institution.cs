@@ -21,7 +21,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly SecretaryRepository _secretaryRepository;
         private readonly AdminRepository _adminRepository;
 
-        private readonly PerscriptionRepository _perscriptionRepository;
+        private readonly PrescriptionRepository _prescriptionRepository;
         private readonly ExaminationRepository _examinationRepository;
         private readonly OperationRepository _operationRepository;
         private readonly ExaminationReferencesRepository _examinationReferencesRepository;
@@ -40,6 +40,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly PendingMedicineRepository _pendingMedicineRepository;
 
         private readonly DoctorDaysOffRepository _doctorDaysOffRepository;
+        private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
         // TODO: add other repositories
 
         private static Institution s_instance = null;
@@ -62,7 +63,7 @@ namespace HealthInstitution.MVVM.Models
             _doctorRepository = new DoctorRepository(_appSettings.DoctorsFileName);
 
 
-            _perscriptionRepository = new PerscriptionRepository(_appSettings.PerscriptionsFileName);
+            _prescriptionRepository = new PrescriptionRepository(_appSettings.PerscriptionsFileName);
             _examinationRepository = new ExaminationRepository(_appSettings.ExaminationsFileName);
             _operationRepository = new OperationRepository(_appSettings.OperationsFileName);
             _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.ExaminationReferencesFileName);
@@ -81,6 +82,7 @@ namespace HealthInstitution.MVVM.Models
             _pendingMedicineRepository = new PendingMedicineRepository(_appSettings.PendingMedicinesFileName);
 
             _doctorDaysOffRepository = new DoctorDaysOffRepository(_appSettings.DoctorDaysOffFileName);
+            _prescriptionMedicineRepository = new PrescriptionMedicineRepository(_appSettings.PrescriptionMedicineFileName);
             // TODO: add other repositories
 
             LoadAll();
@@ -107,6 +109,7 @@ namespace HealthInstitution.MVVM.Models
             _medicineAllergenRepository.LoadFromFile();
             _pendingMedicineRepository.LoadFromFile();
             _doctorDaysOffRepository.LoadFromFile();
+            _prescriptionMedicineRepository.LoadFromFile();
             // TODO: add other repositories
         }
 
@@ -130,6 +133,7 @@ namespace HealthInstitution.MVVM.Models
             _medicineAllergenRepository.LoadFromFile();
             _pendingMedicineRepository.SaveToFile();
             _doctorDaysOffRepository.SaveToFile();
+            _prescriptionMedicineRepository.SaveToFile();
         }
 
         private void ConnectReferences()
@@ -140,6 +144,7 @@ namespace HealthInstitution.MVVM.Models
             FillMedicalRecord();
             ConnectMedicineAllergens();
             ConnectDoctorDaysOff();
+            ConnectPrescriptionRepository();
         }
 
         private void ConnectExaminationReferences()
@@ -149,7 +154,7 @@ namespace HealthInstitution.MVVM.Models
                 Examination examination = _examinationRepository.FindByID(reference.ExaminationID);
                 Doctor doctor = _doctorRepository.FindByID(reference.DoctorID);
                 Patient patient = _patientRepository.FindByID(reference.PatientID);
-                Perscription perscription = _perscriptionRepository.FindByID(reference.PerscriptionID);
+                Prescription perscription = _prescriptionRepository.FindByID(reference.PerscriptionID);
                 Room room = _roomRepository.FindById(reference.RoomID);
 
 
@@ -238,11 +243,21 @@ namespace HealthInstitution.MVVM.Models
             }
         }
 
+        public void ConnectPrescriptionRepository()
+        {
+            foreach ( Prescription prescription in _prescriptionRepository.GetPrescriptions())
+            {
+                List<PrescriptionMedicine> prescriptionMedicines = _prescriptionMedicineRepository.FindByPrescriptionID(prescription.ID);
+                prescription.Medicines = _medicineRepository.PrescriptionMedicineToMedicine(prescriptionMedicines);
+            }
+
+        }
+
         public PatientRepository PatientRepository { get => _patientRepository; }
         public DoctorRepository DoctorRepository { get => _doctorRepository; }
         public SecretaryRepository SecretaryRepository { get => _secretaryRepository; }
         public AdminRepository AdminRepository { get => _adminRepository; }
-        public PerscriptionRepository PerscriptionRepository { get => _perscriptionRepository; }
+        public PrescriptionRepository PrescriptionRepository { get => _prescriptionRepository; }
         public ExaminationRepository ExaminationRepository { get => _examinationRepository; }
         public OperationRepository OperationRepository { get => _operationRepository; }
         public ExaminationReferencesRepository ExaminationReferencesRepository { get => _examinationReferencesRepository; }
@@ -257,6 +272,7 @@ namespace HealthInstitution.MVVM.Models
         public MedicineAllergenRepository MedicineAllergenRepository { get => _medicineAllergenRepository; }
         public PendingMedicineRepository PendingMedicineRepository { get => _pendingMedicineRepository; }
         public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
+        public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
 
 
     }
