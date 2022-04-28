@@ -1,6 +1,5 @@
-﻿using HealthInstitution.MVVM.Models.Enumerations;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using HealthInstitution.MVVM.Models.Enumerations;
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -13,8 +12,16 @@ namespace HealthInstitution.MVVM.Models
         private string _password;
         private Gender _gender;
 
+        public int ID { get => _id; set { _id = value; } }
+        public string FirstName { get => _firstName; set { _firstName = value; } }
+        public string LastName { get => _lastName; set { _lastName = value; } }
+        public string Email { get => _email; set { _email = value; } }
+        public string Password { get => _password; set { _password = value; } }
+        public Gender Gender { get => _gender; set { _gender = value; } }
 
-        public User() { 
+        public User()
+        {
+
         }
 
         public User(int id, string firstName, string lastName, string email, string password, Gender gender)
@@ -28,9 +35,8 @@ namespace HealthInstitution.MVVM.Models
 
         }
 
-
-            // function that searches the collection to find the corresponding user
-            public static T FindUser<T>(List<T> collection, string email, string password) where T : User
+        // function that searches the collection to find the corresponding user
+        public static T FindUser<T>(List<T> collection, string email, string password) where T : User
         {
             for (int i = 0; i < collection.Count; i++)
             {
