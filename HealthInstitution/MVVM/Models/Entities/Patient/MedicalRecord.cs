@@ -13,7 +13,6 @@ namespace HealthInstitution.MVVM.Models.Entities
         private double _height;
         private double _weight;
         private List<Allergen> _allergens;
-        private List<Appointment> _appointments;
         private List<Refferal> _refferals;
         // TODO: add refferals
 
@@ -31,19 +30,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             set
             {
                 _allergens = value;
-            }
-        }
-        [JsonIgnore]
-        public List<Appointment> Appointments
-        {
-            get
-            {
-                if (_appointments == null) _appointments = new List<Appointment>();
-                return _appointments;
-            }
-            set
-            {
-                _appointments = value;
             }
         }
         [JsonIgnore]

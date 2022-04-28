@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthInstitution.MVVM.Models.Entities
+namespace HealthInstitution.MVVM.Models.Enumerations
 {
-    public class Secretary : User 
+    public enum Gender
     {
-        public Secretary()
-        {
-
-        }
+        MALE,
+        FEMALE,
+        OTHER
     }
 }
