@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.Models.Repositories.Room;
 using HealthInstitution.MVVM.Models.Entities.References;
+using HealthInstitution.MVVM.Models.Repositories.References;
+
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -13,24 +15,25 @@ namespace HealthInstitution.MVVM.Models
     // implemented using Singleton pattern
     public sealed class Institution
     {
-        private AppSettings _appSettings;
+        private readonly AppSettings _appSettings;
 
-        private PatientRepository _patientRepository;
-        private DoctorRepository _doctorRepository;
-        private SecretaryRepository _secretaryRepository;
-        private AdminRepository _adminRepository;
+        private readonly PatientRepository _patientRepository;
+        private readonly DoctorRepository _doctorRepository;
+        private readonly SecretaryRepository _secretaryRepository;
+        private readonly AdminRepository _adminRepository;
 
-        private PerscriptionRepository _perscriptionRepository;
-        private ExaminationRepository _examinationRepository;
-        private OperationRepository _operationRepository;
-        private ExaminationReferencesRepository _examinationReferencesRepository;
-        private OperationReferencesRepository _operationReferencesRepository;
+        private readonly PerscriptionRepository _perscriptionRepository;
+        private readonly ExaminationRepository _examinationRepository;
+        private readonly OperationRepository _operationRepository;
+        private readonly ExaminationReferencesRepository _examinationReferencesRepository;
+        private readonly OperationReferencesRepository _operationReferencesRepository;
 
-        private EquipmentRepository _equipmentRepository;
-        private EquipmentArragmentRepository _equipmentArragmentRepository;
-        private RoomRepository _roomRepository;
-        private MedicineRepository _medicineRepository;
-        private DayOffRepository _dayOffRepository;
+        private readonly EquipmentRepository _equipmentRepository;
+        private readonly EquipmentArragmentRepository _equipmentArragmentRepository;
+        private readonly RoomRepository _roomRepository;
+        private readonly MedicineRepository _medicineRepository;
+        private readonly DayOffRepository _dayOffRepository;
+        private readonly RefferalRepository _refferalRepository;
         // TODO: add other repositories
 
         private static Institution s_instance = null;
@@ -63,13 +66,14 @@ namespace HealthInstitution.MVVM.Models
             _equipmentArragmentRepository = new EquipmentArragmentRepository(_appSettings.GetEquipmentArragmentFileName());
 
             _dayOffRepository = new DayOffRepository(_appSettings.GetDayOffFileName());
+            _refferalRepository = new RefferalRepository(_appSettings.GetRefferalFileName());
             // TODO: add other repositories
 
             LoadAll();
             ConnectReferences();
         }
 
-        private void LoadAll()
+        public void LoadAll()
         {
             _adminRepository.LoadFromFile();
             _patientRepository.LoadFromFile();
@@ -82,6 +86,7 @@ namespace HealthInstitution.MVVM.Models
             _dayOffRepository.LoadFromFile();
             _roomRepository.LoadFromFile();
             _equipmentRepository.LoadFromFile();
+            _refferalRepository.LoadFromFile();
             // TODO: add other repositories
         }
 
@@ -98,15 +103,15 @@ namespace HealthInstitution.MVVM.Models
             _dayOffRepository.SaveToFile();
             _roomRepository.SaveToFile();
             _equipmentRepository.SaveToFile();
-            // TODO: add other repositories
+            _refferalRepository.SaveToFile();
         }
 
         private void ConnectReferences()
         {
             ConnectExaminationReferences();
-            ConnectExaminationReferences();
+            ConnectOperationReferences();
             ArrangeEquipment();
-
+            ConnectRefferals();
         }
 
         private void ConnectExaminationReferences()
@@ -160,6 +165,17 @@ namespace HealthInstitution.MVVM.Models
             }
         }
 
+        public void ConnectRefferals()
+        {
+            foreach (Refferal reference in _refferalRepository.GetReferences())
+            {
+                Patient patient = _patientRepository.FindByID(reference.PatientId);
+                
+                // finds all refferals for corresponding patient
+                patient.Record.Refferals = _refferalRepository.FindByPatientID(patient.ID);
+            }
+        }
+
         public PatientRepository PatientRepository { get => _patientRepository; }
         public DoctorRepository DoctorRepository { get => _doctorRepository; }
         public SecretaryRepository SecretaryRepository { get => _secretaryRepository; }
@@ -173,5 +189,6 @@ namespace HealthInstitution.MVVM.Models
         public RoomRepository RoomRepository { get => _roomRepository; }
         public MedicineRepository MedicineRepository { get => _medicineRepository; }
         public DayOffRepository DayOffRepository { get => _dayOffRepository; }
+        public RefferalRepository RefferalRepository { get => _refferalRepository; }
     }
 }
