@@ -99,23 +99,29 @@ namespace HealthInstitution.MVVM.Models.Entities
         }
 
         // schedule for certain day and 3 days after
-        public List<Appointment> GetSchedule(DateTime date)
+        public List<Examination> GetScheduleOfExaminations(DateTime date)
         {
-            List<Appointment> appointments = new();
+            List<Examination> examinations = new();
 
             foreach (Examination examination in _examinations)
             {
                 if (examination.GetDateTime() >= date && date.AddDays(3) >= examination.GetDateTime())
-                    appointments.Add(examination);
+                    examinations.Add(examination);
             }
 
-            foreach(Operation operation in _operations)
+            return examinations;
+        }
+        
+        public List<Operation> GetScheduleOfOperations(DateTime date)
+        {
+            List<Operation> operations = new();
+            foreach (Operation operation in _operations)
             {
                 if (operation.GetDateTime() >= date && date.AddDays(3) >= operation.GetDateTime())
-                    appointments.Add(operation);
+                    operations.Add(operation);
             }
 
-            return appointments;
+            return operations;
         }
     }
 }
