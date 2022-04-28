@@ -30,6 +30,7 @@ namespace HealthInstitution
         private string _allergensFileName;
         private string _patientAllergensFileName;
         private string _medicineAllergensFileName;
+        private string _pendingMedicinesFileName; 
 
 
         public string PatientsFileName { get => _patientsFileName; set => _patientsFileName = value; }
@@ -51,6 +52,7 @@ namespace HealthInstitution
         public string PatientAllergensFileName { get => _patientAllergensFileName; set => _patientAllergensFileName = value; }
         public string MedicineAllergensFileName { get => _medicineAllergensFileName; set => _medicineAllergensFileName = value; }
         public string EquipmentOrderFileName { get => _equipmentOrderFileName; set => _equipmentOrderFileName = value; }
+        public string PendingMedicinesFileName { get => _pendingMedicinesFileName; set => _pendingMedicinesFileName = value; }
         // TODO add the rest of the class attributes that will store the name of the corresponding files
 
 

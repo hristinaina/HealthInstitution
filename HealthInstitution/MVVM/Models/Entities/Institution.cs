@@ -8,7 +8,6 @@ using HealthInstitution.MVVM.Models.Repositories.Room;
 using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Repositories.References;
 
-
 namespace HealthInstitution.MVVM.Models
 {
     // class through which all system entities can be accessed
@@ -38,6 +37,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly AllergenRepository _allergenRepository;
         private readonly PatientAllergenRepository _patientAllergenRepository;
         private readonly MedicineAllergenRepository _medicineAllergenRepository;
+        private readonly PendingMedicineRepository _pendingMedicineRepository;
         // TODO: add other repositories
 
         private static Institution s_instance = null;
@@ -76,6 +76,7 @@ namespace HealthInstitution.MVVM.Models
             _allergenRepository = new AllergenRepository(_appSettings.AllergensFileName);
             _patientAllergenRepository = new PatientAllergenRepository(_appSettings.PatientAllergensFileName);
             _medicineAllergenRepository = new MedicineAllergenRepository(_appSettings.MedicineAllergensFileName);
+            _pendingMedicineRepository = new PendingMedicineRepository(_appSettings.PendingMedicinesFileName);
             // TODO: add other repositories
 
             LoadAll();
@@ -100,6 +101,7 @@ namespace HealthInstitution.MVVM.Models
             _allergenRepository.LoadFromFile();
             _patientAllergenRepository.LoadFromFile();
             _medicineAllergenRepository.LoadFromFile();
+            _pendingMedicineRepository.LoadFromFile();
             // TODO: add other repositories
         }
 
@@ -121,6 +123,7 @@ namespace HealthInstitution.MVVM.Models
             _allergenRepository.SaveToFile();
             _patientAllergenRepository.SaveToFile();
             _medicineAllergenRepository.LoadFromFile();
+            _pendingMedicineRepository.SaveToFile();
         }
 
         private void ConnectReferences()
