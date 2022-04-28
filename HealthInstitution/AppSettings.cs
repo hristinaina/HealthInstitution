@@ -27,6 +27,9 @@ namespace HealthInstitution
         private string _roomsFileName;
         private string _medicinesFileName;
         private string _equipmentOrderFileName;
+        private string _allergensFileName;
+        private string _patientAllergensFileName;
+        private string _medicineAllergensFileName;
 
 
         public string PatientsFileName { get => _patientsFileName; set => _patientsFileName = value; }

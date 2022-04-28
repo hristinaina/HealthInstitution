@@ -32,19 +32,7 @@ namespace HealthInstitution.MVVM.Models.Entities
                 _allergens = value;
             }
         }
-        [JsonIgnore]
-        public List<Appointment> Appointments
-        {
-            get
-            {
-                if (_appointments is null) _appointments = new List<Appointment>();
-                return _appointments;
-            }
-            set
-            {
-                _appointments = value;
-            }
-        }
+       
         [JsonIgnore]
         public List<Refferal> Refferals
         {
