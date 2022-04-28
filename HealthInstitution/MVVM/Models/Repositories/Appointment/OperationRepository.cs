@@ -14,7 +14,6 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _fileName;
         private List<Operation> _operations;
 
-
         public OperationRepository(string filePath)
         {
             _fileName = filePath;
@@ -42,6 +41,17 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 if (operation.ID == id) return operation;
             }
             return null;
+        }
+
+        public List<Operation> FindByPatientID(int patientId)
+        {
+            List<Operation> operations = new();
+            foreach (Operation operation in _operations)
+            {
+                if (operation.Patient.ID == patientId)
+                    operations.Add(operation);
+            }
+            return operations;
         }
     }
 }

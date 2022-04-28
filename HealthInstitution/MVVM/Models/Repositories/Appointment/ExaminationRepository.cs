@@ -38,5 +38,16 @@ namespace HealthInstitution.MVVM.Models
             }
             return null;
         }
+
+        public List<Examination> FindByPatientID(int patientId)
+        {
+            List<Examination> examinations = new List<Examination>();
+            foreach (Examination examination in _examinations)
+            {
+                if (examination.Patient.ID == patientId)
+                    examinations.Add(examination);
+            }
+            return examinations;
+        }
     }
 }
