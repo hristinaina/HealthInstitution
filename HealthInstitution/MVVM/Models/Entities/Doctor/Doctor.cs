@@ -110,5 +110,31 @@ namespace HealthInstitution.MVVM.Models.Entities
 
             return availableTime;
         }
+
+        // schedule for certain day and 3 days after
+        public List<Examination> GetScheduleOfExaminations(DateTime date)
+        {
+            List<Examination> examinations = new();
+
+            foreach (Examination examination in _examinations)
+            {
+                if (examination.Date >= date && date.AddDays(3) >= examination.Date)
+                    examinations.Add(examination);
+            }
+
+            return examinations;
+        }
+
+        public List<Operation> GetScheduleOfOperations(DateTime date)
+        {
+            List<Operation> operations = new();
+            foreach (Operation operation in _operations)
+            {
+                if (operation.Date >= date && date.AddDays(3) >= operation.Date)
+                    operations.Add(operation);
+            }
+
+            return operations;
+        }
     }
 }

@@ -28,5 +28,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             _perscription = null;
             _review = review;
         }
+
+
     }
 }
