@@ -26,7 +26,8 @@ namespace HealthInstitution
                                      "../../../Data/examinationsReferences.json", "../../../Data/operationsReferences.json",
                                      "../../../Data/equipment.json", "../../../Data/rooms.json", "../../../Data/equipmentInRooms.json",
                                      "../../../Data/medicine.json",
-                                     "../../../Data/daysOff.json", "../../../Data/perscriptions.json", "../../../Data/refferal.json");
+                                     "../../../Data/daysOff.json", "../../../Data/perscriptions.json", "../../../Data/refferal.json",
+                                     "../../../Data/ingredients.json", "../../../Data/medicineIngredients.json", "../../../Data/patientAllergen.json");
 
             _institution = Institution.Instance();
 
