@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.PatientViews"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:patientviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.PatientViewModels"
+             xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
              d:DataContext="{d:DesignInstance Type=patientviewmodels:PatientRecordViewModel}"
              mc:Ignorable="d"
              Height="600"
@@ -21,99 +22,7 @@
             <ColumnDefinition Width="6*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <materialDesign:Card Grid.Column="0">
-            <TabControl materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
-                        SnapsToDevicePixels="True"
-                        Style="{StaticResource MaterialDesignNavigationRailTabControl}"
-                        TabStripPlacement="Left"
-                        RenderTransformOrigin="0.523,0.505"
-                        BorderBrush="#00ACACAC"
-                        SelectedIndex="0">
-                <TabItem Width="170">
-                    <TabItem.Header>
-                        <StackPanel Width="auto"
-                                    Height="auto">
-                            <Button Width="170"
-                                    Foreground="#FF80DEEA"
-                                    Content="My medical record"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Padding="-4"
-                                    Command="{}"
-                                    Height="70"
-                                    BorderThickness="0,0,0,0" />
-                            <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
-                        </StackPanel>
-                    </TabItem.Header>
-                </TabItem>
-                <TabItem Width="170">
-                    <TabItem.Header>
-                        <StackPanel Width="auto"
-                                    Height="auto">
-                            <Button Width="170"
-                                    Content="My appointments"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Padding="-4"
-                                    Command="{Binding Navigation.Appointments}"
-                                    Height="70"
-                                    BorderThickness="0,0,0,0" />
-                            <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
-                        </StackPanel>
-                    </TabItem.Header>
-                </TabItem>
-                <TabItem Width="170">
-                    <TabItem.Header>
-                        <StackPanel Width="auto"
-                                    Height="auto">
-                            <Button Width="170"
-                                    Content="Search for a doctor"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Padding="-4"
-                                    Command="{Binding Navigation.Search}"
-                                    Height="70"
-                                    BorderThickness="0,0,0,0" />
-                            <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
-                        </StackPanel>
-                    </TabItem.Header>
-                </TabItem>
-                <TabItem Width="170">
-                    <TabItem.Header>
-                        <StackPanel Width="auto"
-                                    Height="auto">
-                            <Button Width="170"
-                                    Content="Fill out a survey"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Padding="-4"
-                                    Command="{Binding Navigation.Survey}"
-                                    Height="70"
-                                    BorderThickness="0,0,0,0" />
-                            <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
-                        </StackPanel>
-                    </TabItem.Header>
-                </TabItem>
-
-                <TabItem Width="100"
-                         Height="32">
-                    <TabItem.Header>
-                        <StackPanel Width="auto"
-                                    Height="auto">
-                            <Button Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}"
-                                    Width="100"
-                                    ToolTip="Log out from your account"
-                                    Content="Log out"
-                                    Background="#6680DEEA"
-                                    BorderBrush="#6680DEEA"
-                                    Command="{Binding Navigation.LogOut}"
-                                    Height="32" />
-                            <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
-                        </StackPanel>
-                    </TabItem.Header>
-                </TabItem>
-            </TabControl>
-        </materialDesign:Card>
+        <components:PatientNavigationRail SelectedIndex="0"></components:PatientNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
             <TextBox Text="Comming soon..." />
