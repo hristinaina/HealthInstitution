@@ -38,6 +38,8 @@ namespace HealthInstitution.MVVM.Models
         private readonly PatientAllergenRepository _patientAllergenRepository;
         private readonly MedicineAllergenRepository _medicineAllergenRepository;
         private readonly PendingMedicineRepository _pendingMedicineRepository;
+
+        private readonly DoctorDaysOffRepository _doctorDaysOffRepository;
         // TODO: add other repositories
 
         private static Institution s_instance = null;
@@ -77,6 +79,8 @@ namespace HealthInstitution.MVVM.Models
             _patientAllergenRepository = new PatientAllergenRepository(_appSettings.PatientAllergensFileName);
             _medicineAllergenRepository = new MedicineAllergenRepository(_appSettings.MedicineAllergensFileName);
             _pendingMedicineRepository = new PendingMedicineRepository(_appSettings.PendingMedicinesFileName);
+
+            _doctorDaysOffRepository = new DoctorDaysOffRepository(_appSettings.DoctorDaysOffFileName);
             // TODO: add other repositories
 
             LoadAll();
@@ -102,6 +106,7 @@ namespace HealthInstitution.MVVM.Models
             _patientAllergenRepository.LoadFromFile();
             _medicineAllergenRepository.LoadFromFile();
             _pendingMedicineRepository.LoadFromFile();
+            _doctorDaysOffRepository.LoadFromFile();
             // TODO: add other repositories
         }
 
@@ -124,6 +129,7 @@ namespace HealthInstitution.MVVM.Models
             _patientAllergenRepository.SaveToFile();
             _medicineAllergenRepository.LoadFromFile();
             _pendingMedicineRepository.SaveToFile();
+            _doctorDaysOffRepository.SaveToFile();
         }
 
         private void ConnectReferences()
@@ -133,6 +139,7 @@ namespace HealthInstitution.MVVM.Models
             ConnectRefferals();
             FillMedicalRecord();
             ConnectMedicineAllergens();
+            ConnectDoctorDaysOff();
         }
 
         private void ConnectExaminationReferences()
@@ -220,6 +227,17 @@ namespace HealthInstitution.MVVM.Models
             }
         }
 
+        public void ConnectDoctorDaysOff()
+        {
+            foreach (Doctor doctor in _doctorRepository.GetDoctors())
+            {
+                List<DoctorDaysOff> doctorDaysOff = _doctorDaysOffRepository.FindByDoctorID(doctor.ID);
+                doctor.DaysOff = _dayOffRepository.DoctorDaysOffToDaysOff(doctorDaysOff);
+
+                foreach(DayOff dayOff in doctor.DaysOff) dayOff.Doctor = doctor;
+            }
+        }
+
         public PatientRepository PatientRepository { get => _patientRepository; }
         public DoctorRepository DoctorRepository { get => _doctorRepository; }
         public SecretaryRepository SecretaryRepository { get => _secretaryRepository; }
@@ -237,6 +255,9 @@ namespace HealthInstitution.MVVM.Models
         public AllergenRepository AllergenRepository { get => _allergenRepository; }
         public PatientAllergenRepository PatientAllergenRepository { get => _patientAllergenRepository; }
         public MedicineAllergenRepository MedicineAllergenRepository { get => _medicineAllergenRepository; }
+        public PendingMedicineRepository PendingMedicineRepository { get => _pendingMedicineRepository; }
+        public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
+
 
     }
 }

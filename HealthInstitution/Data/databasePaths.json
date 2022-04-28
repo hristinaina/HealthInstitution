@@ -19,6 +19,7 @@
         "MedicineAllergensFileName": "../../../Data/References/medicineIngredients.json",
         "PatientAllergensFileName": "../../../Data/References/patientAllergen.json",
         "AllergensFileName": "../../../Data/Medicine/ingredients.json",
-        "PendingMedicinesFileName": "../../../Data/Medicine/pendingMedicine.json"
+        "PendingMedicinesFileName": "../../../Data/Medicine/pendingMedicine.json",
+        "DoctorDaysOffFileName": "../../../Data/Doctor/doctorDaysOff.json"
     }
 ]

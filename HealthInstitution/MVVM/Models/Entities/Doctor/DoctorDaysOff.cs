@@ -17,6 +17,11 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonProperty("DaysOffId")]
         public int DaysOffId { get => _daysOffId; set { _daysOffId = value; } }
 
+        public DoctorDaysOff()
+        {
+
+        }
+
         public DoctorDaysOff(int doctoId, int daysOffId)
         {
             _doctorId = doctoId;

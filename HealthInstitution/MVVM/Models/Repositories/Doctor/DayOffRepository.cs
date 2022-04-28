@@ -41,5 +41,16 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
             return null;
         }
+
+        public List<DayOff> DoctorDaysOffToDaysOff(List<DoctorDaysOff> doctorDaysOff)
+        {
+            List<DayOff> daysOff = new();
+            foreach (DoctorDaysOff reference in doctorDaysOff)
+            {
+                daysOff.Add(FindByID(reference.DaysOffId));
+
+            }
+            return daysOff;
+        }
     }
 }

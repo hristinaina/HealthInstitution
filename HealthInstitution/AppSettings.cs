@@ -30,7 +30,8 @@ namespace HealthInstitution
         private string _allergensFileName;
         private string _patientAllergensFileName;
         private string _medicineAllergensFileName;
-        private string _pendingMedicinesFileName; 
+        private string _pendingMedicinesFileName;
+        private string _doctorDaysOffFileName;
 
 
         public string PatientsFileName { get => _patientsFileName; set => _patientsFileName = value; }
@@ -45,7 +46,7 @@ namespace HealthInstitution
         public string PerscriptionsFileName { get => _perscriptionsFileName; set => _perscriptionsFileName = value; }
         public string RefferalsFileName { get => _refferalFileName; set => _refferalFileName = value; }
         public string EquipmentFileName { get => _equipmentFileName; set => _equipmentFileName = value; }
-        public string EquipmentArrangementFileName { get => _equipmentArrangementFileName; set => _equipmentFileName = value; }
+        public string EquipmentArrangementFileName { get => _equipmentArrangementFileName; set => _equipmentArrangementFileName = value; }
         public string RoomsFileName { get => _roomsFileName; set => _roomsFileName = value; }
         public string MedicinesFileName { get => _medicinesFileName; set => _medicinesFileName = value; }
         public string AllergensFileName { get => _allergensFileName; set => _allergensFileName = value; }
@@ -53,6 +54,7 @@ namespace HealthInstitution
         public string MedicineAllergensFileName { get => _medicineAllergensFileName; set => _medicineAllergensFileName = value; }
         public string EquipmentOrderFileName { get => _equipmentOrderFileName; set => _equipmentOrderFileName = value; }
         public string PendingMedicinesFileName { get => _pendingMedicinesFileName; set => _pendingMedicinesFileName = value; }
+        public string DoctorDaysOffFileName { get => _doctorDaysOffFileName; set => _doctorDaysOffFileName = value; }
         // TODO add the rest of the class attributes that will store the name of the corresponding files
 
 
