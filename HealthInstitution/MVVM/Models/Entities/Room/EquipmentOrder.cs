@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthInstitution.MVVM.Models.Repositories.Room
+namespace HealthInstitution.MVVM.Models.Entities
 {
     public class EquipmentOrder
     {

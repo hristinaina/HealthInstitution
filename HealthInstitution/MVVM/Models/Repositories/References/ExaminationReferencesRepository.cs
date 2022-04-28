@@ -10,7 +10,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class ExaminationReferencesRepository
     {
-        private string _fileName;
+        private readonly string _fileName;
         private List<ExaminationReference> _references;
 
         public ExaminationReferencesRepository(string FileName)

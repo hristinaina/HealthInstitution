@@ -10,7 +10,6 @@ namespace HealthInstitution
     // implemented using Singleton pattern
     public sealed class AppSettings
     {
-
         private string _patientsFileName;
         private string _doctorsFileName;
         private string _daysOffFileName;
@@ -35,7 +34,6 @@ namespace HealthInstitution
         private string _prescriptionMedicineFileName;
         private string _examinationChangeFileName;
 
-
         public string PatientsFileName { get => _patientsFileName; set => _patientsFileName = value; }
         public string DoctorsFileName { get => _doctorsFileName; set => _doctorsFileName = value; }
         public string DaysOffFileName { get => _daysOffFileName; set => _daysOffFileName = value; }
@@ -58,10 +56,7 @@ namespace HealthInstitution
         public string PendingMedicinesFileName { get => _pendingMedicinesFileName; set => _pendingMedicinesFileName = value; }
         public string DoctorDaysOffFileName { get => _doctorDaysOffFileName; set => _doctorDaysOffFileName = value; }
         public string PrescriptionMedicineFileName { get => _prescriptionMedicineFileName; set => _prescriptionMedicineFileName = value; }
-
         public string ExaminationChangeFileName { get => _examinationChangeFileName; set => _examinationChangeFileName = value; }
-        // TODO add the rest of the class attributes that will store the name of the corresponding files
-
 
         private AppSettings() { }
 
@@ -75,6 +70,7 @@ namespace HealthInstitution
             }
             return s_instance;
         }
+
         public static void SetInstance(AppSettings instance)
         {
             if (s_instance is null)

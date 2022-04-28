@@ -10,7 +10,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
 {
     public class RefferalRepository
     {
-        private string _fileName;
+        private readonly string _fileName;
         private List<Refferal> _references;
 
         public RefferalRepository(string FileName)

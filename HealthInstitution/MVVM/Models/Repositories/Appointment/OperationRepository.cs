@@ -11,7 +11,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
     public class OperationRepository
     {
 
-        private string _fileName;
+        private readonly string _fileName;
         private List<Operation> _operations;
 
         public List<Operation> Operations { get => _operations; }

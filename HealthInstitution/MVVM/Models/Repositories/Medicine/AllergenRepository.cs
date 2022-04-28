@@ -11,7 +11,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class AllergenRepository
     {
-        private string _fileName;
+        private readonly string _fileName;
         private List<Allergen> _allergen;
         public List<Allergen> Allergen { get => _allergen; }
 

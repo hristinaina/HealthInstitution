@@ -6,7 +6,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class SecretaryRepository
     {
-        private string _secretaryFileName;
+        private readonly string _secretaryFileName;
         private List<Secretary> _secretaries;
 
         public List<Secretary> Secretaries { get => _secretaries; }
