@@ -12,6 +12,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private string _anamnesis;
         private Prescription _perscription;
         private ExaminationReview _review;
+        private DateTime now;
 
         [JsonProperty("Anamnesis")]
         public string Anamnesis { get => _anamnesis; set { _anamnesis = value; } }
@@ -20,13 +21,20 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonIgnore]
         public Prescription Perscription { get => _perscription; set { _perscription = value; } }
 
+        public Examination()
+        {
+        }
         public Examination(int id, DateTime date, bool isEmergency, bool done,
-                            string anamnesis, ExaminationReview review)
-                           : base(id, date, isEmergency, done)
+                   string anamnesis, ExaminationReview review)
+                  : base(id, date, isEmergency, done)
         {
             _anamnesis = anamnesis;
             _perscription = null;
             _review = review;
+        }
+
+        public Examination(Doctor doctor, DateTime time, Room room) : base(doctor, time, room)
+        {
         }
     }
 }

@@ -45,28 +45,28 @@ namespace HealthInstitution.Commands
 
         private bool Login(string email, string password)
         {
-            _institution.CurrentUser = User.FindUser(_institution.PatientRepository.GetPatients(), email, password);
+            _institution.CurrentUser = User.FindUser(_institution.PatientRepository.Patients, email, password);
             if (_institution.CurrentUser != null)
             {
                 _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
                 return true;
             }
 
-            _institution.CurrentUser = User.FindUser(_institution.DoctorRepository.GetDoctors(), email, password);
+            _institution.CurrentUser = User.FindUser(_institution.DoctorRepository.Doctors, email, password);
             if (_institution.CurrentUser != null)
             {
                 _navigationStore.CurrentViewModel = new DoctorMainPageViewModel();
                 return true;
             }
 
-            _institution.CurrentUser = User.FindUser(_institution.SecretaryRepository.GetSecretaries(), email, password);
+            _institution.CurrentUser = User.FindUser(_institution.SecretaryRepository.Secretaries, email, password);
             if (_institution.CurrentUser != null)
             {
                 _navigationStore.CurrentViewModel = new SecretaryMainPageViewModel();
                 return true;
             }
 
-            _institution.CurrentUser = User.FindUser(_institution.AdminRepository.GetAdministrators(), email, password);
+            _institution.CurrentUser = User.FindUser(_institution.AdminRepository.Administrators, email, password);
             if (_institution.CurrentUser != null)
             {
                 _navigationStore.CurrentViewModel = new AdminMainPageViewModel();

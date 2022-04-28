@@ -66,6 +66,10 @@ namespace HealthInstitution.MVVM.Models
         }
 
 
+        public string GetName()
+        {
+            return _firstName + " " + _lastName;
+        }
 
     }
 }

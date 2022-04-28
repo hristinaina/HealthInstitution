@@ -39,6 +39,10 @@ namespace HealthInstitution.MVVM.Models.Entities
             _specialization = specialization;
         }
 
+        public Doctor(string firstName, string lastName) : base(firstName, lastName)
+        {
+        }
+
         public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
         {
 
@@ -110,5 +114,6 @@ namespace HealthInstitution.MVVM.Models.Entities
 
             return availableTime;
         }
+
     }
 }

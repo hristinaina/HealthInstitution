@@ -56,20 +56,20 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         {
             _appointments.Clear();
             // hardcoded
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Appointment(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
         }
     }
 }
