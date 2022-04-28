@@ -19,24 +19,8 @@ namespace HealthInstitution
         private readonly NavigationStore _navigation;
         public App()
         {
-            // * appSettings kao parametre prima putanje do fajlova gdje su smjesteni podaci za rad Zdravstvene Ustanove 
             AppSettings.SetInstance(FileService.Deserialize<AppSettings>("../../../Data/databasePaths.json")[0]);
-            //appSettings.AddFilePaths("../../../Data/Patient/patients.json",
-            //                         "../../../Data/Doctor/doctors.json",
-            //                         "../../../Data/Doctor/daysOff.json",
-            //                         "../../../Data/Secretary/secretaries.json", 
-            //                         "../../../Data/Admin/admins.json",
-            //                         "../../../Data/Appointment/examinations.json", 
-            //                         "../../../Data/Appointment/operations.json",
-            //                         "../../../Data/Appointment/perscriptions.json",
-            //                         "../../../Data/References/examinationsReferences.json", 
-            //                         "../../../Data/References/operationsReferences.json",
-            //                         "../../../Data/References/refferal.json",
-            //                         "../../../Data/Room/equipment.json", 
-            //                         "../../../Data/Room/rooms.json", 
-            //                         "../../../Data/Room/equipmentInRooms.json",
-            //                         "../../../Data/Medicine/medicine.json");
-
+            
             _institution = Institution.Instance();
 
             _navigation = NavigationStore.Instance();

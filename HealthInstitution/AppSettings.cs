@@ -83,38 +83,5 @@ namespace HealthInstitution
             }
         }
 
-        /*public void AddFilePaths(string patientFileName, string doctorFileName, string secretaryFileName, string adminFileName,
-                                 string examinationFileName, string operationFileName, string examinationReferenceFileName, string operationReferenceFileName, string equipmentFileName,
-                                 string roomFileName, string equipmentArragmentFileName, string medicineFileName, string dayOffFileName, string perscriptionFileName, string refferalFileName,
-                                 string allergenFileName, string medicineAllergenFileName, string patientAllergenFileName)
-        {
-            _patientsFileName = patientFileName;
-            _doctorsFileName = doctorFileName;
-            _secretariesFileName = secretaryFileName;
-            _adminsFileName = adminFileName;
-
-            _examinationsFileName = examinationFileName;
-            _perscriptionsFileName = perscriptionFileName;
-            _operationsFileName = operationFileName;
-            _examinationsReferencesFileName = examinationReferenceFileName;
-            _operationsReferencesFileName = examinationReferenceFileName;
-
-            _allergensFileName = allergenFileName;
-            _medicineAllergensFileName = medicineAllergenFileName;
-            _patientAllergensFileName = patientAllergenFileName;
-
-            _roomsFileName = roomFileName;
-            _equipmentFileName = equipmentFileName;
-            _equipmentArrangementFileName = equipmentArragmentFileName;
-
-            _medicinesFileName = medicineFileName;
-
-            _daysOffFileName = dayOffFileName;
-
-            _refferalFileName = refferalFileName;
-
-            // TODO add the rest of the class attributes
-        }*/
-
     }
 }
