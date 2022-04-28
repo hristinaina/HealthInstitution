@@ -1,10 +1,10 @@
-﻿<UserControl x:Class="HealthInstitution.MVVM.Views.DoctorViews.DoctorMedicalRecordView"
+﻿<UserControl x:Class="HealthInstitution.MVVM.Views.DoctorViews.UpdateMedicalRecordView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.DoctorViews"
-            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
              mc:Ignorable="d"
              Height="600"
@@ -27,6 +27,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="6*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Medical Record"
                            HorizontalAlignment="Center"
@@ -36,7 +37,7 @@
                            Grid.Row="0"
                            Height="50"/>
 
-                <Grid Grid.Row="1" Margin="0 0 0 100">
+                <Grid Grid.Row="1" Margin="0 0 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -71,7 +72,7 @@
                             TextWrapping="Wrap"
                             MaxLength="30"
                             Grid.Row="1"
-                            IsEnabled="False"
+                            IsEnabled="True"
                             Margin="0 0 0 0"
                             materialDesign:TextFieldAssist.CharacterCounterVisibility=
                             "{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter},
@@ -85,16 +86,19 @@
                             TextWrapping="Wrap"
                             MaxLength="30"
                             Grid.Row="2"
-                            IsEnabled="False"
+                            IsEnabled="True"
                             Margin="0 0 0 0"
                             materialDesign:TextFieldAssist.CharacterCounterVisibility=
                             "{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter},
                             ElementName=MaterialDesignFilledTextBoxTextCountComboBox}"
                             materialDesign:HintAssist.Hint="Weight (kg)"/>
-
                     </Grid>
 
                     <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>
                         <TextBlock Text="Allergens"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Top"
@@ -106,19 +110,34 @@
                         <ListBox IsEnabled="False"
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Center"
-                                 Height="200">
-                            <TextBlock
+                                 Height="150">
+                            <TextBlock Margin="0 10 0 0"
                                 Text="Allergen1" />
-                            <TextBlock
+                            <TextBlock Margin="0 10 0 0"
                                 Text="Allergen2" />
-                            <TextBlock
+                            <TextBlock Margin="0 10 0 0"
                                 Text="Allergen3" />
-                            <TextBlock
+                            <TextBlock Margin="0 10 0 0"
                                 Text="Allergen4" />
                         </ListBox>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                ToolTip="Edit allergens"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right"
+                                Grid.Row="1"
+                                IsEnabled="{Binding DataContext.ControlsEnabled,
+                            RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                            <materialDesign:PackIcon Kind="Edit"
+                                                     Height="15"
+                                                     Width="15"/>
+                        </Button>
                     </Grid>
 
                     <Grid Grid.Column="2" Margin="0 0 30 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>
                         <TextBlock Text="History of illness"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Top"
@@ -130,22 +149,68 @@
                         <ListBox IsEnabled="False"
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Center"
-                                 Height="200" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                 Height="150"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                  ScrollViewer.VerticalScrollBarVisibility="Auto" 
                                  ScrollViewer.CanContentScroll="True">
 
-                            <TextBlock
+                            <TextBlock Margin="0 10 0 0"
                                 Text="Illness1" />
-                            <TextBlock
+                            <TextBlock Margin="0 10 0 0"
                                 Text="Illness2" />
-                            <TextBlock
+                            <TextBlock Margin="0 10 0 0"
                                 Text="Illness3" />
-                            <TextBlock
+                            <TextBlock Margin="0 10 0 0"
                                 Text="Illness4" />
                         </ListBox>
-
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                ToolTip="Edit history of illnesses"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right"
+                                Grid.Row="1"
+                                IsEnabled="{Binding DataContext.ControlsEnabled,
+                            RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                        <materialDesign:PackIcon Kind="Edit"
+                                                     Height="15"
+                                                     Width="15"/>
+                        </Button>
                     </Grid>
-                    
+
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Anamnesis"
+                               Width="110"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               Margin="50, 0, 0, 0"
+                               Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                               Grid.Row="0"
+                               FontSize="20"
+                               Height="50"
+                               Grid.Column="0"/>
+                    <TextBox
+                        Margin="45 0 0 20"
+                        HorizontalAlignment="Left"
+                        Width="600"
+                        TextWrapping="Wrap"
+                        VerticalAlignment="Stretch"
+                        MinWidth="280"
+                        AcceptsReturn="True"
+                        VerticalScrollBarVisibility="Auto"
+                        SpellCheck.IsEnabled="True"
+                        materialDesign:HintAssist.Hint="Multiline text"
+                        Height="80"
+                        Text=" "
+                        Grid.Column="0"/>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Grid.Column="1"
+                            IsDefault="True"
+                            Margin="0 30 50 0"
+                            Content="DONE"/>
                 </Grid>
             </Grid>
 
