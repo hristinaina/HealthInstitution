@@ -15,8 +15,6 @@
              d:DesignHeight="450"
              d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="6*"></ColumnDefinition>
@@ -28,9 +26,7 @@
 
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
-                                       Grid.Row="0"
-                                       Grid.ColumnSpan="3"
-                                       Grid.RowSpan="3">
+                                       Grid.Row="0">
                 <materialDesign:DialogHost.DialogContent>
                     <StackPanel Height="350"
                                 Width="320"
@@ -89,79 +85,130 @@
                 </materialDesign:DialogHost.DialogContent>
                 <materialDesign:Card>
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"></RowDefinition>
-                            <RowDefinition Height="7*"></RowDefinition>
-                            <RowDefinition Height="1*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                Width="170"
-                                ToolTip="Schedule appointment"
-                                Content="New appointment"
-                                Background="#6680DEEA"
-                                BorderBrush="#6680DEEA"
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                Height="32"
-                                VerticalAlignment="Center"
-                                Grid.Row="0"
-                                HorizontalAlignment="Center" />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-                        <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
 
                         <ListView ItemsSource="{Binding Appointments}"
-                                  Width="650"
-                                  VerticalAlignment="Center"
-                                  Height="400"
-                                  Grid.Row="1">
+                                  VerticalAlignment="Top"
+                                  Margin="0 0 0 70"
+                                  Grid.Column="0"
+                                  Width="540"
+                                  SelectionMode="Single"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  HorizontalAlignment="Center"
+                                  SelectedIndex="{Binding Selection}">
                             <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Width="130"
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Width="150"
                                                     Header="Date">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
                                                            Text="{Binding Date}"
-                                                           Width="130" />
+                                                           Width="80" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Width="130"
+                                    <GridViewColumn Width="100"
                                                     Header="Time">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock TextAlignment="Left"
+                                                <TextBlock TextAlignment="Center"
                                                            Text="{Binding Time}"
-                                                           Width="130" />
+                                                           Width="70" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="120"
+                                                    Header="Room">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Center"
+                                                           Text="{Binding Room}"
+                                                           Width="70" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                     <GridViewColumn Width="130"
-                                                    Header="Room">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock TextAlignment="Left"
-                                                           Text="{Binding Room}"
-                                                           Width="130" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Width="170"
                                                     Header="Doctor">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
                                                            Text="{Binding Doctor}"
-                                                           Width="170" />
+                                                           Width="120" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="4*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Width="170"
+                                    ToolTip="Schedule appointment"
+                                    Content="New appointment"
+                                    Background="#CC80DEEA"
+                                    BorderBrush="#6680DEEA"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    Height="32"
+                                    VerticalAlignment="Bottom"
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Left">
+                                <Button.CommandParameter>
+                                    <StackPanel Margin="16">
+                                        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                                     HorizontalAlignment="Center"
+                                                     Margin="16"
+                                                     IsIndeterminate="True"
+                                                     Value="0" />
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                                CommandParameter="Sample2Cancel"
+                                                HorizontalAlignment="Center"
+                                                Content="CANCEL" />
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Width="170"
+                                    ToolTip="Reschedule selected appointment"
+                                    Content="Reschedule"
+                                    Background="#66FFFFFF"
+                                    BorderBrush="#6634565A"
+                                    Height="32"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                    Grid.Row="1"
+                                    IsEnabled="{Binding EnableChanges}" />
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Grid.Column="1"
+                                    Width="170"
+                                    ToolTip="Cancel selected appointment"
+                                    Content="Cancel"
+                                    Background="#66FFFFFF"
+                                    BorderBrush="#6634565A"
+                                    Height="32"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Grid.Row="2"
+                                    IsEnabled="{Binding EnableChanges}" />
+                        </Grid>
+                        <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+
                     </Grid>
                 </materialDesign:Card>
-
-
             </materialDesign:DialogHost>
 
 
