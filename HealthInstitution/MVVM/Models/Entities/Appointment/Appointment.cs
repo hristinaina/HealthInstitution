@@ -11,6 +11,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private DateTime _dateTime;
         private bool _isEmergency;
         private bool _isDone;
+        private DateTime time;
 
         [JsonProperty("ID")]
         public int ID { get => _id; set { _id = value; } }
@@ -27,6 +28,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonIgnore]
         public Room Room { get => _room; set { _room = value; } }
 
+        public Appointment() { 
+        }
         public Appointment(int id, DateTime dateTime, bool isEmergency, bool done)
         {
             _id = id;
@@ -36,6 +39,13 @@ namespace HealthInstitution.MVVM.Models.Entities
             _dateTime = dateTime;
             _isEmergency = isEmergency;
             _isDone = done;
+        }
+
+        protected Appointment(Doctor doctor, DateTime dateTime, Room room)
+        {
+            _doctor = doctor;
+            _dateTime = dateTime;
+            _room = room;
         }
     }
 }

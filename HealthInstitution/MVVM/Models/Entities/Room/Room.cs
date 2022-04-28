@@ -17,6 +17,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private RoomType _type;
         private Dictionary<Equipment, int> _equipment;
         private List<Appointment> _appointments;
+        private string v;
 
         public int ID { get => _id; set => _id = value; }
         public string Name { get => _name; set => _name = value; }
@@ -41,6 +42,11 @@ namespace HealthInstitution.MVVM.Models.Entities
             _number = number;
             _name = name;
             _type = type;
+        }
+
+        public Room(string name)
+        {
+            _name = name;
         }
 
         public static Room Create(int id, int number, string name, RoomType type)

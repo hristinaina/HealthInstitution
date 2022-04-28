@@ -43,6 +43,8 @@ namespace HealthInstitution.MVVM.Models
         private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
         private ExaminationChangeRepository _examinationChangeRepository;
         // TODO: add other repositories
+        private User _currentUser;
+        public User CurrentUser { get => _currentUser; set { _currentUser = value; } }
 
         private static Institution s_instance = null;
 

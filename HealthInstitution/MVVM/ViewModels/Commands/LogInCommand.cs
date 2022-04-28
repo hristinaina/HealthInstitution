@@ -3,6 +3,7 @@ using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.MVVM.ViewModels.MainPageViewModels;
+using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.Stores;
 
 namespace HealthInstitution.Commands
@@ -11,9 +12,9 @@ namespace HealthInstitution.Commands
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
-        private readonly LoginViewModel _loginVM;
+        private readonly LogInViewModel _loginVM;
 
-        public LogInCommand(LoginViewModel loginVM)
+        public LogInCommand(LogInViewModel loginVM)
         {
             _loginVM = loginVM;
             _institution = Institution.Instance();
@@ -44,36 +45,31 @@ namespace HealthInstitution.Commands
 
         private bool Login(string email, string password)
         {
-            Patient userPatient = MVVM.Models.User.FindUser(_institution.PatientRepository.Patients, email, password);
-
-            if (userPatient != null)
+            _institution.CurrentUser = User.FindUser(_institution.PatientRepository.Patients, email, password);
+            if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new PatientMainPageViewModel(userPatient);
+                _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
                 return true;
             }
 
-            Doctor userDoctor = MVVM.Models.User.FindUser(_institution.DoctorRepository.Doctors, email, password);
-
-            if (userDoctor != null)
+            _institution.CurrentUser = User.FindUser(_institution.DoctorRepository.Doctors, email, password);
+            if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new DoctorMainPageViewModel(userDoctor);
+                _navigationStore.CurrentViewModel = new DoctorMainPageViewModel();
                 return true;
             }
 
-            Secretary userSecretary = MVVM.Models.User.FindUser(_institution.SecretaryRepository.Secretaries, email, password);
-
-            if (userSecretary != null)
+            _institution.CurrentUser = User.FindUser(_institution.SecretaryRepository.Secretaries, email, password);
+            if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new SecretaryMainPageViewModel(userSecretary);
+                _navigationStore.CurrentViewModel = new SecretaryMainPageViewModel();
                 return true;
             }
 
-            Admin
-                userAdmin = MVVM.Models.User.FindUser(_institution.AdminRepository.Administrators, email, password);
-
-            if (userAdmin != null)
+            _institution.CurrentUser = User.FindUser(_institution.AdminRepository.Administrators, email, password);
+            if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new AdminMainPageViewModel(userAdmin);
+                _navigationStore.CurrentViewModel = new AdminMainPageViewModel();
                 return true;
             }
 

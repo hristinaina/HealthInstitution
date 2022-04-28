@@ -13,16 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HealthInstitution.MVVM.Views.MainPageViews
+namespace HealthInstitution.MVVM.Views.PatientViews
 {
     /// <summary>
-    /// Interaction logic for PatientMainPageView.xaml
+    /// Interaction logic for PattientAppointmentView.xaml
     /// </summary>
-    public partial class PatientMainPageView : UserControl
+    public partial class PatientAppointmentView : UserControl
     {
-        public PatientMainPageView()
+        public PatientAppointmentView()
         {
             InitializeComponent();
         }
+
     }
 }
