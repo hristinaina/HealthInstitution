@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace HealthInstitution.MVVM.Views.Commands
+namespace HealthInstitution.MVVM.Views.Components
 {
     /// <summary>
     /// Interaction logic for BindablePasswordBox.xaml

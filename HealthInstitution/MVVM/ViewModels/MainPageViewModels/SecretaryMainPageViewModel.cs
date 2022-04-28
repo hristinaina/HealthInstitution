@@ -1,4 +1,5 @@
-﻿using HealthInstitution.MVVM.Models.Entities;
+﻿using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.Commands;
 using System.Windows.Input;
 
@@ -6,12 +7,14 @@ namespace HealthInstitution.MVVM.ViewModels.MainPageViewModels
 {
     public class SecretaryMainPageViewModel : BaseViewModel
     {
-        protected Secretary secretary;
+        private Institution _institution;
+        protected Secretary _secretary;
         public ICommand LogOut { get; }
 
-        public SecretaryMainPageViewModel(Secretary secretary)
+        public SecretaryMainPageViewModel()
         {
-            this.secretary = secretary;
+            _institution = Institution.Instance();
+            _secretary = (Secretary)_institution.CurrentUser;
             LogOut = new LogOutCommand();
 
             // ..............

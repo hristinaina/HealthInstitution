@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LogInViewModel : BaseViewModel
     {
         private string _email;
         private string _password;
@@ -22,7 +22,7 @@ namespace HealthInstitution.MVVM.ViewModels
 
         public ICommand Submit { get; }
 
-        public LoginViewModel()
+        public LogInViewModel()
         {
             Submit = new LogInCommand(this);
         }

@@ -9,33 +9,44 @@
         xmlns:viewmains="clr-namespace:HealthInstitution.MVVM.Views.MainPageViews"
         xmlns:viewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels"
         xmlns:viewmodelmains="clr-namespace:HealthInstitution.MVVM.ViewModels.MainPageViewModels"
+        xmlns:viewmodelsPatient="clr-namespace:HealthInstitution.MVVM.ViewModels.PatientViewModels"
+        xmlns:viewsPatient="clr-namespace:HealthInstitution.MVVM.Views.PatientViews"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
-        Title="NMK - Log in" 
-        Height="600" 
+        Title="NMK - Log in"
+        Height="600"
         Width="1200"
         Style="{StaticResource AllWindows}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}" 
-        ResizeMode="CanMinimize" 
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.Resources>
-            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                <views:LogInView/>
+            <DataTemplate DataType="{x:Type viewmodels:LogInViewModel}">
+                <views:LogInView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodelmains:PatientMainPageViewModel}">
-                <viewmains:PatientMainPageView/>
+            <DataTemplate DataType="{x:Type viewmodelsPatient:PatientRecordViewModel}">
+                <viewsPatient:PatientRecordView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsPatient:PatientSearchViewModel}">
+                <viewsPatient:PatientSearchView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsPatient:PatientAppointmentViewModel}">
+                <viewsPatient:PatientAppointmentView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsPatient:PatientSurveyViewModel}">
+                <viewsPatient:PatientSurveyView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelmains:DoctorMainPageViewModel}">
-                <viewmains:DoctorMainPageView/>
+                <viewmains:DoctorMainPageView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelmains:SecretaryMainPageViewModel}">
-                <viewmains:SecretaryMainPageView/>
+                <viewmains:SecretaryMainPageView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelmains:AdminMainPageViewModel}">
-                <viewmains:AdminMainPageView/>
+                <viewmains:AdminMainPageView />
             </DataTemplate>
         </Grid.Resources>
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>
 </Window>
