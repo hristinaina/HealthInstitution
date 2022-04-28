@@ -26,7 +26,7 @@ namespace HealthInstitution.Stores
 
         public static NavigationStore Instance()
         {
-            if (instance == null)
+            if (instance is null)
             {
                 instance = new NavigationStore();
             }

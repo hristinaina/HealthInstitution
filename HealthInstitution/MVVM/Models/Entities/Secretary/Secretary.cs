@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Entities
 {
-    public class Secretary : User
+    public class Secretary : User 
     {
         public Secretary()
         {

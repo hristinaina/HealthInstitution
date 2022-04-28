@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 namespace HealthInstitution.MVVM.Models.Entities
 {
     abstract public class Appointment
@@ -11,6 +12,21 @@ namespace HealthInstitution.MVVM.Models.Entities
         private bool _isEmergency;
         private bool _isDone;
 
+        [JsonProperty("ID")]
+        public int ID { get => _id; set { _id = value; } }
+        [JsonProperty("Date")]
+        public DateTime Date { get => _dateTime; set { _dateTime = value; } }
+        [JsonProperty("Emergency")]
+        public bool Emergency { get => _isEmergency; set { _isEmergency = value; } }
+        [JsonProperty("Done")]
+        public bool Done { get => _isDone; set { _isDone = value; } }
+        [JsonIgnore]
+        public Doctor Doctor { get => _doctor; set { _doctor = value; } }
+        [JsonIgnore]
+        public Patient Patient { get => _patient; set { _patient = value; } }
+        [JsonIgnore]
+        public Room Room { get => _room; set { _room = value; } }
+
         public Appointment(int id, DateTime dateTime, bool isEmergency, bool done)
         {
             _id = id;
@@ -21,20 +37,5 @@ namespace HealthInstitution.MVVM.Models.Entities
             _isEmergency = isEmergency;
             _isDone = done;
         }
-
-        public int GetId() => _id;
-        public void SetId(int id) => _id = id;
-        public Doctor GetDoctor() => _doctor;
-        public void SetDoctor(Doctor doctor) => _doctor = doctor;
-        public Patient GetPatient() => _patient;
-        public void SetPatient(Patient patient) => _patient = patient;
-        public Room GetRoom() => _room;
-        public void SetRoom(Room room) => _room = room;
-        public DateTime GetDateTime() => _dateTime;
-        public void SetDateTime(DateTime dateTime) => _dateTime = dateTime;
-        public bool GetEmergency() => _isEmergency;
-        public void SetEmergency(bool emergency) => _isEmergency = emergency;
-        public bool GetDone() => _isDone;
-        public void SetDone(bool done) => _isDone = done;
     }
 }

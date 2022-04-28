@@ -1,18 +1,18 @@
 [
-  {
-    "ID": 1,
-    "Email": "admin1@gmail.com",
-    "FirstName": "Ime",
-    "LastName": "Prezime",
-    "Password": "123",
-    "Gender": 0
-  },
-  {
-    "ID": 2,
-    "Email": "admin2@gmail.com",
-    "FirstName": "Ime",
-    "LastName": "Prezime",
-    "Password": "123",
-    "Gender": 1
-  }
+    {
+        "ID": 1,
+        "Email": "admin1@gmail.com",
+        "FirstName": "Ime",
+        "LastName": "Prezime",
+        "Password": "123",
+        "Gender": 0
+    },
+    {
+        "ID": 2,
+        "Email": "admin2@gmail.com",
+        "FirstName": "Ime",
+        "LastName": "Prezime",
+        "Password": "123",
+        "Gender": 1
+    }
 ]

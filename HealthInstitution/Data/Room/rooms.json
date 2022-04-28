@@ -1,22 +1,22 @@
 [
   {
-    "ID": 1,
-    "Name": "Ime",
+    "Id": 1,
+    "Name": "OR",
     "Type": 0
   },
   {
-    "ID": 2,
-    "Name": "Ime",
-    "Type": 0
+    "Id": 2,
+    "Name": "ER",
+    "Type": 1
   },
   {
-    "ID": 3,
-    "name": "Ime",
-    "type": 0
+    "Id": 3,
+    "name": "Soba za odmor 1",
+    "type": 2
   },
   {
-    "ID": 5,
-    "name": "Ime",
-    "type": 0
+    "Id": 5,
+    "name": "Soba za odmor 2",
+    "type": 2
   }
 ]

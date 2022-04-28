@@ -2,19 +2,16 @@
   {
     "Id": 1,
     "Name": "Ime",
-    "Quantity": 50,
-    "Type": 0
+    "Quantity": 50
   },
   {
-    "Id": 2,
+    "Id": 1,
     "Name": "Ime",
-    "Quantity": 50,
-    "Type": 1
+    "Quantity": 50
   },
   {
-    "Id": 3,
+    "Id": 1,
     "Name": "Ime",
-    "Quantity": 50,
-    "Type":  2
+    "Quantity": 50
   }
 ]
