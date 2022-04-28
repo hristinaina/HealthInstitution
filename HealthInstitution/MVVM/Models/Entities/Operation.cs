@@ -18,5 +18,18 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public int GetDurationInMin() => _durationInMin;
         public void SetDurationInMin(int duration) => _durationInMin = duration;
+
+        public void Update(Operation operation)
+        {
+            SetDateTime(operation.GetDateTime());
+            SetEmergency(operation.GetEmergency());
+            SetDone(operation.GetDone());
+            SetRoom(operation.GetRoom());
+        }
+
+        public void Delete(int id)
+        {
+
+        }
     }
 }
