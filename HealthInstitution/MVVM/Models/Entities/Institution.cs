@@ -140,132 +140,18 @@ namespace HealthInstitution.MVVM.Models
             // TODO: Add other repositories
         }
 
-        private void ConnectReferences()
+        private static void ConnectReferences()
         {
-            ConnectExaminationReferences();
-            ConnectOperationReferences();
-            ConnectRefferals();
-            FillMedicalRecord();
-            ConnectMedicineAllergens();
-            ConnectDoctorDaysOff();
-            ConnectPrescriptionRepository();
-            ConnectExaminationChanges();
+            ReferencesService.ConnectExaminationReferences();
+            ReferencesService.ConnectOperationReferences();
+            ReferencesService.ConnectRefferals();
+            ReferencesService.FillMedicalRecord();
+            ReferencesService.ConnectMedicineAllergens();
+            ReferencesService.ConnectDoctorDaysOff();
+            ReferencesService.ConnectPrescriptionRepository();
+            ReferencesService.ConnectExaminationChanges();
         }
 
-        private void ConnectExaminationChanges()
-        {
-            foreach (ExaminationChange change in _examinationChangeRepository.Changes)
-            {
-                Patient p = _patientRepository.FindByID(change.PatientID);
-                p.ExaminationChanges.Add(change);
-            }
-        }
-
-        private void ConnectExaminationReferences()
-        {
-            foreach (ExaminationReference reference in _examinationReferencesRepository.GetReferences())
-            {
-                Examination examination = _examinationRepository.FindByID(reference.ExaminationID);
-                Doctor doctor = _doctorRepository.FindByID(reference.DoctorID);
-                Patient patient = _patientRepository.FindByID(reference.PatientID);
-                Prescription perscription = _prescriptionRepository.FindByID(reference.PerscriptionID);
-                Room room = _roomRepository.FindById(reference.RoomID);
-
-
-                examination.Doctor = doctor;
-                examination.Patient = patient;
-                examination.Perscription = perscription;
-                examination.Room = room;
-
-                room.Appointments.Add(examination);
-                doctor.Examinations.Add(examination);
-                patient.Examinations.Add(examination);
-            }
-        }
-
-
-        private void ConnectOperationReferences()
-        {
-            foreach (OperationReference reference in _operationReferencesRepository.GetReferences())
-            {
-                Operation operation = _operationRepository.FindByID(reference.OperationId);
-                Doctor doctor = _doctorRepository.FindByID(reference.DoctorID);
-                Patient patient = _patientRepository.FindByID(reference.PatientID);
-                Room room = _roomRepository.FindById(reference.RoomID);
-
-                operation.Doctor = doctor;
-                operation.Patient = patient;
-                operation.Room = room;
-
-                room.Appointments.Add(operation);
-                doctor.Operations.Add(operation);
-                patient.Operations.Add(operation);
-            }
-        }
-
-        public void ArrangeEquipment()
-        {
-            foreach (EquipmentArragment a in this._equipmentArragmentRepository.Equipment)
-            {
-                Room r = this.RoomRepository.FindById(a.RoomId);
-                Equipment e = this.EquipmentRepository.FindById(a.EquipmentId);
-                r.AddEquipment(e, a.Quantity);
-                e.ArrangeInRoom(r, a.Quantity);
-            }
-        }
-
-        public void ConnectRefferals()
-        {
-            foreach (Refferal reference in _refferalRepository.GetReferences())
-            {
-                Patient patient = _patientRepository.FindByID(reference.PatientId);
-                
-                // finds all refferals for corresponding patient
-                patient.Record.Refferals = _refferalRepository.FindByPatientID(patient.ID);
-            }
-        }
-
-        public void FillMedicalRecord()
-        {
-            foreach (Patient patient in _patientRepository.Patients)
-            {
-                patient.Examinations = _examinationRepository.FindByPatientID(patient.ID);
-                patient.Operations = _operationRepository.FindByPatientID(patient.ID);
-
-                List<PatientAllergen> patientAllergens = _patientAllergenRepository.FindByPatientID(patient.ID);
-                patient.Record.Allergens = _allergenRepository.PatientAllergenToAllergen(patientAllergens);
-            }
-        }
-
-        public void ConnectMedicineAllergens()
-        {
-            foreach (Medicine medicine in _medicineRepository.Medicine)
-            {
-                List<MedicineAllergen> medicineAllergens = _medicineAllergenRepository.FindByMedicineID(medicine.ID);
-                medicine.Allergens = _allergenRepository.MedicineAllergenToAllergen(medicineAllergens);
-            }
-        }
-
-        public void ConnectDoctorDaysOff()
-        {
-            foreach (Doctor doctor in _doctorRepository.Doctors)
-            {
-                List<DoctorDaysOff> doctorDaysOff = _doctorDaysOffRepository.FindByDoctorID(doctor.ID);
-                doctor.DaysOff = _dayOffRepository.DoctorDaysOffToDaysOff(doctorDaysOff);
-
-                foreach(DayOff dayOff in doctor.DaysOff) dayOff.Doctor = doctor;
-            }
-        }
-
-        public void ConnectPrescriptionRepository()
-        {
-            foreach ( Prescription prescription in _prescriptionRepository.Prescriptions)
-            {
-                List<PrescriptionMedicine> prescriptionMedicines = _prescriptionMedicineRepository.FindByPrescriptionID(prescription.ID);
-                prescription.Medicines = _medicineRepository.PrescriptionMedicineToMedicine(prescriptionMedicines);
-            }
-
-        }
 
         public PatientRepository PatientRepository { get => _patientRepository; }
         public DoctorRepository DoctorRepository { get => _doctorRepository; }
@@ -288,6 +174,7 @@ namespace HealthInstitution.MVVM.Models
         public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
         public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
+        public EquipmentArragmentRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
 
     }
 }
