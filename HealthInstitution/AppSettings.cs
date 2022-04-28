@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution
 {
-    // class that stores the names of the files that store app data
-    // implemented using Singleton pattern
-    public sealed class AppSettings
+	// class that stores the names of the files that store app data
+	// implemented using Singleton pattern
+	public sealed class AppSettings
     {
         private string _patientFileName;
         private string _doctorFileName;
@@ -25,6 +25,7 @@ namespace HealthInstitution
         private string _equipmentArragmentFileName;
         private string _medicineFileName;
         private string _dayOffFileName;
+        private string _refferalFileName;
         // TODO add the rest of the class attributes that will store the name of the corresponding files
 
         private AppSettings() { }
@@ -44,7 +45,7 @@ namespace HealthInstitution
 
         public void AddFilePaths(string patientFileName, string doctorFileName, string secretaryFileName, string adminFileName,
                                  string examinationFileName, string operationFileName, string examinationReferenceFileName, string operationReferenceFileName, string equipmentFileName,
-                                 string roomFileName, string equipmentArragmentFileName, string medicineFileName, string dayOffFileName, string perscriptionFileName)
+                                 string roomFileName, string equipmentArragmentFileName, string medicineFileName, string dayOffFileName, string perscriptionFileName, string refferalFileName)
         {
             _patientFileName = patientFileName;
             _doctorFileName = doctorFileName;
@@ -64,6 +65,8 @@ namespace HealthInstitution
             _medicineFileName = medicineFileName;
 
             _dayOffFileName = dayOffFileName;
+
+            _refferalFileName = refferalFileName;
 
             // TODO add the rest of the class attributes
         }
@@ -134,6 +137,11 @@ namespace HealthInstitution
         public string GetDayOffFileName()
         {
             return _dayOffFileName;
+        }
+
+        public string GetRefferalFileName()
+        {
+            return _refferalFileName;
         }
     }
 }
