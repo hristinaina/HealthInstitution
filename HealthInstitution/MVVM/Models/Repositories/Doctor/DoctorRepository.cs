@@ -11,13 +11,13 @@ namespace HealthInstitution.Repositories
 
         public DoctorRepository(string fileName)
         {
-            this._fileName = fileName;
-            this._doctors = new List<Doctor>();
+            _fileName = fileName;
+            _doctors = new List<Doctor>();
         }
 
         public List<Doctor> GetDoctors()
         {
-            return this._doctors;
+            return _doctors;
         }
 
         public void LoadFromFile()
@@ -36,6 +36,17 @@ namespace HealthInstitution.Repositories
                 if (doctor.ID == id) return doctor;
             }
             return null;
+        }
+        public List<Doctor> GetGeneralPractitioners()
+        {
+            List<Doctor> generalPractitioners = new();
+
+            foreach (Doctor doctor in _doctors)
+            {
+                if (doctor.Specialization == Specialization.NONE) generalPractitioners.Add(doctor);
+            }
+
+            return generalPractitioners;
         }
     }
 }
