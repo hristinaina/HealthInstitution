@@ -9,15 +9,11 @@ namespace HealthInstitution.MVVM.Models
         private string _fileName;
         private List<Examination> _examinations;
 
+        public List<Examination> Examinations { get => _examinations; }
         public ExaminationRepository(string filePath)
         {
             _fileName = filePath;
             _examinations = new List<Examination>();
-        }
-
-        public List<Examination> GetExaminations()
-        {
-            return _examinations;
         }
 
         public void LoadFromFile()

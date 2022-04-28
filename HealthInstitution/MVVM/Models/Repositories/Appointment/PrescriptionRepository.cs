@@ -13,15 +13,11 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _fileName;
         private List<Prescription> _prescriptions;
 
+        public List<Prescription> Prescriptions { get => _prescriptions; }
         public PrescriptionRepository(string filePath)
         {
             _fileName = filePath;
             _prescriptions = new List<Prescription>();
-        }
-
-        public List<Prescription> GetPrescriptions()
-        {
-            return _prescriptions;
         }
 
         public void LoadFromFile()

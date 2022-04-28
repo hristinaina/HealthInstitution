@@ -13,14 +13,11 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _fileName;
         private List<DoctorDaysOff> _references;
 
+        public List<DoctorDaysOff> DoctorDaysOff { get => _references; }
         public DoctorDaysOffRepository(string FileName)
         {
             _fileName = FileName;
             _references = new List<DoctorDaysOff>();
-        }
-        public List<DoctorDaysOff> GetReferences()
-        {
-            return _references;
         }
 
         public void LoadFromFile()

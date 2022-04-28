@@ -14,15 +14,11 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _fileName;
         private List<Operation> _operations;
 
+        public List<Operation> Operations { get => _operations; }
         public OperationRepository(string filePath)
         {
             _fileName = filePath;
             _operations = new List<Operation>();
-        }
-
-        public List<Operation> GetOperations()
-        {
-            return _operations;
         }
 
         public void LoadFromFile()

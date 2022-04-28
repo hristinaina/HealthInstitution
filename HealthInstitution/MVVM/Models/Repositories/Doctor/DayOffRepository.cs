@@ -13,15 +13,11 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _fileName;
         private List<DayOff> _daysOff;
 
+        public List<DayOff> DaysOff { get => _daysOff; }
         public DayOffRepository(string filePath)
         {
             this._fileName = filePath;
             this._daysOff = new List<DayOff>();
-        }
-
-        public List<DayOff> GetDaysOff()
-        {
-            return this._daysOff;
         }
 
         public void LoadFromFile()

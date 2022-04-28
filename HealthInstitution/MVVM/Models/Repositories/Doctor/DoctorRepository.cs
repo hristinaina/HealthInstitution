@@ -9,15 +9,11 @@ namespace HealthInstitution.Repositories
         private string _fileName;
         private List<Doctor> _doctors;
 
+        public List<Doctor> Doctors { get => _doctors; }
         public DoctorRepository(string fileName)
         {
             _fileName = fileName;
             _doctors = new List<Doctor>();
-        }
-
-        public List<Doctor> GetDoctors()
-        {
-            return _doctors;
         }
 
         public void LoadFromFile()

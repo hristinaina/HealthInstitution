@@ -227,7 +227,7 @@ namespace HealthInstitution.MVVM.Models
 
         public void FillMedicalRecord()
         {
-            foreach (Patient patient in _patientRepository.GetPatients())
+            foreach (Patient patient in _patientRepository.Patients)
             {
                 patient.Examinations = _examinationRepository.FindByPatientID(patient.ID);
                 patient.Operations = _operationRepository.FindByPatientID(patient.ID);
@@ -248,7 +248,7 @@ namespace HealthInstitution.MVVM.Models
 
         public void ConnectDoctorDaysOff()
         {
-            foreach (Doctor doctor in _doctorRepository.GetDoctors())
+            foreach (Doctor doctor in _doctorRepository.Doctors)
             {
                 List<DoctorDaysOff> doctorDaysOff = _doctorDaysOffRepository.FindByDoctorID(doctor.ID);
                 doctor.DaysOff = _dayOffRepository.DoctorDaysOffToDaysOff(doctorDaysOff);
@@ -259,7 +259,7 @@ namespace HealthInstitution.MVVM.Models
 
         public void ConnectPrescriptionRepository()
         {
-            foreach ( Prescription prescription in _prescriptionRepository.GetPrescriptions())
+            foreach ( Prescription prescription in _prescriptionRepository.Prescriptions)
             {
                 List<PrescriptionMedicine> prescriptionMedicines = _prescriptionMedicineRepository.FindByPrescriptionID(prescription.ID);
                 prescription.Medicines = _medicineRepository.PrescriptionMedicineToMedicine(prescriptionMedicines);

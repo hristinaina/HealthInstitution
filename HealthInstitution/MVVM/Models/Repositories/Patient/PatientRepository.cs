@@ -9,15 +9,11 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _fileName;
         private List<Patient> _patients;
 
+        public List<Patient> Patients { get => _patients; }
         public PatientRepository(string patientFileName)
         {
             this._fileName = patientFileName;
             this._patients = new List<Patient>();
-        }
-
-        public List<Patient> GetPatients()
-        {
-            return this._patients;
         }
 
         public void LoadFromFile()

@@ -9,16 +9,12 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _secretaryFileName;
         private List<Secretary> _secretaries;
 
+        public List<Secretary> Secretaries { get => _secretaries; }
         public SecretaryRepository(string secretaryFileName)
         {
-            this._secretaryFileName = secretaryFileName;
-            this._secretaries = new List<Secretary
+            _secretaryFileName = secretaryFileName;
+            _secretaries = new List<Secretary
                 >();
-        }
-
-        public List<Secretary> GetSecretaries()
-        {
-            return this._secretaries;
         }
 
         public void LoadFromFile()

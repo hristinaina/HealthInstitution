@@ -9,15 +9,11 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private string _adminFileName;
         private List<Admin> _administrators;
 
+        public List<Admin> Administrators { get => _administrators; }
         public AdminRepository(string adminFileName)
         {
             this._adminFileName = adminFileName;
             this._administrators = new List<Admin>();
-        }
-
-        public List<Admin> GetAdministrators()
-        {
-            return this._administrators;
         }
 
         public void LoadFromFile()
