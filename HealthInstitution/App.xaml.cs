@@ -1,10 +1,10 @@
 ﻿using System.Windows;
+using System;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.Stores;
 using System.Collections.Generic;
-using HealthInstitution.MVVM.Models.Repositories;
 
 namespace HealthInstitution
 {
@@ -26,7 +26,8 @@ namespace HealthInstitution
                                      "../../../Data/examinationsReferences.json", "../../../Data/operationsReferences.json",
                                      "../../../Data/equipment.json", "../../../Data/rooms.json", "../../../Data/equipmentInRooms.json",
                                      "../../../Data/medicine.json",
-                                     "../../../Data/daysOff.json", "../../../Data/perscriptions.json");
+                                     "../../../Data/daysOff.json", "../../../Data/perscriptions.json", "../../../Data/refferal.json");
+
             _institution = Institution.Instance();
 
             _navigation = NavigationStore.Instance();
@@ -54,8 +55,6 @@ namespace HealthInstitution
             //Institution.Instance().DoctorRepository.GetDoctors().Add(d1);
 
             //List<Examination> l = _institution.PatientRepository.FindByID(1).GetExaminations();
-
-
 
         }
 
