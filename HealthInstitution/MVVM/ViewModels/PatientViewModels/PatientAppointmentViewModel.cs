@@ -17,13 +17,15 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
     {
         private readonly Patient _patient;
         private Institution _institution;
+        private AppointmentListItemViewModel _selectedAppointment;
+
 
         private bool _enableChanges;
         private int _selection;
         public bool EnableChanges
         {
             get => _enableChanges;
-                set
+            set
             {
                 _enableChanges = value;
                 OnPropertyChanged(nameof(EnableChanges));
@@ -32,8 +34,24 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public int Selection
         {
             get => _selection;
-            set { _selection = value; EnableChanges = true; OnPropertyChanged(nameof(Selection)); }
+            set
+            {
+                _selection = value;
+                EnableChanges = true;
+                OnPropertyChanged(nameof(Selection));
+                _selectedAppointment = _appointments.ElementAt(_selection);
+                SelectedDoctor = _selectedAppointment.Doctor;
+                OnPropertyChanged(nameof(SelectedDoctor));
+                SelectedDate = _selectedAppointment.Date;
+                OnPropertyChanged(nameof(SelectedDate));
+                SelectedTime = _selectedAppointment.Time;
+                OnPropertyChanged(nameof(SelectedTime));
+            }
         }
+
+        public string SelectedDoctor { get; set; }
+        public string SelectedDate { get; set; }
+        public string SelectedTime { get; set; }
 
         public PatientNavigationViewModel Navigation { get; }
         private readonly ObservableCollection<AppointmentListItemViewModel> _appointments;

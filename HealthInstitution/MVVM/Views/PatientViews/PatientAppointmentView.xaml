@@ -140,7 +140,7 @@
                                                     HorizontalAlignment="Center">
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     IsDefault="True"
-                                                    Margin="0 30 0 0"
+                                                    Margin="0 30 20 0"
                                                     Content="CREATE"
                                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                                                 <Button.CommandParameter>
@@ -151,8 +151,8 @@
                                             </Button>
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     IsCancel="True"
-                                                    Margin="0 30 0 0"
-                                                    Content="CANCEL"
+                                                    Margin="20 30 0 0"
+                                                    Content="DISCARD"
                                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -172,10 +172,68 @@
                                     Background="#66FFFFFF"
                                     BorderBrush="#6634565A"
                                     Height="32"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
                                     Grid.Row="1"
-                                    IsEnabled="{Binding EnableChanges}" />
+                                    IsEnabled="{Binding EnableChanges}">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="350"
+                                                Width="320"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Reschedule appointment"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+
+                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                 Margin="0 20 0 0"
+                                                 Width="250"
+                                                 IsReadOnly="True"
+                                                 HorizontalAlignment="Center"
+                                                 Text="{Binding SelectedDoctor}"
+                                                 materialDesign:HintAssist.Hint="Doctor"
+                                                 materialDesign:HintAssist.HintOpacity=".26" />
+
+                                        <DatePicker Width="250"
+                                                    Margin="0 20 0 0"
+                                                    materialDesign:HintAssist.Hint="Pick Date"
+                                                    Style="{StaticResource MaterialDesignFilledDatePicker}"
+                                                    SelectedDate="{Binding SelectedDate}" />
+                                        <materialDesign:TimePicker Width="250"
+                                                                   Margin="0 20 0 0"
+                                                                   Is24Hours="True"
+                                                                   Style="{StaticResource MaterialDesignFilledTimePicker}"
+                                                                   materialDesign:HintAssist.Hint="Pick time"
+                                                                   SelectedTime="{Binding SelectedTime}" />
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 30 20 0"
+                                                    Content="RESCHEDULE"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="20 30 0 0"
+                                                    Content="DISCARD"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
 
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                     Grid.Column="1"
@@ -188,7 +246,47 @@
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Left"
                                     Grid.Row="2"
-                                    IsEnabled="{Binding EnableChanges}" />
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    IsEnabled="{Binding EnableChanges}">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="150"
+                                                Width="380"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Cancel selected appointment"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBlock Text="Are you sure ?"
+                                                   HorizontalAlignment="Center" 
+                                                   Margin="0 10 0 0"/>
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 20 30 0"
+                                                    Content="YES, CANCEL APPOINTMENT"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="20 20 0 0"
+                                                    Content="DISCARD"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
                         </Grid>
                         <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
 
