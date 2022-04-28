@@ -16,6 +16,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private int _number;
         private RoomType _type;
         private Dictionary<Equipment, int> _equipment;
+        private List<Appointment> _appointments;
 
         public int ID { get => this._id; set { this._id = value; } }
         public string Name { get => this._name; set { this._name = value; } }
@@ -24,6 +25,9 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         [JsonIgnore]
         public Dictionary<Equipment, int> Equipment { get => this._equipment; set { this._equipment = value; } }
+
+        [JsonIgnore]
+        public List<Appointment> Appointments { get => this._appointments; set { this._appointments = value; } }
 
         public Room()
         {
@@ -70,39 +74,30 @@ namespace HealthInstitution.MVVM.Models.Entities
             else throw new Exception();
         }
 
-        //private bool CheckType<T>(List<T> schedule)
-        //{
-        //    foreach (T t in schedule)
-        //    {
-        //        if (t.ID == this.ID) return false;
-        //    }
-        //    return true;
-        //}
+        private bool IsChangeble()
+        {
+            return (this._appointments == null || this._appointments.Count == 0);
+        }
 
         public void ChangeType(OperationRepository operations, ExaminationRepository examinations, RoomType newType)
         {
-            if (this.Type == RoomType.EXAM_ROOM)
+            bool availableForChange = true;
+            if (this.Type == RoomType.EXAM_ROOM || this.Type == RoomType.OPERATING_ROOM)
             {
-                //Check exams
+                availableForChange = this.IsChangeble();
             }
-            else if (this.Type == RoomType.OPERATING_ROOM)
+            if (availableForChange)
             {
-                //Check operations
+                this.Type = newType;
+            } else
+            {
+                //throw cannotChangeException
             }
-            this.Type = newType;
         }
 
-        public bool DeletionCheck(OperationRepository operations, ExaminationRepository examinations)
+        public bool IsDeletable()
         {
-            if (this.Type == RoomType.OPERATING_ROOM)
-            {
-                //Check exams
-            }
-            else if (this.Type == RoomType.EXAM_ROOM)
-            {
-                //Check operations
-            }
-            return true;
+            return this.IsChangeble();
         }
 
         public void AddEquipment(Equipment e, int quantity)
