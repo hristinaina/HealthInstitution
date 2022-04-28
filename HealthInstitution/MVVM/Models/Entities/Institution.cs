@@ -59,10 +59,6 @@ namespace HealthInstitution.MVVM.Models
             _patientRepository = new PatientRepository(_appSettings.PatientsFileName);
             _doctorRepository = new DoctorRepository(_appSettings.DoctorsFileName);
 
-            _adminRepository = new AdminRepository(_appSettings.AdminsFileName);
-            _secretaryRepository = new SecretaryRepository(_appSettings.SecretariesFileName);
-            _patientRepository = new PatientRepository(_appSettings.PatientsFileName);
-            _doctorRepository = new DoctorRepository(_appSettings.DoctorsFileName);
 
             _perscriptionRepository = new PerscriptionRepository(_appSettings.PerscriptionsFileName);
             _examinationRepository = new ExaminationRepository(_appSettings.ExaminationsFileName);

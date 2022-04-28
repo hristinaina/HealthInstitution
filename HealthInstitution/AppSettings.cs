@@ -50,7 +50,6 @@ namespace HealthInstitution
         public string AllergensFileName { get => _allergensFileName; set => _allergensFileName = value; }
         public string PatientAllergensFileName { get => _patientAllergensFileName; set => _patientAllergensFileName = value; }
         public string MedicineAllergensFileName { get => _medicineAllergensFileName; set => _medicineAllergensFileName = value; }
-
         public string EquipmentOrderFileName { get => _equipmentOrderFileName; set => _equipmentOrderFileName = value; }
         // TODO add the rest of the class attributes that will store the name of the corresponding files
 
@@ -75,7 +74,7 @@ namespace HealthInstitution
             }
         }
 
-        public void AddFilePaths(string patientFileName, string doctorFileName, string secretaryFileName, string adminFileName,
+        /*public void AddFilePaths(string patientFileName, string doctorFileName, string secretaryFileName, string adminFileName,
                                  string examinationFileName, string operationFileName, string examinationReferenceFileName, string operationReferenceFileName, string equipmentFileName,
                                  string roomFileName, string equipmentArragmentFileName, string medicineFileName, string dayOffFileName, string perscriptionFileName, string refferalFileName,
                                  string allergenFileName, string medicineAllergenFileName, string patientAllergenFileName)
@@ -106,7 +105,7 @@ namespace HealthInstitution
             _refferalFileName = refferalFileName;
 
             // TODO add the rest of the class attributes
-        }
+        }*/
 
     }
 }
