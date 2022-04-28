@@ -126,7 +126,20 @@
                                 Height="32"
                                 VerticalAlignment="Center"
                                 Grid.Row="0"
-                                HorizontalAlignment="Center" />
+                                HorizontalAlignment="Left"
+                                Margin="200 0 0 0"/>
+                        <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                Width="170"
+                                ToolTip="View Medical Record"
+                                Content="Medical Record"
+                                Background="#6680DEEA"
+                                BorderBrush="#6680DEEA"
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                Height="32"
+                                VerticalAlignment="Center"
+                                Grid.Row="0"
+                                HorizontalAlignment="Right"
+                                Margin="0 0 200 0"/>
 
                         <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
 
