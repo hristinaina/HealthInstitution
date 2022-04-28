@@ -1,74 +1,86 @@
 [
-  {
-    "Blocked": false,
-    "Record": {
-      "Height": 0.0,
-      "Weight": 0.0
+    {
+        "Blocked": false,
+        "BlockadeType": 0,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 1,
+        "FirstName": "Ime",
+        "LastName": "Prezime",
+        "Email": "email@gmail.com",
+        "Password": "sifra",
+        "Gender": 0
     },
-    "ID": 1,
-    "FirstName": "Ime",
-    "LastName": "Prezime",
-    "Email": "email@gmail.com",
-    "Password": "sifra"
-  },
-  {
-    "Blocked": false,
-    "Record": {
-      "Height": 0.0,
-      "Weight": 0.0
+    {
+        "Blocked": false,
+        "BlockadeType": 0,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 2,
+        "FirstName": "Ime",
+        "LastName": "Prezime",
+        "Email": "email@gmail.com",
+        "Password": "sifra",
+        "Gender": 1
     },
-    "ID": 2,
-    "FirstName": "Ime",
-    "LastName": "Prezime",
-    "Email": "email@gmail.com",
-    "Password": "sifra"
-  },
-  {
-    "Blocked": false,
-    "Record": {
-      "Height": 0.0,
-      "Weight": 0.0
+    {
+        "Blocked": false,
+        "BlockadeType": 0,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 3,
+        "FirstName": "Ime",
+        "LastName": "Prezime",
+        "Email": "email@gmail.com",
+        "Password": "sifra",
+        "Gender": 1
     },
-    "ID": 3,
-    "FirstName": "Ime",
-    "LastName": "Prezime",
-    "Email": "email@gmail.com",
-    "Password": "sifra"
-  },
-  {
-    "Blocked": false,
-    "Record": {
-      "Height": 0.0,
-      "Weight": 0.0
+    {
+        "Blocked": false,
+        "BlockadeType": 0,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 4,
+        "FirstName": "Ime",
+        "LastName": "Prezime",
+        "Email": "email@gmail.com",
+        "Password": "sifra",
+        "Gender": 1
     },
-    "ID": 4,
-    "FirstName": "Ime",
-    "LastName": "Prezime",
-    "Email": "email@gmail.com",
-    "Password": "sifra"
-  },
-  {
-    "Blocked": false,
-    "Record": {
-      "Height": 0.0,
-      "Weight": 0.0
+    {
+        "Blocked": false,
+        "BlockadeType": 0,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 5,
+        "FirstName": null,
+        "LastName": null,
+        "Email": "p",
+        "Password": "p",
+        "Gender": 0
     },
-    "ID": 5,
-    "FirstName": null,
-    "LastName": null,
-    "Email": "p",
-    "Password": "p"
-  },
-  {
-    "Blocked": false,
-    "Record": {
-      "Height": 0.0,
-      "Weight": 0.0
-    },
-    "ID": 0,
-    "FirstName": null,
-    "LastName": null,
-    "Email": "p",
-    "Password": "p"
-  }
+    {
+        "Blocked": false,
+        "BlockadeType": 0,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 0,
+        "FirstName": null,
+        "LastName": null,
+        "Email": "p",
+        "Password": "p",
+        "Gender": 1
+    }
 ]
