@@ -13,6 +13,7 @@
     "RefferalsFileName": "../../../Data/References/refferals.json",
     "EquipmentFileName": "../../../Data/Room/equipment.json",
     "EquipmentArrangementFileName": "../../../Data/Room/equipmentInRooms.json",
+    "EquipmentOrderFileName": "../../../Data/Room/equipmentInRooms.json",
     "RoomsFileName": "../../../Data/Room/rooms.json",
     "MedicinesFileName": "../../../Data/Medicine/medicines.json"
   }

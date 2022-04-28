@@ -32,6 +32,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         public Room()
         {
             this.Equipment = new Dictionary<Equipment, int>();
+            this.Appointments = new List<Appointment>();
         }
 
         private Room(int id, int number, string name, RoomType type) : this()

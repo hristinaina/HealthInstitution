@@ -26,6 +26,7 @@ namespace HealthInstitution
         private string _equipmentArrangementFileName;
         private string _roomsFileName;
         private string _medicinesFileName;
+        private string _equipmentOrderFileName;
 
 
         public string PatientsFileName { get => _patientsFileName; set => _patientsFileName = value; }
@@ -43,15 +44,13 @@ namespace HealthInstitution
         public string EquipmentArrangementFileName { get => _equipmentArrangementFileName; set => _equipmentFileName = value; }
         public string RoomsFileName { get => _roomsFileName; set => _roomsFileName = value; }
         public string MedicinesFileName { get => _medicinesFileName; set => _medicinesFileName = value; }
-
+        public string EquipmentOrderFileName { get => _equipmentOrderFileName; set => _equipmentOrderFileName = value; }
         // TODO add the rest of the class attributes that will store the name of the corresponding files
 
 
         private AppSettings() { }
 
         private static AppSettings s_instance = null;
-
-
 
         public static AppSettings Instance()
         {
