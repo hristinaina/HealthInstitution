@@ -34,6 +34,10 @@ namespace HealthInstitution.MVVM.Models
         private readonly MedicineRepository _medicineRepository;
         private readonly DayOffRepository _dayOffRepository;
         private readonly RefferalRepository _refferalRepository;
+
+        private readonly AllergenRepository _allergenRepository;
+        private readonly PatientAllergenRepository _patientAllergenRepository;
+        private readonly MedicineAllergenRepository _medicineAllergenRepository;
         // TODO: add other repositories
 
         private static Institution s_instance = null;
@@ -51,22 +55,27 @@ namespace HealthInstitution.MVVM.Models
         {
             _appSettings = AppSettings.Instance();
 
-            _adminRepository = new AdminRepository(_appSettings.GetAdminFileName());
-            _secretaryRepository = new SecretaryRepository(_appSettings.GetSecretaryFileName());
-            _patientRepository = new PatientRepository(_appSettings.GetPatientFileName());
-            _doctorRepository = new DoctorRepository(_appSettings.GetDoctorFileName());
+            _adminRepository = new AdminRepository(_appSettings.AdminsFileName);
+            _secretaryRepository = new SecretaryRepository(_appSettings.SecretariesFileName);
+            _patientRepository = new PatientRepository(_appSettings.PatientsFileName);
+            _doctorRepository = new DoctorRepository(_appSettings.DoctorsFileName);
 
-            _perscriptionRepository = new PerscriptionRepository(_appSettings.GetPerscriptionFileName());
-            _operationRepository = new OperationRepository(_appSettings.GetOperationFileName());
-            _examinationRepository = new ExaminationRepository(_appSettings.GetExationFileName());
-            _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.GetExaminationReferenceFileName());
-            _operationReferencesRepository = new OperationReferencesRepository(_appSettings.GetOperationReferenceFileName());
-            _roomRepository = new RoomRepository(_appSettings.GetRoomFileName());
-            _equipmentRepository = new EquipmentRepository(_appSettings.GetEquipmentFileName());
-            _equipmentArragmentRepository = new EquipmentArragmentRepository(_appSettings.GetEquipmentArragmentFileName());
+            _perscriptionRepository = new PerscriptionRepository(_appSettings.PerscriptionsFileName);
+            _examinationRepository = new ExaminationRepository(_appSettings.ExaminationsFileName);
+            _operationRepository = new OperationRepository(_appSettings.OperationsFileName);
+            _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.ExaminationReferencesFileName);
+            _operationReferencesRepository = new OperationReferencesRepository(_appSettings.OperationsReferencesFileName);
+            _roomRepository = new RoomRepository(_appSettings.RoomsFileName);
+            _equipmentRepository = new EquipmentRepository(_appSettings.EquipmentFileName);
 
-            _dayOffRepository = new DayOffRepository(_appSettings.GetDayOffFileName());
-            _refferalRepository = new RefferalRepository(_appSettings.GetRefferalFileName());
+            _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
+            _refferalRepository = new RefferalRepository(_appSettings.RefferalsFileName);
+
+            _equipmentArragmentRepository = new EquipmentArragmentRepository(_appSettings.EquipmentArrangementFileName);
+            _medicineRepository = new MedicineRepository(_appSettings.MedicinesFileName);
+            _allergenRepository = new AllergenRepository(_appSettings.AllergensFileName);
+            _patientAllergenRepository = new PatientAllergenRepository(_appSettings.PatientAllergensFileName);
+            _medicineAllergenRepository = new MedicineAllergenRepository(_appSettings.MedicineAllergensFileName);
             // TODO: add other repositories
 
             LoadAll();
@@ -86,7 +95,11 @@ namespace HealthInstitution.MVVM.Models
             _dayOffRepository.LoadFromFile();
             _roomRepository.LoadFromFile();
             _equipmentRepository.LoadFromFile();
+            _medicineRepository.LoadFromFile();
             _refferalRepository.LoadFromFile();
+            _allergenRepository.LoadFromFile();
+            _patientAllergenRepository.LoadFromFile();
+            _medicineAllergenRepository.LoadFromFile();
             // TODO: add other repositories
         }
 
@@ -104,6 +117,10 @@ namespace HealthInstitution.MVVM.Models
             _roomRepository.SaveToFile();
             _equipmentRepository.SaveToFile();
             _refferalRepository.SaveToFile();
+            _medicineRepository.SaveToFile();
+            _allergenRepository.SaveToFile();
+            _patientAllergenRepository.SaveToFile();
+            _medicineAllergenRepository.LoadFromFile();
         }
 
         private void ConnectReferences()
@@ -112,6 +129,8 @@ namespace HealthInstitution.MVVM.Models
             ConnectOperationReferences();
             ArrangeEquipment();
             ConnectRefferals();
+            FillMedicalRecord();
+            ConnectMedicineAllergens();
         }
 
         private void ConnectExaminationReferences()
@@ -131,7 +150,7 @@ namespace HealthInstitution.MVVM.Models
                 // TODO -- set room
 
                 doctor.Examinations.Add(examination);
-                patient.GetExaminations().Add(examination);
+                patient.Examinations.Add(examination);
             }
         }
 
@@ -150,7 +169,7 @@ namespace HealthInstitution.MVVM.Models
                 // TODO -- set room
 
                 doctor.Operations.Add(operation);
-                patient.GetOperations().Add(operation);
+                patient.Operations.Add(operation);
             }
         }
 
@@ -176,6 +195,27 @@ namespace HealthInstitution.MVVM.Models
             }
         }
 
+        public void FillMedicalRecord()
+        {
+            foreach (Patient patient in _patientRepository.GetPatients())
+            {
+                patient.Examinations = _examinationRepository.FindByPatientID(patient.ID);
+                patient.Operations = _operationRepository.FindByPatientID(patient.ID);
+
+                List<PatientAllergen> patientAllergens = _patientAllergenRepository.FindByPatientID(patient.ID);
+                patient.Record.Allergens = _allergenRepository.PatientAllergenToAllergen(patientAllergens);
+            }
+        }
+
+        public void ConnectMedicineAllergens()
+        {
+            foreach (Medicine medicine in _medicineRepository.Medicine)
+            {
+                List<MedicineAllergen> medicineAllergens = _medicineAllergenRepository.FindByMedicineID(medicine.ID);
+                medicine.Allergens = _allergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+            }
+        }
+
         public PatientRepository PatientRepository { get => _patientRepository; }
         public DoctorRepository DoctorRepository { get => _doctorRepository; }
         public SecretaryRepository SecretaryRepository { get => _secretaryRepository; }
@@ -190,5 +230,9 @@ namespace HealthInstitution.MVVM.Models
         public MedicineRepository MedicineRepository { get => _medicineRepository; }
         public DayOffRepository DayOffRepository { get => _dayOffRepository; }
         public RefferalRepository RefferalRepository { get => _refferalRepository; }
+        public AllergenRepository AllergenRepository { get => _allergenRepository; }
+        public PatientAllergenRepository PatientAllergenRepository { get => _patientAllergenRepository; }
+        public MedicineAllergenRepository MedicineAllergenRepository { get => _medicineAllergenRepository; }
+
     }
 }
