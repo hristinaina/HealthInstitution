@@ -45,5 +45,37 @@ namespace HealthInstitution.MVVM.Models
             }
             return examinations;
         }
+
+        public bool Update(Examination examination)
+        {
+            foreach(Examination i in _examinations)
+            {
+                if (i.ID == examination.ID)
+                {
+                    i.Date = examination.Date;
+                    i.Emergency = examination.Emergency;
+                    i.Done = examination.Done;
+                    i.Anamnesis = examination.Anamnesis;
+                    i.Perscription = examination.Perscription;
+                    i.Room = examination.Room;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool Delete(int id)
+        {
+            foreach(Examination examination in _examinations)
+            {
+                if (examination.ID == id)
+                {
+                    _examinations.Remove(examination);
+                    return true;
+                }
+            }
+            return false;
+
+        }
     }
 }

@@ -49,5 +49,34 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
             return operations;
         }
+
+        public bool Update(Operation operation)
+        {
+            foreach (Operation i in _operations)
+            {
+                if (i.ID == operation.ID)
+                {
+                    i.Date = operation.Date;
+                    i.Emergency = operation.Emergency;
+                    i.Done = operation.Done;
+                    i.Room = operation.Room;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool Delete(int id)
+        {
+            foreach(Operation i in _operations)
+            {
+                if (i.ID == id)
+                {
+                    _operations.Remove(i);
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
