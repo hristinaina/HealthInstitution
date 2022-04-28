@@ -24,7 +24,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
         {
             List<EquipmentArragment> allArragments = FileService.Deserialize<EquipmentArragment>(filename);
             //rethink about name
-            if (this._arragments == null) this._arragments = new List<EquipmentArragment>();
+            if (this._arragments is null) this._arragments = new List<EquipmentArragment>();
 
             foreach (EquipmentArragment a in allArragments)
             {

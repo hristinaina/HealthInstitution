@@ -6,32 +6,29 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution
 {
-	// class that stores the names of the files that store app data
-	// implemented using Singleton pattern
-	public sealed class AppSettings
+    // class that stores the names of the files that store app data
+    // implemented using Singleton pattern
+    public sealed class AppSettings
     {
 
         private string _patientsFileName;
         private string _doctorsFileName;
+        private string _daysOffFileName;
         private string _secretariesFileName;
         private string _adminsFileName;
         private string _examinationsFileName;
-        private string _perscriptionsFileName;
         private string _operationsFileName;
         private string _examinationsReferencesFileName;
         private string _operationsReferencesFileName;
-
-        private string _allergensFileName;
-        private string _medicineAllergensFileName;
-        private string _patientAllergensFileName;
-
-        private string _equipmentFileName;
-        private string _roomsFileName;
-        private string _equipmentArrangementFileName;
-        private string _medicinesFileName;
-        private string _daysOffFileName;
+        private string _perscriptionsFileName;
         private string _refferalFileName;
-        
+        private string _equipmentFileName;
+        private string _equipmentArrangementFileName;
+        private string _roomsFileName;
+        private string _medicinesFileName;
+        private string _equipmentOrderFileName;
+
+
         public string PatientsFileName { get => _patientsFileName; set => _patientsFileName = value; }
         public string DoctorsFileName { get => _doctorsFileName; set => _doctorsFileName = value; }
         public string DaysOffFileName { get => _daysOffFileName; set => _daysOffFileName = value; }
@@ -51,6 +48,9 @@ namespace HealthInstitution
         public string PatientAllergensFileName { get => _patientAllergensFileName; set => _patientAllergensFileName = value; }
         public string MedicineAllergensFileName { get => _medicineAllergensFileName; set => _medicineAllergensFileName = value; }
 
+        public string EquipmentOrderFileName { get => _equipmentOrderFileName; set => _equipmentOrderFileName = value; }
+        // TODO add the rest of the class attributes that will store the name of the corresponding files
+
 
         private AppSettings() { }
 
@@ -58,13 +58,12 @@ namespace HealthInstitution
 
         public static AppSettings Instance()
         {
-            if (s_instance == null)
+            if (s_instance is null)
             {
                 s_instance = new AppSettings();
             }
             return s_instance;
         }
-
         public static void SetInstance(AppSettings instance)
         {
             if (s_instance is null)

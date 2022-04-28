@@ -1,0 +1,14 @@
+[
+  {
+    "ID": 1,
+    "EquipmentID": 1,
+    "DeliverDate": "2022-04-25T18:43:37.0931955+02:00",
+    "Quantity": 20
+  },
+  {
+    "ID": 2,
+    "EquipmentID": 2,
+    "DeliverDate": "2022-04-25T18:43:37.0931955+02:00",
+    "Quantity": 10
+  }
+]

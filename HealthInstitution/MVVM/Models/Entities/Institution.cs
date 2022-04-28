@@ -44,7 +44,7 @@ namespace HealthInstitution.MVVM.Models
 
         public static Institution Instance()
         {
-            if (s_instance == null)
+            if (s_instance is null)
             {
                 s_instance = new Institution();
             }
@@ -54,6 +54,10 @@ namespace HealthInstitution.MVVM.Models
         private Institution()
         {
             _appSettings = AppSettings.Instance();
+            _adminRepository = new AdminRepository(_appSettings.AdminsFileName);
+            _secretaryRepository = new SecretaryRepository(_appSettings.SecretariesFileName);
+            _patientRepository = new PatientRepository(_appSettings.PatientsFileName);
+            _doctorRepository = new DoctorRepository(_appSettings.DoctorsFileName);
 
             _adminRepository = new AdminRepository(_appSettings.AdminsFileName);
             _secretaryRepository = new SecretaryRepository(_appSettings.SecretariesFileName);
@@ -127,7 +131,6 @@ namespace HealthInstitution.MVVM.Models
         {
             ConnectExaminationReferences();
             ConnectOperationReferences();
-            ArrangeEquipment();
             ConnectRefferals();
             FillMedicalRecord();
             ConnectMedicineAllergens();
@@ -141,14 +144,15 @@ namespace HealthInstitution.MVVM.Models
                 Doctor doctor = _doctorRepository.FindByID(reference.DoctorID);
                 Patient patient = _patientRepository.FindByID(reference.PatientID);
                 Perscription perscription = _perscriptionRepository.FindByID(reference.PerscriptionID);
-                // TODO -- room
+                Room room = _roomRepository.FindById(reference.RoomID);
 
 
                 examination.Doctor = doctor;
                 examination.Patient = patient;
                 examination.Perscription = perscription;
-                // TODO -- set room
+                examination.Room = room;
 
+                room.Appointments.Add(examination);
                 doctor.Examinations.Add(examination);
                 patient.Examinations.Add(examination);
             }
@@ -162,12 +166,13 @@ namespace HealthInstitution.MVVM.Models
                 Operation operation = _operationRepository.FindByID(reference.OperationId);
                 Doctor doctor = _doctorRepository.FindByID(reference.DoctorID);
                 Patient patient = _patientRepository.FindByID(reference.PatientID);
-                // TODO -- room
+                Room room = _roomRepository.FindById(reference.RoomID);
 
                 operation.Doctor = doctor;
                 operation.Patient = patient;
-                // TODO -- set room
+                operation.Room = room;
 
+                room.Appointments.Add(operation);
                 doctor.Operations.Add(operation);
                 patient.Operations.Add(operation);
             }
@@ -177,8 +182,8 @@ namespace HealthInstitution.MVVM.Models
         {
             foreach (EquipmentArragment a in this._equipmentArragmentRepository.Equipment)
             {
-                Room r = this.RoomRepository.GetById(a.RoomId);
-                Equipment e = this.EquipmentRepository.GetById(a.EquipmentId);
+                Room r = this.RoomRepository.FindById(a.RoomId);
+                Equipment e = this.EquipmentRepository.FindById(a.EquipmentId);
                 r.AddEquipment(e, a.Quantity);
                 e.ArrangeInRoom(r, a.Quantity);
             }

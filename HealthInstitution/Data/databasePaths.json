@@ -1,0 +1,20 @@
+﻿[
+  {
+    "PatientsFileName": "../../../Data/Patient/patients.json",
+    "DoctorsFileName": "../../../Data/Doctor/doctors.json",
+    "DaysOffFileName": "../../../Data/Doctor/daysOff.json",
+    "SecretariesFileName": "../../../Data/Secretary/secretaries.json",
+    "AdminsFileName": "../../../Data/Admin/admins.json",
+    "ExaminationsFileName": "../../../Data/Appointment/examinations.json",
+    "OperationsFileName": "../../../Data/Appointment/operations.json",
+    "ExaminationReferencesFileName": "../../../Data/References/examinationsReferences.json",
+    "OperationsReferencesFileName": "../../../Data/References/operationsReferences.json",
+    "PerscriptionsFileName": "../../../Data/Appointment/perscriptions.json",
+    "RefferalsFileName": "../../../Data/References/refferals.json",
+    "EquipmentFileName": "../../../Data/Room/equipment.json",
+    "EquipmentArrangementFileName": "../../../Data/Room/equipmentInRooms.json",
+    "EquipmentOrderFileName": "../../../Data/Room/equipmentInRooms.json",
+    "RoomsFileName": "../../../Data/Room/rooms.json",
+    "MedicinesFileName": "../../../Data/Medicine/medicines.json"
+  }
+]

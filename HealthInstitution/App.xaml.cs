@@ -5,6 +5,7 @@ using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.Stores;
 using System.Collections.Generic;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution
 {
@@ -19,15 +20,22 @@ namespace HealthInstitution
         public App()
         {
             // * appSettings kao parametre prima putanje do fajlova gdje su smjesteni podaci za rad Zdravstvene Ustanove 
-            AppSettings appSettings = AppSettings.Instance();
-            appSettings.AddFilePaths("../../../Data/patients.json", "../../../Data/doctors.json",
-                                     "../../../Data/secretaries.json", "../../../Data/admins.json",
-                                     "../../../Data/examinations.json", "../../../Data/operations.json",
-                                     "../../../Data/examinationsReferences.json", "../../../Data/operationsReferences.json",
-                                     "../../../Data/equipment.json", "../../../Data/rooms.json", "../../../Data/equipmentInRooms.json",
-                                     "../../../Data/medicine.json",
-                                     "../../../Data/daysOff.json", "../../../Data/perscriptions.json", "../../../Data/refferal.json",
-                                     "../../../Data/ingredients.json", "../../../Data/medicineIngredients.json", "../../../Data/patientAllergen.json");
+            AppSettings.SetInstance(FileService.Deserialize<AppSettings>("../../../Data/databasePaths.json")[0]);
+            //appSettings.AddFilePaths("../../../Data/Patient/patients.json",
+            //                         "../../../Data/Doctor/doctors.json",
+            //                         "../../../Data/Doctor/daysOff.json",
+            //                         "../../../Data/Secretary/secretaries.json", 
+            //                         "../../../Data/Admin/admins.json",
+            //                         "../../../Data/Appointment/examinations.json", 
+            //                         "../../../Data/Appointment/operations.json",
+            //                         "../../../Data/Appointment/perscriptions.json",
+            //                         "../../../Data/References/examinationsReferences.json", 
+            //                         "../../../Data/References/operationsReferences.json",
+            //                         "../../../Data/References/refferal.json",
+            //                         "../../../Data/Room/equipment.json", 
+            //                         "../../../Data/Room/rooms.json", 
+            //                         "../../../Data/Room/equipmentInRooms.json",
+            //                         "../../../Data/Medicine/medicine.json");
 
             _institution = Institution.Instance();
 

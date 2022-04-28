@@ -32,7 +32,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
             FileService.Serialize<Entities.Room>(this._fileName, this._rooms);
         }
 
-        public Entities.Room GetById(int id)
+        public Entities.Room FindById(int id)
         {
             foreach (Entities.Room r in this._rooms)
             {

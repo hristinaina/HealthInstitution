@@ -34,7 +34,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
 
             Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
-            if (interruptingAppointment == null) return true;
+            if (interruptingAppointment is null) return true;
             return false;
         }
 
@@ -81,7 +81,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             while (DateTime.Compare(dateTime.AddMinutes(durationInMin), borderTime) <= 0) 
             {
                 Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
-                if (interruptingAppointment == null)
+                if (interruptingAppointment is null)
                 {
                     availableTime.Add(dateTime);
                     dateTime = dateTime.AddMinutes(durationInMin);
