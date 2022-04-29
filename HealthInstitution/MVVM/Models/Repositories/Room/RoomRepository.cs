@@ -50,6 +50,24 @@ namespace HealthInstitution.MVVM.Models.Repositories
             return true;
         }
 
+        private bool CheckID(int id)
+        {
+            foreach (Entities.Room r in _rooms)
+            {
+                if (r.ID == id) return false;
+            }
+            return true;
+        }
+
+        public int GetID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
         public List<Entities.Room> FilterByRoomType(RoomType type)
         {
             List<Entities.Room> filteredRooms = new();
@@ -58,6 +76,36 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 if (r.Type == type) filteredRooms.Add(r);
             }
             return filteredRooms;
+        }
+
+        public void FindAvailableRoom(Appointment a, DateTime wantedTime)
+        {
+            RoomType type = RoomType.EXAM_ROOM;
+            bool changing = false;
+            if (a is Operation) type = RoomType.OPERATING_ROOM; 
+
+            if (a.Room != null)
+            {
+                changing = true;
+                if (a.Room.isAvailable(wantedTime, a))
+                {
+                    a.Date = wantedTime;
+                    return;
+                }
+                else a.Room.Appointments.Remove(a);
+            }
+
+            List<Entities.Room> rooms = FilterByRoomType(type);
+            foreach (Entities.Room r in rooms)
+            {
+                if(r.isAvailable(wantedTime, a))
+                {
+                    r.Appointments.Add(a);
+                    a.Room = r;
+                    if (changing) a.Date = wantedTime;
+                    return;
+                }
+            }
         }
     }
 }

@@ -54,26 +54,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             return new Room(id, number, name, type);
         }
 
-        private static bool CheckID(List<Room> rooms, int id)
-        {
-            foreach (Room r in rooms)
-            {
-                if (r.ID == id) return false;
-            }
-            return true;
-        }
-
-        public static int GetID(List<Room> rooms)
-        {
-            int i = 1;
-            while (true)
-            {
-                if (CheckID(rooms, i)) return i;
-                i++;
-            }
-        }
-
-
         public void ChangeNumber(RoomRepository repository, int newNumber)
         {
             if (repository.CheckNumber(newNumber)) Number = newNumber;
@@ -123,6 +103,23 @@ namespace HealthInstitution.MVVM.Models.Entities
                 //add NotInRoomException
             }
             _equipment[e] -= quantity;
+        }
+
+        public bool isAvailable(DateTime appointmentTime, Appointment appointment)
+        {
+            bool free = true;
+            foreach (Appointment a in _appointments)
+            {
+                if (a.Date.Date == appointmentTime.Date && a.ID != appointment.ID)
+                {
+                    if (!(a.Date.TimeOfDay + TimeSpan.FromMinutes(15) <= appointmentTime.TimeOfDay || a.Date.TimeOfDay - TimeSpan.FromMinutes(15) >= appointmentTime.TimeOfDay))
+                    {
+                        free = false;
+                        break;
+                    }
+                }
+            }
+            return free;
         }
 
         public override string ToString()
