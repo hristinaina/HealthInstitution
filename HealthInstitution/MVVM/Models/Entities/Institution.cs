@@ -190,12 +190,12 @@ namespace HealthInstitution.MVVM.Models
 
         public Examination CreateExamination(Doctor doctor, Patient patient, DateTime datetime)
         {
-            if (!doctor.IsAvailable(datetime)) {
-                return null;
-            }
-            if (!patient.IsAvailable(datetime)) {
-                return null;
-            }
+            //if (!doctor.IsAvailable(datetime)) {
+            //    return null;
+            //}
+            //if (!patient.IsAvailable(datetime)) {
+            //    return null;
+            //}
             int appointmentId = _examinationRepository.NewId();
             int prescriptionId = _prescriptionRepository.NewId();
             Prescription prescription = new Prescription(prescriptionId);
@@ -203,6 +203,7 @@ namespace HealthInstitution.MVVM.Models
             patient.Examinations.Add(examination);
             doctor.Examinations.Add(examination);
             // find a room
+            _roomRepository.FindAvailableRoom(examination, datetime);
             // add examination to room
             // add room to examination
             _examinationRepository.Add(examination);
@@ -215,13 +216,14 @@ namespace HealthInstitution.MVVM.Models
 
         public void RescheduleExamination(Examination examination, DateTime datetime)
         {
-            if (examination.Doctor.IsAvailable(datetime)) {
-                return;
-            }
-            if (examination.Patient.IsAvailable(datetime)) {
-                return;
-            }
+            //if (examination.Doctor.IsAvailable(datetime)) {
+            //    return;
+            //}
+            //if (examination.Patient.IsAvailable(datetime)) {
+            //    return;
+            //}
             examination.Date = datetime;
+            _roomRepository.FindAvailableRoom(examination, datetime);
             // check room
             // if add examination to room
             // if add room to examination
@@ -246,6 +248,7 @@ namespace HealthInstitution.MVVM.Models
             Room room = examination.Room;
             patient.Examinations.Remove(examination);
             doctor.Examinations.Remove(examination);
+            room.Appointments.Remove(examination);
             // remove from room
             _examinationRepository.Remove(examination);
             _examinationReferencesRepository.Remove(examination);
