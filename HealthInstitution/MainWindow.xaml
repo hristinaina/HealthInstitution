@@ -51,8 +51,6 @@
             <DataTemplate DataType="{x:Type viewmodelsSecretary:BlockedPatientListViewModel}">
                 <viewsSecretary:BlockedPatientListView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodeladmin:AdminMainPageViewModel}">
-                <viewadmin:AdminMainPageView/>
             <DataTemplate DataType="{x:Type viewmodelsSecretary:AppointmentRequestsViewModel}">
                 <viewsSecretary:AppointmentRequestsView />
             </DataTemplate>
@@ -60,8 +58,8 @@
                 <viewsSecretary:PatientListView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodelmains:AdminMainPageViewModel}">
-                <viewmains:AdminMainPageView />
+            <DataTemplate DataType="{x:Type viewmodeladmin:AdminMainPageViewModel}">
+                <viewadmin:AdminMainPageView />
             </DataTemplate>
         </Grid.Resources>
         <ContentControl Content="{Binding CurrentViewModel}" />
