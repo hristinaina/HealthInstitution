@@ -77,10 +77,10 @@
                                   materialDesign:HintAssist.Hint="Pick a room"
                                   materialDesign:HintAssist.HintOpacity=".26"
                                   IsEditable="True">
-                        <ComboBoxItem Content="Room 1" />
-                        <ComboBoxItem Content="Room 2" />
-                        <ComboBoxItem Content="Room 3" />
-                        <ComboBoxItem Content="Room 4" />
+                            <ComboBoxItem Content="Room 1" />
+                            <ComboBoxItem Content="Room 2" />
+                            <ComboBoxItem Content="Room 3" />
+                            <ComboBoxItem Content="Room 4" />
                         </ComboBox>
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center">
@@ -193,6 +193,30 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
+                        <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                Width="170"
+                                ToolTip="Update operation"
+                                Content="Update operation"
+                                Background="#6680DEEA"
+                                BorderBrush="#6680DEEA"
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                Height="32"
+                                VerticalAlignment="Top"
+                                Grid.Row="1"
+                                HorizontalAlignment="Left"
+                                Margin="200,420,0,0" Grid.RowSpan="2"/>
+                        <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                Width="170"
+                                ToolTip="Delete operation"
+                                Content="Delete operation"
+                                Background="#6680DEEA"
+                                BorderBrush="#6680DEEA"
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                Height="32"
+                                VerticalAlignment="Top"
+                                Grid.Row="1"
+                                HorizontalAlignment="Right"
+                                Margin="0,420,200,0"/>
                     </Grid>
                 </materialDesign:Card>
 
