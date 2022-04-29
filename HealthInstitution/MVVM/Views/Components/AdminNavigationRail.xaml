@@ -24,7 +24,7 @@
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Padding="-4"
-                            Command="{Binding Navigation.Record}"
+                            Command="{Binding Navigation.Room}"
                             Height="70"
                             BorderThickness="0,0,0,0" />
                     <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
@@ -40,7 +40,7 @@
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Padding="-4"
-                            Command="{Binding Navigation.Appointments}"
+                            Command="{Binding Navigation.Equipment}"
                             Height="70"
                             BorderThickness="0,0,0,0" />
                     <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
@@ -56,7 +56,6 @@
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Padding="-4"
-                            Command="{Binding Navigation.Search}"
                             Height="70"
                             BorderThickness="0,0,0,0" />
                     <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
@@ -72,7 +71,6 @@
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Padding="-4"
-                            Command="{Binding Navigation.Survey}"
                             Height="70"
                             BorderThickness="0,0,0,0" />
                     <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->

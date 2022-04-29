@@ -4,9 +4,344 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.AdminViews"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             Height="600"
+             Width="1200"
+             Background="White"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <components:AdminNavigationRail SelectedIndex="1"></components:AdminNavigationRail>
+        <materialDesign:Card Grid.Column="1">
+            <materialDesign:DialogHost DialogTheme="Inherit"
+                                           Grid.Column="0"
+                                           Grid.Row="0">
+                <materialDesign:Card>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="5*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0"
+                                          materialDesign:HintAssist.Hint="Enter search"
+                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                          VerticalAlignment="Top" Margin="10,10,10,0" />
+
+                                <Button  Grid.Column="1" 
+                                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                            Width="104"
+                                            ToolTip="..."
+                                            Content="Search"
+                                            Background="#CC80DEEA"
+                                            BorderBrush="#6680DEEA"
+                                            Height="32"
+                                            VerticalAlignment="Top"
+                                            HorizontalAlignment="Left"
+                                            Margin="128,10,0,0"/>
+                            </Grid>
+                        </Grid>
+                        <ListView
+                                      VerticalAlignment="Center"
+                                      Width="514"
+                                      SelectionMode="Single" 
+                                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                      ScrollViewer.CanContentScroll="True"
+                                      HorizontalAlignment="Center">
+                            <ListViewItem/>
+                            <ListViewItem/>
+                            <ListViewItem/>
+                            <ListViewItem/>
+                            <ListViewItem/>
+                            <ListViewItem/>
+                            <ListViewItem/>
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Width="100"
+                                                        Header="ID">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                               Text="Tekst 1"
+                                                               Width="80" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150"
+                                                        Header="Name">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Center"
+                                                               Text="Tekst 2"
+                                                               Width="70" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150"
+                                                        Header="Number">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Center"
+                                                               Text="Tekst 3"
+                                                               Width="70" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="130"
+                                                        Header="Type">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                               Text="Tekst 4"
+                                                               Width="120" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="4*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                        Width="170"
+                                        ToolTip="..."
+                                        Content="Filter"
+                                        Background="#CC80DEEA"
+                                        BorderBrush="#6680DEEA"
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        Height="32"
+                                        VerticalAlignment="Bottom"
+                                        Grid.Row="0"
+                                        HorizontalAlignment="Left">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="350"
+                                                    Width="320"
+                                                    Margin="40 20 40 20">
+                                        <TextBlock Text="Create new room"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="10"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <ComboBox Margin="0 20 0 0"
+                                                      Width="250"
+                                                      HorizontalAlignment="Center"
+                                                      Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                      materialDesign:HintAssist.Hint="Choose room type"
+                                                      materialDesign:HintAssist.HintOpacity=".26"
+                                                      IsEditable="True">
+                                            <ComboBoxItem Content="OR" />
+                                            <ComboBoxItem Content="ER" />
+                                            <ComboBoxItem Content="HODNIK" />
+                                            <ComboBoxItem Content="ODMOR" />
+                                        </ComboBox>
+                                        <TextBox  Margin="0 20 0 0"
+                                                      Width="250"
+                                                      Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                      VerticalAlignment="Top"
+                                                      AcceptsReturn="True"
+                                                      TextWrapping="Wrap"
+                                                      materialDesign:HintAssist.Hint="Enter room name"
+                                                      IsEnabled="True" />
+                                        <TextBox  Margin="0 20 0 0"
+                                                      Width="250"
+                                                      Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                      VerticalAlignment="Top"
+                                                      AcceptsReturn="True"
+                                                      TextWrapping="Wrap"
+                                                      materialDesign:HintAssist.Hint="Enter room number"
+                                                      IsEnabled="True" />
+                                        <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsDefault="True"
+                                                        Margin="0 30 0 0"
+                                                        Content="CREATE"
+                                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsCancel="True"
+                                                        Margin="0 30 0 0"
+                                                        Content="CANCEL"
+                                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                        Width="170"
+                                        ToolTip="..."
+                                        Content="Details"
+                                        Background="#66FFFFFF"
+                                        BorderBrush="#6634565A"
+                                        Height="32"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        Grid.Row="1"
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        IsEnabled="{Binding EnableChanges}">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="400"
+                                                    Width="320"
+                                                    Margin="40 20 40 20">
+                                        <TextBlock Text="Change room with ID:"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="10"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBlock Text="5"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="10"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <ComboBox Margin="0 20 0 0"
+                                                      Width="250"
+                                                      HorizontalAlignment="Center"
+                                                      Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                      materialDesign:HintAssist.Hint="Choose room type"
+                                                      materialDesign:HintAssist.HintOpacity=".26"
+                                                      IsEditable="True">
+                                            <ComboBoxItem Content="OR" />
+                                            <ComboBoxItem Content="ER" />
+                                            <ComboBoxItem Content="HODNIK" />
+                                            <ComboBoxItem Content="ODMOR" />
+                                        </ComboBox>
+                                        <TextBox  Margin="0 20 0 0"
+                                                      Width="250"
+                                                      Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                      VerticalAlignment="Top"
+                                                      AcceptsReturn="True"
+                                                      TextWrapping="Wrap"
+                                                      materialDesign:HintAssist.Hint="Enter room name"
+                                                      IsEnabled="True" />
+                                        <TextBox  Margin="0 20 0 0"
+                                                      Width="250"
+                                                      Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                      VerticalAlignment="Top"
+                                                      AcceptsReturn="True"
+                                                      TextWrapping="Wrap"
+                                                      materialDesign:HintAssist.Hint="Enter room number"
+                                                      IsEnabled="True" />
+                                        <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsDefault="True"
+                                                        Margin="0 30 0 0"
+                                                        Content="CREATE"
+                                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsCancel="True"
+                                                        Margin="0 30 0 0"
+                                                        Content="CANCEL"
+                                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                        Grid.Column="1"
+                                        Width="170"
+                                        ToolTip="..."
+                                        Content="Rearrange"
+                                        Background="#66FFFFFF"
+                                        BorderBrush="#6634565A"
+                                        Height="32"
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Left"
+                                        Grid.Row="2">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="230"
+                                                    Width="400"
+                                                    Margin="40 20 40 20">
+                                        <TextBlock Text="Confirm deletion!"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="10"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBlock Text="You are trying to delete room with number:"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="14"
+                                                       Margin="10"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBlock Text="405"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="10"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsDefault="True"
+                                                        Margin="0 30 0 0"
+                                                        Content="CONFIRM"
+                                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsCancel="True"
+                                                        Margin="0 30 0 0"
+                                                        Content="CANCEL"
+                                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+                        </Grid>
+                        <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+
+                    </Grid>
+                </materialDesign:Card>
+            </materialDesign:DialogHost>
+        </materialDesign:Card>
     </Grid>
 </UserControl>
