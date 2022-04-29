@@ -10,11 +10,12 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
     public class AppointmentListItemViewModel : BaseViewModel
     {
         Appointment _appointment;
+        public Appointment Appointment { get => _appointment; }
 
-        public string Date => _appointment.Date.ToShortDateString();
-        public string Time => _appointment.Date.ToShortTimeString();
-        public string Doctor => _appointment.Doctor.FullName;
-        public string Room => _appointment.Room.Name;
+        public string Date => _appointment.Date.ToString("dd/MM/yyyy");
+        public string Time => _appointment.Date.ToString("HH:MM");
+        public Doctor Doctor => _appointment.Doctor;
+        public Room Room => _appointment.Room;
 
         public AppointmentListItemViewModel(Appointment appointment)
         {

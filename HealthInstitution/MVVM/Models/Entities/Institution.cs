@@ -24,7 +24,10 @@ namespace HealthInstitution.MVVM.Models
         private readonly PrescriptionRepository _prescriptionRepository;
         private readonly ExaminationRepository _examinationRepository;
         private readonly OperationRepository _operationRepository;
+
+
         private readonly ExaminationReferencesRepository _examinationReferencesRepository;
+
         private readonly OperationReferencesRepository _operationReferencesRepository;
 
         private readonly EquipmentRepository _equipmentRepository;
@@ -181,5 +184,36 @@ namespace HealthInstitution.MVVM.Models
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
         public EquipmentArragmentRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
 
+
+        public Examination CreateExamination(Doctor doctor, Patient patient, DateTime datetime)
+        {
+            int appointmentId = _examinationRepository.NewId();
+            int prescriptionId = _prescriptionRepository.NewId();
+            Prescription prescription = new Prescription(prescriptionId);
+            Examination examination = new Examination(appointmentId, doctor, patient, datetime, prescription);
+            patient.Examinations.Add(examination);
+            doctor.Examinations.Add(examination);
+            // find a room
+            // add examination to room
+            // add room to examination
+            _examinationRepository.Add(examination);
+            _examinationReferencesRepository.Add(examination);
+            _examinationChangeRepository.Add(examination, true);
+
+            return examination;
+        }
+
+
+        public void RescheduleExamination(Examination examination, DateTime datetime)
+        {
+            examination.Date = datetime;
+            // check room
+            // if add examination to room
+            // if add room to examination
+            //_examinationReferencesRepository.Add(examination);
+            bool resolved = examination.IsEditable();
+            _examinationChangeRepository.Add(examination, resolved);
+
+        }
     }
 }

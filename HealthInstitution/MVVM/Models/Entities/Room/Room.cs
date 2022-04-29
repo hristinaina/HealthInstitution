@@ -127,7 +127,7 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public override string ToString()
         {
-            return "Id: " + _id + "; Number: " + _number + "; Name: " + _name + "; Tip: " + _type;
+            return _name;
         }
     }
 }

@@ -15,14 +15,14 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     public class PatientAppointmentViewModel : BaseViewModel
     {
+        public PatientNavigationViewModel Navigation { get; }
+
         private readonly Patient _patient;
+        public Patient Patient { get => _patient; }
         private Institution _institution;
 
-        public PatientNavigationViewModel Navigation { get; }
         private readonly ObservableCollection<AppointmentListItemViewModel> _appointments;
         public IEnumerable<AppointmentListItemViewModel> Appointments => _appointments;
-        private ObservableCollection<Doctor> _doctors;
-        public ObservableCollection<Doctor> Doctors => _doctors;
 
         private bool _dialogOpen;
         public bool DialogOpen
@@ -35,6 +35,13 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             }
         }
 
+
+        private ObservableCollection<Doctor> _doctors;
+        public ObservableCollection<Doctor> Doctors => _doctors;
+        public Doctor NewDoctor { get; set; }
+        public string NewDate { get; set; }
+        public string NewTime { get; set; }
+        public Room NewRoom { get; set; }
 
         private bool _enableChanges;
         public bool EnableChanges
@@ -52,26 +59,29 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             get => _selection;
             set
             {
+                if (value < 0) { return; };
                 _selection = value;
                 EnableChanges = true;
                 OnPropertyChanged(nameof(Selection));
                 _selectedAppointment = _appointments.ElementAt(_selection);
                 SelectedDoctor = _selectedAppointment.Doctor;
                 OnPropertyChanged(nameof(SelectedDoctor));
-                SelectedDate = _selectedAppointment.Date;
+                SelectedDate = _selectedAppointment.Appointment.Date.ToString("MM/dd/yyyy HH:mm");
                 OnPropertyChanged(nameof(SelectedDate));
-                SelectedTime = _selectedAppointment.Time;
+                SelectedTime = _selectedAppointment.Appointment.Date.ToString("MM/dd/yyyy HH:mm");
                 OnPropertyChanged(nameof(SelectedTime));
             }
         }
 
         private AppointmentListItemViewModel _selectedAppointment;
+        public AppointmentListItemViewModel SelectedAppointment { get => _selectedAppointment; }
 
-        public string SelectedDoctor { get; set; }
+        public Doctor SelectedDoctor { get; set; }
         public string SelectedDate { get; set; }
         public string SelectedTime { get; set; }
 
         public ICommand CreateAppointment { get; set; }
+        public ICommand RescheduleAppointment { get; set; }
         
         public PatientAppointmentViewModel()
         {
@@ -86,8 +96,11 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             
             FillAppointmentsList();
             FillDoctorsList();
-            
+
+            NewDate = DateTime.Now.ToString("MM/dd/yyyy HH:MM");
+            NewTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
             CreateAppointment = new CreateAppointmentCommand(this);
+            RescheduleAppointment = new RescheduleAppointmentCommand(this);
             // ..............
         }
 
@@ -98,6 +111,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             {
                 _appointments.Add(new AppointmentListItemViewModel(appointment));
             }
+            OnPropertyChanged(nameof(Appointments));
         }
 
         private void FillDoctorsList()
@@ -107,6 +121,5 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
                 _doctors.Add(doctor);
             }
         }
-
     }
 }

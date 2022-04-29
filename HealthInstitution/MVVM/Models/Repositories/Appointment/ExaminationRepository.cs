@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Services;
 
@@ -56,7 +58,7 @@ namespace HealthInstitution.MVVM.Models
                     i.Emergency = examination.Emergency;
                     i.Done = examination.Done;
                     i.Anamnesis = examination.Anamnesis;
-                    i.Perscription = examination.Perscription;
+                    i.Prescription = examination.Prescription;
                     i.Room = examination.Room;
                     return true;
                 }
@@ -76,6 +78,20 @@ namespace HealthInstitution.MVVM.Models
             }
             return false;
 
+        }
+
+        public int NewId()
+        {
+            if (_examinations.Count == 0)
+            {
+                return 1;
+            }
+            return _examinations.Max(x => x.ID) + 1;
+        }
+
+        public void Add(Examination examination)
+        {
+            _examinations.Add(examination);
         }
     }
 }

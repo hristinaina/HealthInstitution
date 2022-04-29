@@ -1,4 +1,6 @@
-﻿using HealthInstitution.MVVM.Models.Entities.References;
+﻿using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Entities.References;
+using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.Models.Services;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,11 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
                 if (reference.AppointmentID == id) return reference;
             }
             return null;
+        }
+
+        public void Add(Examination examination, bool resolved)
+        {
+            _references.Add(new ExaminationChange(examination.Patient.ID, examination.ID, AppointmentStatus.CREATED, DateTime.Now, resolved));
         }
     }
 }

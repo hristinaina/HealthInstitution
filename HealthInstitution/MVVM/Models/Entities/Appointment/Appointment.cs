@@ -47,5 +47,11 @@ namespace HealthInstitution.MVVM.Models.Entities
             _dateTime = dateTime;
             _room = room;
         }
+
+
+        public bool IsEditable()
+        {
+            return (Date - DateTime.Now).TotalDays > 2;
+        }
     }
 }
