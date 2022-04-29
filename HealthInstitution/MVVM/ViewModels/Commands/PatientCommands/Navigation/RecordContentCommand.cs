@@ -1,6 +1,5 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
-using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.Stores;
 using System;
@@ -11,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
-    public class PatientAppointmentsCommand : BaseCommand
+    public class RecordContentCommand : BaseCommand
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
 
-        public PatientAppointmentsCommand()
+        public RecordContentCommand()
         {
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();
@@ -24,7 +23,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
+            _navigationStore.CurrentViewModel = new PatientRecordViewModel();
         }
+
     }
 }

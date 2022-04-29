@@ -22,6 +22,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
         private bool _enableChanges;
         private int _selection;
+        private bool _dialogOpen;
         public bool EnableChanges
         {
             get => _enableChanges;
@@ -53,6 +54,16 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public string SelectedDate { get; set; }
         public string SelectedTime { get; set; }
 
+        public ICommand CreateAppointment { get; set; }
+        public bool DialogOpen
+        {
+            get => _dialogOpen;
+            set {
+                _dialogOpen = value;  
+                OnPropertyChanged(nameof(DialogOpen));
+                }
+        }
+
         public PatientNavigationViewModel Navigation { get; }
         private readonly ObservableCollection<AppointmentListItemViewModel> _appointments;
         public IEnumerable<AppointmentListItemViewModel> Appointments => _appointments;
@@ -67,27 +78,17 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             Navigation = new PatientNavigationViewModel();
             EnableChanges = false;
             FillAppointmentsList();
+            CreateAppointment = new CreateAppointmentCommand(this);
             // ..............
         }
 
         public void FillAppointmentsList()
         {
             _appointments.Clear();
-            // hardcoded
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
-            _appointments.Add(new AppointmentListItemViewModel(new Examination(new Doctor("Marko", "Kljajic"), DateTime.Now, new Room("r1"))));
+            foreach (Appointment appointment in _patient.GetFutureExaminations())
+            {
+                _appointments.Add(new AppointmentListItemViewModel(appointment));
+            }
         }
     }
 }

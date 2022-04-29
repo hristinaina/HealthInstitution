@@ -26,6 +26,8 @@
 
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
+                                       IsOpen="{Binding DialogOpen}"
+                                       OverlayBackground="{DynamicResource MaterialDesignBodyLight}"
                                        Grid.Row="0">
                 <materialDesign:Card>
                     <Grid>
@@ -142,7 +144,7 @@
                                                     IsDefault="True"
                                                     Margin="0 30 20 0"
                                                     Content="CREATE"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    Command="{Binding CreateAppointment}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True

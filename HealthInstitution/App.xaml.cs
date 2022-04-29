@@ -26,11 +26,6 @@ namespace HealthInstitution
             _navigation = NavigationStore.Instance();
 
 
-            Patient p1 = new Patient();
-            p1.Email = "p";
-            p1.Password = "p";
-            Institution.Instance().PatientRepository.Patients.Add(p1);
-
             Secretary s1 = new Secretary();
             s1.Email = "s";
             s1.Password = "s";
@@ -47,7 +42,6 @@ namespace HealthInstitution
 
             Institution.Instance().DoctorRepository.Doctors.Add(d1);
 
-            //List<Examination> l = _institution.PatientRepository.FindByID(1).GetExaminations();
 
         }
 

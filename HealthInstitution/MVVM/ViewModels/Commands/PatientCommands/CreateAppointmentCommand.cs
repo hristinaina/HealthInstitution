@@ -10,20 +10,19 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
-    class PatientSurveyCommand : BaseCommand
+    public class CreateAppointmentCommand : BaseCommand
     {
-        private readonly Institution _institution;
-        private readonly NavigationStore _navigationStore;
+        private PatientAppointmentViewModel _viewModel;
 
-        public PatientSurveyCommand()
+        public CreateAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel)
         {
-            _institution = Institution.Instance();
-            _navigationStore = NavigationStore.Instance();
+            this._viewModel = patientAppointmentViewModel;
         }
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new PatientSurveyViewModel();
+            Institution.Instance().CreateAppointment();
+            _viewModel.DialogOpen = false;
         }
     }
 }

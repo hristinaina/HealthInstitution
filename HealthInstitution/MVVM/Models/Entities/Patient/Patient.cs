@@ -30,49 +30,45 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             get
             {
-                if (_examinations == null) _examinations = new List<Examination>();
+                if (_examinations == null)
+                {
+                    _examinations = new List<Examination>();
+                }
+
                 return _examinations;
             }
-            set
-            {
-                _examinations = value;
-            }
+            set => _examinations = value;
         }
         [JsonIgnore]
         public List<Operation> Operations
         {
             get
             {
-                if (_operations == null) _operations = new List<Operation>();
+                if (_operations == null)
+                {
+                    _operations = new List<Operation>();
+                }
+
                 return _operations;
             }
-            set
-            {
-                _operations = value;
-            }
+            set => _operations = value;
         }
         [JsonIgnore]
         public List<ExaminationChange> ExaminationChanges
         {
             get
             {
-                if (_examinationChanges == null) _examinationChanges = new List<ExaminationChange>();
+                if (_examinationChanges == null)
+                {
+                    _examinationChanges = new List<ExaminationChange>();
+                }
+
                 return _examinationChanges;
             }
-            set
-            {
-                _examinationChanges = value;
-            }
+            set => _examinationChanges = value;
         }
         public Patient()
         {
-        }
-
-        // constructor for when blocking a patient account
-        public void BlockPatient(bool blocked)
-        {
-            _blocked = blocked;
-            // TODO: ?delete all future appointments with this patient 
         }
 
         // constructor for when secretary is creating new patient accounts
@@ -84,6 +80,73 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blockadeType = 0;
             _record = new MedicalRecord(height, weight, allergens);
             // no need to fill _operations and _examinations lists because it is a new user so there would be none
+        }
+
+
+        // constructor for when blocking a patient account
+        public void BlockPatient(bool blocked)
+        {
+            _blocked = blocked;
+            // TODO: ?delete all future appointments with this patient 
+        }
+
+        public List<Appointment> GetFutureExaminations()
+        {
+            List<Appointment> futureExaminations = new List<Appointment>();
+            foreach (Examination examination in _examinations)
+            {
+                if (DateTime.Compare(examination.Date, DateTime.Now) > 0)
+                {
+                    futureExaminations.Add(examination);
+                }
+            }
+            return futureExaminations;
+        }
+
+        public bool isTrolling()
+        {
+
+            if (GetEditingHistory() > 5)
+            {
+                return true;
+            }
+            if (GetCreatingHistory() > 8)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private int GetCreatingHistory()
+        {
+            int totalCreations = 0;
+            foreach (ExaminationChange change in _examinationChanges)
+            {
+                if (change.ChangeStatus == AppointmentStatus.CREATED)
+                {
+                    totalCreations += 1;
+                }
+            }
+
+            return totalCreations;
+        }
+
+        private int GetEditingHistory()
+        {
+            int totalChanges = 0;
+            foreach (ExaminationChange change in _examinationChanges)
+            {
+                if (change.ChangeStatus == AppointmentStatus.EDITED)
+                {
+                    totalChanges += 1;
+                }
+                if (change.ChangeStatus == AppointmentStatus.DELETED)
+                {
+                    totalChanges += 1;
+                }
+            }
+
+            return totalChanges;
         }
     }
 }

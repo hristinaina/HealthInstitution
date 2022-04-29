@@ -13,8 +13,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
         public string Date => _appointment.Date.ToShortDateString();
         public string Time => _appointment.Date.ToShortTimeString();
-        public string Doctor => _appointment.Doctor.GetFullName();
-        public string Room => _appointment.Doctor.GetName();
+        public string Doctor => _appointment.Doctor.FullName;
+        public string Room => _appointment.Room.Name;
 
         public AppointmentListItemViewModel(Appointment appointment)
         {

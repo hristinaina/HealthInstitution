@@ -11,7 +11,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private DateTime _dateTime;
         private bool _isEmergency;
         private bool _isDone;
-        private DateTime time;
+        private DateTime _time;
 
         [JsonProperty("ID")]
         public int ID { get => _id; set { _id = value; } }
