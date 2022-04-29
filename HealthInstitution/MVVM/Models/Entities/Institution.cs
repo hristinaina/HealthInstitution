@@ -53,6 +53,7 @@ namespace HealthInstitution.MVVM.Models
             if (s_instance is null)
             {
                 s_instance = new Institution();
+                ConnectReferences();
             }
             return s_instance;
         }
@@ -90,7 +91,6 @@ namespace HealthInstitution.MVVM.Models
             // TODO: add other repositories
 
             LoadAll();
-            ConnectReferences();
         }
 
         public void LoadAll()
