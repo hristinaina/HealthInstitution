@@ -12,27 +12,27 @@ namespace HealthInstitution.MVVM.Models.Repositories
     public class AllergenRepository
     {
         private readonly string _fileName;
-        private List<Allergen> _allergen;
-        public List<Allergen> Allergen { get => _allergen; }
+        private List<Allergen> _allergens;
+        public List<Allergen> Allergens { get => _allergens; }
 
         public AllergenRepository(string fileName)
         {
             _fileName = fileName;
-            _allergen = new List<Allergen>();
+            _allergens = new List<Allergen>();
         }
 
         public void LoadFromFile()
         {
-            _allergen = FileService.Deserialize<Allergen>(_fileName);
+            _allergens = FileService.Deserialize<Allergen>(_fileName);
         }
 
         public void SaveToFile()
         {
-            FileService.Serialize<Allergen>(_fileName, _allergen);
+            FileService.Serialize<Allergen>(_fileName, _allergens);
         }
         public Allergen FindByID(int id)
         {
-            foreach (Allergen allergen in _allergen)
+            foreach (Allergen allergen in _allergens)
             {
                 if (allergen.Id == id) return allergen;
             }
