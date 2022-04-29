@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace HealthInstitution.MVVM.Views.MainPageViews
+namespace HealthInstitution.MVVM.Views.AdminViews
 {
     /// <summary>
     /// Interaction logic for AdminMainPageView.xaml
