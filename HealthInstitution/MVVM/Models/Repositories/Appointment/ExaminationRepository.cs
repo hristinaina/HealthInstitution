@@ -93,5 +93,10 @@ namespace HealthInstitution.MVVM.Models
         {
             _examinations.Add(examination);
         }
+
+        public void Remove(Examination examination)
+        {
+            _examinations.Remove(examination);
+        }
     }
 }

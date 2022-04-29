@@ -258,7 +258,7 @@
                                                     IsDefault="True"
                                                     Margin="0 20 30 0"
                                                     Content="YES, CANCEL APPOINTMENT"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    Command="{Binding CancelAppointment}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True

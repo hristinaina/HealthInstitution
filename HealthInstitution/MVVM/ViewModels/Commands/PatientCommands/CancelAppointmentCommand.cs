@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
-    class RescheduleAppointmentCommand : BaseCommand
+    class CancelAppointmentCommand : BaseCommand
     {
         private PatientAppointmentViewModel _viewModel;
 
-        public RescheduleAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel)
+        public CancelAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel)
         {
             _viewModel = patientAppointmentViewModel;
         }
@@ -29,9 +29,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
                 return;
             }
             Appointment examination = _viewModel.SelectedAppointment.Appointment;
-            DateTime datetime = _viewModel.MergeTime(_viewModel.SelectedDate, _viewModel.SelectedTime);
 
-            Institution.Instance().RescheduleExamination((Examination)examination, datetime);
+            Institution.Instance().CancelExamination((Examination)examination);
             _viewModel.FillAppointmentsList();
         }
     }

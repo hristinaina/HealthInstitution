@@ -41,9 +41,11 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             return null;
         }
 
-        public void Add(Examination examination, bool resolved)
+        public void Add(Examination examination, bool resolved, AppointmentStatus status)
         {
-            _references.Add(new ExaminationChange(examination.Patient.ID, examination.ID, AppointmentStatus.CREATED, DateTime.Now, resolved));
+            ExaminationChange change = new ExaminationChange(examination.Patient.ID, examination.ID, status, DateTime.Now, resolved);
+            _references.Add(change);
+            examination.Patient.ExaminationChanges.Add(change);
         }
     }
 }

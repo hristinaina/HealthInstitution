@@ -82,7 +82,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
         public ICommand CreateAppointment { get; set; }
         public ICommand RescheduleAppointment { get; set; }
-        
+        public ICommand CancelAppointment { get; set; }
+
         public PatientAppointmentViewModel()
         {
             Navigation = new PatientNavigationViewModel();
@@ -93,7 +94,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _doctors = new ObservableCollection<Doctor>();
 
             EnableChanges = false;
-            
+
             FillAppointmentsList();
             FillDoctorsList();
 
@@ -101,13 +102,13 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             NewTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
             CreateAppointment = new CreateAppointmentCommand(this);
             RescheduleAppointment = new RescheduleAppointmentCommand(this);
-            // ..............
+            CancelAppointment = new CancelAppointmentCommand(this);
         }
 
         public void FillAppointmentsList()
         {
             _appointments.Clear();
-            foreach (Appointment appointment in _patient.GetFutureExaminations())
+            foreach (Appointment appointment in _patient.GetFutureAppointments())
             {
                 _appointments.Add(new AppointmentListItemViewModel(appointment));
             }
@@ -117,7 +118,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         private void FillDoctorsList()
         {
             _doctors.Clear();
-            foreach (Doctor doctor in _institution.DoctorRepository.GetGeneralPractitioners()) {
+            foreach (Doctor doctor in _institution.DoctorRepository.GetGeneralPractitioners())
+            {
                 _doctors.Add(doctor);
             }
         }

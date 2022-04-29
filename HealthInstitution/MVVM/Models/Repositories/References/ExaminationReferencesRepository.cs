@@ -42,9 +42,15 @@ namespace HealthInstitution.MVVM.Models.Repositories
             return null;
         }
 
-        internal void Add(Examination examination)
+        public void Add(Examination examination)
         {
             _references.Add(new ExaminationReference(examination.ID, examination.Doctor.ID, examination.Patient.ID, examination.Prescription.ID, 0));
+        }
+
+        public void Remove(Examination examination)
+        {
+            ExaminationReference reference = FindByExaminationID(examination.ID);
+            _references.Remove(reference);
         }
     }
 }

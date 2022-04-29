@@ -90,17 +90,24 @@ namespace HealthInstitution.MVVM.Models.Entities
             // TODO: ?delete all future appointments with this patient 
         }
 
-        public List<Appointment> GetFutureExaminations()
+        public List<Appointment> GetAllAppointments() {
+            List<Appointment> allAppointments = new List<Appointment>();
+            allAppointments.AddRange(_examinations);
+            allAppointments.AddRange(_operations);
+            return allAppointments;
+
+        }
+        public List<Appointment> GetFutureAppointments()
         {
-            List<Appointment> futureExaminations = new List<Appointment>();
-            foreach (Examination examination in _examinations)
+            List<Appointment> futureAppointments = new List<Appointment>();
+            foreach (Appointment appointment in GetAllAppointments())
             {
-                if (DateTime.Compare(examination.Date, DateTime.Now) > 0)
+                if (DateTime.Compare(appointment.Date, DateTime.Now) > 0)
                 {
-                    futureExaminations.Add(examination);
+                    futureAppointments.Add(appointment);
                 }
             }
-            return futureExaminations;
+            return futureAppointments;
         }
 
         public bool isTrolling()
@@ -147,6 +154,23 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
 
             return totalChanges;
+        }
+
+        public bool IsAvailable(DateTime startDateTime) {
+
+            foreach (Appointment appointment in GetAllAppointments()) {
+                if (DateTime.Compare(appointment.Date, startDateTime) < 0 && DateTime.Compare(appointment.Date, startDateTime) > 0)
+                {
+                    return false;
+                }
+                DateTime endDateTime = startDateTime.AddMinutes(15);
+                if (DateTime.Compare(appointment.Date, endDateTime) < 0 && DateTime.Compare(appointment.Date, endDateTime) > 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

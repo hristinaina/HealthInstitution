@@ -4,20 +4,20 @@
     "AppointmentID": 5,
     "ChangeStatus": 0,
     "ChangeDate": "2022-04-25T18:43:37.0931955+02:00",
-    "Resolved": false
+    "Resolved": true
   },
   {
     "PatientID": 1,
     "AppointmentID": 2,
     "ChangeStatus": 0,
     "ChangeDate": "2022-04-25T18:43:37.0931955+02:00",
-    "Resolved": false
+    "Resolved": true
   },
   {
     "PatientID": 1,
     "AppointmentID": 3,
     "ChangeStatus": 0,
     "ChangeDate": "2022-04-25T18:43:37.0931955+02:00",
-    "Resolved": false
+    "Resolved": true
   }
 ]
