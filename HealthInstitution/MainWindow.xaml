@@ -11,6 +11,8 @@
         xmlns:viewmodelmains="clr-namespace:HealthInstitution.MVVM.ViewModels.MainPageViewModels"
         xmlns:viewmodelsPatient="clr-namespace:HealthInstitution.MVVM.ViewModels.PatientViewModels"
         xmlns:viewsPatient="clr-namespace:HealthInstitution.MVVM.Views.PatientViews"
+        xmlns:viewmodelsSecretary="clr-namespace:HealthInstitution.MVVM.ViewModels.SecretaryViewModels"
+        xmlns:viewsSecretary="clr-namespace:HealthInstitution.MVVM.Views.SecretaryViews"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="NMK - Log in"
@@ -25,6 +27,7 @@
             <DataTemplate DataType="{x:Type viewmodels:LogInViewModel}">
                 <views:LogInView />
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type viewmodelsPatient:PatientRecordViewModel}">
                 <viewsPatient:PatientRecordView />
             </DataTemplate>
@@ -37,12 +40,21 @@
             <DataTemplate DataType="{x:Type viewmodelsPatient:PatientSurveyViewModel}">
                 <viewsPatient:PatientSurveyView />
             </DataTemplate>
+     
             <DataTemplate DataType="{x:Type viewmodelmains:DoctorMainPageViewModel}">
                 <viewmains:DoctorMainPageView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodelmains:SecretaryMainPageViewModel}">
-                <viewmains:SecretaryMainPageView />
+
+            <DataTemplate DataType="{x:Type viewmodelsSecretary:BlockedPatientListViewModel}">
+                <viewsSecretary:BlockedPatientListView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsSecretary:AppointmentRequestsViewModel}">
+                <viewsSecretary:AppointmentRequestsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsSecretary:PatientListViewModel}">
+                <viewsSecretary:PatientListView />
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodelmains:AdminMainPageViewModel}">
                 <viewmains:AdminMainPageView />
             </DataTemplate>

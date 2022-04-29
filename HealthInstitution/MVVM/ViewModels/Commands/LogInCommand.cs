@@ -4,6 +4,7 @@ using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.MVVM.ViewModels.MainPageViewModels;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
+using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
 
 namespace HealthInstitution.Commands
@@ -62,7 +63,7 @@ namespace HealthInstitution.Commands
             _institution.CurrentUser = User.FindUser(_institution.SecretaryRepository.Secretaries, email, password);
             if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new SecretaryMainPageViewModel();
+                _navigationStore.CurrentViewModel = new PatientListViewModel();
                 return true;
             }
 
