@@ -75,12 +75,6 @@ namespace HealthInstitution.MVVM.Models.Entities
         }
 
 
-        public void BlockPatient(bool blocked)
-        {
-            _blocked = blocked;
-            // TODO: ?delete all future appointments with this patient 
-        }
-
         // constructor for when secretary is creating new patient accounts
         public Patient(int id, string firstName, string lastName, string email, string password, Gender gender,
             double height, double weight, List<Allergen> allergens = null)
@@ -93,13 +87,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             // no need to fill _operations and _examinations lists because it is a new user so there would be none
         }
 
-
-        // constructor for when blocking a patient account
-        public void BlockPatient(bool blocked)
-        {
-            _blocked = blocked;
-            // TODO: ?delete all future appointments with this patient 
-        }
 
         public List<Appointment> GetAllAppointments() {
             List<Appointment> allAppointments = new List<Appointment>();
@@ -182,6 +169,13 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
 
             return true;
+        }
+
+
+        public void BlockPatient(bool blocked)
+        {
+            _blocked = blocked;
+            // TODO: ?delete all future appointments with this patient 
         }
     }
 }
