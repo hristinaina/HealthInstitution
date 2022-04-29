@@ -54,5 +54,19 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 OnPropertyChanged(nameof(Weight));
             }
         }
+
+        private string _anamnesis;
+        public string Anamnesis
+        {
+            get
+            {
+                return _anamnesis;
+            }
+            set
+            {
+                _anamnesis = value;
+                OnPropertyChanged(nameof(Anamnesis));
+            }
+        }
     }
 }
