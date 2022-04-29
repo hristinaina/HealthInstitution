@@ -38,5 +38,19 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
             return null;
         }
+
+        public int NewId()
+        {
+            if (_prescriptions.Count == 0)
+            {
+                return 1;
+            }
+            return _prescriptions.Max(x => x.ID) + 1;
+        }
+
+        public void Add(Prescription prescription)
+        {
+            _prescriptions.Add(prescription);
+        }
     }
 }

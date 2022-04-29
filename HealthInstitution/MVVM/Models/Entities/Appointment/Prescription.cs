@@ -52,6 +52,10 @@ namespace HealthInstitution.MVVM.Models.Entities
             _therapyMealDependency = mealDependency;
             _medicines = medicines;
         }
-       
+
+        public Prescription(int id)
+        {
+            ID = id;
+        }
     }
 }

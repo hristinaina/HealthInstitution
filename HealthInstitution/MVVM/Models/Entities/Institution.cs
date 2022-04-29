@@ -7,6 +7,7 @@ using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.Models.Repositories.Room;
 using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Repositories.References;
+using HealthInstitution.MVVM.Models.Enumerations;
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -23,8 +24,13 @@ namespace HealthInstitution.MVVM.Models
 
         private readonly PrescriptionRepository _prescriptionRepository;
         private readonly ExaminationRepository _examinationRepository;
+
+
         private readonly OperationRepository _operationRepository;
+
+
         private readonly ExaminationReferencesRepository _examinationReferencesRepository;
+
         private readonly OperationReferencesRepository _operationReferencesRepository;
 
         private readonly EquipmentRepository _equipmentRepository;
@@ -154,6 +160,9 @@ namespace HealthInstitution.MVVM.Models
             ReferencesService.ConnectExaminationChanges();
         }
 
+        internal void CreateAppointment()
+        {
+        }
 
         public PatientRepository PatientRepository { get => _patientRepository; }
         public DoctorRepository DoctorRepository { get => _doctorRepository; }
@@ -178,5 +187,69 @@ namespace HealthInstitution.MVVM.Models
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
         public EquipmentArragmentRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
 
+
+        public Examination CreateExamination(Doctor doctor, Patient patient, DateTime datetime)
+        {
+            if (!doctor.IsAvailable(datetime)) {
+                return null;
+            }
+            if (!patient.IsAvailable(datetime)) {
+                return null;
+            }
+            int appointmentId = _examinationRepository.NewId();
+            int prescriptionId = _prescriptionRepository.NewId();
+            Prescription prescription = new Prescription(prescriptionId);
+            Examination examination = new Examination(appointmentId, doctor, patient, datetime, prescription);
+            patient.Examinations.Add(examination);
+            doctor.Examinations.Add(examination);
+            // find a room
+            // add examination to room
+            // add room to examination
+            _examinationRepository.Add(examination);
+            _examinationReferencesRepository.Add(examination);
+            _examinationChangeRepository.Add(examination, true, AppointmentStatus.CREATED);
+
+            return examination;
+        }
+
+
+        public void RescheduleExamination(Examination examination, DateTime datetime)
+        {
+            if (examination.Doctor.IsAvailable(datetime)) {
+                return;
+            }
+            if (examination.Patient.IsAvailable(datetime)) {
+                return;
+            }
+            examination.Date = datetime;
+            // check room
+            // if add examination to room
+            // if add room to examination
+            //_examinationReferencesRepository.Add(examination);
+            bool resolved = examination.IsEditable();
+            _examinationChangeRepository.Add(examination, resolved, AppointmentStatus.EDITED);
+
+        }
+
+
+        public void CancelExamination(Examination examination)
+        {
+
+            bool resolved = examination.IsEditable();
+            if (!resolved)
+            {
+                _examinationChangeRepository.Add(examination, resolved, AppointmentStatus.DELETED);
+                return;
+            }
+            Patient patient = examination.Patient;
+            Doctor doctor = examination.Doctor;
+            Room room = examination.Room;
+            patient.Examinations.Remove(examination);
+            doctor.Examinations.Remove(examination);
+            // remove from room
+            _examinationRepository.Remove(examination);
+            _examinationReferencesRepository.Remove(examination);
+
+        }
     }
 }

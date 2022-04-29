@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Entities.References;
+using HealthInstitution.MVVM.Models.Enumerations;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -14,6 +15,9 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             foreach (ExaminationChange change in Institution.Instance().ExaminationChangeRepository.Changes)
             {
+                if (change.Resolved && change.ChangeStatus == AppointmentStatus.DELETED) {
+                    return;
+                } 
                 Patient p = Institution.Instance().PatientRepository.FindByID(change.PatientID);
                 p.ExaminationChanges.Add(change);
             }
@@ -32,7 +36,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
                 examination.Doctor = doctor;
                 examination.Patient = patient;
-                examination.Perscription = perscription;
+                examination.Prescription = perscription;
                 examination.Room = room;
 
                 room.Appointments.Add(examination);

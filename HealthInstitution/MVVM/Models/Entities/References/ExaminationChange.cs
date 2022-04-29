@@ -28,15 +28,13 @@ namespace HealthInstitution.MVVM.Models.Entities.References
         {
         }
 
-        public ExaminationChange(int patientId, int appointmentId, AppointmentStatus changeStatus, DateTime changeDate, bool resolved, DateTime newDate)
+        public ExaminationChange(int patientID, int appointmentID, AppointmentStatus appointmentStatus, DateTime datetime, bool resolved)
         {
-            _patientId = patientId;
-            _appointmentId = appointmentId;
-            _changeStatus = changeStatus;
-            _changeDate = changeDate;
+            _patientId = patientID;
+            _appointmentID = appointmentID;
+            _changeStatus = appointmentStatus;
+            _changeDate = datetime;
             _resolved = resolved;
-            _newDate = newDate;
         }
-
     }
 }

@@ -20,10 +20,10 @@ namespace HealthInstitution.MVVM.Views.PatientViews
 
         public PatientNavigationViewModel() {
             LogOut = new LogOutCommand();
-            Record = new PatientRecordCommand();
-            Appointments = new PatientAppointmentsCommand();
-            Search = new PatientSearchCommand();
-            Survey = new PatientSurveyCommand();
+            Record = new RecordContentCommand();
+            Appointments = new AppointmentsContentCommnad();
+            Search = new SearchContentCommand();
+            Survey = new SurveyContentCommand();
         }
     }
 }

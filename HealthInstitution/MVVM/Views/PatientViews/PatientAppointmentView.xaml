@@ -26,6 +26,7 @@
 
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
+                                       IsOpen="{Binding DialogOpen}"
                                        Grid.Row="0">
                 <materialDesign:Card>
                     <Grid>
@@ -119,20 +120,20 @@
                                                   Width="250"
                                                   HorizontalAlignment="Center"
                                                   Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                  ItemsSource="{Binding Doctors}"
+                                                  SelectedItem="{Binding NewDoctor}"
                                                   materialDesign:HintAssist.Hint="Search for a doctor"
                                                   materialDesign:HintAssist.HintOpacity=".26"
-                                                  IsEditable="True">
-                                            <ComboBoxItem Content="Doctor 1" />
-                                            <ComboBoxItem Content="Doctor 2" />
-                                            <ComboBoxItem Content="Doctor 3" />
-                                            <ComboBoxItem Content="Doctor 4" />
-                                        </ComboBox>
+                                                  IsEditable="True" />
+
                                         <DatePicker Width="250"
+                                                    SelectedDate="{Binding NewDate}"
                                                     Margin="0 20 0 0"
                                                     materialDesign:HintAssist.Hint="Pick Date"
                                                     Style="{StaticResource MaterialDesignFilledDatePicker}" />
                                         <materialDesign:TimePicker Width="250"
                                                                    Margin="0 20 0 0"
+                                                                   SelectedTime="{Binding NewTime}"
                                                                    Is24Hours="True"
                                                                    Style="{StaticResource MaterialDesignFilledTimePicker}"
                                                                    materialDesign:HintAssist.Hint="Pick time" />
@@ -142,7 +143,7 @@
                                                     IsDefault="True"
                                                     Margin="0 30 20 0"
                                                     Content="CREATE"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    Command="{Binding CreateAppointment}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True
@@ -178,7 +179,7 @@
                                     Grid.Row="1"
                                     IsEnabled="{Binding EnableChanges}">
                                 <Button.CommandParameter>
-                                    <StackPanel Height="350"
+                                    <StackPanel Height="280"
                                                 Width="320"
                                                 Margin="40 20 40 20">
                                         <TextBlock Text="Reschedule appointment"
@@ -186,15 +187,7 @@
                                                    Margin="10"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
 
-                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                 Margin="0 20 0 0"
-                                                 Width="250"
-                                                 IsReadOnly="True"
-                                                 HorizontalAlignment="Center"
-                                                 Text="{Binding SelectedDoctor}"
-                                                 materialDesign:HintAssist.Hint="Doctor"
-                                                 materialDesign:HintAssist.HintOpacity=".26" />
-
+                                  
                                         <DatePicker Width="250"
                                                     Margin="0 20 0 0"
                                                     materialDesign:HintAssist.Hint="Pick Date"
@@ -212,7 +205,7 @@
                                                     IsDefault="True"
                                                     Margin="0 30 20 0"
                                                     Content="RESCHEDULE"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    Command="{Binding RescheduleAppointment}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True
@@ -265,7 +258,7 @@
                                                     IsDefault="True"
                                                     Margin="0 20 30 0"
                                                     Content="YES, CANCEL APPOINTMENT"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    Command="{Binding CancelAppointment}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True
