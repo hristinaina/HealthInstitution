@@ -14,6 +14,7 @@ namespace HealthInstitution.MVVM.Models.Entities
     {
         private bool _blocked;
         private BlockadeType _blockadeType;
+        private bool _deleted;
         private MedicalRecord _record;
         private List<Examination> _examinations;
         private List<Operation> _operations;
@@ -23,6 +24,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         public bool Blocked { get => _blocked; set { _blocked = value; } }
         [JsonProperty("BlockadeType")]
         public BlockadeType BlockadeType { get => _blockadeType; set { _blockadeType = value; } }
+        [JsonProperty("Deleted")]
+        public bool Deleted { get => _deleted; set { _deleted = value; } }
         [JsonProperty("Record")]
         public MedicalRecord Record { get => _record; set { _record = value; } }
         [JsonIgnore]
@@ -68,7 +71,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
         }
 
-        // constructor for when blocking a patient account
+
         public void BlockPatient(bool blocked)
         {
             _blocked = blocked;
@@ -82,6 +85,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             _blocked = false;
             _blockadeType = 0;
+            _deleted = false;
             _record = new MedicalRecord(height, weight, allergens);
             // no need to fill _operations and _examinations lists because it is a new user so there would be none
         }

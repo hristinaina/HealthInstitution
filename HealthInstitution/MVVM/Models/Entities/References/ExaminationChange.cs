@@ -11,19 +11,31 @@ namespace HealthInstitution.MVVM.Models.Entities.References
     public class ExaminationChange
     {
         private int _patientId;
-        private int _appointmentID;
+        private int _appointmentId;
         private AppointmentStatus _changeStatus;
         private DateTime _changeDate;
         private bool _resolved;
+        private DateTime _newDate;
 
         public int PatientID { get => this._patientId; set => this._patientId = value; }
-        public int AppointmentID { get => this._appointmentID; set => this._appointmentID = value; }
+        public int AppointmentID { get => this._appointmentId; set => this._appointmentId = value; }
         public AppointmentStatus ChangeStatus { get => this._changeStatus; set => this._changeStatus = value; }
         public DateTime ChangeDate { get => this._changeDate; set => this._changeDate = value; }
         public bool Resolved { get => this._resolved; set => this._resolved = value; }
+        public DateTime NewDate { get => this._newDate; set => this._newDate = value; }
 
         public ExaminationChange()
         {
+        }
+
+        public ExaminationChange(int patientId, int appointmentId, AppointmentStatus changeStatus, DateTime changeDate, bool resolved, DateTime newDate)
+        {
+            _patientId = patientId;
+            _appointmentId = appointmentId;
+            _changeStatus = changeStatus;
+            _changeDate = changeDate;
+            _resolved = resolved;
+            _newDate = newDate;
         }
 
     }
