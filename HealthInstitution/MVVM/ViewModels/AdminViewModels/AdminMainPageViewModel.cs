@@ -7,7 +7,7 @@ using System.Windows.Input;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.Commands;
 
-namespace HealthInstitution.MVVM.ViewModels.MainPageViewModels
+namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 {
     public class AdminMainPageViewModel : BaseViewModel
     {

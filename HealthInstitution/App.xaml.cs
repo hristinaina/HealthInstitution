@@ -39,7 +39,7 @@ namespace HealthInstitution
             Admin a1 = new Admin();
             a1.Email = "a";
             a1.Password = "a";
-            //Institution.Instance().AdminRepository.GetAdministrators().Add(a1);
+            Institution.Instance().AdminRepository.Administrators.Add(a1);
 
             Doctor d1 = new Doctor();
             d1.Email = "d";
