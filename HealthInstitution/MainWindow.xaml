@@ -8,6 +8,7 @@
         xmlns:views="clr-namespace:HealthInstitution.MVVM.Views"
         xmlns:viewmains="clr-namespace:HealthInstitution.MVVM.Views.MainPageViews"
         xmlns:viewadmin="clr-namespace:HealthInstitution.MVVM.Views.AdminViews"
+        xmlns:viewsdoctor="clr-namespace:HealthInstitution.MVVM.Views.DoctorViews"
         xmlns:viewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels"
         xmlns:viewmodelmains="clr-namespace:HealthInstitution.MVVM.ViewModels.MainPageViewModels"
         xmlns:viewmodelsPatient="clr-namespace:HealthInstitution.MVVM.ViewModels.PatientViewModels"

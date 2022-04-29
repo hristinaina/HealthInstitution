@@ -6,6 +6,7 @@ using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.Stores;
 using System.Collections.Generic;
 using HealthInstitution.MVVM.Models.Services;
+using HealthInstitution.MVVM.Views.DoctorViews;
 
 namespace HealthInstitution
 {
