@@ -17,12 +17,26 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
     {
         private readonly Patient _patient;
         private Institution _institution;
-        private AppointmentListItemViewModel _selectedAppointment;
+
+        public PatientNavigationViewModel Navigation { get; }
+        private readonly ObservableCollection<AppointmentListItemViewModel> _appointments;
+        public IEnumerable<AppointmentListItemViewModel> Appointments => _appointments;
+        private ObservableCollection<Doctor> _doctors;
+        public ObservableCollection<Doctor> Doctors => _doctors;
+
+        private bool _dialogOpen;
+        public bool DialogOpen
+        {
+            get => _dialogOpen;
+            set
+            {
+                _dialogOpen = value;
+                OnPropertyChanged(nameof(DialogOpen));
+            }
+        }
 
 
         private bool _enableChanges;
-        private int _selection;
-        private bool _dialogOpen;
         public bool EnableChanges
         {
             get => _enableChanges;
@@ -32,6 +46,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
                 OnPropertyChanged(nameof(EnableChanges));
             }
         }
+        private int _selection;
         public int Selection
         {
             get => _selection;
@@ -50,34 +65,28 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             }
         }
 
+        private AppointmentListItemViewModel _selectedAppointment;
+
         public string SelectedDoctor { get; set; }
         public string SelectedDate { get; set; }
         public string SelectedTime { get; set; }
 
         public ICommand CreateAppointment { get; set; }
-        public bool DialogOpen
-        {
-            get => _dialogOpen;
-            set {
-                _dialogOpen = value;  
-                OnPropertyChanged(nameof(DialogOpen));
-                }
-        }
-
-        public PatientNavigationViewModel Navigation { get; }
-        private readonly ObservableCollection<AppointmentListItemViewModel> _appointments;
-        public IEnumerable<AppointmentListItemViewModel> Appointments => _appointments;
-
-
-
+        
         public PatientAppointmentViewModel()
         {
+            Navigation = new PatientNavigationViewModel();
+
             _institution = Institution.Instance();
             _patient = (Patient)_institution.CurrentUser;
             _appointments = new ObservableCollection<AppointmentListItemViewModel>();
-            Navigation = new PatientNavigationViewModel();
+            _doctors = new ObservableCollection<Doctor>();
+
             EnableChanges = false;
+            
             FillAppointmentsList();
+            FillDoctorsList();
+            
             CreateAppointment = new CreateAppointmentCommand(this);
             // ..............
         }
@@ -90,5 +99,14 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
                 _appointments.Add(new AppointmentListItemViewModel(appointment));
             }
         }
+
+        private void FillDoctorsList()
+        {
+            _doctors.Clear();
+            foreach (Doctor doctor in _institution.DoctorRepository.GetGeneralPractitioners()) {
+                _doctors.Add(doctor);
+            }
+        }
+
     }
 }

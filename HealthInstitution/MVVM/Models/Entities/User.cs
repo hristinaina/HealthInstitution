@@ -48,8 +48,8 @@ namespace HealthInstitution.MVVM.Models
 
         }
 
-            // function that searches the collection to find the corresponding user
-            public static T FindUser<T>(List<T> collection, string email, string password) where T : User
+        // function that searches the collection to find the corresponding user
+        public static T FindUser<T>(List<T> collection, string email, string password) where T : User
         {
             for (int i = 0; i < collection.Count; i++)
             {
@@ -60,6 +60,11 @@ namespace HealthInstitution.MVVM.Models
                 }
             }
             return null;
+        }
+
+        public override string ToString()
+        {
+            return FullName;
         }
 
     }

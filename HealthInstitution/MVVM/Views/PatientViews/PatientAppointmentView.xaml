@@ -27,7 +27,6 @@
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
                                        IsOpen="{Binding DialogOpen}"
-                                       OverlayBackground="{DynamicResource MaterialDesignBodyLight}"
                                        Grid.Row="0">
                 <materialDesign:Card>
                     <Grid>
@@ -121,14 +120,11 @@
                                                   Width="250"
                                                   HorizontalAlignment="Center"
                                                   Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                  ItemsSource="{Binding Doctors}"
                                                   materialDesign:HintAssist.Hint="Search for a doctor"
                                                   materialDesign:HintAssist.HintOpacity=".26"
-                                                  IsEditable="True">
-                                            <ComboBoxItem Content="Doctor 1" />
-                                            <ComboBoxItem Content="Doctor 2" />
-                                            <ComboBoxItem Content="Doctor 3" />
-                                            <ComboBoxItem Content="Doctor 4" />
-                                        </ComboBox>
+                                                  IsEditable="True" />
+
                                         <DatePicker Width="250"
                                                     Margin="0 20 0 0"
                                                     materialDesign:HintAssist.Hint="Pick Date"
