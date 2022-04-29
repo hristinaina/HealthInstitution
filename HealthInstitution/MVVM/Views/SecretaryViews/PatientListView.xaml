@@ -156,18 +156,6 @@
                                                  Text="{Binding NewWeight}"
                                                  materialDesign:HintAssist.Hint="Weight"
                                                  materialDesign:HintAssist.HintOpacity=".26" />
-                                        <ComboBox Margin="0 20 0 0"
-                                                  Width="250"
-                                                  HorizontalAlignment="Center"
-                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                                  materialDesign:HintAssist.Hint="Choose allergens"
-                                                  materialDesign:HintAssist.HintOpacity=".26"
-                                                  IsEditable="True">
-                                            <ComboBoxItem Content="Doctor 1" />
-                                            <ComboBoxItem Content="Doctor 2" />
-                                            <ComboBoxItem Content="Doctor 3" />
-                                            <ComboBoxItem Content="Doctor 4" />
-                                        </ComboBox>
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"

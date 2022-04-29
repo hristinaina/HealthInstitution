@@ -49,21 +49,14 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         //public string SelectedDate { get; set; }
         //public string SelectedTime { get; set; }
 
-        public string NewName { get; set; }
-        public string NewSurname { get; set; }
-        public string NewEmail { get; set; }
-        public string NewPassword { get; set; }
-        public string NewHeight { get; set; }
-        public string NewWeight { get; set; }
-
         public PatientListViewModel()
         {
             _patients = new ObservableCollection<PatientListItemViewModel>();
             Navigation = new SecretaryNavigationViewModel();
             EnableChanges = false;
             FillPatientList();
+            //FillAllergenList();
         }
-
 
         public void FillPatientList()
         {
@@ -78,5 +71,26 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 }
             }
         }
+
+        public string NewName { get; set; }
+        public string NewSurname { get; set; }
+        public string NewEmail { get; set; }
+        public string NewPassword { get; set; }
+        public string NewHeight { get; set; }
+        public string NewWeight { get; set; }
+
+        /*private readonly ObservableCollection<Allergen> _allergens;
+        public IEnumerable<Allergen> Allergens => _allergens;
+
+        public void FillAllergenList()
+        {
+            _allergens.Clear();
+
+            List<Allergen> allergens = Institution.Instance().AllergenRepository.Allergens;
+            foreach (Allergen allergen in allergens)
+            {
+                _allergens.Add(allergen);
+            }
+        }*/
     }
 }
