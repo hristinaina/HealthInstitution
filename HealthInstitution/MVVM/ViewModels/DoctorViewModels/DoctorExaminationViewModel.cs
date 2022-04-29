@@ -27,9 +27,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         {
             _examinations = new ObservableCollection<ExaminationViewModel>();
 
-            // add here test examples
-
-             
+            // add here test examples  
         }
     }
 }
