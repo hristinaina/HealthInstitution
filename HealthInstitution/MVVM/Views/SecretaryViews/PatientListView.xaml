@@ -1,0 +1,308 @@
+﻿<UserControl x:Class="HealthInstitution.MVVM.Views.SecretaryViews.PatientListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.SecretaryViews"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:secretaryviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.SecretaryViewModels"
+             xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
+             d:DataContext="{d:DesignInstance Type=secretaryviewmodels:PatientListViewModel}"
+             mc:Ignorable="d" 
+             Height="600"
+             Width="1200"
+             Background="White"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <components:SecretaryNavigationRail SelectedIndex="0"></components:SecretaryNavigationRail>
+
+        <materialDesign:Card Grid.Column="1">
+
+            <materialDesign:DialogHost DialogTheme="Inherit"
+                                       Grid.Column="0"
+                                       Grid.Row="0">
+                <materialDesign:Card>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+
+                        <ListView ItemsSource="{Binding Patients}"
+                                  VerticalAlignment="Top"
+                                  Margin="0 0 0 70"
+                                  Grid.Column="0"
+                                  Width="540"
+                                  SelectionMode="Single"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  HorizontalAlignment="Center"
+                                  SelectedIndex="{Binding Selection}">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Width="90"
+                                                    Header="Id">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Id}"
+                                                           Width="90" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150"
+                                                    Header="Name">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Name}"
+                                                           Width="70" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150"
+                                                    Header="Surname">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Surname}"
+                                                           Width="70" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="120"
+                                                    Header="Gender">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Gender}"
+                                                           Width="120" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="4*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Width="190"
+                                    ToolTip="Create new patient account"
+                                    Content="New patient account"
+                                    Background="#CC80DEEA"
+                                    BorderBrush="#6680DEEA"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    Height="32"
+                                    VerticalAlignment="Bottom"
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Left" Margin="0,0,0,76" Grid.RowSpan="2">
+
+
+                                <Button.CommandParameter>
+                                    <StackPanel Height="600"
+                                                Width="400"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Create new account"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                 Margin="0 20 0 0"
+                                                 Width="250"
+                                                 HorizontalAlignment="Center"
+                                                 Text="{Binding NewName}"
+                                                 materialDesign:HintAssist.Hint="Name"
+                                                 materialDesign:HintAssist.HintOpacity=".26" />
+                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                 Margin="0 20 0 0"
+                                                 Width="250"
+                                                 HorizontalAlignment="Center"
+                                                 Text="{Binding NewSurname}"
+                                                 materialDesign:HintAssist.Hint="Surame"
+                                                 materialDesign:HintAssist.HintOpacity=".26" />
+                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                 Margin="0 20 0 0"
+                                                 Width="250"
+                                                 HorizontalAlignment="Center"
+                                                 Text="{Binding NewEmail}"
+                                                 materialDesign:HintAssist.Hint="Email"
+                                                 materialDesign:HintAssist.HintOpacity=".26" />
+                                        <components:BindablePasswordBox Grid.Column="1"
+                                                                        Password="{Binding NewPassword}"
+                                                                        MaxWidth="250"
+                                                                        Margin="0 20 0 0"/>
+                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                 Margin="0 20 0 0"
+                                                 Width="250"
+                                                 HorizontalAlignment="Center"
+                                                 Text="{Binding NewHeight}"
+                                                 materialDesign:HintAssist.Hint="Height"
+                                                 materialDesign:HintAssist.HintOpacity=".26" />
+                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                 Margin="0 20 0 0"
+                                                 Width="250"
+                                                 HorizontalAlignment="Center"
+                                                 Text="{Binding NewWeight}"
+                                                 materialDesign:HintAssist.Hint="Weight"
+                                                 materialDesign:HintAssist.HintOpacity=".26" />
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 30 10 0"
+                                                    Content="CREATE"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="10 30 0 0"
+                                                    Content="DISCARD"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Width="190"
+                                    ToolTip="Show patient profile"
+                                    Content="Show profile"
+                                    Background="#66FFFFFF"
+                                    BorderBrush="#6634565A"
+                                    Height="32"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                    Grid.Row="1"
+                                    IsEnabled="{Binding EnableChanges}">
+
+                                <Button.CommandParameter>
+                                    <StackPanel Height="600"
+                                                Width="450"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Patient profile"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                 Margin="0 20 0 0"
+                                                 Width="250"
+                                                 IsReadOnly="True"
+                                                 HorizontalAlignment="Center"
+                                                 Text="ovdje ide binding"
+                                                 materialDesign:HintAssist.Hint="huh?"
+                                                 materialDesign:HintAssist.HintOpacity=".26" />
+
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 30 20 0"
+                                                    Content="EDIT"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="20 30 0 0"
+                                                    Content="CANCEL"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Grid.Column="1"
+                                    Width="190"
+                                    ToolTip="Delete selected account"
+                                    Content="Delete account"
+                                    Background="#66FFFFFF"
+                                    BorderBrush="#6634565A"
+                                    Height="32"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Grid.Row="2"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    IsEnabled="{Binding EnableChanges}">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="150"
+                                                Width="400"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Delete selected patient account"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBlock Text="Are you sure ?"
+                                                   HorizontalAlignment="Center" 
+                                                   Margin="0 10 0 0"/>
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 20 30 0"
+                                                    Content="YES"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="20 20 0 0"
+                                                    Content="CANCEL"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+                        </Grid>
+                        <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+
+                    </Grid>
+                </materialDesign:Card>
+            </materialDesign:DialogHost>
+
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
