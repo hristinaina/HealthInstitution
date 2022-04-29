@@ -49,6 +49,12 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         //public string SelectedDate { get; set; }
         //public string SelectedTime { get; set; }
 
+        public string NewName { get; set; }
+        public string NewSurname { get; set; }
+        public string NewEmail { get; set; }
+        public string NewPassword { get; set; }
+        public string NewHeight { get; set; }
+        public string NewWeight { get; set; }
 
         public PatientListViewModel()
         {
