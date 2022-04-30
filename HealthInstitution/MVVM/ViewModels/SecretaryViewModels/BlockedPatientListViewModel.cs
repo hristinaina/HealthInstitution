@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 
@@ -28,6 +29,12 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 OnPropertyChanged(nameof(EnableChanges));
             }
         }
+
+        public ICommand Unblock { get; set; }
+        //public ICommand ShowProfile { get; set; }
+
+        public int SelectedPatientId { get; set; }
+
         public int Selection
         {
             get => _selection;
@@ -37,7 +44,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 EnableChanges = true;
                 OnPropertyChanged(nameof(Selection));
                 _selectedPatient = _patients.ElementAt(_selection);
-                //SelectedDoctor = _selectedPatient.Doctor;
+                SelectedPatientId = Convert.ToInt32(_selectedPatient.Id);
                 //OnPropertyChanged(nameof(SelectedDoctor));
                 //SelectedDate = _selectedPatient.Date;
                 //OnPropertyChanged(nameof(SelectedDate));
@@ -51,6 +58,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             _patients = new ObservableCollection<BlockedPatientItemViewModel>();
             Navigation = new SecretaryNavigationViewModel();
             EnableChanges = false;
+            Unblock = new UnblockCommand(this);
             FillPatientList();
         }
 

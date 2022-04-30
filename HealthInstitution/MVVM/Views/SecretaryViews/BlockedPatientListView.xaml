@@ -129,7 +129,7 @@
                                     Background="#CC80DEEA"
                                     BorderBrush="#6680DEEA"
                                     Height="32"
-                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    Command="{Binding Unblock}"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Left"
                                     Grid.Row="1"

@@ -4,8 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities.References;
+using HealthInstitution.MVVM.Models.Services;
+using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
@@ -19,6 +22,10 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         private bool _enableChanges;
         private int _selection;
+
+        public ICommand Approve { get; }
+        public ICommand Reject { get; }
+
         public bool EnableChanges
         {
             get => _enableChanges;
@@ -28,6 +35,9 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 OnPropertyChanged(nameof(EnableChanges));
             }
         }
+
+        public int SelectedRequestId { get; set; }
+
         public int Selection
         {
             get => _selection;
@@ -37,12 +47,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 EnableChanges = true;
                 OnPropertyChanged(nameof(Selection));
                 _selectedRequest = _requests.ElementAt(_selection);
-                //SelectedDoctor = _selectedPatient.Doctor;
-                //OnPropertyChanged(nameof(SelectedDoctor));
-                //SelectedDate = _selectedPatient.Date;
-                //OnPropertyChanged(nameof(SelectedDate));
-                //SelectedTime = _selectedPatient.Time;
-                //OnPropertyChanged(nameof(SelectedTime));
+                SelectedRequestId = _selectedRequest.ID;
+                OnPropertyChanged(nameof(SelectedRequestId));
             }
         }
 
@@ -50,6 +56,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _requests = new ObservableCollection<AppointmentChangeViewModel>();
             Navigation = new SecretaryNavigationViewModel();
+            Approve = new ApproveCommand(this);
+            Reject = new RejectCommand(this);
             EnableChanges = false;
             FillRequestsList();
         }
@@ -59,7 +67,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             _requests.Clear();
 
             // automaticaly remove/resolve requests for which secretary was late to do so == outdated requests
-            RemoveOutdatedRequests();
+            SecretaryService.RemoveOutdatedRequests();
 
             List<ExaminationChange> requests = Institution.Instance().ExaminationChangeRepository.Changes;
             foreach (ExaminationChange request in requests)
@@ -69,63 +77,6 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                     _requests.Add(new AppointmentChangeViewModel(request));
                 }
             }
-        }
-
-        private static void RemoveOutdatedRequests()
-        {
-            foreach (ExaminationChange request in Institution.Instance().ExaminationChangeRepository.Changes)
-            {
-                if (!request.Resolved && request.NewDate <= DateTime.Now)
-                {
-                    request.ChangeStatus = Models.Enumerations.AppointmentStatus.DELETED;
-                    request.Resolved = true;
-
-                    // ?to delete appointment as well or not? 
-                    Institution.Instance().ExaminationRepository.Delete(request.AppointmentID);
-                }
-            }
-        }
-
-        private void ApproveChange(ExaminationChange request)
-        {
-            request.Resolved = true;
-            //created
-            if (request.ChangeStatus == 0)
-            {
-                // Milicina funkcija za kreiranje novih pregleda --- bitne sve provjere ---- ako vrati false izbaciti dijalog
-            }
-            //edited
-            else if(request.ChangeStatus.ToString() == "EDITED")
-            {
-                // Milicina funkcija za editovanje pregleda --- bitne sve provjere ---- ako vrati false izbaciti dijalog
-            }
-            //deleted
-            else if(request.ChangeStatus.ToString() == "DELETED")
-            {
-                Institution.Instance().ExaminationRepository.Delete(request.AppointmentID);
-            }
-
-        }
-
-        private void RejectChange(ExaminationChange request)
-        {
-            request.Resolved = true;
-            //created
-            if (request.ChangeStatus == 0)
-            {
-                // do nothing
-            }
-            //edited
-            else if (request.ChangeStatus.ToString() == "EDITED")
-            {
-                // kako signalizirati da sam odbila editovanje??
-            }
-            //deleted
-            else if (request.ChangeStatus.ToString() == "DELETED")
-            {
-                // do nothing
-            }
-
         }
     }
 }
