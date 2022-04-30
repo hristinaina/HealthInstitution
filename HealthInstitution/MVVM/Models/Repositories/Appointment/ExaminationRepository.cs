@@ -98,5 +98,16 @@ namespace HealthInstitution.MVVM.Models
         {
             _examinations.Remove(examination);
         }
+
+        public void DeleteByPatientID(int patientId)
+        {
+            foreach (Examination examination in _examinations)
+            {
+                if (examination.Patient.ID == patientId)
+                {
+                    _examinations.Remove(examination);
+                }
+            }
+        }
     }
 }
