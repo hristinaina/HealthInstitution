@@ -1,11 +1,55 @@
 ﻿using System.ComponentModel;
+﻿using HealthInstitution.Stores;
 using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _message = "";
+        public string Message
+        {
+            get => _message;
+            set
+            {
+                _message = value;
+                OnPropertyChanged(nameof(Message));
+            }
+        }
+        private bool _messageVisibility;
+
+        public bool MessageVisibility
+        {
+            get { return _messageVisibility; }
+            set
+            {
+                _messageVisibility = value;
+                OnPropertyChanged(nameof(MessageVisibility));
+            }
+        }
+
+        public void ShowMessage(string message, bool logOut = false)
+        {
+            Message = message;
+            MessageVisibility = true;
+            Wait(logOut);
+
+        }
+
+        public async void Wait(bool logOut)
+        {
+            await Task.Delay(3000);
+            MessageVisibility = false;
+            if (logOut)
+            {
+                NavigationStore.Instance().CurrentViewModel = new LogInViewModel();
+
+            }
+        }
 
         public DateTime MergeTime(string date, string time)
         {
@@ -47,6 +91,14 @@ namespace HealthInstitution.MVVM.ViewModels
             return new DateTime(year, month, day);
         }
         protected void OnPropertyChanged(string propertyName) {
+        public DateTime MergeTime(DateTime date, DateTime time)
+        {
+
+            return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0, DateTimeKind.Local);
+        }
+
+        protected void OnPropertyChanged(string propertyName)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }

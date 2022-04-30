@@ -31,6 +31,10 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <components:NotificationSnackbar Grid.Column="1"
+                                         Grid.Row="5"
+                                         Panel.ZIndex="2" />
+        
         <Image HorizontalAlignment="Right"
                Grid.RowSpan="6"
                Margin="0,76,443,94.727"

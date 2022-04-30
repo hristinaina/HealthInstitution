@@ -1,7 +1,9 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
+using HealthInstitution.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +26,30 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
             _viewModel.DialogOpen = false;
 
-            if (_viewModel.Patient.isTrolling())
-            {
-                return;
-            }
             Appointment examination = _viewModel.SelectedAppointment.Appointment;
 
-            Institution.Instance().CancelExamination((Examination)examination);
+
+            try
+            {
+                bool doneCompletely = Institution.Instance().CancelExamination((Examination)examination);
+                if (doneCompletely)
+                {
+                    _viewModel.ShowMessage("Appointment successfully canceled !");
+                }
+                else
+                {
+                    _viewModel.ShowMessage("Request sent to secretariat !");
+                }
+            }
+            catch (PatientBlockedException e)
+            {
+                _viewModel.ShowMessage(e.Message, logOut: true);
+            }
+            catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
+
             _viewModel.FillAppointmentsList();
         }
     }

@@ -92,7 +92,8 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blockadeType = BlockadeType.NONE;
         }
 
-        public List<Appointment> GetAllAppointments() {
+        public List<Appointment> GetAllAppointments()
+        {
             List<Appointment> allAppointments = new List<Appointment>();
             allAppointments.AddRange(_examinations);
             allAppointments.AddRange(_operations);
@@ -109,18 +110,22 @@ namespace HealthInstitution.MVVM.Models.Entities
                     futureAppointments.Add(appointment);
                 }
             }
+            futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
             return futureAppointments;
         }
 
-        public bool isTrolling()
+        public bool IsTrolling()
         {
-
             if (GetEditingHistory() > 5)
             {
+                _blocked = true;
+                _blockadeType = BlockadeType.SYSTEM;
                 return true;
             }
             if (GetCreatingHistory() > 8)
             {
+                _blocked = true;
+                _blockadeType = BlockadeType.SYSTEM;
                 return true;
             }
             return false;
@@ -158,15 +163,29 @@ namespace HealthInstitution.MVVM.Models.Entities
             return totalChanges;
         }
 
-        public bool IsAvailable(DateTime startDateTime) {
+        public bool IsAvailable(DateTime startDateTime)
+        {
 
-            foreach (Appointment appointment in GetAllAppointments()) {
-                if (DateTime.Compare(appointment.Date, startDateTime) < 0 && DateTime.Compare(appointment.Date, startDateTime) > 0)
+            foreach (Examination examination in Examinations)
+            {
+                if (DateTime.Compare(examination.Date, startDateTime) < 0 && DateTime.Compare(examination.Date.AddMinutes(15), startDateTime) > 0)
                 {
                     return false;
                 }
                 DateTime endDateTime = startDateTime.AddMinutes(15);
-                if (DateTime.Compare(appointment.Date, endDateTime) < 0 && DateTime.Compare(appointment.Date, endDateTime) > 0)
+                if (DateTime.Compare(examination.Date, endDateTime) < 0 && DateTime.Compare(examination.Date.AddMinutes(15), endDateTime) > 0)
+                {
+                    return false;
+                }
+            }
+            foreach (Operation operation in Operations)
+            {
+                if (DateTime.Compare(operation.Date, startDateTime) < 0 && DateTime.Compare(operation.Date.AddMinutes(operation.Duration), startDateTime) > 0)
+                {
+                    return false;
+                }
+                DateTime endDateTime = startDateTime.AddMinutes(15);
+                if (DateTime.Compare(operation.Date, endDateTime) < 0 && DateTime.Compare(operation.Date.AddMinutes(operation.Duration), endDateTime) > 0)
                 {
                     return false;
                 }
