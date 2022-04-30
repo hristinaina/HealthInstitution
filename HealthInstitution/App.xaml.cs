@@ -58,5 +58,10 @@ namespace HealthInstitution
 
             base.OnStartup(e);
         }
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _institution.SaveAll();
+            base.OnExit(e);
+        }
     }
 }

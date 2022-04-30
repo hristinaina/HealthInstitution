@@ -27,6 +27,8 @@ namespace HealthInstitution.MVVM.Models
         public string Password { get => _password; set { _password = value; } }
         [JsonProperty("Gender")]
         public Gender Gender { get => _gender; set { _gender = value; } }
+        [JsonIgnore]
+        public string FullName => FirstName + " " + LastName;
 
         public User() { }
         public User(string firstName, string lastName)
@@ -35,7 +37,6 @@ namespace HealthInstitution.MVVM.Models
             LastName = lastName;
         }
 
-        public string FullName => FirstName + " " + LastName;
 
         public User(int id, string firstName, string lastName, string email, string password, Gender gender)
         {
