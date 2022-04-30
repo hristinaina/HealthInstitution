@@ -207,5 +207,17 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
             return historyOfIllness;
         }
+
+        public void Update(int id, string name, string lastName, string email, string password, Gender gender, double height, double weight)
+        {
+            ID = id;
+            FirstName = name;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+            Gender = gender;
+            Record.Height = height;
+            Record.Weight = weight;
+        }
     }
 }
