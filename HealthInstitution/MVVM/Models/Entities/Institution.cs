@@ -191,7 +191,7 @@ namespace HealthInstitution.MVVM.Models
         public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
 
 
-        public bool CreateAppointment(Doctor doctor, Patient patient, DateTime datetime, string type, int duration = 15)
+        public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15)
         {
             if (CurrentUser is Patient && patient.IsTrolling())
             {
@@ -220,14 +220,13 @@ namespace HealthInstitution.MVVM.Models
 
             else if (type == nameof(Operation)) {
                 appointmentId = _operationRepository.NewId();
-                Operation operation = new Operation(appointmentId, doctor, patient, datetime, duration);
+                Operation operation = new Operation(appointmentId, doctor, patient, dateTime, duration);
                 patient.Operations.Add(operation);
                 doctor.Operations.Add(operation);
-                _roomRepository.FindAvailableRoom(operation, datetime);
+                _roomRepository.FindAvailableRoom(operation, dateTime);
                 _operationRepository.Add(operation);
                 _operationReferencesRepository.Add(operation);
 
-                return operation;
             }
 
             return true;
@@ -242,7 +241,7 @@ namespace HealthInstitution.MVVM.Models
             }
             ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime);
             appointment.Date = dateTime;
-            _roomRepository.FindAvailableRoom(appointment, datetime);
+            _roomRepository.FindAvailableRoom(appointment, dateTime);
             bool resolved = true;
             if (CurrentUser is Patient) {
                 resolved = appointment.IsEditable();
@@ -250,6 +249,7 @@ namespace HealthInstitution.MVVM.Models
 
             if (appointment is Examination)
             {
+                
                 _examinationReferencesRepository.Remove((Examination)appointment);
                 _examinationReferencesRepository.Add((Examination)appointment);
                 _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.EDITED);

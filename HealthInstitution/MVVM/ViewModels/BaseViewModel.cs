@@ -90,7 +90,6 @@ namespace HealthInstitution.MVVM.ViewModels
             int year = int.Parse(dateTokens[2]);
             return new DateTime(year, month, day);
         }
-        protected void OnPropertyChanged(string propertyName) {
         public DateTime MergeTime(DateTime date, DateTime time)
         {
 

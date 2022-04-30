@@ -168,24 +168,24 @@ namespace HealthInstitution.MVVM.Models.Entities
 
             foreach (Examination examination in Examinations)
             {
-                if (DateTime.Compare(examination.Date, startDateTime) < 0 && DateTime.Compare(examination.Date.AddMinutes(15), startDateTime) > 0)
+                if (DateTime.Compare(examination.Date, startDateTime) <= 0 && DateTime.Compare(examination.Date.AddMinutes(15), startDateTime) >= 0)
                 {
                     return false;
                 }
                 DateTime endDateTime = startDateTime.AddMinutes(15);
-                if (DateTime.Compare(examination.Date, endDateTime) < 0 && DateTime.Compare(examination.Date.AddMinutes(15), endDateTime) > 0)
+                if (DateTime.Compare(examination.Date, endDateTime) <= 0 && DateTime.Compare(examination.Date.AddMinutes(15), endDateTime) >= 0)
                 {
                     return false;
                 }
             }
             foreach (Operation operation in Operations)
             {
-                if (DateTime.Compare(operation.Date, startDateTime) < 0 && DateTime.Compare(operation.Date.AddMinutes(operation.Duration), startDateTime) > 0)
+                if (DateTime.Compare(operation.Date, startDateTime) <= 0 && DateTime.Compare(operation.Date.AddMinutes(operation.Duration), startDateTime) >= 0)
                 {
                     return false;
                 }
                 DateTime endDateTime = startDateTime.AddMinutes(15);
-                if (DateTime.Compare(operation.Date, endDateTime) < 0 && DateTime.Compare(operation.Date.AddMinutes(operation.Duration), endDateTime) > 0)
+                if (DateTime.Compare(operation.Date, endDateTime) <= 0 && DateTime.Compare(operation.Date.AddMinutes(operation.Duration), endDateTime) >= 0)
                 {
                     return false;
                 }
