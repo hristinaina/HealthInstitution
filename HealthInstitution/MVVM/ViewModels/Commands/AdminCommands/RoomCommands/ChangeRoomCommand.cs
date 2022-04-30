@@ -40,7 +40,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
                 _model.SelectedNumber = _model.SelectedRoom.Number;
                 prerequisitesFulfillled = false;
             }
-            else if (!Institution.Instance().RoomRepository.CheckNumber(selectedNumber))
+            else if (_model.SelectedRoom.Room.Number != selectedNumber && !Institution.Instance().RoomRepository.CheckNumber(selectedNumber))
             {
                 MessageBox.Show("Number already taken", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 prerequisitesFulfillled = false;
