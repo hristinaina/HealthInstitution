@@ -28,6 +28,8 @@ namespace HealthInstitution.MVVM.Models.Services
             else if (request.ChangeStatus.ToString() == "DELETED")
             {
                 DeleteAppointment(appointment);
+                string message = "The appointment has been successfully deleted.";
+                MessageBox.Show(message);
             }
         }
 
@@ -49,10 +51,6 @@ namespace HealthInstitution.MVVM.Models.Services
             {
                 // TODO: prekopirati od Milice kad zavrsi
             }
-
-            string message = "The appointment has been successfully deleted.";
-            MessageBox.Show(message);
-
         }
 
         public static void RejectChange(ExaminationChange request)
@@ -84,11 +82,14 @@ namespace HealthInstitution.MVVM.Models.Services
 
         private static void DeleteFutureAppointments(Patient patient)
         {
-            foreach (Examination appointment in Institution.Instance().ExaminationRepository.Examinations)
+            List<Examination> examinations = new List<Examination>(Institution.Instance().ExaminationRepository.Examinations.ToArray());
+            List<Operation> operations = new List<Operation>(Institution.Instance().OperationRepository.Operations.ToArray());
+
+            foreach (Examination appointment in examinations)
             {
                 if (appointment.Date >= DateTime.Now && patient.ID == appointment.Patient.ID) DeleteAppointment(appointment);
             }
-            foreach (Operation appointment in Institution.Instance().OperationRepository.Operations)
+            foreach (Operation appointment in operations)
             {
                 if (appointment.Date >= DateTime.Now && patient.ID == appointment.Patient.ID) DeleteAppointment(appointment);
             }
