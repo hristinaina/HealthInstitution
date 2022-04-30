@@ -189,15 +189,6 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
-                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                    ToolTip="Edit history of illnesses"
-                                    VerticalAlignment="Bottom"
-                                    HorizontalAlignment="Right"
-                                    Grid.Row="1">
-                                <materialDesign:PackIcon Kind="Edit"
-                                                     Height="15"
-                                                     Width="15"/>
-                            </Button>
                         </Grid>
 
                     </Grid>
