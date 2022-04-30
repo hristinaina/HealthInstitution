@@ -175,11 +175,5 @@ namespace HealthInstitution.MVVM.Models.Entities
             return true;
         }
 
-
-        public void BlockPatient(bool blocked)
-        {
-            _blocked = blocked;
-            // TODO: ?delete all future appointments with this patient 
-        }
     }
 }

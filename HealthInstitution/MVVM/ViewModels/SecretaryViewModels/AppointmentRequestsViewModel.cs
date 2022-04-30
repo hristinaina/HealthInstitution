@@ -43,6 +43,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             get => _selection;
             set
             {
+                if (value < 0) { return; };
                 _selection = value;
                 EnableChanges = true;
                 OnPropertyChanged(nameof(Selection));
