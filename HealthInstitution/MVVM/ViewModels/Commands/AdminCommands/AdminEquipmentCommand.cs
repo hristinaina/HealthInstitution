@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
 {
-    class AdminRoomCommand : BaseCommand
+    class AdminEquipmentCommand : BaseCommand
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigation;
 
-        public AdminRoomCommand()
+        public AdminEquipmentCommand()
         {
             _institution = Institution.Instance();
             _navigation = NavigationStore.Instance();
         }
         public override void Execute(object parameter)
         {
-            _navigation.CurrentViewModel = new AdminRoomViewModel();
+            _navigation.CurrentViewModel = new AdminEquipmentViewModel();
         }
     }
 }

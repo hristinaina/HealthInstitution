@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.AdminViews"
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:adminviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.AdminViewModels"
+             d:DataContext="{d:DesignInstance Type=adminviewmodels:AdminEquipmentViewModel}"
              mc:Ignorable="d"
              Height="600"
              Width="1200"

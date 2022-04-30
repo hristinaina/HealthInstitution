@@ -60,13 +60,15 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         private List<string> _roomTypes;
         public List<string> RoomTypes => _roomTypes;
 
+        public AdminNavigationViewModel Navigation { get; }
+
 
         public AdminRoomViewModel()
         {
             _institution = Institution.Instance();
             _admin = (Admin)_institution.CurrentUser;
             _rooms = new ObservableCollection<RoomListItemViewModel>();
-            //Navigation = new PatientNavigationViewModel();
+            Navigation = new AdminNavigationViewModel();
             EnableChanges = false;
             _roomTypes = new List<string>();
             FillRoomTypes();

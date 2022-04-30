@@ -65,7 +65,7 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Width="150"
+                                    <GridViewColumn Width="120"
                                                     Header="Number">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -253,7 +253,7 @@
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                     Grid.Column="1"
                                     Width="170"
-                                    ToolTip="Cancel selected appointment"
+                                    ToolTip="..."
                                     Content="Delete Room"
                                     Background="#66FFFFFF"
                                     BorderBrush="#6634565A"
@@ -261,7 +261,8 @@
                                     Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Left"
-                                    Grid.Row="2">
+                                    Grid.Row="2"
+                                    IsEnabled="{Binding EnableChanges}">
                                 <Button.CommandParameter>
                                     <StackPanel Height="230"
                                                 Width="400"
@@ -275,7 +276,7 @@
                                                    FontSize="14"
                                                    Margin="10"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                        <TextBlock Text="405"
+                                        <TextBlock Text="{Binding SelectedNumber}"
                                                    HorizontalAlignment="Center"
                                                    Margin="10"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
