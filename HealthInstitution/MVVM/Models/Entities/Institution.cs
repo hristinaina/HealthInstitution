@@ -196,6 +196,17 @@ namespace HealthInstitution.MVVM.Models
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
+            if (CurrentUser is Doctor)
+            {
+                if (!doctor.IsAvailable(dateTime))
+                {
+                    return false;
+                }
+                if (!patient.IsAvailable(dateTime))
+                {
+                    return false;
+                }
+            }
             ValidateAppointmentData(patient, doctor, dateTime);
 
             int appointmentId = 0;
@@ -238,6 +249,17 @@ namespace HealthInstitution.MVVM.Models
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
+            if (CurrentUser is Doctor)
+            {
+                if (!appointment.Doctor.IsAvailable(dateTime))
+                {
+                    return false;
+                }
+                if (!appointment.Patient.IsAvailable(dateTime))
+                {
+                    return false;
+                }
+            }
             ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime);
             appointment.Date = dateTime;
             _roomRepository.FindAvailableRoom(appointment, dateTime);
@@ -271,6 +293,7 @@ namespace HealthInstitution.MVVM.Models
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
+           
             Patient patient = appointment.Patient;
             Doctor doctor = appointment.Doctor;
             Room room = appointment.Room;
@@ -329,15 +352,7 @@ namespace HealthInstitution.MVVM.Models
                 }
             }
 
-            if (CurrentUser is Doctor)
-            {
-                if (!doctor.IsAvailable(dateTime))
-                {
-                }
-                if (!patient.IsAvailable(dateTime))
-                {
-                }
-            }
+            
         }
     }
 }
