@@ -55,7 +55,6 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
                 newHeight, newWeight);
             Institution.Instance().PatientRepository.Patients.Add(patient);
 
-            // kreirati poveznicu alergena
             _viewModel.FillPatientList();
 
             MessageBox.Show("Successfully created patient account!");
