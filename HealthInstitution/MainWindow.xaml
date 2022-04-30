@@ -16,6 +16,7 @@
         xmlns:viewmodeladmin="clr-namespace:HealthInstitution.MVVM.ViewModels.AdminViewModels"
         xmlns:viewmodelsSecretary="clr-namespace:HealthInstitution.MVVM.ViewModels.SecretaryViewModels"
         xmlns:viewsSecretary="clr-namespace:HealthInstitution.MVVM.Views.SecretaryViews"
+        xmlns:viewmodelsDoctor="clr-namespace:HealthInstitution.MVVM.ViewModels.DoctorViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="NMK - Log in"
@@ -43,9 +44,17 @@
             <DataTemplate DataType="{x:Type viewmodelsPatient:PatientSurveyViewModel}">
                 <viewsPatient:PatientSurveyView />
             </DataTemplate>
-     
-            <DataTemplate DataType="{x:Type viewmodelmains:DoctorMainPageViewModel}">
-                <viewmains:DoctorMainPageView />
+            <DataTemplate DataType="{x:Type viewmodelsDoctor:DoctorExaminationViewModel}">
+                <viewsdoctor:DoctorExaminationView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsDoctor:DoctorOperationViewModel}">
+                <viewsdoctor:DoctorOperationView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsDoctor:DoctorMedicalRecordViewModel}">
+                <viewsdoctor:DoctorMedicalRecordView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsDoctor:UpdateMedicalRecordViewModel}">
+                <viewsdoctor:UpdateMedicalRecordView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodelsSecretary:BlockedPatientListViewModel}">

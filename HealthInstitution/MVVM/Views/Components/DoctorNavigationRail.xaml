@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.Components"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:doctorviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.DoctorViewModels"
              mc:Ignorable="d">
 
     <TabControl Name="navigation"
@@ -23,7 +24,7 @@
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Padding="-4"
-                            Command="{Binding Navigation.Record}"
+                            Command="{Binding Navigation.MyOperations}"
                             Height="70"
                             BorderThickness="0,0,0,0" />
                     <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
@@ -39,23 +40,7 @@
                             Background="Transparent"
                             BorderBrush="Transparent"
                             Padding="-4"
-                            Command="{Binding Navigation.Appointments}"
-                            Height="70"
-                            BorderThickness="0,0,0,0" />
-                    <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
-                </StackPanel>
-            </TabItem.Header>
-        </TabItem>
-        <TabItem Width="170">
-            <TabItem.Header>
-                <StackPanel Width="auto"
-                            Height="auto">
-                    <Button Width="170"
-                            Content="Start an appointment"
-                            Background="Transparent"
-                            BorderBrush="Transparent"
-                            Padding="-4"
-                            Command="{Binding Navigation.Search}"
+                            Command="{Binding Navigation.MyAppointments}"
                             Height="70"
                             BorderThickness="0,0,0,0" />
                     <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->

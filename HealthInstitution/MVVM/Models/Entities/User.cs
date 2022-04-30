@@ -66,6 +66,5 @@ namespace HealthInstitution.MVVM.Models
         {
             return FullName;
         }
-
     }
 }

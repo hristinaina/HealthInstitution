@@ -1,5 +1,5 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System;
 
 namespace HealthInstitution.MVVM.ViewModels
 {
@@ -7,12 +7,14 @@ namespace HealthInstitution.MVVM.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public DateTime MergeTime(string date, string time) {
+        public DateTime MergeTime(string date, string time)
+        {
 
 
             string[] dateTokens = date.Split(" ")[0].Split("/");
             string[] timeTokens = time.Split(" ")[1].Split(":");
-            if (dateTokens.Length == 1) {
+            if (dateTokens.Length == 1)
+            {
                 dateTokens = date.Split(" ")[0].Split("-");
             }
             int month = int.Parse(dateTokens[0]);
