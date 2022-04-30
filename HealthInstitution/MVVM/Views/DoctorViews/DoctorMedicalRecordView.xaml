@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="HealthInstitution.MVVM.Views.DoctorViews.DoctorMedicalRecordView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.DoctorViews"
+             xmlns:doctorviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.DoctorViewModels"
+             d:DataContext="{d:DesignInstance Type=doctorviewmodels:DoctorMedicalRecordViewModel}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
+             mc:Ignorable="d"
+             Height="600"
+             Width="1200"
+             Background="White"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <components:DoctorNavigationRail></components:DoctorNavigationRail>
+
+        <materialDesign:Card Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="6*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Medical Record"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Margin="0, 20, 0, 0"
+                           Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                           Grid.Row="0"
+                           Height="50"/>
+
+                <Grid Grid.Row="1" Margin="0 0 0 100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                            Text="{Binding Name}"
+                            Width="250"
+                            VerticalAlignment="Center"
+                            TextWrapping="Wrap"
+                            MaxLength="30"
+                            Grid.Row="0"
+                            IsEnabled="False"
+                            Margin="0 0 0 0"
+                            materialDesign:HintAssist.Hint="Patient"/>
+
+                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                            Text="{Binding Height}"
+                            Width="250"
+                            VerticalAlignment="Center"
+                            TextWrapping="Wrap"
+                            MaxLength="30"
+                            Grid.Row="1"
+                            IsEnabled="False"
+                            Margin="0 0 0 0"
+                            materialDesign:HintAssist.Hint="Heigh (cm)"/>
+
+                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                            Text="{Binding Weight}"
+                            Width="250"
+                            VerticalAlignment="Center"
+                            TextWrapping="Wrap"
+                            MaxLength="30"
+                            Grid.Row="2"
+                            IsEnabled="False"
+                            Margin="0 0 0 0"
+                            materialDesign:HintAssist.Hint="Weight (kg)"/>
+
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <ListView ItemsSource="{Binding Allergens}"
+                                  IsEnabled="False"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Center"
+                                  Height="200">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="130"
+                                                    Header="Allergens">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding AllergenName}"
+                                                           Width="130" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="0 0 30 0">
+                        <ListView ItemsSource="{Binding Allergens}"
+                                  IsEnabled="False"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Center"
+                                  Height="200">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="200"
+                                                    Header="History of Illness">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding AllergenName}"
+                                                           Width="130" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                    </Grid>
+                    
+                </Grid>
+            </Grid>
+
+
+
+        </materialDesign:Card>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,122 @@
+[
+  {
+    "Blocked": true,
+    "BlockadeType": 1,
+    "Deleted": false,
+    "Record": {
+      "Height": 190.0,
+      "Weight": 80.0
+    },
+    "ID": 1,
+    "FirstName": "Test",
+    "LastName": "Patient",
+    "Email": "p23",
+    "Password": "p23",
+    "Gender": 0
+  },
+  {
+    "Blocked": true,
+    "BlockadeType": 1,
+    "Deleted": false,
+    "Record": {
+      "Height": 170.0,
+      "Weight": 60.0
+    },
+    "ID": 2,
+    "FirstName": "Test2",
+    "LastName": "Patient",
+    "Email": "p2@mail",
+    "Password": "p",
+    "Gender": 1
+  },
+  {
+    "Blocked": true,
+    "BlockadeType": 1,
+    "Deleted": false,
+    "Record": {
+      "Height": 170.0,
+      "Weight": 60.0
+    },
+    "ID": 3,
+    "FirstName": "Test3",
+    "LastName": "Patient",
+    "Email": "p3@mail",
+    "Password": "p",
+    "Gender": 2
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 179.0,
+      "Weight": 69.0
+    },
+    "ID": 4,
+    "FirstName": "Test9",
+    "LastName": "Patient9",
+    "Email": "p4@mail9",
+    "Password": "p9",
+    "Gender": 1
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 170.0,
+      "Weight": 60.0
+    },
+    "ID": 5,
+    "FirstName": "Test5",
+    "LastName": "Prezime",
+    "Email": "p5@mail",
+    "Password": "p",
+    "Gender": 2
+  },
+  {
+    "Blocked": true,
+    "BlockadeType": 1,
+    "Deleted": false,
+    "Record": {
+      "Height": 170.0,
+      "Weight": 60.0
+    },
+    "ID": 6,
+    "FirstName": "Test6",
+    "LastName": "Prezime",
+    "Email": "p6@mail",
+    "Password": "p",
+    "Gender": 2
+  },
+  {
+    "Blocked": true,
+    "BlockadeType": 2,
+    "Deleted": false,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0
+    },
+    "ID": 0,
+    "FirstName": "debil",
+    "LastName": "debilkovic",
+    "Email": "p",
+    "Password": "p",
+    "Gender": 1
+  },
+  {
+    "Blocked": true,
+    "BlockadeType": 1,
+    "Deleted": false,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0
+    },
+    "ID": 8,
+    "FirstName": "neko",
+    "LastName": "nekovic",
+    "Email": "p89",
+    "Password": "p",
+    "Gender": 1
+  }
+]

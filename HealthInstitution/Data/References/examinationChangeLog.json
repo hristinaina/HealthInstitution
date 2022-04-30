@@ -1,0 +1,38 @@
+[
+    {
+        "Id": 0,
+        "PatientID": 1,
+        "AppointmentID": 5,
+        "ChangeStatus": 1,
+        "ChangeDate": "2022-04-29T18:43:37.0931955+02:00",
+        "Resolved": true,
+        "NewDate": "2022-04-30T18:43:37.0931955+02:00"
+    },
+    {
+        "Id": 1,
+        "PatientID": 1,
+        "AppointmentID": 2,
+        "ChangeStatus": 1,
+        "ChangeDate": "2022-04-29T18:43:37.0931955+02:00",
+        "Resolved": false,
+        "NewDate": "2022-04-30T18:43:37.0931955+02:00"
+    },
+    {
+        "Id": 2,
+        "PatientID": 1,
+        "AppointmentID": 3,
+        "ChangeStatus": 1,
+        "ChangeDate": "2022-04-29T18:43:37.0931955+02:00",
+        "Resolved": false,
+        "NewDate": "2022-04-30T18:43:37.0931955+02:00"
+    },
+    {
+        "Id": 3,
+        "PatientID": 2,
+        "AppointmentID": 2,
+        "ChangeStatus": 2,
+        "ChangeDate": "2022-04-29T18:43:37.0931955+02:00",
+        "Resolved": false,
+        "NewDate": "2022-04-30T18:43:37.0931955+02:00"
+    }
+]

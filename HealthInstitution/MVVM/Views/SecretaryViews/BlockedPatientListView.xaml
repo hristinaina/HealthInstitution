@@ -1,0 +1,343 @@
+﻿<UserControl x:Class="HealthInstitution.MVVM.Views.SecretaryViews.BlockedPatientListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.SecretaryViews"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:secretaryviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.SecretaryViewModels"
+             xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
+             d:DataContext="{d:DesignInstance Type=secretaryviewmodels:BlockedPatientListViewModel}"
+             mc:Ignorable="d"
+             Height="600"
+             Width="1200"
+             Background="White"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <components:SecretaryNavigationRail SelectedIndex="1"></components:SecretaryNavigationRail>
+
+        <materialDesign:Card Grid.Column="1">
+
+            <materialDesign:DialogHost DialogTheme="Inherit"
+                                       Grid.Column="0"
+                                       Grid.Row="0"
+                                       IsOpen="{Binding DialogOpen}">
+                <materialDesign:Card>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+
+                        <ListView ItemsSource="{Binding Patients}"
+                                  VerticalAlignment="Top"
+                                  Width="610"
+                                  SelectionMode="Single"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  HorizontalAlignment="Center"
+                                  SelectedIndex="{Binding Selection}">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Width="80"
+                                                    Header="Id">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Id}"
+                                                           Width="80" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="130"
+                                                    Header="Name">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Name}"
+                                                           Width="70" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150"
+                                                    Header="Surname">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Surname}"
+                                                           Width="70" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="120"
+                                                    Header="Gender">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Gender}"
+                                                           Width="120" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="135"
+                                                    Header="Blocked by">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding BlockadeType}"
+                                                           Width="135" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="4*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Width="190"
+                                    ToolTip="Show patient account"
+                                    Content="Show patient"
+                                    Background="#66FFFFFF"
+                                    BorderBrush="#6634565A"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    Height="32"
+                                    VerticalAlignment="Bottom"
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,0,0,76"
+                                    Grid.RowSpan="2"
+                                    IsEnabled="{Binding EnableChanges}"
+                                    Click="Button_Click">
+                                <Button.CommandParameter>
+                                    <materialDesign:Card Grid.Column="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*"></RowDefinition>
+                                                <RowDefinition Height="6*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="Patient account"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Top"
+                                                       Margin="0, 20, 0, 20"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                                       Grid.Row="0"
+                                                       Height="50" />
+
+                                            <Grid Grid.Row="1"
+                                                  Margin="0 0 0 100">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid Grid.Column="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding FirstName}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="0"
+                                                             IsReadOnly="True"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="First Name"/>
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding LastName}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="1"
+                                                             IsReadOnly="True"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Last Name" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding Email}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="2"
+                                                             IsReadOnly="True"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Email" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding Height}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="3"
+                                                             IsReadOnly="True"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Heigh (cm)" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding Weight}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="4"
+                                                             IsReadOnly="True"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Weight (kg)" />
+
+                                                </Grid>
+
+                                                <Grid Grid.Column="1">
+                                                    <ListView ItemsSource="{Binding Allergens}"
+                                                              VerticalAlignment="Top"
+                                                              HorizontalAlignment="Center"
+                                                              IsManipulationEnabled="False"
+                                                              Height="300"
+                                                              Margin=" 0 0 25 0">
+                                                        <ListView.View>
+                                                            <GridView>
+                                                                <GridViewColumn Width="170"
+                                                                                Header="Allergens">
+                                                                    <GridViewColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <TextBlock TextAlignment="Left"
+                                                                                       Text="{Binding AllergenName}"
+                                                                                       Width="170" />
+                                                                        </DataTemplate>
+                                                                    </GridViewColumn.CellTemplate>
+                                                                </GridViewColumn>
+                                                            </GridView>
+                                                        </ListView.View>
+                                                    </ListView>
+                                                </Grid>
+
+                                                <Grid Grid.Column="2"
+                                                      Margin="0 0 30 0">
+                                                    <ListView ItemsSource="{Binding Illnesses}"
+                                                              IsManipulationEnabled="False"
+                                                              VerticalAlignment="Top"
+                                                              HorizontalAlignment="Center"
+                                                              Height="300">
+                                                        <ListView.View>
+                                                            <GridView>
+                                                                <GridViewColumn Width="200"
+                                                                                Header="History of Illness">
+                                                                    <GridViewColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <TextBlock TextAlignment="Left"
+                                                                                       Text="{Binding Illness}"
+                                                                                       Width="130" />
+                                                                        </DataTemplate>
+                                                                    </GridViewColumn.CellTemplate>
+                                                                </GridViewColumn>
+                                                            </GridView>
+                                                        </ListView.View>
+                                                    </ListView>
+                                                    <StackPanel Orientation="Horizontal"
+                                                                VerticalAlignment="Bottom"
+                                                                HorizontalAlignment="Center">
+                                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                                IsDefault="True"
+                                                                Margin="0 50 10 0"
+                                                                Content="BACK"
+                                                                Width="130"
+                                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                            <Button.CommandParameter>
+                                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                                    True
+                                                                </system:Boolean>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </materialDesign:Card>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Width="190"
+                                    ToolTip="Unblock patient profile"
+                                    Content="Unblock"
+                                    Background="#CC80DEEA"
+                                    BorderBrush="#6680DEEA"
+                                    Height="32"
+                                    Command="{Binding Unblock}"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Grid.Row="1"
+                                    IsEnabled="{Binding EnableChanges}"
+                                    Margin="0,15,0,0">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="150"
+                                                Width="400"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Unblock patient account"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBlock Text="Are you sure ?"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="0 10 0 0" />
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 20 10 0"
+                                                    Content="YES"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="10 20 0 0"
+                                                    Content="CANCEL"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+                        </Grid>
+                        <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+
+                    </Grid>
+                </materialDesign:Card>
+            </materialDesign:DialogHost>
+
+        </materialDesign:Card>
+    </Grid>
+</UserControl>
