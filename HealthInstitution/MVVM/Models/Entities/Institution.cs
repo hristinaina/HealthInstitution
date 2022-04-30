@@ -189,7 +189,7 @@ namespace HealthInstitution.MVVM.Models
         public EquipmentArragmentRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
 
 
-        public Appointment CreateAppointment(Doctor doctor, Patient patient, DateTime datetime, string type)
+        public Appointment CreateAppointment(Doctor doctor, Patient patient, DateTime datetime, string type, int duration = 15)
         {
             if (!doctor.IsAvailable(datetime))
             {
@@ -221,9 +221,15 @@ namespace HealthInstitution.MVVM.Models
             }
 
             else if (type == nameof(Operation)) {
-                // TODO
+                appointmentId = _examinationRepository.NewId();
+                Operation operation = new Operation(appointmentId, doctor, patient, datetime, duration);
+                patient.Operations.Add(operation);
+                doctor.Operations.Add(operation);
+                _roomRepository.FindAvailableRoom(operation, datetime);
+                _operationRepository.Add(operation);
+                _operationReferencesRepository.Add(operation);
 
-                return null;
+                return operation;
             }
 
             return null;
@@ -256,7 +262,8 @@ namespace HealthInstitution.MVVM.Models
 
             }
 
-            else if (appointment is Operation) {
+            else if (appointment is Operation) 
+            {
                 _operationReferencesRepository.Add((Operation)appointment);
             }
 

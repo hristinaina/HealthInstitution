@@ -62,9 +62,6 @@
                             Grid.Row="0"
                             IsEnabled="False"
                             Margin="0 0 0 0"
-                            materialDesign:TextFieldAssist.CharacterCounterVisibility=
-                            "{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter},
-                            ElementName=MaterialDesignFilledTextBoxTextCountComboBox}"
                             materialDesign:HintAssist.Hint="Patient"/>
 
                         <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -76,9 +73,6 @@
                             Grid.Row="1"
                             IsEnabled="True"
                             Margin="0 0 0 0"
-                            materialDesign:TextFieldAssist.CharacterCounterVisibility=
-                            "{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter},
-                            ElementName=MaterialDesignFilledTextBoxTextCountComboBox}"
                             materialDesign:HintAssist.Hint="Heigh (cm)"/>
 
                         <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -90,9 +84,6 @@
                             Grid.Row="2"
                             IsEnabled="True"
                             Margin="0 0 0 0"
-                            materialDesign:TextFieldAssist.CharacterCounterVisibility=
-                            "{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter},
-                            ElementName=MaterialDesignFilledTextBoxTextCountComboBox}"
                             materialDesign:HintAssist.Hint="Weight (kg)"/>
                     </Grid>
 
@@ -118,15 +109,36 @@
                             </ListView.View>
                         </ListView>
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                IsEnabled="True"
                                 ToolTip="Edit allergens"
-                                VerticalAlignment="Bottom"
+                                VerticalAlignment="Top"
                                 HorizontalAlignment="Right"
-                                Grid.Row="1"
-                                IsEnabled="{Binding DataContext.ControlsEnabled,
-                            RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                Margin="0,230,0,0">
                             <materialDesign:PackIcon Kind="Edit"
                                                      Height="15"
                                                      Width="15"/>
+                            <Button.CommandParameter>
+                                <StackPanel Height="420"
+                                            Width="320"
+                                            Margin="40 20 40 20">
+                                    <TextBlock Text="Schedule examination"
+                                                HorizontalAlignment="Center"
+                                                Margin="10"
+                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                    <ComboBox Margin="0 20 0 0"
+                                              Width="250"
+                                              ItemsSource="{Binding NewAllergens}"
+                                              SelectedItem="{Binding NewAllergen}"
+                                              HorizontalAlignment="Center"
+                                              Style="{StaticResource MaterialDesignFilledComboBox}"
+                                              materialDesign:HintAssist.Hint="Add new allergen"
+                                              materialDesign:HintAssist.HintOpacity=".26"
+                                              IsEditable="True">
+                                    </ComboBox>
+
+                                </StackPanel>
+                            </Button.CommandParameter>
                         </Button>
                     </Grid>
 
@@ -155,12 +167,10 @@
                                 ToolTip="Edit history of illnesses"
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Right"
-                                Grid.Row="1"
-                                IsEnabled="{Binding DataContext.ControlsEnabled,
-                            RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
-                        <materialDesign:PackIcon Kind="Edit"
-                                                     Height="15"
-                                                     Width="15"/>
+                                Grid.Row="1">
+                            <materialDesign:PackIcon Kind="Edit"
+                                                 Height="15"
+                                                 Width="15"/>
                         </Button>
                     </Grid>
 
@@ -192,13 +202,14 @@
                         SpellCheck.IsEnabled="True"
                         materialDesign:HintAssist.Hint="Multiline text"
                         Height="80"
-                        Text=" "
+                        Text="{Binding Anamnesis}"
                         Grid.Column="0"/>
                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                             Grid.Column="1"
                             IsDefault="True"
                             Margin="0 30 50 0"
-                            Content="DONE"/>
+                            Content="DONE"
+                            Command="{Binding SaveCommand}"/>
                 </Grid>
             </Grid>
 

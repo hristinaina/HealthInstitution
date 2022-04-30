@@ -16,18 +16,35 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
         private readonly DoctorMedicalRecordViewModel _medicalRecord;
-        private DoctorExaminationViewModel _viewModel;
+        private DoctorExaminationViewModel _examinationViewModel;
+        private DoctorOperationViewModel _operationViewModel;
+        private bool _isExaminationViewModel;
 
         public OpenMedicalRecordCommand(DoctorExaminationViewModel viewModel)
         {
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();
-            _viewModel = viewModel;
+            _examinationViewModel = viewModel;
+            _isExaminationViewModel = true;
+        }
+
+        public OpenMedicalRecordCommand(DoctorOperationViewModel viewModel)
+        {
+            _institution = Institution.Instance();
+            _navigationStore = NavigationStore.Instance();
+            _operationViewModel = viewModel;
+            _isExaminationViewModel = false;
         }
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new DoctorMedicalRecordViewModel(_viewModel.SelectedExamination.Examination);
+            if (_isExaminationViewModel)
+            _navigationStore.CurrentViewModel = 
+            new DoctorMedicalRecordViewModel(_examinationViewModel.SelectedExamination.Examination);
+
+            else
+            _navigationStore.CurrentViewModel =
+            new DoctorMedicalRecordViewModel(_operationViewModel.SelectedOperation.Operation);
         }
     }
 }

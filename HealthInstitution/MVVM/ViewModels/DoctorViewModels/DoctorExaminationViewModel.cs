@@ -30,6 +30,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand RescheduleAppointment { get; }
         public ICommand CancelAppointment { get; }
         public ICommand CreateExamination { get; }
+        public ICommand UpdateMedicalRecord { get; }
 
         private ExaminationViewModel _selectedExamination;
         public ExaminationViewModel SelectedExamination { get => _selectedExamination; }
@@ -112,6 +113,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             RescheduleAppointment = new RescheduleAppointmentCommand(this);
             CancelAppointment = new CancelExaminationCommand(this);
             MedicalRecord = new OpenMedicalRecordCommand(this);
+            UpdateMedicalRecord = new OpenUpdateMedicalRecordCommand(this);
         }
 
         public void FillExaminationsList()

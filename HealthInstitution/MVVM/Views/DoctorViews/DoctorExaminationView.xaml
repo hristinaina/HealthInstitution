@@ -115,7 +115,7 @@
                                 Content="Start examination"
                                 Background="#6680DEEA"
                                 BorderBrush="#6680DEEA"
-                                
+                                Command="{Binding UpdateMedicalRecord}"
                                 Height="32"
                                 VerticalAlignment="Center"
                                 Grid.Row="0"
