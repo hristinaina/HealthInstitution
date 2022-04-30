@@ -56,6 +56,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public Patient NewPatient { get; set; }
         public string NewDate { get; set; }
         public string NewTime { get; set; }
+        public int Duration { get; set; }
         public Room NewRoom { get; set; }
 
         private bool _enableChanges;
@@ -91,8 +92,12 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public DoctorOperationViewModel()
         {
+            bool isSpecialist = true;
+
+            Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
+            if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
             _operations = new ObservableCollection<OperationViewModel>();
-            Navigation = new DoctorNavigationViewModel();
+            Navigation = new DoctorNavigationViewModel(isSpecialist);
 
             _institution = Institution.Instance();
             _doctor = (Doctor)_institution.CurrentUser;
@@ -107,6 +112,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
             NewDate = DateTime.Now.ToString("MM/dd/yyyy HH:MM");
             NewTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
+            Duration = 15;
             CreateOperation = new CreateOperationCommand(this);
             RescheduleOperation = new RescheduleOperationCommand(this);
             CancelOperation = new CancelOperationCommand(this);
@@ -140,32 +146,5 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 _rooms.Add(room);
             }
         }
-
-        /*public DoctorOperationViewModel()
-        {
-            Navigation = new DoctorNavigationViewModel();
-            _operations = new ObservableCollection<OperationViewModel>();
-
-            // test
-            Operation operation = new Operation(1, DateTime.Now, false, false, 30);
-            Patient patient = new Patient();
-            patient.FirstName = "PAcijnet";
-            patient.LastName = "Pacijentic";
-
-            Room room = new Room();
-            room.Name = "neka sobica";
-            operation.Patient = patient;
-            operation.Room = room;
-            _operations.Add(new OperationViewModel(operation));
-            operation.ID = 2;
-            _operations.Add(new OperationViewModel(operation));
-            operation.ID = 8;
-            _operations.Add(new OperationViewModel(operation));
-            operation.Date = DateTime.Now.AddDays(8);
-            _operations.Add(new OperationViewModel(operation));
-            _operations.Add(new OperationViewModel(operation));
-
-            // test
-        }*/
     }
 }

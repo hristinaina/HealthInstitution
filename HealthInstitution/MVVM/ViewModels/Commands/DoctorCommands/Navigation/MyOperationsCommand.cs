@@ -14,11 +14,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
+        public bool Specialization;
 
-        public MyOperationsCommand()
+        public MyOperationsCommand(bool specialzation)
         {
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();
+            Specialization = specialzation;
         }
 
         public override void Execute(object parameter)

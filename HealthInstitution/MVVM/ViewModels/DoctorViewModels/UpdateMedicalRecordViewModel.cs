@@ -17,10 +17,13 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public DoctorNavigationViewModel Navigation { get; }
         
         public ICommand SaveCommand { get; }
+        public ICommand SaveAllergenCommand { get; }
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
-        private ObservableCollection<AllergenViewModel> _newAllergens;
-        public IEnumerable<AllergenViewModel> NewAllergens => _newAllergens;
+        private ObservableCollection<Allergen> _newAllergens;
+        public IEnumerable<Allergen> NewAllergens => _newAllergens;
+        private ObservableCollection<IllnessItemViewModel> _illnesses;
+        public IEnumerable<IllnessItemViewModel> Illnesses => _illnesses;
 
         private Examination _examination;
         public Examination Examination { get => _examination; }
@@ -87,16 +90,22 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public UpdateMedicalRecordViewModel(Examination examination)
         {
-            Navigation = new DoctorNavigationViewModel();
+            bool isSpecialist = true;
+            Doctor doctor = (Doctor) Institution.Instance().CurrentUser;
+            if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
+            Navigation = new DoctorNavigationViewModel(isSpecialist);
             _examination = examination;
             _allergens = new ObservableCollection<AllergenViewModel>();
-            _newAllergens = new ObservableCollection<AllergenViewModel>();
+            _newAllergens = new ObservableCollection<Allergen>();
+            _illnesses = new ObservableCollection<IllnessItemViewModel>();
 
             SaveCommand = new UpdateMedicalRecordCommand(this);
+            SaveAllergenCommand = new SaveAllergenCommand(this);
 
             SetProperties();
             FillAllergensList();
             FillNewAllergenList();
+            FillIllnessList();
         }
 
         public void SetProperties()
@@ -125,11 +134,34 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             {
                 foreach (Allergen i in _examination.Patient.Record.Allergens)
                 {
-                    if (i.Id == allergen.Id) continue;
+                    if (allergen != null && i != null)
+                    {
+                        if (i.Id == allergen.Id) continue;
+                    }
                 }
 
-                _newAllergens.Add(new AllergenViewModel(allergen));
+                _newAllergens.Add(allergen);
             }
+        }
+
+        public void FillIllnessList()
+        {
+            _illnesses.Clear();
+            List<string> allIllnesses = _examination.Patient.GetHistoryOfIllness();
+            foreach (string illness in allIllnesses)
+            {
+                _illnesses.Add(new IllnessItemViewModel(illness));
+            }
+        }
+
+        public void AddAllergen(Allergen allergen)
+        {
+            _allergens.Add(new AllergenViewModel(allergen));
+        }
+
+        public void AddIllness(string illness)
+        {
+            _illnesses.Add(new IllnessItemViewModel(illness));
         }
 
     }

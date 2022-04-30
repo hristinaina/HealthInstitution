@@ -25,193 +25,211 @@
         <components:DoctorNavigationRail SelectedIndex="2"></components:DoctorNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"></RowDefinition>
-                    <RowDefinition Height="6*"></RowDefinition>
-                    <RowDefinition Height="3*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Medical Record"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Margin="0, 20, 0, 0"
-                           Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                           Grid.Row="0"
-                           Height="50"/>
-
-                <Grid Grid.Row="1" Margin="0 0 0 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-
-                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                            Text="{Binding Name}"
-                            Width="250"
-                            VerticalAlignment="Center"
-                            TextWrapping="Wrap"
-                            MaxLength="30"
-                            Grid.Row="0"
-                            IsEnabled="False"
-                            Margin="0 0 0 0"
-                            materialDesign:HintAssist.Hint="Patient"/>
-
-                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                            Text="{Binding Height}"
-                            Width="250"
-                            VerticalAlignment="Center"
-                            TextWrapping="Wrap"
-                            MaxLength="30"
-                            Grid.Row="1"
-                            IsEnabled="True"
-                            Margin="0 0 0 0"
-                            materialDesign:HintAssist.Hint="Heigh (cm)"/>
-
-                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                            Text="{Binding Weight}"
-                            Width="250"
-                            VerticalAlignment="Center"
-                            TextWrapping="Wrap"
-                            MaxLength="30"
-                            Grid.Row="2"
-                            IsEnabled="True"
-                            Margin="0 0 0 0"
-                            materialDesign:HintAssist.Hint="Weight (kg)"/>
-                    </Grid>
-
-                    <Grid Grid.Column="1">
-                        <ListView ItemsSource="{Binding Allergens}"
-                                  IsEnabled="False"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Center"
-                                  Height="200">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Width="130"
-                                                    Header="Allergens">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock TextAlignment="Left"
-                                                           Text="{Binding AllergenName}"
-                                                           Width="130" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                IsEnabled="True"
-                                ToolTip="Edit allergens"
-                                VerticalAlignment="Top"
-                                HorizontalAlignment="Right"
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
-                                Margin="0,230,0,0">
-                            <materialDesign:PackIcon Kind="Edit"
-                                                     Height="15"
-                                                     Width="15"/>
-                            <Button.CommandParameter>
-                                <StackPanel Height="420"
-                                            Width="320"
-                                            Margin="40 20 40 20">
-                                    <TextBlock Text="Schedule examination"
-                                                HorizontalAlignment="Center"
-                                                Margin="10"
-                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                    <ComboBox Margin="0 20 0 0"
-                                              Width="250"
-                                              ItemsSource="{Binding NewAllergens}"
-                                              SelectedItem="{Binding NewAllergen}"
-                                              HorizontalAlignment="Center"
-                                              Style="{StaticResource MaterialDesignFilledComboBox}"
-                                              materialDesign:HintAssist.Hint="Add new allergen"
-                                              materialDesign:HintAssist.HintOpacity=".26"
-                                              IsEditable="True">
-                                    </ComboBox>
-
-                                </StackPanel>
-                            </Button.CommandParameter>
-                        </Button>
-                    </Grid>
-
-                    <Grid Grid.Column="2" Margin="0 0 30 0">
-                        <ListView ItemsSource="{Binding Allergens}"
-                                  IsEnabled="False"
-                                  VerticalAlignment="Top"
-                                  HorizontalAlignment="Center"
-                                  Height="200">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Width="200"
-                                                    Header="History of Illness">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock TextAlignment="Left"
-                                                           Text="{Binding AllergenName}"
-                                                           Width="130" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                ToolTip="Edit history of illnesses"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Right"
-                                Grid.Row="1">
-                            <materialDesign:PackIcon Kind="Edit"
-                                                 Height="15"
-                                                 Width="15"/>
-                        </Button>
-                    </Grid>
-
-                </Grid>
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Anamnesis"
-                               Width="110"
-                               HorizontalAlignment="Left"
+            <materialDesign:DialogHost DialogTheme="Inherit"
+                                       Grid.Column="0"
+                                       
+                                       Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="6*"></RowDefinition>
+                        <RowDefinition Height="3*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Medical Record"
+                               HorizontalAlignment="Center"
                                VerticalAlignment="Top"
-                               Margin="50, 0, 0, 0"
+                               Margin="0, 20, 0, 0"
                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                Grid.Row="0"
-                               FontSize="20"
-                               Height="50"
-                               Grid.Column="0"/>
-                    <TextBox
-                        Margin="45 0 0 20"
-                        HorizontalAlignment="Left"
-                        Width="600"
-                        TextWrapping="Wrap"
-                        VerticalAlignment="Stretch"
-                        MinWidth="280"
-                        AcceptsReturn="True"
-                        VerticalScrollBarVisibility="Auto"
-                        SpellCheck.IsEnabled="True"
-                        materialDesign:HintAssist.Hint="Multiline text"
-                        Height="80"
-                        Text="{Binding Anamnesis}"
-                        Grid.Column="0"/>
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            Grid.Column="1"
-                            IsDefault="True"
-                            Margin="0 30 50 0"
-                            Content="DONE"
-                            Command="{Binding SaveCommand}"/>
+                               Height="50"/>
+
+                    <Grid Grid.Row="1" Margin="0 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                Text="{Binding Name}"
+                                Width="250"
+                                VerticalAlignment="Center"
+                                TextWrapping="Wrap"
+                                MaxLength="30"
+                                Grid.Row="0"
+                                IsEnabled="False"
+                                Margin="0 0 0 0"
+                                materialDesign:HintAssist.Hint="Patient"/>
+
+                            <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                Text="{Binding Height}"
+                                Width="250"
+                                VerticalAlignment="Center"
+                                TextWrapping="Wrap"
+                                MaxLength="30"
+                                Grid.Row="1"
+                                IsEnabled="True"
+                                Margin="0 0 0 0"
+                                materialDesign:HintAssist.Hint="Heigh (cm)"/>
+
+                            <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                Text="{Binding Weight}"
+                                Width="250"
+                                VerticalAlignment="Center"
+                                TextWrapping="Wrap"
+                                MaxLength="30"
+                                Grid.Row="2"
+                                IsEnabled="True"
+                                Margin="0 0 0 0"
+                                materialDesign:HintAssist.Hint="Weight (kg)"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <ListView ItemsSource="{Binding Allergens}"
+                                      IsEnabled="False"
+                                      VerticalAlignment="Top"
+                                      HorizontalAlignment="Center"
+                                      Height="200">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="130"
+                                                        Header="Allergens">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock TextAlignment="Left"
+                                                               Text="{Binding AllergenName}"
+                                                               Width="130" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="Edit allergens"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="0,230,0,0"
+                                    Width="70"
+                                    Content="Edit">
+
+                                <Button.CommandParameter>
+                                    <StackPanel Height="420"
+                                                Width="320"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Schedule examination"
+                                                    HorizontalAlignment="Center"
+                                                    Margin="10"
+                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <ComboBox Margin="0 20 0 0"
+                                                  Width="250"
+                                                  ItemsSource="{Binding NewAllergens}"
+                                                  SelectedItem="{Binding NewAllergen}"
+                                                  HorizontalAlignment="Center"
+                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                  materialDesign:HintAssist.Hint="Add new allergen"
+                                                  materialDesign:HintAssist.HintOpacity=".26"
+                                                  IsEditable="True">
+                                        </ComboBox>
+
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 30 20 0"
+                                                    Content="ADD"
+                                                    Command="{Binding SaveAllergenCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    True
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="20 30 0 0"
+                                                    Content="DISCARD"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Column="2" Margin="0 0 30 0">
+                            <ListView ItemsSource="{Binding Illnesses}"
+                                      IsEnabled="False"
+                                      VerticalAlignment="Top"
+                                      HorizontalAlignment="Center"
+                                      Height="200">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Width="200"
+                                                        Header="History of Illness">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock TextAlignment="Left"
+                                                               Text="{Binding Illness}"
+                                                               Width="130" />
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Anamnesis"
+                                   Width="110"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   Margin="50, 0, 0, 0"
+                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                   Grid.Row="0"
+                                   FontSize="20"
+                                   Height="50"
+                                   Grid.Column="0"/>
+                        <TextBox
+                            Margin="45 0 0 20"
+                            HorizontalAlignment="Left"
+                            Width="600"
+                            TextWrapping="Wrap"
+                            VerticalAlignment="Stretch"
+                            MinWidth="280"
+                            AcceptsReturn="True"
+                            VerticalScrollBarVisibility="Auto"
+                            SpellCheck.IsEnabled="True"
+                            materialDesign:HintAssist.Hint="Multiline text"
+                            Height="80"
+                            Text="{Binding Anamnesis}"
+                            Grid.Column="0"/>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                Grid.Column="1"
+                                IsDefault="True"
+                                Margin="0 30 50 0"
+                                Content="DONE"
+                                Command="{Binding SaveCommand}"/>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </materialDesign:DialogHost>
 
 
 

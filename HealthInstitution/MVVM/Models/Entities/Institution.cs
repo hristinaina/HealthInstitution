@@ -221,7 +221,7 @@ namespace HealthInstitution.MVVM.Models
             }
 
             else if (type == nameof(Operation)) {
-                appointmentId = _examinationRepository.NewId();
+                appointmentId = _operationRepository.NewId();
                 Operation operation = new Operation(appointmentId, doctor, patient, datetime, duration);
                 patient.Operations.Add(operation);
                 doctor.Operations.Add(operation);

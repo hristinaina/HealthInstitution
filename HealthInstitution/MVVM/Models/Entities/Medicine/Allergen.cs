@@ -27,5 +27,10 @@ namespace HealthInstitution.MVVM.Models.Entities
             _id = id;
             _name = name;
         }
+
+        public override string ToString()
+        {
+            return _name;
+        }
     }
 }

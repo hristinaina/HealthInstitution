@@ -10,11 +10,11 @@ using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
-    class UpdateMedicalRecordCommand : BaseCommand
+    class SaveAllergenCommand : BaseCommand
     {
         private UpdateMedicalRecordViewModel _viewModel;
 
-        public UpdateMedicalRecordCommand(UpdateMedicalRecordViewModel medicalRecordViewModel)
+        public SaveAllergenCommand(UpdateMedicalRecordViewModel medicalRecordViewModel)
         {
             _viewModel = medicalRecordViewModel;
         }
@@ -23,12 +23,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
         {
             Examination examination = _viewModel.Examination;
             Patient patient = examination.Patient;
-            patient.Record.Weight = _viewModel.Weight;
-            patient.Record.Height = _viewModel.Height;
-            examination.Patient = patient;
-            examination.Anamnesis = _viewModel.Anamnesis;
             patient.Record.Allergens.Add(_viewModel.NewAllergen);
-            _viewModel.AddIllness(_viewModel.Anamnesis);
+            _viewModel.AddAllergen(_viewModel.NewAllergen);
             Institution.Instance().RescheduleExamination(examination, examination.Date);
         }
     }

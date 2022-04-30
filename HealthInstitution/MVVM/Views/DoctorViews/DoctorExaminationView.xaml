@@ -51,7 +51,7 @@
                                 HorizontalAlignment="Left"
                                 Margin="100 0 0 0">
                             <Button.CommandParameter>
-                                <StackPanel Height="420"
+                                <StackPanel Height="360"
                                 Width="320"
                                 Margin="40 20 40 20">
                                     <TextBlock Text="Schedule examination"
@@ -119,7 +119,8 @@
                                 Height="32"
                                 VerticalAlignment="Center"
                                 Grid.Row="0"
-                                HorizontalAlignment="Center" 
+                                HorizontalAlignment="Center"
+                                IsEnabled="{Binding EnableChanges}"
                                 Margin="0 0 0 0">
                             
                         </Button>
@@ -257,6 +258,7 @@
                                 Width="170"
                                 ToolTip="Delete examination"
                                 Content="Delete examination"
+                                IsEnabled="{Binding EnableChanges}"
                                 Background="#6680DEEA"
                                 BorderBrush="#6680DEEA"
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
