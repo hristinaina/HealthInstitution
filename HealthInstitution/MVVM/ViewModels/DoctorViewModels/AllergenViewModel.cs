@@ -11,7 +11,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
     {
         private readonly Allergen _allergen;
 
-        public string Name => _allergen.Name;
+        public string AllergenName => _allergen.Name;
 
         public AllergenViewModel(Allergen allergen)
         {

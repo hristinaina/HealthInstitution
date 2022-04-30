@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.DoctorViews"
+             xmlns:doctorviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.DoctorViewModels"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
+             d:DataContext="{d:DesignInstance Type=doctorviewmodels:DoctorExaminationViewModel}"
              mc:Ignorable="d"
              Height="600"
              Width="1200"
@@ -144,7 +146,7 @@
                         <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
 
                         <ListView ItemsSource="{Binding Examinations}"
-                            Width="650"
+                                  Width="650"
                                   VerticalAlignment="Center"
                                   Height="400"
                                   Grid.Row="1">
@@ -155,7 +157,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
-                                                           Text="25-05-2022"
+                                                           Text="{Binding Date}"
                                                            Width="130" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -165,7 +167,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
-                                                           Text="14:37"
+                                                           Text="{Binding Time}"
                                                            Width="130" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -175,7 +177,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
-                                                           Text="01"
+                                                           Text="{Binding Room}"
                                                            Width="130" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -185,7 +187,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
-                                                           Text="Neki pacijent"
+                                                           Text="{Binding Patient}"
                                                            Width="170" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>

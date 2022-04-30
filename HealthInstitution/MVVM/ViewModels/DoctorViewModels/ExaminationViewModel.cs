@@ -13,8 +13,9 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public string Date => _examination.Date.ToString("d");
         public string Time => _examination.Date.ToString("t");
-        public string Room => _examination.Room.ID.ToString();
-        public string Patient => _examination.Patient.FirstName + _examination.Patient.LastName;
+        public string Room => _examination.Room.Name;
+        public string Patient => _examination.Patient.FirstName + " " +
+                                 _examination.Patient.LastName;
 
         public ExaminationViewModel(Examination examination)
         {

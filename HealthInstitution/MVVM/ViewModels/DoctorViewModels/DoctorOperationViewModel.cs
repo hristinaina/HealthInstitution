@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using HealthInstitution.MVVM.Models.Repositories;
+using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
@@ -22,11 +23,30 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand CreateOperation { get; }
         public ICommand CancelOperation { get; }
 
-        public DoctorOperationViewModel(OperationRepository operationRepository)
+        public DoctorOperationViewModel()
         {
             _operations = new ObservableCollection<OperationViewModel>();
 
-            // add test examples here
+            // test
+            Operation operation = new Operation(1, DateTime.Now, false, false, 30);
+            Patient patient = new Patient();
+            patient.FirstName = "PAcijnet";
+            patient.LastName = "Pacijentic";
+
+            Room room = new Room();
+            room.Name = "neka sobica";
+            operation.Patient = patient;
+            operation.Room = room;
+            _operations.Add(new OperationViewModel(operation));
+            operation.ID = 2;
+            _operations.Add(new OperationViewModel(operation));
+            operation.ID = 8;
+            _operations.Add(new OperationViewModel(operation));
+            operation.Date = DateTime.Now.AddDays(8);
+            _operations.Add(new OperationViewModel(operation));
+            _operations.Add(new OperationViewModel(operation));
+
+            // test
         }
     }
 }

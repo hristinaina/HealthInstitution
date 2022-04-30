@@ -12,6 +12,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private string _anamnesis;
         private Prescription _perscription;
         private ExaminationReview _review;
+        // ??
         private DateTime now;
 
         [JsonProperty("Anamnesis")]

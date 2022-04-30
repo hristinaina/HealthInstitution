@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
@@ -12,6 +14,10 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
     {
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
+        //private MedicalRecordViewModel _medicalRecord;
+        //public MedicalRecordViewModel MedicalRecord { get => _medicalRecord; }
+        public Examination _examination;
+        public Examination Examination { get => _examination; }
 
         private string _name;
         public string Name
@@ -27,8 +33,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
-        private int _height;
-        public int Height
+        private double _height;
+        public double Height
         {
             get
             {
@@ -41,8 +47,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
-        private int _weight;
-        public int Weight
+        private double _weight;
+        public double Weight
         {
             get
             {
@@ -55,18 +61,41 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
-        private string _anamnesis;
-        public string Anamnesis
+        public DoctorMedicalRecordViewModel()
         {
-            get
-            {
-                return _anamnesis;
-            }
-            set
-            {
-                _anamnesis = value;
-                OnPropertyChanged(nameof(Anamnesis));
-            }
+            _allergens = new ObservableCollection<AllergenViewModel>();
+            _examination = new Examination(1, DateTime.Now, false, false, "", new ExaminationReview(0.0, ""));
+            Allergen allergen = new Allergen(1, "Naziv");
+            List<Allergen> allergens = new List<Allergen>();
+            allergens.Add(allergen);
+            Patient patient = new Patient();
+            patient.FirstName = "Ime";
+            patient.LastName = "Prezime";
+            MedicalRecord mr = new MedicalRecord(180, 80, allergens);
+            patient.Record = mr;
+            _examination.Patient = patient;
+            Name = Examination.Patient.FirstName;
+            SetProperties();
+            FillAllergensList();
         }
+
+        public void SetProperties()
+        {
+            Name = Examination.Patient.FirstName + " " + Examination.Patient.LastName;
+            Height = Examination.Patient.Record.Height;
+            Weight = Examination.Patient.Record.Weight;
+        }
+
+        public void FillAllergensList()
+        {
+            _allergens.Clear();
+            foreach (Allergen allergen in _examination.Patient.Record.Allergens)
+            {
+                _allergens.Add(new AllergenViewModel(allergen));
+            }
+            OnPropertyChanged(nameof(Allergens)) ;
+        }
+
+      
     }
 }

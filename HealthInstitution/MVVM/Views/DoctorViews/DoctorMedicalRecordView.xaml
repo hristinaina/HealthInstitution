@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.DoctorViews"
-            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:doctorviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.DoctorViewModels"
+             d:DataContext="{d:DesignInstance Type=doctorviewmodels:DoctorMedicalRecordViewModel}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
              mc:Ignorable="d"
              Height="600"
@@ -51,7 +53,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                            Text="Firstname Lastname"
+                            Text="{Binding Name}"
                             Width="250"
                             VerticalAlignment="Center"
                             TextWrapping="Wrap"
@@ -65,7 +67,7 @@
                             materialDesign:HintAssist.Hint="Patient"/>
 
                         <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                            Text="175"
+                            Text="{Binding Height}"
                             Width="250"
                             VerticalAlignment="Center"
                             TextWrapping="Wrap"
@@ -79,7 +81,7 @@
                             materialDesign:HintAssist.Hint="Heigh (cm)"/>
 
                         <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                            Text="60"
+                            Text="{Binding Weight}"
                             Width="250"
                             VerticalAlignment="Center"
                             TextWrapping="Wrap"
@@ -95,54 +97,49 @@
                     </Grid>
 
                     <Grid Grid.Column="1">
-                        <TextBlock Text="Allergens"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Margin="0, 35, 0, 0"
-                           Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                           Grid.Row="0"
-                           FontSize="20"
-                           Height="50"/>
-                        <ListBox IsEnabled="False"
-                                 VerticalAlignment="Center"
-                                 HorizontalAlignment="Center"
-                                 Height="200">
-                            <TextBlock
-                                Text="Allergen1" />
-                            <TextBlock
-                                Text="Allergen2" />
-                            <TextBlock
-                                Text="Allergen3" />
-                            <TextBlock
-                                Text="Allergen4" />
-                        </ListBox>
+                        <ListView ItemsSource="{Binding Allergens}"
+                                  IsEnabled="False"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Center"
+                                  Height="200">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="130"
+                                                    Header="Allergens">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding AllergenName}"
+                                                           Width="130" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
                     </Grid>
 
                     <Grid Grid.Column="2" Margin="0 0 30 0">
-                        <TextBlock Text="History of illness"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Top"
-                           Margin="0, 35, 0, 0"
-                           Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                           Grid.Row="0"
-                           FontSize="20"
-                           Height="50"/>
-                        <ListBox IsEnabled="False"
-                                 VerticalAlignment="Center"
-                                 HorizontalAlignment="Center"
-                                 Height="200" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                                 ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                                 ScrollViewer.CanContentScroll="True">
-
-                            <TextBlock
-                                Text="Illness1" />
-                            <TextBlock
-                                Text="Illness2" />
-                            <TextBlock
-                                Text="Illness3" />
-                            <TextBlock
-                                Text="Illness4" />
-                        </ListBox>
+                        <ListView ItemsSource="{Binding Allergens}"
+                                  IsEnabled="False"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Center"
+                                  Height="200">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="200"
+                                                    Header="History of Illness">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding AllergenName}"
+                                                           Width="130" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
 
                     </Grid>
                     
