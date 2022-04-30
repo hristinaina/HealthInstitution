@@ -11,8 +11,12 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
     {
         Equipment _equipment;
         Room _room;
+
+        public Equipment Equipment { get => _equipment; set => _equipment = value; }
+        public Room Room { get => _room; set => _room = value; }
+
         public string Name => _equipment.Name;
-        public string Room { get; set; }
+        public string RoomNumber { get; set; }
         public string Quantity => _equipment.ArrangmentByRooms[_room].ToString();
 
         public EquipmentListItemViewModel(Equipment equipment, Room room)
@@ -20,8 +24,8 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             _equipment = equipment;
             _room = room;
 
-            Room = _room.Number.ToString();
-            if (_room.Number == 0) Room = "Warehouse";
+            RoomNumber = _room.Number.ToString();
+            if (_room.Number == 0) RoomNumber = "Warehouse";
 
         }
     }

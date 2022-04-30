@@ -27,9 +27,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
             }
             else
             {
-                _model.AllEquipment = Institution.Instance().EquipmentRepository.Search(_model.SearchPhrase);
+                _model.FilteredEquipment = Institution.Instance().EquipmentRepository.Search(_model.SearchPhrase);
 
-                _model.FillEquipmentList();
+                _model.FilterEquipmentList();
             }
         }
     }

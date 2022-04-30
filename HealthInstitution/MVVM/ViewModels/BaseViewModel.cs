@@ -25,6 +25,27 @@ namespace HealthInstitution.MVVM.ViewModels
             return new DateTime(year, month, day, hours, minutes, 0, DateTimeKind.Local);
         }
 
+        public DateTime ParseDate(string date)
+        {
+            string[] dateTokens;
+            if (date.Contains("."))
+            {
+                dateTokens = date.Split(".");
+            }
+            else
+            {
+
+                dateTokens = date.Split(" ")[0].Split("/");
+                if (dateTokens.Length == 1)
+                {
+                    dateTokens = date.Split(" ")[0].Split("-");
+                }
+            }
+            int month = int.Parse(dateTokens[0]);
+            int day = int.Parse(dateTokens[1]);
+            int year = int.Parse(dateTokens[2]);
+            return new DateTime(year, month, day);
+        }
         protected void OnPropertyChanged(string propertyName) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

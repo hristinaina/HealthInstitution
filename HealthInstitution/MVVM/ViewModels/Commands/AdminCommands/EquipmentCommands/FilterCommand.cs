@@ -21,10 +21,6 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
         }
         public override void Execute(object parameter)
         {
-            //_model.FilterEquipmentType;
-            //_model.FilterRoomType;
-            //_model.FilterMinQuantity;
-            //_model.FilterMaxQuantity;
 
             int minQuantity = 0, maxQuantity = 0;
             if (!(int.TryParse(_model.FilterMinQuantity, out minQuantity) && int.TryParse(_model.FilterMaxQuantity, out maxQuantity)))
