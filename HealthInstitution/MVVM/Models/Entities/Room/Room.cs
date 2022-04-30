@@ -14,14 +14,14 @@ namespace HealthInstitution.MVVM.Models.Entities
         private int _id;
         private string _name;
         private int _number;
-        private RoomType _type;
+        private RoomType? _type;
         private Dictionary<Equipment, int> _equipment;
         private List<Appointment> _appointments;
 
         public int ID { get => _id; set => _id = value; }
         public string Name { get => _name; set => _name = value; }
         public int Number { get => _number; set => _number = value;  }
-        public RoomType Type { get => _type; set => _type = value;  }
+        public RoomType? Type { get => _type; set => _type = value;  }
 
         [JsonIgnore]
         public Dictionary<Equipment, int> Equipment { get => _equipment; set => _equipment = value;  }

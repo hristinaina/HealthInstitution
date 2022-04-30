@@ -160,7 +160,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 
             foreach (Room r in _institution.RoomRepository.Rooms)
             {
-                _rooms.Add(new RoomListItemViewModel(r));
+                if (r.ID != 0) _rooms.Add(new RoomListItemViewModel(r));
             }
         }
     }
