@@ -1,5 +1,6 @@
 ﻿using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -54,7 +55,10 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 
         //public AdminNavigationViewModel Navigation { get; }
         private readonly ObservableCollection<RoomListItemViewModel> _rooms;
-        public IEnumerable<RoomListItemViewModel> Appointments => _rooms;
+        public IEnumerable<RoomListItemViewModel> Rooms => _rooms;
+
+        private List<string> _roomTypes;
+        public List<string> RoomTypes => _roomTypes;
 
 
         public AdminRoomViewModel()
@@ -64,21 +68,31 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             _rooms = new ObservableCollection<RoomListItemViewModel>();
             //Navigation = new PatientNavigationViewModel();
             EnableChanges = false;
+            _roomTypes = new List<string>();
+            FillRoomTypes();
             FillRoomList();
+
             // ..............
+        }
+
+        private void FillRoomTypes()
+        {
+
+            foreach (RoomType t in Enum.GetValues(typeof(RoomType)))
+            {
+                _roomTypes.Add(t.ToString());
+            }
+            OnPropertyChanged(nameof(RoomTypes));
         }
 
         private void FillRoomList()
         {
             _rooms.Clear();
 
-            _rooms.Add(new RoomListItemViewModel(Room.Create(1, 101, "Ime", Models.Enumerations.RoomType.EXAM_ROOM)));
-            _rooms.Add(new RoomListItemViewModel(Room.Create(1, 101, "Ime", Models.Enumerations.RoomType.EXAM_ROOM)));
-            _rooms.Add(new RoomListItemViewModel(Room.Create(1, 101, "Ime", Models.Enumerations.RoomType.EXAM_ROOM)));
-            _rooms.Add(new RoomListItemViewModel(Room.Create(1, 101, "Ime", Models.Enumerations.RoomType.EXAM_ROOM)));
-            _rooms.Add(new RoomListItemViewModel(Room.Create(1, 101, "Ime", Models.Enumerations.RoomType.EXAM_ROOM)));
-            _rooms.Add(new RoomListItemViewModel(Room.Create(1, 101, "Ime", Models.Enumerations.RoomType.EXAM_ROOM)));
-            _rooms.Add(new RoomListItemViewModel(Room.Create(1, 101, "Ime", Models.Enumerations.RoomType.EXAM_ROOM)));
+            foreach (Room r in _institution.RoomRepository.Rooms)
+            {
+                _rooms.Add(new RoomListItemViewModel(r));
+            }
         }
     }
 }

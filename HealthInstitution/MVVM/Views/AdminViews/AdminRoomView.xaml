@@ -4,15 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.AdminViews"
+             xmlns:adminviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.AdminViewModels"
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DataContext="{d:DesignInstance Type=adminviewmodels:AdminRoomViewModel}"
              mc:Ignorable="d"
              Height="600"
              Width="1200"
              Background="White"
              d:DesignHeight="450"
              d:DesignWidth="800">
-    <Grid>
+    
+<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="6*"></ColumnDefinition>
@@ -31,21 +34,15 @@
                         </Grid.ColumnDefinitions>
 
 
-                        <ListView
+                        <ListView ItemsSource="{Binding Rooms}"
                                   VerticalAlignment="Top"
                                   Grid.Column="0"
                                   Width="514"
                                   SelectionMode="Single" 
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                   ScrollViewer.CanContentScroll="True"
-                                  HorizontalAlignment="Center">
-                            <ListViewItem/>
-                            <ListViewItem/>
-                            <ListViewItem/>
-                            <ListViewItem/>
-                            <ListViewItem/>
-                            <ListViewItem/>
-                            <ListViewItem/>
+                                  HorizontalAlignment="Center"
+                                  SelectedIndex="{Binding Selection}">
                             <ListView.View>
                                 <GridView AllowsColumnReorder="False">
                                     <GridViewColumn Width="100"
@@ -53,8 +50,8 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
-                                                           Text="Tekst 1"
-                                                           Width="80" />
+                                                           Text="{Binding ID}"
+                                                           Width="20" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -62,9 +59,9 @@
                                                     Header="Name">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock TextAlignment="Center"
-                                                           Text="Tekst 2"
-                                                           Width="70" />
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Name}"
+                                                           Width="100" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -73,17 +70,17 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Center"
-                                                           Text="Tekst 3"
-                                                           Width="70" />
+                                                           Text="{Binding Number}"
+                                                           Width="30" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Width="130"
+                                    <GridViewColumn Width="150"
                                                     Header="Type">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
-                                                           Text="Tekst 4"
+                                                           Text="{Binding Type}"
                                                            Width="120" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -120,14 +117,11 @@
                                         <ComboBox Margin="0 20 0 0"
                                                   Width="250"
                                                   HorizontalAlignment="Center"
+                                                  ItemsSource="{Binding RoomTypes}"
                                                   Style="{StaticResource MaterialDesignFilledComboBox}"
                                                   materialDesign:HintAssist.Hint="Choose room type"
                                                   materialDesign:HintAssist.HintOpacity=".26"
                                                   IsEditable="True">
-                                            <ComboBoxItem Content="OR" />
-                                            <ComboBoxItem Content="ER" />
-                                            <ComboBoxItem Content="HODNIK" />
-                                            <ComboBoxItem Content="ODMOR" />
                                         </ComboBox>
                                         <TextBox  Margin="0 20 0 0"
                                                   Width="250"
@@ -176,7 +170,7 @@
 
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                     Width="170"
-                                    ToolTip="Reschedule selected appointment"
+                                    ToolTip="..."
                                     Content="Change Room"
                                     Background="#66FFFFFF"
                                     BorderBrush="#6634565A"
@@ -194,21 +188,20 @@
                                                    HorizontalAlignment="Center"
                                                    Margin="10"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                        <TextBlock Text="5"
+                                        <TextBlock Text="{Binding SelectedID}"
                                                    HorizontalAlignment="Center"
                                                    Margin="10"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                        <ComboBox Margin="0 20 0 0"
+                                        <ComboBox Name="changeCombobox"
+                                                  Margin="0 20 0 0"
                                                   Width="250"
                                                   HorizontalAlignment="Center"
+                                                  ItemsSource="{Binding RoomTypes}"
+                                                  SelectedValue="{Binding SelectedType}"
                                                   Style="{StaticResource MaterialDesignFilledComboBox}"
                                                   materialDesign:HintAssist.Hint="Choose room type"
                                                   materialDesign:HintAssist.HintOpacity=".26"
                                                   IsEditable="True">
-                                            <ComboBoxItem Content="OR" />
-                                            <ComboBoxItem Content="ER" />
-                                            <ComboBoxItem Content="HODNIK" />
-                                            <ComboBoxItem Content="ODMOR" />
                                         </ComboBox>
                                         <TextBox  Margin="0 20 0 0"
                                                   Width="250"
@@ -217,6 +210,7 @@
                                                   AcceptsReturn="True"
                                                   TextWrapping="Wrap"
                                                   materialDesign:HintAssist.Hint="Enter room name"
+                                                  Text="{Binding SelectedName}"
                                                   IsEnabled="True" />
                                         <TextBox  Margin="0 20 0 0"
                                                   Width="250"
@@ -225,13 +219,14 @@
                                                   AcceptsReturn="True"
                                                   TextWrapping="Wrap"
                                                   materialDesign:HintAssist.Hint="Enter room number"
+                                                  Text="{Binding SelectedNumber}"
                                                   IsEnabled="True" />
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     IsDefault="True"
                                                     Margin="0 30 0 0"
-                                                    Content="CREATE"
+                                                    Content="CHANGE"
                                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
