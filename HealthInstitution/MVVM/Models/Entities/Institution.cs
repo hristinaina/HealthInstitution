@@ -72,8 +72,10 @@ namespace HealthInstitution.MVVM.Models
             _operationRepository = new OperationRepository(_appSettings.OperationsFileName);
             _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.ExaminationReferencesFileName);
             _operationReferencesRepository = new OperationReferencesRepository(_appSettings.OperationsReferencesFileName);
+            
             _roomRepository = new RoomRepository(_appSettings.RoomsFileName);
             _equipmentRepository = new EquipmentRepository(_appSettings.EquipmentFileName);
+            _equipmentArragmentRepository = new EquipmentArragmentRepository(_appSettings.EquipmentArrangementFileName);
 
             _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
             _refferalRepository = new RefferalRepository(_appSettings.RefferalsFileName);
@@ -106,6 +108,7 @@ namespace HealthInstitution.MVVM.Models
             _dayOffRepository.LoadFromFile();
             _roomRepository.LoadFromFile();
             _equipmentRepository.LoadFromFile();
+            _equipmentArragmentRepository.LoadFromFile();
             _medicineRepository.LoadFromFile();
             _refferalRepository.LoadFromFile();
             _allergenRepository.LoadFromFile();
@@ -152,6 +155,7 @@ namespace HealthInstitution.MVVM.Models
             ReferencesService.ConnectDoctorDaysOff();
             ReferencesService.ConnectPrescriptionRepository();
             ReferencesService.ConnectExaminationChanges();
+            ReferencesService.ArrangeEquipment();
         }
 
 

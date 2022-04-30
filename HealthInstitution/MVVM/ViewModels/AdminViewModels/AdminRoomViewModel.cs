@@ -53,7 +53,6 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public string SelectedName { get; set; }
         public string SelectedType { get; set; }
 
-        //public AdminNavigationViewModel Navigation { get; }
         private readonly ObservableCollection<RoomListItemViewModel> _rooms;
         public IEnumerable<RoomListItemViewModel> Rooms => _rooms;
 

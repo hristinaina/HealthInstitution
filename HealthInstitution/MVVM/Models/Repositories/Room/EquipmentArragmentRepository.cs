@@ -16,14 +16,27 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
 
         public List<EquipmentArragment> Equipment { get => _arragments; }
 
+        public List<EquipmentArragment> CurrentEquipment
+        {
+            get
+            {
+                List<EquipmentArragment> currentArragments = new List<EquipmentArragment>();
+                foreach (EquipmentArragment a in _arragments)
+                {
+                    if (a.StartDate < DateTime.Today && a.EndDate > DateTime.Today) currentArragments.Add(a);
+                }
+                return currentArragments;
+            }
+        }
+
         public EquipmentArragmentRepository(string roomsFileName)
         {
             _fileName = roomsFileName;
             _arragments = new List<EquipmentArragment>();
         }
-        public void LoadFromFile(string filename)
+        public void LoadFromFile()
         {
-            List<EquipmentArragment> allArragments = FileService.Deserialize<EquipmentArragment>(filename);
+            List<EquipmentArragment> allArragments = FileService.Deserialize<EquipmentArragment>(_fileName);
             //rethink about name
             if (_arragments is null) _arragments = new List<EquipmentArragment>();
 
@@ -38,14 +51,5 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             FileService.Serialize<EquipmentArragment>(_fileName, _arragments);
         }
 
-        public List<EquipmentArragment> GetCurrentArragments()
-        {
-            List<EquipmentArragment> currentArragments = new List<EquipmentArragment>();
-            foreach (EquipmentArragment a in _arragments)
-            {
-                if (a.StartDate < DateTime.Today && a.EndDate > DateTime.Today) currentArragments.Add(a);
-            }
-            return currentArragments;
-        }
     }
 }
