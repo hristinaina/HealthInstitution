@@ -22,21 +22,15 @@
 
         <components:NotificationSnackbar Grid.Column="1"
                                          Panel.ZIndex="2" />
-
         <components:PatientNavigationRail SelectedIndex="1"
                                           Grid.RowSpan="2"></components:PatientNavigationRail>
-
-
         <materialDesign:Card Grid.Column="1"
                              Grid.Row="2">
-
-
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
                                        IsOpen="{Binding DialogOpen}"
                                        Grid.Row="0">
                 <materialDesign:Card>
-
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -46,14 +40,12 @@
                             <RowDefinition Height="1*"></RowDefinition>
                             <RowDefinition Height="7*"></RowDefinition>
                         </Grid.RowDefinitions>
-
                         <TextBlock HorizontalAlignment="Center"
                                    Grid.ColumnSpan="2"
                                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                                    VerticalAlignment="Center"
                                    Text="Upcoming appointments"
                                    FontWeight="DemiBold" />
-
                         <ListView ItemsSource="{Binding Appointments}"
                                   VerticalAlignment="Top"
                                   Margin="0 0 0 70"
@@ -109,8 +101,8 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-
-                        <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid Grid.Column="1"
+                              Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*"></RowDefinition>
                                 <RowDefinition Height="1*"></RowDefinition>
@@ -143,10 +135,7 @@
                                                   SelectedItem="{Binding NewDoctor}"
                                                   materialDesign:HintAssist.Hint="Search for a doctor"
                                                   materialDesign:HintAssist.HintOpacity=".26"
-                                                  IsEditable="True">
-                                            
-                                        </ComboBox>
-
+                                                  IsEditable="True" />
                                         <DatePicker Width="250"
                                                     SelectedDate="{Binding NewDate}"
                                                     Margin="0 20 0 0"
@@ -186,7 +175,6 @@
                                     </StackPanel>
                                 </Button.CommandParameter>
                             </Button>
-
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                     Width="170"
                                     ToolTip="Reschedule selected appointment"
@@ -207,12 +195,9 @@
                                                    HorizontalAlignment="Center"
                                                    Margin="10"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-
-
                                         <DatePicker Width="250"
                                                     Margin="0 20 0 0"
                                                     materialDesign:HintAssist.Hint="Pick Date"
-                                                    
                                                     Style="{StaticResource MaterialDesignFilledDatePicker}"
                                                     SelectedDate="{Binding SelectedDate}" />
                                         <materialDesign:TimePicker Width="250"
@@ -249,7 +234,6 @@
                                     </StackPanel>
                                 </Button.CommandParameter>
                             </Button>
-
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                     Grid.Column="1"
                                     Width="170"
@@ -303,13 +287,9 @@
                                 </Button.CommandParameter>
                             </Button>
                         </Grid>
-                        <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
-
                     </Grid>
                 </materialDesign:Card>
             </materialDesign:DialogHost>
-
-
         </materialDesign:Card>
     </Grid>
 </UserControl>

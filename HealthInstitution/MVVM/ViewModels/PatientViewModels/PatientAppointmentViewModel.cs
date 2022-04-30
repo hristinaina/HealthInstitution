@@ -63,6 +63,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
                 if (value < 0) { return; };
                 _selection = value;
                 EnableChanges = true;
+                OnPropertyChanged(nameof(EnableChanges));
                 OnPropertyChanged(nameof(Selection));
                 _selectedAppointment = _appointments.ElementAt(_selection);
                 SelectedDoctor = _selectedAppointment.Doctor;
@@ -105,6 +106,9 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             if (_appointments.Count != 0)
             {
                 Selection = 0;
+                EnableChanges = true;
+                OnPropertyChanged(nameof(Selection));
+                OnPropertyChanged(nameof(EnableChanges));
             }
             CreateAppointment = new CreateAppointmentCommand(this);
             RescheduleAppointment = new RescheduleAppointmentCommand(this);

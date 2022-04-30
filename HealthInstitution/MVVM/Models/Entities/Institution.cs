@@ -279,7 +279,6 @@ namespace HealthInstitution.MVVM.Models
                 _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.DELETED);
             }
 
-
             else if (appointment is Operation)
             {
                 // TODO

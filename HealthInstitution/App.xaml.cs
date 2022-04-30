@@ -27,7 +27,6 @@ namespace HealthInstitution
             _navigation = NavigationStore.Instance();
 
 
-            Institution.Instance().DoctorRepository.Doctors.Add(d1);
 
 
         }
