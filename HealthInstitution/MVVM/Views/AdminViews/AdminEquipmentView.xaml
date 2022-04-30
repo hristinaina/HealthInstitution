@@ -23,7 +23,8 @@
         <materialDesign:Card Grid.Column="1">
             <materialDesign:DialogHost DialogTheme="Inherit"
                                            Grid.Column="0"
-                                           Grid.Row="0">
+                                           Grid.Row="0"
+                                           IsOpen="{Binding DialogOpen}">
                 <materialDesign:Card>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -43,19 +44,33 @@
                                 <TextBox Grid.Column="0"
                                           materialDesign:HintAssist.Hint="Enter search"
                                           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                          Text="{Binding SearchPhrase}"
                                           VerticalAlignment="Top" Margin="10,10,10,0" />
-
                                 <Button  Grid.Column="1" 
                                             Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                             Width="104"
-                                            ToolTip="..."
-                                            Content="Search"
+                                            ToolTip="Reset page content"
+                                            Content="Reset"
                                             Background="#CC80DEEA"
                                             BorderBrush="#6680DEEA"
                                             Height="32"
                                             VerticalAlignment="Top"
                                             HorizontalAlignment="Left"
+                                            Command="{Binding Reset}"
                                             Margin="128,10,0,0"/>
+
+                                <Button  Grid.Column="1" 
+                                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                            Width="104"
+                                            ToolTip="Search"
+                                            Content="Search"  
+                                            Background="#CC80DEEA"
+                                            BorderBrush="#6680DEEA"
+                                            Height="32"
+                                            VerticalAlignment="Top"
+                                            HorizontalAlignment="Left"
+                                            Command="{Binding Search}"
+                                            Margin="19,10,0,0"/>
                             </Grid>
                         </Grid>
                         <ListView     ItemsSource="{Binding Equipment}"
@@ -110,7 +125,7 @@
                             </Grid.RowDefinitions>
                             <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                         Width="170"
-                                        ToolTip="..."
+                                        ToolTip="Filter equipment"
                                         Content="Filter"
                                         Background="#CC80DEEA"
                                         BorderBrush="#6680DEEA"
@@ -131,6 +146,7 @@
                                                       Width="250"
                                                       HorizontalAlignment="Center"
                                                       ItemsSource="{Binding RoomTypes}"
+                                                      SelectedIndex="{Binding FilterRoomType}"
                                                       Style="{StaticResource MaterialDesignFilledComboBox}"
                                                       materialDesign:HintAssist.Hint="Choose room type"
                                                       materialDesign:HintAssist.HintOpacity=".26"
@@ -140,6 +156,7 @@
                                                       Width="250"
                                                       HorizontalAlignment="Center"
                                                       ItemsSource="{Binding EquipmentTypes}"
+                                                      SelectedIndex="{Binding FilterEquipmentType}"
                                                       Style="{StaticResource MaterialDesignFilledComboBox}"
                                                       materialDesign:HintAssist.Hint="Choose equipment type"
                                                       materialDesign:HintAssist.HintOpacity=".26"
@@ -151,6 +168,7 @@
                                                       VerticalAlignment="Top"
                                                       AcceptsReturn="True"
                                                       TextWrapping="Wrap"
+                                                      Text="{Binding FilterMinQuantity}"
                                                       materialDesign:HintAssist.Hint="Enter min quantity"
                                                       IsEnabled="True" />
                                         <TextBox  Margin="0 20 0 0"
@@ -159,6 +177,7 @@
                                                       VerticalAlignment="Top"
                                                       AcceptsReturn="True"
                                                       TextWrapping="Wrap"
+                                                      Text="{Binding FilterMaxQuantity}"
                                                       materialDesign:HintAssist.Hint="Enter max quantity"
                                                       IsEnabled="True" />
                                         <StackPanel Orientation="Horizontal"
@@ -167,7 +186,7 @@
                                                         IsDefault="True"
                                                         Margin="0 30 0 0"
                                                         Content="FILTER"
-                                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                        Command="{Binding Filter}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True
