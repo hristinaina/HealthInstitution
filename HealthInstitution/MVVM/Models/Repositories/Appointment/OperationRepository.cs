@@ -78,5 +78,16 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
             return false;
         }
+
+        public void DeleteByPatientID(int patientId)
+        {
+            foreach (Operation operation in _operations)
+            {
+                if (operation.Patient.ID == patientId)
+                {
+                    _operations.Remove(operation);
+                }
+            }
+        }
     }
 }
