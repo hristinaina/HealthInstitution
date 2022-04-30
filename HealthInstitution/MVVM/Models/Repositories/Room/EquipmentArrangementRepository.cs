@@ -29,9 +29,9 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             }
         }
 
-        public EquipmentArrangementRepository(string roomsFileName)
+        public EquipmentArrangementRepository(string fileName)
         {
-            _fileName = roomsFileName;
+            _fileName = fileName;
             _validArrangement = new List<EquipmentArrangement>();
         }
         public void LoadFromFile()

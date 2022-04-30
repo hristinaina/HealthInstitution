@@ -12,9 +12,9 @@ namespace HealthInstitution.MVVM.Models
 
         public List<Equipment> Equipment { get => _equipment; }
 
-        public EquipmentRepository(string roomsFileName)
+        public EquipmentRepository(string fileName)
         {
-            _fileName = roomsFileName;
+            _fileName = fileName;
             _equipment = new List<Equipment>();
         }
 
