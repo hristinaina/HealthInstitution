@@ -103,13 +103,6 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             NewDate = DateTime.Now;
             NewTime = DateTime.Now;
 
-            if (_appointments.Count != 0)
-            {
-                Selection = 0;
-                EnableChanges = true;
-                OnPropertyChanged(nameof(Selection));
-                OnPropertyChanged(nameof(EnableChanges));
-            }
             CreateAppointment = new CreateAppointmentCommand(this);
             RescheduleAppointment = new RescheduleAppointmentCommand(this);
             CancelAppointment = new CancelAppointmentCommand(this);
@@ -122,6 +115,13 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             foreach (Appointment appointment in _patient.GetFutureAppointments())
             {
                 _appointments.Add(new AppointmentListItemViewModel(appointment));
+            }
+            if (_appointments.Count != 0)
+            {
+                Selection = 0;
+                EnableChanges = true;
+                OnPropertyChanged(nameof(Selection));
+                OnPropertyChanged(nameof(EnableChanges));
             }
             OnPropertyChanged(nameof(Appointments));
         }

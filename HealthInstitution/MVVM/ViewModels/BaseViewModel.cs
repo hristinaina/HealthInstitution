@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-﻿using HealthInstitution.Stores;
+using HealthInstitution.Stores;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -53,7 +53,6 @@ namespace HealthInstitution.MVVM.ViewModels
 
         public DateTime MergeTime(string date, string time)
         {
-
 
             string[] dateTokens = date.Split(" ")[0].Split("/");
             string[] timeTokens = time.Split(" ")[1].Split(":");
