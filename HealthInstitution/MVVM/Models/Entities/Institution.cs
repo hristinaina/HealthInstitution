@@ -160,9 +160,6 @@ namespace HealthInstitution.MVVM.Models
             ReferencesService.ConnectExaminationChanges();
         }
 
-        internal void CreateAppointment()
-        {
-        }
 
         public PatientRepository PatientRepository { get => _patientRepository; }
         public DoctorRepository DoctorRepository { get => _doctorRepository; }
@@ -188,7 +185,7 @@ namespace HealthInstitution.MVVM.Models
         public EquipmentArragmentRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
 
 
-        public Examination CreateExamination(Doctor doctor, Patient patient, DateTime datetime)
+        public Appointment CreateAppointment(Doctor doctor, Patient patient, DateTime datetime, string type)
         {
             if (!doctor.IsAvailable(datetime))
             {
@@ -198,64 +195,93 @@ namespace HealthInstitution.MVVM.Models
             {
                 return null;
             }
-            int appointmentId = _examinationRepository.NewId();
-            int prescriptionId = _prescriptionRepository.NewId();
-            Prescription prescription = new Prescription(prescriptionId);
-            Examination examination = new Examination(appointmentId, doctor, patient, datetime, prescription);
-            patient.Examinations.Add(examination);
-            doctor.Examinations.Add(examination);
-            // find a room
-            _roomRepository.FindAvailableRoom(examination, datetime);
-            // add examination to room
-            // add room to examination
-            _examinationRepository.Add(examination);
-            _examinationReferencesRepository.Add(examination);
-            _examinationChangeRepository.Add(examination, true, AppointmentStatus.CREATED);
 
-            return examination;
+            int appointmentId = 0;
+
+            if (type == nameof(Examination))
+            {
+
+                appointmentId = _examinationRepository.NewId();
+                int prescriptionId = _prescriptionRepository.NewId();
+                Prescription prescription = new Prescription(prescriptionId);
+
+                Examination examination = new Examination(appointmentId, doctor, patient, datetime, prescription);
+                patient.Examinations.Add(examination);
+                doctor.Examinations.Add(examination);
+                _roomRepository.FindAvailableRoom(examination, datetime);
+                _examinationRepository.Add(examination);
+                _examinationReferencesRepository.Add(examination);
+                _examinationChangeRepository.Add(examination, true, AppointmentStatus.CREATED);
+
+                return examination;
+            }
+
+            else if (type == nameof(Operation)) {
+                // TODO
+
+                return null;
+            }
+
+            return null;
         }
 
 
-        public void RescheduleExamination(Examination examination, DateTime datetime)
+        public void RescheduleExamination(Appointment appointment, DateTime datetime)
         {
-            if (examination.Doctor.IsAvailable(datetime))
+
+            if (appointment.Doctor.IsAvailable(datetime))
             {
                 return;
             }
-            if (examination.Patient.IsAvailable(datetime))
+            if (appointment.Patient.IsAvailable(datetime))
             {
                 return;
             }
-            examination.Date = datetime;
-            _roomRepository.FindAvailableRoom(examination, datetime);
-            // check room
-            // if add examination to room
-            // if add room to examination
-            //_examinationReferencesRepository.Add(examination);
-            bool resolved = examination.IsEditable();
-            _examinationChangeRepository.Add(examination, resolved, AppointmentStatus.EDITED);
+            appointment.Date = datetime;
+            _roomRepository.FindAvailableRoom(appointment, datetime);
+            bool resolved = appointment.IsEditable();
+
+            if (appointment is Examination)
+            {
+                _examinationReferencesRepository.Add((Examination)appointment);
+                _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.EDITED);
+
+            }
+
+            else if (appointment is Operation) { 
+                // TODO
+            }
 
         }
 
 
-        public void CancelExamination(Examination examination)
+        public void CancelExamination(Appointment appointment)
         {
 
-            bool resolved = examination.IsEditable();
-            if (!resolved)
-            {
-                _examinationChangeRepository.Add(examination, resolved, AppointmentStatus.DELETED);
-                return;
+            Patient patient = appointment.Patient;
+            Doctor doctor = appointment.Doctor;
+            Room room = appointment.Room;
+            bool resolved = appointment.IsEditable();
+            if (appointment is Examination) {
+                if (!resolved)
+                {
+                    _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.DELETED);
+                    return;
+                }
+                patient.Examinations.Remove((Examination)appointment);
+                doctor.Examinations.Remove((Examination)appointment);
+                _examinationRepository.Remove((Examination)appointment);
+                _examinationReferencesRepository.Remove((Examination)appointment);
             }
-            Patient patient = examination.Patient;
-            Doctor doctor = examination.Doctor;
-            Room room = examination.Room;
-            patient.Examinations.Remove(examination);
-            doctor.Examinations.Remove(examination);
-            room.Appointments.Remove(examination);
-            // remove from room
-            _examinationRepository.Remove(examination);
-            _examinationReferencesRepository.Remove(examination);
+
+
+            else if (appointment is Operation)
+            {
+                // TODO
+            }
+
+            // DO NOT DELETE THIS
+            room.Appointments.Remove(appointment);
 
         }
     }
