@@ -28,7 +28,6 @@ namespace HealthInstitution.Commands
         {
             if (string.IsNullOrEmpty(_loginVM.Email) | string.IsNullOrEmpty(_loginVM.Password))
             {
-                //TODO prikazati kao MessageBox: Niste popunili sva polja
                 return;
             }
 
@@ -37,7 +36,6 @@ namespace HealthInstitution.Commands
 
             if (!foundUser)
             {
-                //TODO: prikazati kao MessageBox: Ne postoji korisnik sa unesenim podacima!
             }
         }
 
@@ -51,6 +49,8 @@ namespace HealthInstitution.Commands
             _institution.CurrentUser = User.FindUser(_institution.PatientRepository.Patients, email, password);
             if (_institution.CurrentUser != null)
             {
+                Patient patient = (Patient)_institution.CurrentUser;
+                if (patient.Blocked || patient.Deleted) return false;
                 _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
                 return true;
             }
