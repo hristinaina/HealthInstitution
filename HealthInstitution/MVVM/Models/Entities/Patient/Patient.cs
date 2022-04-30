@@ -191,5 +191,17 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blocked = blocked;
             // TODO: ?delete all future appointments with this patient 
         }
+
+        public List<string> GetHistoryOfIllness()
+        {
+            List<string> historyOfIllness = new List<string>();
+            foreach (Examination examination in _examinations)
+            {
+                if (examination.Anamnesis.Length > 1) 
+                    historyOfIllness.Add(examination.Anamnesis);
+ 
+            }
+            return historyOfIllness;
+        }
     }
 }

@@ -25,7 +25,6 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             //Navigation = new DoctorNavigationViewModel();
             _examination = examination;
         }
-
         public MedicalRecordViewModel()
         {
             Navigation = new DoctorNavigationViewModel();
