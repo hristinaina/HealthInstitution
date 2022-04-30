@@ -24,5 +24,10 @@ namespace HealthInstitution.MVVM.Views.SecretaryViews
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

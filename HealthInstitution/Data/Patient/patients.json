@@ -1,7 +1,7 @@
 [
   {
-    "Blocked": false,
-    "BlockadeType": 0,
+    "Blocked": true,
+    "BlockadeType": 1,
     "Deleted": false,
     "Record": {
       "Height": 190.0,

@@ -92,7 +92,8 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blockadeType = BlockadeType.NONE;
         }
 
-        public List<Appointment> GetAllAppointments() {
+        public List<Appointment> GetAllAppointments()
+        {
             List<Appointment> allAppointments = new List<Appointment>();
             allAppointments.AddRange(_examinations);
             allAppointments.AddRange(_operations);
@@ -158,9 +159,11 @@ namespace HealthInstitution.MVVM.Models.Entities
             return totalChanges;
         }
 
-        public bool IsAvailable(DateTime startDateTime) {
+        public bool IsAvailable(DateTime startDateTime)
+        {
 
-            foreach (Appointment appointment in GetAllAppointments()) {
+            foreach (Appointment appointment in GetAllAppointments())
+            {
                 if (DateTime.Compare(appointment.Date, startDateTime) < 0 && DateTime.Compare(appointment.Date, startDateTime) > 0)
                 {
                     return false;
@@ -173,6 +176,20 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
 
             return true;
+        }
+
+        public List<string> GetHistoryOfIllness()
+        {
+            List<string> historyOfIllness = new List<string>();
+            foreach (Examination examination in _examinations)
+            {
+                if (examination.Anamnesis != null)
+                {
+                    if (examination.Anamnesis.Length > 1)
+                        historyOfIllness.Add(examination.Anamnesis);
+                }
+            }
+            return historyOfIllness;
         }
     }
 }
