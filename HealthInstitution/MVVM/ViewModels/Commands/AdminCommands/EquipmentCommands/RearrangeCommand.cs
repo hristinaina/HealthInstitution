@@ -20,19 +20,30 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
             _model = model;
         }
 
-        public override void Execute(object parameter)
+        private bool CheckPrerequisites()
         {
+            bool prerequisitesFulfilled = true;
             if (_model.NewArrangementStartDate is null || _model.NewArrangementQuantity == 0 || _model.NewArrangemenTargetRoom is null)
             {
                 MessageBox.Show("All fields must be filled", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else if (_model.ParseDate(_model.NewArrangementStartDate) <= DateTime.Today)
+                prerequisitesFulfilled = false;
+            }
+            else if (_model.ParseDate(_model.NewArrangementStartDate) <= DateTime.Today)
             {
                 MessageBox.Show("Arrangement date must be in future", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else if (_model.NewArrangementQuantity > _model.SelectedEquipment.Equipment.ArrangmentByRooms[_model.SelectedEquipment.Room]) 
+                prerequisitesFulfilled = false;
+            }
+            else if (_model.NewArrangementQuantity > _model.SelectedEquipment.Equipment.ArrangmentByRooms[_model.SelectedEquipment.Room])
             {
                 MessageBox.Show("Not enough equipment in selected room", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                prerequisitesFulfilled = false;
             }
-            else
+            return prerequisitesFulfilled;
+        }
+
+        public override void Execute(object parameter)
+        {
+            if (CheckPrerequisites())
             {
                 _model.DialogOpen = false;
 

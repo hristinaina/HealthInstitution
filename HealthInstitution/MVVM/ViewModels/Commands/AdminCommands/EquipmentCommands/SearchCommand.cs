@@ -19,13 +19,21 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
             _model = model;
         }
 
-        public override void Execute(object parameter)
+        private bool CheckPrerequisites()
         {
+            bool prerequisitesFulfilled = true;
             if (_model.SearchPhrase is null)
             {
                 MessageBox.Show("You need to enter phrase for search", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                prerequisitesFulfilled = false;
             }
-            else
+            return prerequisitesFulfilled;
+        }
+
+        public override void Execute(object parameter)
+        {
+            
+            if(CheckPrerequisites())
             {
                 _model.FilteredEquipment = Institution.Instance().EquipmentRepository.Search(_model.SearchPhrase);
 
