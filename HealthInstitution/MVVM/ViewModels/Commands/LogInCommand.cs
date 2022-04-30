@@ -71,7 +71,7 @@ namespace HealthInstitution.Commands
             _institution.CurrentUser = User.FindUser(_institution.AdminRepository.Administrators, email, password);
             if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new AdminMainPageViewModel();
+                _navigationStore.CurrentViewModel = new AdminRoomViewModel();
                 return true;
             }
 

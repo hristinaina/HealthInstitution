@@ -36,7 +36,7 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public Equipment()
         {
-
+            _arrangmentByRooms = new Dictionary<Room, int>();
         }
 
         public Equipment(int id, string name, int quantity, EquipmentType type)
