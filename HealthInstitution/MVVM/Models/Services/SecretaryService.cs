@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 
@@ -15,44 +16,50 @@ namespace HealthInstitution.MVVM.Models.Services
         public static void ApproveChange(ExaminationChange request)
         {
             request.Resolved = true;
-            //created
-            if (request.ChangeStatus == 0)
+            Appointment appointment = Institution.Instance().ExaminationRepository.FindByID(request.AppointmentID);
+
+            if (request.ChangeStatus.ToString() == "EDITED")
             {
-                // Milicina funkcija za kreiranje novih pregleda --- bitne sve provjere ---- ako vrati false izbaciti dijalog
-            }
-            //edited
-            else if (request.ChangeStatus.ToString() == "EDITED")
-            {
-                // Milicina funkcija za editovanje pregleda --- bitne sve provjere ---- ako vrati false izbaciti dijalog
+                Institution.Instance().RescheduleExamination(appointment, request.NewDate);
+                // TODO: dodati da vraca vrijednost o uspjesnoti promjene i zavisno od toga prikazati MassageBox: uspjesno, neuspjesno
             }
             //deleted
             else if (request.ChangeStatus.ToString() == "DELETED")
             {
-                Institution.Instance().ExaminationRepository.Delete(request.AppointmentID);
+                DeleteAppointment(appointment);
             }
+        }
+
+        private static void DeleteAppointment(Appointment appointment) 
+        {
+            Patient patient = appointment.Patient;
+            Doctor doctor = appointment.Doctor;
+            Room room = appointment.Room;
+
+            if (appointment is Examination)
+            {
+                patient.Examinations.Remove((Examination)appointment);
+                doctor.Examinations.Remove((Examination)appointment);
+                room.Appointments.Remove(appointment);
+                Institution.Instance().ExaminationRepository.Remove((Examination)appointment);
+                Institution.Instance().ExaminationReferencesRepository.Remove((Examination)appointment);
+            }
+            else if (appointment is Operation)
+            {
+                // TODO: prekopirati od Milice kad zavrsi
+            }
+
+            string message = "The appointment has been deleted.";
+            MessageBox.Show(message);
 
         }
 
         public static void RejectChange(ExaminationChange request)
         {
             request.Resolved = true;
+
             string message = "This request has been rejected.";
             MessageBox.Show(message);
-
-            if (request.ChangeStatus == 0)
-            {
-                // do nothing
-            }
-            //edited
-            else if (request.ChangeStatus.ToString() == "EDITED")
-            {
-                
-            }
-            //deleted
-            else if (request.ChangeStatus.ToString() == "DELETED")
-            {
-                // do nothing
-            }
         }
 
         public static void RemoveOutdatedRequests()
