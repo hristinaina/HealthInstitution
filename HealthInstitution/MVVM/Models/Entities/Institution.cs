@@ -266,16 +266,20 @@ namespace HealthInstitution.MVVM.Models
             Doctor doctor = appointment.Doctor;
             Room room = appointment.Room;
             bool resolved = appointment.IsEditable();
-            if (appointment is Examination) {
+            if (appointment is Examination)
+            {
                 if (!resolved)
                 {
                     _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.DELETED);
                     return;
                 }
-                patient.Examinations.Remove((Examination)appointment);
-                doctor.Examinations.Remove((Examination)appointment);
-                _examinationRepository.Remove((Examination)appointment);
-                _examinationReferencesRepository.Remove((Examination)appointment);
+                else
+                {
+                    patient.Examinations.Remove((Examination)appointment);
+                    doctor.Examinations.Remove((Examination)appointment);
+                    _examinationRepository.Remove((Examination)appointment);
+                    _examinationReferencesRepository.Remove((Examination)appointment);
+                }
             }
 
 
@@ -285,7 +289,7 @@ namespace HealthInstitution.MVVM.Models
             }
 
             // DO NOT DELETE THIS
-            room.Appointments.Remove(appointment);
+            if (resolved) room.Appointments.Remove(appointment);
 
         }
     }
