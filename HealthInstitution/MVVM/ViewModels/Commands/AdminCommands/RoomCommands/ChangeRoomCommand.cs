@@ -28,7 +28,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
                 _model.SelectedType = _model.SelectedRoom.Type;
                 _model.SelectedName = _model.SelectedRoom.Name;
                 _model.SelectedNumber = _model.SelectedRoom.Number;
-            } else if (!Int32.TryParse(_model.SelectedNumber, out selectedNumber))
+            } else if (!int.TryParse(_model.SelectedNumber, out selectedNumber))
             {
                 MessageBox.Show("Room number must be whole number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 _model.SelectedType = _model.SelectedRoom.Type;
