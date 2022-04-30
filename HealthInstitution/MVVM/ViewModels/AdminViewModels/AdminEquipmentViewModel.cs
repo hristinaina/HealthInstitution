@@ -19,6 +19,8 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 
         private EquipmentListItemViewModel _selectedEquipment;
 
+        public EquipmentListItemViewModel SelectedEquipment { get => _selectedEquipment; set => _selectedEquipment = value; }
+
         private bool _dialogOpen;
         public bool DialogOpen
         {
@@ -51,9 +53,9 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
                 EnableChanges = true;
                 OnPropertyChanged(nameof(Selection));
                 _selectedEquipment = _equipment.ElementAt(_selection);
-                SelectedEquipment = _selectedEquipment.Name;
-                OnPropertyChanged(nameof(SelectedEquipment));
-                SelectedRoom = _selectedEquipment.Room;
+                SelectedEquipmentName = _selectedEquipment.Name;
+                OnPropertyChanged(nameof(SelectedEquipmentName));
+                SelectedRoom = _selectedEquipment.RoomNumber;
                 OnPropertyChanged(nameof(SelectedRoom));
                 SelectedName = _selectedEquipment.Name;
                 OnPropertyChanged(nameof(SelectedName));
@@ -62,7 +64,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             }
         }
 
-        public string SelectedEquipment { get; set; }
+        public string SelectedEquipmentName { get; set; }
         public string SelectedRoom { get; set; }
         public string SelectedName { get; set; }
         public string SelectedQuantity { get; set; }
@@ -117,10 +119,40 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             }
         }
 
+        private string _newArrangementStartDate;
 
+        public string NewArrangementStartDate
+        {
+            get => _newArrangementStartDate;
+            set
+            {
+                _newArrangementStartDate = value;
+                OnPropertyChanged(nameof(NewArrangementStartDate));
+            }
+        }
 
+        private Room _newArrangemenTargetRoom;
+        public Room NewArrangemenTargetRoom
+        {
+            get => _newArrangemenTargetRoom;
+            set
+            {
+                _newArrangemenTargetRoom = value;
+                OnPropertyChanged(nameof(NewArrangemenTargetRoom));
+            }
+        }
 
+        private int _newArrangementQuantity;
+        public int NewArrangementQuantity
 
+        {
+            get => _newArrangementQuantity;
+            set
+            {
+                _newArrangementQuantity = value;
+                OnPropertyChanged(nameof(NewArrangementQuantity));
+            }
+        }
 
         private readonly ObservableCollection<EquipmentListItemViewModel> _equipment;
         public IEnumerable<EquipmentListItemViewModel> Equipment => _equipment;
@@ -143,6 +175,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public ICommand Search { get; set; }
         public ICommand Reset { get; set; }
         public ICommand Filter { get; set; }
+        public ICommand Rearrange { get; set; }
 
         public AdminNavigationViewModel Navigation { get; }
 
@@ -157,10 +190,12 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             _equipmentTypes = new List<string>();
             _rooms = new List<Room>();
             _allEquipment = _institution.EquipmentRepository.Equipment;
+            _newArrangementStartDate = DateTime.Now.ToString("MM/dd/yyyy");
 
             Search = new SearchCommand(this);
             Reset = new ResetCommand(this);
             Filter = new FilterCommand(this);
+            Rearrange = new RearrangeCommand(this);
 
             FillEquipmentList();
             FillEquipmentTypes();

@@ -15,13 +15,13 @@ namespace HealthInstitution.MVVM.Models.Entities
         private int _quantity;
 
         [JsonProperty("ID")]
-        public int ID { get => this._id; set { this._id = value; } }
+        public int ID { get => _id; set => _id = value; }
         [JsonProperty("EquipmentID")]
-        public int EquipmentID { get => this._equipmentId; set { this._equipmentId = value; } }
+        public int EquipmentID { get => _equipmentId; set => _equipmentId = value; }
         [JsonProperty("DeliverDate")]
-        public DateTime DeliverDate { get => this._deliverDate; set { this._deliverDate = value; } }
+        public DateTime DeliverDate { get => _deliverDate; set => _deliverDate = value; }
         [JsonProperty("Quantity")]
-        public int Quantity { get => this._quantity; set { this._quantity = value; } }
+        public int Quantity { get => _quantity; set => _quantity = value; }
 
         public EquipmentOrder()
         {
@@ -30,7 +30,7 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public bool isDelivered()
         {
-            return this._deliverDate < DateTime.Today;
+            return _deliverDate < DateTime.Today;
         }
 
     }

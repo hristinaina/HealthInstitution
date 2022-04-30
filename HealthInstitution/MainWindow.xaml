@@ -7,13 +7,13 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:views="clr-namespace:HealthInstitution.MVVM.Views"
         xmlns:viewmains="clr-namespace:HealthInstitution.MVVM.Views.MainPageViews"
-        xmlns:viewadmin="clr-namespace:HealthInstitution.MVVM.Views.AdminViews"
+        xmlns:viewsadmin="clr-namespace:HealthInstitution.MVVM.Views.AdminViews"
         xmlns:viewsdoctor="clr-namespace:HealthInstitution.MVVM.Views.DoctorViews"
         xmlns:viewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels"
         xmlns:viewmodelmains="clr-namespace:HealthInstitution.MVVM.ViewModels.MainPageViewModels"
         xmlns:viewmodelsPatient="clr-namespace:HealthInstitution.MVVM.ViewModels.PatientViewModels"
         xmlns:viewsPatient="clr-namespace:HealthInstitution.MVVM.Views.PatientViews"
-        xmlns:viewmodeladmin="clr-namespace:HealthInstitution.MVVM.ViewModels.AdminViewModels"
+        xmlns:viewmodelsAdmin="clr-namespace:HealthInstitution.MVVM.ViewModels.AdminViewModels"
         xmlns:viewmodelsSecretary="clr-namespace:HealthInstitution.MVVM.ViewModels.SecretaryViewModels"
         xmlns:viewsSecretary="clr-namespace:HealthInstitution.MVVM.Views.SecretaryViews"
         xmlns:viewmodelsDoctor="clr-namespace:HealthInstitution.MVVM.ViewModels.DoctorViewModels"
@@ -66,15 +66,11 @@
             <DataTemplate DataType="{x:Type viewmodelsSecretary:PatientListViewModel}">
                 <viewsSecretary:PatientListView />
             </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodeladmin:AdminMainPageViewModel}">
-                <viewadmin:AdminMainPageView />
+            <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminRoomViewModel}">
+                <viewsadmin:AdminRoomView />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodeladmin:AdminRoomViewModel}">
-                <viewadmin:AdminRoomView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodeladmin:AdminEquipmentViewModel}">
-                <viewadmin:AdminEquipmentView />
+            <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminEquipmentViewModel}">
+                <viewsadmin:AdminEquipmentView />
             </DataTemplate>
         </Grid.Resources>
         <ContentControl Content="{Binding CurrentViewModel}" />
