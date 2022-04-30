@@ -53,6 +53,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
                 int id = Institution.Instance().RoomRepository.GetID();
                 Institution.Instance().RoomRepository.CreateRoom(id, _model.NewRoomName, _model.NewRoomNumber, (RoomType)_model.NewRoomType);
                 _model.FillRoomList();
+                _model.NewRoomNumber = 0;
+                _model.NewRoomType = 0;
+                _model.NewRoomName = null;
             }
         }
     }
