@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Entities.References;
+using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 
 namespace HealthInstitution.MVVM.Models.Services
@@ -49,7 +50,7 @@ namespace HealthInstitution.MVVM.Models.Services
                 // TODO: prekopirati od Milice kad zavrsi
             }
 
-            string message = "The appointment has been deleted.";
+            string message = "The appointment has been successfully deleted.";
             MessageBox.Show(message);
 
         }
@@ -58,7 +59,7 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             request.Resolved = true;
 
-            string message = "This request has been rejected.";
+            string message = "This request has been successfully rejected.";
             MessageBox.Show(message);
         }
 
@@ -70,11 +71,37 @@ namespace HealthInstitution.MVVM.Models.Services
                 {
                     request.ChangeStatus = Models.Enumerations.AppointmentStatus.DELETED;
                     request.Resolved = true;
-
-                    // ?to delete appointment as well or not? 
-                    Institution.Instance().ExaminationRepository.Delete(request.AppointmentID);
                 }
             }
+        }
+
+        public static void DeletePatient(Patient patient)
+        {
+            patient.Deleted = true;
+
+            DeleteFutureAppointments(patient);
+        }
+
+        private static void DeleteFutureAppointments(Patient patient)
+        {
+            foreach (Examination appointment in Institution.Instance().ExaminationRepository.Examinations)
+            {
+                if (appointment.Date >= DateTime.Now && patient.ID == appointment.Patient.ID) DeleteAppointment(appointment);
+            }
+            foreach (Operation appointment in Institution.Instance().OperationRepository.Operations)
+            {
+                if (appointment.Date >= DateTime.Now && patient.ID == appointment.Patient.ID) DeleteAppointment(appointment);
+            }
+
+            Institution.Instance().ExaminationChangeRepository.DeleteUnresolvedRequestsByPatientId(patient.ID);
+        }
+
+        public static void BlockPatient(Patient patient)
+        {
+            patient.Blocked = true;
+            patient.BlockadeType = BlockadeType.SECRETARY;
+
+            DeleteFutureAppointments(patient);
         }
     }
 }

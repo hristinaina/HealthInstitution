@@ -56,5 +56,17 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             }
             return null;
         }
+
+        public void DeleteUnresolvedRequestsByPatientId(int patientId)
+        {
+            foreach (ExaminationChange reference in _references)
+            {
+                if (!reference.Resolved && reference.PatientID == patientId)
+                {
+                    reference.ChangeStatus = AppointmentStatus.DELETED;
+                    reference.Resolved = true;
+                }
+            }
+        }
     }
 }
