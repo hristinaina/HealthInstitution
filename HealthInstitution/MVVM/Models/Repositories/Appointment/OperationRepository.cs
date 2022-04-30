@@ -98,5 +98,14 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             _operations.Add(operation);
         }
+
+        public int NewId()
+        {
+            if (_operations.Count == 0)
+            {
+                return 1;
+            }
+            return _operations.Max(x => x.ID) + 1;
+        }
     }
 }

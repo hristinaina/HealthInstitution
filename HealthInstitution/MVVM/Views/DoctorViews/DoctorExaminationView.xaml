@@ -51,7 +51,7 @@
                                 HorizontalAlignment="Left"
                                 Margin="100 0 0 0">
                             <Button.CommandParameter>
-                                <StackPanel Height="420"
+                                <StackPanel Height="360"
                                 Width="320"
                                 Margin="40 20 40 20">
                                     <TextBlock Text="Schedule examination"

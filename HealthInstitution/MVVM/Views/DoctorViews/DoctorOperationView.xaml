@@ -81,13 +81,22 @@
                                                    SelectedTime="{Binding NewTime}"
                                                    Style="{StaticResource MaterialDesignFilledTimePicker}"
                                                    materialDesign:HintAssist.Hint="Pick time" />
+                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                            Text="{Binding Duration}"
+                                            Width="250"
+                                            VerticalAlignment="Center"
+                                            TextWrapping="Wrap"
+                                            MaxLength="5"
+                                            IsEnabled="True"
+                                            materialDesign:HintAssist.Hint="Duration (min)"
+                                            Margin="0 20 0 0"/>
                                     <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center">
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsDefault="True"
-                                    Margin="0 30 0 0"
-                                    Content="CREATE"
-                                    Command="{Binding CreateOperation}">
+                                                IsDefault="True"
+                                                Margin="0 30 0 0"
+                                                Content="CREATE"
+                                                Command="{Binding CreateOperation}">
                                             <Button.CommandParameter>
                                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                     True
