@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
     class UpdateMedicalRecordViewModel : BaseViewModel
     {
+        public ICommand SaveCommand { get; }
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         //private MedicalRecordViewModel _medicalRecord;
