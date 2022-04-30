@@ -193,3 +193,4 @@ StyleCop.Cache
 bin
 obj
 HealthInstitution/.vs/HealthInstitution/DesignTimeBuild/.dtbcache.v2
+HealthInstitution/Data/*.json
