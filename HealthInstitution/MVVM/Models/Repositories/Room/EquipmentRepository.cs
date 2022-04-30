@@ -42,7 +42,7 @@ namespace HealthInstitution.MVVM.Models
             List<Equipment> matchingEquipment = new List<Equipment>();
             foreach (Equipment e in _equipment)
             {
-                if (e.Name.Contains(phrase)) matchingEquipment.Add(e);
+                if (e.Name.ToLower().Contains(phrase.ToLower())) matchingEquipment.Add(e);
             }
             return matchingEquipment;
         }
@@ -55,7 +55,11 @@ namespace HealthInstitution.MVVM.Models
             {
                 foreach (Room r in e.ArrangmentByRooms.Keys)
                 {
-                    if (r.Type == type) filteredEquipment[e].Add(r);
+                    if (r.Type == type)
+                    {
+                        if (!filteredEquipment.ContainsKey(e)) filteredEquipment.Add(e, new List<Room>());
+                        filteredEquipment[e].Add(r);
+                    }
                 }
             }
             return filteredEquipment;
@@ -65,9 +69,13 @@ namespace HealthInstitution.MVVM.Models
         {
             Dictionary<Equipment, List<Room>> filteredEquipment = new();
 
-            foreach (Equipment e in _equipment)
+            foreach (Equipment e in allEquipment.Keys)
             {
-                if (e.Type == type) filteredEquipment[e] = allEquipment[e];
+                if (e.Type == type)
+                {
+                    if (!filteredEquipment.ContainsKey(e)) filteredEquipment.Add(e, new List<Room>());
+                    filteredEquipment[e] = allEquipment[e]; 
+                }
             }
             return filteredEquipment;
         }
@@ -79,7 +87,11 @@ namespace HealthInstitution.MVVM.Models
             {
                 foreach (Room r in allEquipment[e])
                 {
-                    if (e.ArrangmentByRooms[r] >= minQuantity && e.ArrangmentByRooms[r] <= maxQuantity) filteredEquipment[e].Add(r);
+                    if (e.ArrangmentByRooms[r] >= minQuantity && e.ArrangmentByRooms[r] <= maxQuantity)
+                    {
+                        if (!filteredEquipment.ContainsKey(e)) filteredEquipment.Add(e, new List<Room>());
+                        filteredEquipment[e].Add(r); 
+                    }
                 }
             }
             return filteredEquipment;
