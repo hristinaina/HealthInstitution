@@ -41,7 +41,7 @@ namespace HealthInstitution.MVVM.ViewModels
 
         public async void Wait(bool logOut)
         {
-            await Task.Delay(7000);
+            await Task.Delay(3000);
             MessageVisibility = false;
             if (logOut)
             {
@@ -66,6 +66,12 @@ namespace HealthInstitution.MVVM.ViewModels
             int hours = int.Parse(timeTokens[0]);
             int minutes = int.Parse(timeTokens[1]);
             return new DateTime(year, month, day, hours, minutes, 0, DateTimeKind.Local);
+        }
+
+        public DateTime MergeTime(DateTime date, DateTime time)
+        {
+
+            return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0, DateTimeKind.Local);
         }
 
         protected void OnPropertyChanged(string propertyName)

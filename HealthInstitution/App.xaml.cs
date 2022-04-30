@@ -27,20 +27,6 @@ namespace HealthInstitution
             _navigation = NavigationStore.Instance();
 
 
-            Secretary s1 = new Secretary();
-            s1.Email = "s";
-            s1.Password = "s";
-            Institution.Instance().SecretaryRepository.Secretaries.Add(s1);
-
-            Admin a1 = new Admin();
-            a1.Email = "a";
-            a1.Password = "a";
-            Institution.Instance().AdminRepository.Administrators.Add(a1);
-
-            Doctor d1 = new Doctor();
-            d1.Email = "d";
-            d1.Password = "d";
-
             Institution.Instance().DoctorRepository.Doctors.Add(d1);
 
 
@@ -57,6 +43,12 @@ namespace HealthInstitution
             MainWindow.Show();
 
             base.OnStartup(e);
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _institution.SaveAll();
+            base.OnExit(e);
         }
     }
 }

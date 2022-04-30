@@ -31,11 +31,19 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
             try
             {
-                Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Examination));
+                bool done = Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Examination));
+                if (done)
+                {
+                    _viewModel.ShowMessage("Appointment successfully scheduled !");
+                }
             }
-            catch (PatientBlockedException) {
-                _viewModel.DialogOpen = false;
-                _viewModel.ShowMessage("System has blocked your account !", logOut:true);
+            catch (PatientBlockedException e)
+            {
+                _viewModel.ShowMessage(e.Message, logOut: true);
+            }
+            catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
             }
             _viewModel.FillAppointmentsList();
         }

@@ -39,9 +39,10 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         private ObservableCollection<Doctor> _doctors;
         public ObservableCollection<Doctor> Doctors => _doctors;
         public Doctor NewDoctor { get; set; }
-        public string NewDate { get; set; }
-        public string NewTime { get; set; }
+        public DateTime NewDate { get; set; }
+        public DateTime NewTime { get; set; }
         public Room NewRoom { get; set; }
+        
 
         private bool _enableChanges;
         public bool EnableChanges
@@ -98,10 +99,11 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             FillAppointmentsList();
             FillDoctorsList();
 
-            NewDate = DateTime.Now.ToString("MM/dd/yyyy HH:MM");
-            NewTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
+            NewDate = DateTime.Now;
+            NewTime = DateTime.Now;
 
-            if (_appointments.Count != 0) {
+            if (_appointments.Count != 0)
+            {
                 Selection = 0;
             }
             CreateAppointment = new CreateAppointmentCommand(this);

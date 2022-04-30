@@ -31,12 +31,23 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
             try
             {
-                Institution.Instance().CancelExamination((Examination)examination);
+                bool doneCompletely = Institution.Instance().CancelExamination((Examination)examination);
+                if (doneCompletely)
+                {
+                    _viewModel.ShowMessage("Appointment successfully canceled !");
+                }
+                else
+                {
+                    _viewModel.ShowMessage("Request sent to secretariat !");
+                }
             }
-            catch (PatientBlockedException)
+            catch (PatientBlockedException e)
             {
-                _viewModel.DialogOpen = false;
-                _viewModel.ShowMessage("System has blocked your account !", logOut: true);
+                _viewModel.ShowMessage(e.Message, logOut: true);
+            }
+            catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
             }
 
             _viewModel.FillAppointmentsList();

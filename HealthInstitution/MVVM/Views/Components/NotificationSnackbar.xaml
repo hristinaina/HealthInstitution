@@ -14,7 +14,7 @@
 
         <materialDesign:Snackbar x:Name="Notification"
                                  Height="150"
-                                 Width="300"
+                                 Width="400"
                                  Background="Black"
                                  HorizontalContentAlignment="Center"
                                  Foreground="White"

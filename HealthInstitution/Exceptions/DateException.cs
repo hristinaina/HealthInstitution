@@ -1,13 +1,13 @@
 ﻿using System;
 namespace HealthInstitution.Exceptions
 {
-    class PastDateException : Exception
+    class DateException : Exception
     {
-        public PastDateException()
+        public DateException()
         {
         }
 
-        public PastDateException(string message)
+        public DateException(string message)
             : base(message)
         {
         }
