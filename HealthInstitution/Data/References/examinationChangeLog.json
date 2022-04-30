@@ -1,5 +1,6 @@
 [
     {
+        "Id": 0,
         "PatientID": 1,
         "AppointmentID": 5,
         "ChangeStatus": 1,
@@ -8,6 +9,7 @@
         "NewDate": "2022-04-30T18:43:37.0931955+02:00"
     },
     {
+        "Id": 1,
         "PatientID": 1,
         "AppointmentID": 2,
         "ChangeStatus": 0,
@@ -16,6 +18,7 @@
         "NewDate": "2022-04-30T18:43:37.0931955+02:00"
     },
     {
+        "Id": 2,
         "PatientID": 1,
         "AppointmentID": 3,
         "ChangeStatus": 0,
