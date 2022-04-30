@@ -302,6 +302,7 @@ namespace HealthInstitution.MVVM.Models
             // DO NOT DELETE THIS
             if (resolved) room.Appointments.Remove(appointment);
 
+
         }
     }
 }

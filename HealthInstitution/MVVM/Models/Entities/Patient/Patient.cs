@@ -186,5 +186,17 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
             return historyOfIllness;
         }
+
+        public List<string> GetHistoryOfIllness()
+        {
+            List<string> historyOfIllness = new List<string>();
+            foreach (Examination examination in _examinations)
+            {
+                if (examination.Anamnesis.Length > 1) 
+                    historyOfIllness.Add(examination.Anamnesis);
+ 
+            }
+            return historyOfIllness;
+        }
     }
 }
