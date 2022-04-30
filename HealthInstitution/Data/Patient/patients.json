@@ -1,7 +1,7 @@
 [
   {
-    "Blocked": false,
-    "BlockadeType": 0,
+    "Blocked": true,
+    "BlockadeType": 1,
     "Deleted": false,
     "Record": {
       "Height": 190.0,
@@ -15,8 +15,8 @@
     "Gender": 0
   },
   {
-    "Blocked": false,
-    "BlockadeType": 0,
+    "Blocked": true,
+    "BlockadeType": 1,
     "Deleted": false,
     "Record": {
       "Height": 170.0,
@@ -30,8 +30,8 @@
     "Gender": 1
   },
   {
-    "Blocked": false,
-    "BlockadeType": 0,
+    "Blocked": true,
+    "BlockadeType": 1,
     "Deleted": false,
     "Record": {
       "Height": 170.0,
@@ -75,8 +75,8 @@
     "Gender": 2
   },
   {
-    "Blocked": false,
-    "BlockadeType": 0,
+    "Blocked": true,
+    "BlockadeType": 1,
     "Deleted": false,
     "Record": {
       "Height": 170.0,

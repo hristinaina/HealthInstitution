@@ -8,6 +8,7 @@ using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.Exceptions;
 
 namespace HealthInstitution.Commands
 {
@@ -28,14 +29,24 @@ namespace HealthInstitution.Commands
         {
             if (string.IsNullOrEmpty(_loginVM.Email) | string.IsNullOrEmpty(_loginVM.Password))
             {
+                _loginVM.ShowMessage("All fields must be filled !");
                 return;
             }
 
             // check which user type it is and redirect to the corresponding main page
-            bool foundUser = Login(_loginVM.Email, _loginVM.Password);
-
-            if (!foundUser)
+            try
             {
+                bool foundUser = Login(_loginVM.Email, _loginVM.Password);
+
+                if (!foundUser)
+                {
+                    _loginVM.ShowMessage("Wrong credentials !");
+                }
+            }
+            catch (PatientBlockedException e) 
+            {
+
+                _loginVM.ShowMessage("Cannot login. You were blocked. ");
             }
         }
 
@@ -52,6 +63,11 @@ namespace HealthInstitution.Commands
                 Patient patient = (Patient)_institution.CurrentUser;
                 if (patient.Blocked || patient.Deleted) return false;
                 _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
+                Patient user = (Patient)_institution.CurrentUser;
+                if (user.Blocked)
+                {
+                    throw new PatientBlockedException("Patient is blocked !");
+                }
                 return true;
             }
 
