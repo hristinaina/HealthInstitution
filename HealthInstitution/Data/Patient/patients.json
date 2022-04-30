@@ -89,19 +89,34 @@
     "Gender": 2,
     "Deleted": false
   },
-  {
-    "Blocked": false,
-    "BlockadeType": 0,
-    "Record": {
-      "Height": 190.0,
-      "Weight": 80.0
+    {
+        "Blocked": true,
+        "BlockadeType": 2,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 0,
+        "FirstName": "debil",
+        "LastName": "debilkovic",
+        "Email": "p",
+        "Password": "p",
+        "Gender": 1,
+        "Deleted": false
     },
-    "ID": 7,
-    "FirstName": "Harry",
-    "LastName": "Styles",
-    "Email": "harry@tpwk.com",
-    "Password": "1d",
-    "Gender": 0,
-    "Deleted": false
-  }
+    {
+        "Blocked": true,
+        "BlockadeType": 1,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 7,
+        "FirstName": "debil",
+        "LastName": "debilkovic",
+        "Email": "p",
+        "Password": "p",
+        "Gender": 1,
+        "Deleted": true
+    }
 ]

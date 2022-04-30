@@ -1,5 +1,6 @@
 ﻿
 using HealthInstitution.MVVM.Models.Enumerations;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace HealthInstitution.MVVM.Models.Entities.References
 {
     public class ExaminationChange
     {
+        private int _id;
         private int _patientId;
         private int _appointmentId;
         private AppointmentStatus _changeStatus;
@@ -17,8 +19,10 @@ namespace HealthInstitution.MVVM.Models.Entities.References
         private bool _resolved;
         private DateTime _newDate;
 
+        public int ID { get => this._id; set => this._id = value; }
         public int PatientID { get => this._patientId; set => this._patientId = value; }
         public int AppointmentID { get => this._appointmentId; set => this._appointmentId = value; }
+        [JsonProperty("ChangeStatus")]
         public AppointmentStatus ChangeStatus { get => this._changeStatus; set => this._changeStatus = value; }
         public DateTime ChangeDate { get => this._changeDate; set => this._changeDate = value; }
         public bool Resolved { get => this._resolved; set => this._resolved = value; }

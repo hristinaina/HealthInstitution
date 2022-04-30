@@ -15,7 +15,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
         private readonly string _fileName;
         private List<ExaminationChange> _references;
 
-        public List<ExaminationChange> Changes { get => _references;}
+        public List<ExaminationChange> Changes { get => _references; }
         public ExaminationChangeRepository(string FileName)
         {
             _fileName = FileName;
@@ -46,6 +46,14 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             ExaminationChange change = new ExaminationChange(examination.Patient.ID, examination.ID, status, DateTime.Now, resolved);
             _references.Add(change);
             examination.Patient.ExaminationChanges.Add(change);
+            
+        public ExaminationChange FindByID(int id)
+        {
+            foreach (ExaminationChange reference in _references)
+            {
+                if (reference.ID == id) return reference;
+            }
+            return null;
         }
     }
 }
