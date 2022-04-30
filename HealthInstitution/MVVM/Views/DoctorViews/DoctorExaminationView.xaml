@@ -28,77 +28,8 @@
 
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
-                                       Grid.Row="0"
-                                       Grid.ColumnSpan="3"
-                                       Grid.RowSpan="3">
-                <materialDesign:DialogHost.DialogContent>
-                    <StackPanel Height="420"
-                                Width="320"
-                                Margin="40 20 40 20">
-                        <TextBlock Text="Schedule examination"
-                                   HorizontalAlignment="Center"
-                                   Margin="10"
-                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                        <ComboBox Margin="0 20 0 0"
-                                  Width="250"
-                                  HorizontalAlignment="Center"
-                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                  materialDesign:HintAssist.Hint="Search for a patient"
-                                  materialDesign:HintAssist.HintOpacity=".26"
-                                  IsEditable="True">
-                            <ComboBoxItem Content="Patient 1" />
-                            <ComboBoxItem Content="Patient 2" />
-                            <ComboBoxItem Content="Patient 3" />
-                            <ComboBoxItem Content="Patient 4" />
-                        </ComboBox>
-                        <DatePicker Width="250"
-                                    Margin="0 20 0 0"
-                                    materialDesign:HintAssist.Hint="Pick date"
-                                    Style="{StaticResource MaterialDesignFilledDatePicker}" />
-                        <materialDesign:TimePicker Width="250"
-                                                   Margin="0 20 0 0"
-                                                   Is24Hours="True"
-                                                   Style="{StaticResource MaterialDesignFilledTimePicker}"
-                                                   materialDesign:HintAssist.Hint="Pick time" />
-                        <ComboBox Margin="0 20 0 0"
-                                  Width="250"
-                                  HorizontalAlignment="Center"
-                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                  materialDesign:HintAssist.Hint="Pick a room"
-                                  materialDesign:HintAssist.HintOpacity=".26"
-                                  IsEditable="True">
-                        <ComboBoxItem Content="Room 1" />
-                        <ComboBoxItem Content="Room 2" />
-                        <ComboBoxItem Content="Room 3" />
-                        <ComboBoxItem Content="Room 4" />
-                        </ComboBox>
-                        <StackPanel Orientation="Horizontal"
-                                    HorizontalAlignment="Center">
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsDefault="True"
-                                    Margin="0 30 0 0"
-                                    Content="CREATE"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                <Button.CommandParameter>
-                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                        True
-                                    </system:Boolean>
-                                </Button.CommandParameter>
-                            </Button>
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    IsCancel="True"
-                                    Margin="0 30 0 0"
-                                    Content="CANCEL"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                <Button.CommandParameter>
-                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                        False
-                                    </system:Boolean>
-                                </Button.CommandParameter>
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>
-                </materialDesign:DialogHost.DialogContent>
+                                       Grid.Row="0">
+                
                 <materialDesign:Card>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -117,26 +48,98 @@
                                 VerticalAlignment="Center"
                                 Grid.Row="0"
                                 HorizontalAlignment="Left"
-                                Margin="100 0 0 0"/>
+                                Margin="100 0 0 0">
+                            <Button.CommandParameter>
+                                <StackPanel Height="420"
+                                Width="320"
+                                Margin="40 20 40 20">
+                                    <TextBlock Text="Schedule examination"
+                                   HorizontalAlignment="Center"
+                                   Margin="10"
+                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                    <ComboBox Margin="0 20 0 0"
+                                  Width="250"
+                                  HorizontalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                                  materialDesign:HintAssist.Hint="Search for a patient"
+                                  materialDesign:HintAssist.HintOpacity=".26"
+                                  IsEditable="True">
+                                        <ComboBoxItem Content="Patient 1" />
+                                        <ComboBoxItem Content="Patient 2" />
+                                        <ComboBoxItem Content="Patient 3" />
+                                        <ComboBoxItem Content="Patient 4" />
+                                    </ComboBox>
+                                    <DatePicker Width="250"
+                                    Margin="0 20 0 0"
+                                    materialDesign:HintAssist.Hint="Pick date"
+                                    Style="{StaticResource MaterialDesignFilledDatePicker}" />
+                                    <materialDesign:TimePicker Width="250"
+                                                   Margin="0 20 0 0"
+                                                   Is24Hours="True"
+                                                   Style="{StaticResource MaterialDesignFilledTimePicker}"
+                                                   materialDesign:HintAssist.Hint="Pick time" />
+                                    <ComboBox Margin="0 20 0 0"
+                                  Width="250"
+                                  HorizontalAlignment="Center"
+                                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                                  materialDesign:HintAssist.Hint="Pick a room"
+                                  materialDesign:HintAssist.HintOpacity=".26"
+                                  IsEditable="True">
+                                        <ComboBoxItem Content="Room 1" />
+                                        <ComboBoxItem Content="Room 2" />
+                                        <ComboBoxItem Content="Room 3" />
+                                        <ComboBoxItem Content="Room 4" />
+                                    </ComboBox>
+                                    <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsDefault="True"
+                                    Margin="0 30 0 0"
+                                    Content="CREATE"
+                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    True
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsCancel="True"
+                                    Margin="0 30 0 0"
+                                    Content="CANCEL"
+                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </Button.CommandParameter>
+                        </Button>
                         <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="170"
-                                ToolTip="Schedule examination"
+                                ToolTip="Start examination"
                                 Content="Start examination"
                                 Background="#6680DEEA"
                                 BorderBrush="#6680DEEA"
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                
                                 Height="32"
                                 VerticalAlignment="Center"
                                 Grid.Row="0"
                                 HorizontalAlignment="Center" 
-                                Margin="0 0 0 0"/>
+                                Margin="0 0 0 0">
+                            
+                        </Button>
                         <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="170"
-                                ToolTip="Schedule examination"
+                                ToolTip="View medical record"
                                 Content="Medical record"
                                 Background="#6680DEEA"
                                 BorderBrush="#6680DEEA"
-                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                Command="{Binding MedicalRecord}"
                                 Height="32"
                                 VerticalAlignment="Center"
                                 Grid.Row="0"
@@ -197,8 +200,8 @@
                         </ListView>
                         <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="170"
-                                ToolTip="Update operation"
-                                Content="Update operation"
+                                ToolTip="Update examination"
+                                Content="Update examination"
                                 Background="#6680DEEA"
                                 BorderBrush="#6680DEEA"
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
@@ -209,8 +212,8 @@
                                 Margin="200,420,0,0" Grid.RowSpan="2"/>
                         <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="170"
-                                ToolTip="Delete operation"
-                                Content="Delete operation"
+                                ToolTip="Delete examination"
+                                Content="Delete examination"
                                 Background="#6680DEEA"
                                 BorderBrush="#6680DEEA"
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"

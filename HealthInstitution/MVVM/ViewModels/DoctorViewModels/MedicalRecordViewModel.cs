@@ -9,6 +9,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
     class MedicalRecordViewModel : BaseViewModel
     {
+        public DoctorNavigationViewModel Navigation { get; }
+
         private readonly Examination _examination;
         public Examination Examination { get => _examination; }
 
@@ -18,9 +20,15 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                               _examination.Patient.LastName.ToString();
         public string Anamnesis => _examination.Anamnesis;
 
-        public MedicalRecordViewModel(Examination examination)
+        public MedicalRecordViewModel(Examination examination) : this()
         {
+            //Navigation = new DoctorNavigationViewModel();
             _examination = examination;
+        }
+
+        public MedicalRecordViewModel()
+        {
+            Navigation = new DoctorNavigationViewModel();
         }
     }
 }

@@ -22,7 +22,7 @@
             <ColumnDefinition Width="6*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <components:DoctorNavigationRail SelectedIndex="0"></components:DoctorNavigationRail>
+        <components:DoctorNavigationRail SelectedIndex="1"></components:DoctorNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
             <Grid>
@@ -61,9 +61,6 @@
                             Grid.Row="0"
                             IsEnabled="False"
                             Margin="0 0 0 0"
-                            materialDesign:TextFieldAssist.CharacterCounterVisibility=
-                            "{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter},
-                            ElementName=MaterialDesignFilledTextBoxTextCountComboBox}"
                             materialDesign:HintAssist.Hint="Patient"/>
 
                         <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -75,9 +72,6 @@
                             Grid.Row="1"
                             IsEnabled="False"
                             Margin="0 0 0 0"
-                            materialDesign:TextFieldAssist.CharacterCounterVisibility=
-                            "{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter},
-                            ElementName=MaterialDesignFilledTextBoxTextCountComboBox}"
                             materialDesign:HintAssist.Hint="Heigh (cm)"/>
 
                         <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
@@ -89,9 +83,6 @@
                             Grid.Row="2"
                             IsEnabled="False"
                             Margin="0 0 0 0"
-                            materialDesign:TextFieldAssist.CharacterCounterVisibility=
-                            "{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter},
-                            ElementName=MaterialDesignFilledTextBoxTextCountComboBox}"
                             materialDesign:HintAssist.Hint="Weight (kg)"/>
 
                     </Grid>

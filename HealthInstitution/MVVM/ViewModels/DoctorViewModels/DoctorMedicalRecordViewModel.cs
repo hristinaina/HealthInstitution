@@ -12,6 +12,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
     class DoctorMedicalRecordViewModel : BaseViewModel
     {
+        public DoctorNavigationViewModel Navigation { get; }
+
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         //private MedicalRecordViewModel _medicalRecord;
@@ -63,6 +65,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public DoctorMedicalRecordViewModel()
         {
+            Navigation = new DoctorNavigationViewModel();
             _allergens = new ObservableCollection<AllergenViewModel>();
             _examination = new Examination(1, DateTime.Now, false, false, "", new ExaminationReview(0.0, ""));
             Allergen allergen = new Allergen(1, "Naziv");

@@ -13,7 +13,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
     class DoctorOperationViewModel : BaseViewModel
     {
         private readonly ObservableCollection<OperationViewModel> _operations;
-
+        public DoctorNavigationViewModel Navigation { get; }
         public IEnumerable<OperationViewModel> Operations => _operations;
 
         public ICommand ScheduleOperation { get; }
@@ -25,6 +25,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public DoctorOperationViewModel()
         {
+            Navigation = new DoctorNavigationViewModel();
             _operations = new ObservableCollection<OperationViewModel>();
 
             // test

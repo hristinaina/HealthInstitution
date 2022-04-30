@@ -57,7 +57,7 @@ namespace HealthInstitution.Commands
             _institution.CurrentUser = User.FindUser(_institution.DoctorRepository.Doctors, email, password);
             if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new UpdateMedicalRecordViewModel();
+                _navigationStore.CurrentViewModel = new DoctorExaminationViewModel();
                 return true;
             }
 

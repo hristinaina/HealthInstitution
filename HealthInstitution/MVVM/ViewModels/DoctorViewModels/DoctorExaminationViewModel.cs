@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
     class DoctorExaminationViewModel : BaseViewModel
     {
         private readonly ObservableCollection<ExaminationViewModel> _examinations;
+
+        public DoctorNavigationViewModel Navigation { get; }
+        public DoctorMedicalRecordViewModel MedicalRecordVM { get; }
 
         public IEnumerable<ExaminationViewModel> Examinations => _examinations;
 
@@ -25,7 +29,10 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public DoctorExaminationViewModel()
         {
+            MedicalRecordVM = new DoctorMedicalRecordViewModel();
+            MedicalRecord = new OpenMedicalRecordCommand();
             _examinations = new ObservableCollection<ExaminationViewModel>();
+            Navigation = new DoctorNavigationViewModel();
 
             // test
             Examination exam = new Examination(1, DateTime.Now, false, false, "", new ExaminationReview(0.0, ""));

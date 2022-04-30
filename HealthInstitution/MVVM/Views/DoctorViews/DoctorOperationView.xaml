@@ -65,9 +65,7 @@
                                      VerticalAlignment="Top"
                                      TextWrapping="Wrap"
                                      MaxLength="5"
-                                     materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked,
-                                     ElementName=MaterialDesignFilledTextBoxTextCountComboBox,
-                                     Converter={StaticResource BooleanToVisibilityConverter}}"
+                                     
                                      materialDesign:HintAssist.Hint="Duration of operation" />
                         </StackPanel>
                         <ComboBox Margin="0 20 0 0"
