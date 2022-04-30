@@ -78,5 +78,10 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
             return false;
         }
+
+        public void Remove(Operation operation)
+        {
+            _operations.Remove(operation);
+        }
     }
 }

@@ -21,7 +21,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            _viewModel.DialogOpen = false;
+
+            Appointment examination = _viewModel.SelectedExamination.Examination;
+
+            Institution.Instance().CancelExamination((Examination)examination);
+            _viewModel.FillExaminationsList();
+        
         }
     }
 }

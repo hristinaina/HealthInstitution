@@ -41,5 +41,15 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
             return null;
         }
+
+        public void Remove(Operation operation)
+        {
+            OperationReference reference = FindByOperationID(operation.ID);
+            _references.Remove(reference);
+        }
+        public void Add(Operation operation)
+        {
+            _references.Add(new OperationReference(operation.ID, operation.Doctor.ID, operation.Patient.ID, operation.Room.ID));
+        }
     }
 }

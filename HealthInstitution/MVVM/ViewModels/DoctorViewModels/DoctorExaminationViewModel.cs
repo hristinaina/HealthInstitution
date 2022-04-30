@@ -27,10 +27,9 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand ScheduleExaminationCommand { get; }
         public ICommand StartExamination { get; }
         public ICommand MedicalRecord { get; }
-        public ICommand UpdateExamination { get; }
-        public ICommand DeleteExamination { get; }
+        public ICommand RescheduleAppointment { get; }
+        public ICommand CancelAppointment { get; }
         public ICommand CreateExamination { get; }
-        public ICommand CancelExamination { get; }
 
         private ExaminationViewModel _selectedExamination;
         public ExaminationViewModel SelectedExamination { get => _selectedExamination; }
@@ -92,8 +91,6 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public DoctorExaminationViewModel()
         {
-            MedicalRecordVM = new DoctorMedicalRecordViewModel();
-            MedicalRecord = new OpenMedicalRecordCommand();
             _examinations = new ObservableCollection<ExaminationViewModel>();
             Navigation = new DoctorNavigationViewModel();
 
@@ -112,8 +109,9 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             NewDate = DateTime.Now.ToString("MM/dd/yyyy HH:MM");
             NewTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
             CreateExamination = new CreateAppointmentCommand(this);
-            UpdateExamination = new RescheduleAppointmentCommand(this);
-            CancelExamination = new CancelExaminationCommand(this);
+            RescheduleAppointment = new RescheduleAppointmentCommand(this);
+            CancelAppointment = new CancelExaminationCommand(this);
+            MedicalRecord = new OpenMedicalRecordCommand(this);
         }
 
         public void FillExaminationsList()
