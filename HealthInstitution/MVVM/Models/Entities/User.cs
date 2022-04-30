@@ -66,13 +66,5 @@ namespace HealthInstitution.MVVM.Models
         {
             return FullName;
         }
-
-        public string FullName => FirstName + " " + LastName;
-
-        public override string ToString()
-        {
-            return FullName;
-        }
-
     }
 }
