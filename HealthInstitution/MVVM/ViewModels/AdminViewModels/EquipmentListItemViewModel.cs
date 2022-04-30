@@ -12,13 +12,17 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         Equipment _equipment;
         Room _room;
         public string Name => _equipment.Name;
-        public string Room => _room.Number.ToString();
+        public string Room { get; set; }
         public string Quantity => _equipment.ArrangmentByRooms[_room].ToString();
 
         public EquipmentListItemViewModel(Equipment equipment, Room room)
         {
             _equipment = equipment;
             _room = room;
+
+            Room = _room.Number.ToString();
+            if (_room.Number == 0) Room = "Warehouse";
+
         }
     }
 }

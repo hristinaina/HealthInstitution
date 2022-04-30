@@ -10,7 +10,9 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
     class RoomListItemViewModel : BaseViewModel
     {
 
-        Room _room;
+        private Room _room;
+
+        public Room Room { get => _room; set => _room = value; }
 
         public string ID => _room.ID.ToString();
         public string Name => _room.Name;

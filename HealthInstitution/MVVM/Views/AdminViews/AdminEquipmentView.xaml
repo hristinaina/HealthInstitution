@@ -84,7 +84,7 @@
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Center"
                                                                Text="{Binding Room}"
-                                                               Width="70" />
+                                                               Width="100" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
