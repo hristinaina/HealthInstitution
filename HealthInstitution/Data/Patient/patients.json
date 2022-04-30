@@ -2,6 +2,7 @@
   {
     "Blocked": false,
     "BlockadeType": 0,
+    "Deleted": false,
     "Record": {
       "Height": 190.0,
       "Weight": 80.0
@@ -11,12 +12,12 @@
     "LastName": "Patient",
     "Email": "p",
     "Password": "p",
-    "Gender": 0,
-    "Deleted": false
+    "Gender": 0
   },
   {
     "Blocked": false,
     "BlockadeType": 0,
+    "Deleted": false,
     "Record": {
       "Height": 170.0,
       "Weight": 60.0
@@ -26,12 +27,12 @@
     "LastName": "Patient",
     "Email": "p2@mail",
     "Password": "p",
-    "Gender": 1,
-    "Deleted": false
+    "Gender": 1
   },
   {
-    "Blocked": false,
-    "BlockadeType": 0,
+    "Blocked": true,
+    "BlockadeType": 1,
+    "Deleted": false,
     "Record": {
       "Height": 170.0,
       "Weight": 60.0
@@ -41,12 +42,12 @@
     "LastName": "Patient",
     "Email": "p3@mail",
     "Password": "p",
-    "Gender": 2,
-    "Deleted": false
+    "Gender": 2
   },
   {
     "Blocked": false,
     "BlockadeType": 0,
+    "Deleted": false,
     "Record": {
       "Height": 170.0,
       "Weight": 60.0
@@ -56,12 +57,12 @@
     "LastName": "Patient",
     "Email": "p4@mail",
     "Password": "p",
-    "Gender": 2,
-    "Deleted": false
+    "Gender": 2
   },
   {
     "Blocked": false,
     "BlockadeType": 0,
+    "Deleted": false,
     "Record": {
       "Height": 170.0,
       "Weight": 60.0
@@ -71,12 +72,12 @@
     "LastName": "Prezime",
     "Email": "p5@mail",
     "Password": "p",
-    "Gender": 2,
-    "Deleted": false
+    "Gender": 2
   },
   {
     "Blocked": false,
     "BlockadeType": 0,
+    "Deleted": false,
     "Record": {
       "Height": 170.0,
       "Weight": 60.0
@@ -86,52 +87,51 @@
     "LastName": "Prezime",
     "Email": "p6@mail",
     "Password": "p",
-    "Gender": 2,
-    "Deleted": false
+    "Gender": 2
   },
-    {
-        "Blocked": true,
-        "BlockadeType": 2,
-        "Record": {
-            "Height": 0.0,
-            "Weight": 0.0
-        },
-        "ID": 0,
-        "FirstName": "debil",
-        "LastName": "debilkovic",
-        "Email": "p",
-        "Password": "p",
-        "Gender": 1,
-        "Deleted": false
+  {
+    "Blocked": true,
+    "BlockadeType": 2,
+    "Deleted": false,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0
     },
-    {
-        "Blocked": true,
-        "BlockadeType": 1,
-        "Record": {
-            "Height": 0.0,
-            "Weight": 0.0
-        },
-        "ID": 7,
-        "FirstName": "debil",
-        "LastName": "debilkovic",
-        "Email": "p",
-        "Password": "p",
-        "Gender": 1,
-        "Deleted": true
+    "ID": 0,
+    "FirstName": "debil",
+    "LastName": "debilkovic",
+    "Email": "p",
+    "Password": "p",
+    "Gender": 1
+  },
+  {
+    "Blocked": true,
+    "BlockadeType": 1,
+    "Deleted": true,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0
     },
-    {
-        "Blocked": true,
-        "BlockadeType": 1,
-        "Record": {
-            "Height": 0.0,
-            "Weight": 0.0
-        },
-        "ID": 8,
-        "FirstName": "neko",
-        "LastName": "nekovic",
-        "Email": "p",
-        "Password": "p",
-        "Gender": 1,
-        "Deleted": false
-    }
+    "ID": 7,
+    "FirstName": "debil",
+    "LastName": "debilkovic",
+    "Email": "p",
+    "Password": "p",
+    "Gender": 1
+  },
+  {
+    "Blocked": true,
+    "BlockadeType": 1,
+    "Deleted": false,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0
+    },
+    "ID": 8,
+    "FirstName": "neko",
+    "LastName": "nekovic",
+    "Email": "p",
+    "Password": "p",
+    "Gender": 1
+  }
 ]

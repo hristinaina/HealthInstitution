@@ -1,72 +1,72 @@
 [
   {
-    "Id": 0,
+    "ID": 0,
     "Name": "Warehouse",
     "Number": 0,
     "Type": null
   },
   {
-    "Id": 1,
+    "ID": 1,
     "Name": "OR",
     "Number": 100,
     "Type": 0
   },
   {
-    "Id": 2,
+    "ID": 2,
     "Name": "ER",
     "Number": 101,
     "Type": 1
   },
   {
-    "Id": 3,
+    "ID": 3,
     "Name": "Soba za odmor 1",
     "Number": 102,
     "Type": 2
   },
   {
-    "Id": 4,
+    "ID": 4,
     "Name": "INT",
     "Number": 302,
-    "type": 0
+    "Type": 0
   },
   {
-    "Id": 5,
+    "ID": 5,
     "Name": "NTP-307",
     "Number": 307,
     "Type": 1
   },
   {
-    "Id": 6,
+    "ID": 6,
     "Name": "Soba 403",
     "Number": 403,
     "Type": 2
   },
   {
-    "Id": 7,
+    "ID": 7,
     "Name": "ER 404",
     "Number": 404,
     "Type": 0
   },
   {
-    "Id": 8,
+    "ID": 8,
     "Name": "Dosadna soba",
     "Number": 400,
     "Type": 1
   },
   {
-    "Id": 9,
+    "ID": 9,
     "Name": "Djecija soba",
     "Number": 103,
     "Type": 2
   },
   {
-    "Id": 10,
+    "ID": 10,
     "Name": "Vesela soba",
     "Number": 107,
     "Type": 2
   },
   {
-    "Id": 11,
+    "ID": 11,
     "Name": "Soba za odmor 2",
     "Number": 109,
     "Type": 2
