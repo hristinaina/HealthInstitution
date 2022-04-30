@@ -8,6 +8,7 @@ using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.Exceptions;
 
 namespace HealthInstitution.Commands
 {
@@ -28,16 +29,23 @@ namespace HealthInstitution.Commands
         {
             if (string.IsNullOrEmpty(_loginVM.Email) | string.IsNullOrEmpty(_loginVM.Password))
             {
-                //TODO prikazati kao MessageBox: Niste popunili sva polja
+                _loginVM.ShowMessage("All fields must be filled !");
                 return;
             }
 
             // check which user type it is and redirect to the corresponding main page
-            bool foundUser = Login(_loginVM.Email, _loginVM.Password);
-
-            if (!foundUser)
+            try
             {
-                //TODO: prikazati kao MessageBox: Ne postoji korisnik sa unesenim podacima!
+                bool foundUser = Login(_loginVM.Email, _loginVM.Password);
+
+                if (!foundUser)
+                {
+                    _loginVM.ShowMessage("Wrong credentials !");
+                }
+            }
+            catch (PatientBlockedException e) 
+            {
+                _loginVM.ShowMessage("Cannot login. You were blocked. ");
             }
         }
 
@@ -52,6 +60,11 @@ namespace HealthInstitution.Commands
             if (_institution.CurrentUser != null)
             {
                 _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
+                Patient user = (Patient)_institution.CurrentUser;
+                if (user.Blocked)
+                {
+                    throw new PatientBlockedException("Patient is blocked !");
+                }
                 return true;
             }
 
