@@ -49,6 +49,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
                 return;
             }
 
+            if (!Institution.Instance().PatientRepository.CheckEmail(_viewModel.NewEmail))
+            {
+                MessageBox.Show("Account with this email already exist! Please choose a new one!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             int id = Institution.Instance().PatientRepository.GetNewID();
             Enum.TryParse(_viewModel.NewGender, out Gender gender);
             Patient patient = new Patient(id, _viewModel.NewName, _viewModel.NewSurname, _viewModel.NewEmail, _viewModel.NewPassword, gender,

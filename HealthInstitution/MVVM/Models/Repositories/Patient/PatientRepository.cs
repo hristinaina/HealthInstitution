@@ -36,9 +36,9 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         private bool CheckID(int id)
         {
-            foreach (Patient r in _patients)
+            foreach (Patient p in _patients)
             {
-                if (r.ID == id) return false;
+                if (p.ID == id) return false;
             }
             return true;
         }
@@ -51,6 +51,15 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 if (CheckID(i)) return i;
                 i++;
             }
+        }
+
+        public bool CheckEmail(string email)
+        {
+            foreach (Patient p in _patients)
+            {
+                if (p.Email == email) return false;
+            }
+            return true;
         }
     }
 }
