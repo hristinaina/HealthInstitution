@@ -38,5 +38,14 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             }
             return null;
         }
+
+        public ExaminationChange FindByID(int id)
+        {
+            foreach (ExaminationChange reference in _references)
+            {
+                if (reference.ID == id) return reference;
+            }
+            return null;
+        }
     }
 }
