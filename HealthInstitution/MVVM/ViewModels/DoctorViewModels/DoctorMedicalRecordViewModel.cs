@@ -18,8 +18,10 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         //private MedicalRecordViewModel _medicalRecord;
         //public MedicalRecordViewModel MedicalRecord { get => _medicalRecord; }
-        public Examination _examination;
+        private Examination _examination;
         public Examination Examination { get => _examination; }
+        private Operation _operation;
+        public Operation Operation { get => _operation; }
 
         private string _name;
         public string Name
@@ -63,40 +65,69 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
-        public DoctorMedicalRecordViewModel()
+        public DoctorMedicalRecordViewModel(Examination selectedExamination)
         {
-            Navigation = new DoctorNavigationViewModel();
+            bool isSpecialist = true;
+            Doctor doctor = (Doctor) Institution.Instance().CurrentUser;
+            if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
+            Navigation = new DoctorNavigationViewModel(isSpecialist);
             _allergens = new ObservableCollection<AllergenViewModel>();
-            _examination = new Examination(1, DateTime.Now, false, false, "", new ExaminationReview(0.0, ""));
-            Allergen allergen = new Allergen(1, "Naziv");
-            List<Allergen> allergens = new List<Allergen>();
-            allergens.Add(allergen);
-            Patient patient = new Patient();
-            patient.FirstName = "Ime";
-            patient.LastName = "Prezime";
-            MedicalRecord mr = new MedicalRecord(180, 80, allergens);
-            patient.Record = mr;
-            _examination.Patient = patient;
-            Name = Examination.Patient.FirstName;
-            SetProperties();
-            FillAllergensList();
+            _examination = selectedExamination;
+
+            SetProperties(true);
+            FillAllergensList(true);
         }
 
-        public void SetProperties()
+        public DoctorMedicalRecordViewModel(Operation selectedOperation)
         {
-            Name = Examination.Patient.FirstName + " " + Examination.Patient.LastName;
-            Height = Examination.Patient.Record.Height;
-            Weight = Examination.Patient.Record.Weight;
+            bool isSpecialist = true;
+            Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
+            if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
+            Navigation = new DoctorNavigationViewModel(isSpecialist);
+            _allergens = new ObservableCollection<AllergenViewModel>();
+            _operation = selectedOperation;
+            SetProperties(false);
+            FillAllergensList(false);
+
         }
 
-        public void FillAllergensList()
+        public void SetProperties(bool isExamination)
+        {
+            if (isExamination)
+            {
+                Name = _examination.Patient.FirstName + " " + _examination.Patient.LastName;
+                Height = _examination.Patient.Record.Height;
+                Weight = _examination.Patient.Record.Weight;
+            }
+            else
+            {
+                Name = _operation.Patient.FirstName + " " + _operation.Patient.LastName;
+                Height = _operation.Patient.Record.Height;
+                Weight = _operation.Patient.Record.Weight;
+            }
+            
+        }
+
+        public void FillAllergensList(bool isExamination)
         {
             _allergens.Clear();
-            foreach (Allergen allergen in _examination.Patient.Record.Allergens)
+            if (isExamination)
             {
-                _allergens.Add(new AllergenViewModel(allergen));
+                foreach (Allergen allergen in _examination.Patient.Record.Allergens)
+                {
+                    _allergens.Add(new AllergenViewModel(allergen));
+                }
             }
-            OnPropertyChanged(nameof(Allergens)) ;
+            else
+            {
+                foreach (Allergen allergen in _operation.Patient.Record.Allergens)
+                {
+                    _allergens.Add(new AllergenViewModel(allergen));
+                }
+            }
+
+            OnPropertyChanged(nameof(Allergens));
+
         }
 
       

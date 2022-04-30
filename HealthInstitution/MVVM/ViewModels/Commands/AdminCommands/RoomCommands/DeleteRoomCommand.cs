@@ -21,7 +21,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
 
         public override void Execute(object parameter)
         {
-            if (!_model.SelectedRoom.Room.IsDeletable())
+            if (!_model.SelectedRoom.Room.IsChangeable())
             {
                 MessageBox.Show("Room cannot be deleted, because it has scheduled appointments", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }

@@ -17,8 +17,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         private Dictionary<Room, int> _arrangmentByRooms;
 
         public int ID { get => _id; set => _id = value; }
-        public string Name { get => this._name; set => _name = value; }
-        public int Quantity { get => this._quantity; set => _quantity = value; }
+        public string Name { get => _name; set => _name = value; }
+        public int Quantity { get => _quantity; set => _quantity = value; }
         public EquipmentType Type { get => _type; set => _type = value; }
         [JsonIgnore]
         public Dictionary<Room, int> ArrangmentByRooms

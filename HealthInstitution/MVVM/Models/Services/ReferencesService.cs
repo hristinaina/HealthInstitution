@@ -30,13 +30,13 @@ namespace HealthInstitution.MVVM.Models.Services
                 Examination examination = Institution.Instance().ExaminationRepository.FindByID(reference.ExaminationID);
                 Doctor doctor = Institution.Instance().DoctorRepository.FindByID(reference.DoctorID);
                 Patient patient = Institution.Instance().PatientRepository.FindByID(reference.PatientID);
-                Prescription perscription = Institution.Instance().PrescriptionRepository.FindByID(reference.PerscriptionID);
+                Prescription prescription = Institution.Instance().PrescriptionRepository.FindByID(reference.PerscriptionID);
                 Room room = Institution.Instance().RoomRepository.FindById(reference.RoomID);
 
 
                 examination.Doctor = doctor;
                 examination.Patient = patient;
-                examination.Prescription = perscription;
+                examination.Prescription = prescription;
                 examination.Room = room;
 
                 room.Appointments.Add(examination);
@@ -66,7 +66,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
         public static void ArrangeEquipment()
         {
-            foreach (EquipmentArragment a in Institution.Instance().EquipmentArragmentRepository.CurrentEquipment)
+            foreach (EquipmentArrangement a in Institution.Instance().EquipmentArragmentRepository.CurrentArrangement)
             {
 
                 Room r = Institution.Instance().RoomRepository.FindById(a.RoomId);

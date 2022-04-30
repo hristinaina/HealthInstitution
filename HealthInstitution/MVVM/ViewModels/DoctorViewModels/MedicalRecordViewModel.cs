@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
@@ -25,10 +26,12 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             //Navigation = new DoctorNavigationViewModel();
             _examination = examination;
         }
-
         public MedicalRecordViewModel()
         {
-            Navigation = new DoctorNavigationViewModel();
+            bool isSpecialist = true;
+            Doctor doctor = (Doctor) Institution.Instance().CurrentUser;
+            if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
+            Navigation = new DoctorNavigationViewModel(isSpecialist);
         }
     }
 }

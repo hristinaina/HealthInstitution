@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -88,6 +88,24 @@ namespace HealthInstitution.MVVM.Models.Repositories
                     _operations.Remove(operation);
                 }
             }
+        }
+        public void Remove(Operation operation)
+        {
+            _operations.Remove(operation);
+        }
+
+        public void Add(Operation operation)
+        {
+            _operations.Add(operation);
+        }
+
+        public int NewId()
+        {
+            if (_operations.Count == 0)
+            {
+                return 1;
+            }
+            return _operations.Max(x => x.ID) + 1;
         }
     }
 }

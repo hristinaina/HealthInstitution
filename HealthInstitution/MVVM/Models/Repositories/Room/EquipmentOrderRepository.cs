@@ -15,9 +15,9 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
 
         public List<EquipmentOrder> Rooms { get => _orders; }
 
-        public EquipmentOrderRepository(string roomsFileName)
+        public EquipmentOrderRepository(string fileName)
         {
-            _fileName = roomsFileName;
+            _fileName = fileName;
             _orders = new List<EquipmentOrder>();
         }
 

@@ -8,6 +8,7 @@ using HealthInstitution.MVVM.Models.Repositories.Room;
 using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Repositories.References;
 using HealthInstitution.MVVM.Models.Enumerations;
+using HealthInstitution.Exceptions;
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -34,7 +35,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly OperationReferencesRepository _operationReferencesRepository;
 
         private readonly EquipmentRepository _equipmentRepository;
-        private readonly EquipmentArragmentRepository _equipmentArragmentRepository;
+        private readonly EquipmentArrangementRepository _equipmentArragmentRepository;
         private readonly RoomRepository _roomRepository;
         private readonly MedicineRepository _medicineRepository;
         private readonly DayOffRepository _dayOffRepository;
@@ -81,12 +82,12 @@ namespace HealthInstitution.MVVM.Models
             
             _roomRepository = new RoomRepository(_appSettings.RoomsFileName);
             _equipmentRepository = new EquipmentRepository(_appSettings.EquipmentFileName);
-            _equipmentArragmentRepository = new EquipmentArragmentRepository(_appSettings.EquipmentArrangementFileName);
+            _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
 
             _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
             _refferalRepository = new RefferalRepository(_appSettings.RefferalsFileName);
 
-            _equipmentArragmentRepository = new EquipmentArragmentRepository(_appSettings.EquipmentArrangementFileName);
+            _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
             _medicineRepository = new MedicineRepository(_appSettings.MedicinesFileName);
             _allergenRepository = new AllergenRepository(_appSettings.AllergensFileName);
             _patientAllergenRepository = new PatientAllergenRepository(_appSettings.PatientAllergensFileName);
@@ -140,6 +141,7 @@ namespace HealthInstitution.MVVM.Models
             _dayOffRepository.SaveToFile();
             _roomRepository.SaveToFile();
             _equipmentRepository.SaveToFile();
+            _equipmentArragmentRepository.SaveToFile();
             _refferalRepository.SaveToFile();
             _medicineRepository.SaveToFile();
             _allergenRepository.SaveToFile();
@@ -186,19 +188,16 @@ namespace HealthInstitution.MVVM.Models
         public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
         public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
-        public EquipmentArragmentRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
+        public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
 
 
-        public Appointment CreateAppointment(Doctor doctor, Patient patient, DateTime datetime, string type)
+        public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15)
         {
-            if (!doctor.IsAvailable(datetime))
+            if (CurrentUser is Patient && patient.IsTrolling())
             {
-                return null;
+                throw new PatientBlockedException("System has blocked your account !");
             }
-            if (!patient.IsAvailable(datetime))
-            {
-                return null;
-            }
+            ValidateAppointmentData(patient, doctor, dateTime);
 
             int appointmentId = 0;
 
@@ -209,88 +208,137 @@ namespace HealthInstitution.MVVM.Models
                 int prescriptionId = _prescriptionRepository.NewId();
                 Prescription prescription = new Prescription(prescriptionId);
 
-                Examination examination = new Examination(appointmentId, doctor, patient, datetime, prescription);
+                Examination examination = new Examination(appointmentId, doctor, patient, dateTime, prescription);
                 patient.Examinations.Add(examination);
                 doctor.Examinations.Add(examination);
-                _roomRepository.FindAvailableRoom(examination, datetime);
+                _roomRepository.FindAvailableRoom(examination, dateTime);
                 _examinationRepository.Add(examination);
                 _examinationReferencesRepository.Add(examination);
                 _examinationChangeRepository.Add(examination, true, AppointmentStatus.CREATED);
 
-                return examination;
             }
 
             else if (type == nameof(Operation)) {
-                // TODO
+                appointmentId = _operationRepository.NewId();
+                Operation operation = new Operation(appointmentId, doctor, patient, dateTime, duration);
+                patient.Operations.Add(operation);
+                doctor.Operations.Add(operation);
+                _roomRepository.FindAvailableRoom(operation, dateTime);
+                _operationRepository.Add(operation);
+                _operationReferencesRepository.Add(operation);
 
-                return null;
             }
 
-            return null;
+            return true;
         }
 
 
-        public void RescheduleExamination(Appointment appointment, DateTime datetime)
+        public bool RescheduleExamination(Appointment appointment, DateTime dateTime)
         {
-
-            if (appointment.Doctor.IsAvailable(datetime))
+            if (CurrentUser is Patient && appointment.Patient.IsTrolling())
             {
-                return;
+                throw new PatientBlockedException("System has blocked your account !");
             }
-            if (appointment.Patient.IsAvailable(datetime))
-            {
-                return;
+            ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime);
+            appointment.Date = dateTime;
+            _roomRepository.FindAvailableRoom(appointment, dateTime);
+            bool resolved = true;
+            if (CurrentUser is Patient) {
+                resolved = appointment.IsEditable();
             }
-            appointment.Date = datetime;
-            _roomRepository.FindAvailableRoom(appointment, datetime);
-            bool resolved = appointment.IsEditable();
 
             if (appointment is Examination)
             {
+                
+                _examinationReferencesRepository.Remove((Examination)appointment);
                 _examinationReferencesRepository.Add((Examination)appointment);
                 _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.EDITED);
 
             }
 
-            else if (appointment is Operation) { 
-                // TODO
+            else if (appointment is Operation) 
+            {
+                _operationReferencesRepository.Add((Operation)appointment);
             }
+
+            return resolved;
 
         }
 
 
-        public void CancelExamination(Appointment appointment)
+        public bool CancelExamination(Appointment appointment)
         {
-
+            if (CurrentUser is Patient && appointment.Patient.IsTrolling())
+            {
+                throw new PatientBlockedException("System has blocked your account !");
+            }
             Patient patient = appointment.Patient;
             Doctor doctor = appointment.Doctor;
             Room room = appointment.Room;
-            bool resolved = appointment.IsEditable();
-            if (appointment is Examination)
-            {
-                if (!resolved)
-                {
-                    _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.DELETED);
-                    return;
-                }
-                else
+            bool resolved = true;
+            if (CurrentUser is Patient) resolved = appointment.IsEditable();
+            if (appointment is Examination) {
+                if (resolved)
                 {
                     patient.Examinations.Remove((Examination)appointment);
                     doctor.Examinations.Remove((Examination)appointment);
                     _examinationRepository.Remove((Examination)appointment);
                     _examinationReferencesRepository.Remove((Examination)appointment);
                 }
+                _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.DELETED);
             }
-
 
             else if (appointment is Operation)
             {
-                // TODO
+                patient.Operations.Remove((Operation)appointment);
+                doctor.Operations.Remove((Operation)appointment);
+                _operationRepository.Remove((Operation)appointment);
+                _operationReferencesRepository.Remove((Operation)appointment);
+                
             }
 
             // DO NOT DELETE THIS
             if (resolved) room.Appointments.Remove(appointment);
 
+
+            return resolved;
+        }
+
+        private void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime)
+        {
+            if (CurrentUser is Patient)
+            {
+                if (DateTime.Compare(DateTime.Now, dateTime) > 0)
+                {
+                    throw new DateException("Date must be in future !");
+                }
+                if ((dateTime - DateTime.Now).TotalDays < 1)
+                {
+                    throw new DateException("Cannot schedule in next 24 hours");
+                }
+                if (doctor is null)
+                {
+                    throw new EmptyFieldException("Doctor not selected !");
+                }
+                if (!patient.IsAvailable(dateTime))
+                {
+                    throw new UserNotAvailableException("You are not available at selected time !");
+                }
+                if (!doctor.IsAvailable(dateTime))
+                {
+                    throw new UserNotAvailableException("Doctor not available at selected time !");
+                }
+            }
+
+            if (CurrentUser is Doctor)
+            {
+                if (!doctor.IsAvailable(dateTime))
+                {
+                }
+                if (!patient.IsAvailable(dateTime))
+                {
+                }
+            }
         }
     }
 }

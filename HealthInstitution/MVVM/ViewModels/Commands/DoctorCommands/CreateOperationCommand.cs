@@ -10,13 +10,13 @@ using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
-    class CreateAppointmentCommand : BaseCommand
+    class CreateOperationCommand : BaseCommand
     {
-        private DoctorExaminationViewModel _viewModel;
+        private DoctorOperationViewModel _viewModel;
 
-        public CreateAppointmentCommand(DoctorExaminationViewModel doctorExaminationViewModel)
+        public CreateOperationCommand(DoctorOperationViewModel doctorOperationViewModel)
         {
-            _viewModel = doctorExaminationViewModel;
+            _viewModel = doctorOperationViewModel;
         }
 
         public override void Execute(object parameter)
@@ -25,10 +25,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             Doctor doctor = _viewModel.Doctor;
             Patient patient = _viewModel.NewPatient;
             DateTime datetime = _viewModel.MergeTime(_viewModel.NewDate, _viewModel.NewTime);
-
-            Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Examination));
-            _viewModel.FillExaminationsList();
+            Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Operation), _viewModel.Duration);
+            _viewModel.FillOperationsList();
         }
-
     }
 }

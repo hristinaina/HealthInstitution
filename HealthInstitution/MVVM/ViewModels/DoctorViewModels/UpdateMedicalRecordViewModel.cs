@@ -6,18 +6,31 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
+using HealthInstitution.MVVM.Models;
+
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
     class UpdateMedicalRecordViewModel : BaseViewModel
     {
+        public DoctorNavigationViewModel Navigation { get; }
+        
         public ICommand SaveCommand { get; }
+        public ICommand SaveAllergenCommand { get; }
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
-        //private MedicalRecordViewModel _medicalRecord;
-        //public MedicalRecordViewModel MedicalRecord { get => _medicalRecord; }
-        public Examination _examination;
+        private ObservableCollection<Allergen> _newAllergens;
+        public IEnumerable<Allergen> NewAllergens => _newAllergens;
+        private ObservableCollection<IllnessItemViewModel> _illnesses;
+        public IEnumerable<IllnessItemViewModel> Illnesses => _illnesses;
+
+        private Examination _examination;
         public Examination Examination { get => _examination; }
+
+        private Patient _patient;
+        public Patient Patient { get => _patient; }
+        public Allergen NewAllergen { get; set; }
 
         private string _name;
         public string Name
@@ -61,23 +74,38 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
-        public UpdateMedicalRecordViewModel()
+        private string _anamnesis;
+        public string Anamnesis
         {
+            get
+            {
+                return _anamnesis;
+            }
+            set
+            {
+                _anamnesis = value;
+                OnPropertyChanged(nameof(Anamnesis));
+            }
+        }
+
+        public UpdateMedicalRecordViewModel(Examination examination)
+        {
+            bool isSpecialist = true;
+            Doctor doctor = (Doctor) Institution.Instance().CurrentUser;
+            if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
+            Navigation = new DoctorNavigationViewModel(isSpecialist);
+            _examination = examination;
             _allergens = new ObservableCollection<AllergenViewModel>();
-            _examination = new Examination(1, DateTime.Now, false, false, "", new ExaminationReview(0.0, ""));
-            Allergen allergen = new Allergen(1, "Naziv");
-            List<Allergen> allergens = new List<Allergen>();
-            allergens.Add(allergen);
-            Patient patient = new Patient();
-            patient.FirstName = "Ime";
-            patient.LastName = "Prezime";
-            MedicalRecord mr = new MedicalRecord(180, 80, allergens);
-            patient.Record = mr;
-            _examination.Patient = patient;
-            _examination.Anamnesis = " ";
-            Name = Examination.Patient.FirstName;
+            _newAllergens = new ObservableCollection<Allergen>();
+            _illnesses = new ObservableCollection<IllnessItemViewModel>();
+
+            SaveCommand = new UpdateMedicalRecordCommand(this);
+            SaveAllergenCommand = new SaveAllergenCommand(this);
+
             SetProperties();
             FillAllergensList();
+            FillNewAllergenList();
+            FillIllnessList();
         }
 
         public void SetProperties()
@@ -85,6 +113,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             Name = Examination.Patient.FirstName + " " + Examination.Patient.LastName;
             Height = Examination.Patient.Record.Height;
             Weight = Examination.Patient.Record.Weight;
+            Anamnesis = Examination.Anamnesis;
         }
 
         public void FillAllergensList()
@@ -95,6 +124,44 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 _allergens.Add(new AllergenViewModel(allergen));
             }
             OnPropertyChanged(nameof(Allergens));
+        }
+
+        public void FillNewAllergenList()
+        {
+            _newAllergens.Clear();
+
+            foreach(Allergen allergen in Institution.Instance().AllergenRepository.Allergens)
+            {
+                foreach (Allergen i in _examination.Patient.Record.Allergens)
+                {
+                    if (allergen != null && i != null)
+                    {
+                        if (i.Id == allergen.Id) continue;
+                    }
+                }
+
+                _newAllergens.Add(allergen);
+            }
+        }
+
+        public void FillIllnessList()
+        {
+            _illnesses.Clear();
+            List<string> allIllnesses = _examination.Patient.GetHistoryOfIllness();
+            foreach (string illness in allIllnesses)
+            {
+                _illnesses.Add(new IllnessItemViewModel(illness));
+            }
+        }
+
+        public void AddAllergen(Allergen allergen)
+        {
+            _allergens.Add(new AllergenViewModel(allergen));
+        }
+
+        public void AddIllness(string illness)
+        {
+            _illnesses.Add(new IllnessItemViewModel(illness));
         }
 
     }

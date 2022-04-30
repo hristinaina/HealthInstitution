@@ -35,7 +35,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             Appointments = new List<Appointment>();
         }
 
-        private Room(int id, int number, string name, RoomType type) : this()
+        public Room(int id, int number, string name, RoomType type) : this()
         {
             _id = id;
             _number = number;
@@ -43,47 +43,9 @@ namespace HealthInstitution.MVVM.Models.Entities
             _type = type;
         }
 
-        public Room(string name)
-        {
-            _name = name;
-        }
-
-        public static Room Create(int id, int number, string name, RoomType type)
-        {
-            return new Room(id, number, name, type);
-        }
-
-        public void ChangeNumber(RoomRepository repository, int newNumber)
-        {
-            if (repository.CheckNumber(newNumber)) Number = newNumber;
-            //Add RoomNumberAlreadyInUseException
-            else throw new Exception();
-        }
-
-        public bool IsChangeble()
+        public bool IsChangeable()
         {
             return (_appointments == null || _appointments.Count == 0);
-        }
-
-        public void ChangeType(OperationRepository operations, ExaminationRepository examinations, RoomType newType)
-        {
-            bool availableForChange = true;
-            if (_type == RoomType.EXAM_ROOM || _type == RoomType.OPERATING_ROOM)
-            {
-                availableForChange = this.IsChangeble();
-            }
-            if (availableForChange)
-            {
-                _type = newType;
-            } else
-            {
-                //throw cannotChangeException
-            }
-        }
-
-        public bool IsDeletable()
-        {
-            return IsChangeble();
         }
 
         public void AddEquipment(Equipment e, int quantity)
@@ -93,15 +55,6 @@ namespace HealthInstitution.MVVM.Models.Entities
                 _equipment[e] = 0;
             }
             _equipment[e] += quantity;
-        }
-
-        public void RemoveEquipment(Equipment e, int quantity)
-        {
-            if (!_equipment.ContainsKey(e))
-            {
-                //add NotInRoomException
-            }
-            _equipment[e] -= quantity;
         }
 
         public bool isAvailable(DateTime appointmentTime, Appointment appointment)

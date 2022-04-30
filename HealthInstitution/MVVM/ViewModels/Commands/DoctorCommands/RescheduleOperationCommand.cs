@@ -10,14 +10,13 @@ using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
-    class RescheduleAppointmentCommand : BaseCommand
+    class RescheduleOperationCommand : BaseCommand
     {
+        private DoctorOperationViewModel _viewModel;
 
-        private DoctorExaminationViewModel _viewModel;
-
-        public RescheduleAppointmentCommand(DoctorExaminationViewModel doctorExaminationViewModel)
+        public RescheduleOperationCommand(DoctorOperationViewModel doctorOperationViewModel)
         {
-            _viewModel = doctorExaminationViewModel;
+            _viewModel = doctorOperationViewModel;
         }
 
         public override void Execute(object parameter)
@@ -25,11 +24,11 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
             _viewModel.DialogOpen = false;
 
-            Examination examination = _viewModel.SelectedExamination.Examination;
+            Operation operation = _viewModel.SelectedOperation.Operation;
             DateTime datetime = _viewModel.MergeTime(_viewModel.SelectedDate, _viewModel.SelectedTime);
 
-            Institution.Instance().RescheduleExamination((Examination)examination, datetime);
-            _viewModel.FillExaminationsList();
+            Institution.Instance().RescheduleExamination((Operation)operation, datetime);
+            _viewModel.FillOperationsList();
         }
     }
 }

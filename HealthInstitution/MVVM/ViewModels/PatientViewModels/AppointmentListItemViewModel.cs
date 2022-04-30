@@ -13,7 +13,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public Appointment Appointment { get => _appointment; }
 
         public string Date => _appointment.Date.ToString("dd/MM/yyyy");
-        public string Time => _appointment.Date.ToString("HH:MM");
+        public string Time => _appointment.Date.ToString("HH:mm");
         public Doctor Doctor => _appointment.Doctor;
         public Room Room => _appointment.Room;
 

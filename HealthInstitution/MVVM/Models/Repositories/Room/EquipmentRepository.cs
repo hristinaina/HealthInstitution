@@ -12,9 +12,9 @@ namespace HealthInstitution.MVVM.Models
 
         public List<Equipment> Equipment { get => _equipment; }
 
-        public EquipmentRepository(string roomsFileName)
+        public EquipmentRepository(string fileName)
         {
-            _fileName = roomsFileName;
+            _fileName = fileName;
             _equipment = new List<Equipment>();
         }
 
@@ -37,12 +37,27 @@ namespace HealthInstitution.MVVM.Models
             return null;
         }
 
-        public List<Equipment> Search(string phrase)
+        public Dictionary<Equipment, List<Room>> Search(string phrase)
         {
-            List<Equipment> matchingEquipment = new List<Equipment>();
+            Dictionary<Equipment, List<Room>> matchingEquipment = new Dictionary<Equipment, List<Room>>();
+
             foreach (Equipment e in _equipment)
             {
-                if (e.Name.ToLower().Contains(phrase.ToLower())) matchingEquipment.Add(e);
+                if (e.Name.ToLower().Contains(phrase.ToLower()))
+                {
+                    matchingEquipment.Add(e, new List<Room>());
+                    foreach (Room r in e.ArrangmentByRooms.Keys) matchingEquipment[e].Add(r);
+                } else
+                {
+                    foreach (Room r in e.ArrangmentByRooms.Keys)
+                    {
+                        if (r.Name.ToLower().Contains(phrase.ToLower()))
+                        {
+                            if (!matchingEquipment.ContainsKey(e)) matchingEquipment.Add(e, new List<Room>());
+                            matchingEquipment[e].Add(r);
+                        }
+                    }
+                }
             }
             return matchingEquipment;
         }

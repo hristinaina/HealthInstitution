@@ -19,24 +19,43 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
         {
             _model = model;
         }
-        public override void Execute(object parameter)
+
+        private bool CheckPrerequisites()
         {
+            bool prerequisitesFulfillled = true;
+
             if (_model.NewRoomName is null)
             {
                 MessageBox.Show("You need to fill all fields", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else if (_model.NewRoomNumber is 0) {
+                prerequisitesFulfillled = false;
+            }
+            else if (_model.NewRoomNumber == 0)
+            {
                 MessageBox.Show("Room number cannot be 0", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else if (!Institution.Instance().RoomRepository.CheckNumber(_model.NewRoomNumber))
+                prerequisitesFulfillled = false;
+            }
+            else if (!Institution.Instance().RoomRepository.CheckNumber(_model.NewRoomNumber))
             {
                 MessageBox.Show("Number already taken", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                prerequisitesFulfillled = false;
             }
-            else
+
+            return prerequisitesFulfillled;
+        }
+
+        public override void Execute(object parameter)
+        {
+            
+            if (CheckPrerequisites())
             {
                 _model.DialogOpen = false;
 
                 int id = Institution.Instance().RoomRepository.GetID();
                 Institution.Instance().RoomRepository.CreateRoom(id, _model.NewRoomName, _model.NewRoomNumber, (RoomType)_model.NewRoomType);
                 _model.FillRoomList();
+                _model.NewRoomNumber = 0;
+                _model.NewRoomType = 0;
+                _model.NewRoomName = null;
             }
         }
     }

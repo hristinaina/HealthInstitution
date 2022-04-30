@@ -11,10 +11,12 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
     {
         private readonly Operation _operation;
 
-        public string Date => _operation.Date.ToString("d");
-        public string Time => _operation.Date.ToString("t");
+        public Operation Operation { get => _operation; }
+
+        public string Date => _operation.Date.ToString("MM/dd/yyyy HH:mm");
+        public string Time => _operation.Date.ToString("MM/dd/yyyy HH:mm");
         public string Room => _operation.Room.ID.ToString();
-        public string Patient => _operation.Patient.FirstName + _operation.Patient.LastName;
+        public Patient Patient => _operation.Patient;
 
         public OperationViewModel(Operation operation)
         {

@@ -18,4 +18,4 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             _illness = illness;
         }
     }
-}
+  }

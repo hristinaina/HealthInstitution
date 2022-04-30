@@ -10,24 +10,24 @@ using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
-    class CancelExaminationCommand : BaseCommand
+    class CancelOperationCommand : BaseCommand
     {
-        private DoctorExaminationViewModel _viewModel;
+        private DoctorOperationViewModel _viewModel;
 
-        public CancelExaminationCommand(DoctorExaminationViewModel doctorExaminationViewModel)
+        public CancelOperationCommand(DoctorOperationViewModel doctorOperationViewModel)
         {
-            _viewModel = doctorExaminationViewModel;
+            _viewModel = doctorOperationViewModel;
         }
 
         public override void Execute(object parameter)
         {
             _viewModel.DialogOpen = false;
 
-            Appointment examination = _viewModel.SelectedExamination.Examination;
+            Appointment operation = _viewModel.SelectedOperation.Operation;
 
-            Institution.Instance().CancelExamination((Examination)examination);
-            _viewModel.FillExaminationsList();
-        
+            Institution.Instance().CancelExamination((Operation)operation);
+            _viewModel.FillOperationsList();
+
         }
     }
 }

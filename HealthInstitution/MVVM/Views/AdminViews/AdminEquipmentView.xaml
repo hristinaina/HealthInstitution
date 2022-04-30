@@ -76,6 +76,7 @@
                         <ListView     ItemsSource="{Binding Equipment}"
                                       VerticalAlignment="Center"
                                       Width="514"
+                                      Height="470"
                                       SelectionMode="Single" 
                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                       ScrollViewer.CanContentScroll="True"
@@ -211,7 +212,7 @@
 
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                         Width="170"
-                                        ToolTip="..."
+                                        ToolTip="Rearrange equipment"
                                         Content="Rearrange"
                                         Background="#66FFFFFF"
                                         BorderBrush="#6634565A"
@@ -224,7 +225,7 @@
                                         Grid.RowSpan="2"
                                         >
                                 <Button.CommandParameter>
-                                    <StackPanel Height="400"
+                                    <StackPanel Height="500"
                                                     Width="400"
                                                     Margin="40 20 40 20">
                                         <TextBlock Text="Rearrangement"
@@ -244,6 +245,7 @@
                                                       Width="250"
                                                       HorizontalAlignment="Center"
                                                       ItemsSource="{Binding Rooms}"
+                                                      SelectedItem="{Binding NewArrangemenTargetRoom}"
                                                       Style="{StaticResource MaterialDesignFilledComboBox}"
                                                       materialDesign:HintAssist.Hint="Choose new room"
                                                       materialDesign:HintAssist.HintOpacity=".26"
@@ -255,15 +257,22 @@
                                                       VerticalAlignment="Top"
                                                       AcceptsReturn="True"
                                                       TextWrapping="Wrap"
+                                                      Text="{Binding NewArrangementQuantity}"
                                                       materialDesign:HintAssist.Hint="Enter quantity"
+                                                      materialDesign:HintAssist.HelperText="Must be a whole number"
                                                       IsEnabled="True" />
+                                        <DatePicker Width="250"
+                                                    SelectedDate="{Binding NewArrangementStartDate}"
+                                                    Margin="0 20 0 0"
+                                                    materialDesign:HintAssist.Hint="Pick Date"
+                                                    Style="{StaticResource MaterialDesignFilledDatePicker}" />
                                         <StackPanel Orientation="Horizontal"
                                                         HorizontalAlignment="Center">
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                         IsDefault="True"
                                                         Margin="0 30 0 0"
                                                         Content="CONFIRM"
-                                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                        Command="{Binding Rearrange}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True

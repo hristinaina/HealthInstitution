@@ -39,9 +39,10 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         private ObservableCollection<Doctor> _doctors;
         public ObservableCollection<Doctor> Doctors => _doctors;
         public Doctor NewDoctor { get; set; }
-        public string NewDate { get; set; }
-        public string NewTime { get; set; }
+        public DateTime NewDate { get; set; }
+        public DateTime NewTime { get; set; }
         public Room NewRoom { get; set; }
+        
 
         private bool _enableChanges;
         public bool EnableChanges
@@ -62,6 +63,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
                 if (value < 0) { return; };
                 _selection = value;
                 EnableChanges = true;
+                OnPropertyChanged(nameof(EnableChanges));
                 OnPropertyChanged(nameof(Selection));
                 _selectedAppointment = _appointments.ElementAt(_selection);
                 SelectedDoctor = _selectedAppointment.Doctor;
@@ -98,11 +100,13 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             FillAppointmentsList();
             FillDoctorsList();
 
-            NewDate = DateTime.Now.ToString("MM/dd/yyyy HH:MM");
-            NewTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
+            NewDate = DateTime.Now;
+            NewTime = DateTime.Now;
+
             CreateAppointment = new CreateAppointmentCommand(this);
             RescheduleAppointment = new RescheduleAppointmentCommand(this);
             CancelAppointment = new CancelAppointmentCommand(this);
+
         }
 
         public void FillAppointmentsList()
@@ -111,6 +115,13 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             foreach (Appointment appointment in _patient.GetFutureAppointments())
             {
                 _appointments.Add(new AppointmentListItemViewModel(appointment));
+            }
+            if (_appointments.Count != 0)
+            {
+                Selection = 0;
+                EnableChanges = true;
+                OnPropertyChanged(nameof(Selection));
+                OnPropertyChanged(nameof(EnableChanges));
             }
             OnPropertyChanged(nameof(Appointments));
         }
@@ -122,6 +133,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             {
                 _doctors.Add(doctor);
             }
+            OnPropertyChanged(nameof(Doctors));
         }
     }
 }

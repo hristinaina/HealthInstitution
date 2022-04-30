@@ -20,5 +20,18 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             _durationInMin = duration;
         }
+        public Operation(int id, Doctor doctor, Patient patient, DateTime date, int duration)
+        {
+            ID = id;
+            Doctor = doctor;
+            Patient = patient;
+            Date = date;
+            Emergency = false;
+            Duration = duration;
+        }
+        public Operation()
+        {
+
+        }
     }
 }

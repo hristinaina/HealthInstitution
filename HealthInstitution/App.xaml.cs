@@ -26,6 +26,7 @@ namespace HealthInstitution
             _institution = Institution.Instance();
 
             _navigation = NavigationStore.Instance();
+
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -41,6 +42,7 @@ namespace HealthInstitution
 
             base.OnStartup(e);
         }
+
         protected override void OnExit(ExitEventArgs e)
         {
             _institution.SaveAll();

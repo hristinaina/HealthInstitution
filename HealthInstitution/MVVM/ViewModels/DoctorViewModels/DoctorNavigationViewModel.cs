@@ -14,12 +14,14 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand MyAppointments { get; }
         public ICommand MyOperations { get; }
         public ICommand LogOut { get; }
+        public bool Specialization { get; }
 
-        public DoctorNavigationViewModel()
+        public DoctorNavigationViewModel(bool isSpecialist)
         {
             LogOut = new LogOutCommand();
             MyAppointments = new MyAppointmentsCommand();
-            MyOperations = new MyOperationsCommand();
+            MyOperations = new MyOperationsCommand(isSpecialist);
+            Specialization = isSpecialist;
         }
     }
 }

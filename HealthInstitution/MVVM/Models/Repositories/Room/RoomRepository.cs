@@ -16,9 +16,9 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         public List<Entities.Room> Rooms {get => _rooms;}
 
-        public RoomRepository(string roomsFileName)
+        public RoomRepository(string fileName)
         {
-            _fileName = roomsFileName;
+            _fileName = fileName;
             _rooms = new List<Entities.Room>();
         }
 
@@ -71,7 +71,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         public void CreateRoom(int id, string name, int number, RoomType type)
         {
-            Entities.Room r = Entities.Room.Create(id, number, name, type);
+            Entities.Room r = new Entities.Room(id, number, name, type);
             _rooms.Add(r);
         }
 

@@ -9,12 +9,30 @@
     "ID": 2,
     "Name": "Table",
     "Quantity": 50,
-    "Type": 2
+    "Type": 3
   },
   {
     "ID": 3,
     "Name": "Cabinet",
     "Quantity": 50,
     "Type": 2
+  },
+  {
+    "ID": 4,
+    "Name": "Scalpel",
+    "Quantity": 50,
+    "Type": 1
+  },
+  {
+    "ID": 5,
+    "Name": "Syringe",
+    "Quantity": 50,
+    "Type": 0
+  },
+  {
+    "ID": 6,
+    "Name": "Needles",
+    "Quantity": 50,
+    "Type": 0
   }
 ]
