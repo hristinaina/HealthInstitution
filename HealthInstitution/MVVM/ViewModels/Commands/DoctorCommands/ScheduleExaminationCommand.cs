@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
     class ScheduleExaminationCommand : BaseCommand
     {
-        private readonly ExaminationRepository _examination;
+        private readonly DoctorExaminationViewModel _doctorExaminationViewModel;
+
+        public ScheduleExaminationCommand(DoctorExaminationViewModel doctorExaminationViewModel)
+        {
+            _doctorExaminationViewModel = doctorExaminationViewModel;
+        }
 
         public override void Execute(object parameter)
         {

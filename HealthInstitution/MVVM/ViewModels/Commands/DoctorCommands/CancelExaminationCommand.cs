@@ -10,11 +10,11 @@ using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
-    class CreateAppointmentCommand : BaseCommand
+    class CancelExaminationCommand : BaseCommand
     {
         private DoctorExaminationViewModel _viewModel;
 
-        public CreateAppointmentCommand(DoctorExaminationViewModel doctorExaminationViewModel)
+        public CancelExaminationCommand(DoctorExaminationViewModel doctorExaminationViewModel)
         {
             _viewModel = doctorExaminationViewModel;
         }
@@ -23,6 +23,5 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
         {
             throw new NotImplementedException();
         }
-
     }
 }

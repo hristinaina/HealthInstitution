@@ -5,24 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
-using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.Stores;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
-    class CreateAppointmentCommand : BaseCommand
+    class MyAppointmentsCommand : BaseCommand
     {
-        private DoctorExaminationViewModel _viewModel;
+        private readonly Institution _institution;
+        private readonly NavigationStore _navigationStore;
 
-        public CreateAppointmentCommand(DoctorExaminationViewModel doctorExaminationViewModel)
+        public MyAppointmentsCommand()
         {
-            _viewModel = doctorExaminationViewModel;
+            _institution = Institution.Instance();
+            _navigationStore = NavigationStore.Instance();
         }
 
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            _navigationStore.CurrentViewModel = new DoctorExaminationViewModel();
         }
-
     }
 }

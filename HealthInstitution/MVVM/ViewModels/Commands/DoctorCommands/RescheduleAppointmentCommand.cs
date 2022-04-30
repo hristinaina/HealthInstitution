@@ -10,19 +10,19 @@ using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
-    class CreateAppointmentCommand : BaseCommand
+    class RescheduleAppointmentCommand : BaseCommand
     {
+
         private DoctorExaminationViewModel _viewModel;
 
-        public CreateAppointmentCommand(DoctorExaminationViewModel doctorExaminationViewModel)
+        public RescheduleAppointmentCommand(DoctorExaminationViewModel examinationViewModel)
         {
-            _viewModel = doctorExaminationViewModel;
+            _viewModel = examinationViewModel;
         }
 
         public override void Execute(object parameter)
         {
             throw new NotImplementedException();
         }
-
     }
 }
