@@ -100,9 +100,14 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
             NewDate = DateTime.Now.ToString("MM/dd/yyyy HH:MM");
             NewTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
+
+            if (_appointments.Count != 0) {
+                Selection = 0;
+            }
             CreateAppointment = new CreateAppointmentCommand(this);
             RescheduleAppointment = new RescheduleAppointmentCommand(this);
             CancelAppointment = new CancelAppointmentCommand(this);
+
         }
 
         public void FillAppointmentsList()
@@ -122,6 +127,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             {
                 _doctors.Add(doctor);
             }
+            OnPropertyChanged(nameof(Doctors));
         }
     }
 }

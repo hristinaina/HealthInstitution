@@ -124,7 +124,6 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public bool isTrolling()
         {
-
             if (GetEditingHistory() > 5)
             {
                 return true;

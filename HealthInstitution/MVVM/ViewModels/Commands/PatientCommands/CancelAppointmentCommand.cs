@@ -1,7 +1,9 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
+using HealthInstitution.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,13 +26,19 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
             _viewModel.DialogOpen = false;
 
-            if (_viewModel.Patient.isTrolling())
-            {
-                return;
-            }
             Appointment examination = _viewModel.SelectedAppointment.Appointment;
 
-            Institution.Instance().CancelExamination((Examination)examination);
+
+            try
+            {
+                Institution.Instance().CancelExamination((Examination)examination);
+            }
+            catch (PatientBlockedException)
+            {
+                _viewModel.DialogOpen = false;
+                _viewModel.ShowMessage("System has blocked your account !", logOut: true);
+            }
+
             _viewModel.FillAppointmentsList();
         }
     }
