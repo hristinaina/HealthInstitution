@@ -46,7 +46,8 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             ExaminationChange change = new ExaminationChange(examination.Patient.ID, examination.ID, status, DateTime.Now, resolved);
             _references.Add(change);
             examination.Patient.ExaminationChanges.Add(change);
-            
+        }
+
         public ExaminationChange FindByID(int id)
         {
             foreach (ExaminationChange reference in _references)
