@@ -125,7 +125,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private int GetCreatingHistory()
         {
             int totalCreations = 0;
-            foreach (ExaminationChange change in _examinationChanges)
+            foreach (ExaminationChange change in ExaminationChanges)
             {
                 if (change.ChangeStatus == AppointmentStatus.CREATED)
                 {
@@ -139,7 +139,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private int GetEditingHistory()
         {
             int totalChanges = 0;
-            foreach (ExaminationChange change in _examinationChanges)
+            foreach (ExaminationChange change in ExaminationChanges)
             {
                 if (change.ChangeStatus == AppointmentStatus.EDITED)
                 {
