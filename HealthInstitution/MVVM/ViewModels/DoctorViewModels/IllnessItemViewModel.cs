@@ -7,7 +7,7 @@ using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
-    class IllnessItemViewModel : BaseViewModel
+    public class IllnessItemViewModel : BaseViewModel
     {
         private readonly string _illness;
 
@@ -18,4 +18,4 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             _illness = illness;
         }
     }
-}
+  }

@@ -308,17 +308,13 @@ namespace HealthInstitution.MVVM.Models
         {
             if (CurrentUser is Patient)
             {
-                if (patient.IsTrolling())
+                if (DateTime.Compare(DateTime.Now, dateTime) > 0)
                 {
-                    throw new PatientBlockedException("System has blocked your account !");
+                    throw new DateException("Date must be in future !");
                 }
                 if ((dateTime - DateTime.Now).TotalDays < 1)
                 {
                     throw new DateException("Cannot schedule in next 24 hours");
-                }
-                if (DateTime.Compare(DateTime.Now, dateTime) > 0)
-                {
-                    throw new DateException("Date must be in future !");
                 }
                 if (doctor is null)
                 {

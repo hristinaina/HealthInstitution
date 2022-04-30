@@ -32,6 +32,17 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             }
         }
 
+        private bool _dialogOpen;
+        public bool DialogOpen
+        {
+            get => _dialogOpen;
+            set
+            {
+                _dialogOpen = value;
+                OnPropertyChanged(nameof(DialogOpen));
+            }
+        }
+
         public ICommand Unblock { get; set; }
 
         public int SelectedPatientId { get; set; }
@@ -43,6 +54,10 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         private readonly ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
+
+
+        private readonly ObservableCollection<IllnessItemViewModel> _illnesses;
+        public IEnumerable<IllnessItemViewModel> Illnesses => _illnesses;
 
         public int Selection
         {
@@ -66,6 +81,9 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 OnPropertyChanged(nameof(Height));
                 Weight = Institution.Instance().PatientRepository.FindByID(Convert.ToInt32(_selectedPatient.Id)).Record.Weight.ToString();
                 OnPropertyChanged(nameof(Weight));
+
+                FillAllergenList();
+                FillIllnessList();
             }
         }
 
@@ -73,11 +91,13 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _patients = new ObservableCollection<BlockedPatientItemViewModel>();
             _allergens = new ObservableCollection<AllergenViewModel>();
+            _illnesses = new ObservableCollection<IllnessItemViewModel>();
             Navigation = new SecretaryNavigationViewModel();
             EnableChanges = false;
             Unblock = new UnblockCommand(this);
             FillPatientList();
             FillAllergenList();
+            FillIllnessList();
         }
 
         public void FillPatientList()
@@ -93,7 +113,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 }
             }
         }
-        private void FillAllergenList()
+        public void FillAllergenList()
         {
             _allergens.Clear();
             int id = 1;
@@ -104,5 +124,19 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 _allergens.Add(new AllergenViewModel(allergen));
             }
         }
+
+        public void FillIllnessList()
+        {
+            _illnesses.Clear();
+            int id = 1;
+            if (_selectedPatient != null) id = Convert.ToInt32(_selectedPatient.Id);
+            List<string> allIllnesses = Institution.Instance().PatientRepository.FindByID(id).GetHistoryOfIllness();
+            foreach (string illness in allIllnesses)
+            {
+                _illnesses.Add(new IllnessItemViewModel(illness));
+            }
+        }
+
+
     }
 }

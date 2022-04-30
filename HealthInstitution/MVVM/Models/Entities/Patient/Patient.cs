@@ -165,7 +165,6 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public bool IsAvailable(DateTime startDateTime)
         {
-
             foreach (Examination examination in Examinations)
             {
                 if (DateTime.Compare(examination.Date, startDateTime) <= 0 && DateTime.Compare(examination.Date.AddMinutes(15), startDateTime) >= 0)
@@ -206,6 +205,18 @@ namespace HealthInstitution.MVVM.Models.Entities
                 }
             }
             return historyOfIllness;
+        }
+
+        public void Update(int id, string name, string lastName, string email, string password, Gender gender, double height, double weight)
+        {
+            ID = id;
+            FirstName = name;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+            Gender = gender;
+            Record.Height = height;
+            Record.Weight = weight;
         }
     }
 }

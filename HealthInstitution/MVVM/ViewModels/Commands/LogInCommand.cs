@@ -45,6 +45,7 @@ namespace HealthInstitution.Commands
             }
             catch (PatientBlockedException e) 
             {
+
                 _loginVM.ShowMessage("Cannot login. You were blocked. ");
             }
         }
@@ -59,6 +60,8 @@ namespace HealthInstitution.Commands
             _institution.CurrentUser = User.FindUser(_institution.PatientRepository.Patients, email, password);
             if (_institution.CurrentUser != null)
             {
+                Patient patient = (Patient)_institution.CurrentUser;
+                if (patient.Blocked || patient.Deleted) return false;
                 _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
                 Patient user = (Patient)_institution.CurrentUser;
                 if (user.Blocked)
