@@ -36,7 +36,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
             {
                 if (perscription.ID == id) return perscription;
             }
-            return null;
+            return new Prescription(NewId());
         }
 
         public int NewId()

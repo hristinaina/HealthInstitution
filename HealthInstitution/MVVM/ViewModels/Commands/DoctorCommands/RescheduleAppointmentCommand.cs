@@ -15,14 +15,21 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
         private DoctorExaminationViewModel _viewModel;
 
-        public RescheduleAppointmentCommand(DoctorExaminationViewModel examinationViewModel)
+        public RescheduleAppointmentCommand(DoctorExaminationViewModel doctorExaminationViewModel)
         {
-            _viewModel = examinationViewModel;
+            _viewModel = doctorExaminationViewModel;
         }
 
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+
+            _viewModel.DialogOpen = false;
+
+            Examination examination = _viewModel.SelectedExamination.Examination;
+            DateTime datetime = _viewModel.MergeTime(_viewModel.SelectedDate, _viewModel.SelectedTime);
+
+            Institution.Instance().RescheduleExamination((Examination)examination, datetime);
+            _viewModel.FillExaminationsList();
         }
     }
 }

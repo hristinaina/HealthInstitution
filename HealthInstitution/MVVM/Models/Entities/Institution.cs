@@ -233,17 +233,21 @@ namespace HealthInstitution.MVVM.Models
         public void RescheduleExamination(Appointment appointment, DateTime datetime)
         {
 
-            if (appointment.Doctor.IsAvailable(datetime))
+            if (!appointment.Doctor.IsAvailable(datetime))
             {
                 return;
             }
-            if (appointment.Patient.IsAvailable(datetime))
+            if (!appointment.Patient.IsAvailable(datetime))
             {
                 return;
             }
             appointment.Date = datetime;
             _roomRepository.FindAvailableRoom(appointment, datetime);
-            bool resolved = appointment.IsEditable();
+
+            bool resolved = true;
+            if (CurrentUser is Patient) {
+                resolved = appointment.IsEditable();
+            }
 
             if (appointment is Examination)
             {
@@ -252,8 +256,8 @@ namespace HealthInstitution.MVVM.Models
 
             }
 
-            else if (appointment is Operation) { 
-                // TODO
+            else if (appointment is Operation) {
+                _operationReferencesRepository.Add((Operation)appointment);
             }
 
         }
@@ -265,27 +269,27 @@ namespace HealthInstitution.MVVM.Models
             Patient patient = appointment.Patient;
             Doctor doctor = appointment.Doctor;
             Room room = appointment.Room;
-            bool resolved = appointment.IsEditable();
-            if (appointment is Examination)
-            {
-                if (!resolved)
-                {
-                    _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.DELETED);
-                    return;
-                }
-                else
+            bool resolved = true;
+            if (CurrentUser is Patient) resolved = appointment.IsEditable();
+            if (appointment is Examination) {
+                if (resolved)
                 {
                     patient.Examinations.Remove((Examination)appointment);
                     doctor.Examinations.Remove((Examination)appointment);
                     _examinationRepository.Remove((Examination)appointment);
                     _examinationReferencesRepository.Remove((Examination)appointment);
                 }
+                _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.DELETED);
             }
 
 
             else if (appointment is Operation)
             {
-                // TODO
+                patient.Operations.Remove((Operation)appointment);
+                doctor.Operations.Remove((Operation)appointment);
+                _operationRepository.Remove((Operation)appointment);
+                _operationReferencesRepository.Remove((Operation)appointment);
+                
             }
 
             // DO NOT DELETE THIS

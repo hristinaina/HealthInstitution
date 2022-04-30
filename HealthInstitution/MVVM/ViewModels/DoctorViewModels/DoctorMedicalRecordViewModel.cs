@@ -63,11 +63,12 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
-        public DoctorMedicalRecordViewModel()
+        public DoctorMedicalRecordViewModel(Examination selectedExamination)
         {
             Navigation = new DoctorNavigationViewModel();
             _allergens = new ObservableCollection<AllergenViewModel>();
-            _examination = new Examination(1, DateTime.Now, false, false, "", new ExaminationReview(0.0, ""));
+            _examination = selectedExamination;
+            /*_examination = new Examination(1, DateTime.Now, false, false, "", new ExaminationReview(0.0, ""));
             Allergen allergen = new Allergen(1, "Naziv");
             List<Allergen> allergens = new List<Allergen>();
             allergens.Add(allergen);
@@ -77,16 +78,16 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             MedicalRecord mr = new MedicalRecord(180, 80, allergens);
             patient.Record = mr;
             _examination.Patient = patient;
-            Name = Examination.Patient.FirstName;
+            Name = Examination.Patient.FirstName;*/
             SetProperties();
             FillAllergensList();
         }
 
         public void SetProperties()
         {
-            Name = Examination.Patient.FirstName + " " + Examination.Patient.LastName;
-            Height = Examination.Patient.Record.Height;
-            Weight = Examination.Patient.Record.Weight;
+            Name = _examination.Patient.FirstName + " " + _examination.Patient.LastName;
+            Height = _examination.Patient.Record.Height;
+            Weight = _examination.Patient.Record.Weight;
         }
 
         public void FillAllergensList()
