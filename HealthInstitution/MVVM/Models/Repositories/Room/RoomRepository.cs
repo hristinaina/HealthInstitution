@@ -68,6 +68,13 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 i++;
             }
         }
+
+        public void CreateRoom(int id, string name, int number, RoomType type)
+        {
+            Entities.Room r = Entities.Room.Create(id, number, name, type);
+            _rooms.Add(r);
+        }
+
         public List<Entities.Room> FilterByRoomType(RoomType type)
         {
             List<Entities.Room> filteredRooms = new();

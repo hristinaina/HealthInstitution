@@ -25,6 +25,7 @@
 
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
+                                       IsOpen="{Binding DialogOpen}"
                                        Grid.Row="0">
                 <materialDesign:Card>
                     <Grid>
@@ -97,7 +98,7 @@
                             </Grid.RowDefinitions>
                             <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                     Width="170"
-                                    ToolTip="New Room"
+                                    ToolTip="Create new room"
                                     Content="New Room"
                                     Background="#CC80DEEA"
                                     BorderBrush="#6680DEEA"
@@ -118,6 +119,7 @@
                                                   Width="250"
                                                   HorizontalAlignment="Center"
                                                   ItemsSource="{Binding RoomTypes}"
+                                                  SelectedIndex="{Binding NewRoomType}"
                                                   Style="{StaticResource MaterialDesignFilledComboBox}"
                                                   materialDesign:HintAssist.Hint="Choose room type"
                                                   materialDesign:HintAssist.HintOpacity=".26"
@@ -130,6 +132,7 @@
                                                   AcceptsReturn="True"
                                                   TextWrapping="Wrap"
                                                   materialDesign:HintAssist.Hint="Enter room name"
+                                                  Text="{Binding NewRoomName}"
                                                   IsEnabled="True" />
                                         <TextBox  Margin="0 20 0 0"
                                                   Width="250"
@@ -138,6 +141,8 @@
                                                   AcceptsReturn="True"
                                                   TextWrapping="Wrap"
                                                   materialDesign:HintAssist.Hint="Enter room number"
+                                                  Text="{Binding NewRoomNumber}"
+                                                  materialDesign:HintAssist.HelperText="Must be number"
                                                   IsEnabled="True" />
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
@@ -145,7 +150,7 @@
                                                     IsDefault="True"
                                                     Margin="0 30 0 0"
                                                     Content="CREATE"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    Command="{Binding CreateNewRoom}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True
@@ -170,7 +175,7 @@
 
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                     Width="170"
-                                    ToolTip="..."
+                                    ToolTip="Change selected room"
                                     Content="Change Room"
                                     Background="#66FFFFFF"
                                     BorderBrush="#6634565A"
@@ -197,7 +202,7 @@
                                                   Width="250"
                                                   HorizontalAlignment="Center"
                                                   ItemsSource="{Binding RoomTypes}"
-                                                  SelectedValue="{Binding SelectedType}"
+                                                  SelectedIndex="{Binding SelectedTypeIndex}"
                                                   Style="{StaticResource MaterialDesignFilledComboBox}"
                                                   materialDesign:HintAssist.Hint="Choose room type"
                                                   materialDesign:HintAssist.HintOpacity=".26"
@@ -227,7 +232,7 @@
                                                     IsDefault="True"
                                                     Margin="0 30 0 0"
                                                     Content="CHANGE"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    Command="{Binding ChangeRoom}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True
@@ -238,7 +243,7 @@
                                                     IsCancel="True"
                                                     Margin="0 30 0 0"
                                                     Content="CANCEL"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    Command="{Binding CancelChange}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         False
@@ -253,7 +258,7 @@
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                     Grid.Column="1"
                                     Width="170"
-                                    ToolTip="..."
+                                    ToolTip="Delete selected room"
                                     Content="Delete Room"
                                     Background="#66FFFFFF"
                                     BorderBrush="#6634565A"
@@ -286,7 +291,7 @@
                                                     IsDefault="True"
                                                     Margin="0 30 0 0"
                                                     Content="CONFIRM"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    Command="{Binding DeleteRoom}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True

@@ -1,12 +1,15 @@
 ﻿using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Enumerations;
+using HealthInstitution.MVVM.ViewModels.Commands.AdminCommands;
+using HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 {
@@ -15,6 +18,8 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         private readonly Admin _admin;
         private Institution _institution;
         private RoomListItemViewModel _selectedRoom;
+
+        public RoomListItemViewModel SelectedRoom { get => _selectedRoom; }
 
 
         private bool _enableChanges;
@@ -28,11 +33,24 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
                 OnPropertyChanged(nameof(EnableChanges));
             }
         }
+
+        private bool _dialogOpen;
+        public bool DialogOpen
+        {
+            get => _dialogOpen;
+            set
+            {
+                _dialogOpen = value;
+                OnPropertyChanged(nameof(DialogOpen));
+            }
+        }
+
         public int Selection
         {
             get => _selection;
             set
             {
+                if (value < 0) { EnableChanges = false; return; };
                 _selection = value;
                 EnableChanges = true;
                 OnPropertyChanged(nameof(Selection));
@@ -45,6 +63,8 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
                 OnPropertyChanged(nameof(SelectedName));
                 SelectedType = _selectedRoom.Type;
                 OnPropertyChanged(nameof(SelectedType));
+                SelectedTypeIndex = (int)_selectedRoom.Room.Type;
+                OnPropertyChanged(nameof(SelectedTypeIndex));
             }
         }
 
@@ -52,6 +72,43 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public string SelectedNumber { get; set; }
         public string SelectedName { get; set; }
         public string SelectedType { get; set; }
+        public int SelectedTypeIndex { get; set; }
+
+
+        private int _newRoomType;
+        public int NewRoomType
+        {
+            get => _newRoomType;
+            set
+            {
+                _newRoomType = value;
+                OnPropertyChanged(nameof(NewRoomType));
+            }
+        }
+
+        private string _newRoomName;
+        public string NewRoomName
+        {
+            get => _newRoomName;
+            set
+            {
+                _newRoomName = value;
+                OnPropertyChanged(nameof(NewRoomName));
+            }
+        }
+
+        private int _newRoomNumber;
+        public int NewRoomNumber
+        {
+            get => _newRoomNumber;
+            set
+            {
+                _newRoomNumber = value;
+                OnPropertyChanged(nameof(NewRoomNumber));
+            }
+        }
+
+
 
         private readonly ObservableCollection<RoomListItemViewModel> _rooms;
         public IEnumerable<RoomListItemViewModel> Rooms => _rooms;
@@ -61,6 +118,11 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 
         public AdminNavigationViewModel Navigation { get; }
 
+        public ICommand CreateNewRoom { get; set; }
+        public ICommand DeleteRoom { get; set; }
+        public ICommand ChangeRoom { get; set; }
+        public ICommand CancelChange { get; set; }
+
 
         public AdminRoomViewModel()
         {
@@ -68,6 +130,12 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             _admin = (Admin)_institution.CurrentUser;
             _rooms = new ObservableCollection<RoomListItemViewModel>();
             Navigation = new AdminNavigationViewModel();
+
+            CreateNewRoom = new CreateNewRoomCommand(this);
+            DeleteRoom = new DeleteRoomCommand(this);
+            ChangeRoom = new ChangeRoomCommand(this);
+            CancelChange = new RoomChangeCancelCommand(this);
+
             EnableChanges = false;
             _roomTypes = new List<string>();
             FillRoomTypes();
@@ -86,7 +154,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             OnPropertyChanged(nameof(RoomTypes));
         }
 
-        private void FillRoomList()
+        public void FillRoomList()
         {
             _rooms.Clear();
 

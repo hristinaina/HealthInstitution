@@ -60,7 +60,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             else throw new Exception();
         }
 
-        private bool IsChangeble()
+        public bool IsChangeble()
         {
             return (_appointments == null || _appointments.Count == 0);
         }
