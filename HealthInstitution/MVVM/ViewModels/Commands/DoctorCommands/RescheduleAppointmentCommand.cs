@@ -4,24 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Commands;
-using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
-    class ScheduleExaminationCommand : BaseCommand
+    class RescheduleAppointmentCommand : BaseCommand
     {
-        private readonly DoctorExaminationViewModel _doctorExaminationViewModel;
 
-        public ScheduleExaminationCommand(DoctorExaminationViewModel doctorExaminationViewModel)
+        private DoctorExaminationViewModel _viewModel;
+
+        public RescheduleAppointmentCommand(DoctorExaminationViewModel examinationViewModel)
         {
-            _doctorExaminationViewModel = doctorExaminationViewModel;
+            _viewModel = examinationViewModel;
         }
 
         public override void Execute(object parameter)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

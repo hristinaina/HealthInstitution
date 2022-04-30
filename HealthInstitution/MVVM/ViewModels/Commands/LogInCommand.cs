@@ -7,6 +7,7 @@ using HealthInstitution.MVVM.ViewModels.MainPageViewModels;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
+using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.Commands
 {
@@ -57,7 +58,7 @@ namespace HealthInstitution.Commands
             _institution.CurrentUser = User.FindUser(_institution.DoctorRepository.Doctors, email, password);
             if (_institution.CurrentUser != null)
             {
-                _navigationStore.CurrentViewModel = new DoctorMainPageViewModel();
+                _navigationStore.CurrentViewModel = new DoctorExaminationViewModel();
                 return true;
             }
 

@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using HealthInstitution.MVVM.Models.Entities;
-using HealthInstitution.MVVM.Models;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
-    class DoctorMedicalRecordViewModel : BaseViewModel
+    class UpdateMedicalRecordViewModel : BaseViewModel
     {
-        public DoctorNavigationViewModel Navigation { get; }
-
+        public ICommand SaveCommand { get; }
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         //private MedicalRecordViewModel _medicalRecord;
@@ -63,9 +61,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
-        public DoctorMedicalRecordViewModel()
+        public UpdateMedicalRecordViewModel()
         {
-            Navigation = new DoctorNavigationViewModel();
             _allergens = new ObservableCollection<AllergenViewModel>();
             _examination = new Examination(1, DateTime.Now, false, false, "", new ExaminationReview(0.0, ""));
             Allergen allergen = new Allergen(1, "Naziv");
@@ -77,6 +74,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             MedicalRecord mr = new MedicalRecord(180, 80, allergens);
             patient.Record = mr;
             _examination.Patient = patient;
+            _examination.Anamnesis = " ";
             Name = Examination.Patient.FirstName;
             SetProperties();
             FillAllergensList();
@@ -96,9 +94,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             {
                 _allergens.Add(new AllergenViewModel(allergen));
             }
-            OnPropertyChanged(nameof(Allergens)) ;
+            OnPropertyChanged(nameof(Allergens));
         }
 
-      
     }
 }
