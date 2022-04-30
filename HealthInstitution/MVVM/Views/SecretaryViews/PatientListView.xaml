@@ -26,7 +26,8 @@
 
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
-                                       Grid.Row="0">
+                                       Grid.Row="0"
+                                       IsOpen="{Binding DialogOpen}">
                 <materialDesign:Card>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -110,80 +111,198 @@
                                     Margin="0,0,0,76"
                                     Grid.RowSpan="2">
 
-
                                 <Button.CommandParameter>
-                                    <StackPanel Height="600"
-                                                Width="400"
-                                                Margin="40 20 40 20">
-                                        <TextBlock Text="Create new account"
-                                                   HorizontalAlignment="Center"
-                                                   Margin="10"
-                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                 Margin="0 20 0 0"
-                                                 Width="250"
-                                                 HorizontalAlignment="Center"
-                                                 Text="{Binding NewName}"
-                                                 materialDesign:HintAssist.Hint="Name"
-                                                 materialDesign:HintAssist.HintOpacity=".26" />
-                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                 Margin="0 20 0 0"
-                                                 Width="250"
-                                                 HorizontalAlignment="Center"
-                                                 Text="{Binding NewSurname}"
-                                                 materialDesign:HintAssist.Hint="Surame"
-                                                 materialDesign:HintAssist.HintOpacity=".26" />
-                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                 Margin="0 20 0 0"
-                                                 Width="250"
-                                                 HorizontalAlignment="Center"
-                                                 Text="{Binding NewEmail}"
-                                                 materialDesign:HintAssist.Hint="Email"
-                                                 materialDesign:HintAssist.HintOpacity=".26" />
-                                        <components:BindablePasswordBox Grid.Column="1"
-                                                                        Password="{Binding NewPassword}"
-                                                                        MaxWidth="250"
-                                                                        Margin="0 20 0 0" />
-                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                 Margin="0 20 0 0"
-                                                 Width="250"
-                                                 HorizontalAlignment="Center"
-                                                 Text="{Binding NewHeight}"
-                                                 materialDesign:HintAssist.Hint="Height"
-                                                 materialDesign:HintAssist.HintOpacity=".26" />
-                                        <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                 Margin="0 20 0 0"
-                                                 Width="250"
-                                                 HorizontalAlignment="Center"
-                                                 Text="{Binding NewWeight}"
-                                                 materialDesign:HintAssist.Hint="Weight"
-                                                 materialDesign:HintAssist.HintOpacity=".26" />
-                                        <StackPanel Orientation="Horizontal"
-                                                    HorizontalAlignment="Center">
-                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                    IsDefault="True"
-                                                    Margin="0 30 10 0"
-                                                    Content="CREATE"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                                <Button.CommandParameter>
-                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                        True
-                                                    </system:Boolean>
-                                                </Button.CommandParameter>
-                                            </Button>
-                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                    IsCancel="True"
-                                                    Margin="10 30 0 0"
-                                                    Content="DISCARD"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                                <Button.CommandParameter>
-                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                        False
-                                                    </system:Boolean>
-                                                </Button.CommandParameter>
-                                            </Button>
-                                        </StackPanel>
-                                    </StackPanel>
+                                    <materialDesign:Card Grid.Column="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*"></RowDefinition>
+                                                <RowDefinition Height="6*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="Create patient account"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Top"
+                                                       Margin="0, 20, 0, 20"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                                       Grid.Row="0"
+                                                       Height="50" />
+
+                                            <Grid Grid.Row="1"
+                                                  Margin="0 0 0 100">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid Grid.Column="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding NewName}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="0"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="First Name" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding NewSurname}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="1"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Last Name" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding NewEmail}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="2"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Email" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding NewPassword}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="3"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Password" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding NewHeight}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="4"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Heigh (cm)" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding NewWeight}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="5"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Weight (kg)" />
+
+                                                </Grid>
+
+                                                <Grid Grid.Column="1">
+                                                    <ListView ItemsSource="{Binding Allergens}"
+                                                              VerticalAlignment="Top"
+                                                              HorizontalAlignment="Center"
+                                                              IsManipulationEnabled="True"
+                                                              Height="300"
+                                                              Margin=" 0 0 25 0"
+                                                              SelectedIndex="{Binding SelectedAllergens}">
+                                                        <ListView.View>
+                                                            <GridView>
+                                                                <GridViewColumn Width="170"
+                                                                                Header="Allergens">
+                                                                    <GridViewColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <TextBlock TextAlignment="Left"
+                                                                                       Text="{Binding AllergenName}"
+                                                                                       Width="170" />
+                                                                        </DataTemplate>
+                                                                    </GridViewColumn.CellTemplate>
+                                                                </GridViewColumn>
+                                                            </GridView>
+                                                        </ListView.View>
+                                                    </ListView>
+                                                </Grid>
+
+                                                <Grid Grid.Column="2"
+                                                      Margin="0 0 30 0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="75"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <ComboBox Margin="0 20 0 0"
+                                                              Width="250"
+                                                              HorizontalAlignment="Center"
+                                                              Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                              ItemsSource="{Binding Gender}"
+                                                              SelectedItem="{Binding NewGender}"
+                                                              Grid.Row="0"
+                                                              materialDesign:HintAssist.Hint="Choose Gender"
+                                                              materialDesign:HintAssist.HintOpacity=".26"
+                                                              IsEditable="True" />
+
+                                                    <ListView ItemsSource="{Binding}"
+                                                              IsManipulationEnabled="False"
+                                                              VerticalAlignment="Top"
+                                                              Grid.Row="1"
+                                                              HorizontalAlignment="Center"
+                                                              Height="300">
+                                                        <ListView.View>
+                                                            <GridView>
+                                                                <GridViewColumn Width="200"
+                                                                                Header="History of Illness">
+                                                                    <GridViewColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <TextBlock TextAlignment="Left"
+                                                                                       Text="{Binding }"
+                                                                                       Width="130" />
+                                                                        </DataTemplate>
+                                                                    </GridViewColumn.CellTemplate>
+                                                                </GridViewColumn>
+                                                            </GridView>
+                                                        </ListView.View>
+                                                    </ListView>
+                                                    <StackPanel Orientation="Horizontal"
+                                                                VerticalAlignment="Bottom"
+                                                                HorizontalAlignment="Right"
+                                                                Grid.Row="2">
+                                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                                IsDefault="True"
+                                                                Margin="0 50 10 0"
+                                                                Content="CREATE"
+                                                                Width="130"
+                                                                Command="{Binding CreateAccount}">
+                                                            <Button.CommandParameter>
+                                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                                    True
+                                                                </system:Boolean>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                                IsDefault="True"
+                                                                Margin="0 50 10 0"
+                                                                Content="BACK"
+                                                                Width="130"
+                                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                            <Button.CommandParameter>
+                                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                                    True
+                                                                </system:Boolean>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </materialDesign:Card>
                                 </Button.CommandParameter>
                             </Button>
 

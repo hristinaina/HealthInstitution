@@ -8,6 +8,7 @@ using System.Windows.Input;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands;
+using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
@@ -20,6 +21,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         private bool _enableChanges;
         private int _selection;
+
         public bool EnableChanges
         {
             get => _enableChanges;
@@ -32,6 +34,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         public ICommand Block { get; set; }
         public ICommand Delete { get; set; }
+        public ICommand CreateAccount { get; set; }
 
         public int Selection
         {
@@ -52,6 +55,17 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             }
         }
 
+        private bool _dialogOpen;
+        public bool DialogOpen
+        {
+            get => _dialogOpen;
+            set
+            {
+                _dialogOpen = value;
+                OnPropertyChanged(nameof(DialogOpen));
+            }
+        }
+
         public int SelectedPatientId { get; set; }
         //public string SelectedDate { get; set; }
         //public string SelectedTime { get; set; }
@@ -59,12 +73,16 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public PatientListViewModel()
         {
             _patients = new ObservableCollection<PatientListItemViewModel>();
+            _allergens = new ObservableCollection<AllergenViewModel>();
+            _gender = new ObservableCollection<string>();
             Navigation = new SecretaryNavigationViewModel();
             Block = new BlockCommand(this);
             Delete = new DeleteCommand(this);
+            CreateAccount = new CreateAccountCommand(this);
             EnableChanges = false;
             FillPatientList();
-            //FillAllergenList();
+            FillAllergenList();
+            FillGenderList();
         }
 
         public void FillPatientList()
@@ -87,19 +105,32 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public string NewPassword { get; set; }
         public string NewHeight { get; set; }
         public string NewWeight { get; set; }
+        public string NewGender { get; set; }
 
-        /*private readonly ObservableCollection<Allergen> _allergens;
-        public IEnumerable<Allergen> Allergens => _allergens;
+        private readonly ObservableCollection<AllergenViewModel> _allergens;
+        public IEnumerable<AllergenViewModel> Allergens => _allergens;
+
+        private readonly ObservableCollection<string> _gender;
+        public IEnumerable<string> Gender => _gender;
+
 
         public void FillAllergenList()
         {
-            _allergens.Clear();
-
+            if (_allergens != null)
+                _allergens.Clear();
             List<Allergen> allergens = Institution.Instance().AllergenRepository.Allergens;
             foreach (Allergen allergen in allergens)
             {
-                _allergens.Add(allergen);
+                _allergens.Add(new AllergenViewModel(allergen));
             }
-        }*/
+        }
+
+        public void FillGenderList()
+        {
+
+            _gender.Add("MALE");
+            _gender.Add("FEMALE");
+            _gender.Add("OTHER");
+        }
     }
 }

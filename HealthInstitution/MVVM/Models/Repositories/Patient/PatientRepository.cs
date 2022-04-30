@@ -33,5 +33,24 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
             return null;
         }
+
+        private bool CheckID(int id)
+        {
+            foreach (Patient r in _patients)
+            {
+                if (r.ID == id) return false;
+            }
+            return true;
+        }
+
+        public int GetNewID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
     }
 }

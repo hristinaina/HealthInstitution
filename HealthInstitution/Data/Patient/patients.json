@@ -46,7 +46,7 @@
   },
   {
     "Blocked": false,
-    "BlockadeType": 1,
+    "BlockadeType": 0,
     "Deleted": false,
     "Record": {
       "Height": 170.0,
@@ -133,5 +133,50 @@
     "Email": "p",
     "Password": "p",
     "Gender": 1
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 179.0,
+      "Weight": 60.0
+    },
+    "ID": 9,
+    "FirstName": "Vaske",
+    "LastName": "Vaskic",
+    "Email": "mejl",
+    "Password": "4567",
+    "Gender": 0
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": true,
+    "Record": {
+      "Height": 179.0,
+      "Weight": 60.0
+    },
+    "ID": 10,
+    "FirstName": "Vaske",
+    "LastName": "Vaskic",
+    "Email": "mejl",
+    "Password": "4567",
+    "Gender": 0
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 140.0,
+      "Weight": 34.0
+    },
+    "ID": 11,
+    "FirstName": "Buba",
+    "LastName": "Mara",
+    "Email": "mejl",
+    "Password": "123456",
+    "Gender": 2
   }
 ]

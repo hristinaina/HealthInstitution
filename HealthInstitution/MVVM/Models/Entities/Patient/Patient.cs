@@ -174,6 +174,5 @@ namespace HealthInstitution.MVVM.Models.Entities
 
             return true;
         }
-
     }
 }
