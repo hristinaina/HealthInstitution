@@ -165,7 +165,6 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public bool IsAvailable(DateTime startDateTime)
         {
-
             foreach (Examination examination in Examinations)
             {
                 if (DateTime.Compare(examination.Date, startDateTime) <= 0 && DateTime.Compare(examination.Date.AddMinutes(15), startDateTime) >= 0)
