@@ -91,8 +91,12 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public DoctorOperationViewModel()
         {
+            bool isSpecialist = true;
+
+            Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
+            if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
             _operations = new ObservableCollection<OperationViewModel>();
-            Navigation = new DoctorNavigationViewModel();
+            Navigation = new DoctorNavigationViewModel(isSpecialist);
 
             _institution = Institution.Instance();
             _doctor = (Doctor)_institution.CurrentUser;

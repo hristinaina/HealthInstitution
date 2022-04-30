@@ -67,7 +67,10 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public DoctorMedicalRecordViewModel(Examination selectedExamination)
         {
-            Navigation = new DoctorNavigationViewModel();
+            bool isSpecialist = true;
+            Doctor doctor = (Doctor) Institution.Instance().CurrentUser;
+            if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
+            Navigation = new DoctorNavigationViewModel(isSpecialist);
             _allergens = new ObservableCollection<AllergenViewModel>();
             _examination = selectedExamination;
 
@@ -77,7 +80,10 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public DoctorMedicalRecordViewModel(Operation selectedOperation)
         {
-            Navigation = new DoctorNavigationViewModel();
+            bool isSpecialist = true;
+            Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
+            if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
+            Navigation = new DoctorNavigationViewModel(isSpecialist);
             _allergens = new ObservableCollection<AllergenViewModel>();
             _operation = selectedOperation;
             SetProperties(false);
