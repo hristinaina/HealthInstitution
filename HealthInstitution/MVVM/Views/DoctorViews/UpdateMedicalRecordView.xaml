@@ -22,7 +22,7 @@
             <ColumnDefinition Width="6*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <components:DoctorNavigationRail SelectedIndex="2"></components:DoctorNavigationRail>
+        <components:DoctorNavigationRail></components:DoctorNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
             <materialDesign:DialogHost DialogTheme="Inherit"
