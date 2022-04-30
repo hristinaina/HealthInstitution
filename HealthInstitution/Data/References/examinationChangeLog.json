@@ -2,25 +2,25 @@
     {
         "PatientID": 1,
         "AppointmentID": 5,
-        "ChangeStatus": 0,
-        "ChangeDate": "2022-04-25T18:43:37.0931955+02:00",
-        "Resolved": false,
-        "NewDate": "2022-04-26T18:43:37.0931955+02:00"
+        "ChangeStatus": 1,
+        "ChangeDate": "2022-04-29T18:43:37.0931955+02:00",
+        "Resolved": true,
+        "NewDate": "2022-04-30T18:43:37.0931955+02:00"
     },
     {
         "PatientID": 1,
         "AppointmentID": 2,
         "ChangeStatus": 0,
-        "ChangeDate": "2022-04-25T18:43:37.0931955+02:00",
+        "ChangeDate": "2022-04-29T18:43:37.0931955+02:00",
         "Resolved": false,
-        "NewDate": "2022-04-26T18:43:37.0931955+02:00"
+        "NewDate": "2022-04-30T18:43:37.0931955+02:00"
     },
     {
         "PatientID": 1,
         "AppointmentID": 3,
         "ChangeStatus": 0,
-        "ChangeDate": "2022-04-25T18:43:37.0931955+02:00",
+        "ChangeDate": "2022-04-29T18:43:37.0931955+02:00",
         "Resolved": false,
-        "NewDate": "2022-04-26T18:43:37.0931955+02:00"
+        "NewDate": "2022-04-30T18:43:37.0931955+02:00"
     }
 ]

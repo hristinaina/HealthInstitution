@@ -88,5 +88,50 @@
         "Password": "p",
         "Gender": 1,
         "Deleted": true
+    },
+    {
+        "Blocked": true,
+        "BlockadeType": 1,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 6,
+        "FirstName": "debil",
+        "LastName": "debilkovic",
+        "Email": "p",
+        "Password": "p",
+        "Gender": 1,
+        "Deleted": false
+    },
+    {
+        "Blocked": true,
+        "BlockadeType": 2,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 7,
+        "FirstName": "debil",
+        "LastName": "debilkovic",
+        "Email": "p",
+        "Password": "p",
+        "Gender": 1,
+        "Deleted": false
+    },
+    {
+        "Blocked": true,
+        "BlockadeType": 1,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 8,
+        "FirstName": "debil",
+        "LastName": "debilkovic",
+        "Email": "p",
+        "Password": "p",
+        "Gender": 1,
+        "Deleted": true
     }
 ]
