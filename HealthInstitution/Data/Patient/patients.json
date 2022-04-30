@@ -1,7 +1,7 @@
 [
   {
-    "Blocked": true,
-    "BlockadeType": 1,
+    "Blocked": false,
+    "BlockadeType": 0,
     "Deleted": false,
     "Record": {
       "Height": 190.0,
@@ -10,8 +10,8 @@
     "ID": 1,
     "FirstName": "Test",
     "LastName": "Patient",
-    "Email": "p",
-    "Password": "p",
+    "Email": "p23",
+    "Password": "p23",
     "Gender": 0
   },
   {
@@ -49,15 +49,15 @@
     "BlockadeType": 0,
     "Deleted": false,
     "Record": {
-      "Height": 170.0,
-      "Weight": 60.0
+      "Height": 179.0,
+      "Weight": 69.0
     },
     "ID": 4,
-    "FirstName": "Test4",
-    "LastName": "Patient",
-    "Email": "p4@mail",
-    "Password": "p",
-    "Gender": 2
+    "FirstName": "Test9",
+    "LastName": "Patient9",
+    "Email": "p4@mail9",
+    "Password": "p9",
+    "Gender": 1
   },
   {
     "Blocked": false,
@@ -107,21 +107,6 @@
   {
     "Blocked": true,
     "BlockadeType": 1,
-    "Deleted": true,
-    "Record": {
-      "Height": 0.0,
-      "Weight": 0.0
-    },
-    "ID": 7,
-    "FirstName": "debil",
-    "LastName": "debilkovic",
-    "Email": "p",
-    "Password": "p",
-    "Gender": 1
-  },
-  {
-    "Blocked": true,
-    "BlockadeType": 1,
     "Deleted": false,
     "Record": {
       "Height": 0.0,
@@ -130,53 +115,8 @@
     "ID": 8,
     "FirstName": "neko",
     "LastName": "nekovic",
-    "Email": "p",
+    "Email": "p89",
     "Password": "p",
     "Gender": 1
-  },
-  {
-    "Blocked": false,
-    "BlockadeType": 0,
-    "Deleted": false,
-    "Record": {
-      "Height": 179.0,
-      "Weight": 60.0
-    },
-    "ID": 9,
-    "FirstName": "Vaske",
-    "LastName": "Vaskic",
-    "Email": "mejl",
-    "Password": "4567",
-    "Gender": 0
-  },
-  {
-    "Blocked": false,
-    "BlockadeType": 0,
-    "Deleted": true,
-    "Record": {
-      "Height": 179.0,
-      "Weight": 60.0
-    },
-    "ID": 10,
-    "FirstName": "Vaske",
-    "LastName": "Vaskic",
-    "Email": "mejl",
-    "Password": "4567",
-    "Gender": 0
-  },
-  {
-    "Blocked": false,
-    "BlockadeType": 0,
-    "Deleted": false,
-    "Record": {
-      "Height": 140.0,
-      "Weight": 34.0
-    },
-    "ID": 11,
-    "FirstName": "Buba",
-    "LastName": "Mara",
-    "Email": "mejl",
-    "Password": "123456",
-    "Gender": 2
   }
 ]
