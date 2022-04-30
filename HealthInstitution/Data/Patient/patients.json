@@ -118,5 +118,20 @@
         "Password": "p",
         "Gender": 1,
         "Deleted": true
+    },
+    {
+        "Blocked": true,
+        "BlockadeType": 1,
+        "Record": {
+            "Height": 0.0,
+            "Weight": 0.0
+        },
+        "ID": 8,
+        "FirstName": "neko",
+        "LastName": "nekovic",
+        "Email": "p",
+        "Password": "p",
+        "Gender": 1,
+        "Deleted": false
     }
 ]
