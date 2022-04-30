@@ -58,38 +58,27 @@
                                    Margin="10"
                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
                                     <ComboBox Margin="0 20 0 0"
-                                  Width="250"
-                                  HorizontalAlignment="Center"
-                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                  materialDesign:HintAssist.Hint="Search for a patient"
-                                  materialDesign:HintAssist.HintOpacity=".26"
-                                  IsEditable="True">
-                                        <ComboBoxItem Content="Patient 1" />
-                                        <ComboBoxItem Content="Patient 2" />
-                                        <ComboBoxItem Content="Patient 3" />
-                                        <ComboBoxItem Content="Patient 4" />
+                                              Width="250"
+                                              ItemsSource="{Binding Patients}"
+                                              SelectedItem="{Binding NewPatient}"
+                                              HorizontalAlignment="Center"
+                                              Style="{StaticResource MaterialDesignFilledComboBox}"
+                                              materialDesign:HintAssist.Hint="Search for a patient"
+                                              materialDesign:HintAssist.HintOpacity=".26"
+                                              IsEditable="True">
+ 
                                     </ComboBox>
                                     <DatePicker Width="250"
-                                    Margin="0 20 0 0"
-                                    materialDesign:HintAssist.Hint="Pick date"
-                                    Style="{StaticResource MaterialDesignFilledDatePicker}" />
+                                                Margin="0 20 0 0"
+                                                materialDesign:HintAssist.Hint="Pick date"
+                                                SelectedDate="{Binding NewDate}"
+                                                Style="{StaticResource MaterialDesignFilledDatePicker}" />
                                     <materialDesign:TimePicker Width="250"
                                                    Margin="0 20 0 0"
                                                    Is24Hours="True"
+                                                   SelectedTime="{Binding NewTime}"
                                                    Style="{StaticResource MaterialDesignFilledTimePicker}"
                                                    materialDesign:HintAssist.Hint="Pick time" />
-                                    <ComboBox Margin="0 20 0 0"
-                                  Width="250"
-                                  HorizontalAlignment="Center"
-                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                  materialDesign:HintAssist.Hint="Pick a room"
-                                  materialDesign:HintAssist.HintOpacity=".26"
-                                  IsEditable="True">
-                                        <ComboBoxItem Content="Room 1" />
-                                        <ComboBoxItem Content="Room 2" />
-                                        <ComboBoxItem Content="Room 3" />
-                                        <ComboBoxItem Content="Room 4" />
-                                    </ComboBox>
                                     <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Center">
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -149,6 +138,8 @@
                         <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
 
                         <ListView ItemsSource="{Binding Examinations}"
+                                  SelectionMode="Single"
+                                  SelectedIndex="{Binding Selection}"
                                   Width="650"
                                   VerticalAlignment="Center"
                                   Height="400"

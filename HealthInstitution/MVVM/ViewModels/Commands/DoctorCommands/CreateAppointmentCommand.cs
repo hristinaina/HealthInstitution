@@ -21,7 +21,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            _viewModel.DialogOpen = false;
+            Doctor doctor = _viewModel.Doctor;
+            Patient patient = _viewModel.NewPatient;
+            DateTime datetime = _viewModel.MergeTime(_viewModel.NewDate, _viewModel.NewTime);
+
+            //Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Examination));
+            //_viewModel.FillAppointmentsList();
         }
 
     }
