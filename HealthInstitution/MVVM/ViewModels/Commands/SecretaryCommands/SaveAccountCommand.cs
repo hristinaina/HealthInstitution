@@ -48,6 +48,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
                 MessageBox.Show("Weight must be a number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+            if (!Institution.Instance().PatientRepository.CheckEmail(_viewModel.NewEmail))
+            {
+                MessageBox.Show("Account with this email already exist! Please choose a new one!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             Enum.TryParse(_viewModel.GetGender, out Gender gender);
             Patient patient = Institution.Instance().PatientRepository.FindByID(_viewModel.SelectedPatientId);
             patient.Update(_viewModel.SelectedPatientId, _viewModel.FirstName, _viewModel.LastName, _viewModel.Email, _viewModel.Password, gender,

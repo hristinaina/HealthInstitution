@@ -21,10 +21,18 @@ namespace HealthInstitution.MVVM.Models.Services
 
             if (request.ChangeStatus.ToString() == "EDITED")
             {
-                Institution.Instance().RescheduleExamination(appointment, request.NewDate);
-                // TODO: dodati da vraca vrijednost o uspjesnoti promjene i zavisno od toga prikazati MassageBox: uspjesno, neuspjesno
+                bool resolved = Institution.Instance().RescheduleExamination(appointment, request.NewDate);
+                if (resolved)
+                {
+                    string message = "The request has been successfully accepted.";
+                    MessageBox.Show(message);
+                }
+                else
+                {
+                    string message = "Request cannot be accepted because either Doctor or Room are not available.";
+                    MessageBox.Show(message);
+                }
             }
-            //deleted
             else if (request.ChangeStatus.ToString() == "DELETED")
             {
                 DeleteAppointment(appointment);
@@ -49,7 +57,11 @@ namespace HealthInstitution.MVVM.Models.Services
             }
             else if (appointment is Operation)
             {
-                // TODO: prekopirati od Milice kad zavrsi
+                patient.Operations.Remove((Operation)appointment);
+                doctor.Operations.Remove((Operation)appointment);
+                Institution.Instance().OperationRepository.Remove((Operation)appointment);
+                Institution.Instance().OperationReferencesRepository.Remove((Operation)appointment);
+                room.Appointments.Remove(appointment);
             }
         }
 

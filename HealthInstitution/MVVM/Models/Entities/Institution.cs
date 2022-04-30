@@ -150,7 +150,6 @@ namespace HealthInstitution.MVVM.Models
             _pendingMedicineRepository.SaveToFile();
             _doctorDaysOffRepository.SaveToFile();
             _prescriptionMedicineRepository.SaveToFile();
-            // TODO: Add other repositories
         }
 
         private static void ConnectReferences()
