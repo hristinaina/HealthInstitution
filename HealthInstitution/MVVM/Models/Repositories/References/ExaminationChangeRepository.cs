@@ -13,7 +13,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
         private readonly string _fileName;
         private List<ExaminationChange> _references;
 
-        public List<ExaminationChange> Changes { get => _references;}
+        public List<ExaminationChange> Changes { get => _references; }
         public ExaminationChangeRepository(string FileName)
         {
             _fileName = FileName;
