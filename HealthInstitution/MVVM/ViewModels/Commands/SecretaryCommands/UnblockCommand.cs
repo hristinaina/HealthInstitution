@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
@@ -25,6 +26,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
         {
             Patient patient = Institution.Instance().PatientRepository.FindByID(_viewModel.SelectedPatientId);
             patient.UnblockPatient();
+            string message = "The patient has ben successfully unblocked.";
+            MessageBox.Show(message);
             _viewModel.FillPatientList();
         }
     }
