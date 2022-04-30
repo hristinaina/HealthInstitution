@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Exceptions
 {
-    class PatientBlockedException : Exception
+    class PastDateException : Exception
     {
-        public PatientBlockedException()
+        public PastDateException()
         {
         }
 
-        public PatientBlockedException(string message)
+        public PastDateException(string message)
             : base(message)
         {
         }
-
     }
 }

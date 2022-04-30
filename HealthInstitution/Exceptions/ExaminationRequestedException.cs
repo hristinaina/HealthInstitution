@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthInstitution.Exceptions
 {
-    class PatientBlockedException : Exception
+    class ExaminationRequestedException : Exception
     {
-        public PatientBlockedException()
+        public ExaminationRequestedException()
         {
         }
 
-        public PatientBlockedException(string message)
+        public ExaminationRequestedException(string message)
             : base(message)
         {
         }
