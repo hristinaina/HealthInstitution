@@ -14,13 +14,13 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
     {
         private Institution _institution;
         protected Admin _admin;
-        public ICommand LogOut { get; }
+        public AdminNavigationViewModel Navigation { get; }
 
         public AdminMainPageViewModel()
         {
             _institution = Institution.Instance();
             _admin = (Admin)_institution.CurrentUser;
-            LogOut = new LogOutCommand();
+            Navigation = new AdminNavigationViewModel();
 
             // ..............
         }

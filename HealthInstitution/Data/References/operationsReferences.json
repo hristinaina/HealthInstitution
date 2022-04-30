@@ -2,13 +2,13 @@
   {
     "OperationId": 1,
     "DoctorID": 1,
-    "PatientId": 1,
+    "PatientID": 1,
     "RoomID": 1
   },
   {
     "OperationId": 2,
     "DoctorID": 3,
-    "PatientId": 3,
+    "PatientID": 3,
     "RoomID": 2
   }
 ]

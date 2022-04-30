@@ -2,25 +2,25 @@
   {
     "Id": 10,
     "Name": "Ime",
-    "State": 0,
-    "Description": "Opis leka"
+    "Description": "Opis leka",
+    "State": 0
   },
   {
     "Id": 9,
     "Name": "Ime",
-    "State": 0,
-    "Description": "Opis"
+    "Description": "Opis",
+    "State": 0
   },
   {
     "Id": 3,
     "Name": "Ime",
-    "State": 0,
-    "Description": "Opis"
+    "Description": "Opis",
+    "State": 0
   },
   {
     "Id": 4,
     "Name": "Ime",
-    "State": 0,
-    "Description": "Opis"
+    "Description": "Opis",
+    "State": 0
   }
 ]

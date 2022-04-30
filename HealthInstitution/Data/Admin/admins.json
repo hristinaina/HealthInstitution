@@ -1,18 +1,26 @@
 [
-    {
-        "ID": 1,
-        "Email": "admin1@gmail.com",
-        "FirstName": "Ime",
-        "LastName": "Prezime",
-        "Password": "123",
-        "Gender": 0
-    },
-    {
-        "ID": 2,
-        "Email": "admin2@gmail.com",
-        "FirstName": "Ime",
-        "LastName": "Prezime",
-        "Password": "123",
-        "Gender": 1
-    }
+  {
+    "ID": 1,
+    "FirstName": "Ime",
+    "LastName": "Prezime",
+    "Email": "admin1@gmail.com",
+    "Password": "123",
+    "Gender": 0
+  },
+  {
+    "ID": 2,
+    "FirstName": "Ime",
+    "LastName": "Prezime",
+    "Email": "admin2@gmail.com",
+    "Password": "123",
+    "Gender": 1
+  },
+  {
+    "ID": 0,
+    "FirstName": null,
+    "LastName": null,
+    "Email": "a",
+    "Password": "a",
+    "Gender": 0
+  }
 ]

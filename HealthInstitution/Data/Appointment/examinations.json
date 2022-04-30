@@ -1,45 +1,47 @@
-﻿[
+[
   {
-    "ID": 1,
-    "Date": "2022-05-02T18:43:37.0931955+02:00",
-    "Emergency": false,
-    "Done": true,
+
     "Anamnesis": "bla bla bla ...",
     "Review": {
       "Rating": 5.0,
       "Comment": "good"
-    }
+    },
+    "ID": 1,
+    "Date": "2022-04-30T18:43:37.0931955+02:00",
+    "Emergency": false,
+    "Done": true
   },
   {
+    "Anamnesis": "",
+    "Review": {
+      "Rating": 0.0,
+      "Comment": ""
+    },
     "ID": 2,
     "Date": "2022-04-30T18:43:37.0931955+02:00",
     "Emergency": true,
-    "Done": false,
+    "Done": false
+  },
+  {
     "Anamnesis": "",
     "Review": {
       "Rating": 0.0,
       "Comment": ""
-    }
-  },
-  {
+    },
     "ID": 3,
     "Date": "2022-04-25T18:43:37.0931955+02:00",
     "Emergency": true,
-    "Done": false,
-    "Anamnesis": "",
+    "Done": false
+  },
+  {
+    "Anamnesis": null,
     "Review": {
       "Rating": 0.0,
       "Comment": ""
-    }
-  },
-  {
+    },
     "ID": 4,
     "Date": "2022-04-25T18:43:37.0931955+02:00",
     "Emergency": false,
-    "Done": false,
-    "Review": {
-      "Rating": 0.0,
-      "Comment": ""
-    }
+    "Done": false
   }
 ]

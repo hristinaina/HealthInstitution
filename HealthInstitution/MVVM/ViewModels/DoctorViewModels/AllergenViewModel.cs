@@ -7,7 +7,7 @@ using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
-    class AllergenViewModel : BaseViewModel
+    public class AllergenViewModel : BaseViewModel
     {
         private readonly Allergen _allergen;
 

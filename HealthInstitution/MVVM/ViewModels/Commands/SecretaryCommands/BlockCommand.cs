@@ -7,16 +7,17 @@ using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
 {
-    public class UnblockCommand : BaseCommand
+    public class BlockCommand : BaseCommand
     {
         private readonly Institution _institution;
-        private BlockedPatientListViewModel _viewModel;
+        private PatientListViewModel _viewModel;
 
-        public UnblockCommand(BlockedPatientListViewModel viewModel)
+        public BlockCommand(PatientListViewModel viewModel)
         {
             _institution = Institution.Instance();
             _viewModel = viewModel;
@@ -25,8 +26,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
         public override void Execute(object parameter)
         {
             Patient patient = Institution.Instance().PatientRepository.FindByID(_viewModel.SelectedPatientId);
-            patient.UnblockPatient();
-            string message = "The patient has ben successfully unblocked.";
+            SecretaryService.BlockPatient(patient);
+            string message = "The patient has ben successfully blocked.";
             MessageBox.Show(message);
             _viewModel.FillPatientList();
         }

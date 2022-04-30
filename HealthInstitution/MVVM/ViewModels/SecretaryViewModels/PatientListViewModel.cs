@@ -4,8 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
@@ -27,16 +29,21 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 OnPropertyChanged(nameof(EnableChanges));
             }
         }
+
+        public ICommand Block { get; set; }
+        public ICommand Delete { get; set; }
+
         public int Selection
         {
             get => _selection;
             set
             {
+                if (value < 0) { return; }
                 _selection = value;
                 EnableChanges = true;
                 OnPropertyChanged(nameof(Selection));
                 _selectedPatient = _patients.ElementAt(_selection);
-                //SelectedDoctor = _selectedPatient.Doctor;
+                SelectedPatientId = Convert.ToInt32(_selectedPatient.Id);
                 //OnPropertyChanged(nameof(SelectedDoctor));
                 //SelectedDate = _selectedPatient.Date;
                 //OnPropertyChanged(nameof(SelectedDate));
@@ -45,7 +52,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             }
         }
 
-        //public string SelectedDoctor { get; set; }
+        public int SelectedPatientId { get; set; }
         //public string SelectedDate { get; set; }
         //public string SelectedTime { get; set; }
 
@@ -53,6 +60,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _patients = new ObservableCollection<PatientListItemViewModel>();
             Navigation = new SecretaryNavigationViewModel();
+            Block = new BlockCommand(this);
+            Delete = new DeleteCommand(this);
             EnableChanges = false;
             FillPatientList();
             //FillAllergenList();

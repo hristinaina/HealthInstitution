@@ -74,22 +74,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
         }
 
-
-        public void BlockPatient()
-        {
-            _blocked = true;
-            _blockadeType = BlockadeType.SECRETARY;
-            // TODO: ?delete all future appointments with this patient 
-        }
-
-        public void UnblockPatient()
-        {
-            _blocked = false;
-            _blockadeType = BlockadeType.NONE;
-            // TODO: ?delete all future appointments with this patient 
-        }
-
-        // constructor for when secretary is creating new patient accounts
+        // constructor used when secretary is creating new patient accounts
         public Patient(int id, string firstName, string lastName, string email, string password, Gender gender,
             double height, double weight, List<Allergen> allergens = null)
             : base(id, firstName, lastName, email, password, gender)
@@ -101,6 +86,11 @@ namespace HealthInstitution.MVVM.Models.Entities
             // no need to fill _operations and _examinations lists because it is a new user so there would be none
         }
 
+        public void UnblockPatient()
+        {
+            _blocked = false;
+            _blockadeType = BlockadeType.NONE;
+        }
 
         public List<Appointment> GetAllAppointments() {
             List<Appointment> allAppointments = new List<Appointment>();
@@ -185,11 +175,16 @@ namespace HealthInstitution.MVVM.Models.Entities
             return true;
         }
 
-
-        public void BlockPatient(bool blocked)
+        public List<string> GetHistoryOfIllness()
         {
-            _blocked = blocked;
-            // TODO: ?delete all future appointments with this patient 
+            List<string> historyOfIllness = new List<string>();
+            foreach (Examination examination in _examinations)
+            {
+                if (examination.Anamnesis.Length > 1) 
+                    historyOfIllness.Add(examination.Anamnesis);
+ 
+            }
+            return historyOfIllness;
         }
 
         public List<string> GetHistoryOfIllness()

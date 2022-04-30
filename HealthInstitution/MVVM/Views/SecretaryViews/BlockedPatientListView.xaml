@@ -119,7 +119,162 @@
                                     Margin="0,0,0,76"
                                     Grid.RowSpan="2"
                                     IsEnabled="{Binding EnableChanges}">
-                              
+                                <Button.CommandParameter>
+                                    <materialDesign:Card Grid.Column="1">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*"></RowDefinition>
+                                                <RowDefinition Height="6*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="Patient account"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Top"
+                                                       Margin="0, 20, 0, 20"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                                                       Grid.Row="0"
+                                                       Height="50" />
+
+                                            <Grid Grid.Row="1"
+                                                  Margin="0 0 0 100">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid Grid.Column="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding FirstName}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="0"
+                                                             IsReadOnly="True"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="First Name"/>
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding LastName}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="1"
+                                                             IsReadOnly="True"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Last Name" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding Email}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="2"
+                                                             IsReadOnly="True"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Email" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding Height}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="3"
+                                                             IsReadOnly="True"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Heigh (cm)" />
+
+                                                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                             Text="{Binding Weight}"
+                                                             Width="250"
+                                                             VerticalAlignment="Center"
+                                                             TextWrapping="Wrap"
+                                                             MaxLength="30"
+                                                             Grid.Row="4"
+                                                             IsReadOnly="True"
+                                                             Margin="20 0 25 20"
+                                                             materialDesign:HintAssist.Hint="Weight (kg)" />
+
+                                                </Grid>
+
+                                                <Grid Grid.Column="1">
+                                                    <ListView ItemsSource="{Binding Allergens}"
+                                                              VerticalAlignment="Top"
+                                                              HorizontalAlignment="Center"
+                                                              IsManipulationEnabled="False"
+                                                              Height="300"
+                                                              Margin=" 0 0 25 0">
+                                                        <ListView.View>
+                                                            <GridView>
+                                                                <GridViewColumn Width="170"
+                                                                                Header="Allergens">
+                                                                    <GridViewColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <TextBlock TextAlignment="Left"
+                                                                                       Text="{Binding AllergenName}"
+                                                                                       Width="170" />
+                                                                        </DataTemplate>
+                                                                    </GridViewColumn.CellTemplate>
+                                                                </GridViewColumn>
+                                                            </GridView>
+                                                        </ListView.View>
+                                                    </ListView>
+                                                </Grid>
+
+                                                <Grid Grid.Column="2"
+                                                      Margin="0 0 30 0">
+                                                    <ListView ItemsSource="{Binding Allergens}"
+                                                              IsManipulationEnabled="False"
+                                                              VerticalAlignment="Top"
+                                                              HorizontalAlignment="Center"
+                                                              Height="300">
+                                                        <ListView.View>
+                                                            <GridView>
+                                                                <GridViewColumn Width="200"
+                                                                                Header="History of Illness">
+                                                                    <GridViewColumn.CellTemplate>
+                                                                        <DataTemplate>
+                                                                            <TextBlock TextAlignment="Left"
+                                                                                       Text="{Binding AllergenName}"
+                                                                                       Width="130" />
+                                                                        </DataTemplate>
+                                                                    </GridViewColumn.CellTemplate>
+                                                                </GridViewColumn>
+                                                            </GridView>
+                                                        </ListView.View>
+                                                    </ListView>
+                                                    <StackPanel Orientation="Horizontal"
+                                                                VerticalAlignment="Bottom"
+                                                                HorizontalAlignment="Center">
+                                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                                IsDefault="True"
+                                                                Margin="0 50 10 0"
+                                                                Content="BACK"
+                                                                Width="130"
+                                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                            <Button.CommandParameter>
+                                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                                    True
+                                                                </system:Boolean>
+                                                            </Button.CommandParameter>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </materialDesign:Card>
+                                </Button.CommandParameter>
                             </Button>
 
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"

@@ -70,6 +70,12 @@
             <DataTemplate DataType="{x:Type viewmodeladmin:AdminMainPageViewModel}">
                 <viewadmin:AdminMainPageView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodeladmin:AdminRoomViewModel}">
+                <viewadmin:AdminRoomView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodeladmin:AdminEquipmentViewModel}">
+                <viewadmin:AdminEquipmentView />
+            </DataTemplate>
         </Grid.Resources>
         <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>

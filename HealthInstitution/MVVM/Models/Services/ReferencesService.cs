@@ -66,8 +66,9 @@ namespace HealthInstitution.MVVM.Models.Services
 
         public static void ArrangeEquipment()
         {
-            foreach (EquipmentArragment a in Institution.Instance().EquipmentArragmentRepository.Equipment)
+            foreach (EquipmentArragment a in Institution.Instance().EquipmentArragmentRepository.CurrentEquipment)
             {
+
                 Room r = Institution.Instance().RoomRepository.FindById(a.RoomId);
                 Equipment e = Institution.Instance().EquipmentRepository.FindById(a.EquipmentId);
                 r.AddEquipment(e, a.Quantity);

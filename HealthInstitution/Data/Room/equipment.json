@@ -1,17 +1,20 @@
 [
   {
-    "Id": 1,
-    "Name": "Ime",
-    "Quantity": 50
+    "ID": 1,
+    "Name": "Chair",
+    "Quantity": 50,
+    "Type": 2
   },
   {
-    "Id": 1,
-    "Name": "Ime",
-    "Quantity": 50
+    "ID": 2,
+    "Name": "Table",
+    "Quantity": 50,
+    "Type": 2
   },
   {
-    "Id": 1,
-    "Name": "Ime",
-    "Quantity": 50
+    "ID": 3,
+    "Name": "Cabinet",
+    "Quantity": 50,
+    "Type": 2
   }
 ]
