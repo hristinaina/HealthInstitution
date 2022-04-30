@@ -50,6 +50,9 @@
             <DataTemplate DataType="{x:Type viewmodelsDoctor:DoctorMedicalRecordViewModel}">
                 <viewsdoctor:DoctorMedicalRecordView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsDoctor:UpdateMedicalRecordViewModel}">
+                <viewsdoctor:UpdateMedicalRecordView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelmains:SecretaryMainPageViewModel}">
                 <viewmains:SecretaryMainPageView />
             </DataTemplate>
