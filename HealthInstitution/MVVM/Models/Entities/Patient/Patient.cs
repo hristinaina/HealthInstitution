@@ -72,9 +72,17 @@ namespace HealthInstitution.MVVM.Models.Entities
         }
 
 
-        public void BlockPatient(bool blocked)
+        public void BlockPatient()
         {
-            _blocked = blocked;
+            _blocked = true;
+            _blockadeType = BlockadeType.SECRETARY;
+            // TODO: ?delete all future appointments with this patient 
+        }
+
+        public void UnblockPatient()
+        {
+            _blocked = false;
+            _blockadeType = BlockadeType.NONE;
             // TODO: ?delete all future appointments with this patient 
         }
 
