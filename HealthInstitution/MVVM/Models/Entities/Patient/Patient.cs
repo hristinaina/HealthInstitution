@@ -180,9 +180,11 @@ namespace HealthInstitution.MVVM.Models.Entities
             List<string> historyOfIllness = new List<string>();
             foreach (Examination examination in _examinations)
             {
-                if (examination.Anamnesis.Length > 1) 
-                    historyOfIllness.Add(examination.Anamnesis);
- 
+                if (examination.Anamnesis != null)
+                {
+                    if (examination.Anamnesis.Length > 1)
+                        historyOfIllness.Add(examination.Anamnesis);
+                }
             }
             return historyOfIllness;
         }
