@@ -34,7 +34,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly OperationReferencesRepository _operationReferencesRepository;
 
         private readonly EquipmentRepository _equipmentRepository;
-        private readonly EquipmentArragmentRepository _equipmentArragmentRepository;
+        private readonly EquipmentArrangementRepository _equipmentArragmentRepository;
         private readonly RoomRepository _roomRepository;
         private readonly MedicineRepository _medicineRepository;
         private readonly DayOffRepository _dayOffRepository;
@@ -81,12 +81,12 @@ namespace HealthInstitution.MVVM.Models
             
             _roomRepository = new RoomRepository(_appSettings.RoomsFileName);
             _equipmentRepository = new EquipmentRepository(_appSettings.EquipmentFileName);
-            _equipmentArragmentRepository = new EquipmentArragmentRepository(_appSettings.EquipmentArrangementFileName);
+            _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
 
             _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
             _refferalRepository = new RefferalRepository(_appSettings.RefferalsFileName);
 
-            _equipmentArragmentRepository = new EquipmentArragmentRepository(_appSettings.EquipmentArrangementFileName);
+            _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
             _medicineRepository = new MedicineRepository(_appSettings.MedicinesFileName);
             _allergenRepository = new AllergenRepository(_appSettings.AllergensFileName);
             _patientAllergenRepository = new PatientAllergenRepository(_appSettings.PatientAllergensFileName);
@@ -140,6 +140,7 @@ namespace HealthInstitution.MVVM.Models
             _dayOffRepository.SaveToFile();
             _roomRepository.SaveToFile();
             _equipmentRepository.SaveToFile();
+            _equipmentArragmentRepository.SaveToFile();
             _refferalRepository.SaveToFile();
             _medicineRepository.SaveToFile();
             _allergenRepository.SaveToFile();
@@ -186,7 +187,7 @@ namespace HealthInstitution.MVVM.Models
         public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
         public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
-        public EquipmentArragmentRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
+        public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
 
 
         public Appointment CreateAppointment(Doctor doctor, Patient patient, DateTime datetime, string type)
