@@ -26,5 +26,12 @@
     "PatientID": 1,
     "RoomID": 2,
     "PerscriptionID": 2
+  },
+  {
+    "ExaminationID": 5,
+    "DoctorID": 7,
+    "PatientID": 1,
+    "RoomID": 1,
+    "PerscriptionID": 1
   }
 ]

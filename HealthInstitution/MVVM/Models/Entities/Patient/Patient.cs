@@ -196,6 +196,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         public List<string> GetHistoryOfIllness()
         {
             List<string> historyOfIllness = new List<string>();
+            if (_examinations == null) return new List<string>();
             foreach (Examination examination in _examinations)
             {
                 if (examination.Anamnesis != null)

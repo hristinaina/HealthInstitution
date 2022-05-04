@@ -224,7 +224,7 @@ namespace HealthInstitution.MVVM.Models
                 _roomRepository.FindAvailableRoom(examination, dateTime);
                 _examinationRepository.Add(examination);
                 _examinationReferencesRepository.Add(examination);
-                _examinationChangeRepository.Add(examination, true, AppointmentStatus.CREATED);
+                _examinationChangeRepository.Add(examination, dateTime, true, AppointmentStatus.CREATED);
 
             }
 
@@ -261,11 +261,14 @@ namespace HealthInstitution.MVVM.Models
                 }
             }
             ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime);
-            appointment.Date = dateTime;
+
             _roomRepository.FindAvailableRoom(appointment, dateTime);
             bool resolved = true;
             if (CurrentUser is Patient) {
                 resolved = appointment.IsEditable();
+            }
+            if (resolved) {
+                appointment.Date = dateTime;
             }
 
             if (appointment is Examination)
@@ -273,7 +276,7 @@ namespace HealthInstitution.MVVM.Models
                 
                 _examinationReferencesRepository.Remove((Examination)appointment);
                 _examinationReferencesRepository.Add((Examination)appointment);
-                _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.EDITED);
+                _examinationChangeRepository.Add((Examination)appointment, dateTime, resolved, AppointmentStatus.EDITED);
 
             }
 
@@ -307,7 +310,7 @@ namespace HealthInstitution.MVVM.Models
                     _examinationRepository.Remove((Examination)appointment);
                     _examinationReferencesRepository.Remove((Examination)appointment);
                 }
-                _examinationChangeRepository.Add((Examination)appointment, resolved, AppointmentStatus.DELETED);
+                _examinationChangeRepository.Add((Examination)appointment, appointment.Date, resolved, AppointmentStatus.DELETED);
             }
 
             else if (appointment is Operation)

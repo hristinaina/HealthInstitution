@@ -1,6 +1,6 @@
 [
   {
-    "Blocked": true,
+    "Blocked": false,
     "BlockadeType": 1,
     "Deleted": false,
     "Record": {
@@ -10,20 +10,20 @@
     "ID": 1,
     "FirstName": "Test",
     "LastName": "Patient",
-    "Email": "p23",
-    "Password": "p23",
+    "Email": "p",
+    "Password": "p",
     "Gender": 0
   },
   {
-    "Blocked": true,
-    "BlockadeType": 1,
+    "Blocked": false,
+    "BlockadeType": 0,
     "Deleted": false,
     "Record": {
       "Height": 170.0,
       "Weight": 60.0
     },
     "ID": 2,
-    "FirstName": "Test2",
+    "FirstName": "Test99",
     "LastName": "Patient",
     "Email": "p2@mail",
     "Password": "p",
@@ -47,7 +47,7 @@
   {
     "Blocked": false,
     "BlockadeType": 0,
-    "Deleted": false,
+    "Deleted": true,
     "Record": {
       "Height": 179.0,
       "Weight": 69.0
@@ -90,9 +90,9 @@
     "Gender": 2
   },
   {
-    "Blocked": true,
-    "BlockadeType": 2,
-    "Deleted": false,
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": true,
     "Record": {
       "Height": 0.0,
       "Weight": 0.0
@@ -105,8 +105,8 @@
     "Gender": 1
   },
   {
-    "Blocked": true,
-    "BlockadeType": 1,
+    "Blocked": false,
+    "BlockadeType": 0,
     "Deleted": false,
     "Record": {
       "Height": 0.0,

@@ -16,6 +16,10 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public AllergenViewModel(Allergen allergen)
         {
             _allergen = allergen;
+            if (_allergen == null)
+            {
+                _allergen = new Allergen(0, " ");
+            }
         }
     }
 }

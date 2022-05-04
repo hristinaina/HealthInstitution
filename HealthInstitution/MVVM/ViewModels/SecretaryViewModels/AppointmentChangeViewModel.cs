@@ -18,7 +18,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public string OldDate => Institution.Instance().ExaminationRepository.FindByID(_request.AppointmentID).Date.ToString();
         public string NewDate => _request.NewDate.ToString();
         public string Patient => Institution.Instance().PatientRepository.FindByID(_request.PatientID).FirstName + " " + Institution.Instance().PatientRepository.FindByID(_request.PatientID).LastName;
-        public string State => _request.ChangeStatus.ToString();
+        public string Status => _request.ChangeStatus.ToString();
         //public int AppointmentId => _request.AppointmentID;   // will not be showed in a list
         //public int PatientId => _request.PatientID;   // will not be showed in a list
         //public bool Resolved => _request.Resolved;   // will not be showed in a list
