@@ -26,7 +26,8 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public Renovation()
         {
-
+            _rooms = new List<Room>();
+            _result = new List<Room>();
         }
         public Renovation(int id, DateTime startDate, DateTime endDate, List<Room> rooms, List<Room> result)
         {
@@ -37,9 +38,26 @@ namespace HealthInstitution.MVVM.Models.Entities
             _id = id;
         }
 
-        public void EndRenovaton()
+        public void StartRenovation()
         {
-            //make results
+            foreach (Room r in _rooms) r.UnderRenovation = true;
+        }
+
+        public void EndRenovation()
+        {
+            if (_rooms.Count() > 1)
+            {
+                //room is deleted
+                foreach (Room r in _rooms) Institution.Instance().RoomRepository.Rooms.Remove(r);
+            } else if (_result.Count() > 1)
+            {
+                Institution.Instance().RoomRepository.Rooms.Remove(_rooms[0]);
+
+                foreach (Room r in _result) Institution.Instance().RoomRepository.Rooms.Add(r);
+            } else
+            {
+                _rooms[0].UnderRenovation = false;
+            }
         }
     }
 }

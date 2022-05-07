@@ -38,6 +38,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly EquipmentArrangementRepository _equipmentArragmentRepository;
         private readonly RoomRepository _roomRepository;
         private readonly RenovationRepository _renovationRepository;
+        private readonly RoomRenovationRepository _roomRenovationRepository;
 
         private readonly MedicineRepository _medicineRepository;
         private readonly DayOffRepository _dayOffRepository;
@@ -81,11 +82,12 @@ namespace HealthInstitution.MVVM.Models
             _operationRepository = new OperationRepository(_appSettings.OperationsFileName);
             _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.ExaminationReferencesFileName);
             _operationReferencesRepository = new OperationReferencesRepository(_appSettings.OperationsReferencesFileName);
-            
+
             _roomRepository = new RoomRepository(_appSettings.RoomsFileName);
             _equipmentRepository = new EquipmentRepository(_appSettings.EquipmentFileName);
             _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
             _renovationRepository = new RenovationRepository(_appSettings.RenovationFileName);
+            _roomRenovationRepository = new RoomRenovationRepository(_appSettings.RoomRenovationFileName);
 
             _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
             _refferalRepository = new RefferalRepository(_appSettings.RefferalsFileName);
@@ -120,6 +122,7 @@ namespace HealthInstitution.MVVM.Models
             _equipmentRepository.LoadFromFile();
             _equipmentArragmentRepository.LoadFromFile();
             _renovationRepository.LoadFromFile();
+            _roomRenovationRepository.LoadFromFile();
             _medicineRepository.LoadFromFile();
             _refferalRepository.LoadFromFile();
             _allergenRepository.LoadFromFile();
@@ -147,6 +150,7 @@ namespace HealthInstitution.MVVM.Models
             _equipmentRepository.SaveToFile();
             _equipmentArragmentRepository.SaveToFile();
             _renovationRepository.SaveToFile();
+            _roomRenovationRepository.SaveToFile();
             _refferalRepository.SaveToFile();
             _medicineRepository.SaveToFile();
             _allergenRepository.SaveToFile();
@@ -168,6 +172,7 @@ namespace HealthInstitution.MVVM.Models
             ReferencesService.ConnectPrescriptionRepository();
             ReferencesService.ConnectExaminationChanges();
             ReferencesService.ArrangeEquipment();
+            ReferencesService.ConnectRenovations();
         }
 
 
@@ -183,6 +188,7 @@ namespace HealthInstitution.MVVM.Models
         public EquipmentRepository EquipmentRepository { get => _equipmentRepository; }
         public RoomRepository RoomRepository { get => _roomRepository; }
         public RenovationRepository RenovationRepository { get => _renovationRepository; }
+        public RoomRenovationRepository RoomRenovationRepository { get => _roomRenovationRepository; }
         public MedicineRepository MedicineRepository { get => _medicineRepository; }
         public DayOffRepository DayOffRepository { get => _dayOffRepository; }
         public RefferalRepository RefferalRepository { get => _refferalRepository; }

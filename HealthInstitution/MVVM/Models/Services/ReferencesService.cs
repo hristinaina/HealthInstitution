@@ -76,6 +76,20 @@ namespace HealthInstitution.MVVM.Models.Services
             }
         }
 
+        public static void ConnectRenovations()
+        {
+            foreach (RoomRenovation roomUnderRenovation in Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations)
+            {
+                Renovation renovation = Institution.Instance().RenovationRepository.FindById(roomUnderRenovation.RenovationId);
+                Room room = Institution.Instance().RoomRepository.FindById(roomUnderRenovation.RoomId);
+
+                room.Renovations.Add(renovation);
+
+                if (roomUnderRenovation.Result) renovation.Result.Add(room);
+                else renovation.Rooms.Add(room);
+            }
+        }
+
         public static void ConnectRefferals()
         {
             foreach (Refferal reference in Institution.Instance().RefferalRepository.GetReferences())

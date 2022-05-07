@@ -1,0 +1,22 @@
+[
+  {
+    "RenovationId": 1,
+    "RoomId": 1,
+    "Result": false
+  },
+  {
+    "RenovationId": 1,
+    "RoomId": 1,
+    "Result": false
+  },
+  {
+    "RenovationId": 1,
+    "RoomId": 1,
+    "Result": true
+  },
+  {
+    "RenovationId": 1,
+    "RoomId": 1,
+    "Result": false
+  }
+]

@@ -35,5 +35,22 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             }
             return null;
         }
+
+        public void EndRenovation(int id)
+        {
+            Renovation r = FindById(id);
+            r.EndRenovation();
+
+            List<RoomRenovation> renovations = Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations;
+            foreach (RoomRenovation roomUnderRenovation in renovations)
+            {
+                if (r.ID == roomUnderRenovation.RenovationId)
+                {
+                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Remove(roomUnderRenovation);
+                }
+            }
+
+            _renovations.Remove(r);
+        }
     }
 }
