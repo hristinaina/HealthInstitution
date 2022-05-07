@@ -51,7 +51,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
         }
 
-        public MedicalRecord(double height, double weight, List<Allergen> allergens = null)
+        public MedicalRecord(double height, double weight, List<Allergen> allergens)
         {
             _height = height;
             _weight = weight;

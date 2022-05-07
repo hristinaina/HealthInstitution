@@ -76,13 +76,13 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         // constructor used when secretary is creating new patient accounts
         public Patient(int id, string firstName, string lastName, string email, string password, Gender gender,
-            double height, double weight, List<Allergen> allergens = null)
+            double height, double weight)
             : base(id, firstName, lastName, email, password, gender)
         {
             _blocked = false;
             _blockadeType = 0;
             _deleted = false;
-            _record = new MedicalRecord(height, weight, allergens);
+            _record = new MedicalRecord(height, weight, new List<Allergen>());
             // no need to fill _operations and _examinations lists because it is a new user so there would be none
         }
 
