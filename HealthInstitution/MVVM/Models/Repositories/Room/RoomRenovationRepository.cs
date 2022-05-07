@@ -13,7 +13,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
         private readonly string _fileName;
         private List<RoomRenovation> _roomsUnderRenovation;
 
-        public List<RoomRenovation> RoomsUnderRenovations { get => _roomsUnderRenovation; }
+        public List<RoomRenovation> RoomsUnderRenovations { get => _roomsUnderRenovation; set => _roomsUnderRenovation = value; }
 
         public RoomRenovationRepository(string fileName)
         {

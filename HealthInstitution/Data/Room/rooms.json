@@ -11,14 +11,14 @@
     "Name": "OR",
     "Number": 100,
     "Type": 0,
-    "UnderRenovation": false
+    "UnderRenovation": true
   },
   {
     "ID": 2,
     "Name": "ER",
     "Number": 101,
     "Type": 1,
-    "UnderRenovation": false
+    "UnderRenovation": true
   },
   {
     "ID": 3,
@@ -32,7 +32,7 @@
     "Name": "INT",
     "Number": 302,
     "Type": 0,
-    "UnderRenovation": false
+    "UnderRenovation": true
   },
   {
     "ID": 5,

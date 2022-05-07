@@ -14,10 +14,12 @@ namespace HealthInstitution.MVVM.Models.Entities
         private DateTime _endDate;
         private List<Room> _rooms;
         private List<Room> _result;
+        private bool _started;
 
         public int ID { get => _id; set => _id = value; }
-        public DateTime EndDate { get => _endDate; set => _endDate = value; }
         public DateTime StartDate { get => _startDate; set => _startDate = value; }
+        public DateTime EndDate { get => _endDate; set => _endDate = value; }
+        public bool Started { get => _started; set => _started = value; }
 
         [JsonIgnore]
         public List<Room> Rooms { get => _rooms; set => _rooms = value; }
@@ -41,6 +43,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         public void StartRenovation()
         {
             foreach (Room r in _rooms) r.UnderRenovation = true;
+            _started = true;
         }
 
         public void EndRenovation()
