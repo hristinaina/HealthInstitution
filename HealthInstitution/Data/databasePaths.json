@@ -16,6 +16,7 @@
     "EquipmentArrangementFileName": "../../../Data/Room/equipmentInRooms.json",
     "EquipmentOrderFileName": "../../../Data/Room/equipmentInRooms.json",
     "RoomsFileName": "../../../Data/Room/rooms.json",
+    "RenovationFileName": "../../../Data/Room/renovations.json",
     "MedicinesFileName": "../../../Data/Medicine/medicines.json",
     "MedicineAllergensFileName": "../../../Data/References/medicineIngredients.json",
     "PrescriptionMedicineFileName": "../../../Data/References/prescriptionMedicine.json",

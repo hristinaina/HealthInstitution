@@ -23,6 +23,7 @@ namespace HealthInstitution
         private string _refferalFileName;
         private string _equipmentFileName;
         private string _equipmentArrangementFileName;
+        private string _renovationFileName;
         private string _roomsFileName;
         private string _medicinesFileName;
         private string _equipmentOrderFileName;
@@ -47,6 +48,7 @@ namespace HealthInstitution
         public string RefferalsFileName { get => _refferalFileName; set => _refferalFileName = value; }
         public string EquipmentFileName { get => _equipmentFileName; set => _equipmentFileName = value; }
         public string EquipmentArrangementFileName { get => _equipmentArrangementFileName; set => _equipmentArrangementFileName = value; }
+        public string RenovationFileName { get => _renovationFileName; set => _renovationFileName = value; }
         public string RoomsFileName { get => _roomsFileName; set => _roomsFileName = value; }
         public string MedicinesFileName { get => _medicinesFileName; set => _medicinesFileName = value; }
         public string AllergensFileName { get => _allergensFileName; set => _allergensFileName = value; }
