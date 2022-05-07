@@ -12,8 +12,6 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
     public class AppointmentChangeViewModel : BaseViewModel
     {
         private readonly ExaminationChange _request;
-
-        // TODO: FORMATIRANJE STRINGA
         public int ID => _request.ID; // will not be showed in a list
         public string OldDate => Institution.Instance().ExaminationRepository.FindByID(_request.AppointmentID).Date.ToString();
         public string NewDate => _request.NewDate.ToString();
