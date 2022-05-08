@@ -26,6 +26,8 @@ namespace HealthInstitution
         private string _renovationFileName;
         private string _roomRenovationFileName;
         private string _roomsFileName;
+        private string _deletedRoomsFileName;
+        private string _futureRoomsFileName;
         private string _medicinesFileName;
         private string _equipmentOrderFileName;
         private string _allergensFileName;
@@ -52,6 +54,8 @@ namespace HealthInstitution
         public string RenovationFileName { get => _renovationFileName; set => _renovationFileName = value; }
         public string RoomRenovationFileName { get => _roomRenovationFileName; set => _roomRenovationFileName = value; }
         public string RoomsFileName { get => _roomsFileName; set => _roomsFileName = value; }
+        public string DeletedRoomsFileName { get => _deletedRoomsFileName; set => _deletedRoomsFileName = value; }
+        public string FutureRoomsFileName { get => _futureRoomsFileName; set => _futureRoomsFileName = value; }
         public string MedicinesFileName { get => _medicinesFileName; set => _medicinesFileName = value; }
         public string AllergensFileName { get => _allergensFileName; set => _allergensFileName = value; }
         public string PatientAllergensFileName { get => _patientAllergensFileName; set => _patientAllergensFileName = value; }
@@ -61,7 +65,7 @@ namespace HealthInstitution
         public string DoctorDaysOffFileName { get => _doctorDaysOffFileName; set => _doctorDaysOffFileName = value; }
         public string PrescriptionMedicineFileName { get => _prescriptionMedicineFileName; set => _prescriptionMedicineFileName = value; }
         public string ExaminationChangeFileName { get => _examinationChangeFileName; set => _examinationChangeFileName = value; }
-
+        
         private AppSettings() { }
 
         private static AppSettings s_instance = null;

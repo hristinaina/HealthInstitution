@@ -51,7 +51,11 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public bool IsChangeable()
         {
-            return (_appointments == null || _appointments.Count == 0);
+            foreach (Appointment a in _appointments)
+            {
+                if (a.Date >= DateTime.Today) return false;
+            }
+            return true;
         }
 
         public void AddEquipment(Equipment e, int quantity)

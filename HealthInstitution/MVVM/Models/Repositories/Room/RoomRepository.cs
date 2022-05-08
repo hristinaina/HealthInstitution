@@ -11,30 +11,50 @@ namespace HealthInstitution.MVVM.Models.Repositories
 {
     public class RoomRepository
     {
-        private readonly string _fileName;
+        private readonly string _roomsfileName;
+        private readonly string _deletedRoomsfileName;
+        private readonly string _futureRoomsfileName;
         private List<Entities.Room> _rooms;
+        private List<Entities.Room> _deletedRooms;
+        private List<Entities.Room> _futureRooms;
 
-        public List<Entities.Room> Rooms {get => _rooms;}
+        public List<Entities.Room> Rooms { get => _rooms; }
+        public List<Entities.Room> DeletedRooms { get => _deletedRooms; set => _deletedRooms = value; }
+        public List<Entities.Room> FutureRooms { get => _futureRooms; set => _futureRooms = value; }
 
-        public RoomRepository(string fileName)
+        public RoomRepository(string roomsFileName, string futureRoomsfileName, string deletedRoomsfileName)
         {
-            _fileName = fileName;
+            _roomsfileName = roomsFileName;
+            _futureRoomsfileName = futureRoomsfileName;
+            _deletedRoomsfileName = deletedRoomsfileName;
             _rooms = new List<Entities.Room>();
         }
 
         public void LoadFromFile()
         {
-            _rooms = FileService.Deserialize<Entities.Room>(_fileName);
+            _rooms = FileService.Deserialize<Entities.Room>(_roomsfileName);
+            _deletedRooms = FileService.Deserialize<Entities.Room>(_deletedRoomsfileName);
+            _futureRooms = FileService.Deserialize<Entities.Room>(_futureRoomsfileName);
         }
 
         public void SaveToFile()
         {
-            FileService.Serialize<Entities.Room>(_fileName, _rooms);
+            FileService.Serialize<Entities.Room>(_roomsfileName, _rooms);
+            FileService.Serialize<Entities.Room>(_deletedRoomsfileName, _deletedRooms);
+            FileService.Serialize<Entities.Room>(_futureRoomsfileName, _futureRooms);
         }
 
         public Entities.Room FindById(int id)
         {
             foreach (Entities.Room r in _rooms)
+            {
+                if (r.ID == id) return r;
+            }
+            foreach (Entities.Room r in _futureRooms)
+            {
+                if (r.ID == id) return r;
+            }
+            foreach (Entities.Room r in _deletedRooms)
             {
                 if (r.ID == id) return r;
             }
@@ -47,12 +67,28 @@ namespace HealthInstitution.MVVM.Models.Repositories
             {
                 if (r.Number == number) return false;
             }
+            foreach (Entities.Room r in _futureRooms)
+            {
+                if (r.Number == number) return false;
+            }
+            foreach (Entities.Room r in _deletedRooms)
+            {
+                if (r.Number == number) return false;
+            }
             return true;
         }
 
         private bool CheckID(int id)
         {
             foreach (Entities.Room r in _rooms)
+            {
+                if (r.ID == id) return false;
+            }
+            foreach (Entities.Room r in _futureRooms)
+            {
+                if (r.ID == id) return false;
+            }
+            foreach (Entities.Room r in _deletedRooms)
             {
                 if (r.ID == id) return false;
             }

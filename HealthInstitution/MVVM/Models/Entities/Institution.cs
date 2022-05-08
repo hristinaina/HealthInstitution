@@ -83,7 +83,7 @@ namespace HealthInstitution.MVVM.Models
             _examinationReferencesRepository = new ExaminationReferencesRepository(_appSettings.ExaminationReferencesFileName);
             _operationReferencesRepository = new OperationReferencesRepository(_appSettings.OperationsReferencesFileName);
 
-            _roomRepository = new RoomRepository(_appSettings.RoomsFileName);
+            _roomRepository = new RoomRepository(_appSettings.RoomsFileName, _appSettings.FutureRoomsFileName, _appSettings.DeletedRoomsFileName);
             _equipmentRepository = new EquipmentRepository(_appSettings.EquipmentFileName);
             _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
             _renovationRepository = new RenovationRepository(_appSettings.RenovationFileName);

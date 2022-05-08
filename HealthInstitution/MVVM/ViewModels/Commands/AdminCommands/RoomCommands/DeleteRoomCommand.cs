@@ -29,6 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
                 _model.DialogOpen = false;
 
                 Institution.Instance().RoomRepository.Rooms.Remove(_model.SelectedRoom.Room);
+                Institution.Instance().RoomRepository.DeletedRooms.Add(_model.SelectedRoom.Room);
                 _model.FillRoomList();
             }
         }

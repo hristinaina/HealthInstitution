@@ -16,6 +16,8 @@
     "EquipmentArrangementFileName": "../../../Data/Room/equipmentInRooms.json",
     "EquipmentOrderFileName": "../../../Data/Room/equipmentInRooms.json",
     "RoomsFileName": "../../../Data/Room/rooms.json",
+    "DeletedRoomsFileName": "../../../Data/Room/deletedRooms.json",
+    "FutureRoomsFileName": "../../../Data/Room/futureRooms.json",
     "RenovationFileName": "../../../Data/Room/renovations.json",
     "RoomRenovationFileName": "../../../Data/Room/roomRenovations.json",
     "MedicinesFileName": "../../../Data/Medicine/medicines.json",
