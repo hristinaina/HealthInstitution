@@ -55,7 +55,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             }
 
             foreach (int renovationId in endedRenovations) EndRenovation(renovationId);
-            //add deleteted rooms and future rooms
+
         }
 
         public void EndRenovation(int id)

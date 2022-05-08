@@ -42,8 +42,11 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public void StartRenovation()
         {
+            //when creating renovation add all new rooms to future rooms
+            //if not only one room under renovation 
             foreach (Room r in _rooms) r.UnderRenovation = true;
             _started = true;
+
         }
 
         public void EndRenovation()
@@ -51,12 +54,21 @@ namespace HealthInstitution.MVVM.Models.Entities
             if (_rooms.Count() > 1)
             {
                 //room is deleted
-                foreach (Room r in _rooms) Institution.Instance().RoomRepository.Rooms.Remove(r);
+                foreach (Room r in _rooms)
+                {
+                    Institution.Instance().RoomRepository.Rooms.Remove(r);
+                    Institution.Instance().RoomRepository.DeletedRooms.Add(r);
+                }
             } else if (_result.Count() > 1)
             {
                 Institution.Instance().RoomRepository.Rooms.Remove(_rooms[0]);
+                Institution.Instance().RoomRepository.DeletedRooms.Add(_rooms[0]);
 
-                foreach (Room r in _result) Institution.Instance().RoomRepository.Rooms.Add(r);
+                foreach (Room r in _result)
+                {
+                    Institution.Instance().RoomRepository.FutureRooms.Remove(r);
+                    Institution.Instance().RoomRepository.Rooms.Add(r);
+                }
             } else
             {
                 _rooms[0].UnderRenovation = false;
