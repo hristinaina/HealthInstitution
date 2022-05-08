@@ -43,7 +43,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
 
         public void Add(Examination examination, DateTime dateTime, bool resolved, AppointmentStatus status)
         {
-            ExaminationChange change = new ExaminationChange(examination.Patient.ID, examination.ID, status, DateTime.Now, resolved, dateTime);
+            ExaminationChange change = new ExaminationChange(GetNewID(), examination.Patient.ID, examination.ID, status, DateTime.Now, resolved, dateTime);
             _references.Add(change);
             examination.Patient.ExaminationChanges.Add(change);
         }
@@ -66,6 +66,34 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
                     reference.ChangeStatus = AppointmentStatus.DELETED;
                     reference.Resolved = true;
                 }
+            }
+        }
+
+        private bool CheckID(int id)
+        {
+            foreach (ExaminationChange e in _references)
+            {
+                if (e.ID == id) return false;
+            }
+            return true;
+        }
+
+        public int GetNewID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
+
+        public void RemoveByAppointmentId(int appointmentId)
+        {
+            List<ExaminationChange> requests = _references.ToList();
+            foreach (ExaminationChange reference in requests)
+            {
+                if (reference.AppointmentID == appointmentId) _references.Remove(reference);
             }
         }
     }
