@@ -366,9 +366,9 @@ namespace HealthInstitution.MVVM.Models
 
         public bool CreateReferral(int doctorId, int patientId, Specialization specialization)
         {
-            Doctor doctor = _doctorRepository.FindByID(doctorId);
-            Refferal referral = new Refferal(patientId, doctorId, specialization);
-            _refferalRepository.Add(referral);
+            int id = Institution.Instance().ReferralRepository.GetNewID();
+            Referral referral = new Referral(id, patientId, doctorId, specialization);
+            _referralRepository.Add(referral);
             return true;
         }
     }
