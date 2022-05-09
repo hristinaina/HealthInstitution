@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCommands;
 
 namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 {
@@ -71,6 +73,12 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public List<Room> SelectedResult { get; private set; }
 
 
+        private List<Room> _rooms;
+        public List<Room> Rooms => _rooms;
+        public Room NewRenovationRoom { get; set; }
+        public DateTime NewRenovationStartDate { get; set; }
+        public DateTime NewRenovationEndDate { get; set; }
+
 
         private ObservableCollection<RenovationListItemViewModel> _renovations;
 
@@ -79,6 +87,10 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 
         public AdminNavigationViewModel Navigation { get; }
 
+        public ICommand ScheduleRenovation { get; set; }
+        public ICommand MergeRooms { get; set; }
+        public ICommand DivideRoom { get; set; }
+
         public AdminRenovationViewModel()
         {
             _institution = Institution.Instance();
@@ -86,7 +98,16 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             _renovations = new ObservableCollection<RenovationListItemViewModel>();
             Navigation = new AdminNavigationViewModel();
 
+            _rooms = new List<Room>();
+            NewRenovationStartDate = DateTime.Today;
+            NewRenovationEndDate = DateTime.Today;
+
+            ScheduleRenovation = new ScheduleRenovationCommand(this);
+            MergeRooms = new MergeRoomsCommand();
+            DivideRoom = new DivideRoomCommand();
+
             FillRenovationList();
+            FillRooms();
         }
 
         public void FillRenovationList()
@@ -96,6 +117,14 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             foreach (Renovation r in _institution.RenovationRepository.Renovations)
             {
                 _renovations.Add(new RenovationListItemViewModel(r));
+            }
+        }
+
+        private void FillRooms()
+        {
+            foreach (Room r in Institution.Instance().RoomRepository.Rooms)
+            {
+                _rooms.Add(r);
             }
         }
     }
