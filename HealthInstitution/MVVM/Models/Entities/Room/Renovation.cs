@@ -42,10 +42,30 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public void StartRenovation()
         {
-            //when creating renovation add all new rooms to future rooms
-            //if not only one room under renovation 
             foreach (Room r in _rooms) r.UnderRenovation = true;
             _started = true;
+
+            if (_rooms.Count() > 1 || _result.Count() > 1)
+            {
+                foreach (Room r in _rooms)
+                {
+                    Dictionary<Equipment, int> equipment = r.Equipment;
+                    foreach (Equipment e in equipment.Keys)
+                    {
+                        Room warehouse = Institution.Instance().RoomRepository.FindById(0);
+                        EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(r, e);
+                        a.EndDate = _endDate;
+                        Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Remove(a);
+                        EquipmentArrangement newArragment = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(warehouse, e);
+                        if (newArragment is null)
+                        {
+                            newArragment = new EquipmentArrangement(e, warehouse, 0, a.EndDate, DateTime.MaxValue);
+                            Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(newArragment);
+                        }
+                        newArragment.Quantity += equipment[e];
+                    }
+                }
+                }
 
         }
 
@@ -58,14 +78,6 @@ namespace HealthInstitution.MVVM.Models.Entities
                 //room is deleted
                 foreach (Room r in _rooms)
                 {
-                    Dictionary<Equipment, int> equipment = r.Equipment;
-                    foreach (Equipment e in equipment.Keys)
-                    {
-                        EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindByRoomAndEquipment(r, e);
-                        a.EndDate = _endDate;
-                        Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(e, resultingRoom, equipment[e], a.EndDate, DateTime.MaxValue));
-                    }
-
                     Institution.Instance().RoomRepository.Rooms.Remove(r);
                     Institution.Instance().RoomRepository.DeletedRooms.Add(r);
                 }
@@ -74,14 +86,14 @@ namespace HealthInstitution.MVVM.Models.Entities
                 Institution.Instance().RoomRepository.Rooms.Add(resultingRoom);
             } else if (_result.Count() > 1)
             {
-                Room rommUnderRenovation = _rooms[0];
-                Institution.Instance().RoomRepository.Rooms.Remove(rommUnderRenovation);
-                Institution.Instance().RoomRepository.DeletedRooms.Add(rommUnderRenovation);
+                Room roomUnderRenovation = _rooms[0];
+                Institution.Instance().RoomRepository.Rooms.Remove(roomUnderRenovation);
+                Institution.Instance().RoomRepository.DeletedRooms.Add(roomUnderRenovation);
 
-                Dictionary<Equipment, int> equipment = rommUnderRenovation.Equipment;
+                Dictionary<Equipment, int> equipment = roomUnderRenovation.Equipment;
                 foreach (Equipment e in equipment.Keys)
                 {
-                    EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindByRoomAndEquipment(rommUnderRenovation, e);
+                    EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(roomUnderRenovation, e);
                     a.EndDate = _endDate;
                     Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(e, _result[0], equipment[e], a.EndDate, DateTime.MaxValue));
                 }

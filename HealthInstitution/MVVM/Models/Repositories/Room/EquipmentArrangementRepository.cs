@@ -50,7 +50,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             FileService.Serialize<EquipmentArrangement>(_fileName, _validArrangement);
         }
 
-        public EquipmentArrangement FindByRoomAndEquipment(Entities.Room r, Equipment e)
+        public EquipmentArrangement FindCurrentArrangement(Entities.Room r, Equipment e)
         {
             foreach (EquipmentArrangement a in _validArrangement)
             {

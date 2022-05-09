@@ -24,7 +24,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
         {
             bool prerequisitesFulfillled = true;
 
-            if (_model.NewRoomName is null)
+            if (_model.NewRoomName is null || _model.NewRoomName.Equals(""))
             {
                 MessageBox.Show("You need to fill all fields", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 prerequisitesFulfillled = false;

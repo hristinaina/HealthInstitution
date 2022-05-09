@@ -48,9 +48,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
                 _model.DialogOpen = false;
 
                 DateTime newArrangementStartDate = _model.ParseDate(_model.NewArrangementStartDate);
-                EquipmentArrangement destinationRoomArrangement = Institution.Instance().EquipmentArragmentRepository.FindByRoomAndEquipment(_model.SelectedEquipment.Room, _model.SelectedEquipment.Equipment);
+                EquipmentArrangement destinationRoomArrangement = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(_model.SelectedEquipment.Room, _model.SelectedEquipment.Equipment);
                 destinationRoomArrangement.EndDate = newArrangementStartDate;
-                EquipmentArrangement targetRoomArrangement = Institution.Instance().EquipmentArragmentRepository.FindByRoomAndEquipment(_model.NewArrangemenTargetRoom, _model.SelectedEquipment.Equipment);
+                EquipmentArrangement targetRoomArrangement = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(_model.NewArrangemenTargetRoom, _model.SelectedEquipment.Equipment);
                 if (targetRoomArrangement is not null) targetRoomArrangement.EndDate = newArrangementStartDate;
 
 

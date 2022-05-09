@@ -66,18 +66,48 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             }
         }
 
-        public string SelectedID { get; private set; }
-        public string SelectedStartDate { get; private set; }
-        public string SelectedEndDate { get; private set; }
-        public List<Room> SelectedRoomsUnderRenovation { get; private set; }
-        public List<Room> SelectedResult { get; private set; }
+        public string SelectedID { get; set; }
+        public string SelectedStartDate { get; set; }
+        public string SelectedEndDate { get; set; }
+        public List<Room> SelectedRoomsUnderRenovation { get; set; }
+        public List<Room> SelectedResult { get; set; }
 
 
         private List<Room> _rooms;
         public List<Room> Rooms => _rooms;
-        public Room NewRenovationRoom { get; set; }
-        public DateTime NewRenovationStartDate { get; set; }
-        public DateTime NewRenovationEndDate { get; set; }
+
+        private Room _newRenovationRoom;
+        public Room NewRenovationRoom
+        {
+            get => _newRenovationRoom;
+            set
+            {
+                _newRenovationRoom = value;
+                OnPropertyChanged(nameof(NewRenovationRoom));
+            }
+        }
+
+        private DateTime _newRenovationStartDate;
+        public DateTime NewRenovationStartDate
+        {
+            get => _newRenovationStartDate;
+            set
+            {
+                _newRenovationStartDate = value;
+                OnPropertyChanged(nameof(NewRenovationStartDate));
+            }
+        }
+
+        private DateTime _newRenovationEndDate;
+        public DateTime NewRenovationEndDate
+        {
+            get => _newRenovationEndDate;
+            set
+            {
+                _newRenovationEndDate = value;
+                OnPropertyChanged(nameof(NewRenovationEndDate));
+            }
+        }
 
 
         private ObservableCollection<RenovationListItemViewModel> _renovations;
