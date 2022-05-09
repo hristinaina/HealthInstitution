@@ -6,37 +6,37 @@
   },
   {
     "RenovationId": 1,
-    "RoomId": 1,
+    "RoomId": 2,
     "Result": false
   },
   {
     "RenovationId": 1,
-    "RoomId": 1,
+    "RoomId": 3,
     "Result": true
   },
   {
-    "RenovationId": 1,
-    "RoomId": 1,
+    "RenovationId": 2,
+    "RoomId": 4,
     "Result": false
   },
   {
-    "RenovationId": 1,
-    "RoomId": 1,
+    "RenovationId": 2,
+    "RoomId": 5,
+    "Result": true
+  },
+  {
+    "RenovationId": 2,
+    "RoomId": 6,
+    "Result": true
+  },
+  {
+    "RenovationId": 3,
+    "RoomId": 7,
     "Result": false
   },
   {
-    "RenovationId": 1,
-    "RoomId": 1,
-    "Result": false
-  },
-  {
-    "RenovationId": 1,
-    "RoomId": 1,
-    "Result": false
-  },
-  {
-    "RenovationId": 1,
-    "RoomId": 1,
-    "Result": false
+    "RenovationId": 3,
+    "RoomId": 7,
+    "Result": true
   }
 ]

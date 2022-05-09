@@ -7,7 +7,7 @@
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:adminviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.AdminViewModels"
-             
+             d:DataContext="{d:DesignInstance Type=adminviewmodels:AdminRenovationViewModel}"
              mc:Ignorable="d"
              Height="600"
              Width="1200"
@@ -42,9 +42,6 @@
                                   ScrollViewer.CanContentScroll="True"
                                   HorizontalAlignment="Center"
                                   SelectedIndex="{Binding Selection}">
-                            <ListItem></ListItem>
-                            <ListItem></ListItem>
-                            <ListItem></ListItem>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="False">
                                     <GridViewColumn Width="90"
@@ -52,7 +49,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Center"
-                                                           Text="1"
+                                                           Text="{Binding ID}"
                                                            Width="50" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -62,7 +59,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
-                                                           Text="Datum pocetka"
+                                                           Text="{Binding StartDate}"
                                                            Width="150" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -72,7 +69,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
-                                                           Text="Datum zavrsetka"
+                                                           Text="{Binding EndDate}"
                                                            Width="150" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -82,7 +79,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Center"
-                                                           Text="True"
+                                                           Text="{Binding Started}"
                                                            Width="70" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -110,8 +107,8 @@
                                     HorizontalAlignment="Left"
                                     IsEnabled="{Binding EnableChanges}">
                                 <Button.CommandParameter>
-                                    <StackPanel Height="430"
-                                                Width="600"
+                                    <StackPanel Height="380"
+                                                Width="500"
                                                 Margin="40 20 40 20">
                                         <TextBlock Text="Renovation details"
                                                    HorizontalAlignment="Center"
@@ -129,7 +126,7 @@
                                                            Margin="30 10"
                                                            FontSize="20"
                                                            Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                                <TextBlock Text="Datum 1"
+                                                <TextBlock Text="{Binding SelectedStartDate}"
                                                            HorizontalAlignment="Center"
                                                            FontSize="15"
                                                            Margin="30 10"
@@ -142,7 +139,7 @@
                                                            Margin="30 10"
                                                            FontSize="20"
                                                            Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                                <TextBlock Text="Datum 2"
+                                                <TextBlock Text="{Binding SelectedEndDate}"
                                                            HorizontalAlignment="Center"
                                                            FontSize="15"
                                                            Margin="30 10"
@@ -163,12 +160,8 @@
                                                                FontSize="20"
                                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
                                                 <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False"
-                                                     HorizontalAlignment="Center">
-
-                                                    <TextBlock Text="Listbox" />
-                                                    <TextBlock Text="Listbox" />
-                                                    <TextBlock Text="Listbox" />
-
+                                                         ItemsSource="{Binding SelectedRoomsUnderRenovation}"
+                                                         HorizontalAlignment="Center">
                                                 </ListBox>
                                             </StackPanel>
                                             <StackPanel Orientation="Vertical"
@@ -179,10 +172,8 @@
                                                                FontSize="20"
                                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
                                                 <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False"
-                                                     HorizontalAlignment="Center">
-
-                                                    <TextBlock Text="Listbox" />
-
+                                                         ItemsSource="{Binding SelectedResult}"
+                                                         HorizontalAlignment="Center">
                                                 </ListBox>
                                             </StackPanel>
                                         </StackPanel>
