@@ -21,6 +21,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand SaveAllergenCommand { get; }
         public ICommand SaveAnamnesisCommand { get; }
         public ICommand CreateReferralCommand { get; }
+        public ICommand CreateReferralSpecCommand { get; }
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         private ObservableCollection<Allergen> _newAllergens;
@@ -34,6 +35,9 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         private ObservableCollection<Doctor> _doctors;
         public ObservableCollection<Doctor> Doctors => _doctors;
         public Doctor SelectedDoctor { get; set; }
+        private ObservableCollection<Specialization> _specializations;
+        public ObservableCollection<Specialization> Specializations => _specializations;
+        public Specialization SelectedSpecialization { get; set; }
 
         private Patient _patient;
         public Patient Patient { get => _patient; }
@@ -145,17 +149,20 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             _newAllergens = new ObservableCollection<Allergen>();
             _illnesses = new ObservableCollection<IllnessItemViewModel>();
             _doctors = new ObservableCollection<Doctor>();
+            _specializations = new ObservableCollection<Specialization>();
 
             SaveCommand = new UpdateMedicalRecordCommand(this);
             SaveAllergenCommand = new SaveAllergenCommand(this);
             SaveAnamnesisCommand = new SaveAnamnesisCommand(this);
             CreateReferralCommand = new CreateReferralCommand(this);
+            CreateReferralSpecCommand = new CreateReferralSpecCommand(this);
 
             SetProperties();
             FillAllergensList();
             FillNewAllergenList();
             FillIllnessList();
             FillDoctorsList();
+            FillSpecializationsList();
         }
 
         public void SetProperties()
@@ -212,6 +219,15 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 _doctors.Add(doctor);
             }
             OnPropertyChanged(nameof(Doctors));
+        }
+
+        public void FillSpecializationsList()
+        {
+            _specializations.Clear();
+            foreach (Specialization specialization in Enum.GetValues(typeof(Specialization)))
+            {
+                _specializations.Add(specialization);
+            }
         }
 
         public void AddAllergen(Allergen allergen)
