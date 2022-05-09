@@ -76,5 +76,25 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
 
             _renovations.Remove(r);
         }
+
+        private bool CheckID(int id)
+        {
+            foreach (Renovation r in _renovations)
+            {
+                if (r.ID == id) return false;
+            }
+            return true;
+        }
+
+        public int GetID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
+
     }
 }
