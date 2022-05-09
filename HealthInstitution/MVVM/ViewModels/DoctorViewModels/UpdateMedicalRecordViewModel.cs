@@ -18,6 +18,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         
         public ICommand SaveCommand { get; }
         public ICommand SaveAllergenCommand { get; }
+        public ICommand SaveAnamnesisCommand { get; }
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         private ObservableCollection<Allergen> _newAllergens;
@@ -101,6 +102,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
             SaveCommand = new UpdateMedicalRecordCommand(this);
             SaveAllergenCommand = new SaveAllergenCommand(this);
+            SaveAnamnesisCommand = new SaveAnamnesisCommand(this);
 
             SetProperties();
             FillAllergensList();
