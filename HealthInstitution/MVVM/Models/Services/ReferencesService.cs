@@ -144,7 +144,20 @@ namespace HealthInstitution.MVVM.Models.Services
                     FindByPrescriptionID(prescription.ID);
                 prescription.Medicines = Institution.Instance().MedicineRepository.PrescriptionMedicineToMedicine(prescriptionMedicines);
             }
+        }
 
+        public static bool CheckIfEmailIsAvailable(string email, Patient patient = null)
+        {
+            string patientEmail = null;
+            if (patient != null)
+            {
+                patientEmail = patient.Email;
+            }
+            if (!User.CheckEmail(email, Institution.Instance().PatientRepository.Patients, patientEmail)) return false;
+            if (!User.CheckEmail(email, Institution.Instance().DoctorRepository.Doctors)) return false;
+            if (!User.CheckEmail(email, Institution.Instance().SecretaryRepository.Secretaries)) return false;
+            if (!User.CheckEmail(email, Institution.Instance().AdminRepository.Administrators)) return false;
+            return true;
         }
     }
 }

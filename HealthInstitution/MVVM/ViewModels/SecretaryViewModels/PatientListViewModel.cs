@@ -105,8 +105,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             CreateAccount = new CreateAccountCommand(this);
             SaveAccount = new SaveAccountCommand(this);
             EnableChanges = false;
-            FillPatientList();
 
+            FillPatientList();
             FillAllAllergenList();
             FillAllergenList();
             FillGenderList();

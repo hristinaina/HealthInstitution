@@ -67,5 +67,16 @@ namespace HealthInstitution.MVVM.Models
         {
             return FullName;
         }
+
+        public static bool CheckEmail<T>(string email, List<T> users, string patientEmail = null) where T : User
+        {
+
+            foreach (T user in users)
+            {
+                if (user.Email == email && user.Email != patientEmail) return false;
+            }
+            return true;
+
+        }
     }
 }

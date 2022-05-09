@@ -27,7 +27,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
         {
             Patient patient = Institution.Instance().PatientRepository.FindByID(_viewModel.SelectedPatientId);
             SecretaryService.DeletePatient(patient);
-            string message = "The patient has ben successfully deleted.";
+            string message = "The patient has been successfully deleted.";
             MessageBox.Show(message);
             _viewModel.FillPatientList();
         }

@@ -159,6 +159,7 @@ namespace HealthInstitution.MVVM.Models
             _pendingMedicineRepository.SaveToFile();
             _doctorDaysOffRepository.SaveToFile();
             _prescriptionMedicineRepository.SaveToFile();
+            _examinationChangeRepository.SaveToFile();
         }
 
         private static void ConnectReferences()
@@ -300,7 +301,6 @@ namespace HealthInstitution.MVVM.Models
 
         }
 
-
         public bool CancelExamination(Appointment appointment)
         {
             if (CurrentUser is Patient && appointment.Patient.IsTrolling())
@@ -316,6 +316,8 @@ namespace HealthInstitution.MVVM.Models
             if (appointment is Examination) {
                 if (resolved)
                 {
+
+                    _examinationChangeRepository.RemoveByAppointmentId(appointment.ID);
                     patient.Examinations.Remove((Examination)appointment);
                     doctor.Examinations.Remove((Examination)appointment);
                     _examinationRepository.Remove((Examination)appointment);
@@ -326,11 +328,12 @@ namespace HealthInstitution.MVVM.Models
 
             else if (appointment is Operation)
             {
+                _examinationChangeRepository.RemoveByAppointmentId(appointment.ID);
                 patient.Operations.Remove((Operation)appointment);
                 doctor.Operations.Remove((Operation)appointment);
                 _operationRepository.Remove((Operation)appointment);
                 _operationReferencesRepository.Remove((Operation)appointment);
-                
+
             }
 
             // DO NOT DELETE THIS
