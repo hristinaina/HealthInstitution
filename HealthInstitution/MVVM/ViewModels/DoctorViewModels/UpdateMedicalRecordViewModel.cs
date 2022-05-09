@@ -15,7 +15,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
     class UpdateMedicalRecordViewModel : BaseViewModel
     {
         public DoctorNavigationViewModel Navigation { get; }
-        
+
+        private Institution _institution;
         public ICommand SaveCommand { get; }
         public ICommand SaveAllergenCommand { get; }
         public ICommand SaveAnamnesisCommand { get; }
@@ -100,16 +101,24 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
+        private ObservableCollection<Doctor> _doctors;
+        public ObservableCollection<Doctor> Doctors => _doctors;
+        public Doctor NewDoctor { get; set; }
+
         public UpdateMedicalRecordViewModel(Examination examination)
         {
             bool isSpecialist = true;
-            Doctor doctor = (Doctor) Institution.Instance().CurrentUser;
+            Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
             Navigation = new DoctorNavigationViewModel(isSpecialist);
+
+            _institution = Institution.Instance();
+               
             _examination = examination;
             _allergens = new ObservableCollection<AllergenViewModel>();
             _newAllergens = new ObservableCollection<Allergen>();
             _illnesses = new ObservableCollection<IllnessItemViewModel>();
+            _doctors = new ObservableCollection<Doctor>();
 
             SaveCommand = new UpdateMedicalRecordCommand(this);
             SaveAllergenCommand = new SaveAllergenCommand(this);
@@ -119,6 +128,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             FillAllergensList();
             FillNewAllergenList();
             FillIllnessList();
+            FillDoctorsList();
         }
 
         public void SetProperties()
@@ -165,6 +175,16 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             {
                 _illnesses.Add(new IllnessItemViewModel(illness));
             }
+        }
+
+        public void FillDoctorsList()
+        {
+            _doctors.Clear();
+            foreach (Doctor doctor in _institution.DoctorRepository.Doctors)
+            {
+                _doctors.Add(doctor);
+            }
+            OnPropertyChanged(nameof(Doctors));
         }
 
         public void AddAllergen(Allergen allergen)

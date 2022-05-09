@@ -314,13 +314,58 @@
                                 </Button.CommandParameter>
                             </Button>
                             <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                    ToolTip="New referral for doctor"
+                                    ToolTip="New referral for a doctor"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Center"
                                     Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
                                     Margin="0,30,0,0"
                                     Width="210"
-                                    Content="Referral for doctor"/>
+                                    Content="Referral for a doctor">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="300"
+                                                Width="400"
+                                                Margin="40 20 40 20">
+                                        <TextBlock 
+                                                Text="Referral"
+                                                HorizontalAlignment="Center"
+                                                Margin="0 20"
+                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <ComboBox Margin="0 20 0 0"
+                                                  Width="250"
+                                                  HorizontalAlignment="Center"
+                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                  ItemsSource="{Binding Doctors}"
+                                                  SelectedItem="{Binding NewDoctor}"
+                                                  materialDesign:HintAssist.Hint="Search for a doctor"
+                                                  materialDesign:HintAssist.HintOpacity=".26"
+                                                  IsEditable="True" />
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Content="SAVE"
+                                                Margin="0 50 0 0"
+                                                Width="250"
+                                                Command="{Binding SaveAnamnesisCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Content="CLOSE"
+                                                Margin="0 10 0 0"
+                                                Width="250"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
                             <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                     ToolTip="New referral for specialization"
                                     VerticalAlignment="Top"
