@@ -43,5 +43,24 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             }
             return refferals;
         }
+
+        private bool CheckID(int id)
+        {
+            foreach (Referral r in _references)
+            {
+                if (r.Id == id) return false;
+            }
+            return true;
+        }
+
+        public int GetNewID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
     }
 }
