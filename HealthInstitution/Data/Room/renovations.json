@@ -3,48 +3,48 @@
     "ID": 1,
     "StartDate": "2022-05-09T00:00:00+02:00",
     "EndDate": "2022-05-10T00:00:00+02:00",
-    "Started": false
+    "Started": true
   },
   {
     "ID": 2,
     "StartDate": "2022-05-09T00:00:00+02:00",
     "EndDate": "2022-05-10T00:00:00+02:00",
-    "Started": false
+    "Started": true
   },
   {
     "ID": 3,
     "StartDate": "2022-05-09T00:00:00+02:00",
     "EndDate": "2022-05-10T00:00:00+02:00",
-    "Started": false
+    "Started": true
   },
   {
     "ID": 4,
     "StartDate": "2022-05-09T00:00:00+02:00",
     "EndDate": "2022-05-10T00:00:00+02:00",
-    "Started": false
+    "Started": true
   },
   {
     "ID": 5,
     "StartDate": "2022-05-09T00:00:00+02:00",
     "EndDate": "2022-05-10T00:00:00+02:00",
-    "Started": false
+    "Started": true
   },
   {
     "ID": 6,
     "StartDate": "2022-05-09T00:00:00+02:00",
     "EndDate": "2022-05-10T00:00:00+02:00",
-    "Started": false
+    "Started": true
   },
   {
     "ID": 7,
     "StartDate": "2022-05-09T00:00:00+02:00",
     "EndDate": "2022-05-10T00:00:00+02:00",
-    "Started": false
+    "Started": true
   },
   {
     "ID": 8,
     "StartDate": "2022-05-09T00:00:00+02:00",
     "EndDate": "2022-05-10T00:00:00+02:00",
-    "Started": false
+    "Started": true
   }
 ]

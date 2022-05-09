@@ -254,36 +254,50 @@
                             <ColumnDefinition Width="3*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Anamnesis"
-                                   Width="110"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   Margin="50, 0, 0, 0"
-                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                                   Grid.Row="0"
-                                   FontSize="20"
-                                   Height="50"
-                                   Grid.Column="0"/>
-                        <TextBox
-                            Margin="45 0 0 20"
-                            HorizontalAlignment="Left"
-                            Width="600"
-                            TextWrapping="Wrap"
-                            VerticalAlignment="Stretch"
-                            MinWidth="280"
-                            AcceptsReturn="True"
-                            VerticalScrollBarVisibility="Auto"
-                            SpellCheck.IsEnabled="True"
-                            materialDesign:HintAssist.Hint="Multiline text"
-                            Height="80"
-                            Text="{Binding Anamnesis}"
-                            Grid.Column="0"/>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                Grid.Column="1"
-                                IsDefault="True"
-                                Margin="0 30 50 0"
-                                Content="DONE"
-                                Command="{Binding SaveCommand}"/>
+                        <Grid Grid.Column="0">
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="Write anamnesis"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="45,30,0,0"
+                                    Width="210"
+                                    Content="Write anamnesis"/>
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="New referral for doctor"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="0,30,0,0"
+                                    Width="210"
+                                    Content="Referral for doctor"/>
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="New referral for specialization"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="480,30,0,0"
+                                    Width="210"
+                                    Content="Referral for specialization"/>
+
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="New prescription"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="-60,30,0,0"
+                                    Width="210"
+                                    Content="Write a prescription"/>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsDefault="True"
+                                    Margin="0 30 50 0"
+                                    Content="DONE"
+                                    Width="210"
+                                    Command="{Binding SaveCommand}"/>
+                        </Grid>
+                        
                     </Grid>
                 </Grid>
             </materialDesign:DialogHost>
