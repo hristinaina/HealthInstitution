@@ -11,7 +11,7 @@
     "ExaminationChangeFileName": "../../../Data/References/examinationChangeLog.json",
     "OperationsReferencesFileName": "../../../Data/References/operationsReferences.json",
     "PerscriptionsFileName": "../../../Data/Appointment/perscriptions.json",
-    "RefferalsFileName": "../../../Data/References/refferals.json",
+    "RefferalsFileName": "../../../Data/References/referrals.json",
     "EquipmentFileName": "../../../Data/Room/equipment.json",
     "EquipmentArrangementFileName": "../../../Data/Room/equipmentInRooms.json",
     "EquipmentOrderFileName": "../../../Data/Room/equipmentInRooms.json",
