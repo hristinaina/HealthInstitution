@@ -1,0 +1,26 @@
+[
+    {
+        "Id": 1,
+        "DoctorId": 3,
+        "PatientId": 5,
+        "Specialization": 3
+    },
+    {
+        "Id": 2,
+        "DoctorId": 4,
+        "PatientId": 3,
+        "Specialization": 3
+    },
+    {
+        "Id": 3,
+        "DoctorId": 1,
+        "PatientId": 2,
+        "Specialization": 3
+    },
+    {
+        "Id": 4,
+        "DoctorId": 1,
+        "PatientId": 5,
+        "Specialization": 3
+    }
+]

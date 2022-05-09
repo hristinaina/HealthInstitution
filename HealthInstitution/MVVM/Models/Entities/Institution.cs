@@ -26,9 +26,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly PrescriptionRepository _prescriptionRepository;
         private readonly ExaminationRepository _examinationRepository;
 
-
         private readonly OperationRepository _operationRepository;
-
 
         private readonly ExaminationReferencesRepository _examinationReferencesRepository;
 
@@ -42,7 +40,7 @@ namespace HealthInstitution.MVVM.Models
 
         private readonly MedicineRepository _medicineRepository;
         private readonly DayOffRepository _dayOffRepository;
-        private readonly RefferalRepository _refferalRepository;
+        private readonly ReferralRepository _referralRepository;
 
         private readonly AllergenRepository _allergenRepository;
         private readonly PatientAllergenRepository _patientAllergenRepository;
@@ -52,7 +50,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly DoctorDaysOffRepository _doctorDaysOffRepository;
         private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
         private ExaminationChangeRepository _examinationChangeRepository;
-        // TODO: add other repositories
+  
         private User _currentUser;
         public User CurrentUser { get => _currentUser; set { _currentUser = value; } }
 
@@ -76,7 +74,6 @@ namespace HealthInstitution.MVVM.Models
             _patientRepository = new PatientRepository(_appSettings.PatientsFileName);
             _doctorRepository = new DoctorRepository(_appSettings.DoctorsFileName);
 
-
             _prescriptionRepository = new PrescriptionRepository(_appSettings.PerscriptionsFileName);
             _examinationRepository = new ExaminationRepository(_appSettings.ExaminationsFileName);
             _operationRepository = new OperationRepository(_appSettings.OperationsFileName);
@@ -90,7 +87,7 @@ namespace HealthInstitution.MVVM.Models
             _roomRenovationRepository = new RoomRenovationRepository(_appSettings.RoomRenovationFileName);
 
             _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
-            _refferalRepository = new RefferalRepository(_appSettings.RefferalsFileName);
+            _referralRepository = new ReferralRepository(_appSettings.RefferalsFileName);
 
             _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
             _medicineRepository = new MedicineRepository(_appSettings.MedicinesFileName);
@@ -102,7 +99,6 @@ namespace HealthInstitution.MVVM.Models
             _doctorDaysOffRepository = new DoctorDaysOffRepository(_appSettings.DoctorDaysOffFileName);
             _prescriptionMedicineRepository = new PrescriptionMedicineRepository(_appSettings.PrescriptionMedicineFileName);
             _examinationChangeRepository = new ExaminationChangeRepository(_appSettings.ExaminationChangeFileName);
-            // TODO: add other repositories
 
             LoadAll();
         }
@@ -124,7 +120,7 @@ namespace HealthInstitution.MVVM.Models
             _renovationRepository.LoadFromFile();
             _roomRenovationRepository.LoadFromFile();
             _medicineRepository.LoadFromFile();
-            _refferalRepository.LoadFromFile();
+            _referralRepository.LoadFromFile();
             _allergenRepository.LoadFromFile();
             _patientAllergenRepository.LoadFromFile();
             _medicineAllergenRepository.LoadFromFile();
@@ -132,7 +128,6 @@ namespace HealthInstitution.MVVM.Models
             _doctorDaysOffRepository.LoadFromFile();
             _prescriptionMedicineRepository.LoadFromFile();
             _examinationChangeRepository.LoadFromFile();
-            // TODO: add other repositories
         }
 
         public void SaveAll()
@@ -151,7 +146,7 @@ namespace HealthInstitution.MVVM.Models
             _equipmentArragmentRepository.SaveToFile();
             _renovationRepository.SaveToFile();
             _roomRenovationRepository.SaveToFile();
-            _refferalRepository.SaveToFile();
+            _referralRepository.SaveToFile();
             _medicineRepository.SaveToFile();
             _allergenRepository.SaveToFile();
             _patientAllergenRepository.SaveToFile();
@@ -166,7 +161,6 @@ namespace HealthInstitution.MVVM.Models
         {
             ReferencesService.ConnectExaminationReferences();
             ReferencesService.ConnectOperationReferences();
-            ReferencesService.ConnectRefferals();
             ReferencesService.FillMedicalRecord();
             ReferencesService.ConnectMedicineAllergens();
             ReferencesService.ConnectDoctorDaysOff();
@@ -192,7 +186,7 @@ namespace HealthInstitution.MVVM.Models
         public RoomRenovationRepository RoomRenovationRepository { get => _roomRenovationRepository; }
         public MedicineRepository MedicineRepository { get => _medicineRepository; }
         public DayOffRepository DayOffRepository { get => _dayOffRepository; }
-        public RefferalRepository RefferalRepository { get => _refferalRepository; }
+        public ReferralRepository ReferralRepository { get => _referralRepository; }
         public AllergenRepository AllergenRepository { get => _allergenRepository; }
         public PatientAllergenRepository PatientAllergenRepository { get => _patientAllergenRepository; }
         public MedicineAllergenRepository MedicineAllergenRepository { get => _medicineAllergenRepository; }
