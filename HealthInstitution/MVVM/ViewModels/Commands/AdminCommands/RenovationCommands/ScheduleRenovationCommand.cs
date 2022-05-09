@@ -1,4 +1,6 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using System;
 using System.Collections.Generic;
@@ -34,7 +36,14 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                 MessageBox.Show("End date must be after start date", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             } else
             {
-            _model.DialogOpen = false;
+                _model.DialogOpen = false;
+                List<Room> rooms = new List<Room> { _model.NewRenovationRoom };
+                Renovation r = new Renovation(Institution.Instance().RenovationRepository.Renovations.Count() + 1, _model.NewRenovationStartDate, _model.NewRenovationEndDate, rooms, rooms);
+                Institution.Instance().RenovationRepository.Renovations.Add(r);
+                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(r.ID, _model.NewRenovationRoom.ID, false));
+                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(r.ID, _model.NewRenovationRoom.ID, true));
+
+                _model.FillRenovationList();
             }
         }
     }

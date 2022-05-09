@@ -124,6 +124,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         {
             foreach (Room r in Institution.Instance().RoomRepository.Rooms)
             {
+                if (r.ID == 0) continue;
                 _rooms.Add(r);
             }
         }

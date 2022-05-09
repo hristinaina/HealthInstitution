@@ -38,5 +38,25 @@
     "RenovationId": 3,
     "RoomId": 7,
     "Result": true
+  },
+  {
+    "RenovationId": 4,
+    "RoomId": 5,
+    "Result": false
+  },
+  {
+    "RenovationId": 4,
+    "RoomId": 5,
+    "Result": true
+  },
+  {
+    "RenovationId": 5,
+    "RoomId": 3,
+    "Result": false
+  },
+  {
+    "RenovationId": 5,
+    "RoomId": 3,
+    "Result": true
   }
 ]

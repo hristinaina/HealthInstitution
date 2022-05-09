@@ -31,7 +31,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             _rooms = new List<Room>();
             _result = new List<Room>();
         }
-        public Renovation(int id, DateTime startDate, DateTime endDate, List<Room> rooms, List<Room> result)
+        public Renovation(int id, DateTime startDate, DateTime endDate, List<Room> rooms, List<Room> result) : this()
         {
             _startDate = startDate;
             _endDate = endDate;
