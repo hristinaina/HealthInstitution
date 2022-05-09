@@ -27,7 +27,7 @@
         <materialDesign:Card Grid.Column="1">
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
-                                       
+                                       IsOpen="{Binding DialogOpen}"
                                        Grid.Row="0">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -122,10 +122,10 @@
                                     Content="Edit">
 
                                 <Button.CommandParameter>
-                                    <StackPanel Height="420"
+                                    <StackPanel Height="300"
                                                 Width="320"
                                                 Margin="40 20 40 20">
-                                        <TextBlock Text="Schedule examination"
+                                        <TextBlock Text="Add new allergen"
                                                     HorizontalAlignment="Center"
                                                     Margin="10"
                                                     Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
@@ -135,16 +135,17 @@
                                                   SelectedItem="{Binding NewAllergen}"
                                                   HorizontalAlignment="Center"
                                                   Style="{StaticResource MaterialDesignFilledComboBox}"
-                                                  materialDesign:HintAssist.Hint="Add new allergen"
+                                                  materialDesign:HintAssist.Hint="Choose allergen"
                                                   materialDesign:HintAssist.HintOpacity=".26"
                                                   IsEditable="True">
                                         </ComboBox>
 
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                    IsDefault="True"
-                                                    Margin="0 30 20 0"
-                                                    Content="ADD"
-                                                    Command="{Binding SaveAllergenCommand}">
+                                                IsDefault="True"
+                                                Margin="20 30 20 0"
+                                                Content="ADD"
+                                                Width="250"
+                                                Command="{Binding SaveAllergenCommand}">
                                             <Button.CommandParameter>
                                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                     True
@@ -152,10 +153,11 @@
                                             </Button.CommandParameter>
                                         </Button>
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                    IsCancel="True"
-                                                    Margin="20 30 0 0"
-                                                    Content="DISCARD"
-                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                IsCancel="True"
+                                                Margin="20 30 20 0"
+                                                Content="CLOSE"
+                                                Width="250"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                                             <Button.CommandParameter>
                                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                     False
@@ -181,7 +183,7 @@
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock TextAlignment="Left"
-                                                               Text="{Binding Illness}"
+                                                               Text="Dodati bindovanje"
                                                                Width="130" />
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
@@ -189,6 +191,61 @@
                                     </GridView>
                                 </ListView.View>
                             </ListView>
+
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="Add new illness"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="0,230,0,0"
+                                    Width="70"
+                                    Content="Add">
+
+                                <Button.CommandParameter>
+                                    <StackPanel Height="300"
+                                                Width="320"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Add new illness"
+                                                    HorizontalAlignment="Center"
+                                                    Margin="0 20"
+                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBox
+                                            Width="300"
+                                            Style="{StaticResource MaterialDesignFilledTextBox}"
+                                            VerticalAlignment="Top"
+                                            TextWrapping="Wrap"
+                                            MaxLength="30"
+                                            materialDesign:HintAssist.Hint="Short description of illness" />
+
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsDefault="True"
+                                                Margin="20 30 20 0"
+                                                Content="ADD"
+                                                Width="300"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    True
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Margin="20 30 20 0"
+                                                Content="DISCARD"
+                                                Width="300"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
                         </Grid>
 
                     </Grid>
@@ -197,41 +254,193 @@
                             <ColumnDefinition Width="3*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Anamnesis"
-                                   Width="110"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top"
-                                   Margin="50, 0, 0, 0"
-                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
-                                   Grid.Row="0"
-                                   FontSize="20"
-                                   Height="50"
-                                   Grid.Column="0"/>
-                        <TextBox
-                            Margin="45 0 0 20"
-                            HorizontalAlignment="Left"
-                            Width="600"
-                            TextWrapping="Wrap"
-                            VerticalAlignment="Stretch"
-                            MinWidth="280"
-                            AcceptsReturn="True"
-                            VerticalScrollBarVisibility="Auto"
-                            SpellCheck.IsEnabled="True"
-                            materialDesign:HintAssist.Hint="Multiline text"
-                            Height="80"
-                            Text="{Binding Anamnesis}"
-                            Grid.Column="0"/>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                Grid.Column="1"
-                                IsDefault="True"
-                                Margin="0 30 50 0"
-                                Content="DONE"
-                                Command="{Binding SaveCommand}"/>
+                        <Grid Grid.Column="0">
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="Write anamnesis"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="45,30,0,0"
+                                    Width="210"
+                                    Content="Write anamnesis">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="300"
+                                                Width="400"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Anamnesis"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="0 20"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBox
+                                            Margin="0 0 0 20"
+                                            HorizontalAlignment="Left"
+                                            Width="400"
+                                            TextWrapping="Wrap"
+                                            VerticalAlignment="Stretch"
+                                            MinWidth="280"
+                                            AcceptsReturn="True"
+                                            VerticalScrollBarVisibility="Auto"
+                                            SpellCheck.IsEnabled="True"
+                                            materialDesign:HintAssist.Hint="Multiline text"
+                                            Height="80"
+                                            Text="{Binding Anamnesis}"
+                                            Grid.Column="0"/>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Content="SAVE"
+                                                Margin="0 20 0 0"
+                                                Width="400"
+                                                Command="{Binding SaveAnamnesisCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Content="CLOSE"
+                                                Margin="0 10 0 0"
+                                                Width="400"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="New referral for a doctor"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="0,30,0,0"
+                                    Width="210"
+                                    Content="Referral for a doctor">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="300"
+                                                Width="400"
+                                                Margin="40 20 40 20">
+                                        <TextBlock 
+                                                Text="Referral"
+                                                HorizontalAlignment="Center"
+                                                Margin="0 20"
+                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <ComboBox Margin="0 20 0 0"
+                                                  Width="250"
+                                                  HorizontalAlignment="Center"
+                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                  ItemsSource="{Binding Doctors}"
+                                                  SelectedItem="{Binding SelectedDoctor}"
+                                                  materialDesign:HintAssist.Hint="Search for a doctor"
+                                                  materialDesign:HintAssist.HintOpacity=".26"
+                                                  IsEditable="True" />
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Content="CREATE"
+                                                Margin="0 50 0 0"
+                                                Width="250"
+                                                Command="{Binding CreateReferralCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Content="CLOSE"
+                                                Margin="0 10 0 0"
+                                                Width="250"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="New referral for specialization"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="480,30,0,0"
+                                    Width="210"
+                                    Content="Referral for specialization">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="300"
+                                                Width="400"
+                                                Margin="40 20 40 20">
+                                        <TextBlock 
+                                                Text="Referral"
+                                                HorizontalAlignment="Center"
+                                                Margin="0 20"
+                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <ComboBox Margin="0 20 0 0"
+                                                  Width="250"
+                                                  HorizontalAlignment="Center"
+                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                  ItemsSource="{Binding Specializations}"
+                                                  SelectedItem="{Binding SelectedSpecialization}"
+                                                  materialDesign:HintAssist.Hint="Search for a doctor"
+                                                  materialDesign:HintAssist.HintOpacity=".26"
+                                                  IsEditable="True" />
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Content="CREATE"
+                                                Margin="0 50 0 0"
+                                                Width="250"
+                                                Command="{Binding CreateReferralSpecCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Content="CLOSE"
+                                                Margin="0 10 0 0"
+                                                Width="250"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="New prescription"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="-60,30,0,0"
+                                    Width="210"
+                                    Content="Write a prescription"/>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    IsDefault="True"
+                                    Margin="0 30 50 0"
+                                    Content="DONE"                 
+                                    Width="210"
+                                    Command="{Binding SaveCommand}"/>
+                        </Grid>
+                        
                     </Grid>
                 </Grid>
             </materialDesign:DialogHost>
-
-
 
         </materialDesign:Card>
 

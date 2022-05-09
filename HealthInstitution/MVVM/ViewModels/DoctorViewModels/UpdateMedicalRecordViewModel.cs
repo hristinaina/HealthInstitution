@@ -15,9 +15,13 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
     class UpdateMedicalRecordViewModel : BaseViewModel
     {
         public DoctorNavigationViewModel Navigation { get; }
-        
+
+        private Institution _institution;
         public ICommand SaveCommand { get; }
         public ICommand SaveAllergenCommand { get; }
+        public ICommand SaveAnamnesisCommand { get; }
+        public ICommand CreateReferralCommand { get; }
+        public ICommand CreateReferralSpecCommand { get; }
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         private ObservableCollection<Allergen> _newAllergens;
@@ -27,10 +31,28 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         private Examination _examination;
         public Examination Examination { get => _examination; }
+        
+        private ObservableCollection<Doctor> _doctors;
+        public ObservableCollection<Doctor> Doctors => _doctors;
+        public Doctor SelectedDoctor { get; set; }
+        private ObservableCollection<Specialization> _specializations;
+        public ObservableCollection<Specialization> Specializations => _specializations;
+        public Specialization SelectedSpecialization { get; set; }
 
         private Patient _patient;
         public Patient Patient { get => _patient; }
         public Allergen NewAllergen { get; set; }
+
+        private bool _dialogOpen;
+        public bool DialogOpen
+        {
+            get => _dialogOpen;
+            set
+            {
+                _dialogOpen = value;
+                OnPropertyChanged(nameof(DialogOpen));
+            }
+        }
 
         private string _name;
         public string Name
@@ -88,24 +110,59 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
+        private bool _enableChanges;
+        public bool EnableChanges
+        {
+            get => _enableChanges;
+            set
+            {
+                _enableChanges = value;
+                OnPropertyChanged(nameof(EnableChanges));
+            }
+        }
+
+        private int _selection;
+        public int Selection
+        {
+            get => _selection;
+            set
+            {
+                if (value < 0) { return; };
+                _selection = value;
+                EnableChanges = true;
+                OnPropertyChanged(nameof(Selection));
+                OnPropertyChanged(nameof(SelectedDoctor));
+            }
+        }
+
         public UpdateMedicalRecordViewModel(Examination examination)
         {
             bool isSpecialist = true;
-            Doctor doctor = (Doctor) Institution.Instance().CurrentUser;
+            Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
             Navigation = new DoctorNavigationViewModel(isSpecialist);
+
+            _institution = Institution.Instance();
+               
             _examination = examination;
             _allergens = new ObservableCollection<AllergenViewModel>();
             _newAllergens = new ObservableCollection<Allergen>();
             _illnesses = new ObservableCollection<IllnessItemViewModel>();
+            _doctors = new ObservableCollection<Doctor>();
+            _specializations = new ObservableCollection<Specialization>();
 
             SaveCommand = new UpdateMedicalRecordCommand(this);
             SaveAllergenCommand = new SaveAllergenCommand(this);
+            SaveAnamnesisCommand = new SaveAnamnesisCommand(this);
+            CreateReferralCommand = new CreateReferralCommand(this);
+            CreateReferralSpecCommand = new CreateReferralSpecCommand(this);
 
             SetProperties();
             FillAllergensList();
             FillNewAllergenList();
             FillIllnessList();
+            FillDoctorsList();
+            FillSpecializationsList();
         }
 
         public void SetProperties()
@@ -151,6 +208,25 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             foreach (string illness in allIllnesses)
             {
                 _illnesses.Add(new IllnessItemViewModel(illness));
+            }
+        }
+
+        public void FillDoctorsList()
+        {
+            _doctors.Clear();
+            foreach (Doctor doctor in _institution.DoctorRepository.Doctors)
+            {
+                _doctors.Add(doctor);
+            }
+            OnPropertyChanged(nameof(Doctors));
+        }
+
+        public void FillSpecializationsList()
+        {
+            _specializations.Clear();
+            foreach (Specialization specialization in Enum.GetValues(typeof(Specialization)))
+            {
+                _specializations.Add(specialization);
             }
         }
 

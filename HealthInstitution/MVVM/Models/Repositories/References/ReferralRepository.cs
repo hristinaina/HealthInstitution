@@ -43,5 +43,10 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             }
             return refferals;
         }
+
+        public void Add(Refferal referral)
+        {
+            _references.Add(referral);
+        }
     }
 }
