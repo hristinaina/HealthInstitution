@@ -335,16 +335,16 @@
                                                   HorizontalAlignment="Center"
                                                   Style="{StaticResource MaterialDesignFilledComboBox}"
                                                   ItemsSource="{Binding Doctors}"
-                                                  SelectedItem="{Binding NewDoctor}"
+                                                  SelectedItem="{Binding SelectedDoctor}"
                                                   materialDesign:HintAssist.Hint="Search for a doctor"
                                                   materialDesign:HintAssist.HintOpacity=".26"
                                                   IsEditable="True" />
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsCancel="True"
-                                                Content="SAVE"
+                                                Content="CREATE"
                                                 Margin="0 50 0 0"
                                                 Width="250"
-                                                Command="{Binding SaveAnamnesisCommand}">
+                                                Command="{Binding CreateReferralCommand}">
                                             <Button.CommandParameter>
                                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                     False

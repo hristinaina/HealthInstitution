@@ -18,5 +18,10 @@
     "DoctorId": 1,
     "PatientId": 5,
     "Specialization": 3
+  },
+  {
+    "DoctorId": 2,
+    "PatientId": 1,
+    "Specialization": 7
   }
 ]

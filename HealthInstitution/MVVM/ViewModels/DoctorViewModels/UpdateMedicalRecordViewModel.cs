@@ -20,6 +20,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand SaveCommand { get; }
         public ICommand SaveAllergenCommand { get; }
         public ICommand SaveAnamnesisCommand { get; }
+        public ICommand CreateReferralCommand { get; }
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         private ObservableCollection<Allergen> _newAllergens;
@@ -29,6 +30,10 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         private Examination _examination;
         public Examination Examination { get => _examination; }
+        
+        private ObservableCollection<Doctor> _doctors;
+        public ObservableCollection<Doctor> Doctors => _doctors;
+        public Doctor SelectedDoctor { get; set; }
 
         private Patient _patient;
         public Patient Patient { get => _patient; }
@@ -101,9 +106,30 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
-        private ObservableCollection<Doctor> _doctors;
-        public ObservableCollection<Doctor> Doctors => _doctors;
-        public Doctor NewDoctor { get; set; }
+        private bool _enableChanges;
+        public bool EnableChanges
+        {
+            get => _enableChanges;
+            set
+            {
+                _enableChanges = value;
+                OnPropertyChanged(nameof(EnableChanges));
+            }
+        }
+
+        private int _selection;
+        public int Selection
+        {
+            get => _selection;
+            set
+            {
+                if (value < 0) { return; };
+                _selection = value;
+                EnableChanges = true;
+                OnPropertyChanged(nameof(Selection));
+                OnPropertyChanged(nameof(SelectedDoctor));
+            }
+        }
 
         public UpdateMedicalRecordViewModel(Examination examination)
         {
@@ -123,6 +149,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             SaveCommand = new UpdateMedicalRecordCommand(this);
             SaveAllergenCommand = new SaveAllergenCommand(this);
             SaveAnamnesisCommand = new SaveAnamnesisCommand(this);
+            CreateReferralCommand = new CreateReferralCommand(this);
 
             SetProperties();
             FillAllergensList();
