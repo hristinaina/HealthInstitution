@@ -119,5 +119,21 @@ namespace HealthInstitution.MVVM.Models.Services
 
             //DeleteFutureAppointments(patient);
         }
+
+        public static List<Referral> SearchMatchingReferrals(string phrase)
+        {
+            List<Referral> matchingReferrals = new();
+
+            foreach (Referral r in Institution.Instance().ReferralRepository.Referrals)
+            {
+                Patient patient = Institution.Instance().PatientRepository.FindByID(r.PatientId);
+                string name = patient.FirstName + " " + patient.LastName;
+                if (name.ToLower().Contains(phrase.ToLower()))
+                {
+                    matchingReferrals.Add(r);
+                }
+            }
+            return matchingReferrals;
+        }
     }
 }
