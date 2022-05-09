@@ -5,5 +5,12 @@
     "Number": 705,
     "Type": 0,
     "UnderRenovation": false
+  },
+  {
+    "ID": 16,
+    "Name": "Soba za razdvajanje",
+    "Number": 900,
+    "Type": 0,
+    "UnderRenovation": true
   }
 ]

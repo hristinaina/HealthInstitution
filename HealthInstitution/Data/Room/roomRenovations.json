@@ -1,35 +1,5 @@
 [
   {
-    "RenovationId": 1,
-    "RoomId": 1,
-    "Result": false
-  },
-  {
-    "RenovationId": 1,
-    "RoomId": 2,
-    "Result": false
-  },
-  {
-    "RenovationId": 1,
-    "RoomId": 3,
-    "Result": true
-  },
-  {
-    "RenovationId": 2,
-    "RoomId": 4,
-    "Result": false
-  },
-  {
-    "RenovationId": 2,
-    "RoomId": 5,
-    "Result": true
-  },
-  {
-    "RenovationId": 2,
-    "RoomId": 6,
-    "Result": true
-  },
-  {
     "RenovationId": 3,
     "RoomId": 7,
     "Result": false
@@ -58,5 +28,20 @@
     "RenovationId": 5,
     "RoomId": 3,
     "Result": true
+  },
+  {
+    "RenovationId": 6,
+    "RoomId": 15,
+    "Result": true
+  },
+  {
+    "RenovationId": 6,
+    "RoomId": 14,
+    "Result": false
+  },
+  {
+    "RenovationId": 6,
+    "RoomId": 13,
+    "Result": false
   }
 ]
