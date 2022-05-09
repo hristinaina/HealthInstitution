@@ -15,7 +15,7 @@ namespace HealthInstitution.MVVM.Models.Entities.References
         private Specialization _specialization;
 
         [JsonProperty("Id")]
-        public int Id { get => _doctorId; set { _doctorId = value; } }
+        public int Id { get => _id; set { _id = value; } }
         [JsonProperty("DoctorId")]
         public int DoctorId { get => _doctorId; set { _doctorId = value; } }
         [JsonProperty("PatientId")]
