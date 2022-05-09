@@ -14,6 +14,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public ICommand PatientList { get; }
         public ICommand BlockedPatient { get; }
         public ICommand AppointmentRequests { get; }
+        public ICommand Appointments { get; }
         public ICommand LogOut { get; }
 
         public SecretaryNavigationViewModel()
@@ -22,7 +23,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             PatientList = new PatientListCommand();
             BlockedPatient = new BlockedPatientCommand();
             AppointmentRequests = new AppointmentRequestsCommand();
-            
+            Appointments = new AppointmentsCommand();
+
         }
     }
 }
