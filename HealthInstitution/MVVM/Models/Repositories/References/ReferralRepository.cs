@@ -18,6 +18,9 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             _fileName = FileName;
             _references = new List<Referral>();
         }
+
+        public List<Referral> Referrals { get => _references; }
+
         public List<Referral> GetReferences()
         {
             return _references;
