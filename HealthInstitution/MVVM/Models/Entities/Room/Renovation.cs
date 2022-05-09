@@ -53,17 +53,39 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             if (_rooms.Count() > 1)
             {
+                Room resultingRoom = _result[0];
+
                 //room is deleted
                 foreach (Room r in _rooms)
                 {
+                    Dictionary<Equipment, int> equipment = r.Equipment;
+                    foreach (Equipment e in equipment.Keys)
+                    {
+                        EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindByRoomAndEquipment(r, e);
+                        a.EndDate = _endDate;
+                        Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(e, resultingRoom, equipment[e], a.EndDate, DateTime.MaxValue));
+                    }
+
                     Institution.Instance().RoomRepository.Rooms.Remove(r);
                     Institution.Instance().RoomRepository.DeletedRooms.Add(r);
                 }
+
+                Institution.Instance().RoomRepository.FutureRooms.Remove(resultingRoom);
+                Institution.Instance().RoomRepository.Rooms.Add(resultingRoom);
             } else if (_result.Count() > 1)
             {
-                Institution.Instance().RoomRepository.Rooms.Remove(_rooms[0]);
-                Institution.Instance().RoomRepository.DeletedRooms.Add(_rooms[0]);
+                Room rommUnderRenovation = _rooms[0];
+                Institution.Instance().RoomRepository.Rooms.Remove(rommUnderRenovation);
+                Institution.Instance().RoomRepository.DeletedRooms.Add(rommUnderRenovation);
 
+                Dictionary<Equipment, int> equipment = rommUnderRenovation.Equipment;
+                foreach (Equipment e in equipment.Keys)
+                {
+                    EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindByRoomAndEquipment(rommUnderRenovation, e);
+                    a.EndDate = _endDate;
+                    Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(e, _result[0], equipment[e], a.EndDate, DateTime.MaxValue));
+                }
+                
                 foreach (Room r in _result)
                 {
                     Institution.Instance().RoomRepository.FutureRooms.Remove(r);
