@@ -21,6 +21,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
         public override void Execute(object parameter)
         {
+            _viewModel.DialogOpen = false;
             Examination examination = _viewModel.Examination;
             examination.Anamnesis = _viewModel.Anamnesis;
             Institution.Instance().RescheduleExamination(examination, examination.Date);

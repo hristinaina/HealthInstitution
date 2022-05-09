@@ -27,7 +27,7 @@
         <materialDesign:Card Grid.Column="1">
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
-                                       
+                                       IsOpen="{Binding DialogOpen}"
                                        Grid.Row="0">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -293,7 +293,7 @@
                                                 Command="{Binding SaveAnamnesisCommand}">
                                             <Button.CommandParameter>
                                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                    True
+                                                    False
                                                 </system:Boolean>
                                             </Button.CommandParameter>
                                         </Button>

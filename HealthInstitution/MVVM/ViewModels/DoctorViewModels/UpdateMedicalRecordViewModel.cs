@@ -33,6 +33,17 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public Patient Patient { get => _patient; }
         public Allergen NewAllergen { get; set; }
 
+        private bool _dialogOpen;
+        public bool DialogOpen
+        {
+            get => _dialogOpen;
+            set
+            {
+                _dialogOpen = value;
+                OnPropertyChanged(nameof(DialogOpen));
+            }
+        }
+
         private string _name;
         public string Name
         {
