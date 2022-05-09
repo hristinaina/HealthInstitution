@@ -93,23 +93,13 @@ namespace HealthInstitution.MVVM.Models.Services
             Institution.Instance().RenovationRepository.EndRenovations();
         }
 
-        public static void ConnectRefferals()
-        {
-            foreach (Refferal reference in Institution.Instance().RefferalRepository.GetReferences())
-            {
-                Patient patient = Institution.Instance().PatientRepository.FindByID(reference.PatientId);
-
-                // finds all refferals for corresponding patient
-                patient.Record.Refferals = Institution.Instance().RefferalRepository.FindByPatientID(patient.ID);
-            }
-        }
-
         public static void FillMedicalRecord()
         {
             foreach (Patient patient in Institution.Instance().PatientRepository.Patients)
             {
                 patient.Examinations = Institution.Instance().ExaminationRepository.FindByPatientID(patient.ID);
                 patient.Operations = Institution.Instance().OperationRepository.FindByPatientID(patient.ID);
+                patient.Record.Referrals = Institution.Instance().ReferralRepository.FindByPatientID(patient.ID);
 
                 List<PatientAllergen> patientAllergens = Institution.Instance().PatientAllergenRepository.FindByPatientID(patient.ID);
                 patient.Record.Allergens = Institution.Instance().AllergenRepository.PatientAllergenToAllergen(patientAllergens);
