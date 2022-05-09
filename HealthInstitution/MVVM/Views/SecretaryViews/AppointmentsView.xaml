@@ -26,7 +26,10 @@
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
                                        Grid.Row="0"
-                                       IsOpen="{Binding DialogOpen}">
+                                       IsOpen="{}">
                 <materialDesign:Card>
+                </materialDesign:Card>
+            </materialDesign:DialogHost>
+        </materialDesign:Card>
     </Grid>
 </UserControl>
