@@ -135,5 +135,18 @@ namespace HealthInstitution.MVVM.Models.Services
             }
             return matchingReferrals;
         }
+
+        public static void RemoveReferralsOfDeletedPatients()
+        {
+            List<Referral> referrals = new List<Referral>(Institution.Instance().ReferralRepository.Referrals.ToArray());
+            foreach (Referral referral in referrals)
+            {
+                Patient patient = Institution.Instance().PatientRepository.FindByID(referral.PatientId);
+                if (patient.Deleted == true)
+                {
+                    Institution.Instance().ReferralRepository.Referrals.Remove(referral);
+                }
+            }
+        }
     }
 }
