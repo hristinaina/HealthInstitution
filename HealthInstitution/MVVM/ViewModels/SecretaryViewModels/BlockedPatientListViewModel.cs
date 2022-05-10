@@ -112,7 +112,13 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                     _patients.Add(new BlockedPatientItemViewModel(patient));
                 }
             }
+            if (_patients.Count != 0)
+            {
+                Selection = 0;
+                OnPropertyChanged(nameof(Selection));
+            }
         }
+
         public void FillAllergenList()
         {
             _allergens.Clear();

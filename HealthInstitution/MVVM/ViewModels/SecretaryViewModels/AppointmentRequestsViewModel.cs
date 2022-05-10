@@ -78,6 +78,12 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                     _requests.Add(new AppointmentChangeViewModel(request));
                 }
             }
+
+            if (_requests.Count != 0)
+            {
+                Selection = 0;
+                OnPropertyChanged(nameof(Selection));
+            }
         }
     }
 }
