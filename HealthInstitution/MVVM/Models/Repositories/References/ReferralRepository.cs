@@ -36,6 +36,15 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             FileService.Serialize<Referral>(_fileName, _references);
         }
 
+        public Referral FindByID(int id)
+        {
+            foreach (Referral referral in _references)
+            {
+                if (referral.Id == id) return referral;
+            }
+            return null;
+        }
+
         public List<Referral> FindByPatientID(int patientId)
         {
             List<Referral> refferals = new List<Referral>();
