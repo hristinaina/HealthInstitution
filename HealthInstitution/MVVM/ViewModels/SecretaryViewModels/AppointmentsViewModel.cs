@@ -44,6 +44,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             }
         }
 
+        public DateTime NewAppointmentDate { get; set; }
+        public DateTime NewAppointmentTime { get; set; }
         public int SelectedReferralId { get; set; }
 
         public int Selection
@@ -74,13 +76,17 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         public ICommand Search { get; set; }
         public ICommand Reset { get; set; }
+        public ICommand CreateReferralAppointment { get; set; }
 
         public AppointmentsViewModel()
         {
             _referrals = new ObservableCollection<ReferralItemViewModel>();
+            NewAppointmentDate = DateTime.Now;
+            NewAppointmentTime = DateTime.Now;
 
             Search = new SearchCommand(this);
             Reset = new ResetCommand(this);
+            CreateReferralAppointment = new CreateReferralAppointmentCommand(this);
 
             // funkcije koje fill-uju
             FillReferralsList();
@@ -94,6 +100,12 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             foreach (Referral referral in referrals)
             {
                 _referrals.Add(new ReferralItemViewModel(referral));
+            }
+
+            if (_referrals.Count != 0)
+            {
+                Selection = 0;
+                OnPropertyChanged(nameof(Selection));
             }
         }
     }
