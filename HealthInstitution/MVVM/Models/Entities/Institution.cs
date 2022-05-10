@@ -202,7 +202,7 @@ namespace HealthInstitution.MVVM.Models
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
-            if (CurrentUser is Doctor)
+            if (CurrentUser is Doctor || CurrentUser is Secretary)
             {
                 if (!doctor.IsAvailable(dateTime))
                 {
@@ -339,7 +339,7 @@ namespace HealthInstitution.MVVM.Models
 
         private void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime)
         {
-            if (CurrentUser is Patient)
+            if (CurrentUser is Patient || CurrentUser is Secretary)
             {
                 if (DateTime.Compare(DateTime.Now, dateTime) > 0)
                 {

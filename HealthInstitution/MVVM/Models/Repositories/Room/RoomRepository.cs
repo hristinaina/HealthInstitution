@@ -149,6 +149,11 @@ namespace HealthInstitution.MVVM.Models.Repositories
                     return;
                 }
             }
+
+            if (a.Room == null)
+            {
+                throw new Exception("There are no available rooms for this appointment. Please choose another date or time!");
+            }
         }
     }
 }

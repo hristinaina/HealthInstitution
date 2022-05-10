@@ -1,26 +1,32 @@
 [
-    {
-        "Id": 1,
-        "DoctorId": 3,
-        "PatientId": 5,
-        "Specialization": 3
-    },
-    {
-        "Id": 2,
-        "DoctorId": 4,
-        "PatientId": 3,
-        "Specialization": 3
-    },
-    {
-        "Id": 3,
-        "DoctorId": 1,
-        "PatientId": 2,
-        "Specialization": 3
-    },
-    {
-        "Id": 4,
-        "DoctorId": 1,
-        "PatientId": 5,
-        "Specialization": 3
-    }
+  {
+    "Id": 1,
+    "DoctorId": 3,
+    "PatientId": 5,
+    "Specialization": 8
+  },
+  {
+    "Id": 2,
+    "DoctorId": 4,
+    "PatientId": 3,
+    "Specialization": 9
+  },
+  {
+    "Id": 3,
+    "DoctorId": 1,
+    "PatientId": 2,
+    "Specialization": 0
+  },
+  {
+    "Id": 4,
+    "DoctorId": 1,
+    "PatientId": 5,
+    "Specialization": 0
+  },
+  {
+    "Id": 5,
+    "DoctorId": 7,
+    "PatientId": 4,
+    "Specialization": 0
+  }
 ]

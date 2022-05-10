@@ -125,6 +125,12 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                     _patients.Add(new PatientListItemViewModel(patient));
                 }
             }
+
+            if (_patients.Count != 0)
+            {
+                Selection = 0;
+                OnPropertyChanged(nameof(Selection));
+            }
         }
 
         public string NewName { get; set; }
