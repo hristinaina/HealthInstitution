@@ -184,7 +184,7 @@
                                     Grid.Row="1"
                                     Margin="0,6,65,0">
                                 <Button.CommandParameter>
-                                    <StackPanel Height="500"
+                                    <StackPanel Height="300"
                                                 Width="400"
                                                 Margin="40 20 40 20">
                                         <TextBlock Text="Create appointment"
@@ -196,13 +196,19 @@
                                                     Margin="0 20 0 0"
                                                     materialDesign:HintAssist.Hint="Pick Date"
                                                     Style="{StaticResource MaterialDesignFilledDatePicker}" />
+                                        <materialDesign:TimePicker Width="250"
+                                                                   Margin="0 20 0 0"
+                                                                   SelectedTime="{Binding NewAppointmentTime}"
+                                                                   Is24Hours="True"
+                                                                   Style="{StaticResource MaterialDesignFilledTimePicker}"
+                                                                   materialDesign:HintAssist.Hint="Pick time" />
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     IsDefault="True"
                                                     Margin="0 30 0 0"
                                                     Content="CONFIRM"
-                                                    Command="{Binding CreateAppointment}">
+                                                    Command="{Binding CreateReferralAppointment}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True
