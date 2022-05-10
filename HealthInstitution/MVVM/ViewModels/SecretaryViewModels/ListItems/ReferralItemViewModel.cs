@@ -15,9 +15,10 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public string Id => _referral.Id.ToString();
         public string Patient => Institution.Instance().PatientRepository.FindByID(_referral.PatientId).FirstName + " " + Institution.Instance().PatientRepository.FindByID(_referral.PatientId).LastName;
         public string Specialization => _referral.Specialization.ToString();
-        public string Doctor => Institution.Instance().DoctorRepository.FindByID(_referral.DoctorId).FirstName + " " + Institution.Instance().DoctorRepository.FindByID(_referral.DoctorId).LastName;
+        public string Doctor => (_referral.DoctorId != -1) ? Institution.Instance().DoctorRepository.FindByID(_referral.DoctorId).FirstName
+            + " " + Institution.Instance().DoctorRepository.FindByID(_referral.DoctorId).LastName : " / ";
 
-        public ReferralItemViewModel(Referral referral)
+    public ReferralItemViewModel(Referral referral)
         {
             _referral = referral;
         }
