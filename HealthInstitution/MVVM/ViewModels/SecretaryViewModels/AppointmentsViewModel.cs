@@ -88,7 +88,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             Reset = new ResetCommand(this);
             CreateReferralAppointment = new CreateReferralAppointmentCommand(this);
 
-            // funkcije koje fill-uju
+            SecretaryService.RemoveReferralsOfDeletedPatients();
             FillReferralsList();
         }
 
