@@ -48,11 +48,33 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
                 _model.DialogOpen = false;
 
                 DateTime newArrangementStartDate = _model.ParseDate(_model.NewArrangementStartDate);
-                EquipmentArrangement destinationRoomArrangement = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(_model.SelectedEquipment.Room, _model.SelectedEquipment.Equipment);
-                destinationRoomArrangement.EndDate = newArrangementStartDate;
-                EquipmentArrangement targetRoomArrangement = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(_model.NewArrangemenTargetRoom, _model.SelectedEquipment.Equipment);
-                if (targetRoomArrangement is not null) targetRoomArrangement.EndDate = newArrangementStartDate;
 
+                EquipmentArrangement destinationRoomArrangement = Institution.Instance().EquipmentArragmentRepository.FindArragmentBefore(_model.SelectedEquipment.Room, _model.SelectedEquipment.Equipment, newArrangementStartDate);
+                List<EquipmentArrangement> futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(_model.SelectedEquipment.Room, _model.SelectedEquipment.Equipment, newArrangementStartDate);
+                
+                DateTime newArrangementDestinationEndDate = destinationRoomArrangement.EndDate;
+                destinationRoomArrangement.EndDate = newArrangementStartDate;
+                foreach (EquipmentArrangement a in futureArrangements)
+                {
+                    a.Quantity -= _model.NewArrangementQuantity;
+                }
+                
+
+
+                EquipmentArrangement targetRoomArrangement = Institution.Instance().EquipmentArragmentRepository.FindArragmentBefore(_model.NewArrangemenTargetRoom, _model.SelectedEquipment.Equipment, newArrangementStartDate);
+                futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(_model.NewArrangemenTargetRoom, _model.SelectedEquipment.Equipment, newArrangementStartDate);
+                DateTime newArrangementTargetEndDate = DateTime.MaxValue;
+
+
+                if (targetRoomArrangement is not null)
+                {
+                    newArrangementTargetEndDate = targetRoomArrangement.EndDate;
+                    targetRoomArrangement.EndDate = newArrangementStartDate;
+                }
+                foreach (EquipmentArrangement a in futureArrangements)
+                {
+                    a.Quantity += _model.NewArrangementQuantity;
+                }
 
                 int newDestinationRoomQuantity = destinationRoomArrangement.Quantity - _model.NewArrangementQuantity;
                 int newTargetRoomQuantity = 0;
@@ -63,8 +85,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
                 newTargetRoomQuantity += _model.NewArrangementQuantity;
 
 
-                Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(_model.SelectedEquipment.Equipment, _model.SelectedEquipment.Room, newDestinationRoomQuantity, newArrangementStartDate, DateTime.MaxValue));
-                Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(_model.SelectedEquipment.Equipment, _model.NewArrangemenTargetRoom, newTargetRoomQuantity, newArrangementStartDate, DateTime.MaxValue));
+                Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(_model.SelectedEquipment.Equipment, _model.SelectedEquipment.Room, newDestinationRoomQuantity, newArrangementStartDate, newArrangementDestinationEndDate));
+                Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(_model.SelectedEquipment.Equipment, _model.NewArrangemenTargetRoom, newTargetRoomQuantity, newArrangementStartDate, newArrangementTargetEndDate));
 
                 MessageBox.Show("Arrangement successfully planned", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
