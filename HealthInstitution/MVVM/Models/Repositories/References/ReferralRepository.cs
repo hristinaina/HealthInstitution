@@ -56,6 +56,11 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             return refferals;
         }
 
+        public void Add(Referral referral)
+        {
+            _references.Add(referral);
+        }
+
         private bool CheckID(int id)
         {
             foreach (Referral r in _references)

@@ -361,9 +361,15 @@ namespace HealthInstitution.MVVM.Models
                 {
                     throw new UserNotAvailableException("Doctor not available at selected time !");
                 }
-            }
+            }       
+        }
 
-            
+        public bool CreateReferral(int doctorId, int patientId, Specialization specialization)
+        {
+            int id = Institution.Instance().ReferralRepository.GetNewID();
+            Referral referral = new Referral(id, patientId, doctorId, specialization);
+            _referralRepository.Add(referral);
+            return true;
         }
     }
 }
