@@ -130,9 +130,9 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             foreach (Prescription prescription in Institution.Instance().PrescriptionRepository.Prescriptions)
             {
-                List<PrescriptionMedicine> prescriptionMedicines = Institution.Instance().PrescriptionMedicineRepository.
-                    FindByPrescriptionID(prescription.ID);
-                prescription.Medicines = Institution.Instance().MedicineRepository.PrescriptionMedicineToMedicine(prescriptionMedicines);
+                PrescriptionMedicine prescriptionMedicine = Institution.Instance().PrescriptionMedicineRepository.
+                                                             FindByPrescriptionID(prescription.ID);
+                prescription.Medicine = Institution.Instance().MedicineRepository.PrescriptionMedicineToMedicine(prescriptionMedicine);
             }
         }
 

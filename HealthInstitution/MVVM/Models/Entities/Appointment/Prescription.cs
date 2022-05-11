@@ -11,7 +11,7 @@ namespace HealthInstitution.MVVM.Models.Entities
     public class Prescription
     {
         private int _id;
-        private List<Medicine> _medicines;
+        private Medicine _medicine;
         private int _longitudeInDays;     // how long to take the medicine
         private int _dailyFrequency;      // how many times a day to take a medicine
         private TherapyMealDependency _therapyMealDependency;
@@ -26,31 +26,23 @@ namespace HealthInstitution.MVVM.Models.Entities
         public TherapyMealDependency TherapyMealDependency { get => _therapyMealDependency;
                                                              set { _therapyMealDependency = value; } }
         [JsonIgnore]
-        public List<Medicine> Medicines
-        {
-            get
-            {
-                if (_medicines == null) _medicines = new List<Medicine>();
-                return _medicines;
-            }
-            set
-            {
-                _medicines = value;
-            }
-        }
+        public Medicine Medicine { get => _medicine; set { _medicine = value; } }
+   
+       
         public Prescription()
         {
 
         }
 
         public Prescription(int id, int longitudeInDays, int dailyFrequency,
-                            TherapyMealDependency mealDependency, List<Medicine> medicines=null)
+                            TherapyMealDependency mealDependency, Medicine medicines=null)
         {
             _id = id;
             _longitudeInDays = longitudeInDays;
             _dailyFrequency = dailyFrequency;
             _therapyMealDependency = mealDependency;
-            _medicines = medicines;
+            _medicine = medicines;
+            if (_medicine == null) _medicine = new Medicine(-1, " ");
         }
 
         public Prescription(int id)

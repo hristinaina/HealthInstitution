@@ -127,6 +127,7 @@ namespace HealthInstitution.MVVM.Models
             _pendingMedicineRepository.LoadFromFile();
             _doctorDaysOffRepository.LoadFromFile();
             _prescriptionMedicineRepository.LoadFromFile();
+            _prescriptionRepository.LoadFromFile();
             _examinationChangeRepository.LoadFromFile();
         }
 
@@ -154,6 +155,7 @@ namespace HealthInstitution.MVVM.Models
             _pendingMedicineRepository.SaveToFile();
             _doctorDaysOffRepository.SaveToFile();
             _prescriptionMedicineRepository.SaveToFile();
+            _prescriptionRepository.SaveToFile();
             _examinationChangeRepository.SaveToFile();
         }
 
@@ -221,7 +223,7 @@ namespace HealthInstitution.MVVM.Models
             {
 
                 appointmentId = _examinationRepository.NewId();
-                int prescriptionId = _prescriptionRepository.NewId();
+                int prescriptionId = _prescriptionRepository.GetNewId();
                 Prescription prescription = new Prescription(prescriptionId);
 
                 Examination examination = new Examination(appointmentId, doctor, patient, dateTime, prescription);
@@ -370,6 +372,17 @@ namespace HealthInstitution.MVVM.Models
             int id = Institution.Instance().ReferralRepository.GetNewID();
             Referral referral = new Referral(id, patientId, doctorId, specialization);
             _referralRepository.Add(referral);
+            return true;
+        }
+
+        public bool CreatePrescription(Medicine medicine, int longitudeInDays, int dailyFrequency,
+                                       TherapyMealDependency therapyMealDependency)
+        {
+            int id = Institution.Instance().PrescriptionRepository.GetNewId();
+            Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, medicine);
+            _prescriptionRepository.Add(prescription);
+            PrescriptionMedicine prescriptionMedicine = new PrescriptionMedicine(medicine.ID, prescription.ID);
+            _prescriptionMedicineRepository.Add(prescriptionMedicine);
             return true;
         }
     }

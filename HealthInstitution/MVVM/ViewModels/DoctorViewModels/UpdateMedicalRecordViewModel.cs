@@ -23,6 +23,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand SaveAnamnesisCommand { get; }
         public ICommand CreateReferralCommand { get; }
         public ICommand CreateReferralSpecCommand { get; }
+        public ICommand CreatePrescriptionCommand { get; }
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         private ObservableCollection<Allergen> _newAllergens;
@@ -45,7 +46,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         private ObservableCollection<Medicine> _medicines;
         public ObservableCollection<Medicine> Medicines => _medicines;
         public Medicine SelectedMedicine { get; set; }
-
+        public int DailyFrequency { get; set; }
+        public int LongitudeInDays { get; set; }
         private Patient _patient;
         public Patient Patient { get => _patient; }
         public Allergen NewAllergen { get; set; }
@@ -165,7 +167,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             SaveAnamnesisCommand = new SaveAnamnesisCommand(this);
             CreateReferralCommand = new CreateReferralCommand(this);
             CreateReferralSpecCommand = new CreateReferralSpecCommand(this);
-            // add new commands
+            CreatePrescriptionCommand = new CreatePrescriptionCommand(this);
 
             SetProperties();
             FillAllergensList();
