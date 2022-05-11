@@ -435,7 +435,8 @@
                                     Margin="0 30 50 0"
                                     Content="DONE"                 
                                     Width="210"
-                                    Command="{Binding SaveCommand}"/>
+                                    Command="{Binding SaveCommand}">
+                            </Button>
                         </Grid>
                         
                     </Grid>
