@@ -40,10 +40,18 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             }
             return null;
         }
+        public int NewId()
+        {
+            if (_references.Count == 0)
+            {
+                return 1;
+            }
+            return _references.Max(x => x.ID) + 1;
+        }
 
         public void Add(Examination examination, DateTime dateTime, bool resolved, AppointmentStatus status)
         {
-            ExaminationChange change = new ExaminationChange(GetNewID(), examination.Patient.ID, examination.ID, status, DateTime.Now, resolved, dateTime);
+            ExaminationChange change = new ExaminationChange(NewId(), examination.Patient.ID, examination.ID, status, DateTime.Now, resolved, dateTime);
             _references.Add(change);
             examination.Patient.ExaminationChanges.Add(change);
         }
@@ -56,6 +64,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             }
             return null;
         }
+
 
         public void DeleteUnresolvedRequestsByPatientId(int patientId)
         {
@@ -78,7 +87,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             return true;
         }
 
-        public int GetNewID()
+        public int NewID()
         {
             int i = 1;
             while (true)

@@ -33,15 +33,20 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
             FileService.Serialize<PrescriptionMedicine>(_fileName, _references);
         }
 
-        public List<PrescriptionMedicine> FindByPrescriptionID(int prescriptionId)
+        public PrescriptionMedicine FindByPrescriptionID(int prescriptionId)
         {
-            List<PrescriptionMedicine> prescriptionMedicines = new();
+            PrescriptionMedicine prescriptionMedicine = new();
             foreach (PrescriptionMedicine reference in _references)
             {
                 if (reference.PrescriptionID == prescriptionId)
-                    prescriptionMedicines.Add(reference);
+                    prescriptionMedicine = reference;
             }
-            return prescriptionMedicines;
+            return prescriptionMedicine;
+        }
+
+        public void Add(PrescriptionMedicine prescriptionMedicine)
+        {
+            _references.Add(prescriptionMedicine);
         }
     }
 }

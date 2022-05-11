@@ -70,8 +70,10 @@ namespace HealthInstitution.MVVM.Models.Entities
                     Institution.Instance().RoomRepository.Rooms.Add(r);
                 }
             } else
-            {
-                //_rooms[0].UnderRenovation = false;
+            { 
+                if (_rooms.Count > 0)
+                _rooms[0].UnderRenovation = false;
+
             }
         }
     }
