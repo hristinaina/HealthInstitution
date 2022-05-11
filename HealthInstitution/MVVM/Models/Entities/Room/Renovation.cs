@@ -73,6 +73,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             { 
                 if (_rooms.Count > 0)
                 _rooms[0].UnderRenovation = false;
+
             }
         }
     }

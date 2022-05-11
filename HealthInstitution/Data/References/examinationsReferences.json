@@ -61,5 +61,40 @@
     "PatientID": 3,
     "RoomID": 1,
     "PerscriptionID": 5
+  },
+  {
+    "ExaminationID": 8,
+    "DoctorID": 7,
+    "PatientID": 1,
+    "RoomID": 1,
+    "PerscriptionID": 5
+  },
+  {
+    "ExaminationID": 9,
+    "DoctorID": 7,
+    "PatientID": 1,
+    "RoomID": 1,
+    "PerscriptionID": 5
+  },
+  {
+    "ExaminationID": 10,
+    "DoctorID": 1,
+    "PatientID": 3,
+    "RoomID": 1,
+    "PerscriptionID": 5
+  },
+  {
+    "ExaminationID": 11,
+    "DoctorID": 1,
+    "PatientID": 0,
+    "RoomID": 1,
+    "PerscriptionID": 5
+  },
+  {
+    "ExaminationID": 12,
+    "DoctorID": 1,
+    "PatientID": 0,
+    "RoomID": 1,
+    "PerscriptionID": 5
   }
 ]

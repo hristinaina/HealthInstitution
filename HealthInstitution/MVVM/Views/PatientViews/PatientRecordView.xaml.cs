@@ -29,5 +29,10 @@ namespace HealthInstitution.MVVM.Views.PatientViews
         {
 
         }
+
+        private void PatientNavigationRail_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
