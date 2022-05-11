@@ -8,6 +8,7 @@ using System.Windows.Input;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
 using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Enumerations;
 
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
@@ -38,6 +39,12 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         private ObservableCollection<Specialization> _specializations;
         public ObservableCollection<Specialization> Specializations => _specializations;
         public Specialization SelectedSpecialization { get; set; }
+        private ObservableCollection<TherapyMealDependency> _therapyMealDependencies;
+        public ObservableCollection<TherapyMealDependency> TherapyMealDependencies => _therapyMealDependencies;
+        public TherapyMealDependency SelectedDependency { get; set; }
+        private ObservableCollection<Medicine> _medicines;
+        public ObservableCollection<Medicine> Medicines => _medicines;
+        public Medicine SelectedMedicine { get; set; }
 
         private Patient _patient;
         public Patient Patient { get => _patient; }
@@ -150,12 +157,15 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             _illnesses = new ObservableCollection<IllnessItemViewModel>();
             _doctors = new ObservableCollection<Doctor>();
             _specializations = new ObservableCollection<Specialization>();
+            _therapyMealDependencies = new ObservableCollection<TherapyMealDependency>();
+            _medicines = new ObservableCollection<Medicine>();
 
             SaveCommand = new UpdateMedicalRecordCommand(this);
             SaveAllergenCommand = new SaveAllergenCommand(this);
             SaveAnamnesisCommand = new SaveAnamnesisCommand(this);
             CreateReferralCommand = new CreateReferralCommand(this);
             CreateReferralSpecCommand = new CreateReferralSpecCommand(this);
+            // add new commands
 
             SetProperties();
             FillAllergensList();
@@ -163,6 +173,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             FillIllnessList();
             FillDoctorsList();
             FillSpecializationsList();
+            FillThreapyMealDependenciesList();
+            FillMedicinesList();
         }
 
         public void SetProperties()
@@ -227,6 +239,24 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             foreach (Specialization specialization in Enum.GetValues(typeof(Specialization)))
             {
                 _specializations.Add(specialization);
+            }
+        }
+
+        public void FillThreapyMealDependenciesList()
+        {
+            _therapyMealDependencies.Clear();
+            foreach(TherapyMealDependency dependency in Enum.GetValues(typeof(TherapyMealDependency)))
+            {
+                _therapyMealDependencies.Add(dependency);
+            }
+        }
+
+        public void FillMedicinesList()
+        {
+            _medicines.Clear();
+            foreach(Medicine medicine in _institution.MedicineRepository.Medicine)
+            {
+                _medicines.Add(medicine);
             }
         }
 

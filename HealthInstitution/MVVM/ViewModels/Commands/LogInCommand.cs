@@ -3,7 +3,6 @@ using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
-using HealthInstitution.MVVM.ViewModels.MainPageViewModels;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;

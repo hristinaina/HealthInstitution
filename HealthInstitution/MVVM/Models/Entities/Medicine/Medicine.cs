@@ -29,12 +29,10 @@ namespace HealthInstitution.MVVM.Models.Entities
             _allergens = new List<Allergen>();
         }
 
-        public int GetId() => _id;
-        public void SetId(int id) => _id = id;
-        public string GetName() => _name;
-        public void SetName(string name) => _name = name;
-        public List<Allergen> GetAllergens() => _allergens;
-        public void SetAllegens(List<Allergen> allergens) => _allergens = allergens;
+        public override string ToString()
+        {
+            return _name;
+        }
     }
 
 }
