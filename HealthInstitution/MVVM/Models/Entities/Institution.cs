@@ -273,7 +273,8 @@ namespace HealthInstitution.MVVM.Models
             if (CurrentUser is Patient) {
                 resolved = appointment.IsEditable();
             }
-            if (resolved) {
+            if (resolved)
+            {
                 appointment.Date = dateTime;
             }
 
