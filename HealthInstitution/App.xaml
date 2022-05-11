@@ -20,6 +20,34 @@
                 <Setter Property="TextElement.FontFamily"
                         Value="/Style/Poppins/Poppins-Light.ttf #Poppins" />
             </Style>
+            <Style x:Key="DisableSelection"
+                   TargetType="DataGridCell">
+                <Setter Property="Focusable"
+                        Value="False" />
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="BorderBrush"
+                        Value="Transparent" />
+                <Setter Property="BorderThickness"
+                        Value="0 0 0 0" />
+            </Style>
+            <Style TargetType="DataGridRow">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver"
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="#dedede" />
+                        <Setter Property="BorderThickness"
+                                Value="0 0 0 0" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="ColumnElementStyle"
+                   TargetType="TextBlock">
+                <Setter Property="Margin"
+                        Value="16,10,0,10" />
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

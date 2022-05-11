@@ -19,7 +19,7 @@
         xmlns:viewmodelsDoctor="clr-namespace:HealthInstitution.MVVM.ViewModels.DoctorViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
-        Title="NMK - Log in"
+        Title="NMK"
         Height="600"
         Width="1200"
         Style="{StaticResource AllWindows}"

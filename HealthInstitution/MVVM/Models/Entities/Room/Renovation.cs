@@ -71,7 +71,7 @@ namespace HealthInstitution.MVVM.Models.Entities
                 }
             } else
             {
-                _rooms[0].UnderRenovation = false;
+                //_rooms[0].UnderRenovation = false;
             }
         }
     }

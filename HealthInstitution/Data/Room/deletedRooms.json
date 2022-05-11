@@ -5,5 +5,54 @@
     "Number": 705,
     "Type": 0,
     "UnderRenovation": false
+  },
+  {
+    "ID": 1,
+    "Name": "OR",
+    "Number": 100,
+    "Type": 0,
+    "UnderRenovation": true
+  },
+  {
+    "ID": 1,
+    "Name": "OR",
+    "Number": 100,
+    "Type": 0,
+    "UnderRenovation": true
+  },
+  {
+    "ID": 1,
+    "Name": "OR",
+    "Number": 100,
+    "Type": 0,
+    "UnderRenovation": true
+  },
+  {
+    "ID": 1,
+    "Name": "OR",
+    "Number": 100,
+    "Type": 0,
+    "UnderRenovation": true
+  },
+  {
+    "ID": 1,
+    "Name": "OR",
+    "Number": 100,
+    "Type": 0,
+    "UnderRenovation": true
+  },
+  {
+    "ID": 1,
+    "Name": "OR",
+    "Number": 100,
+    "Type": 0,
+    "UnderRenovation": true
+  },
+  {
+    "ID": 1,
+    "Name": "OR",
+    "Number": 100,
+    "Type": 0,
+    "UnderRenovation": true
   }
 ]

@@ -7,13 +7,6 @@
     "UnderRenovation": false
   },
   {
-    "ID": 1,
-    "Name": "OR",
-    "Number": 100,
-    "Type": 0,
-    "UnderRenovation": true
-  },
-  {
     "ID": 2,
     "Name": "ER",
     "Number": 101,
