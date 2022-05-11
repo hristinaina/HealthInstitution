@@ -33,7 +33,6 @@ namespace HealthInstitution.Commands
                 return;
             }
 
-            // check which user type it is and redirect to the corresponding main page
             try
             {
                 bool foundUser = Login(_loginVM.Email, _loginVM.Password);
@@ -45,8 +44,7 @@ namespace HealthInstitution.Commands
             }
             catch (PatientBlockedException e) 
             {
-
-                _loginVM.ShowMessage("Cannot login. You were blocked. ");
+                _loginVM.ShowMessage(e.Message);
             }
         }
 
@@ -55,19 +53,25 @@ namespace HealthInstitution.Commands
             return base.CanExecute(parameter);
         }
 
+
+        // check which user type it is and redirect to the corresponding main page
         private bool Login(string email, string password)
         {
             _institution.CurrentUser = User.FindUser(_institution.PatientRepository.Patients, email, password);
             if (_institution.CurrentUser != null)
             {
-                Patient patient = (Patient)_institution.CurrentUser;
-                if (patient.Blocked || patient.Deleted) return false;
-                _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
                 Patient user = (Patient)_institution.CurrentUser;
                 if (user.Blocked)
                 {
                     throw new PatientBlockedException("Patient is blocked !");
                 }
+
+                if (user.Deleted)
+                {
+                    return false;
+                }
+
+                _navigationStore.CurrentViewModel = new PatientAppointmentViewModel();
                 return true;
             }
 

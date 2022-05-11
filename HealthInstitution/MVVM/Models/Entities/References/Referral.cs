@@ -7,12 +7,15 @@ using Newtonsoft.Json;
 
 namespace HealthInstitution.MVVM.Models.Entities.References
 {
-    public class Refferal
+    public class Referral
     {
+        private int _id;
         private int _doctorId;
         private int _patientId;
         private Specialization _specialization;
 
+        [JsonProperty("Id")]
+        public int Id { get => _id; set { _id = value; } }
         [JsonProperty("DoctorId")]
         public int DoctorId { get => _doctorId; set { _doctorId = value; } }
         [JsonProperty("PatientId")]
@@ -20,13 +23,14 @@ namespace HealthInstitution.MVVM.Models.Entities.References
         [JsonProperty("Specialization")]
         public Specialization Specialization { get => _specialization; set { _specialization = value; } }
 
-        public Refferal()
+        public Referral()
         {
 
         }
 
-        public Refferal(int patientId, int doctorId, Specialization specialization)
+        public Referral(int id, int patientId, int doctorId, Specialization specialization)
         {
+            _id = id;
             _patientId = patientId;
             _doctorId = doctorId;
             _specialization = specialization;

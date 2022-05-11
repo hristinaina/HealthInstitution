@@ -77,5 +77,33 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
                 }
             }
         }
+
+        private bool CheckID(int id)
+        {
+            foreach (ExaminationChange e in _references)
+            {
+                if (e.ID == id) return false;
+            }
+            return true;
+        }
+
+        public int NewID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
+
+        public void RemoveByAppointmentId(int appointmentId)
+        {
+            List<ExaminationChange> requests = _references.ToList();
+            foreach (ExaminationChange reference in requests)
+            {
+                if (reference.AppointmentID == appointmentId) _references.Remove(reference);
+            }
+        }
     }
 }

@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HealthInstitution.MVVM.Views.PatientViews
+namespace HealthInstitution.MVVM.Views.SecretaryViews
 {
     /// <summary>
-    /// Interaction logic for PattientAppointmentView.xaml
+    /// Interaction logic for AppointmentsView.xaml
     /// </summary>
-    public partial class PatientAppointmentView : UserControl
+    public partial class AppointmentsView : UserControl
     {
-        public PatientAppointmentView()
+        public AppointmentsView()
         {
             InitializeComponent();
-        }
-
-        private void NotificationSnackbar_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

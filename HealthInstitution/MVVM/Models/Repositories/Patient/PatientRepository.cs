@@ -52,14 +52,5 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 i++;
             }
         }
-
-        public bool CheckEmail(string email)
-        {
-            foreach (Patient p in _patients)
-            {
-                if (p.Email == email) return false;
-            }
-            return true;
-        }
     }
 }

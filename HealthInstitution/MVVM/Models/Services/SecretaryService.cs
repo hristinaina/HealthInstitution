@@ -41,11 +41,14 @@ namespace HealthInstitution.MVVM.Models.Services
             }
         }
 
-        private static void DeleteAppointment(Appointment appointment) 
+        private static void DeleteAppointment(Appointment appointment)
         {
             Patient patient = appointment.Patient;
             Doctor doctor = appointment.Doctor;
             Room room = appointment.Room;
+
+            // when deleting an appointment, requests connected with that appointment should be deleted as well to avoid inconsistencies with appointment ids
+            Institution.Instance().ExaminationChangeRepository.RemoveByAppointmentId(appointment.ID);
 
             if (appointment is Examination)
             {
@@ -79,7 +82,7 @@ namespace HealthInstitution.MVVM.Models.Services
             {
                 if (!request.Resolved && request.NewDate <= DateTime.Now)
                 {
-                    request.ChangeStatus = Models.Enumerations.AppointmentStatus.DELETED;
+                    //request.ChangeStatus = Models.Enumerations.AppointmentStatus.DELETED;
                     request.Resolved = true;
                 }
             }
@@ -114,7 +117,36 @@ namespace HealthInstitution.MVVM.Models.Services
             patient.Blocked = true;
             patient.BlockadeType = BlockadeType.SECRETARY;
 
-            DeleteFutureAppointments(patient);
+            //DeleteFutureAppointments(patient);
+        }
+
+        public static List<Referral> SearchMatchingReferrals(string phrase)
+        {
+            List<Referral> matchingReferrals = new();
+
+            foreach (Referral r in Institution.Instance().ReferralRepository.Referrals)
+            {
+                Patient patient = Institution.Instance().PatientRepository.FindByID(r.PatientId);
+                string name = patient.FirstName + " " + patient.LastName;
+                if (name.ToLower().Contains(phrase.ToLower()))
+                {
+                    matchingReferrals.Add(r);
+                }
+            }
+            return matchingReferrals;
+        }
+
+        public static void RemoveReferralsOfDeletedPatients()
+        {
+            List<Referral> referrals = new List<Referral>(Institution.Instance().ReferralRepository.Referrals.ToArray());
+            foreach (Referral referral in referrals)
+            {
+                Patient patient = Institution.Instance().PatientRepository.FindByID(referral.PatientId);
+                if (patient.Deleted == true)
+                {
+                    Institution.Instance().ReferralRepository.Referrals.Remove(referral);
+                }
+            }
         }
     }
 }

@@ -105,8 +105,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             CreateAccount = new CreateAccountCommand(this);
             SaveAccount = new SaveAccountCommand(this);
             EnableChanges = false;
-            FillPatientList();
 
+            FillPatientList();
             FillAllAllergenList();
             FillAllergenList();
             FillGenderList();
@@ -124,6 +124,12 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 {
                     _patients.Add(new PatientListItemViewModel(patient));
                 }
+            }
+
+            if (_patients.Count != 0)
+            {
+                Selection = 0;
+                OnPropertyChanged(nameof(Selection));
             }
         }
 
