@@ -1,18 +1,26 @@
 [
   {
     "ID": 1,
-    "Name": "Ime"
-  },
-  {
-    "ID": 3,
-    "Name": "Ime"
-  },
-  {
-    "ID": 5,
-    "Name": "Ime"
+    "Name": "Paracetamol"
   },
   {
     "ID": 2,
-    "Name": "Ime"
+    "Name": "Brufen"
+  },
+  {
+    "ID": 3,
+    "Name": "Ranital"
+  },
+  {
+    "ID": 4,
+    "Name": "Apaurin"
+  },
+  {
+    "ID": 5,
+    "Name": "Leksilijum"
+  },
+  {
+    "ID": 6,
+    "Name": "Bensedin"
   }
 ]

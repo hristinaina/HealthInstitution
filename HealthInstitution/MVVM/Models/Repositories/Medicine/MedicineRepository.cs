@@ -35,15 +35,9 @@ namespace HealthInstitution.MVVM.Models.Repositories
             return null;
         }
 
-        public List<Medicine> PrescriptionMedicineToMedicine(List<PrescriptionMedicine> prescriptionMedicines)
+        public Medicine PrescriptionMedicineToMedicine(PrescriptionMedicine prescriptionMedicine)
         {
-            List<Medicine> medicines = new();
-            foreach (PrescriptionMedicine reference in prescriptionMedicines)
-            {
-                medicines.Add(FindByID(reference.MedicineId));
-
-            }
-            return medicines;
+            return FindByID(prescriptionMedicine.MedicineId);
         }
     }
 }
