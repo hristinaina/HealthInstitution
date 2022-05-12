@@ -67,6 +67,13 @@ namespace HealthInstitution.MVVM.Models.Entities
             _equipment[e] += quantity;
         }
 
+        public void ReturnEquipmentToWarehouse(DateTime date)
+        {
+            foreach (Equipment e in _equipment.Keys)
+            {
+                e.ReturnToWarehouse(date, this);
+            }
+        }
         public bool isAvailable(DateTime appointmentTime, Appointment appointment)
         {
             if (_underRenovation) return false;

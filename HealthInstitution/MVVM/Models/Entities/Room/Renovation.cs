@@ -31,6 +31,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             _rooms = new List<Room>();
             _result = new List<Room>();
         }
+
         public Renovation(int id, DateTime startDate, DateTime endDate, List<Room> rooms, List<Room> result) : this()
         {
             _startDate = startDate;
@@ -49,25 +50,12 @@ namespace HealthInstitution.MVVM.Models.Entities
             {
                 foreach (Room r in _rooms)
                 {
-                    Dictionary<Equipment, int> equipment = r.Equipment;
-                    foreach (Equipment e in equipment.Keys)
-                    {
-                        Room warehouse = Institution.Instance().RoomRepository.FindById(0);
-                        EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(r, e);
-                        a.EndDate = _endDate;
-                        Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Remove(a);
-                        EquipmentArrangement newArragment = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(warehouse, e);
-                        if (newArragment is null)
-                        {
-                            newArragment = new EquipmentArrangement(e, warehouse, 0, a.EndDate, DateTime.MaxValue);
-                            Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(newArragment);
-                        }
-                        newArragment.Quantity += equipment[e];
-                    }
+                    r.ReturnEquipmentToWarehouse(_endDate);
                 }
-                }
+            }
 
         }
+
 
         public void EndRenovation()
         {
@@ -84,19 +72,20 @@ namespace HealthInstitution.MVVM.Models.Entities
 
                 Institution.Instance().RoomRepository.FutureRooms.Remove(resultingRoom);
                 Institution.Instance().RoomRepository.Rooms.Add(resultingRoom);
+            
             } else if (_result.Count() > 1)
             {
                 Room roomUnderRenovation = _rooms[0];
                 Institution.Instance().RoomRepository.Rooms.Remove(roomUnderRenovation);
                 Institution.Instance().RoomRepository.DeletedRooms.Add(roomUnderRenovation);
 
-                Dictionary<Equipment, int> equipment = roomUnderRenovation.Equipment;
-                foreach (Equipment e in equipment.Keys)
-                {
-                    EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(roomUnderRenovation, e);
-                    a.EndDate = _endDate;
-                    Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(e, _result[0], equipment[e], a.EndDate, DateTime.MaxValue));
-                }
+                //Dictionary<Equipment, int> equipment = roomUnderRenovation.Equipment;
+                //foreach (Equipment e in equipment.Keys)
+                //{
+                //    EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(roomUnderRenovation, e);
+                //    a.EndDate = _endDate;
+                //    Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(e, _result[0], equipment[e], a.EndDate, DateTime.MaxValue));
+                //}
                 
                 foreach (Room r in _result)
                 {

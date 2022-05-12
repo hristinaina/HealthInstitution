@@ -23,7 +23,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
                 List<EquipmentArrangement> currentArrangement = new List<EquipmentArrangement>();
                 foreach (EquipmentArrangement a in _validArrangement)
                 {
-                    if (a.StartDate < DateTime.Today && a.EndDate > DateTime.Today) currentArrangement.Add(a);
+                    if (a.StartDate <= DateTime.Today && a.EndDate > DateTime.Today) currentArrangement.Add(a);
                 }
                 return currentArrangement;
             }
@@ -34,6 +34,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             _fileName = fileName;
             _validArrangement = new List<EquipmentArrangement>();
         }
+
         public void LoadFromFile()
         {
             List<EquipmentArrangement> allArragments = FileService.Deserialize<EquipmentArrangement>(_fileName);
@@ -41,7 +42,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
 
             foreach (EquipmentArrangement a in allArragments)
             {
-                if (a.EndDate > DateTime.Today) _validArrangement.Add(a);
+                if (a.IsValid()) _validArrangement.Add(a);
             }
         }
 
@@ -59,7 +60,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             return null;
         }
 
-        public EquipmentArrangement FindArragmentBefore(Entities.Room r, Equipment e, DateTime date)
+        public EquipmentArrangement FindFirstBefore(Entities.Room r, Equipment e, DateTime date)
         {
             EquipmentArrangement arrangement = null;
             foreach (EquipmentArrangement a in _validArrangement)
@@ -85,7 +86,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             return arrangements;
         }
 
-        public EquipmentArrangement FindArragmentAfter(Entities.Room r, Equipment e, DateTime date)
+        public EquipmentArrangement FindFirstAfter(Entities.Room r, Equipment e, DateTime date)
         {
             EquipmentArrangement arrangement = null;
             foreach (EquipmentArrangement a in _validArrangement)
@@ -110,5 +111,6 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             }
             return arrangements;
         }
+ 
     }
 }

@@ -14,7 +14,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
     class AdminDivideComplexRenovationViewModel : BaseViewModel
     {
         private readonly Admin _admin;
-        private Institution _institution;
+        private readonly Institution _institution;
 
         private DateTime _startDate;
         public DateTime StartDate

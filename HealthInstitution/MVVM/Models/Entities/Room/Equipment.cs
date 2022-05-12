@@ -66,5 +66,103 @@ namespace HealthInstitution.MVVM.Models.Entities
             return _arrangmentByRooms[r];
         }
 
+        public void ReturnToWarehouse(DateTime date, Room room)
+        {
+            Room warehouse = Institution.Instance().RoomRepository.FindById(0);
+
+            EquipmentArrangement destinationRoomArrangement = Institution.Instance().EquipmentArragmentRepository.FindFirstBefore(room, this, date);
+            List<EquipmentArrangement> futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(room, this, date);
+
+            destinationRoomArrangement.EndDate = date;
+            foreach (EquipmentArrangement a in futureArrangements)
+            {
+                Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Remove(a);
+            }
+
+            EquipmentArrangement warehouseArrangement = Institution.Instance().EquipmentArragmentRepository.FindFirstBefore(warehouse, this, date);
+            futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(warehouse, this, date);
+            DateTime newArrangementTargetEndDate = DateTime.MaxValue;
+
+
+            if (warehouseArrangement is not null)
+            {
+                newArrangementTargetEndDate = warehouseArrangement.EndDate;
+                warehouseArrangement.EndDate = date;
+            }
+            foreach (EquipmentArrangement a in futureArrangements)
+            {
+                a.Quantity += destinationRoomArrangement.Quantity;
+            }
+
+            int newWarehouseQuantity = 0;
+            if (warehouseArrangement is not null)
+            {
+                newWarehouseQuantity = warehouseArrangement.Quantity;
+            }
+            newWarehouseQuantity += destinationRoomArrangement.Quantity;
+
+            Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, warehouse, newWarehouseQuantity, date, newArrangementTargetEndDate));
+
+
+
+            //EquipmentArrangement newArragment = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(warehouse, this);
+            //if (newArragment is null)
+            //{
+            //    newArragment = new EquipmentArrangement(this, warehouse, 0, a.EndDate, DateTime.MaxValue);
+            //    Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(newArragment);
+            //}
+            //newArragment.Quantity += _arrangmentByRooms[room];
+        }
+
+        public void Rearrange(Room destinationRoom, Room targetRoom, DateTime newArrangementStartDate, int newArrangementQuantity)
+        {
+            MoveFromRoom(destinationRoom, newArrangementStartDate, newArrangementQuantity);
+            MoveToNewRoom(targetRoom, newArrangementStartDate, newArrangementQuantity);
+        }
+
+        public void MoveFromRoom(Room room, DateTime newArrangementStartDate, int quantity)
+        {
+            EquipmentArrangement pastArrangement = Institution.Instance().EquipmentArragmentRepository.FindFirstBefore(room, this, newArrangementStartDate);
+            List<EquipmentArrangement> futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(room, this, newArrangementStartDate);
+
+            DateTime newArrangementEndDate = pastArrangement.EndDate;
+            pastArrangement.EndDate = newArrangementStartDate;
+            foreach (EquipmentArrangement a in futureArrangements)
+            {
+                a.Quantity -= quantity;
+            }
+
+            int newDestinationRoomQuantity = pastArrangement.Quantity - quantity;
+            Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, room, newDestinationRoomQuantity, newArrangementStartDate, newArrangementEndDate));
+        }
+
+        public void MoveToNewRoom(Room room, DateTime newArrangementStartDate, int quantity)
+        {
+            EquipmentArrangement pastArrangement = Institution.Instance().EquipmentArragmentRepository.FindFirstBefore(room, this, newArrangementStartDate);
+            List<EquipmentArrangement> futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(room, this, newArrangementStartDate);
+            DateTime newArrangementTargetEndDate = DateTime.MaxValue;
+
+
+            if (pastArrangement is not null)
+            {
+                newArrangementTargetEndDate = pastArrangement.EndDate;
+                pastArrangement.EndDate = newArrangementStartDate;
+            }
+
+            foreach (EquipmentArrangement a in futureArrangements)
+            {
+                a.Quantity += quantity;
+            }
+
+
+            int newTargetRoomQuantity = 0;
+            if (pastArrangement is not null)
+            {
+                newTargetRoomQuantity = pastArrangement.Quantity;
+            }
+            newTargetRoomQuantity += quantity;
+
+            Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, room, newTargetRoomQuantity, newArrangementStartDate, newArrangementTargetEndDate));
+        }
     }
 }
