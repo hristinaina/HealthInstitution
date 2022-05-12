@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.AppointmentCommands;
@@ -18,7 +19,17 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         private readonly ObservableCollection<ReferralItemViewModel> _referrals;
         public IEnumerable<ReferralItemViewModel> Referrals => _referrals;
+
+        private readonly ObservableCollection<Specialization> _specializations;
+        public IEnumerable<Specialization> Specializations => _specializations;
+
+        private readonly ObservableCollection<Patient> _patients;
+        public IEnumerable<Patient> Patients => _patients;
+
         private ReferralItemViewModel _selectedReferral;
+        public Patient SelectedPatient { get; set; }
+        public Specialization SelectedSpecialization { get; set; }
+        public String SelectedDuration { get; set; }
 
         private bool _enableChanges;
         private int _selection;
@@ -58,6 +69,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 EnableChanges = true;
                 OnPropertyChanged(nameof(Selection));
                 _selectedReferral = _referrals.ElementAt(_selection);
+
                 SelectedReferralId = Convert.ToInt32(_selectedReferral.Id);
                 OnPropertyChanged(nameof(SelectedReferralId));
             }
@@ -77,19 +89,47 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public ICommand Search { get; set; }
         public ICommand Reset { get; set; }
         public ICommand CreateReferralAppointment { get; set; }
+        public ICommand CreateEmergencyAppointment { get; set; }
 
         public AppointmentsViewModel()
         {
+            EnableChanges = false;
+            Navigation = new SecretaryNavigationViewModel();
+
             _referrals = new ObservableCollection<ReferralItemViewModel>();
+            _specializations = new ObservableCollection<Specialization>();
+            _patients = new ObservableCollection<Patient>();
             NewAppointmentDate = DateTime.Now;
             NewAppointmentTime = DateTime.Now;
 
             Search = new SearchCommand(this);
             Reset = new ResetCommand(this);
             CreateReferralAppointment = new CreateReferralAppointmentCommand(this);
+            CreateEmergencyAppointment = new CreateEmergencyAppointmentCommand(this);
 
             SecretaryService.RemoveReferralsOfDeletedPatients();
             FillReferralsList();
+            FillPatientsBox();
+            FillSpecializations();
+        }
+
+        public void FillPatientsBox()
+        {
+            _patients.Clear();
+            foreach (Patient patient in Institution.Instance().PatientRepository.Patients)
+            {
+                if(!patient.Deleted) _patients.Add(patient);
+            }
+            OnPropertyChanged(nameof(Patients));
+        }
+
+        public void FillSpecializations()
+        {
+            _specializations.Clear();
+            foreach (Specialization specialization in Enum.GetValues(typeof(Specialization)))
+            {
+                _specializations.Add(specialization);
+            }
         }
 
         public void FillReferralsList(string phrase = null)
