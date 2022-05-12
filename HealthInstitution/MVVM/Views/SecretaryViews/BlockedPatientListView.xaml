@@ -249,7 +249,7 @@
                                                                         <DataTemplate>
                                                                             <TextBlock TextAlignment="Left"
                                                                                        Text="{Binding Illness}"
-                                                                                       Width="130" />
+                                                                                       Width="200" />
                                                                         </DataTemplate>
                                                                     </GridViewColumn.CellTemplate>
                                                                 </GridViewColumn>

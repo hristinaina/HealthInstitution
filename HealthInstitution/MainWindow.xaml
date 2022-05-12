@@ -67,7 +67,10 @@
             <DataTemplate DataType="{x:Type viewmodelsSecretary:AppointmentsViewModel}">
                 <viewsSecretary:AppointmentsView />
             </DataTemplate>
-            
+            <DataTemplate DataType="{x:Type viewmodelsSecretary:EmergencyAppointmentViewModel}">
+                <viewsSecretary:EmergencyAppointmentView />
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminRoomViewModel}">
                 <viewsadmin:AdminRoomView />
             </DataTemplate>
