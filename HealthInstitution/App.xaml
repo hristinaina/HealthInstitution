@@ -40,6 +40,11 @@
                         <Setter Property="BorderThickness"
                                 Value="0 0 0 0" />
                     </Trigger>
+                    <Trigger Property="IsSelected" 
+                             Value="True">
+                        <Setter Property="Background"
+                                Value="#dedede" />
+                    </Trigger>
                 </Style.Triggers>
             </Style>
             <Style x:Key="ColumnElementStyle"

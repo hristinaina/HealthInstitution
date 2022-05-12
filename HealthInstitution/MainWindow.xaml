@@ -17,7 +17,7 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="NMK"
-        Height="600"
+        Height="650"
         Width="1200"
         Style="{StaticResource AllWindows}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -41,6 +41,7 @@
             <DataTemplate DataType="{x:Type viewmodelsPatient:PatientSurveyViewModel}">
                 <viewsPatient:PatientSurveyView />
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type viewmodelsDoctor:DoctorExaminationViewModel}">
                 <viewsdoctor:DoctorExaminationView />
             </DataTemplate>
@@ -69,6 +70,7 @@
             <DataTemplate DataType="{x:Type viewmodelsSecretary:EmergencyAppointmentViewModel}">
                 <viewsSecretary:EmergencyAppointmentView />
             </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminRoomViewModel}">
                 <viewsadmin:AdminRoomView />
             </DataTemplate>
