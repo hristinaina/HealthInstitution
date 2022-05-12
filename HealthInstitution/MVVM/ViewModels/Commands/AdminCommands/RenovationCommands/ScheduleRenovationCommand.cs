@@ -20,21 +20,35 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             _model = model;
         }
 
-        public override void Execute(object parameter)
+        private bool CheckPrerequisites()
         {
+            bool prerequisitesFulfilled = true;
             if (_model.NewRenovationRoom is null)
             {
                 MessageBox.Show("Room must be selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else if (_model.NewRenovationStartDate <= DateTime.Today)
+                prerequisitesFulfilled = false;
+            }
+            else if (_model.NewRenovationStartDate <= DateTime.Today)
             {
                 MessageBox.Show("Start date must be in future", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else if (_model.NewRenovationEndDate <= DateTime.Today)
+                prerequisitesFulfilled = false;
+            }
+            else if (_model.NewRenovationEndDate <= DateTime.Today)
             {
                 MessageBox.Show("End date must be in future", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else if (_model.NewRenovationStartDate >= _model.NewRenovationEndDate)
+                prerequisitesFulfilled = false;
+            }
+            else if (_model.NewRenovationStartDate >= _model.NewRenovationEndDate)
             {
                 MessageBox.Show("End date must be after start date", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else
+                prerequisitesFulfilled = false;
+            }
+            return prerequisitesFulfilled;
+        }
+
+        public override void Execute(object parameter)
+        {
+            if (CheckPrerequisites())
             {
                 _model.DialogOpen = false;
                 List<Room> rooms = new List<Room> { _model.NewRenovationRoom };
