@@ -24,7 +24,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
         {
             bool prerequisitesFulfillled = true;
             int selectedNumber;
-            if (_model.SelectedRoom.Room.Type != (RoomType)_model.SelectedTypeIndex && !_model.SelectedRoom.Room.IsChangeable())
+            if (_model.SelectedName.Equals("") || _model.SelectedName is null)
+            {
+                MessageBox.Show("Room name cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                prerequisitesFulfillled = false;
+            }
+            else if (_model.SelectedRoom.Room.Type != (RoomType)_model.SelectedTypeIndex && !_model.SelectedRoom.Room.IsChangeable())
             {
                 MessageBox.Show("Room cannot be changed, because it has scheduled appointments", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 _model.SelectedType = _model.SelectedRoom.Type;

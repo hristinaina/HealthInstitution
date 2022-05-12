@@ -7,7 +7,7 @@
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:adminviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.AdminViewModels"
-             
+             d:DataContext="{d:DesignInstance Type=adminviewmodels:AdminRenovationViewModel}"
              mc:Ignorable="d"
              Height="600"
              Width="1200"
@@ -42,9 +42,6 @@
                                   ScrollViewer.CanContentScroll="True"
                                   HorizontalAlignment="Center"
                                   SelectedIndex="{Binding Selection}">
-                            <ListItem></ListItem>
-                            <ListItem></ListItem>
-                            <ListItem></ListItem>
                             <ListView.View>
                                 <GridView AllowsColumnReorder="False">
                                     <GridViewColumn Width="90"
@@ -52,7 +49,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Center"
-                                                           Text="1"
+                                                           Text="{Binding ID}"
                                                            Width="50" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -62,7 +59,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
-                                                           Text="Datum pocetka"
+                                                           Text="{Binding StartDate}"
                                                            Width="150" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -72,7 +69,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Left"
-                                                           Text="Datum zavrsetka"
+                                                           Text="{Binding EndDate}"
                                                            Width="150" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -82,7 +79,7 @@
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Center"
-                                                           Text="True"
+                                                           Text="{Binding Started}"
                                                            Width="70" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
@@ -110,8 +107,8 @@
                                     HorizontalAlignment="Left"
                                     IsEnabled="{Binding EnableChanges}">
                                 <Button.CommandParameter>
-                                    <StackPanel Height="430"
-                                                Width="600"
+                                    <StackPanel Height="380"
+                                                Width="500"
                                                 Margin="40 20 40 20">
                                         <TextBlock Text="Renovation details"
                                                    HorizontalAlignment="Center"
@@ -129,7 +126,7 @@
                                                            Margin="30 10"
                                                            FontSize="20"
                                                            Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                                <TextBlock Text="Datum 1"
+                                                <TextBlock Text="{Binding SelectedStartDate}"
                                                            HorizontalAlignment="Center"
                                                            FontSize="15"
                                                            Margin="30 10"
@@ -142,7 +139,7 @@
                                                            Margin="30 10"
                                                            FontSize="20"
                                                            Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                                <TextBlock Text="Datum 2"
+                                                <TextBlock Text="{Binding SelectedEndDate}"
                                                            HorizontalAlignment="Center"
                                                            FontSize="15"
                                                            Margin="30 10"
@@ -163,12 +160,8 @@
                                                                FontSize="20"
                                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
                                                 <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False"
-                                                     HorizontalAlignment="Center">
-
-                                                    <TextBlock Text="Listbox" />
-                                                    <TextBlock Text="Listbox" />
-                                                    <TextBlock Text="Listbox" />
-
+                                                         ItemsSource="{Binding SelectedRoomsUnderRenovation}"
+                                                         HorizontalAlignment="Center">
                                                 </ListBox>
                                             </StackPanel>
                                             <StackPanel Orientation="Vertical"
@@ -179,10 +172,8 @@
                                                                FontSize="20"
                                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
                                                 <ListBox materialDesign:ListBoxItemAssist.ShowSelection="False"
-                                                     HorizontalAlignment="Center">
-
-                                                    <TextBlock Text="Listbox" />
-
+                                                         ItemsSource="{Binding SelectedResult}"
+                                                         HorizontalAlignment="Center">
                                                 </ListBox>
                                             </StackPanel>
                                         </StackPanel>
@@ -227,19 +218,19 @@
                                                       Width="250"
                                                       HorizontalAlignment="Center"
                                                       ItemsSource="{Binding Rooms}"
-                                                      SelectedItem="{Binding NewArrangemenTargetRoom}"
+                                                      SelectedItem="{Binding NewRenovationRoom}"
                                                       Style="{StaticResource MaterialDesignFilledComboBox}"
                                                       materialDesign:HintAssist.Hint="Choose room"
                                                       materialDesign:HintAssist.HintOpacity=".26"
                                                       IsEditable="True">
                                         </ComboBox>
                                         <DatePicker Width="250"
-                                                    SelectedDate="{Binding NewArrangementStartDate}"
+                                                    SelectedDate="{Binding NewRenovationStartDate}"
                                                     Margin="0 20 0 0"
                                                     materialDesign:HintAssist.Hint="Pick Start Date"
                                                     Style="{StaticResource MaterialDesignFilledDatePicker}" />
                                         <DatePicker Width="250"
-                                                    SelectedDate="{Binding NewArrangementStartDate}"
+                                                    SelectedDate="{Binding NewRenovationEndDate}"
                                                     Margin="0 20 0 0"
                                                     materialDesign:HintAssist.Hint="Pick End Date"
                                                     Style="{StaticResource MaterialDesignFilledDatePicker}" />
@@ -249,7 +240,7 @@
                                                     IsDefault="True"
                                                     Margin="0 30 0 0"
                                                     Content="SCHEDULE"
-                                                    Command="{Binding ChangeRoom}">
+                                                    Command="{Binding ScheduleRenovation}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                         True
@@ -285,315 +276,28 @@
                                     HorizontalAlignment="Left"
                                     Grid.Row="2">
                                 <Button.CommandParameter>
-                                    <StackPanel Height="300"
-                                                Width="400"
+                                    <StackPanel Height="150"
+                                                Width="300"
                                                 Margin="40 20 40 20">
-                                        <TextBlock Text="Schedule complex renovation"
+                                        <TextBlock Text="Select renovation type"
                                                    HorizontalAlignment="Center"
                                                    Margin="10"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                        <DatePicker Width="250"
-                                                    SelectedDate="{Binding NewArrangementStartDate}"
-                                                    Margin="0 20 0 0"
-                                                    materialDesign:HintAssist.Hint="Pick Start Date"
-                                                    Style="{StaticResource MaterialDesignFilledDatePicker}" />
-                                        <DatePicker Width="250"
-                                                    SelectedDate="{Binding NewArrangementStartDate}"
-                                                    Margin="0 20 0 0"
-                                                    materialDesign:HintAssist.Hint="Pick End Date"
-                                                    Style="{StaticResource MaterialDesignFilledDatePicker}" />
-                                        <StackPanel Orientation="Horizontal"
+                                        <StackPanel
+                                                    Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     IsDefault="True"
                                                     Margin="0 30 0 0"
-                                                    Content="MERGE ROOMS"
-                                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
-                                                <Button.CommandParameter>
-                                                    <StackPanel Height="300"
-                                                                Width="400"
-                                                                Margin="40 20 40 20">
-                                                        <TextBlock Text="Choose two rooms to merge"
-                                                                         HorizontalAlignment="Center"
-                                                                         Margin="10"
-                                                                         Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                                        <ComboBox Margin="0 20 0 0"
-                                                                  Width="250"
-                                                                  HorizontalAlignment="Center"
-                                                                  ItemsSource="{Binding Rooms}"
-                                                                  SelectedItem="{Binding NewArrangemenTargetRoom}"
-                                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                                                  materialDesign:HintAssist.Hint="Choose first room"
-                                                                  materialDesign:HintAssist.HintOpacity=".26"
-                                                                  IsEditable="True">
-                                                        </ComboBox>
-                                                        <ComboBox Margin="0 20 0 0"
-                                                                  Width="250"
-                                                                  HorizontalAlignment="Center"
-                                                                  ItemsSource="{Binding Rooms}"
-                                                                  SelectedItem="{Binding NewArrangemenTargetRoom}"
-                                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                                                  materialDesign:HintAssist.Hint="Choose second room"
-                                                                  materialDesign:HintAssist.HintOpacity=".26"
-                                                                  IsEditable="True">
-                                                        </ComboBox>
-                                                        <StackPanel Orientation="Horizontal"
-                                                                    HorizontalAlignment="Center">
-                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                                            IsDefault="True"
-                                                                            Margin="0 30 0 0"
-                                                                            Content="MERGE"
-                                                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
-                                                                <Button.CommandParameter>
-                                                                    <StackPanel Height="350"
-                                                                                Width="320"
-                                                                                Margin="40 20 40 20">
-                                                                        <TextBlock Text="Create resulting room"
-                                                                                   HorizontalAlignment="Center"
-                                                                                   Margin="10"
-                                                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                                                        <ComboBox Margin="0 20 0 0"
-                                                                                  Width="250"
-                                                                                  HorizontalAlignment="Center"
-                                                                                  ItemsSource="{Binding RoomTypes}"
-                                                                                  SelectedIndex="{Binding NewRoomType}"
-                                                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                                                                  materialDesign:HintAssist.Hint="Choose room type"
-                                                                                  materialDesign:HintAssist.HintOpacity=".26"
-                                                                                  IsEditable="True">
-                                                                        </ComboBox>
-                                                                        <TextBox  Margin="0 20 0 0"
-                                                                                  Width="250"
-                                                                                  Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                                                  VerticalAlignment="Top"
-                                                                                  AcceptsReturn="True"
-                                                                                  TextWrapping="Wrap"
-                                                                                  materialDesign:HintAssist.Hint="Enter room name"
-                                                                                  Text="{Binding NewRoomName}"
-                                                                                  IsEnabled="True" />
-                                                                        <TextBox  Margin="0 20 0 0"
-                                                                                  Width="250"
-                                                                                  Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                                                  VerticalAlignment="Top"
-                                                                                  AcceptsReturn="True"
-                                                                                  TextWrapping="Wrap"
-                                                                                  materialDesign:HintAssist.Hint="Enter room number"
-                                                                                  Text="{Binding NewRoomNumber}"
-                                                                                  materialDesign:HintAssist.HelperText="Must be number"
-                                                                                  IsEnabled="True" />
-                                                                        <StackPanel Orientation="Horizontal"
-                                                                                    HorizontalAlignment="Center">
-                                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                                                            IsDefault="True"
-                                                                                            Margin="0 30 0 0"
-                                                                                            Content="CONFIRM"
-                                                                                            Command="{Binding CreateNewRoom}">
-                                                                                <Button.CommandParameter>
-                                                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                                                        True
-                                                                                    </system:Boolean>
-                                                                                </Button.CommandParameter>
-                                                                            </Button>
-                                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                                                    IsCancel="True"
-                                                                                    Margin="0 30 0 0"
-                                                                                    Content="CANCEL"
-                                                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                                                                <Button.CommandParameter>
-                                                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                                                        False
-                                                                                    </system:Boolean>
-                                                                                </Button.CommandParameter>
-                                                                            </Button>
-                                                                        </StackPanel>
-                                                                    </StackPanel>
-                                                                </Button.CommandParameter>
-                                                            </Button>
-                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                                    IsCancel="True"
-                                                                    Margin="0 30 0 0"
-                                                                    Content="CANCEL"
-                                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                                                <Button.CommandParameter>
-                                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                                        False
-                                                                    </system:Boolean>
-                                                                </Button.CommandParameter>
-                                                            </Button>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                </Button.CommandParameter>
-                                            </Button>
+                                                    ToolTip="Merge two rooms"
+                                                    Content="MERGE"
+                                                    Command="{Binding MergeRooms}"/>
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     IsDefault="True"
                                                     Margin="0 30 0 0"
-                                                    Content="DIVIDE ROOM"
-                                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
-                                                <Button.CommandParameter>
-                                                    <StackPanel Height="200"
-                                                                Width="400"
-                                                                Margin="40 20 40 20">
-                                                        <TextBlock Text="Choose room to divide"
-                                                                         HorizontalAlignment="Center"
-                                                                         Margin="10"
-                                                                         Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                                        <ComboBox Margin="0 20 0 0"
-                                                                  Width="250"
-                                                                  HorizontalAlignment="Center"
-                                                                  ItemsSource="{Binding Rooms}"
-                                                                  SelectedItem="{Binding NewArrangemenTargetRoom}"
-                                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                                                  materialDesign:HintAssist.Hint="Choose room"
-                                                                  materialDesign:HintAssist.HintOpacity=".26"
-                                                                  IsEditable="True">
-                                                        </ComboBox>
-                                                        <StackPanel Orientation="Horizontal"
-                                                                    HorizontalAlignment="Center">
-                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                                            IsDefault="True"
-                                                                            Margin="0 30 0 0"
-                                                                            Content="DIVIDE"
-                                                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
-                                                                <Button.CommandParameter>
-                                                                    <StackPanel Height="350"
-                                                                                Width="400"
-                                                                                Margin="40 20 40 20">
-                                                                        <TextBlock Text="Create first resulting room"
-                                                                                   HorizontalAlignment="Center"
-                                                                                   Margin="10"
-                                                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                                                        <ComboBox Margin="0 20 0 0"
-                                                                                  Width="250"
-                                                                                  HorizontalAlignment="Center"
-                                                                                  ItemsSource="{Binding RoomTypes}"
-                                                                                  SelectedIndex="{Binding NewRoomType}"
-                                                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                                                                  materialDesign:HintAssist.Hint="Choose room type"
-                                                                                  materialDesign:HintAssist.HintOpacity=".26"
-                                                                                  IsEditable="True">
-                                                                        </ComboBox>
-                                                                        <TextBox  Margin="0 20 0 0"
-                                                                                  Width="250"
-                                                                                  Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                                                  VerticalAlignment="Top"
-                                                                                  AcceptsReturn="True"
-                                                                                  TextWrapping="Wrap"
-                                                                                  materialDesign:HintAssist.Hint="Enter room name"
-                                                                                  Text="{Binding NewRoomName}"
-                                                                                  IsEnabled="True" />
-                                                                        <TextBox  Margin="0 20 0 0"
-                                                                                  Width="250"
-                                                                                  Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                                                  VerticalAlignment="Top"
-                                                                                  AcceptsReturn="True"
-                                                                                  TextWrapping="Wrap"
-                                                                                  materialDesign:HintAssist.Hint="Enter room number"
-                                                                                  Text="{Binding NewRoomNumber}"
-                                                                                  materialDesign:HintAssist.HelperText="Must be number"
-                                                                                  IsEnabled="True" />
-                                                                        <StackPanel Orientation="Horizontal"
-                                                                                    HorizontalAlignment="Center">
-                                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                                                            IsDefault="True"
-                                                                                            Margin="0 30 0 0"
-                                                                                            Content="NEXT"
-                                                                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
-                                                                                <Button.CommandParameter>
-                                                                                    <StackPanel Height="350"
-                                                                                                Width="400"
-                                                                                                Margin="40 20 40 20">
-                                                                                        <TextBlock Text="Create second resulting room"
-                                                                                                   HorizontalAlignment="Center"
-                                                                                                   Margin="10"
-                                                                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                                                                        <ComboBox Margin="0 20 0 0"
-                                                                                                  Width="250"
-                                                                                                  HorizontalAlignment="Center"
-                                                                                                  ItemsSource="{Binding RoomTypes}"
-                                                                                                  SelectedIndex="{Binding NewRoomType}"
-                                                                                                  Style="{StaticResource MaterialDesignFilledComboBox}"
-                                                                                                  materialDesign:HintAssist.Hint="Choose room type"
-                                                                                                  materialDesign:HintAssist.HintOpacity=".26"
-                                                                                                  IsEditable="True">
-                                                                                        </ComboBox>
-                                                                                        <TextBox  Margin="0 20 0 0"
-                                                                                                  Width="250"
-                                                                                                  Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                                                                  VerticalAlignment="Top"
-                                                                                                  AcceptsReturn="True"
-                                                                                                  TextWrapping="Wrap"
-                                                                                                  materialDesign:HintAssist.Hint="Enter room name"
-                                                                                                  Text="{Binding NewRoomName}"
-                                                                                                  IsEnabled="True" />
-                                                                                        <TextBox  Margin="0 20 0 0"
-                                                                                                  Width="250"
-                                                                                                  Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                                                                  VerticalAlignment="Top"
-                                                                                                  AcceptsReturn="True"
-                                                                                                  TextWrapping="Wrap"
-                                                                                                  materialDesign:HintAssist.Hint="Enter room number"
-                                                                                                  Text="{Binding NewRoomNumber}"
-                                                                                                  materialDesign:HintAssist.HelperText="Must be number"
-                                                                                                  IsEnabled="True" />
-                                                                                        <StackPanel Orientation="Horizontal"
-                                                                                                    HorizontalAlignment="Center">
-                                                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                                                                    IsDefault="True"
-                                                                                                    Margin="0 30 0 0"
-                                                                                                    Content="CONFIRM"
-                                                                                                    Command="{Binding CreateNewRoom}">
-                                                                                                <Button.CommandParameter>
-                                                                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                                                                        True
-                                                                                                    </system:Boolean>
-                                                                                                </Button.CommandParameter>
-                                                                                            </Button>
-                                                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                                                                    IsCancel="True"
-                                                                                                    Margin="0 30 0 0"
-                                                                                                    Content="CANCEL"
-                                                                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                                                                                <Button.CommandParameter>
-                                                                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                                                                        False
-                                                                                                    </system:Boolean>
-                                                                                                </Button.CommandParameter>
-                                                                                            </Button>
-                                                                                        </StackPanel>
-                                                                                    </StackPanel>
-                                                                                </Button.CommandParameter>
-                                                                            </Button>
-                                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                                                    IsCancel="True"
-                                                                                    Margin="0 30 0 0"
-                                                                                    Content="CANCEL"
-                                                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                                                                <Button.CommandParameter>
-                                                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                                                        False
-                                                                                    </system:Boolean>
-                                                                                </Button.CommandParameter>
-                                                                            </Button>
-                                                                        </StackPanel>
-                                                                    </StackPanel>
-                                                                </Button.CommandParameter>
-                                                            </Button>
-                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                                    IsCancel="True"
-                                                                    Margin="0 30 0 0"
-                                                                    Content="CANCEL"
-                                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                                                <Button.CommandParameter>
-                                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                                        False
-                                                                    </system:Boolean>
-                                                                </Button.CommandParameter>
-                                                            </Button>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                    
-                                                </Button.CommandParameter>
-                                            </Button>
+                                                    ToolTip="Divide a room"
+                                                    Content="DIVIDE"
+                                                    Command="{Binding DivideRoom}"/>
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     IsCancel="True"
                                                     Margin="0 30 0 0"

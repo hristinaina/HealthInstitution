@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "ID": 15,
+    "Name": "Spojena soba",
+    "Number": 707,
+    "Type": 0,
+    "UnderRenovation": false
+  }
+]

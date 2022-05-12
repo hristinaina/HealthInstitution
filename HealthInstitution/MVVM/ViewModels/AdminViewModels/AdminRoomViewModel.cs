@@ -151,7 +151,6 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             {
                 _roomTypes.Add(t.ToString());
             }
-            OnPropertyChanged(nameof(RoomTypes));
         }
 
         public void FillRoomList()

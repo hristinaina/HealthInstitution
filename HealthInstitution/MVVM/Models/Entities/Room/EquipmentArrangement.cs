@@ -20,9 +20,9 @@ namespace HealthInstitution.MVVM.Models.Entities
         public int Quantity { get => this._quantity; set => _quantity = value; }
         public DateTime StartDate { get => this._startDate; set => _startDate = value; }
         public DateTime EndDate { get => this._endDate; set => _endDate = value; }
+        
         public EquipmentArrangement()
         {
-
         }
 
         public EquipmentArrangement(Equipment equipment, Room room, int quantity, DateTime startDate, DateTime endDate)
@@ -32,6 +32,11 @@ namespace HealthInstitution.MVVM.Models.Entities
             _quantity = quantity;
             _startDate = startDate;
             _endDate = endDate;
+        }
+
+        public bool IsValid()
+        {
+            return _endDate > DateTime.Today;
         }
     }
 }

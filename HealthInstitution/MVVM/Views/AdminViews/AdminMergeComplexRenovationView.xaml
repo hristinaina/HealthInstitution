@@ -7,7 +7,7 @@
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:adminviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.AdminViewModels"
-             
+             d:DataContext="{d:DesignInstance Type=adminviewmodels:AdminMergeComplexRenovationViewModel}"
              mc:Ignorable="d"
              Height="600"
              Width="1200"
@@ -37,12 +37,12 @@
                     <StackPanel
                             Margin="40 20 40 20">
                         <DatePicker Width="250"
-                                SelectedDate="{Binding NewArrangementStartDate}"
+                                SelectedDate="{Binding StartDate}"
                                 Margin="0 20 0 0"
                                 materialDesign:HintAssist.Hint="Pick Start Date"
                                 Style="{StaticResource MaterialDesignFilledDatePicker}" />
                         <DatePicker Width="250"
-                                SelectedDate="{Binding NewArrangementStartDate}"
+                                SelectedDate="{Binding EndDate}"
                                 Margin="0 20 0 0"
                                 materialDesign:HintAssist.Hint="Pick End Date"
                                 Style="{StaticResource MaterialDesignFilledDatePicker}" />
@@ -61,7 +61,7 @@
                               Width="250"
                               HorizontalAlignment="Center"
                               ItemsSource="{Binding Rooms}"
-                              SelectedItem="{Binding NewArrangemenTargetRoom}"
+                              SelectedItem="{Binding FirstSelectedRoom}"
                               Style="{StaticResource MaterialDesignFilledComboBox}"
                               materialDesign:HintAssist.Hint="Choose first room"
                               materialDesign:HintAssist.HintOpacity=".26"
@@ -71,7 +71,7 @@
                               Width="250"
                               HorizontalAlignment="Center"
                               ItemsSource="{Binding Rooms}"
-                              SelectedItem="{Binding NewArrangemenTargetRoom}"
+                              SelectedItem="{Binding SecondSelectedRoom}"
                               Style="{StaticResource MaterialDesignFilledComboBox}"
                               materialDesign:HintAssist.Hint="Choose second room"
                               materialDesign:HintAssist.HintOpacity=".26"
@@ -120,16 +120,26 @@
         </Grid>
         <StackPanel Margin="0,0,0,34"
                     Grid.Row="2"
+                    Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
             <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                ToolTip="Schedule"
-                Content="Schedule"
-                Background="#CC80DEEA"
-                BorderBrush="#6680DEEA"
-                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                IsEnabled="{Binding EnableChanges}"
-                Width="180"/>
+                    ToolTip="Schedule new renovation"
+                    Content="Schedule"
+                    Margin="10"
+                    Background="#CC80DEEA"
+                    BorderBrush="#6680DEEA"
+                    Command="{Binding Merge}"
+                    IsEnabled="True"
+                    Width="180"/>
+            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    ToolTip="Back to renovations"
+                    Content="Back"
+                    Margin="10"
+                    Background="#CC80DEEA"
+                    BorderBrush="#6680DEEA"
+                    Command="{Binding Back}"
+                    Width="180"/>
         </StackPanel>
     </Grid>
 </UserControl>

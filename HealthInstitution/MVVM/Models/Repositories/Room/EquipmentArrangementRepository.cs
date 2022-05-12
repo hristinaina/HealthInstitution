@@ -23,7 +23,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
                 List<EquipmentArrangement> currentArrangement = new List<EquipmentArrangement>();
                 foreach (EquipmentArrangement a in _validArrangement)
                 {
-                    if (a.StartDate < DateTime.Today && a.EndDate > DateTime.Today) currentArrangement.Add(a);
+                    if (a.StartDate <= DateTime.Today && a.EndDate > DateTime.Today) currentArrangement.Add(a);
                 }
                 return currentArrangement;
             }
@@ -34,6 +34,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             _fileName = fileName;
             _validArrangement = new List<EquipmentArrangement>();
         }
+
         public void LoadFromFile()
         {
             List<EquipmentArrangement> allArragments = FileService.Deserialize<EquipmentArrangement>(_fileName);
@@ -41,7 +42,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
 
             foreach (EquipmentArrangement a in allArragments)
             {
-                if (a.EndDate > DateTime.Today) _validArrangement.Add(a);
+                if (a.IsValid()) _validArrangement.Add(a);
             }
         }
 
@@ -50,14 +51,66 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             FileService.Serialize<EquipmentArrangement>(_fileName, _validArrangement);
         }
 
-        public EquipmentArrangement FindByRoomAndEquipment(Entities.Room r, Equipment e)
+        public EquipmentArrangement FindCurrentArrangement(Entities.Room r, Equipment e)
         {
-            foreach (EquipmentArrangement a in _validArrangement)
+            foreach (EquipmentArrangement a in CurrentArrangement)
             {
                 if (a.RoomId == r.ID && a.EquipmentId == e.ID) return a;
             }
             return null;
         }
 
+        public EquipmentArrangement FindFirstBefore(Entities.Room r, Equipment e, DateTime date)
+        {
+            EquipmentArrangement arrangement = null;
+            foreach (EquipmentArrangement a in _validArrangement)
+            {
+                if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate < date)
+                {
+                    if (arrangement is null || a.StartDate > arrangement.StartDate) arrangement = a;
+                }
+            }
+            return arrangement;
+        }
+
+        public List<EquipmentArrangement> FindAllBefore(Entities.Room r, Equipment e, DateTime date)
+        {
+            List<EquipmentArrangement> arrangements = new List<EquipmentArrangement>();
+            foreach (EquipmentArrangement a in _validArrangement)
+            {
+                if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate < date)
+                {
+                    arrangements.Add(a);
+                }
+            }
+            return arrangements;
+        }
+
+        public EquipmentArrangement FindFirstAfter(Entities.Room r, Equipment e, DateTime date)
+        {
+            EquipmentArrangement arrangement = null;
+            foreach (EquipmentArrangement a in _validArrangement)
+            {
+                if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate > date)
+                {
+                    if (arrangement is null || a.StartDate < arrangement.StartDate) arrangement = a;
+                }
+            }
+            return arrangement;
+        }
+
+        public List<EquipmentArrangement> FindAllAfter(Entities.Room r, Equipment e, DateTime date)
+        {
+            List<EquipmentArrangement> arrangements = new List<EquipmentArrangement>();
+            foreach (EquipmentArrangement a in _validArrangement)
+            {
+                if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate > date)
+                {
+                    arrangements.Add(a);
+                }
+            }
+            return arrangements;
+        }
+ 
     }
 }
