@@ -1,6 +1,5 @@
 ﻿using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
-using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +23,6 @@ namespace HealthInstitution.MVVM.Views.PatientViews
             LogOut = new LogOutCommand();
             Record = new RecordContentCommand();
             Appointments = new AppointmentsContentCommand();
-            AdvancedScheduling = new AdvancedSchedulingCommand();
             Search = new SearchContentCommand();
             Survey = new SurveyContentCommand();
         }

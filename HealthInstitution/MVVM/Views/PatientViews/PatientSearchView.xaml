@@ -22,7 +22,7 @@
             <ColumnDefinition Width="6*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <components:PatientNavigationRail SelectedIndex="3"></components:PatientNavigationRail>
+        <components:PatientNavigationRail SelectedIndex="2"></components:PatientNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
             <TextBox Text="Comming soon..." />
