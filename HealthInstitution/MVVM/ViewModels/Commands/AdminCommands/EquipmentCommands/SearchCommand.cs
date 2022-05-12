@@ -22,7 +22,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
         private bool CheckPrerequisites()
         {
             bool prerequisitesFulfilled = true;
-            if (_model.SearchPhrase is null)
+            if (_model.SearchPhrase is null || _model.SearchPhrase.Equals(""))
             {
                 MessageBox.Show("You need to enter phrase for search", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 prerequisitesFulfilled = false;

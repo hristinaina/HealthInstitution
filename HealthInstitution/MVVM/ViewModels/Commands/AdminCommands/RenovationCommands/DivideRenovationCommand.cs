@@ -36,6 +36,10 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             {
                 MessageBox.Show("New room numbers cannot be 0", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else if (_model.FirstNewRoomNumber == _model.SecondNewRoomNumber)
+            {
+                MessageBox.Show("New room numbers must be different", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             else if (!Institution.Instance().RoomRepository.CheckNumber(_model.FirstNewRoomNumber) && !Institution.Instance().RoomRepository.CheckNumber(_model.SecondNewRoomNumber) 
                 && _model.SelectedRoom.Number != _model.FirstNewRoomNumber && _model.SelectedRoom.Number != _model.SecondNewRoomNumber)
             {
