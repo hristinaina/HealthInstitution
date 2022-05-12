@@ -17,7 +17,7 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="NMK"
-        Height="600"
+        Height="650"
         Width="1200"
         Style="{StaticResource AllWindows}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"

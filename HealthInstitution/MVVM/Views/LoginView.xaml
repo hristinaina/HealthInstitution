@@ -99,7 +99,8 @@
                 Content="Log in"
                 Background="#6680DEEA"
                 BorderBrush="#6680DEEA"
-                Command="{Binding Submit}" />
+                Command="{Binding Submit}"
+                IsDefault="True" />
         <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
 
     </Grid>

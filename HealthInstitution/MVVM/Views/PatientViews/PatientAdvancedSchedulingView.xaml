@@ -9,7 +9,7 @@
              xmlns:patientviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.PatientViewModels"
              d:DataContext="{d:DesignInstance Type=patientviewmodels:PatientAdvancedSchedulingViewModel}"
              mc:Ignorable="d"
-             Height="600"
+             Height="650"
              Width="1200"
              Background="White"
              d:DesignHeight="450"
