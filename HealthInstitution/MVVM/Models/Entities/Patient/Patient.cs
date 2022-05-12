@@ -163,16 +163,16 @@ namespace HealthInstitution.MVVM.Models.Entities
             return totalChanges;
         }
 
-        public bool IsAvailable(DateTime startDateTime)
+        public bool IsAvailable(DateTime startDateTime, int durationInMin = 15)
         {
             foreach (Examination examination in Examinations)
             {
-                if (DateTime.Compare(examination.Date, startDateTime) <= 0 && DateTime.Compare(examination.Date.AddMinutes(15), startDateTime) >= 0)
+                if (DateTime.Compare(examination.Date, startDateTime) <= 0 && DateTime.Compare(examination.Date.AddMinutes(durationInMin), startDateTime) >= 0)
                 {
                     return false;
                 }
                 DateTime endDateTime = startDateTime.AddMinutes(15);
-                if (DateTime.Compare(examination.Date, endDateTime) <= 0 && DateTime.Compare(examination.Date.AddMinutes(15), endDateTime) >= 0)
+                if (DateTime.Compare(examination.Date, endDateTime) <= 0 && DateTime.Compare(examination.Date.AddMinutes(durationInMin), endDateTime) >= 0)
                 {
                     return false;
                 }
@@ -191,6 +191,37 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
 
             return true;
+        }
+
+        public Appointment FindInterruptingAppointment(DateTime dateTime, int durationInMin = 15)
+        // returns null if appointment can be reserved
+        // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
+        {
+            for (int i = 0; i < _examinations.Count(); i++)
+            {
+                DateTime examinationStart = _examinations[i].Date;
+                DateTime examinationEnd = examinationStart.AddMinutes(15);
+                if (DateTime.Compare(_examinations[i].Date.Date, dateTime.Date) != 0) continue;
+                if (DateTime.Compare(dateTime, examinationStart) >= 0 &&
+                    DateTime.Compare(dateTime, examinationEnd) < 0) return _examinations[i];
+                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationStart) > 0 &&
+                    DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationEnd) <= 0)
+                    return _examinations[i];
+            }
+
+            for (int i = 0; i < _operations.Count(); i++)
+            {
+                DateTime operationStart = _operations[i].Date;
+                DateTime operationEnd = operationStart.AddMinutes(_operations[i].Duration);
+                if (DateTime.Compare(_operations[i].Date.Date, dateTime.Date) != 0) continue;
+                if (DateTime.Compare(dateTime, operationStart) >= 0 &&
+                    DateTime.Compare(dateTime, operationEnd) < 0) return _operations[i];
+                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), operationStart) > 0 &&
+                    DateTime.Compare(dateTime.AddMinutes(durationInMin), operationEnd) <= 0)
+                    return _operations[i];
+            }
+
+            return null;
         }
 
         public List<string> GetHistoryOfIllness()

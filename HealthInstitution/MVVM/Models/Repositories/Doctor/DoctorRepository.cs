@@ -44,5 +44,14 @@ namespace HealthInstitution.Repositories
 
             return generalPractitioners;
         }
+
+        public Doctor FindDoctorBySpecialization(Specialization specialization)
+        {
+            foreach (Doctor doctor in _doctors)
+            {
+                if (doctor.Specialization == specialization) return doctor;
+            }
+            return null;
+        }
     }
 }
