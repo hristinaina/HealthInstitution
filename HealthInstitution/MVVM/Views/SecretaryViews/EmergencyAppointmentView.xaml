@@ -107,7 +107,7 @@
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                     Width="190"
                                     ToolTip="Choose appointment to reschedule"
-                                    Content="Schedule"
+                                    Content="Reschedule"
                                     Background="#66FFFFFF"
                                     BorderBrush="#6634565A"
                                     Command="{Binding Schedule}"

@@ -213,7 +213,7 @@ namespace HealthInstitution.MVVM.Models
                     return false;
                 }
             }
-            ValidateAppointmentData(patient, doctor, dateTime, validation);
+            ValidateAppointmentData(patient, doctor, dateTime, validation, duration);
 
             int appointmentId = 0;
 
@@ -337,7 +337,7 @@ namespace HealthInstitution.MVVM.Models
             return resolved;
         }
 
-        public void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime, bool validation)
+        public void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime, bool validation, int duration=15)
         {
             if (CurrentUser is Patient || CurrentUser is Secretary)
             {
@@ -353,11 +353,11 @@ namespace HealthInstitution.MVVM.Models
                 {
                     throw new EmptyFieldException("Doctor not selected !");
                 }
-                if (!patient.IsAvailable(dateTime))
+                if (!patient.IsAvailable(dateTime, duration))
                 {
                     throw new UserNotAvailableException("Patient not available at selected time !");
                 }
-                if (!doctor.IsAvailable(dateTime))
+                if (!doctor.IsAvailable(dateTime, duration))
                 {
                     throw new UserNotAvailableException("Doctor not available at selected time !");
                 }

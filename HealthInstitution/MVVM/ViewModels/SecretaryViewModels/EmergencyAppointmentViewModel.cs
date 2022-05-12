@@ -64,7 +64,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public void FillAppointmentsList()
         {
             _appointments.Clear();
-
+            int newDuration = Int32.Parse(_viewModel.SelectedDuration);
             List<Examination> examinations = Institution.Instance().ExaminationRepository.GetFutureExaminations(SelectedSpecialization, SelectedPatient);
             List<Operation> operations = Institution.Instance().OperationRepository.GetFutureOperations(SelectedSpecialization, SelectedPatient);
             AppointmentsNewDate = new();
@@ -79,11 +79,13 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             }
 
             List<Appointment> filteredAppointments = (from entry in AppointmentsNewDate select entry.Key).ToList();
-            filteredAppointments = filteredAppointments.OrderBy(x => x.Emergency).Take(5).ToList();
+            filteredAppointments = filteredAppointments.OrderBy(x => x.Emergency).ToList();
 
             foreach (Appointment appointment in filteredAppointments)
             {
-              _appointments.Add(new AppointmentListItemViewModel(appointment));
+                if (GetDuration(appointment) >= newDuration)
+                    _appointments.Add(new AppointmentListItemViewModel(appointment));
+                if (_appointments.Count >= 5) break;
             }
 
             if (_appointments.Count != 0)
@@ -91,13 +93,6 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 Selection = 0;
                 OnPropertyChanged(nameof(Selection));
             }
-
-            foreach (KeyValuePair<Appointment, DateTime> kvp in AppointmentsNewDate)
-            {
-                //textBox3.Text += ("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-            }
-
         }
 
         public static void FindNewAppointmentTime(Appointment appointment, int duration, Dictionary<Appointment, DateTime> appointments)
@@ -117,7 +112,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                         break;
                     }
                 }
-                catch (Exception e){ } // do nothing
+                catch (Exception e) { } // do nothing
             }
         }
 
@@ -133,6 +128,17 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             }
             Institution.Instance().ValidateAppointmentData(patient, doctor, dateTime, validation);
             return true;
+        }
+
+        public static int GetDuration(Appointment appointment)
+        {
+            int duration = 15;
+            if (appointment.GetType() == typeof(Operation))
+            {
+                Operation o = (Operation)appointment;
+                duration = o.Duration;
+            }
+            return duration;
         }
     }
 }
