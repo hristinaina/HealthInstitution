@@ -42,7 +42,7 @@ namespace HealthInstitution.MVVM.Models
             List<Examination> examinations = new List<Examination>();
             foreach (Examination examination in _examinations)
             {
-                if (examination.Patient.ID == patientId)
+                if (examination.Patient is not null && examination.Patient.ID == patientId)
                     examinations.Add(examination);
             }
             return examinations;

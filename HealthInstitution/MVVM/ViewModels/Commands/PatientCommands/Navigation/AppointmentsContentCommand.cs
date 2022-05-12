@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
-    public class AppointmentsContentCommnad : BaseCommand
+    public class AppointmentsContentCommand : BaseCommand
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
 
-        public AppointmentsContentCommnad()
+        public AppointmentsContentCommand()
         {
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();

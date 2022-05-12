@@ -52,6 +52,22 @@
                 <StackPanel Width="auto"
                             Height="auto">
                     <Button Width="170"
+                            Content="Advanced Scheduling"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Padding="-4"
+                            Command="{Binding Navigation.AdvancedScheduling}"
+                            Height="70"
+                            BorderThickness="0,0,0,0" />
+                    <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+                </StackPanel>
+            </TabItem.Header>
+        </TabItem>
+        <TabItem Width="170">
+            <TabItem.Header>
+                <StackPanel Width="auto"
+                            Height="auto">
+                    <Button Width="170"
                             Content="Search for a doctor"
                             Background="Transparent"
                             BorderBrush="Transparent"
