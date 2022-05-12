@@ -50,7 +50,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly DoctorDaysOffRepository _doctorDaysOffRepository;
         private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
         private ExaminationChangeRepository _examinationChangeRepository;
-  
+
         private User _currentUser;
         public User CurrentUser { get => _currentUser; set { _currentUser = value; } }
 
@@ -196,7 +196,7 @@ namespace HealthInstitution.MVVM.Models
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
         public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
 
-        public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15)
+        public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
         {
             if (CurrentUser is Patient && patient.IsTrolling())
             {
@@ -204,16 +204,16 @@ namespace HealthInstitution.MVVM.Models
             }
             if (CurrentUser is Doctor || CurrentUser is Secretary)
             {
-                if (!doctor.IsAvailable(dateTime))
+                if (!doctor.IsAvailable(dateTime, duration))
                 {
                     return false;
                 }
-                if (!patient.IsAvailable(dateTime))
+                if (!patient.IsAvailable(dateTime, duration))
                 {
                     return false;
                 }
             }
-            ValidateAppointmentData(patient, doctor, dateTime);
+            ValidateAppointmentData(patient, doctor, dateTime, validation);
 
             int appointmentId = 0;
 
@@ -249,7 +249,7 @@ namespace HealthInstitution.MVVM.Models
         }
 
 
-        public bool RescheduleExamination(Appointment appointment, DateTime dateTime)
+        public bool RescheduleExamination(Appointment appointment, DateTime dateTime, bool validation = true)
         {
             if (CurrentUser is Patient && appointment.Patient.IsTrolling())
             {
@@ -266,7 +266,7 @@ namespace HealthInstitution.MVVM.Models
                     return false;
                 }
             }
-            ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime);
+            ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime, validation);
 
             _roomRepository.FindAvailableRoom(appointment, dateTime);
             bool resolved = true;
@@ -337,15 +337,15 @@ namespace HealthInstitution.MVVM.Models
             return resolved;
         }
 
-        private void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime)
+        public void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime, bool validation)
         {
             if (CurrentUser is Patient || CurrentUser is Secretary)
             {
-                if (DateTime.Compare(DateTime.Now, dateTime) > 0)
+                if (DateTime.Compare(DateTime.Now, dateTime) > 0 && validation)
                 {
                     throw new DateException("Date must be in future !");
                 }
-                if ((dateTime - DateTime.Now).TotalDays < 1)
+                if ((dateTime - DateTime.Now).TotalDays < 1 && validation)
                 {
                     throw new DateException("Cannot schedule in next 24 hours");
                 }
@@ -355,7 +355,7 @@ namespace HealthInstitution.MVVM.Models
                 }
                 if (!patient.IsAvailable(dateTime))
                 {
-                    throw new UserNotAvailableException("You are not available at selected time !");
+                    throw new UserNotAvailableException("Patient not available at selected time !");
                 }
                 if (!doctor.IsAvailable(dateTime))
                 {
