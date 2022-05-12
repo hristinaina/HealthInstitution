@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.SecretaryViews"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:secretaryviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.SecretaryViewModels"
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
@@ -154,8 +155,64 @@
                                         HorizontalAlignment="Center"
                                         Margin="0,0,65,50">
                                     <Button.CommandParameter>
-                                        <StackPanel>
-
+                                        <StackPanel Height="350"
+                                                    Width="320"
+                                                    Margin="40 20 40 20">
+                                            <TextBlock Text="Emergency appointment"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="10"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                            <ComboBox Margin="0 20 0 0"
+                                                      Width="250"
+                                                      HorizontalAlignment="Center"
+                                                      Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                      ItemsSource="{Binding Patients}"
+                                                      SelectedItem="{Binding SelectedPatient}"
+                                                      materialDesign:HintAssist.Hint="Search for a patient"
+                                                      materialDesign:HintAssist.HintOpacity=".26"
+                                                      IsEditable="True"/>
+                                            <ComboBox Margin="0 20 0 0"
+                                                      Width="250"
+                                                      HorizontalAlignment="Center"
+                                                      Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                      ItemsSource="{Binding Specializations}"
+                                                      SelectedItem="{Binding SelectedSpecialization}"
+                                                      materialDesign:HintAssist.Hint="Choose doctor specialization"
+                                                      materialDesign:HintAssist.HintOpacity=".26"
+                                                      IsEditable="True" />
+                                            <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                     Text="{Binding SelectedDuration}"
+                                                     Width="250"
+                                                     VerticalAlignment="Center"
+                                                     TextWrapping="Wrap"
+                                                     MaxLength="30"
+                                                     Margin="0 20 0 0"
+                                                     materialDesign:HintAssist.Hint="Duration" />
+                                            <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Center">
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsDefault="True"
+                                                        Margin="0 30 20 0"
+                                                        Content="CREATE"
+                                                        Command="{Binding CreateEmergencyAppointment}">
+                                                    <Button.CommandParameter>
+                                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                            True
+                                                        </system:Boolean>
+                                                    </Button.CommandParameter>
+                                                </Button>
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsCancel="True"
+                                                        Margin="20 30 0 0"
+                                                        Content="DISCARD"
+                                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    <Button.CommandParameter>
+                                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                            False
+                                                        </system:Boolean>
+                                                    </Button.CommandParameter>
+                                                </Button>
+                                            </StackPanel>
                                         </StackPanel>
                                     </Button.CommandParameter>
 

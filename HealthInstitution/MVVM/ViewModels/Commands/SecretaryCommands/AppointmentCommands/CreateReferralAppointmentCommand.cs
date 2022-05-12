@@ -36,7 +36,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
                 bool done = ScheduleAppointment(referral, patient, datetime);
                 if (!done)
                 {
-                    MessageBox.Show("The appointment is not available. Please choose another date or time!");
+                    MessageBox.Show("The appointment is not available. Please choose another date or time!", "Error",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
@@ -44,13 +45,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             catch (PatientBlockedException e)
             {
                 _viewModel.ShowMessage(e.Message, logOut: true);
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             catch (Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -83,10 +84,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
         public bool ScheduleAppointmentBySpecialization(Specialization specialization, Patient patient, DateTime datetime)
         {
             bool done = false;
+            bool specializationException = false;
             foreach (Doctor doctor in Institution.Instance().DoctorRepository.Doctors)
             {
                 if (doctor.Specialization == specialization)
                 {
+                    specializationException = true;
                     done = ScheduleAppointmentByDoctor(doctor, patient, datetime);
                     if (done)
                     {
@@ -94,6 +97,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
                     }
                 }
             }
+            if (!specializationException) throw new Exception("There are currently no doctors with selected specialization that work in this hospital.");
             return done;
         }
 
