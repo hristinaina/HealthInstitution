@@ -66,15 +66,15 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
         {
             if (CheckPrerequisites())
             {
-                List<Room> rooms = new List<Room> { _model.FirstSelectedRoom, _model.SecondSelectedRoom };
+                List<Room> roomsUnderRenovation = new List<Room> { _model.FirstSelectedRoom, _model.SecondSelectedRoom };
                 Room resultingRoom = new Room(Institution.Instance().RoomRepository.GetID(), _model.NewRoomNumber, _model.NewRoomName, (RoomType)_model.NewRoomType);
                 List<Room> result = new List<Room> { resultingRoom };
-                Renovation r = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.StartDate, _model.EndDate, rooms, result);
-                Institution.Instance().RenovationRepository.Renovations.Add(r);
+                Renovation renovation = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.StartDate, _model.EndDate, roomsUnderRenovation, result);
+                Institution.Instance().RenovationRepository.Renovations.Add(renovation);
                 
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(r.ID, _model.FirstSelectedRoom.ID, false));
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(r.ID, _model.SecondSelectedRoom.ID, false));
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(r.ID, resultingRoom.ID, true));
+                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.FirstSelectedRoom.ID, false));
+                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.SecondSelectedRoom.ID, false));
+                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, resultingRoom.ID, true));
 
                 Institution.Instance().RoomRepository.FutureRooms.Add(resultingRoom);
 

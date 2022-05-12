@@ -51,11 +51,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             if (CheckPrerequisites())
             {
                 _model.DialogOpen = false;
+                
                 List<Room> rooms = new List<Room> { _model.NewRenovationRoom };
-                Renovation r = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.NewRenovationStartDate, _model.NewRenovationEndDate, rooms, rooms);
-                Institution.Instance().RenovationRepository.Renovations.Add(r);
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(r.ID, _model.NewRenovationRoom.ID, false));
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(r.ID, _model.NewRenovationRoom.ID, true));
+                Renovation renovation = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.NewRenovationStartDate, _model.NewRenovationEndDate, rooms, rooms);
+                Institution.Instance().RenovationRepository.Renovations.Add(renovation);
+                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, false));
+                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, true));
 
                 _model.FillRenovationList();
             }

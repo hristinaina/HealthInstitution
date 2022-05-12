@@ -75,7 +75,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
         {
             if (!CheckPrerequisites())
             {
-                List<Room> rooms = new List<Room> { _model.SelectedRoom};
+                List<Room> roomUnderRenovation = new List<Room> { _model.SelectedRoom};
                 Room firstResultingRoom = new Room(Institution.Instance().RoomRepository.GetID(), _model.FirstNewRoomNumber, _model.FirstNewRoomName, (RoomType)_model.FirstNewRoomType);
                 Institution.Instance().RoomRepository.FutureRooms.Add(firstResultingRoom);
 
@@ -83,12 +83,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                 Institution.Instance().RoomRepository.FutureRooms.Add(secondResultingRoom);
                 
                 List<Room> result = new List<Room> { firstResultingRoom, secondResultingRoom };
-                Renovation r = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.StartDate, _model.EndDate, rooms, result);
-                Institution.Instance().RenovationRepository.Renovations.Add(r);
+                Renovation renovation = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.StartDate, _model.EndDate, roomUnderRenovation, result);
+                Institution.Instance().RenovationRepository.Renovations.Add(renovation);
 
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(r.ID, _model.SelectedRoom.ID, false));
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(r.ID, firstResultingRoom.ID, true));
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(r.ID, secondResultingRoom.ID, true));
+                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.SelectedRoom.ID, false));
+                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, firstResultingRoom.ID, true));
+                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, secondResultingRoom.ID, true));
 
 
                 NavigationStore.Instance().CurrentViewModel = new AdminRenovationViewModel();
