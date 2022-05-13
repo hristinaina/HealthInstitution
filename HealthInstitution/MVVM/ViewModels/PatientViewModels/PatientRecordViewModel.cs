@@ -38,7 +38,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public void FillAppointmentsList()
         {
             _appointments.Clear();
-            foreach (Appointment appointment in _patient.GetFutureAppointments())
+            foreach (Appointment appointment in _patient.GetPastAppointments())
             {
                 _appointments.Add(new AppointmentListItemViewModel(appointment));
             }

@@ -114,6 +114,20 @@ namespace HealthInstitution.MVVM.Models.Entities
             return futureAppointments;
         }
 
+        public List<Appointment> GetPastAppointments()
+        {
+            List<Appointment> pastAppointments = new List<Appointment>();
+            foreach (Appointment appointment in GetAllAppointments())
+            {
+                if (DateTime.Compare(appointment.Date, DateTime.Now) < 0)
+                {
+                    pastAppointments.Add(appointment);
+                }
+            }
+            pastAppointments = pastAppointments.OrderBy(x => x.Date).ToList();
+            return pastAppointments;
+        }
+
         public bool IsTrolling()
         {
             if (GetEditingHistory() > 5)
