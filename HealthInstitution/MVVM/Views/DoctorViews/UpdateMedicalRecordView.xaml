@@ -183,7 +183,7 @@
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock TextAlignment="Left"
-                                                               Text="Dodati bindovanje"
+                                                               Text="{Binding Illness}"
                                                                Width="130" />
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
@@ -210,6 +210,7 @@
                                                     Margin="0 20"
                                                     Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
                                         <TextBox
+                                            Text="{Binding NewIllness}"
                                             Width="300"
                                             Style="{StaticResource MaterialDesignFilledTextBox}"
                                             VerticalAlignment="Top"
@@ -222,7 +223,7 @@
                                                 Margin="20 30 20 0"
                                                 Content="ADD"
                                                 Width="300"
-                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                Command="{Binding SaveIllnessCommand}">
                                             
                                             <Button.CommandParameter>
                                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
