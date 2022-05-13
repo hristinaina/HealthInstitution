@@ -20,6 +20,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         private Institution _institution;
         public ICommand SaveCommand { get; }
         public ICommand SaveAllergenCommand { get; }
+        public ICommand SaveIllnessCommand { get; }
         public ICommand SaveAnamnesisCommand { get; }
         public ICommand CreateReferralCommand { get; }
         public ICommand CreateReferralSpecCommand { get; }
@@ -51,6 +52,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         private Patient _patient;
         public Patient Patient { get => _patient; }
         public Allergen NewAllergen { get; set; }
+        public string NewIllness { get; set; }
 
         private bool _dialogOpen;
         public bool DialogOpen
@@ -164,6 +166,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
             SaveCommand = new UpdateMedicalRecordCommand(this);
             SaveAllergenCommand = new SaveAllergenCommand(this);
+            SaveIllnessCommand = new SaveIllnessCommand(this);
             SaveAnamnesisCommand = new SaveAnamnesisCommand(this);
             CreateReferralCommand = new CreateReferralCommand(this);
             CreateReferralSpecCommand = new CreateReferralSpecCommand(this);
@@ -218,9 +221,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public void FillIllnessList()
         {
             _illnesses.Clear();
-            List<string> allIllnesses = _examination.Patient.GetHistoryOfIllness();
-            foreach (string illness in allIllnesses)
-            {
+            foreach (string illness in _examination.Patient.Record.HistoryOfIllnesses) {
                 _illnesses.Add(new IllnessItemViewModel(illness));
             }
         }
@@ -264,6 +265,10 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public void AddAllergen(Allergen allergen)
         {
+            foreach(AllergenViewModel allergenViewModel in _allergens)
+            {
+                if (allergenViewModel.AllergenName == allergen.Name) return;
+            }
             _allergens.Add(new AllergenViewModel(allergen));
         }
 

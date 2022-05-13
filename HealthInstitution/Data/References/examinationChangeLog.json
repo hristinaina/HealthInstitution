@@ -79,5 +79,32 @@
     "ChangeDate": "2022-05-11T10:43:46.6585944+02:00",
     "Resolved": true,
     "NewDate": "2022-05-13T03:43:00+02:00"
+  },
+  {
+    "ID": 9,
+    "PatientID": 3,
+    "AppointmentID": 13,
+    "ChangeStatus": 0,
+    "ChangeDate": "2022-05-13T16:20:48.9151789+02:00",
+    "Resolved": true,
+    "NewDate": "2022-05-13T16:20:00+02:00"
+  },
+  {
+    "ID": 10,
+    "PatientID": 6,
+    "AppointmentID": 14,
+    "ChangeStatus": 0,
+    "ChangeDate": "2022-05-13T16:20:54.7967268+02:00",
+    "Resolved": true,
+    "NewDate": "2022-05-15T16:20:00+02:00"
+  },
+  {
+    "ID": 11,
+    "PatientID": 7,
+    "AppointmentID": 15,
+    "ChangeStatus": 0,
+    "ChangeDate": "2022-05-13T17:03:42.1427609+02:00",
+    "Resolved": true,
+    "NewDate": "2022-05-14T17:03:00+02:00"
   }
 ]

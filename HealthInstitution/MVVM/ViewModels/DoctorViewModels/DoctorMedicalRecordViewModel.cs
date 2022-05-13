@@ -16,6 +16,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
+        private ObservableCollection<IllnessItemViewModel> _illnesses;
+        public IEnumerable<IllnessItemViewModel> Illnesses => _illnesses;
         //private MedicalRecordViewModel _medicalRecord;
         //public MedicalRecordViewModel MedicalRecord { get => _medicalRecord; }
         private Examination _examination;
@@ -72,10 +74,12 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
             Navigation = new DoctorNavigationViewModel(isSpecialist);
             _allergens = new ObservableCollection<AllergenViewModel>();
+            _illnesses = new ObservableCollection<IllnessItemViewModel>();
             _examination = selectedExamination;
 
             SetProperties(true);
             FillAllergensList(true);
+            FillIllnessesList(true);
         }
 
         public DoctorMedicalRecordViewModel(Operation selectedOperation)
@@ -85,9 +89,11 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
             Navigation = new DoctorNavigationViewModel(isSpecialist);
             _allergens = new ObservableCollection<AllergenViewModel>();
+            _illnesses = new ObservableCollection<IllnessItemViewModel>();
             _operation = selectedOperation;
             SetProperties(false);
             FillAllergensList(false);
+            FillIllnessesList(false);
 
         }
 
@@ -130,6 +136,23 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         }
 
-      
+        public void FillIllnessesList(bool isExamination)
+        {
+            _illnesses.Clear();
+            if (isExamination)
+            {
+                foreach (string illness in _examination.Patient.Record.HistoryOfIllnesses)
+                {
+                    _illnesses.Add(new IllnessItemViewModel(illness));
+                }
+            } else
+            {
+                foreach (string illness in _operation.Patient.Record.HistoryOfIllnesses)
+                {
+                    _illnesses.Add(new IllnessItemViewModel(illness));
+                }
+            }
+            
+        }
     }
 }

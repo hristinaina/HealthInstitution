@@ -14,11 +14,11 @@ namespace HealthInstitution.MVVM.Models.Entities
         private double _weight;
         private List<Allergen> _allergens;
         private List<Referral> _referrals;
-        // TODO: add refferals
+        private List<string> _historyOfIllnesses;
 
         public double Height { get => _height; set { _height = value; } }
         public double Weight { get => _weight; set { _weight = value; } }
-        // history of sickness !?
+        public List<string> HistoryOfIllnesses { get => _historyOfIllnesses; set { _historyOfIllnesses = value; } }
         [JsonIgnore]
         public List<Allergen> Allergens
         {
@@ -51,11 +51,12 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
         }
 
-        public MedicalRecord(double height, double weight, List<Allergen> allergens)
+        public MedicalRecord(double height, double weight, List<Allergen> allergens, List<string> historyOfIllnesses)
         {
             _height = height;
             _weight = weight;
             _allergens = allergens;
+            _historyOfIllnesses = historyOfIllnesses;
         }
     }
 }
