@@ -51,11 +51,12 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
         }
 
-        public MedicalRecord(double height, double weight, List<Allergen> allergens)
+        public MedicalRecord(double height, double weight, List<Allergen> allergens, List<string> historyOfIllnesses)
         {
             _height = height;
             _weight = weight;
             _allergens = allergens;
+            _historyOfIllnesses = historyOfIllnesses;
         }
     }
 }

@@ -151,5 +151,23 @@
     "Email": "p89",
     "Password": "p",
     "Gender": 1
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 180.0,
+      "Weight": 80.0,
+      "HistoryOfIllnesses": [
+        "Imao glavobolju poslije nastup"
+      ]
+    },
+    "ID": 7,
+    "FirstName": "Harry",
+    "LastName": "Styles",
+    "Email": "itsharry@gmail.com",
+    "Password": "123",
+    "Gender": 2
   }
 ]
