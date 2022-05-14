@@ -41,7 +41,13 @@
   {
     "Specialization": 9,
     "Rating": 0.0,
-    "Notifications": [],
+    "Notifications": [
+      "An emergency appointment with id=7 has been scheduled!",
+      "An emergency appointment with id=8 has been scheduled!",
+      "An emergency appointment with id=9 has been scheduled!",
+      "Appointment with id=9 has been changed. Changed date from 5/14/2022 5:33:29 PM to 5/14/2022 6:18:29 PM",
+      "An emergency appointment with id=10 has been scheduled!"
+    ],
     "ID": 4,
     "FirstName": "Lili",
     "LastName": "Muha",

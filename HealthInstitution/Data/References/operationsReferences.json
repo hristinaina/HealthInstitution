@@ -34,5 +34,29 @@
     "DoctorID": 2,
     "PatientID": 1,
     "RoomID": 1
+  },
+  {
+    "OperationId": 7,
+    "DoctorID": 4,
+    "PatientID": 5,
+    "RoomID": 7
+  },
+  {
+    "OperationId": 8,
+    "DoctorID": 4,
+    "PatientID": 5,
+    "RoomID": 7
+  },
+  {
+    "OperationId": 9,
+    "DoctorID": 4,
+    "PatientID": 5,
+    "RoomID": 7
+  },
+  {
+    "OperationId": 10,
+    "DoctorID": 4,
+    "PatientID": 5,
+    "RoomID": 7
   }
 ]
