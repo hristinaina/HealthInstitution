@@ -19,6 +19,9 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="6*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+
+        <components:NotificationSnackbar Grid.Column="1"
+                                         Panel.ZIndex="2"/>
         <components:AdminNavigationRail SelectedIndex="1"></components:AdminNavigationRail>
         <materialDesign:Card Grid.Column="1">
             <materialDesign:DialogHost DialogTheme="Inherit"
