@@ -61,7 +61,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             foreach (Appointment appointment in appointments)
             {
                 DateTime appointmentBegin = appointment.Date;
-                int duration = 15; ;
+                int duration = 15;
                 if (appointment.GetType() == typeof(Operation))
                 {
                     Operation operation = (Operation)appointment;
@@ -79,63 +79,26 @@ namespace HealthInstitution.MVVM.Models.Entities
             return null; 
         }
 
-        public List<DateTime> FindFreeTime(DateTime date, int durationInMin = 15) 
-        {
-            List<DateTime> availableTime = new();
-            
-            DateTime dateTime = date;
-            dateTime = dateTime.AddHours(8);       // date == today, time == 8:00
-            DateTime borderTime = date;
-            borderTime = borderTime.AddHours(20);  // doctor works till 20 pm
-
-            while (DateTime.Compare(dateTime.AddMinutes(durationInMin), borderTime) <= 0) 
-            {
-                Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
-                if (interruptingAppointment is null)
-                {
-                    availableTime.Add(dateTime);
-                    dateTime = dateTime.AddMinutes(durationInMin);
-                    continue;
-                }
-
-                if (interruptingAppointment.GetType().Equals(typeof(Examination)))
-                {
-                    dateTime = interruptingAppointment.Date.AddMinutes(15);  // continuing at the end of 
-                }                                                                     // interrupting appointment  
-                else
-                {
-                    Operation scheduledOperation = (Operation) interruptingAppointment;
-                    dateTime = scheduledOperation.Date.AddMinutes(scheduledOperation.Duration);
-                }
-            }
-
-            return availableTime;
-        }
-
         // schedule for certain day and 3 days after
-        public List<Examination> GetScheduleOfExaminations(DateTime date)
+        public List<Appointment> GetSchedule(DateTime date, string type)
         {
-            List<Examination> examinations = new();
-
-            foreach (Examination examination in _examinations)
+            List<Appointment> appointments = new();
+            List<Appointment> scheduledAppointments = new();
+            if (type == nameof(Examination))
             {
-                if (examination.Date >= date && date.AddDays(3) >= examination.Date)
-                    examinations.Add(examination);
+                foreach (Examination examination in _examinations) appointments.Add(examination);
+            } else
+            {
+                foreach (Operation operation in _operations) appointments.Add(operation);
             }
 
-            return examinations;
-        }
-
-        public List<Operation> GetScheduleOfOperations(DateTime date)
-        {
-            List<Operation> operations = new();
-            foreach (Operation operation in _operations)
+            foreach (Appointment appointment in appointments)
             {
-                if (operation.Date >= date && date.AddDays(3) >= operation.Date)
-                    operations.Add(operation);
+                if (appointment.Date >= date && date.AddDays(3) >= appointment.Date)
+                    scheduledAppointments.Add(appointment);
             }
 
-            return operations;
+            return scheduledAppointments;
         }
     }
 }

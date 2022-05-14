@@ -196,5 +196,14 @@
     "ChangeDate": "2022-05-14T18:22:10.0965729+02:00",
     "Resolved": true,
     "NewDate": "2022-05-15T18:21:00+02:00"
+  },
+  {
+    "ID": 27,
+    "PatientID": 3,
+    "AppointmentID": 23,
+    "ChangeStatus": 0,
+    "ChangeDate": "2022-05-14T20:36:26.4258471+02:00",
+    "Resolved": true,
+    "NewDate": "2022-05-15T20:36:00+02:00"
   }
 ]

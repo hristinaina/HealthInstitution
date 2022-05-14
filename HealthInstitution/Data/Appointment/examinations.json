@@ -154,5 +154,13 @@
     "Date": "2022-05-15T18:21:00+02:00",
     "Emergency": false,
     "Done": false
+  },
+  {
+    "Anamnesis": null,
+    "Review": null,
+    "ID": 23,
+    "Date": "2022-05-15T20:36:00+02:00",
+    "Emergency": false,
+    "Done": false
   }
 ]

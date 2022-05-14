@@ -122,7 +122,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public void FillOperationsList()
         {
             _operations.Clear();
-            foreach (Operation operation in _doctor.GetScheduleOfOperations(DateTime.Today))
+            foreach (Operation operation in _doctor.GetSchedule(DateTime.Today, nameof(Operation)))
             {
                 _operations.Add(new OperationViewModel(operation));
             }
