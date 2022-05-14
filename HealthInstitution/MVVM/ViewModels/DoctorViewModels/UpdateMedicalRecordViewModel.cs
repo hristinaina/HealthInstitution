@@ -25,6 +25,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand CreateReferralCommand { get; }
         public ICommand CreateReferralSpecCommand { get; }
         public ICommand CreatePrescriptionCommand { get; }
+
         private ObservableCollection<AllergenViewModel> _allergens;
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         private ObservableCollection<Allergen> _newAllergens;

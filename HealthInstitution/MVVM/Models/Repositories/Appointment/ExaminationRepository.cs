@@ -110,7 +110,6 @@ namespace HealthInstitution.MVVM.Models
             }
         }
 
-        // get future examinations by specialization and patient
         public List<Examination> GetFutureExaminations(Specialization specialization, Patient patient)
         {
             List<Examination> futureAppointments = new();
