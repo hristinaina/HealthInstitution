@@ -409,5 +409,13 @@ namespace HealthInstitution.MVVM.Models
                 throw new PatientBlockedException("System has blocked your account !");
             }
         }
+
+        public void AddIllness(Patient patient, string illness)
+        {
+            foreach(Patient i in _patientRepository.Patients)
+            {
+                if (patient.ID == i.ID) patient.Record.HistoryOfIllnesses.Add(illness);
+            }
+        }
     }
 }

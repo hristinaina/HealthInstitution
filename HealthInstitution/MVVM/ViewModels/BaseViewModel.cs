@@ -54,7 +54,7 @@ namespace HealthInstitution.MVVM.ViewModels
         public DateTime MergeTime(string date, string time)
         {
             string[] dateTokens;
-            if (date.Split(" ").Length == 3)
+            if (date.Split(" ").Length == 3 || date.Split(" ").Length == 2)
             {
                 dateTokens = date.Split(" ")[0].Split("/");
             }

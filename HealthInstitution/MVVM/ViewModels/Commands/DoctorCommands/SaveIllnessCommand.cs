@@ -26,7 +26,14 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             Patient patient = examination.Patient;
             patient.Record.HistoryOfIllnesses.Add(_viewModel.NewIllness);
             _viewModel.AddIllness(_viewModel.NewIllness);
-            Institution.Instance().RescheduleExamination(examination, examination.Date);
+            try
+            {
+                Institution.Instance().AddIllness(patient, _viewModel.NewIllness);
+            } catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
+            /*Institution.Instance().RescheduleExamination(examination, examination.Date);*/
         }
     }
 }
