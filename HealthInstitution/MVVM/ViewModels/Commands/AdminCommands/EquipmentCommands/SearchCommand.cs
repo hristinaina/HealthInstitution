@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Exceptions.AdminExceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using System;
@@ -19,25 +20,21 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
             _model = model;
         }
 
-        private bool CheckPrerequisites()
-        {
-            bool prerequisitesFulfilled = true;
-            if (_model.SearchPhrase is null || _model.SearchPhrase.Equals(""))
-            {
-                MessageBox.Show("You need to enter phrase for search", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            return prerequisitesFulfilled;
-        }
-
         public override void Execute(object parameter)
         {
             
-            if(CheckPrerequisites())
+            try 
             {
                 _model.FilteredEquipment = Institution.Instance().EquipmentRepository.Search(_model.SearchPhrase);
 
+
                 _model.FilterEquipmentList();
+            } catch (EmptySearchPhraseException e)
+            {
+                _model.ShowMessage(e.Message);
+            } catch (Exception e)
+            {
+                _model.ShowMessage(e.Message);
             }
         }
     }

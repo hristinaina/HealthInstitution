@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Exceptions.AdminExceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
@@ -24,30 +25,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
         {
             bool prerequisitesFulfillled = true;
             int selectedNumber;
-            if (_model.SelectedName.Equals("") || _model.SelectedName is null)
+            if (!int.TryParse(_model.SelectedNumber, out selectedNumber))
             {
-                MessageBox.Show("Room name cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfillled = false;
-            }
-            else if (_model.SelectedRoom.Room.Type != (RoomType)_model.SelectedTypeIndex && !_model.SelectedRoom.Room.IsChangeable())
-            {
-                MessageBox.Show("Room cannot be changed, because it has scheduled appointments", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                _model.SelectedType = _model.SelectedRoom.Type;
-                _model.SelectedName = _model.SelectedRoom.Name;
-                _model.SelectedNumber = _model.SelectedRoom.Number;
-                prerequisitesFulfillled = false;
-            }
-            else if (!int.TryParse(_model.SelectedNumber, out selectedNumber))
-            {
-                MessageBox.Show("Room number must be whole number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                _model.SelectedType = _model.SelectedRoom.Type;
-                _model.SelectedName = _model.SelectedRoom.Name;
-                _model.SelectedNumber = _model.SelectedRoom.Number;
-                prerequisitesFulfillled = false;
-            }
-            else if (_model.SelectedRoom.Room.Number != selectedNumber && !Institution.Instance().RoomRepository.CheckNumber(selectedNumber))
-            {
-                MessageBox.Show("Number already taken", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _model.ShowMessage("Room number must be whole number");
                 prerequisitesFulfillled = false;
             }
             return prerequisitesFulfillled;
@@ -57,14 +37,36 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
         {
             if (CheckPrerequisites())
             {
-                int selectedNumber = int.Parse(_model.SelectedNumber);
+                try
+                {
+                    int selectedNumber = int.Parse(_model.SelectedNumber);
+                    _model.SelectedRoom.Room.Change(_model.SelectedName, selectedNumber, (RoomType)_model.SelectedTypeIndex);
 
-                _model.DialogOpen = false;
+                    _model.DialogOpen = false;
+                    _model.FillRoomList();
+                }
+                catch (ZeroRoomNumberException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (EmptyRoomNameException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (RoomNumberAlreadyTakenException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (RoomCannotBeChangedException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (Exception e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
 
-                _model.SelectedRoom.Room.Name = _model.SelectedName;
-                _model.SelectedRoom.Room.Number = selectedNumber;
-                _model.SelectedRoom.Room.Type = (RoomType)_model.SelectedTypeIndex;
-                _model.FillRoomList();
+
             }
         }
     }

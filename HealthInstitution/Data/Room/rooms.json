@@ -2,7 +2,7 @@
   {
     "ID": 0,
     "Name": "Warehouse",
-    "Number": 0,
+    "Number": -1,
     "Type": null,
     "UnderRenovation": false
   },
