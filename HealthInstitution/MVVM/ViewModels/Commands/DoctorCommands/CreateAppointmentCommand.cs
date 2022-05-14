@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.Exceptions;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -26,8 +27,24 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             Patient patient = _viewModel.NewPatient;
             DateTime datetime = _viewModel.MergeTime(_viewModel.NewDate, _viewModel.NewTime);
 
-            Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Examination));
+            try
+            {
+                bool isCreated = Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Examination));
+                if (isCreated)
+                {
+                    _viewModel.ShowMessage("Examination successfully scheduled !");
+                }
+            }
+            catch (ExistingAllergenException e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
+            catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
             _viewModel.FillExaminationsList();
+
         }
 
     }

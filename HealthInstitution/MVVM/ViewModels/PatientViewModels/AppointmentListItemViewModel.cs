@@ -12,6 +12,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         Appointment _appointment;
         public Appointment Appointment { get => _appointment; }
 
+        public int Id => _appointment.ID;
+        public bool Emergency => _appointment.Emergency;
         public string Date => _appointment.Date.ToString("dd/MM/yyyy");
         public string Time => _appointment.Date.ToString("HH:mm");
         public Doctor Doctor => _appointment.Doctor;

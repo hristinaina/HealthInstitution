@@ -23,7 +23,6 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public MedicalRecordViewModel(Examination examination) : this()
         {
-            //Navigation = new DoctorNavigationViewModel();
             _examination = examination;
         }
         public MedicalRecordViewModel()

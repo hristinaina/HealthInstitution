@@ -58,7 +58,7 @@ namespace HealthInstitution.MVVM.Models
                     i.Emergency = examination.Emergency;
                     i.Done = examination.Done;
                     i.Anamnesis = examination.Anamnesis;
-                    i.Prescription = examination.Prescription;
+                    i.Prescriptions = examination.Prescriptions;
                     i.Room = examination.Room;
                     return true;
                 }
@@ -110,7 +110,6 @@ namespace HealthInstitution.MVVM.Models
             }
         }
 
-        // get future examinations by specialization and patient
         public List<Examination> GetFutureExaminations(Specialization specialization, Patient patient)
         {
             List<Examination> futureAppointments = new();
@@ -124,6 +123,18 @@ namespace HealthInstitution.MVVM.Models
             }
             futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
             return futureAppointments;
+        }
+
+        public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate)
+        {
+            foreach (Examination appointment in Examinations)
+            {
+                if (appointment.Date == oldDate && appointment.Doctor == doctor && appointment.Patient == patient)
+                {
+                    return appointment;
+                }
+            }
+            return null;
         }
     }
 }

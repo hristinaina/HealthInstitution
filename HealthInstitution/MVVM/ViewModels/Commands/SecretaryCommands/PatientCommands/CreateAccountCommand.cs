@@ -26,12 +26,31 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
 
         public override void Execute(object parameter)
         {
+            bool validation = ValidateData();
+            if (!validation) return;
+
+            int id = Institution.Instance().PatientRepository.GetNewID();
+            Enum.TryParse(_viewModel.NewGender, out Gender gender);
+            int newWeight = Int32.Parse(_viewModel.NewWeight);
+            int newHeight = Int32.Parse(_viewModel.NewHeight);
+
+            Patient patient = new Patient(id, _viewModel.NewName, _viewModel.NewSurname, _viewModel.NewEmail, _viewModel.NewPassword, gender,
+                newHeight, newWeight);
+            Institution.Instance().PatientRepository.Patients.Add(patient);
+            _viewModel.FillPatientList();
+
+            MessageBox.Show("Successfully created patient account!");
+            _viewModel.DialogOpen = false;
+        }
+
+        private bool ValidateData()
+        {
             if (string.IsNullOrWhiteSpace(_viewModel.NewName) || string.IsNullOrWhiteSpace(_viewModel.NewSurname)
                 || string.IsNullOrWhiteSpace(_viewModel.NewPassword) || string.IsNullOrWhiteSpace(_viewModel.NewEmail)
-                || string.IsNullOrWhiteSpace(_viewModel.NewGender)) 
+                || string.IsNullOrWhiteSpace(_viewModel.NewGender))
             {
                 MessageBox.Show("You need to fill all fields", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return false;
             }
 
             double newHeight;
@@ -39,7 +58,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
             if (!isHeightDouble)
             {
                 MessageBox.Show("Height must be a number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return false;
             }
 
             double newWeight;
@@ -47,26 +66,15 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
             if (!isWeightDouble)
             {
                 MessageBox.Show("Weight must be a number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return false;
             }
 
             if (!ReferencesService.CheckIfEmailIsAvailable(_viewModel.NewEmail))
             {
                 MessageBox.Show("Account with this email already exist! Please choose a new one!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return false;
             }
-
-            int id = Institution.Instance().PatientRepository.GetNewID();
-            Enum.TryParse(_viewModel.NewGender, out Gender gender);
-            Patient patient = new Patient(id, _viewModel.NewName, _viewModel.NewSurname, _viewModel.NewEmail, _viewModel.NewPassword, gender,
-                newHeight, newWeight);
-            Institution.Instance().PatientRepository.Patients.Add(patient);
-
-            _viewModel.FillPatientList();
-
-            MessageBox.Show("Successfully created patient account!");
-
-            _viewModel.DialogOpen = false;
+            return true;
         }
     }
 }

@@ -45,7 +45,7 @@
 
                         <ListView ItemsSource="{Binding Appointments}"
                                   VerticalAlignment="Top"
-                                  Width="500"
+                                  Width="750"
                                   SelectionMode="Single"
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                   HorizontalAlignment="Center"
@@ -53,7 +53,17 @@
                                   Grid.Row="1">
                             <ListView.View>
                                 <GridView AllowsColumnReorder="False">
-                                    <GridViewColumn Width="150"
+                                    <GridViewColumn Width="100"
+                                                    Header="Id">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Center"
+                                                           Text="{Binding Id}"
+                                                           Width="50" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="100"
                                                     Header="Date">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -73,13 +83,13 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Width="120"
+                                    <GridViewColumn Width="150"
                                                     Header="Room">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock TextAlignment="Center"
                                                            Text="{Binding Room}"
-                                                           Width="70" />
+                                                           Width="110" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -90,6 +100,16 @@
                                                 <TextBlock TextAlignment="Left"
                                                            Text="{Binding Doctor}"
                                                            Width="120" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="170"
+                                                    Header="Emergency">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Center"
+                                                           Text="{Binding Emergency}"
+                                                           Width="150" />
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>

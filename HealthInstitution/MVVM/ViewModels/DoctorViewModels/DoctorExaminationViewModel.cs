@@ -122,7 +122,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public void FillExaminationsList()
         {
             _examinations.Clear();
-            foreach (Examination examination in _doctor.GetScheduleOfExaminations(DateTime.Today))
+            foreach (Examination examination in _doctor.GetSchedule(DateTime.Today, nameof(Examination)))
             {
                 _examinations.Add(new ExaminationViewModel(examination));
             }

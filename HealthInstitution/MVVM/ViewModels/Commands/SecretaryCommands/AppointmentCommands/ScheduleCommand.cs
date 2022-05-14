@@ -9,6 +9,7 @@ using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Enumerations;
+using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
 
@@ -32,7 +33,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
         {
             if (_viewModel.SelectedAppointment is null)
             {
-                MessageBox.Show("No appointments to reschedule. Recommendation: create a non-emergency appointment !");
+                MessageBox.Show("No compatible appointments to reschedule. Recommendation: create a non-emergency appointment !");
                 _navigationStore.CurrentViewModel = new AppointmentsViewModel();
                 return;
             }
@@ -53,6 +54,19 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
 
             Institution.Instance().CreateAppointment(doctor, patient, oldDate, type, duration, false);
             MessageBox.Show("Emergency appointment has been successfully created !");
+
+            SendNotifications(appointmentToPostpone, oldDate, newDate, patient, doctor);
+        }
+
+        private void SendNotifications(Appointment rescheduledAppointment, DateTime oldDate, DateTime newDate, Patient patient, Doctor doctor)
+        {
+            string message = "Appointment with id=" + rescheduledAppointment.ID.ToString() + " has been changed." +
+                " Changed date from " + oldDate.ToString() + " to " + newDate.ToString();
+            patient.Notifications.Add(message);
+            doctor.Notifications.Add(message);
+            Appointment newAppointment = SecretaryService.FindAppointment(patient, doctor, oldDate);
+            newAppointment.Emergency = true;
+            doctor.Notifications.Add("An emergency appointment with id=" + newAppointment.ID.ToString() + " has been scheduled!");
             _navigationStore.CurrentViewModel = new AppointmentsViewModel();
         }
     }

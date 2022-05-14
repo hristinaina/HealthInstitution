@@ -25,7 +25,21 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             Doctor doctor = _viewModel.Doctor;
             Patient patient = _viewModel.NewPatient;
             DateTime datetime = _viewModel.MergeTime(_viewModel.NewDate, _viewModel.NewTime);
-            Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Operation), _viewModel.Duration);
+
+            try
+            {
+                bool isCreated = Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Operation), _viewModel.Duration);
+                
+                if (isCreated)
+                {
+                    _viewModel.ShowMessage("Examination successfully scheduled !");
+                }
+            }
+            catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
+
             _viewModel.FillOperationsList();
         }
     }
