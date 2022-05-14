@@ -60,8 +60,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
                 " Changed date from " + oldDate.ToString() + " to " + newDate.ToString();
             patient.Notifications.Add(message);
             doctor.Notifications.Add(message);
-            int newId = SecretaryService.FindAppointmentId(patient, doctor, oldDate);
-            doctor.Notifications.Add("An emergency appointment with id=" + newId.ToString() + " has been scheduled!");
+            Appointment newAppointment = SecretaryService.FindAppointment(patient, doctor, oldDate);
+            newAppointment.Emergency = true;
+            doctor.Notifications.Add("An emergency appointment with id=" + newAppointment.ID.ToString() + " has been scheduled!");
             _navigationStore.CurrentViewModel = new AppointmentsViewModel();
         }
     }

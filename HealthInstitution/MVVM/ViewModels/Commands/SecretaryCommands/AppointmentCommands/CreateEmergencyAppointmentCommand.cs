@@ -53,8 +53,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
                 if (created)
                 {
                     MessageBox.Show("Appointment has been successfully created!");
-                    int newId = SecretaryService.FindAppointmentId(_viewModel.SelectedPatient, _doctor, _newDate);
-                    _doctor.Notifications.Add("An emergency appointment with id=" + newId.ToString() + " has been scheduled!");
+                    Appointment newAppointment = SecretaryService.FindAppointment(_viewModel.SelectedPatient, _doctor, _newDate);
+                    newAppointment.Emergency = true;
+                    _doctor.Notifications.Add("An emergency appointment with id=" + newAppointment.ID.ToString() + " has been scheduled!");
                     return;
                 }
             }
