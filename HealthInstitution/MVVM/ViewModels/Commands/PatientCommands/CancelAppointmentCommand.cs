@@ -27,6 +27,11 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             _viewModel.DialogOpen = false;
 
             Appointment examination = _viewModel.SelectedAppointment.Appointment;
+            if (examination is Operation)
+            {
+                _viewModel.ShowMessage("Cannot cancel operation !");
+                return;
+            }
 
 
             try
