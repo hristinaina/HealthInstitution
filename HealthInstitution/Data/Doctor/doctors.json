@@ -2,6 +2,7 @@
   {
     "Specialization": 0,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 1,
     "FirstName": "Doctor",
     "LastName": "Someone",
@@ -12,6 +13,7 @@
   {
     "Specialization": 7,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 2,
     "FirstName": "Jovan",
     "LastName": "Guzinic",
@@ -22,6 +24,7 @@
   {
     "Specialization": 8,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 3,
     "FirstName": "Bogo",
     "LastName": "Moljka",
@@ -32,6 +35,7 @@
   {
     "Specialization": 9,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 4,
     "FirstName": "Lili",
     "LastName": "Muha",
@@ -42,6 +46,7 @@
   {
     "Specialization": 4,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 5,
     "FirstName": "Veljko",
     "LastName": "Zec",
@@ -52,6 +57,7 @@
   {
     "Specialization": 2,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 6,
     "FirstName": "Mirko",
     "LastName": "Vrabec",
@@ -62,6 +68,7 @@
   {
     "Specialization": 0,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 7,
     "FirstName": "Mirko2",
     "LastName": "Vrabec",
