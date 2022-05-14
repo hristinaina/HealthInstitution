@@ -1,4 +1,5 @@
-﻿using HealthInstitution.MVVM.Models.Enumerations;
+﻿using HealthInstitution.Exceptions.AdminExceptions;
+using HealthInstitution.MVVM.Models.Enumerations;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -103,19 +104,14 @@ namespace HealthInstitution.MVVM.Models.Entities
 
             Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, warehouse, newWarehouseQuantity, date, newArrangementTargetEndDate));
 
-
-
-            //EquipmentArrangement newArragment = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(warehouse, this);
-            //if (newArragment is null)
-            //{
-            //    newArragment = new EquipmentArrangement(this, warehouse, 0, a.EndDate, DateTime.MaxValue);
-            //    Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(newArragment);
-            //}
-            //newArragment.Quantity += _arrangmentByRooms[room];
         }
 
         public void Rearrange(Room destinationRoom, Room targetRoom, DateTime newArrangementStartDate, int newArrangementQuantity)
         {
+            if (targetRoom is null) throw new RearrangeTargetRoomNullException("Target room must be selected");
+            else if (newArrangementQuantity == 0) throw new ZeroQuantityException("Quantity cannot be zero");
+            else if (newArrangementStartDate <= DateTime.Today) throw new RearrangeDateException("Arrangement date must be in future");
+            else if (newArrangementQuantity > ArrangmentByRooms[destinationRoom]) throw new NotEnoughEquipmentException("Not enough equipment in selected room");
             MoveFromRoom(destinationRoom, newArrangementStartDate, newArrangementQuantity);
             MoveToNewRoom(targetRoom, newArrangementStartDate, newArrangementQuantity);
         }

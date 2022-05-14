@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Exceptions.AdminExceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
@@ -29,23 +30,29 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
                 MessageBox.Show("Minimum and maximum quantity must be whole numbers!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 prerequisitesFulfilled = false;
             }
-            else if (minQuantity >= maxQuantity)
-            {
-                MessageBox.Show("Minimum quantity must be lower than maximum quantity!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
             return prerequisitesFulfilled;
         }
+
         public override void Execute(object parameter)
         {
             if (CheckPrerequisites())
             {
+        
                 int minQuantity = int.Parse(_model.FilterMinQuantity), maxQuantity = int.Parse(_model.FilterMaxQuantity);
-                _model.DialogOpen = false;
-
+                try
+                {
                 _model.FilteredEquipment = Institution.Instance().EquipmentRepository.FilterEquipment((RoomType)_model.FilterRoomType, minQuantity, maxQuantity, (EquipmentType)_model.FilterEquipmentType);
 
+                _model.DialogOpen = false;
                 _model.FilterEquipmentList();
+                } catch (EquipmentFilterQuantityException e)
+                {
+                    _model.ShowMessage(e.Message);
+                } catch (Exception e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+
             }
         }
     }
