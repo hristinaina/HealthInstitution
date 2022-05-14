@@ -20,8 +20,20 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public PatientNavigationViewModel Navigation { get; }
         public Patient Patient => _patient;
 
-        private readonly ObservableCollection<AppointmentListItemViewModel> _appointments;
-        public IEnumerable<AppointmentListItemViewModel> Appointments => _appointments;
+
+        private ObservableCollection<AppointmentListItemViewModel> _appointments;
+        public IEnumerable<AppointmentListItemViewModel> Appointments {
+            get { return _appointments; }
+            set { _appointments = new ObservableCollection<AppointmentListItemViewModel>(value); }
+        }
+
+        private string _searchKeyWord;
+        public string SearchKeyWord {
+            get { return _searchKeyWord; }
+            set { _searchKeyWord = value; OnPropertyChanged(SearchKeyWord); }
+        }
+        public ICommand Search { get; set; }
+
 
 
         public PatientRecordViewModel()
@@ -30,25 +42,20 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _patient = (Patient)_institution.CurrentUser;
             Navigation = new PatientNavigationViewModel();
             _appointments = new ObservableCollection<AppointmentListItemViewModel>();
-            FillAppointmentsList();
+            FillAppointmentsList(_patient.GetPastAppointments());
+            Search = new SearchAnamnesisCommand(this);
+            _searchKeyWord = "";
 
             // ..............
         }
 
-        public void FillAppointmentsList()
+        public void FillAppointmentsList(List<Appointment> appointments)
         {
             _appointments.Clear();
-            foreach (Appointment appointment in _patient.GetPastAppointments())
+            foreach (Appointment appointment in appointments)
             {
                 _appointments.Add(new AppointmentListItemViewModel(appointment));
             }
-            //if (_appointments.Count != 0)
-            //{
-            //    Selection = 0;
-            //    EnableChanges = true;
-            //    OnPropertyChanged(nameof(Selection));
-            //    OnPropertyChanged(nameof(EnableChanges));
-            //}
             OnPropertyChanged(nameof(Appointments));
         }
 

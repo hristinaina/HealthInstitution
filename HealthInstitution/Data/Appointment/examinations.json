@@ -11,7 +11,7 @@
     "Done": true
   },
   {
-    "Anamnesis": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": {
       "Rating": 0.0,
       "Comment": ""
@@ -22,7 +22,7 @@
     "Done": false
   },
   {
-    "Anamnesis": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. ",
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": {
       "Rating": 0.0,
       "Comment": ""
@@ -33,7 +33,7 @@
     "Done": false
   },
   {
-    "Anamnesis": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vel hendrerit urna. Ut a nulla urna. Praesent non urna sit amet felis volutpat pharetra. Aenean nec felis eu nibh congue consequat. Donec feugiat massa nisl, eget interdum tortor auctor et. In hac habitasse platea dictumst. Sed varius elit id feugiat pretium. Etiam in sapien auctor, luctus diam eu, accumsan ligula. Sed quis nibh nec tortor porta sollicitudin volutpat eleifend ipsum. Nulla facilisi. Donec sit amet risus pretium, placerat mauris quis, sodales libero. Ut id purus tincidunt, commodo ipsum ut, ornare erat. Vivamus ut eros dignissim tellus fermentum ultrices a quis nibh. Ut semper, libero volutpat vulputate sodales, mi eros cursus tellus, vel porta dui est id justo. ",
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": {
       "Rating": 0.0,
       "Comment": ""
@@ -44,7 +44,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 5,
     "Date": "2022-04-30T18:43:37.0931955+02:00",
@@ -52,7 +52,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 6,
     "Date": "2022-05-11T10:43:00+02:00",
@@ -60,7 +60,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 7,
     "Date": "2022-05-12T10:43:00+02:00",
@@ -68,7 +68,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 8,
     "Date": "2022-05-13T10:43:00+02:00",
@@ -76,7 +76,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 9,
     "Date": "2022-05-13T03:43:00+02:00",
@@ -84,7 +84,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 8,
     "Date": "2022-05-20T10:35:00+02:00",
@@ -92,7 +92,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 9,
     "Date": "2022-05-27T11:15:00+02:00",
@@ -100,7 +100,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 10,
     "Date": "2022-05-11T15:57:00+02:00",

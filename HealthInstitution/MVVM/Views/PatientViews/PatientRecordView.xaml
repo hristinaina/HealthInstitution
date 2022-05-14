@@ -154,14 +154,45 @@
                         </DataTemplate>
                     </DataGrid.RowDetailsTemplate>
                 </DataGrid>
+                <Grid Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="4.5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
                 <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                         VerticalAlignment="Top"
                          TextWrapping="NoWrap"
-                         Grid.Row="5"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Top"
+                         Grid.Column="1"
                          MaxWidth="400"
                          FontSize="12"
                          materialDesign:HintAssist.Hint="Search for anamnesis by keyword"
-                         Background="#A5FFFFFF" />
+                         Background="#A5FFFFFF"
+                         Text="{Binding SearchKeyWord}"/>
+                    <Button Grid.Column="2"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            HorizontalAlignment="Center"
+                            Padding="0"
+                            Margin="0 15 0 0"
+                            VerticalAlignment="Top"
+                            IsDefault="True"
+                            Command="{Binding Search}">
+                        <materialDesign:PackIcon Kind="Magnify" />
+                    </Button>
+                    <Button Grid.Column="3"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            HorizontalAlignment="Center"
+                            Padding="0"
+                            Margin="0 15 0 0"
+                            VerticalAlignment="Top"
+                            Command="{Binding Search}">
+                        <materialDesign:PackIcon Kind="Refresh" />
+                    </Button> 
+
+                </Grid>
             </Grid>
         </materialDesign:Card>
     </Grid>
