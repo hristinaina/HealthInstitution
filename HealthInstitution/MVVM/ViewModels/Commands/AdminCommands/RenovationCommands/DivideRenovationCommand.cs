@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using HealthInstitution.Exceptions.AdminExceptions;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCommands
 {
@@ -31,25 +32,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                 MessageBox.Show("Room for dividing must be selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 prerequisitesFulfilled = false;
             }
-            else if (_model.FirstNewRoomName is null || _model.FirstNewRoomName.Equals("") || _model.SecondNewRoomName is null || _model.SecondNewRoomName.Equals(""))
-            {
-                MessageBox.Show("You need to fill new room names", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            else if (_model.FirstNewRoomNumber == 0 || _model.SecondNewRoomNumber == 0)
-            {
-                MessageBox.Show("New room numbers cannot be 0", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
             else if (_model.FirstNewRoomNumber == _model.SecondNewRoomNumber)
             {
                 MessageBox.Show("New room numbers must be different", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            else if (!Institution.Instance().RoomRepository.CheckNumber(_model.FirstNewRoomNumber) && !Institution.Instance().RoomRepository.CheckNumber(_model.SecondNewRoomNumber)
-                && _model.SelectedRoom.Number != _model.FirstNewRoomNumber && _model.SelectedRoom.Number != _model.SecondNewRoomNumber)
-            {
-                MessageBox.Show("Number already taken", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 prerequisitesFulfilled = false;
             }
             else if (_model.StartDate <= DateTime.Today)
@@ -66,6 +51,10 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             {
                 MessageBox.Show("End date must be after start date", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 prerequisitesFulfilled = false;
+            } else if (_model.SelectedRoom.IsUnderRenovation(_model.StartDate, _model.EndDate))
+            {
+                MessageBox.Show("Room is already under renovation in selected period", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                prerequisitesFulfilled = false;
             }
 
             return prerequisitesFulfilled;
@@ -73,25 +62,45 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
 
         public override void Execute(object parameter)
         {
-            if (!CheckPrerequisites())
+            if (CheckPrerequisites())
             {
-                List<Room> roomUnderRenovation = new List<Room> { _model.SelectedRoom};
-                Room firstResultingRoom = new Room(Institution.Instance().RoomRepository.GetID(), _model.FirstNewRoomNumber, _model.FirstNewRoomName, (RoomType)_model.FirstNewRoomType);
-                Institution.Instance().RoomRepository.FutureRooms.Add(firstResultingRoom);
+                try
+                {
+                    int id = Institution.Instance().RoomRepository.GetID();
+                    List<Room> roomUnderRenovation = new List<Room> { _model.SelectedRoom};
+                    Room firstResultingRoom = Institution.Instance().RoomRepository.CreateRoom(Institution.Instance().RoomRepository.GetID(), _model.FirstNewRoomName, _model.FirstNewRoomNumber, (RoomType)_model.FirstNewRoomType, true);
+                    Institution.Instance().RoomRepository.FutureRooms.Add(firstResultingRoom);
 
-                Room secondResultingRoom = new Room(Institution.Instance().RoomRepository.GetID(), _model.SecondNewRoomNumber, _model.SecondNewRoomName, (RoomType)_model.SecondNewRoomType);
-                Institution.Instance().RoomRepository.FutureRooms.Add(secondResultingRoom);
+                    id = Institution.Instance().RoomRepository.GetID();
+                    Room secondResultingRoom = Institution.Instance().RoomRepository.CreateRoom(id, _model.SecondNewRoomName, _model.SecondNewRoomNumber, (RoomType)_model.SecondNewRoomType, true);
                 
-                List<Room> result = new List<Room> { firstResultingRoom, secondResultingRoom };
-                Renovation renovation = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.StartDate, _model.EndDate, roomUnderRenovation, result);
-                Institution.Instance().RenovationRepository.Renovations.Add(renovation);
+                    List<Room> result = new List<Room> { firstResultingRoom, secondResultingRoom };
+                    Renovation renovation = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.StartDate, _model.EndDate, roomUnderRenovation, result);
+                    Institution.Instance().RenovationRepository.Renovations.Add(renovation);
 
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.SelectedRoom.ID, false));
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, firstResultingRoom.ID, true));
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, secondResultingRoom.ID, true));
+                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.SelectedRoom.ID, false));
+                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, firstResultingRoom.ID, true));
+                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, secondResultingRoom.ID, true));
 
 
-                NavigationStore.Instance().CurrentViewModel = new AdminRenovationViewModel();
+                    NavigationStore.Instance().CurrentViewModel = new AdminRenovationViewModel();
+                }
+                catch (ZeroRoomNumberException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (EmptyRoomNameException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (RoomNumberAlreadyTakenException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (Exception e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
             }
         }
     }
