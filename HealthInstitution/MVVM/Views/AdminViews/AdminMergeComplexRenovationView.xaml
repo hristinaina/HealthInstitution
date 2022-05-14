@@ -20,6 +20,9 @@
             <RowDefinition Height="6*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
+
+        <components:NotificationSnackbar Grid.Row="1"
+                                         Panel.ZIndex="2"/>
         <Grid Grid.Row="0">
             <TextBlock Text="Schedule complex renovation"
                        HorizontalAlignment="Center"
