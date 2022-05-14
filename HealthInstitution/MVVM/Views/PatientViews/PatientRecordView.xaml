@@ -188,7 +188,7 @@
                             Padding="0"
                             Margin="0 15 0 0"
                             VerticalAlignment="Top"
-                            Command="{Binding Search}">
+                            Command="{Binding Reset}">
                         <materialDesign:PackIcon Kind="Refresh" />
                     </Button> 
 

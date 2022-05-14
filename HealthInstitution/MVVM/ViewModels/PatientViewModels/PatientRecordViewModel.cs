@@ -33,6 +33,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             set { _searchKeyWord = value; OnPropertyChanged(SearchKeyWord); }
         }
         public ICommand Search { get; set; }
+        public ICommand Reset { get; set; }
 
 
 
@@ -43,8 +44,9 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             Navigation = new PatientNavigationViewModel();
             _appointments = new ObservableCollection<AppointmentListItemViewModel>();
             FillAppointmentsList(_patient.GetPastAppointments());
-            Search = new SearchAnamnesisCommand(this);
             _searchKeyWord = "";
+            Search = new SearchAnamnesisCommand(this);
+            Reset = new ResetRecordCommand(this);
 
             // ..............
         }
