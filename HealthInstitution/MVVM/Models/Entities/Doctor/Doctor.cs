@@ -14,6 +14,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private List<Operation> _operations;
         private List<DayOff> _daysOff;
         private double _rating;
+        private List<string> _notifications;
 
         [JsonProperty("Specialization")]
         public Specialization Specialization { get => _specialization; set { _specialization = value; } }
@@ -25,6 +26,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         public List<Operation> Operations { get => _operations; set { _operations = value; } }
         [JsonIgnore]
         public List<DayOff> DaysOff { get => _daysOff; set { _daysOff = value; } }
+        public List<string> Notifications { get => _notifications; set { _notifications = value; } }
 
         public Doctor()
         {
@@ -32,6 +34,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             _examinations = new List<Examination>();
             _operations = new List<Operation>();
             _daysOff = new List<DayOff>();
+            _notifications = new List<string>();
         }
 
         public Doctor(Specialization specialization = Specialization.NONE) : this()

@@ -2,6 +2,7 @@
   {
     "Specialization": 0,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 1,
     "FirstName": "Doctor",
     "LastName": "Someone",
@@ -12,6 +13,13 @@
   {
     "Specialization": 7,
     "Rating": 0.0,
+    "Notifications": [
+      "An emergency appointment with id=3 has been scheduled!",
+      "An emergency appointment with id=4 has been scheduled!",
+      "An emergency appointment with id=5 has been scheduled!",
+      "Appointment with id=5 has been changed. Changed date from 5/14/2022 5:36:13 PM to 5/14/2022 6:21:13 PM",
+      "An emergency appointment with id=6 has been scheduled!"
+    ],
     "ID": 2,
     "FirstName": "Jovan",
     "LastName": "Guzinic",
@@ -22,6 +30,7 @@
   {
     "Specialization": 8,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 3,
     "FirstName": "Bogo",
     "LastName": "Moljka",
@@ -32,6 +41,13 @@
   {
     "Specialization": 9,
     "Rating": 0.0,
+    "Notifications": [
+      "An emergency appointment with id=7 has been scheduled!",
+      "An emergency appointment with id=8 has been scheduled!",
+      "An emergency appointment with id=9 has been scheduled!",
+      "Appointment with id=9 has been changed. Changed date from 5/14/2022 5:33:29 PM to 5/14/2022 6:18:29 PM",
+      "An emergency appointment with id=10 has been scheduled!"
+    ],
     "ID": 4,
     "FirstName": "Lili",
     "LastName": "Muha",
@@ -42,6 +58,7 @@
   {
     "Specialization": 4,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 5,
     "FirstName": "Veljko",
     "LastName": "Zec",
@@ -52,6 +69,7 @@
   {
     "Specialization": 2,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 6,
     "FirstName": "Mirko",
     "LastName": "Vrabec",
@@ -62,6 +80,7 @@
   {
     "Specialization": 0,
     "Rating": 0.0,
+    "Notifications": [],
     "ID": 7,
     "FirstName": "Mirko2",
     "LastName": "Vrabec",

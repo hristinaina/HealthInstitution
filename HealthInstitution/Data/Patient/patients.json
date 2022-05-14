@@ -1,5 +1,8 @@
 [
   {
+    "Notifications": [
+      "Appointment with id=5 has been changed. Changed date from 5/14/2022 5:36:13 PM to 5/14/2022 6:21:13 PM"
+    ],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": false,
@@ -19,6 +22,7 @@
     "Gender": 0
   },
   {
+    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": false,
@@ -38,6 +42,7 @@
     "Gender": 1
   },
   {
+    "Notifications": [],
     "Blocked": true,
     "BlockadeType": 1,
     "Deleted": false,
@@ -57,6 +62,7 @@
     "Gender": 2
   },
   {
+    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": true,
@@ -76,6 +82,9 @@
     "Gender": 1
   },
   {
+    "Notifications": [
+      "Appointment with id=9 has been changed. Changed date from 5/14/2022 5:33:29 PM to 5/14/2022 6:18:29 PM"
+    ],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": false,
@@ -95,6 +104,7 @@
     "Gender": 2
   },
   {
+    "Notifications": [],
     "Blocked": true,
     "BlockadeType": 1,
     "Deleted": false,
@@ -115,6 +125,7 @@
     "Gender": 2
   },
   {
+    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": true,
@@ -134,6 +145,7 @@
     "Gender": 1
   },
   {
+    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": false,
@@ -153,6 +165,7 @@
     "Gender": 1
   },
   {
+    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": false,

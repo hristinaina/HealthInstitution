@@ -125,5 +125,17 @@ namespace HealthInstitution.MVVM.Models
             futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
             return futureAppointments;
         }
+
+        public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate)
+        {
+            foreach (Examination appointment in Examinations)
+            {
+                if (appointment.Date == oldDate && appointment.Doctor == doctor && appointment.Patient == patient)
+                {
+                    return appointment;
+                }
+            }
+            return null;
+        }
     }
 }

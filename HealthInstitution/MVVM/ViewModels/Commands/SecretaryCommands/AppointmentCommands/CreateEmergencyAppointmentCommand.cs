@@ -8,6 +8,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
 
@@ -19,6 +20,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
         private AppointmentsViewModel _viewModel;
         private readonly NavigationStore _navigationStore;
         private int _newDuration;
+        private Doctor _doctor;
+        private DateTime _newDate;
 
         public CreateEmergencyAppointmentCommand(AppointmentsViewModel viewModel)
         {
@@ -26,6 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             _viewModel = viewModel;
             _navigationStore = NavigationStore.Instance();
             _newDuration = 0;
+            _doctor = null;
         }
 
         public override void Execute(object parameter)
@@ -49,6 +53,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
                 if (created)
                 {
                     MessageBox.Show("Appointment has been successfully created!");
+                    Appointment newAppointment = SecretaryService.FindAppointment(_viewModel.SelectedPatient, _doctor, _newDate);
+                    newAppointment.Emergency = true;
+                    _doctor.Notifications.Add("An emergency appointment with id=" + newAppointment.ID.ToString() + " has been scheduled!");
                     return;
                 }
             }
@@ -70,6 +77,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             Patient patient = _viewModel.SelectedPatient;
             DateTime startTime = DateTime.Now.AddMinutes(5);
             DateTime currentTime = DateTime.Now.AddMinutes(5);
+            _newDate = currentTime;
             string type = _newDuration == 15 ? nameof(Examination) : nameof(Operation);
             bool done = false;
 
@@ -82,12 +90,17 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
                     {
                         specialistException = true;
                         done = Institution.Instance().CreateAppointment(doctor, patient, currentTime, type, _newDuration, false);
-                        if (done) return true;
+                        if (done)
+                        {
+                            _newDate = currentTime;
+                            _doctor = doctor;
+                            return true;
+                        }
                     }
                 }
                 if (!specialistException)
                     throw new Exception("There are currently no doctors with selected specialization that work in this hospital.");
-                
+
             }
             return done;
         }
