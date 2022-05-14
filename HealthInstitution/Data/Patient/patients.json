@@ -182,5 +182,22 @@
     "Email": "itsharry@gmail.com",
     "Password": "123",
     "Gender": 2
+  },
+  {
+    "Notifications": [],
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": true,
+    "Record": {
+      "Height": 30.0,
+      "Weight": 10.0,
+      "HistoryOfIllnesses": []
+    },
+    "ID": 9,
+    "FirstName": "golub",
+    "LastName": "golubic",
+    "Email": "golub",
+    "Password": "golub",
+    "Gender": 1
   }
 ]
