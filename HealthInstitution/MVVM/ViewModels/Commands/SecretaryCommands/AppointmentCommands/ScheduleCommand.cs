@@ -55,8 +55,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             Institution.Instance().CreateAppointment(doctor, patient, oldDate, type, duration, false);
             MessageBox.Show("Emergency appointment has been successfully created !");
 
-            // inform
-            string message = "Appointment with id=" + appointmentToPostpone.ID.ToString() + " has been changed." +
+            SendNotifications(appointmentToPostpone, oldDate, newDate, patient, doctor);
+        }
+
+        private void SendNotifications(Appointment rescheduledAppointment, DateTime oldDate, DateTime newDate, Patient patient, Doctor doctor)
+        {
+            string message = "Appointment with id=" + rescheduledAppointment.ID.ToString() + " has been changed." +
                 " Changed date from " + oldDate.ToString() + " to " + newDate.ToString();
             patient.Notifications.Add(message);
             doctor.Notifications.Add(message);
