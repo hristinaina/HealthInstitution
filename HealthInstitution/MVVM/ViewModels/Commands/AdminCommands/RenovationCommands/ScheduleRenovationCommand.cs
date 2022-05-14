@@ -27,7 +27,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             bool prerequisitesFulfilled = true;
             if (_model.NewRenovationRoom is null)
             {
-                MessageBox.Show("Room must be selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _model.ShowMessage("Room must be selected");
                 prerequisitesFulfilled = false;
             }
             return prerequisitesFulfilled;
@@ -35,33 +35,36 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
 
         public override void Execute(object parameter)
         {
-            try
+            if(CheckPrerequisites())
             {
+                try
+                {
                 
-                List<Room> roomUnderRenovation = new List<Room> { _model.NewRenovationRoom };
-                Renovation renovation = Institution.Instance().RenovationRepository.Create(_model.NewRenovationStartDate, _model.NewRenovationEndDate);
+                    List<Room> roomUnderRenovation = new List<Room> { _model.NewRenovationRoom };
+                    Renovation renovation = Institution.Instance().RenovationRepository.Create(_model.NewRenovationStartDate, _model.NewRenovationEndDate);
 
-                renovation.RoomsUnderRenovation = roomUnderRenovation;
-                renovation.Result = roomUnderRenovation;
+                    renovation.RoomsUnderRenovation = roomUnderRenovation;
+                    renovation.Result = roomUnderRenovation;
 
-                Institution.Instance().RenovationRepository.Renovations.Add(renovation);
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, false));
-                Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, true));
+                    Institution.Instance().RenovationRepository.Renovations.Add(renovation);
+                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, false));
+                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, true));
 
-                _model.DialogOpen = false;
-                _model.FillRenovationList();
-            }
-            catch (DateException e)
-            {
-                _model.ShowMessage(e.Message);
-            }
-            catch (RoomUnderRenovationException e)
-            {
-                _model.ShowMessage(e.Message);
-            }
-            catch (Exception e)
-            {
-                _model.ShowMessage(e.Message);
+                    _model.DialogOpen = false;
+                    _model.FillRenovationList();
+                }
+                catch (DateException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (RoomUnderRenovationException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (Exception e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
             }
         }
     }
