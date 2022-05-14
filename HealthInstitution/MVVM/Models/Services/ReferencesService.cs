@@ -86,7 +86,7 @@ namespace HealthInstitution.MVVM.Models.Services
                 room.Renovations.Add(renovation);
 
                 if (roomUnderRenovation.Result) renovation.Result.Add(room);
-                else renovation.Rooms.Add(room);
+                else renovation.RoomsUnderRenovation.Add(room);
             }
 
             Institution.Instance().RenovationRepository.StartRenovations();

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthInstitution.Exceptions.AdminExceptions;
 
 namespace HealthInstitution.MVVM.Models.Repositories
 {
@@ -65,11 +66,11 @@ namespace HealthInstitution.MVVM.Models.Repositories
             return null;
         }
 
-        public bool CheckNumber(int number)
+        public bool CheckNumber(int number, List<int> ignore)
         {
             foreach (Entities.Room r in _rooms)
             {
-                if (r.Number == number) return false;
+                if (r.Number == number && !ignore.Contains(number)) return false;
             }
 
             return true;
@@ -105,10 +106,38 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
         }
 
-        public void CreateRoom(int id, string name, int number, RoomType type)
+        public Entities.Room CreateRoom(int id, string name, int number, RoomType type, bool future = false, List<int> ignoredNumbers = null)
         {
+            if (number == 0)
+            {
+                throw new ZeroRoomNumberException("Room number cannot be zero");
+            }
+            else if (name is null || name.Equals(""))
+            {
+                throw new EmptyRoomNameException("Room name cannot be empty");
+            } else if (!CheckNumber(number, ignoredNumbers))
+            {
+                throw new RoomNumberAlreadyTakenException("Room number already taken");
+            }
+
             Entities.Room r = new Entities.Room(id, number, name, type);
-            _rooms.Add(r);
+            if (!future) 
+            { 
+                _rooms.Add(r);
+            } else
+            {
+                _futureRooms.Add(r);
+            }
+
+            return r;
+        }
+
+        public void DeleteRoom(Entities.Room r)
+        {
+            if (!r.IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
+            r.ReturnEquipmentToWarehouse(DateTime.Today);
+            _rooms.Remove(r);
+            _deletedRooms.Add(r);
         }
 
         public List<Entities.Room> FilterByRoomType(RoomType type)

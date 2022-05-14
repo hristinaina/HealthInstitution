@@ -1,4 +1,5 @@
-﻿using HealthInstitution.MVVM.Models.Entities;
+﻿using HealthInstitution.Exceptions.AdminExceptions;
+using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.Models.Services;
 using System.Collections.Generic;
@@ -39,6 +40,7 @@ namespace HealthInstitution.MVVM.Models
 
         public Dictionary<Equipment, List<Room>> Search(string phrase)
         {
+            if (phrase is null || phrase.Equals("")) throw new EmptySearchPhraseException("You need to enter phrase for search");
             Dictionary<Equipment, List<Room>> matchingEquipment = new Dictionary<Equipment, List<Room>>();
 
             foreach (Equipment e in _equipment)
@@ -97,6 +99,7 @@ namespace HealthInstitution.MVVM.Models
 
         public Dictionary<Equipment, List<Room>> FilterByQuantity(Dictionary<Equipment, List<Room>> allEquipment, int minQuantity, int maxQuantity)
         {
+            if (minQuantity >= maxQuantity) throw new EquipmentFilterQuantityException("Minimum quantity must be lower than maximum quantity");
             Dictionary<Equipment, List<Room>> filteredEquipment = new();
             foreach (Equipment e in allEquipment.Keys)
             {

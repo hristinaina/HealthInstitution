@@ -59,7 +59,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
                 OnPropertyChanged(nameof(SelectedStartDate));
                 SelectedEndDate = _selectedRenovation.EndDate;
                 OnPropertyChanged(nameof(SelectedEndDate));
-                SelectedRoomsUnderRenovation = _selectedRenovation.Renovation.Rooms;
+                SelectedRoomsUnderRenovation = _selectedRenovation.Renovation.RoomsUnderRenovation;
                 OnPropertyChanged(nameof(SelectedRoomsUnderRenovation));
                 SelectedResult = _selectedRenovation.Renovation.Result;
                 OnPropertyChanged(nameof(SelectedResult));

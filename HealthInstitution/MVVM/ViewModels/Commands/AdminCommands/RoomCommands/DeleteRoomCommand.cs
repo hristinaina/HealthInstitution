@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Exceptions.AdminExceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using System;
@@ -21,17 +22,19 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
 
         public override void Execute(object parameter)
         {
-            if (!_model.SelectedRoom.Room.IsChangeable())
+            try
             {
-                MessageBox.Show("Room cannot be deleted, because it has scheduled appointments", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else{
                 _model.DialogOpen = false;
 
-                _model.SelectedRoom.Room.ReturnEquipmentToWarehouse(DateTime.Today);
-                Institution.Instance().RoomRepository.Rooms.Remove(_model.SelectedRoom.Room);
-                Institution.Instance().RoomRepository.DeletedRooms.Add(_model.SelectedRoom.Room);
+                Institution.Instance().RoomRepository.DeleteRoom(_model.SelectedRoom.Room);
+
                 _model.FillRoomList();
+            } catch (RoomCannotBeChangedException e)
+            {
+                _model.ShowMessage(e.Message);
+            } catch (Exception e)
+            {
+                _model.ShowMessage(e.Message);
             }
         }
     }

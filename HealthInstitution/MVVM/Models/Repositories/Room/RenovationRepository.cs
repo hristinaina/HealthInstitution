@@ -1,4 +1,5 @@
-﻿using HealthInstitution.MVVM.Models.Entities;
+﻿using HealthInstitution.Exceptions;
+using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Services;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,23 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
                 if (r.ID == id) return r;
             }
             return null;
+        }
+
+        public Renovation Create(DateTime startDate, DateTime endDate)
+        {
+            if (startDate <= DateTime.Today)
+            {
+                throw new DateException("Start date must be in future");
+            }
+            else if (endDate <= DateTime.Today)
+            {
+                throw new DateException("End date must be in future");
+            }
+            else if (startDate >= endDate)
+            {
+                throw new DateException("End date must be after start date");
+            }
+            return new Renovation(GetID(), startDate, endDate);
         }
 
         public void StartRenovations()
