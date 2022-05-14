@@ -51,32 +51,29 @@ namespace HealthInstitution.MVVM.Models.Entities
             return false;
         }
 
-        public Appointment FindInterruptingAppointment(DateTime dateTime, int durationInMin = 15)
+        public Appointment FindInterruptingAppointment(DateTime dateTime,int durationInMin = 15)
             // returns null if appointment can be reserved
             // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
         {
-            for (int i = 0; i < _examinations.Count(); i++)
+            List<Appointment> appointments = new();
+            foreach (Examination examination in _examinations) appointments.Add(examination);
+            foreach (Operation operation in _operations) appointments.Add(operation);
+            foreach (Appointment appointment in appointments)
             {
-                DateTime examinationStart = _examinations[i].Date;
-                DateTime examinationEnd = examinationStart.AddMinutes(15);
-                if (DateTime.Compare(_examinations[i].Date.Date, dateTime.Date) != 0) continue;
-                if (DateTime.Compare(dateTime, examinationStart) >= 0 &&
-                    DateTime.Compare(dateTime, examinationEnd) < 0) return _examinations[i];  
-                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationStart) > 0 &&
-                    DateTime.Compare(dateTime.AddMinutes(durationInMin), examinationEnd) <= 0)
-                    return _examinations[i];
-            }
-
-            for (int i = 0; i < _operations.Count(); i++)
-            {
-                DateTime operationStart = _operations[i].Date;
-                DateTime operationEnd = operationStart.AddMinutes(_operations[i].Duration);
-                if (DateTime.Compare(_operations[i].Date.Date, dateTime.Date) != 0) continue;
-                if (DateTime.Compare(dateTime, operationStart) >= 0 &&
-                    DateTime.Compare(dateTime, operationEnd) < 0) return _operations[i];
-                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), operationStart) > 0 &&
-                    DateTime.Compare(dateTime.AddMinutes(durationInMin), operationEnd) <= 0)
-                    return _operations[i];
+                DateTime appointmentBegin = appointment.Date;
+                int duration = 15; ;
+                if (appointment.GetType() == typeof(Operation))
+                {
+                    Operation operation = (Operation)appointment;
+                    duration = operation.Duration;
+                }
+                DateTime appointmentEnd = appointmentBegin.AddMinutes(duration);
+                if (DateTime.Compare(appointment.Date.Date, dateTime.Date) != 0) continue;
+                if (DateTime.Compare(dateTime, appointmentBegin) >= 0 &&
+                    DateTime.Compare(dateTime, appointmentEnd) < 0) return appointment;  
+                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentBegin) > 0 &&
+                    DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentEnd) <= 0)
+                    return appointment;
             }
 
             return null; 
