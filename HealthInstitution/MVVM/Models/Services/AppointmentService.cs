@@ -30,15 +30,17 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = DateTime.Now;
-            DateTime endDateTime = DateTime.Now; 
-          
+            DateTime endDateTime = DateTime.Now;
+
             while (startDateTime < deadlineDate)
             {
-                startDateTime += new TimeSpan(1, startTime.Hour - startDateTime.Hour, startTime.Minute - startDateTime.Minute, 0);
+                startDateTime += new TimeSpan(1, startTime.Hour - startDateTime.Hour + 1, startTime.Minute - startDateTime.Minute, 0);
                 endDateTime += new TimeSpan(1, endTime.Hour - endDateTime.Hour, endTime.Minute - endDateTime.Minute, 0);
-                while ((!patient.IsAvailable(startDateTime) || !doctor.IsAvailable(startDateTime)) && startDateTime < endDateTime) {
+                while ((!patient.IsAvailable(startDateTime) || !doctor.IsAvailable(startDateTime)) && startDateTime < endDateTime)
+                {
                     Appointment interrupting;
-                    if (!doctor.IsAvailable(startDateTime)) {
+                    if (!doctor.IsAvailable(startDateTime))
+                    {
                         interrupting = doctor.FindInterruptingAppointment(startDateTime);
                     }
                     else
@@ -47,34 +49,41 @@ namespace HealthInstitution.MVVM.Models.Services
                     }
                     startDateTime = interrupting.Date;
                     int duration = 15;
-                    if (interrupting is Operation interruptingOperation) {
+                    if (interrupting is Operation interruptingOperation)
+                    {
                         duration = interruptingOperation.Duration;
                     }
-                    startDateTime += new TimeSpan(0, duration+1, 0);
+                    startDateTime += new TimeSpan(0, duration + 1, 0);
+
+                    if (startDateTime < endDateTime && patient.IsAvailable(startDateTime) && doctor.IsAvailable(startDateTime))
+                    {
+                        suggestions.Add(new Examination(0, doctor, patient, startDateTime, null));
+                        break;
                     }
-                suggestions.Add(new Examination(0, doctor, patient, startDateTime, null));
-                break;
+                }
             }
-            if (suggestions.Count() == 0) {
+            if (suggestions.Count() == 0)
+            {
                 if (priority == SchedulingPriority.DOCTOR)
                 {
                     suggestions = MakeAlternativeSuggestions(patient, doctor);
                 }
-                else { 
-                    startDateTime = DateTime.Now + new TimeSpan(1, startTime.Hour - startDateTime.Hour, startTime.Minute - startDateTime.Minute, 0);
+                else
+                {
+                    startDateTime = DateTime.Now + new TimeSpan(1, startTime.Hour - startDateTime.Hour + 1, startTime.Minute - startDateTime.Minute, 0);
                     endDateTime = DateTime.Now + new TimeSpan(1, endTime.Hour - endDateTime.Hour, endTime.Minute - endDateTime.Minute, 0);
 
                     suggestions = MakeAlternativeSuggestions(patient, startDateTime, endDateTime, deadlineDate);
                 }
-            } 
+            }
             return suggestions;
         }
 
-    private static List<Examination> MakeAlternativeSuggestions(Patient patient, Doctor doctor)
-    {
-        List<Examination> suggestions = new List<Examination>();
-        DateTime startDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day+1);
-        while (suggestions.Count() < 3 && (!patient.IsAvailable(startDateTime) || !doctor.IsAvailable(startDateTime)))
+        private static List<Examination> MakeAlternativeSuggestions(Patient patient, Doctor doctor)
+        {
+            List<Examination> suggestions = new List<Examination>();
+            DateTime startDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1);
+            while (suggestions.Count() < 3 && (!patient.IsAvailable(startDateTime) || !doctor.IsAvailable(startDateTime)))
             {
                 Appointment interrupting;
                 if (!doctor.IsAvailable(startDateTime))
@@ -94,7 +103,7 @@ namespace HealthInstitution.MVVM.Models.Services
                 startDateTime += new TimeSpan(0, duration + 1, 0);
             }
             suggestions.Add(new Examination(0, doctor, patient, startDateTime, null));
-         return suggestions;
+            return suggestions;
         }
 
 
@@ -106,20 +115,21 @@ namespace HealthInstitution.MVVM.Models.Services
 
             while (suggestions.Count() < 3 && startDateTime < deadlineDate)
             {
-                startDateTime += new TimeSpan(1, startTime.Hour - startDateTime.Hour, startTime.Minute - startDateTime.Minute, 0);
+                startDateTime += new TimeSpan(1, startTime.Hour - startDateTime.Hour + 1, startTime.Minute - startDateTime.Minute, 0);
                 endDateTime += new TimeSpan(1, endTime.Hour - endDateTime.Hour, endTime.Minute - endDateTime.Minute, 0);
                 while (!patient.IsAvailable(startDateTime) && startDateTime < endDateTime)
                 {
-                    if (!patient.IsAvailable(startDateTime)) { 
-                    Appointment interrupting = patient.FindInterruptingAppointment(startDateTime);
-                
-                    startDateTime = interrupting.Date;
-                    int duration = 15;
-                    if (interrupting is Operation interruptingOperation)
+                    if (!patient.IsAvailable(startDateTime))
                     {
-                        duration = interruptingOperation.Duration;
-                    }
-                    startDateTime += new TimeSpan(0, duration + 1, 0);
+                        Appointment interrupting = patient.FindInterruptingAppointment(startDateTime);
+
+                        startDateTime = interrupting.Date;
+                        int duration = 15;
+                        if (interrupting is Operation interruptingOperation)
+                        {
+                            duration = interruptingOperation.Duration;
+                        }
+                        startDateTime += new TimeSpan(0, duration + 1, 0);
                     }
                 }
 
@@ -130,9 +140,9 @@ namespace HealthInstitution.MVVM.Models.Services
                         suggestions.Add(new Examination(0, doctor, patient, startDateTime, null));
                     }
                 }
-        }
+            }
             return suggestions;
+        }
     }
-}
 }
 

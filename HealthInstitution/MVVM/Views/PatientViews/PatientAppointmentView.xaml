@@ -160,27 +160,27 @@
                                                                   HorizontalAlignment="Center"
                                                                   Style="{StaticResource MaterialDesignFilledComboBox}"
                                                                   ItemsSource="{Binding Doctors}"
-                                                                  SelectedItem="{Binding NewDoctor}"
+                                                                  SelectedItem="{Binding SuggestionDoctor}"
                                                                   materialDesign:HintAssist.Hint="Search for a doctor"
                                                                   IsEditable="True" />
                                                         <DatePicker Width="250"
                                                                 Grid.Row="2"
                                                                 Grid.Column="0"
-                                                                SelectedDate="{Binding NewDate}"
+                                                                SelectedDate="{Binding SuggestionDeadlineDate}"
                                                                 Margin="0 20 0 0"
                                                                 materialDesign:HintAssist.Hint="Pick latest date limit"
-                                                                    Style="{StaticResource MaterialDesignFilledDatePicker}" />
+                                                                Style="{StaticResource MaterialDesignFilledDatePicker}" />
                                                     <materialDesign:TimePicker Width="250"
                                                                                 Margin="0 20 0 0"
                                                                                Grid.Row="3"
-                                                                                SelectedTime="{Binding NewTime}"
+                                                                                SelectedTime="{Binding SuggestionStartTime}"
                                                                                 Is24Hours="True"
                                                                                 Style="{StaticResource MaterialDesignFilledTimePicker}"
                                                                                 materialDesign:HintAssist.Hint="Pick earliest time limit" />
                                                     <materialDesign:TimePicker Width="250"
                                                                                 Margin="0 20 0 0"
                                                                                Grid.Row="4"
-                                                                                SelectedTime="{Binding NewTime}"
+                                                                                SelectedTime="{Binding SuggestionEndTime}"
                                                                                 Is24Hours="True"
                                                                                 Style="{StaticResource MaterialDesignFilledTimePicker}"
                                                                                 materialDesign:HintAssist.Hint="Pick latest time limit" />
@@ -193,14 +193,20 @@
                                                                    Padding="0 0 0 15"></Label>
                                                             <RadioButton Content="Selected doctor"
                                                                          Style="{StaticResource MaterialDesignRadioButton}"
-                                                                         IsChecked="True"/>
+                                                                         IsChecked="{Binding SuggestionPriority}"/>
                                                             <RadioButton Content="Selected time"
                                                                          Style="{StaticResource MaterialDesignRadioButton}" />
+                                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                                    Width="150"
+                                                                    HorizontalAlignment="Left"
+                                                                    Margin="6 0 0 0"
+                                                                    Content="Find suggestions"
+                                                                    Command="{Binding Suggestions}"/>
                                                         </StackPanel>
                                                         <StackPanel Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" Margin="30 0 0 0">
                                                             <Label Content="Top suggestions:"
                                                                    Padding="0 0 0 15"></Label>
-                                                            <DataGrid ItemsSource="{Binding Appointments}"
+                                                            <DataGrid ItemsSource="{Binding AppointmentSuggestions}"
                                                                       AutoGenerateColumns="False"
                                                                       VerticalAlignment="Top"
                                                                       BorderBrush="Transparent"
@@ -208,6 +214,7 @@
                                                                       SelectionMode="Single"
                                                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                                                       HorizontalAlignment="Center"
+                                                                      SelectedItem="{Binding SelectedSuggestion}"
                                                                       SelectionUnit="FullRow"
                                                                       materialDesign:DataGridAssist.ColumnHeaderPadding="2 5 0 0">
                                                                 <DataGrid.Columns>
@@ -240,7 +247,7 @@
                                                                 IsDefault="True"
                                                                 Margin="0 30 20 0"
                                                                 Content="CREATE"
-                                                                Command="{Binding CreateAppointment}">
+                                                                Command="{Binding UseSuggestion}">
                                                             <Button.CommandParameter>
                                                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                                     True
