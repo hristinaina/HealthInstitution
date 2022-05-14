@@ -96,14 +96,6 @@ namespace HealthInstitution.MVVM.Models.Entities
                 Institution.Instance().RoomRepository.Rooms.Remove(roomUnderRenovation);
                 Institution.Instance().RoomRepository.DeletedRooms.Add(roomUnderRenovation);
 
-                //Dictionary<Equipment, int> equipment = roomUnderRenovation.Equipment;
-                //foreach (Equipment e in equipment.Keys)
-                //{
-                //    EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(roomUnderRenovation, e);
-                //    a.EndDate = _endDate;
-                //    Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(e, _result[0], equipment[e], a.EndDate, DateTime.MaxValue));
-                //}
-                
                 foreach (Room r in _result)
                 {
                     Institution.Instance().RoomRepository.FutureRooms.Remove(r);
