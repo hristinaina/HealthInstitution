@@ -14,5 +14,29 @@
   {
     "PatientId": 2,
     "IngredientId": 3
+  },
+  {
+    "PatientId": 7,
+    "IngredientId": 2
+  },
+  {
+    "PatientId": 7,
+    "IngredientId": 1
+  },
+  {
+    "PatientId": 7,
+    "IngredientId": 2
+  },
+  {
+    "PatientId": 4,
+    "IngredientId": 1
+  },
+  {
+    "PatientId": 4,
+    "IngredientId": 1
+  },
+  {
+    "PatientId": 3,
+    "IngredientId": 2
   }
 ]

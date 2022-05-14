@@ -27,8 +27,18 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
             Examination examination = _viewModel.SelectedExamination.Examination;
             DateTime datetime = _viewModel.MergeTime(_viewModel.SelectedDate, _viewModel.SelectedTime);
-
-            Institution.Instance().RescheduleExamination((Examination)examination, datetime);
+            try
+            {
+                bool isRescheduled = Institution.Instance().RescheduleExamination((Examination)examination, datetime);
+                if (isRescheduled)
+                {
+                    _viewModel.ShowMessage("Examination successfully rescheduled !");
+                }
+            }
+            catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
             _viewModel.FillExaminationsList();
         }
     }

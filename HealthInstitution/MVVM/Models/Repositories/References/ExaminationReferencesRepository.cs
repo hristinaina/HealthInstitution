@@ -44,7 +44,13 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         public void Add(Examination examination)
         {
-            _references.Add(new ExaminationReference(examination.ID, examination.Doctor.ID, examination.Patient.ID, examination.Prescription.ID, examination.Room.ID));
+            foreach (Prescription prescription in examination.Prescriptions)
+            _references.Add(new ExaminationReference(examination.ID, examination.Doctor.ID, examination.Patient.ID, prescription.ID, examination.Room.ID));
+        }
+
+        public void Add(ExaminationReference examinationReference)
+        {
+            _references.Add(examinationReference);
         }
 
         public void Remove(Examination examination)

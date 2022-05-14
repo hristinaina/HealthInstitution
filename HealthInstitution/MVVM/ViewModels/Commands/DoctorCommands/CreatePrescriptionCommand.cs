@@ -23,8 +23,18 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
         {
             _viewModel.DialogOpen = false;
 
-            Institution.Instance().CreatePrescription(_viewModel.SelectedMedicine, _viewModel.LongitudeInDays,
-                                                      _viewModel.DailyFrequency, _viewModel.SelectedDependency);
+            try
+            {
+                bool isCreated = Institution.Instance().CreatePrescription(_viewModel.SelectedMedicine, _viewModel.LongitudeInDays,
+                                                                           _viewModel.DailyFrequency, _viewModel.SelectedDependency,
+                                                                           _viewModel.Examination);
+                if (isCreated) _viewModel.ShowMessage("Prescription successfully created !");
+                
+            } catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
+            
         }
     }
 }

@@ -36,7 +36,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
                 examination.Doctor = doctor;
                 examination.Patient = patient;
-                examination.Prescription = prescription;
+                examination.Prescriptions.Add(prescription);
                 examination.Room = room;
 
                 room.Appointments.Add(examination);

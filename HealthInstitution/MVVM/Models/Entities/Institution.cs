@@ -200,11 +200,13 @@ namespace HealthInstitution.MVVM.Models
 
         public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
         {
+            CheckTrolling();
+
             if (CurrentUser is Patient && patient.IsTrolling())
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
-            if (CurrentUser is Doctor || CurrentUser is Secretary)
+            if (CurrentUser is Secretary)
             {
                 if (!doctor.IsAvailable(dateTime, duration))
                 {
@@ -223,10 +225,10 @@ namespace HealthInstitution.MVVM.Models
             {
 
                 appointmentId = _examinationRepository.NewId();
-                int prescriptionId = _prescriptionRepository.GetNewId();
-                Prescription prescription = new Prescription(prescriptionId);
-
-                Examination examination = new Examination(appointmentId, doctor, patient, dateTime, prescription);
+                //int prescriptionId = _prescriptionRepository.GetNewId();
+                
+                Examination examination = new Examination(appointmentId, doctor, patient, dateTime,
+                                          new List<Prescription>());
                 patient.Examinations.Add(examination);
                 doctor.Examinations.Add(examination);
                 _roomRepository.FindAvailableRoom(examination, dateTime);
@@ -253,21 +255,8 @@ namespace HealthInstitution.MVVM.Models
 
         public bool RescheduleExamination(Appointment appointment, DateTime dateTime, bool validation = true)
         {
-            if (CurrentUser is Patient && appointment.Patient.IsTrolling())
-            {
-                throw new PatientBlockedException("System has blocked your account !");
-            }
-            if (CurrentUser is Doctor)
-            {
-                if (!appointment.Doctor.IsAvailable(dateTime))
-                {
-                    return false;
-                }
-                if (!appointment.Patient.IsAvailable(dateTime))
-                {
-                    return false;
-                }
-            }
+            CheckTrolling();
+
             ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime, validation);
 
             _roomRepository.FindAvailableRoom(appointment, dateTime);
@@ -291,6 +280,7 @@ namespace HealthInstitution.MVVM.Models
 
             else if (appointment is Operation) 
             {
+                _operationReferencesRepository.Remove((Operation)appointment);
                 _operationReferencesRepository.Add((Operation)appointment);
             }
 
@@ -300,20 +290,17 @@ namespace HealthInstitution.MVVM.Models
 
         public bool CancelExamination(Appointment appointment)
         {
-            if (CurrentUser is Patient && appointment.Patient.IsTrolling())
-            {
-                throw new PatientBlockedException("System has blocked your account !");
-            }
+            CheckTrolling();
            
             Patient patient = appointment.Patient;
             Doctor doctor = appointment.Doctor;
             Room room = appointment.Room;
             bool resolved = true;
             if (CurrentUser is Patient) resolved = appointment.IsEditable();
+
             if (appointment is Examination) {
                 if (resolved)
                 {
-
                     _examinationChangeRepository.RemoveByAppointmentId(appointment.ID);
                     patient.Examinations.Remove((Examination)appointment);
                     doctor.Examinations.Remove((Examination)appointment);
@@ -330,31 +317,35 @@ namespace HealthInstitution.MVVM.Models
                 doctor.Operations.Remove((Operation)appointment);
                 _operationRepository.Remove((Operation)appointment);
                 _operationReferencesRepository.Remove((Operation)appointment);
-
             }
 
-            // DO NOT DELETE THIS
             if (resolved) room.Appointments.Remove(appointment);
-
-
             return resolved;
         }
 
         public void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime, bool validation, int duration=15)
         {
-            if (CurrentUser is Patient || CurrentUser is Secretary)
+            if (CurrentUser is Patient || CurrentUser is Secretary || CurrentUser is Doctor)
             {
                 if (DateTime.Compare(DateTime.Now, dateTime) > 0 && validation)
                 {
                     throw new DateException("Date must be in future !");
                 }
-                if ((dateTime - DateTime.Now).TotalDays < 1 && validation)
+                if (CurrentUser is not Doctor)
                 {
-                    throw new DateException("Cannot schedule in next 24 hours");
+                    if ((dateTime - DateTime.Now).TotalDays < 1 && validation)
+                    {
+                        throw new DateException("Cannot schedule in next 24 hours");
+                    }
                 }
+               
                 if (doctor is null)
                 {
                     throw new EmptyFieldException("Doctor not selected !");
+                }
+                if (patient is null)
+                {
+                    throw new EmptyFieldException("Patient not selected !");
                 }
                 if (!patient.IsAvailable(dateTime, duration))
                 {
@@ -375,15 +366,48 @@ namespace HealthInstitution.MVVM.Models
             return true;
         }
 
+
         public bool CreatePrescription(Medicine medicine, int longitudeInDays, int dailyFrequency,
-                                       TherapyMealDependency therapyMealDependency)
+                                       TherapyMealDependency therapyMealDependency, Examination examination)
         {
             int id = Institution.Instance().PrescriptionRepository.GetNewId();
             Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, medicine);
+            if (examination.Patient.isAllergic(prescription.Medicine.Allergens)) throw new Exception("Patient is allergic !") ;
+
             _prescriptionRepository.Add(prescription);
+            examination.AddPrescription(prescription);
+            if ((medicine == null) || (dailyFrequency < 1) || (longitudeInDays < 1))
+            {
+                throw new Exception("Wrong input !");
+            }
             PrescriptionMedicine prescriptionMedicine = new PrescriptionMedicine(medicine.ID, prescription.ID);
             _prescriptionMedicineRepository.Add(prescriptionMedicine);
+            ExaminationReference examinationReference = new ExaminationReference(examination.ID, examination.Doctor.ID,
+                                                                                 examination.Patient.ID, examination.Room.ID,
+                                                                                 prescription.ID);
+            Institution.Instance().ExaminationReferencesRepository.Add(examinationReference);
+            
             return true;
+        }
+
+        public bool AddAllergen(MedicalRecord record, Allergen newAllergen)
+        {
+            List<Allergen> allergens = record.Allergens;
+            foreach (Allergen allergen in allergens)
+            {
+                if (allergen.Id == newAllergen.Id) return false;
+            }
+            return true;
+        }
+
+        public void CheckTrolling()
+        {
+            if (CurrentUser is Patient)
+            {
+                Patient patient = (Patient)CurrentUser;
+                if (patient.IsTrolling())
+                throw new PatientBlockedException("System has blocked your account !");
+            }
         }
     }
 }

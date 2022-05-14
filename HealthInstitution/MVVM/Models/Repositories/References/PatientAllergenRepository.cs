@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Services;
+using HealthInstitution.Exceptions;
 
 namespace HealthInstitution.MVVM.Models.Repositories.References
 {
@@ -43,6 +44,23 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
                     patientAllergens.Add(reference);
             }
             return patientAllergens;
+        }
+
+        public bool Add(Allergen allergen, Patient patient)
+        {
+            if (allergen == null) throw new EmptyFieldException("The allergen is not selected !");
+
+            PatientAllergen patientAllergen = new PatientAllergen(patient.ID, allergen.Id);
+            foreach (Allergen existingAllergen in patient.Record.Allergens)
+            {
+                if (existingAllergen.Id == allergen.Id)
+                {
+                    throw new ExistingAllergenException("This allergen already exists in medical record !");
+                }
+            }
+            _references.Add(patientAllergen);
+            patient.Record.Allergens.Add(allergen);
+            return true;
         }
     }
 }
