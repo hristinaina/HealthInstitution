@@ -39,16 +39,22 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
         public PatientRecordViewModel()
         {
+            Navigation = new PatientNavigationViewModel();
+
             _institution = Institution.Instance();
             _patient = (Patient)_institution.CurrentUser;
-            Navigation = new PatientNavigationViewModel();
             _appointments = new ObservableCollection<AppointmentListItemViewModel>();
             FillAppointmentsList(_patient.GetPastAppointments());
+            InitializeSearchParameters();
+
+            // ..............
+        }
+
+        private void InitializeSearchParameters()
+        {
             _searchKeyWord = "";
             Search = new SearchAnamnesisCommand(this);
             Reset = new ResetRecordCommand(this);
-
-            // ..............
         }
 
         public void FillAppointmentsList(List<Appointment> appointments)
