@@ -148,5 +148,13 @@ namespace HealthInstitution.MVVM.Models.Services
                 }
             }
         }
+
+        public static int FindAppointmentId(Patient patient, Doctor doctor, DateTime date)
+        {
+            int newId = Institution.Instance().ExaminationRepository.FindAppointmentId(doctor, patient, date);
+            if (newId == -1)
+                newId = Institution.Instance().OperationRepository.FindAppointmentId(doctor, patient, date);
+            return newId;
+        }
     }
 }

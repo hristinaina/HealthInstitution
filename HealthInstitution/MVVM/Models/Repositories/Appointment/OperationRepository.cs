@@ -122,5 +122,17 @@ namespace HealthInstitution.MVVM.Models.Repositories
             futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
             return futureAppointments;
         }
+
+        public int FindAppointmentId(Doctor doctor, Patient patient, DateTime oldDate)
+        {
+            foreach (Operation appointment in Operations)
+            {
+                if (appointment.Date == oldDate && appointment.Doctor == doctor && appointment.Patient == patient)
+                {
+                    return appointment.ID;
+                }
+            }
+            return -1;
+        }
     }
 }
