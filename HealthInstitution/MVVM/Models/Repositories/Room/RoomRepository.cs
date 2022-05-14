@@ -66,11 +66,11 @@ namespace HealthInstitution.MVVM.Models.Repositories
             return null;
         }
 
-        public bool CheckNumber(int number)
+        public bool CheckNumber(int number, List<int> ignore)
         {
             foreach (Entities.Room r in _rooms)
             {
-                if (r.Number == number) return false;
+                if (r.Number == number && !ignore.Contains(number)) return false;
             }
 
             return true;
@@ -106,7 +106,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
         }
 
-        public Entities.Room CreateRoom(int id, string name, int number, RoomType type, bool future = false)
+        public Entities.Room CreateRoom(int id, string name, int number, RoomType type, bool future = false, List<int> ignoredNumbers = null)
         {
             if (number == 0)
             {
@@ -115,7 +115,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
             else if (name is null || name.Equals(""))
             {
                 throw new EmptyRoomNameException("Room name cannot be empty");
-            } else if (!CheckNumber(number))
+            } else if (!CheckNumber(number, ignoredNumbers))
             {
                 throw new RoomNumberAlreadyTakenException("Room number already taken");
             }
