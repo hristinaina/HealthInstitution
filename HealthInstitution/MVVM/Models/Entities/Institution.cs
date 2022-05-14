@@ -204,7 +204,7 @@ namespace HealthInstitution.MVVM.Models
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
-            if (CurrentUser is Doctor || CurrentUser is Secretary)
+            /*if (CurrentUser is Doctor || CurrentUser is Secretary)
             {
                 if (!doctor.IsAvailable(dateTime, duration))
                 {
@@ -214,7 +214,7 @@ namespace HealthInstitution.MVVM.Models
                 {
                     return false;
                 }
-            }
+            }*/
             ValidateAppointmentData(patient, doctor, dateTime, validation, duration);
 
             int appointmentId = 0;
@@ -257,7 +257,7 @@ namespace HealthInstitution.MVVM.Models
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
-            if (CurrentUser is Doctor)
+            /*if (CurrentUser is Doctor)
             {
                 if (!appointment.Doctor.IsAvailable(dateTime))
                 {
@@ -267,7 +267,7 @@ namespace HealthInstitution.MVVM.Models
                 {
                     return false;
                 }
-            }
+            }*/
             ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime, validation);
 
             _roomRepository.FindAvailableRoom(appointment, dateTime);
@@ -342,19 +342,27 @@ namespace HealthInstitution.MVVM.Models
 
         public void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime, bool validation, int duration=15)
         {
-            if (CurrentUser is Patient || CurrentUser is Secretary)
+            if (CurrentUser is Patient || CurrentUser is Secretary || CurrentUser is Doctor)
             {
                 if (DateTime.Compare(DateTime.Now, dateTime) > 0 && validation)
                 {
                     throw new DateException("Date must be in future !");
                 }
-                if ((dateTime - DateTime.Now).TotalDays < 1 && validation)
+                if (CurrentUser is not Doctor)
                 {
-                    throw new DateException("Cannot schedule in next 24 hours");
+                    if ((dateTime - DateTime.Now).TotalDays < 1 && validation)
+                    {
+                        throw new DateException("Cannot schedule in next 24 hours");
+                    }
                 }
+               
                 if (doctor is null)
                 {
                     throw new EmptyFieldException("Doctor not selected !");
+                }
+                if (patient is null)
+                {
+                    throw new EmptyFieldException("Patient not selected !");
                 }
                 if (!patient.IsAvailable(dateTime, duration))
                 {
@@ -383,6 +391,16 @@ namespace HealthInstitution.MVVM.Models
             _prescriptionRepository.Add(prescription);
             PrescriptionMedicine prescriptionMedicine = new PrescriptionMedicine(medicine.ID, prescription.ID);
             _prescriptionMedicineRepository.Add(prescriptionMedicine);
+            return true;
+        }
+
+        public bool AddAllergen(MedicalRecord record, Allergen newAllergen)
+        {
+            List<Allergen> allergens = record.Allergens;
+            foreach (Allergen allergen in allergens)
+            {
+                if (allergen.Id == newAllergen.Id) return false;
+            }
             return true;
         }
     }

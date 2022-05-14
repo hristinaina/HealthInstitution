@@ -150,6 +150,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         {
             bool isSpecialist = true;
             Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
+            _patient = examination.Patient;
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
             Navigation = new DoctorNavigationViewModel(isSpecialist);
 
@@ -174,7 +175,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
             SetProperties();
             FillAllergensList();
-            FillNewAllergenList();
+            FillNewAllergensList();
             FillIllnessList();
             FillDoctorsList();
             FillSpecializationsList();
@@ -200,7 +201,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             OnPropertyChanged(nameof(Allergens));
         }
 
-        public void FillNewAllergenList()
+        public void FillNewAllergensList()
         {
             _newAllergens.Clear();
 

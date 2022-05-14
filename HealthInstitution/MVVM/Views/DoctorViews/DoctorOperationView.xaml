@@ -22,6 +22,9 @@
             <ColumnDefinition Width="6*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <components:NotificationSnackbar Grid.Column="1"
+                                         Panel.ZIndex="2"/>
+
         <components:DoctorNavigationRail SelectedIndex="0"></components:DoctorNavigationRail>
 
         <materialDesign:Card Grid.Column="1">

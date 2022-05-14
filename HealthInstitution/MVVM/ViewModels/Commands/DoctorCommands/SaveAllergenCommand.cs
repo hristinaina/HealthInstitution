@@ -21,11 +21,23 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
         public override void Execute(object parameter)
         {
+            _viewModel.DialogOpen = false;
             Examination examination = _viewModel.Examination;
             Patient patient = examination.Patient;
-            patient.Record.Allergens.Add(_viewModel.NewAllergen);
-            _viewModel.AddAllergen(_viewModel.NewAllergen);
-            Institution.Instance().RescheduleExamination(examination, examination.Date);
+ 
+            try
+            {
+                bool isAdded = Institution.Instance().PatientAllergenRepository.Add(_viewModel.NewAllergen, _viewModel.Patient);
+                if (isAdded)
+                {
+                    _viewModel.AddAllergen(_viewModel.NewAllergen);
+                    _viewModel.ShowMessage("Allergen successfully added !");
+                }
+
+            } catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
         }
     }
 }
