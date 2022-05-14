@@ -126,40 +126,8 @@
   {
     "Anamnesis": null,
     "Review": null,
-    "ID": 15,
-    "Date": "2022-05-14T17:03:00+02:00",
-    "Emergency": false,
-    "Done": false
-  },
-  {
-    "Anamnesis": null,
-    "Review": null,
-    "ID": 16,
-    "Date": "2022-05-14T14:16:00+02:00",
-    "Emergency": false,
-    "Done": false
-  },
-  {
-    "Anamnesis": null,
-    "Review": null,
-    "ID": 17,
-    "Date": "2022-05-16T14:40:00+02:00",
-    "Emergency": false,
-    "Done": false
-  },
-  {
-    "Anamnesis": null,
-    "Review": null,
     "ID": 18,
     "Date": "2022-05-16T15:09:00+02:00",
-    "Emergency": false,
-    "Done": false
-  },
-  {
-    "Anamnesis": null,
-    "Review": null,
-    "ID": 19,
-    "Date": "2022-05-15T05:10:00+02:00",
     "Emergency": false,
     "Done": false
   },
@@ -176,6 +144,14 @@
     "Review": null,
     "ID": 21,
     "Date": "2022-05-16T08:40:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": null,
+    "Review": null,
+    "ID": 22,
+    "Date": "2022-05-15T18:21:00+02:00",
     "Emergency": false,
     "Done": false
   }

@@ -51,7 +51,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             return false;
         }
 
-        public Appointment FindInterruptingAppointment(DateTime dateTime,int durationInMin = 15)
+        public Appointment FindInterruptingAppointment(DateTime dateTime, int durationInMin = 15)
             // returns null if appointment can be reserved
             // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
         {

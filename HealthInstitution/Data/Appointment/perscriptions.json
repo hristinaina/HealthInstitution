@@ -10,5 +10,23 @@
     "LongitudeInDays": 7,
     "TimesADay": 3,
     "TherapyMealDependency": 3
+  },
+  {
+    "ID": 3,
+    "LongitudeInDays": 3,
+    "TimesADay": 2,
+    "TherapyMealDependency": 0
+  },
+  {
+    "ID": 4,
+    "LongitudeInDays": 5,
+    "TimesADay": 3,
+    "TherapyMealDependency": 0
+  },
+  {
+    "ID": 5,
+    "LongitudeInDays": 5,
+    "TimesADay": 5,
+    "TherapyMealDependency": 1
   }
 ]

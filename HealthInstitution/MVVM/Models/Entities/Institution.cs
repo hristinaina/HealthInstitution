@@ -204,7 +204,7 @@ namespace HealthInstitution.MVVM.Models
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
-            /*if (CurrentUser is Doctor || CurrentUser is Secretary)
+            if (CurrentUser is Secretary)
             {
                 if (!doctor.IsAvailable(dateTime, duration))
                 {
@@ -214,7 +214,7 @@ namespace HealthInstitution.MVVM.Models
                 {
                     return false;
                 }
-            }*/
+            }
             ValidateAppointmentData(patient, doctor, dateTime, validation, duration);
 
             int appointmentId = 0;
@@ -223,10 +223,10 @@ namespace HealthInstitution.MVVM.Models
             {
 
                 appointmentId = _examinationRepository.NewId();
-                int prescriptionId = _prescriptionRepository.GetNewId();
-                Prescription prescription = new Prescription(prescriptionId);
-
-                Examination examination = new Examination(appointmentId, doctor, patient, dateTime, prescription);
+                //int prescriptionId = _prescriptionRepository.GetNewId();
+                
+                Examination examination = new Examination(appointmentId, doctor, patient, dateTime,
+                                          new List<Prescription>());
                 patient.Examinations.Add(examination);
                 doctor.Examinations.Add(examination);
                 _roomRepository.FindAvailableRoom(examination, dateTime);
@@ -257,17 +257,7 @@ namespace HealthInstitution.MVVM.Models
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
-            /*if (CurrentUser is Doctor)
-            {
-                if (!appointment.Doctor.IsAvailable(dateTime))
-                {
-                    return false;
-                }
-                if (!appointment.Patient.IsAvailable(dateTime))
-                {
-                    return false;
-                }
-            }*/
+
             ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime, validation);
 
             _roomRepository.FindAvailableRoom(appointment, dateTime);
@@ -383,14 +373,27 @@ namespace HealthInstitution.MVVM.Models
             return true;
         }
 
+
         public bool CreatePrescription(Medicine medicine, int longitudeInDays, int dailyFrequency,
-                                       TherapyMealDependency therapyMealDependency)
+                                       TherapyMealDependency therapyMealDependency, Examination examination)
         {
             int id = Institution.Instance().PrescriptionRepository.GetNewId();
             Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, medicine);
+            if (examination.Patient.isAllergic(prescription.Medicine.Allergens)) throw new Exception("Patient is allergic !") ;
+
             _prescriptionRepository.Add(prescription);
+            examination.AddPrescription(prescription);
+            if ((medicine == null) || (dailyFrequency < 1) || (longitudeInDays < 1))
+            {
+                throw new Exception("Wrong input !");
+            }
             PrescriptionMedicine prescriptionMedicine = new PrescriptionMedicine(medicine.ID, prescription.ID);
             _prescriptionMedicineRepository.Add(prescriptionMedicine);
+            ExaminationReference examinationReference = new ExaminationReference(examination.ID, examination.Doctor.ID,
+                                                                                 examination.Patient.ID, examination.Room.ID,
+                                                                                 prescription.ID);
+            Institution.Instance().ExaminationReferencesRepository.Add(examinationReference);
+            
             return true;
         }
 

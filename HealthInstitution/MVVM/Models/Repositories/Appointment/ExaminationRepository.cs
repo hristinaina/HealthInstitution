@@ -58,7 +58,7 @@ namespace HealthInstitution.MVVM.Models
                     i.Emergency = examination.Emergency;
                     i.Done = examination.Done;
                     i.Anamnesis = examination.Anamnesis;
-                    i.Prescription = examination.Prescription;
+                    i.Prescriptions = examination.Prescriptions;
                     i.Room = examination.Room;
                     return true;
                 }

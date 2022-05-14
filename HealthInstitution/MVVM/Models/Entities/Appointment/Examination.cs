@@ -10,7 +10,7 @@ namespace HealthInstitution.MVVM.Models.Entities
     public class Examination : Appointment
     {
         private string _anamnesis;
-        private Prescription _perscription;
+        private List<Prescription> _prescriptions;
         private ExaminationReview _review;
 
         [JsonProperty("Anamnesis")]
@@ -18,29 +18,36 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonProperty("Review")]
         public ExaminationReview Review { get => _review; set { _review = value; } }
         [JsonIgnore]
-        public Prescription Prescription { get => _perscription; set { _perscription = value; } }
+        public List<Prescription> Prescriptions { get => _prescriptions; set { _prescriptions = value; } }
 
         public Examination()
         {
+            _prescriptions = new List<Prescription>();
         }
         public Examination(int id, DateTime date, bool isEmergency, bool done,
-                   string anamnesis, ExaminationReview review)
-                  : base(id, date, isEmergency, done)
+                           string anamnesis, ExaminationReview review)
+                           : base(id, date, isEmergency, done)
         {
             _anamnesis = anamnesis;
-            _perscription = null;
+            _prescriptions = new List<Prescription>();
             _review = review;
         }
 
 
-        public Examination(int id, Doctor doctor, Patient patient, DateTime date, Prescription prescription)
+        public Examination(int id, Doctor doctor, Patient patient, DateTime date, List<Prescription> prescriptions)
         {
             ID = id;
             Doctor = doctor;
             Patient = patient;
             Date = date;
             Emergency = false;
-            Prescription = prescription;
+            Prescriptions = prescriptions;
+        }
+
+        public void AddPrescription(Prescription prescription)
+        {
+            Prescriptions.Add(prescription);
+            Institution.Instance().ExaminationRepository.Update(this);
         }
 
     }

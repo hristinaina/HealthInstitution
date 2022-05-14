@@ -14,5 +14,17 @@
   {
     "MedicineId": 3,
     "PrescriptionID": 1
+  },
+  {
+    "MedicineId": 2,
+    "PrescriptionID": 3
+  },
+  {
+    "MedicineId": 2,
+    "PrescriptionID": 4
+  },
+  {
+    "MedicineId": 3,
+    "PrescriptionID": 5
   }
 ]
