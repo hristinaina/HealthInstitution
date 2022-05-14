@@ -6,12 +6,12 @@
       "Comment": "good"
     },
     "ID": 1,
-    "Date": "2022-04-30T18:43:37.0931955+02:00",
+    "Date": "2022-04-29T18:43:37.0931955+02:00",
     "Emergency": false,
     "Done": true
   },
   {
-    "Anamnesis": "",
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": {
       "Rating": 0.0,
       "Comment": ""
@@ -22,37 +22,37 @@
     "Done": false
   },
   {
-    "Anamnesis": "",
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": {
       "Rating": 0.0,
       "Comment": ""
     },
     "ID": 3,
-    "Date": "2022-04-25T18:43:37.0931955+02:00",
+    "Date": "2022-04-26T18:43:37.0931955+02:00",
     "Emergency": true,
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": {
       "Rating": 0.0,
       "Comment": ""
     },
     "ID": 4,
-    "Date": "2022-04-25T18:43:37.0931955+02:00",
+    "Date": "2022-04-23T18:43:37.0931955+02:00",
     "Emergency": false,
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 5,
-    "Date": "2022-04-30T18:43:37.0931955+02:00",
+    "Date": "2022-04-03T18:43:37.0931955+02:00",
     "Emergency": false,
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 6,
     "Date": "2022-05-11T10:43:00+02:00",
@@ -60,7 +60,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 7,
     "Date": "2022-05-12T10:43:00+02:00",
@@ -68,7 +68,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 8,
     "Date": "2022-05-20T10:35:00+02:00",
@@ -76,15 +76,15 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 9,
-    "Date": "2022-05-27T11:15:00+02:00",
+    "Date": "2022-05-14T03:43:00+02:00",
     "Emergency": false,
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 10,
     "Date": "2022-05-11T15:57:00+02:00",
@@ -92,7 +92,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 11,
     "Date": "2022-06-16T15:57:00+02:00",
@@ -100,7 +100,7 @@
     "Done": false
   },
   {
-    "Anamnesis": null,
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
     "Review": null,
     "ID": 12,
     "Date": "2022-06-30T15:57:00+02:00",
@@ -128,6 +128,14 @@
     "Review": null,
     "ID": 15,
     "Date": "2022-05-14T17:03:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": null,
+    "Review": null,
+    "ID": 13,
+    "Date": "2022-06-09T16:54:00+02:00",
     "Emergency": false,
     "Done": false
   }

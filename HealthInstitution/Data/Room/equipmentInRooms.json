@@ -14,25 +14,11 @@
     "EndDate": "2022-05-14T00:00:00"
   },
   {
-    "RoomId": 7,
-    "EquipmentId": 2,
-    "Quantity": 3,
-    "StartDate": "2022-04-25T18:43:37.0931955+02:00",
-    "EndDate": "2022-05-13T00:00:00"
-  },
-  {
     "RoomId": 8,
     "EquipmentId": 1,
     "Quantity": 1,
     "StartDate": "2022-04-25T18:43:37.0931955+02:00",
     "EndDate": "9999-04-25T18:43:37.0931955+02:00"
-  },
-  {
-    "RoomId": 0,
-    "EquipmentId": 2,
-    "Quantity": 47,
-    "StartDate": "2022-04-25T18:43:37.0931955+02:00",
-    "EndDate": "2022-05-13T00:00:00"
   },
   {
     "RoomId": 0,
