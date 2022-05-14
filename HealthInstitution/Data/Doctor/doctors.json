@@ -13,7 +13,13 @@
   {
     "Specialization": 7,
     "Rating": 0.0,
-    "Notifications": [],
+    "Notifications": [
+      "An emergency appointment with id=3 has been scheduled!",
+      "An emergency appointment with id=4 has been scheduled!",
+      "An emergency appointment with id=5 has been scheduled!",
+      "Appointment with id=5 has been changed. Changed date from 5/14/2022 5:36:13 PM to 5/14/2022 6:21:13 PM",
+      "An emergency appointment with id=6 has been scheduled!"
+    ],
     "ID": 2,
     "FirstName": "Jovan",
     "LastName": "Guzinic",
