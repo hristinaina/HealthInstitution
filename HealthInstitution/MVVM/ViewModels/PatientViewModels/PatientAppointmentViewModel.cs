@@ -63,17 +63,22 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             {
                 if (value < 0) { return; };
                 _selection = value;
-                EnableChanges = true;
-                OnPropertyChanged(nameof(EnableChanges));
-                OnPropertyChanged(nameof(Selection));
-                _selectedAppointment = _appointments.ElementAt(_selection);
-                SelectedDoctor = _selectedAppointment.Doctor;
-                OnPropertyChanged(nameof(SelectedDoctor));
-                SelectedDate = _selectedAppointment.Appointment.Date.ToString("MM/dd/yyyy HH:mm");
-                OnPropertyChanged(nameof(SelectedDate));
-                SelectedTime = _selectedAppointment.Appointment.Date.ToString("MM/dd/yyyy HH:mm");
-                OnPropertyChanged(nameof(SelectedTime));
+                ChangeSelectionParameters();
             }
+        }
+
+        private void ChangeSelectionParameters()
+        {
+            EnableChanges = true;
+            OnPropertyChanged(nameof(EnableChanges));
+            OnPropertyChanged(nameof(Selection));
+            _selectedAppointment = _appointments.ElementAt(_selection);
+            SelectedDoctor = _selectedAppointment.Doctor;
+            OnPropertyChanged(nameof(SelectedDoctor));
+            SelectedDate = _selectedAppointment.Appointment.Date.ToString("MM/dd/yyyy HH:mm");
+            OnPropertyChanged(nameof(SelectedDate));
+            SelectedTime = _selectedAppointment.Appointment.Date.ToString("MM/dd/yyyy HH:mm");
+            OnPropertyChanged(nameof(SelectedTime));
         }
 
         private AppointmentListItemViewModel _selectedAppointment;
@@ -107,25 +112,38 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _appointments = new ObservableCollection<AppointmentListItemViewModel>();
             _doctors = new ObservableCollection<Doctor>();
 
-            EnableChanges = false;
+            InitializeChangesParameters();
 
             FillAppointmentsList();
             FillDoctorsList();
 
+            InitializeCommands();
+            InitializeSuggestionsParrameters();
+        }
+
+        private void InitializeChangesParameters()
+        {
+            EnableChanges = false;
             NewTime = DateTime.Now;
             NewDate = DateTime.Now;
+        }
 
+        private void InitializeCommands()
+        {
             CreateAppointment = new CreateAppointmentCommand(this);
             RescheduleAppointment = new RescheduleAppointmentCommand(this);
             CancelAppointment = new CancelAppointmentCommand(this);
+            UseSuggestion = new CreateAppointmentCommand(this, usingSuggestion: true);
+        }
 
+        private void InitializeSuggestionsParrameters()
+        {
+            _appointmentSuggestions = new ObservableCollection<AppointmentListItemViewModel>();
             Suggestions = new MakeSuggestionsCommand(this);
             SuggestionDeadlineDate = DateTime.Now;
             SuggestionStartTime = DateTime.Now;
             SuggestionEndTime = DateTime.Now;
-            _appointmentSuggestions = new ObservableCollection<AppointmentListItemViewModel>();
             SuggestionPriority = true;
-            UseSuggestion = new CreateAppointmentCommand(this, usingSuggestion: true);
         }
 
         public void FillSuggestionsList(List<Examination> suggestions)

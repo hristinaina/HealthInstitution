@@ -162,5 +162,13 @@
     "Date": "2022-05-16T22:22:00+02:00",
     "Emergency": false,
     "Done": false
+  },
+  {
+    "Anamnesis": null,
+    "Review": null,
+    "ID": 19,
+    "Date": "2022-05-16T22:56:00+02:00",
+    "Emergency": false,
+    "Done": false
   }
 ]
