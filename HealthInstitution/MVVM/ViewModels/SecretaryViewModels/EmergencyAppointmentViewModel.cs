@@ -112,7 +112,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                         break;
                     }
                 }
-                catch (Exception e) { } // do nothing
+                catch (Exception e) { }
             }
         }
 
