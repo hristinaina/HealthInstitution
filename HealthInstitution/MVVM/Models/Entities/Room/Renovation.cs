@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HealthInstitution.Exceptions.AdminExceptions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private int _id;
         private DateTime _startDate;
         private DateTime _endDate;
-        private List<Room> _rooms;
+        private List<Room> _roomsUnderRenovation;
         private List<Room> _result;
         private bool _started;
 
@@ -22,33 +23,49 @@ namespace HealthInstitution.MVVM.Models.Entities
         public bool Started { get => _started; set => _started = value; }
 
         [JsonIgnore]
-        public List<Room> Rooms { get => _rooms; set => _rooms = value; }
+        public List<Room> RoomsUnderRenovation { get => _roomsUnderRenovation;
+            set
+            {
+                foreach (Entities.Room r in value)
+                {
+                    if (r.IsUnderRenovation(_startDate, _endDate)) throw new RoomUnderRenovationException("Room already under renovation at that time");
+                }
+                _roomsUnderRenovation = value;
+            }
+        }
         [JsonIgnore]
-        public List<Room> Result { get => _result; set => _result = value; }
+        public List<Room> Result { get => _result; set => _roomsUnderRenovation = value; }
 
         public Renovation()
         {
-            _rooms = new List<Room>();
+            _roomsUnderRenovation = new List<Room>();
             _result = new List<Room>();
+        }
+
+        public Renovation(int id, DateTime startDate, DateTime endDate) : this()
+        {
+            _startDate = startDate;
+            _endDate = endDate;
+            _id = id;
         }
 
         public Renovation(int id, DateTime startDate, DateTime endDate, List<Room> rooms, List<Room> result) : this()
         {
             _startDate = startDate;
             _endDate = endDate;
-            _rooms = rooms;
+            _roomsUnderRenovation = rooms;
             _result = result;
             _id = id;
         }
 
         public void StartRenovation()
         {
-            foreach (Room r in _rooms) r.UnderRenovation = true;
+            foreach (Room r in _roomsUnderRenovation) r.UnderRenovation = true;
             _started = true;
 
-            if (_rooms.Count() > 1 || _result.Count() > 1)
+            if (_roomsUnderRenovation.Count() > 1 || _result.Count() > 1)
             {
-                foreach (Room r in _rooms)
+                foreach (Room r in _roomsUnderRenovation)
                 {
                     r.ReturnEquipmentToWarehouse(_endDate);
                 }
@@ -59,12 +76,12 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public void EndRenovation()
         {
-            if (_rooms.Count() > 1)
+            if (_roomsUnderRenovation.Count() > 1)
             {
                 Room resultingRoom = _result[0];
 
                 //room is deleted
-                foreach (Room r in _rooms)
+                foreach (Room r in _roomsUnderRenovation)
                 {
                     Institution.Instance().RoomRepository.Rooms.Remove(r);
                     Institution.Instance().RoomRepository.DeletedRooms.Add(r);
@@ -75,7 +92,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             
             } else if (_result.Count() > 1)
             {
-                Room roomUnderRenovation = _rooms[0];
+                Room roomUnderRenovation = _roomsUnderRenovation[0];
                 Institution.Instance().RoomRepository.Rooms.Remove(roomUnderRenovation);
                 Institution.Instance().RoomRepository.DeletedRooms.Add(roomUnderRenovation);
 
@@ -94,8 +111,8 @@ namespace HealthInstitution.MVVM.Models.Entities
                 }
             } else
             { 
-                if (_rooms.Count > 0)
-                _rooms[0].UnderRenovation = false;
+                if (_roomsUnderRenovation.Count > 0)
+                _roomsUnderRenovation[0].UnderRenovation = false;
 
             }
         }

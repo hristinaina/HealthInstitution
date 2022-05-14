@@ -1,4 +1,6 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Exceptions;
+using HealthInstitution.Exceptions.AdminExceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
@@ -28,42 +30,38 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                 MessageBox.Show("Room must be selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 prerequisitesFulfilled = false;
             }
-            else if (_model.NewRenovationStartDate <= DateTime.Today)
-            {
-                MessageBox.Show("Start date must be in future", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            else if (_model.NewRenovationEndDate <= DateTime.Today)
-            {
-                MessageBox.Show("End date must be in future", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            else if (_model.NewRenovationStartDate >= _model.NewRenovationEndDate)
-            {
-                MessageBox.Show("End date must be after start date", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            else if (_model.NewRenovationRoom.IsUnderRenovation(_model.NewRenovationStartDate, _model.NewRenovationEndDate))
-            {
-                MessageBox.Show("Room is already under renovation in selected period", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
             return prerequisitesFulfilled;
         }
 
         public override void Execute(object parameter)
         {
-            if (CheckPrerequisites())
+            try
             {
-                _model.DialogOpen = false;
                 
-                List<Room> rooms = new List<Room> { _model.NewRenovationRoom };
-                Renovation renovation = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.NewRenovationStartDate, _model.NewRenovationEndDate, rooms, rooms);
+                List<Room> roomUnderRenovation = new List<Room> { _model.NewRenovationRoom };
+                Renovation renovation = Institution.Instance().RenovationRepository.Create(_model.NewRenovationStartDate, _model.NewRenovationEndDate);
+
+                renovation.RoomsUnderRenovation = roomUnderRenovation;
+                renovation.Result = roomUnderRenovation;
+
                 Institution.Instance().RenovationRepository.Renovations.Add(renovation);
                 Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, false));
                 Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, true));
 
+                _model.DialogOpen = false;
                 _model.FillRenovationList();
+            }
+            catch (DateException e)
+            {
+                _model.ShowMessage(e.Message);
+            }
+            catch (RoomUnderRenovationException e)
+            {
+                _model.ShowMessage(e.Message);
+            }
+            catch (Exception e)
+            {
+                _model.ShowMessage(e.Message);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Exceptions;
 using HealthInstitution.Exceptions.AdminExceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
@@ -39,7 +40,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
             {
                 _model.ShowMessage(e.Message);
             }
-            catch (RearrangeDateException e)
+            catch (DateException e)
             {
                 _model.ShowMessage(e.Message);
             }

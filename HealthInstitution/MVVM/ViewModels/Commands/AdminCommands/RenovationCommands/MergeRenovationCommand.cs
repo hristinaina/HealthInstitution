@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Exceptions;
 using HealthInstitution.Exceptions.AdminExceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
@@ -28,27 +29,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             bool prerequisitesFulfilled = true;
             if (_model.FirstSelectedRoom is null || _model.SecondSelectedRoom is null)
             {
-                MessageBox.Show("Rooms for merging must be selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _model.ShowMessage("Rooms for merging must be selected");
                 prerequisitesFulfilled = false;
             }
-            else if (_model.StartDate <= DateTime.Today)
+            else if (_model.FirstSelectedRoom == _model.SecondSelectedRoom)
             {
-                MessageBox.Show("Start date must be in future", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            else if (_model.EndDate <= DateTime.Today)
-            {
-                MessageBox.Show("End date must be in future", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            else if (_model.StartDate >= _model.EndDate)
-            {
-                MessageBox.Show("End date must be after start date", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            else if (_model.FirstSelectedRoom.IsUnderRenovation(_model.StartDate, _model.EndDate) || _model.SecondSelectedRoom.IsUnderRenovation(_model.StartDate, _model.EndDate))
-            {
-                MessageBox.Show("Room is already under renovation in selected period", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _model.ShowMessage("Rooms for merging must be different");
                 prerequisitesFulfilled = false;
             }
             return prerequisitesFulfilled;
@@ -60,12 +46,17 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             {
                 try
                 {
+                    Renovation renovation = Institution.Instance().RenovationRepository.Create(_model.StartDate, _model.EndDate);
+                    
                     List<Room> roomsUnderRenovation = new List<Room> { _model.FirstSelectedRoom, _model.SecondSelectedRoom };
+
                     int id = Institution.Instance().RoomRepository.GetID();
                     List<int> numbersForIgnoring = new List<int> { _model.FirstSelectedRoom.Number, _model.SecondSelectedRoom.Number };
                     Room resultingRoom = Institution.Instance().RoomRepository.CreateRoom(id, _model.NewRoomName, _model.NewRoomNumber, (RoomType)_model.NewRoomType, true, numbersForIgnoring);
                     List<Room> result = new List<Room> { resultingRoom };
-                    Renovation renovation = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.StartDate, _model.EndDate, roomsUnderRenovation, result);
+
+                    renovation.RoomsUnderRenovation = roomsUnderRenovation;
+                    renovation.Result = result;
                     Institution.Instance().RenovationRepository.Renovations.Add(renovation);
                 
                     Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.FirstSelectedRoom.ID, false));
@@ -83,6 +74,14 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                     _model.ShowMessage(e.Message);
                 }
                 catch (RoomNumberAlreadyTakenException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (DateException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (RoomUnderRenovationException e)
                 {
                     _model.ShowMessage(e.Message);
                 }

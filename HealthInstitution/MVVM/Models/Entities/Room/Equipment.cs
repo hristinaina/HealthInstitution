@@ -1,4 +1,5 @@
-﻿using HealthInstitution.Exceptions.AdminExceptions;
+﻿using HealthInstitution.Exceptions;
+using HealthInstitution.Exceptions.AdminExceptions;
 using HealthInstitution.MVVM.Models.Enumerations;
 using Newtonsoft.Json;
 using System;
@@ -110,7 +111,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             if (targetRoom is null) throw new RearrangeTargetRoomNullException("Target room must be selected");
             else if (newArrangementQuantity == 0) throw new ZeroQuantityException("Quantity cannot be zero");
-            else if (newArrangementStartDate <= DateTime.Today) throw new RearrangeDateException("Arrangement date must be in future");
+            else if (newArrangementStartDate <= DateTime.Today) throw new DateException("Arrangement date must be in future");
             else if (newArrangementQuantity > ArrangmentByRooms[destinationRoom]) throw new NotEnoughEquipmentException("Not enough equipment in selected room");
             MoveFromRoom(destinationRoom, newArrangementStartDate, newArrangementQuantity);
             MoveToNewRoom(targetRoom, newArrangementStartDate, newArrangementQuantity);

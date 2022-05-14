@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Exceptions.AdminExceptions
 {
-    class RearrangeDateException : Exception
+    class RoomUnderRenovationException : Exception
     {
-        public RearrangeDateException()
+        public RoomUnderRenovationException()
         {
         }
 
-        public RearrangeDateException(string message)
+        public RoomUnderRenovationException(string message)
             : base(message)
         {
         }

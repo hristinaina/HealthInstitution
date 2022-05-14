@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using HealthInstitution.Exceptions.AdminExceptions;
+using HealthInstitution.Exceptions;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCommands
 {
@@ -29,34 +30,14 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
 
             if (_model.SelectedRoom is null)
             {
-                MessageBox.Show("Room for dividing must be selected", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _model.ShowMessage("Room for dividing must be selected");
                 prerequisitesFulfilled = false;
             }
             else if (_model.FirstNewRoomNumber == _model.SecondNewRoomNumber)
             {
-                MessageBox.Show("New room numbers must be different", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _model.ShowMessage("New room numbers must be different");
                 prerequisitesFulfilled = false;
             }
-            else if (_model.StartDate <= DateTime.Today)
-            {
-                MessageBox.Show("Start date must be in future", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            else if (_model.EndDate <= DateTime.Today)
-            {
-                MessageBox.Show("End date must be in future", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-            else if (_model.StartDate >= _model.EndDate)
-            {
-                MessageBox.Show("End date must be after start date", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            } else if (_model.SelectedRoom.IsUnderRenovation(_model.StartDate, _model.EndDate))
-            {
-                MessageBox.Show("Room is already under renovation in selected period", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfilled = false;
-            }
-
             return prerequisitesFulfilled;
         }
 
@@ -66,16 +47,19 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             {
                 try
                 {
+                    Renovation renovation = Institution.Instance().RenovationRepository.Create(_model.StartDate, _model.EndDate);
+
                     int id = Institution.Instance().RoomRepository.GetID();
                     List<Room> roomUnderRenovation = new List<Room> { _model.SelectedRoom};
                     Room firstResultingRoom = Institution.Instance().RoomRepository.CreateRoom(Institution.Instance().RoomRepository.GetID(), _model.FirstNewRoomName, _model.FirstNewRoomNumber, (RoomType)_model.FirstNewRoomType, true, new List<int> { _model.SelectedRoom.Number });
-                    Institution.Instance().RoomRepository.FutureRooms.Add(firstResultingRoom);
 
                     id = Institution.Instance().RoomRepository.GetID();
                     Room secondResultingRoom = Institution.Instance().RoomRepository.CreateRoom(id, _model.SecondNewRoomName, _model.SecondNewRoomNumber, (RoomType)_model.SecondNewRoomType, true, new List<int> { _model.SelectedRoom.Number });
                 
                     List<Room> result = new List<Room> { firstResultingRoom, secondResultingRoom };
-                    Renovation renovation = new Renovation(Institution.Instance().RenovationRepository.GetID(), _model.StartDate, _model.EndDate, roomUnderRenovation, result);
+
+                    renovation.Result = result;
+                    renovation.RoomsUnderRenovation = roomUnderRenovation;
                     Institution.Instance().RenovationRepository.Renovations.Add(renovation);
 
                     Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.SelectedRoom.ID, false));
@@ -94,6 +78,14 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                     _model.ShowMessage(e.Message);
                 }
                 catch (RoomNumberAlreadyTakenException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (DateException e)
+                {
+                    _model.ShowMessage(e.Message);
+                }
+                catch (RoomUnderRenovationException e)
                 {
                     _model.ShowMessage(e.Message);
                 }
