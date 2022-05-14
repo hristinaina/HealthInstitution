@@ -14,6 +14,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         private readonly string _roomsfileName;
         private readonly string _deletedRoomsfileName;
         private readonly string _futureRoomsfileName;
+
         private List<Entities.Room> _rooms;
         private List<Entities.Room> _deletedRooms;
         private List<Entities.Room> _futureRooms;
@@ -50,14 +51,17 @@ namespace HealthInstitution.MVVM.Models.Repositories
             {
                 if (r.ID == id) return r;
             }
+
             foreach (Entities.Room r in _futureRooms)
             {
                 if (r.ID == id) return r;
             }
+            
             foreach (Entities.Room r in _deletedRooms)
             {
                 if (r.ID == id) return r;
             }
+            
             return null;
         }
 
@@ -67,14 +71,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
             {
                 if (r.Number == number) return false;
             }
-            foreach (Entities.Room r in _futureRooms)
-            {
-                if (r.Number == number) return false;
-            }
-            foreach (Entities.Room r in _deletedRooms)
-            {
-                if (r.Number == number) return false;
-            }
+
             return true;
         }
 
@@ -84,14 +81,17 @@ namespace HealthInstitution.MVVM.Models.Repositories
             {
                 if (r.ID == id) return false;
             }
+            
             foreach (Entities.Room r in _futureRooms)
             {
                 if (r.ID == id) return false;
             }
+            
             foreach (Entities.Room r in _deletedRooms)
             {
                 if (r.ID == id) return false;
             }
+            
             return true;
         }
 

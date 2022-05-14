@@ -7,51 +7,9 @@
     "UnderRenovation": false
   },
   {
-    "ID": 1,
-    "Name": "OR",
-    "Number": 100,
-    "Type": 0,
-    "UnderRenovation": true
-  },
-  {
-    "ID": 1,
-    "Name": "OR",
-    "Number": 100,
-    "Type": 0,
-    "UnderRenovation": true
-  },
-  {
-    "ID": 1,
-    "Name": "OR",
-    "Number": 100,
-    "Type": 0,
-    "UnderRenovation": true
-  },
-  {
-    "ID": 1,
-    "Name": "OR",
-    "Number": 100,
-    "Type": 0,
-    "UnderRenovation": true
-  },
-  {
-    "ID": 1,
-    "Name": "OR",
-    "Number": 100,
-    "Type": 0,
-    "UnderRenovation": true
-  },
-  {
-    "ID": 1,
-    "Name": "OR",
-    "Number": 100,
-    "Type": 0,
-    "UnderRenovation": true
-  },
-  {
-    "ID": 1,
-    "Name": "OR",
-    "Number": 100,
+    "ID": 16,
+    "Name": "Soba za razdvajanje",
+    "Number": 900,
     "Type": 0,
     "UnderRenovation": true
   }

@@ -1,5 +1,13 @@
 [
   {
+    "ID": 0,
+    "FirstName": "Ime",
+    "LastName": "Prezime",
+    "Email": "a",
+    "Password": "a",
+    "Gender": 0
+  },
+  {
     "ID": 1,
     "FirstName": "Ime",
     "LastName": "Prezime",

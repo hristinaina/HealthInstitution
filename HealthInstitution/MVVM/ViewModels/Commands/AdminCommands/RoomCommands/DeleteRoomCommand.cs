@@ -28,6 +28,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
             else{
                 _model.DialogOpen = false;
 
+                _model.SelectedRoom.Room.ReturnEquipmentToWarehouse(DateTime.Today);
                 Institution.Instance().RoomRepository.Rooms.Remove(_model.SelectedRoom.Room);
                 Institution.Instance().RoomRepository.DeletedRooms.Add(_model.SelectedRoom.Room);
                 _model.FillRoomList();

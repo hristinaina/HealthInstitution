@@ -17,6 +17,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
         {
             _model = model;
         }
+
         public override void Execute(object parameter)
         {
             _model.SearchPhrase = null;

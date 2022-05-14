@@ -31,7 +31,8 @@ namespace HealthInstitution.MVVM.Models.Entities
             _rooms = new List<Room>();
             _result = new List<Room>();
         }
-        public Renovation(int id, DateTime startDate, DateTime endDate, List<Room> rooms, List<Room> result)
+
+        public Renovation(int id, DateTime startDate, DateTime endDate, List<Room> rooms, List<Room> result) : this()
         {
             _startDate = startDate;
             _endDate = endDate;
@@ -42,28 +43,50 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public void StartRenovation()
         {
-            //when creating renovation add all new rooms to future rooms
-            //if not only one room under renovation 
             foreach (Room r in _rooms) r.UnderRenovation = true;
             _started = true;
 
+            if (_rooms.Count() > 1 || _result.Count() > 1)
+            {
+                foreach (Room r in _rooms)
+                {
+                    r.ReturnEquipmentToWarehouse(_endDate);
+                }
+            }
+
         }
+
 
         public void EndRenovation()
         {
             if (_rooms.Count() > 1)
             {
+                Room resultingRoom = _result[0];
+
                 //room is deleted
                 foreach (Room r in _rooms)
                 {
                     Institution.Instance().RoomRepository.Rooms.Remove(r);
                     Institution.Instance().RoomRepository.DeletedRooms.Add(r);
                 }
+
+                Institution.Instance().RoomRepository.FutureRooms.Remove(resultingRoom);
+                Institution.Instance().RoomRepository.Rooms.Add(resultingRoom);
+            
             } else if (_result.Count() > 1)
             {
-                Institution.Instance().RoomRepository.Rooms.Remove(_rooms[0]);
-                Institution.Instance().RoomRepository.DeletedRooms.Add(_rooms[0]);
+                Room roomUnderRenovation = _rooms[0];
+                Institution.Instance().RoomRepository.Rooms.Remove(roomUnderRenovation);
+                Institution.Instance().RoomRepository.DeletedRooms.Add(roomUnderRenovation);
 
+                //Dictionary<Equipment, int> equipment = roomUnderRenovation.Equipment;
+                //foreach (Equipment e in equipment.Keys)
+                //{
+                //    EquipmentArrangement a = Institution.Instance().EquipmentArragmentRepository.FindCurrentArrangement(roomUnderRenovation, e);
+                //    a.EndDate = _endDate;
+                //    Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(e, _result[0], equipment[e], a.EndDate, DateTime.MaxValue));
+                //}
+                
                 foreach (Room r in _result)
                 {
                     Institution.Instance().RoomRepository.FutureRooms.Remove(r);

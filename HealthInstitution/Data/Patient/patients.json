@@ -5,7 +5,11 @@
     "Deleted": false,
     "Record": {
       "Height": 190.0,
-      "Weight": 80.0
+      "Weight": 80.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto"
+      ]
     },
     "ID": 1,
     "FirstName": "Test",
@@ -20,7 +24,11 @@
     "Deleted": false,
     "Record": {
       "Height": 170.0,
-      "Weight": 60.0
+      "Weight": 60.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
     },
     "ID": 2,
     "FirstName": "Test99",
@@ -35,7 +43,11 @@
     "Deleted": false,
     "Record": {
       "Height": 170.0,
-      "Weight": 60.0
+      "Weight": 60.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
     },
     "ID": 3,
     "FirstName": "Test3",
@@ -50,7 +62,11 @@
     "Deleted": true,
     "Record": {
       "Height": 179.0,
-      "Weight": 69.0
+      "Weight": 69.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
     },
     "ID": 4,
     "FirstName": "Test9",
@@ -65,7 +81,11 @@
     "Deleted": false,
     "Record": {
       "Height": 170.0,
-      "Weight": 60.0
+      "Weight": 60.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
     },
     "ID": 5,
     "FirstName": "Test5",
@@ -80,7 +100,12 @@
     "Deleted": false,
     "Record": {
       "Height": 170.0,
-      "Weight": 60.0
+      "Weight": 60.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto...",
+        "glavobolja"
+      ]
     },
     "ID": 6,
     "FirstName": "Test6",
@@ -95,7 +120,11 @@
     "Deleted": true,
     "Record": {
       "Height": 0.0,
-      "Weight": 0.0
+      "Weight": 0.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
     },
     "ID": 0,
     "FirstName": "debil",
@@ -110,7 +139,11 @@
     "Deleted": false,
     "Record": {
       "Height": 0.0,
-      "Weight": 0.0
+      "Weight": 0.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
     },
     "ID": 8,
     "FirstName": "neko",
@@ -118,5 +151,23 @@
     "Email": "p89",
     "Password": "p",
     "Gender": 1
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 180.0,
+      "Weight": 80.0,
+      "HistoryOfIllnesses": [
+        "Imao glavobolju poslije nastup"
+      ]
+    },
+    "ID": 7,
+    "FirstName": "Harry",
+    "LastName": "Styles",
+    "Email": "itsharry@gmail.com",
+    "Password": "123",
+    "Gender": 2
   }
 ]

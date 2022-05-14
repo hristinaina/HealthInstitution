@@ -77,6 +77,15 @@
             <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminEquipmentViewModel}">
                 <viewsadmin:AdminEquipmentView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminRenovationViewModel}">
+                <viewsadmin:AdminRenovationView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminMergeComplexRenovationViewModel}">
+                <viewsadmin:AdminMergeComplexRenovation />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminDivideComplexRenovationViewModel}">
+                <viewsadmin:AdminDivideComplexRenovation />
+            </DataTemplate>
         </Grid.Resources>
         <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>

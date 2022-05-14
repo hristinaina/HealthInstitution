@@ -82,7 +82,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blocked = false;
             _blockadeType = 0;
             _deleted = false;
-            _record = new MedicalRecord(height, weight, new List<Allergen>());
+            _record = new MedicalRecord(height, weight, new List<Allergen>(), new List<string>());
             // no need to fill _operations and _examinations lists because it is a new user so there would be none
         }
 

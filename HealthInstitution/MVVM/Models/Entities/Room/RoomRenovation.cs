@@ -18,7 +18,6 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public RoomRenovation()
         {
-
         }
 
         public RoomRenovation(int renovationId, int roomId, bool result)
