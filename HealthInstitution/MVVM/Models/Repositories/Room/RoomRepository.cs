@@ -132,6 +132,14 @@ namespace HealthInstitution.MVVM.Models.Repositories
             return r;
         }
 
+        public void DeleteRoom(Entities.Room r)
+        {
+            if (!r.IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
+            r.ReturnEquipmentToWarehouse(DateTime.Today);
+            _rooms.Remove(r);
+            _deletedRooms.Add(r);
+        }
+
         public List<Entities.Room> FilterByRoomType(RoomType type)
         {
             List<Entities.Room> filteredRooms = new();
