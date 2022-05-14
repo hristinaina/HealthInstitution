@@ -41,14 +41,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
                     return;
                 }
             }
-
             catch (PatientBlockedException e)
             {
                 _viewModel.ShowMessage(e.Message, logOut: true);
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -57,7 +55,6 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
 
             patient.Record.Referrals.Remove(referral);
             Institution.Instance().ReferralRepository.Referrals.Remove(referral);
-
             _viewModel.FillReferralsList();
         }
 
