@@ -20,7 +20,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
         public override void Execute(object parameter)
         {
-            _viewModel.FillAppointmentsList(AppointmentService.SearchByAnamnesis(_viewModel.Patient.ID, _viewModel.SearchKeyWord));
+            _viewModel.FillAppointmentsList(AppointmentService.SearchByAnamnesis(_viewModel.Patient, _viewModel.SearchKeyWord));
         }
     }
 }

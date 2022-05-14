@@ -10,16 +10,6 @@
     "Result": true
   },
   {
-    "RenovationId": 4,
-    "RoomId": 5,
-    "Result": false
-  },
-  {
-    "RenovationId": 4,
-    "RoomId": 5,
-    "Result": true
-  },
-  {
     "RenovationId": 5,
     "RoomId": 3,
     "Result": false

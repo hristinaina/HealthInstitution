@@ -6,12 +6,6 @@
     "Started": false
   },
   {
-    "ID": 4,
-    "StartDate": "2022-05-12T00:00:00",
-    "EndDate": "2022-05-13T00:00:00",
-    "Started": true
-  },
-  {
     "ID": 5,
     "StartDate": "2022-05-16T00:00:00",
     "EndDate": "2022-05-20T00:00:00",
