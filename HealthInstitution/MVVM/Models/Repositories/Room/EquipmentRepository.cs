@@ -40,6 +40,7 @@ namespace HealthInstitution.MVVM.Models
 
         public Dictionary<Equipment, List<Room>> Search(string phrase)
         {
+            if (phrase is null || phrase.Equals("")) throw new EmptySearchPhraseException("You need to enter phrase for search");
             Dictionary<Equipment, List<Room>> matchingEquipment = new Dictionary<Equipment, List<Room>>();
 
             foreach (Equipment e in _equipment)
