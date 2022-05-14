@@ -15,10 +15,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
     public class CreateAppointmentCommand : BaseCommand
     {
         private PatientAppointmentViewModel _viewModel;
+        private bool _usingSuggestion;
 
-        public CreateAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel)
+        public CreateAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel, bool usingSuggestion=false)
         {
             _viewModel = patientAppointmentViewModel;
+            _usingSuggestion = usingSuggestion;
         }
 
         public override void Execute(object parameter)
@@ -28,6 +30,11 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             Patient patient = _viewModel.Patient;
             Doctor doctor = _viewModel.NewDoctor;
             DateTime datetime = _viewModel.MergeTime(_viewModel.NewDate, _viewModel.NewTime);
+
+            if (_usingSuggestion) {
+                doctor = _viewModel.SelectedSuggestion.Doctor;
+                datetime = _viewModel.MergeTime(_viewModel.SelectedSuggestion.Date, _viewModel.SelectedSuggestion.Time);
+            }
 
             try
             {

@@ -1,5 +1,6 @@
 ﻿using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
@@ -42,7 +43,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public DateTime NewDate { get; set; }
         public DateTime NewTime { get; set; }
         public Room NewRoom { get; set; }
-        
+
 
         private bool _enableChanges;
         public bool EnableChanges
@@ -86,6 +87,17 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public ICommand RescheduleAppointment { get; set; }
         public ICommand CancelAppointment { get; set; }
 
+        public ICommand Suggestions { get; set; }
+        public Doctor SuggestionDoctor { get; set; }
+        public DateTime SuggestionDeadlineDate { get; set; }
+        public DateTime SuggestionStartTime { get; set; }
+        public DateTime SuggestionEndTime { get; set; }
+        public bool SuggestionPriority { get; set; }
+        private ObservableCollection<AppointmentListItemViewModel> _appointmentSuggestions;
+        public IEnumerable<AppointmentListItemViewModel> AppointmentSuggestions { get => _appointmentSuggestions; }
+        public AppointmentListItemViewModel SelectedSuggestion { get; set; }
+        public ICommand UseSuggestion { get; set; }
+
         public PatientAppointmentViewModel()
         {
             Navigation = new PatientNavigationViewModel();
@@ -100,12 +112,35 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             FillAppointmentsList();
             FillDoctorsList();
 
-            NewDate = DateTime.Now;
             NewTime = DateTime.Now;
+            NewDate = DateTime.Now;
 
             CreateAppointment = new CreateAppointmentCommand(this);
             RescheduleAppointment = new RescheduleAppointmentCommand(this);
             CancelAppointment = new CancelAppointmentCommand(this);
+
+            Suggestions = new MakeSuggestionsCommand(this);
+            SuggestionDeadlineDate = DateTime.Now;
+            SuggestionStartTime = DateTime.Now;
+            SuggestionEndTime = DateTime.Now;
+            _appointmentSuggestions = new ObservableCollection<AppointmentListItemViewModel>();
+            SuggestionPriority = true;
+            UseSuggestion = new CreateAppointmentCommand(this, usingSuggestion: true);
+        }
+
+        public void FillSuggestionsList(List<Examination> suggestions)
+        {
+            _appointmentSuggestions.Clear();
+            foreach (Examination examination in suggestions)
+            {
+                _appointmentSuggestions.Add(new AppointmentListItemViewModel(examination));
+            }
+            if (_appointmentSuggestions.Count != 0)
+            {
+                SelectedSuggestion = _appointmentSuggestions[0];
+                OnPropertyChanged(nameof(SelectedSuggestion));
+            }
+            OnPropertyChanged(nameof(AppointmentSuggestions));
 
         }
 

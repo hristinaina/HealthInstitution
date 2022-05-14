@@ -8,7 +8,7 @@ namespace HealthInstitution.MVVM.Models.Enumerations
 {
     public enum SchedulingPriority
     {
-        DOCTOR,
-        TIME
+        TIME,
+        DOCTOR
     }
 }
