@@ -93,6 +93,18 @@ namespace HealthInstitution.MVVM.Models.Entities
             return free;
         }
 
+        public bool IsUnderRenovation(DateTime startDate, DateTime endDate)
+        {
+            foreach (Renovation r in _renovations)
+            {
+                if ((r.StartDate < endDate && r.StartDate > startDate) || (r.EndDate < endDate && r.EndDate > startDate))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public override string ToString()
         {
             return _name;

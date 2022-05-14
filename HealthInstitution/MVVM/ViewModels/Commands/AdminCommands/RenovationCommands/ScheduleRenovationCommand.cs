@@ -43,6 +43,11 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                 MessageBox.Show("End date must be after start date", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 prerequisitesFulfilled = false;
             }
+            else if (_model.NewRenovationRoom.IsUnderRenovation(_model.NewRenovationStartDate, _model.NewRenovationEndDate))
+            {
+                MessageBox.Show("Room is already under renovation in selected period", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                prerequisitesFulfilled = false;
+            }
             return prerequisitesFulfilled;
         }
 

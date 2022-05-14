@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Exceptions.AdminExceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
@@ -20,42 +21,31 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
             _model = model;
         }
 
-        private bool CheckPrerequisites()
-        {
-            bool prerequisitesFulfillled = true;
 
-            if (_model.NewRoomName is null || _model.NewRoomName.Equals(""))
-            {
-                MessageBox.Show("You need to fill all fields", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfillled = false;
-            }
-            else if (_model.NewRoomNumber == 0)
-            {
-                MessageBox.Show("Room number cannot be 0", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfillled = false;
-            }
-            else if (!Institution.Instance().RoomRepository.CheckNumber(_model.NewRoomNumber))
-            {
-                MessageBox.Show("Number already taken", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                prerequisitesFulfillled = false;
-            }
-
-            return prerequisitesFulfillled;
-        }
 
         public override void Execute(object parameter)
         {
-            
-            if (CheckPrerequisites())
+            int id = Institution.Instance().RoomRepository.GetID();
+            try
             {
-                _model.DialogOpen = false;
-
-                int id = Institution.Instance().RoomRepository.GetID();
                 Institution.Instance().RoomRepository.CreateRoom(id, _model.NewRoomName, _model.NewRoomNumber, (RoomType)_model.NewRoomType);
+                _model.DialogOpen = false;
                 _model.FillRoomList();
                 _model.NewRoomNumber = 0;
                 _model.NewRoomType = 0;
                 _model.NewRoomName = null;
+            } catch(ZeroRoomNumberException e)
+            {
+                _model.ShowMessage(e.Message);
+            } catch(EmptyRoomNameException e)
+            {
+                _model.ShowMessage(e.Message);
+            } catch(RoomNumberAlreadyTakenException e)
+            {
+                _model.ShowMessage(e.Message);
+            } catch (Exception e)
+            {
+                _model.ShowMessage(e.Message);
             }
         }
     }
