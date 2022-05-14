@@ -200,6 +200,8 @@ namespace HealthInstitution.MVVM.Models
 
         public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
         {
+            CheckTrolling();
+
             if (CurrentUser is Patient && patient.IsTrolling())
             {
                 throw new PatientBlockedException("System has blocked your account !");
@@ -253,10 +255,7 @@ namespace HealthInstitution.MVVM.Models
 
         public bool RescheduleExamination(Appointment appointment, DateTime dateTime, bool validation = true)
         {
-            if (CurrentUser is Patient && appointment.Patient.IsTrolling())
-            {
-                throw new PatientBlockedException("System has blocked your account !");
-            }
+            CheckTrolling();
 
             ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime, validation);
 
@@ -281,6 +280,7 @@ namespace HealthInstitution.MVVM.Models
 
             else if (appointment is Operation) 
             {
+                _operationReferencesRepository.Remove((Operation)appointment);
                 _operationReferencesRepository.Add((Operation)appointment);
             }
 
@@ -290,10 +290,7 @@ namespace HealthInstitution.MVVM.Models
 
         public bool CancelExamination(Appointment appointment)
         {
-            if (CurrentUser is Patient && appointment.Patient.IsTrolling())
-            {
-                throw new PatientBlockedException("System has blocked your account !");
-            }
+            CheckTrolling();
            
             Patient patient = appointment.Patient;
             Doctor doctor = appointment.Doctor;
@@ -401,6 +398,16 @@ namespace HealthInstitution.MVVM.Models
                 if (allergen.Id == newAllergen.Id) return false;
             }
             return true;
+        }
+
+        public void CheckTrolling()
+        {
+            if (CurrentUser is Patient)
+            {
+                Patient patient = (Patient)CurrentUser;
+                if (patient.IsTrolling())
+                throw new PatientBlockedException("System has blocked your account !");
+            }
         }
     }
 }

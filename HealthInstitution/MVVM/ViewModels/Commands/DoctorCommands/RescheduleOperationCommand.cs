@@ -21,13 +21,19 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
         public override void Execute(object parameter)
         {
-
             _viewModel.DialogOpen = false;
 
-            Operation operation = _viewModel.SelectedOperation.Operation;
-            DateTime datetime = _viewModel.MergeTime(_viewModel.SelectedDate, _viewModel.SelectedTime);
-
-            Institution.Instance().RescheduleExamination((Operation)operation, datetime);
+            try
+            {
+                Operation operation = _viewModel.SelectedOperation.Operation;
+                DateTime datetime = _viewModel.MergeTime(_viewModel.SelectedDate, _viewModel.SelectedTime);
+                bool isRescheduled = Institution.Instance().RescheduleExamination((Operation)operation, datetime);
+                if (isRescheduled) _viewModel.ShowMessage("Operation successfully rescheduled !");
+            } catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
+     
             _viewModel.FillOperationsList();
         }
     }

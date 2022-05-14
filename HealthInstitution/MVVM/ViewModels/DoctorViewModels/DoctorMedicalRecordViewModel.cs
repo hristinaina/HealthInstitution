@@ -18,8 +18,6 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public IEnumerable<AllergenViewModel> Allergens => _allergens;
         private ObservableCollection<IllnessItemViewModel> _illnesses;
         public IEnumerable<IllnessItemViewModel> Illnesses => _illnesses;
-        //private MedicalRecordViewModel _medicalRecord;
-        //public MedicalRecordViewModel MedicalRecord { get => _medicalRecord; }
         private Examination _examination;
         public Examination Examination { get => _examination; }
         private Operation _operation;
