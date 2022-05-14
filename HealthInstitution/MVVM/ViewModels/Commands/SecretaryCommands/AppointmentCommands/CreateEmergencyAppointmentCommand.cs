@@ -91,6 +91,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
                         done = Institution.Instance().CreateAppointment(doctor, patient, currentTime, type, _newDuration, false);
                         if (done)
                         {
+                            _newDate = currentTime;
                             _doctor = doctor;
                             return true;
                         }
