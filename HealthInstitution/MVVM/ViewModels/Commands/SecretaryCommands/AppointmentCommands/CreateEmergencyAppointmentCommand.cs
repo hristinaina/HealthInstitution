@@ -34,17 +34,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
 
         public override void Execute(object parameter)
         {
-            if (_viewModel.SelectedPatient == null)
-            {
-                MessageBox.Show("Please select a patient!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            bool isDurationInt = Int32.TryParse(_viewModel.SelectedDuration, out _newDuration);
-            if (!isDurationInt || _newDuration < 15)
-            {
-                MessageBox.Show("Duration must be a number > 15", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            bool validation = ValidateData();
+            if (!validation) return;
 
             _viewModel.DialogOpen = false;
             try
@@ -103,6 +94,22 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
 
             }
             return done;
+        }
+
+        private bool ValidateData()
+        {
+            if (_viewModel.SelectedPatient == null)
+            {
+                MessageBox.Show("Please select a patient!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            bool isDurationInt = Int32.TryParse(_viewModel.SelectedDuration, out _newDuration);
+            if (!isDurationInt || _newDuration < 15)
+            {
+                MessageBox.Show("Duration must be a number > 15", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
         }
     }
 }

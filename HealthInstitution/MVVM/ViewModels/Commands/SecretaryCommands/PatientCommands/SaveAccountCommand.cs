@@ -26,29 +26,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
 
         public override void Execute(object parameter)
         {
-            if (string.IsNullOrWhiteSpace(_viewModel.FirstName) || string.IsNullOrWhiteSpace(_viewModel.LastName)
-                || string.IsNullOrWhiteSpace(_viewModel.Password) || string.IsNullOrWhiteSpace(_viewModel.Email)
-                || string.IsNullOrWhiteSpace(_viewModel.GetGender))
-            {
-                MessageBox.Show("You need to fill all fields", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            double height;
-            bool isHeightDouble = Double.TryParse(_viewModel.Height, out height);
-            if (!isHeightDouble)
-            {
-                MessageBox.Show("Height must be a number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            double weight;
-            bool isWeightDouble = Double.TryParse(_viewModel.Weight, out weight);
-            if (!isWeightDouble)
-            {
-                MessageBox.Show("Weight must be a number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            bool validation = ValidateData();
+            if (!validation) return;
 
             Patient patient = Institution.Instance().PatientRepository.FindByID(_viewModel.SelectedPatientId);
 
@@ -59,14 +38,43 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
             }
 
             Enum.TryParse(_viewModel.GetGender, out Gender gender);
+            int weight = Int32.Parse(_viewModel.Weight);
+            int height =  Int32.Parse(_viewModel.Height);
+
             patient.Update(_viewModel.SelectedPatientId, _viewModel.FirstName, _viewModel.LastName, _viewModel.Email, _viewModel.Password, gender,
                 height, weight);
-
             _viewModel.FillPatientList();
 
             MessageBox.Show("Successfully changed patient data!");
-
             _viewModel.DialogOpen = false;
+        }
+
+        private bool ValidateData()
+        {
+            if (string.IsNullOrWhiteSpace(_viewModel.FirstName) || string.IsNullOrWhiteSpace(_viewModel.LastName)
+                || string.IsNullOrWhiteSpace(_viewModel.Password) || string.IsNullOrWhiteSpace(_viewModel.Email)
+                || string.IsNullOrWhiteSpace(_viewModel.GetGender))
+            {
+                MessageBox.Show("You need to fill all fields", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            double height;
+            bool isHeightDouble = Double.TryParse(_viewModel.Height, out height);
+            if (!isHeightDouble)
+            {
+                MessageBox.Show("Height must be a number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            double weight;
+            bool isWeightDouble = Double.TryParse(_viewModel.Weight, out weight);
+            if (!isWeightDouble)
+            {
+                MessageBox.Show("Weight must be a number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -37,13 +37,13 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             }
         }
 
-        public ICommand Cancel { get; set; }
-        public ICommand Schedule { get; set; }
-
         public Patient SelectedPatient { get; set; }
         public Specialization SelectedSpecialization { get; set; }
         public int SelectedDuration { get; set; }
         public Dictionary<Appointment, DateTime> AppointmentsNewDate { get; set; }
+
+        public ICommand Cancel { get; set; }
+        public ICommand Schedule { get; set; }
 
         public EmergencyAppointmentViewModel(AppointmentsViewModel viewModel)
         {
