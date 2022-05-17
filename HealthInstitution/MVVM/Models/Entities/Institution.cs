@@ -415,6 +415,7 @@ namespace HealthInstitution.MVVM.Models
             foreach(Patient i in _patientRepository.Patients)
             {
                 if (patient.ID == i.ID) patient.Record.HistoryOfIllnesses.Add(illness);
+                
             }
         }
     }
