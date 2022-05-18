@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using HealthInstitution.Stores;
 using System;
-using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels
