@@ -24,7 +24,16 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             _viewModel.DialogOpen = false;
             Examination examination = _viewModel.Examination;
             examination.Anamnesis = _viewModel.Anamnesis;
-            Institution.Instance().RescheduleExamination(examination, examination.Date);
+            try
+            {
+                bool isAdded = Institution.Instance().AddAnamnesis(examination, _viewModel.Anamnesis);
+
+                if (isAdded) _viewModel.ShowMessage("Anamnesis successfully added !");
+            } 
+            catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
         }
     }
 }

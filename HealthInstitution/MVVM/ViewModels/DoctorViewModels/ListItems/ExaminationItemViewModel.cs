@@ -7,7 +7,7 @@ using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
-    public class ExaminationViewModel : BaseViewModel
+    public class ExaminationItemViewModel : BaseViewModel
     {
         private readonly Examination _examination;
         public Examination Examination { get => _examination; }
@@ -17,7 +17,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public Room Room => _examination.Room;
         public Patient Patient => _examination.Patient;
 
-        public ExaminationViewModel(Examination examination)
+        public ExaminationItemViewModel(Examination examination)
         {
             _examination = examination;
         }

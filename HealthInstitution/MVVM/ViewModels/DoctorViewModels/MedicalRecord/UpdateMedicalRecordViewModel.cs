@@ -26,8 +26,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand CreateReferralSpecCommand { get; }
         public ICommand CreatePrescriptionCommand { get; }
 
-        private ObservableCollection<AllergenViewModel> _allergens;
-        public IEnumerable<AllergenViewModel> Allergens => _allergens;
+        private ObservableCollection<AllergenItemViewModel> _allergens;
+        public IEnumerable<AllergenItemViewModel> Allergens => _allergens;
         private ObservableCollection<Allergen> _newAllergens;
         public IEnumerable<Allergen> NewAllergens => _newAllergens;
         private ObservableCollection<IllnessItemViewModel> _illnesses;
@@ -158,7 +158,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             _institution = Institution.Instance();
                
             _examination = examination;
-            _allergens = new ObservableCollection<AllergenViewModel>();
+            _allergens = new ObservableCollection<AllergenItemViewModel>();
             _newAllergens = new ObservableCollection<Allergen>();
             _illnesses = new ObservableCollection<IllnessItemViewModel>();
             _doctors = new ObservableCollection<Doctor>();
@@ -197,7 +197,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             _allergens.Clear();
             foreach (Allergen allergen in _examination.Patient.Record.Allergens)
             {
-                _allergens.Add(new AllergenViewModel(allergen));
+                _allergens.Add(new AllergenItemViewModel(allergen));
             }
             OnPropertyChanged(nameof(Allergens));
         }
@@ -267,11 +267,11 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public void AddAllergen(Allergen allergen)
         {
-            foreach(AllergenViewModel allergenViewModel in _allergens)
+            foreach(AllergenItemViewModel allergenViewModel in _allergens)
             {
                 if (allergenViewModel.AllergenName == allergen.Name) return;
             }
-            _allergens.Add(new AllergenViewModel(allergen));
+            _allergens.Add(new AllergenItemViewModel(allergen));
         }
 
         public void AddIllness(string illness)

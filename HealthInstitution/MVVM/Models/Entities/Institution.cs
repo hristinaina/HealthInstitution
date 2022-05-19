@@ -418,5 +418,19 @@ namespace HealthInstitution.MVVM.Models
                 
             }
         }
+
+
+        public bool AddAnamnesis(Examination examination, string anamnesis)
+        {
+            foreach (Examination i in _examinationRepository.Examinations)
+            {
+                if (i.ID == examination.ID)
+                {
+                    examination.Anamnesis = anamnesis;
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

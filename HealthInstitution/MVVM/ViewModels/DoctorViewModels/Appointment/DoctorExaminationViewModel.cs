@@ -5,34 +5,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
-using HealthInstitution.MVVM.Models.Repositories;
 using HealthInstitution.MVVM.Models.Entities;
-using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
-
+using HealthInstitution.MVVM.Models;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
-    class DoctorOperationViewModel : BaseViewModel
+    class DoctorExaminationViewModel : BaseViewModel
     {
-        private readonly ObservableCollection<OperationViewModel> _operations;
+        private readonly ObservableCollection<ExaminationItemViewModel> _examinations;
 
         private Institution _institution;
         private readonly Doctor _doctor;
         public Doctor Doctor { get => _doctor; }
-        public DoctorMedicalRecordViewModel MedicalRecordVM { get; }
+
         public DoctorNavigationViewModel Navigation { get; }
-        public IEnumerable<OperationViewModel> Operations => _operations;
+        public DoctorMedicalRecordViewModel MedicalRecordVM { get; }
 
-        public ICommand ScheduleOperation { get; }
+        public IEnumerable<ExaminationItemViewModel> Examinations => _examinations;
+
+        public ICommand ScheduleExaminationCommand { get; }
+        public ICommand StartExamination { get; }
         public ICommand MedicalRecord { get; }
-        public ICommand RescheduleOperation { get; }
-        public ICommand DeleteOperation { get; }
-        public ICommand CreateOperation { get; }
-        public ICommand CancelOperation { get; }
+        public ICommand RescheduleAppointment { get; }
+        public ICommand CancelAppointment { get; }
+        public ICommand CreateExamination { get; }
+        public ICommand UpdateMedicalRecord { get; }
 
-        private OperationViewModel _selectedOperation;
-        public OperationViewModel SelectedOperation { get => _selectedOperation; }
+        private ExaminationItemViewModel _selectedExamination;
+        public ExaminationItemViewModel SelectedExamination { get => _selectedExamination; }
 
         private bool _dialogOpen;
         public bool DialogOpen
@@ -56,7 +57,6 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public Patient NewPatient { get; set; }
         public string NewDate { get; set; }
         public string NewTime { get; set; }
-        public int Duration { get; set; }
         public Room NewRoom { get; set; }
 
         private bool _enableChanges;
@@ -80,53 +80,53 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 _selection = value;
                 EnableChanges = true;
                 OnPropertyChanged(nameof(Selection));
-                _selectedOperation = _operations.ElementAt(_selection);
-                SelectedPatient = _selectedOperation.Patient;
+                _selectedExamination = _examinations.ElementAt(_selection);
+                SelectedPatient = _selectedExamination.Patient;
                 OnPropertyChanged(nameof(SelectedPatient));
-                SelectedDate = _selectedOperation.Operation.Date.ToString("MM/dd/yyyy HH:mm");
+                SelectedDate = _selectedExamination.Examination.Date.ToString("MM/dd/yyyy HH:mm");
                 OnPropertyChanged(nameof(SelectedDate));
-                SelectedTime = _selectedOperation.Operation.Date.ToString("MM/dd/yyyy HH:mm");
+                SelectedTime = _selectedExamination.Examination.Date.ToString("MM/dd/yyyy HH:mm");
                 OnPropertyChanged(nameof(SelectedTime));
             }
         }
 
-        public DoctorOperationViewModel()
+        public DoctorExaminationViewModel()
         {
             bool isSpecialist = true;
-
             Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
-            _operations = new ObservableCollection<OperationViewModel>();
+            _examinations = new ObservableCollection<ExaminationItemViewModel>();
             Navigation = new DoctorNavigationViewModel(isSpecialist);
 
             _institution = Institution.Instance();
             _doctor = (Doctor)_institution.CurrentUser;
+            _examinations = new ObservableCollection<ExaminationItemViewModel>();
             _patients = new ObservableCollection<Patient>();
             _rooms = new ObservableCollection<Room>();
 
             EnableChanges = false;
 
-            FillOperationsList();
+            FillExaminationsList();
             FillPatientsList();
             FillRoomsList();
 
             NewDate = DateTime.Now.ToString("MM/dd/yyyy HH:MM");
             NewTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
-            Duration = 15;
-            CreateOperation = new CreateOperationCommand(this);
-            RescheduleOperation = new RescheduleOperationCommand(this);
-            CancelOperation = new CancelOperationCommand(this);
+            CreateExamination = new CreateAppointmentCommand(this);
+            RescheduleAppointment = new RescheduleAppointmentCommand(this);
+            CancelAppointment = new CancelExaminationCommand(this);
             MedicalRecord = new OpenMedicalRecordCommand(this);
+            UpdateMedicalRecord = new OpenUpdateMedicalRecordCommand(this);
         }
 
-        public void FillOperationsList()
+        public void FillExaminationsList()
         {
-            _operations.Clear();
-            foreach (Operation operation in _doctor.GetSchedule(DateTime.Today, nameof(Operation)))
+            _examinations.Clear();
+            foreach (Examination examination in _doctor.GetSchedule(DateTime.Today, nameof(Examination)))
             {
-                _operations.Add(new OperationViewModel(operation));
+                _examinations.Add(new ExaminationItemViewModel(examination));
             }
-            OnPropertyChanged(nameof(Operations));
+            OnPropertyChanged(nameof(Examinations));
         }
 
         private void FillPatientsList()

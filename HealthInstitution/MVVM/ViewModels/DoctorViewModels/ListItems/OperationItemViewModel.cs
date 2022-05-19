@@ -7,7 +7,7 @@ using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
-    class OperationViewModel : BaseViewModel
+    class OperationItemViewModel : BaseViewModel
     {
         private readonly Operation _operation;
 
@@ -18,7 +18,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public string Room => _operation.Room.ID.ToString();
         public Patient Patient => _operation.Patient;
 
-        public OperationViewModel(Operation operation)
+        public OperationItemViewModel(Operation operation)
         {
             _operation = operation;
         }

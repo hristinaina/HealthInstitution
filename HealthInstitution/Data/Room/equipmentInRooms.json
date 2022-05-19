@@ -117,19 +117,5 @@
     "Quantity": 28,
     "StartDate": "2022-06-08T00:00:00",
     "EndDate": "9999-04-25T18:43:37.0931955+02:00"
-  },
-  {
-    "RoomId": 0,
-    "EquipmentId": 1,
-    "Quantity": 26,
-    "StartDate": "2022-05-14T00:00:00",
-    "EndDate": "2022-05-15T00:00:00"
-  },
-  {
-    "RoomId": 3,
-    "EquipmentId": 1,
-    "Quantity": 5,
-    "StartDate": "2022-05-14T00:00:00",
-    "EndDate": "2022-05-15T00:00:00"
   }
 ]
