@@ -23,5 +23,10 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels.ListItems
             _equipment = equipment;
             _status = status;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
