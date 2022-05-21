@@ -37,6 +37,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly RoomRepository _roomRepository;
         private readonly RenovationRepository _renovationRepository;
         private readonly RoomRenovationRepository _roomRenovationRepository;
+        private readonly EquipmentOrderRepository _equipmentOrderRepository;
 
         private readonly MedicineRepository _medicineRepository;
         private readonly DayOffRepository _dayOffRepository;
@@ -85,6 +86,7 @@ namespace HealthInstitution.MVVM.Models
             _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
             _renovationRepository = new RenovationRepository(_appSettings.RenovationFileName);
             _roomRenovationRepository = new RoomRenovationRepository(_appSettings.RoomRenovationFileName);
+            _equipmentOrderRepository = new EquipmentOrderRepository(_appSettings.EquipmentOrderFileName);
 
             _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
             _referralRepository = new ReferralRepository(_appSettings.RefferalsFileName);
@@ -129,6 +131,7 @@ namespace HealthInstitution.MVVM.Models
             _prescriptionMedicineRepository.LoadFromFile();
             _prescriptionRepository.LoadFromFile();
             _examinationChangeRepository.LoadFromFile();
+            _equipmentOrderRepository.LoadFromFile();
         }
 
         public void SaveAll()
@@ -157,6 +160,7 @@ namespace HealthInstitution.MVVM.Models
             _prescriptionMedicineRepository.SaveToFile();
             _prescriptionRepository.SaveToFile();
             _examinationChangeRepository.SaveToFile();
+            _equipmentOrderRepository.SaveToFile();
         }
 
         private static void ConnectReferences()
@@ -197,6 +201,7 @@ namespace HealthInstitution.MVVM.Models
         public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
         public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
+        public EquipmentOrderRepository EquipmentOrderRepository { get => _equipmentOrderRepository; }
 
         public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
         {

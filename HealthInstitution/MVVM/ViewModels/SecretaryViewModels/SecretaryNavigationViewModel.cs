@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands;
-using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Navigation;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
@@ -29,8 +28,6 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             Appointments = new AppointmentsCommand();
             OrderingEquipment = new OrderingEquipmentCommand();
             ArrangingEquipment = new ArrangingEquipmentCommand();
-
-
         }
     }
 }

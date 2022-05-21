@@ -8,7 +8,7 @@ using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
 
-namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Navigation
+namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
 {
     public class ArrangingEquipmentCommand : BaseCommand
     {

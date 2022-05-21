@@ -56,5 +56,23 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             }
             _orders = futureOrders;
         }
+
+        public string CheckIfOrdered(Equipment equipment)
+        {
+            string status = "Out of stock";
+            int ordered = 0;
+
+            foreach (EquipmentOrder order in _orders)
+            {
+                if (equipment.ID == order.EquipmentID && order.DeliverDate > DateTime.Now)
+                {
+                    ordered += order.Quantity;
+                }
+            }
+
+            if (ordered != 0) status = "Ordered: " + ordered.ToString();
+
+            return status;
+        }
     }
 }

@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.ViewModels.SecretaryViewModels.ListItems;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
@@ -10,21 +14,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
     {
         public SecretaryNavigationViewModel Navigation { get; }
 
-        // private readonly ObservableCollection<BlockedPatientItemViewModel> _patients;
-        // public IEnumerable<BlockedPatientItemViewModel> Patients => _patients;
-        // private BlockedPatientItemViewModel _selectedPatient;
-
-        private bool _enableChanges;
-        private int _selection;
-        public bool EnableChanges
-        {
-            get => _enableChanges;
-            set
-            {
-                _enableChanges = value;
-                OnPropertyChanged(nameof(EnableChanges));
-            }
-        }
+        private readonly ObservableCollection<MissingEquipmentItemViewModel> _equipment;
+        public IEnumerable<MissingEquipmentItemViewModel> Equipment => _equipment;
 
         private bool _dialogOpen;
         public bool DialogOpen
@@ -37,22 +28,32 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             }
         }
 
-        public int Selection
-        {
-            get => _selection;
-            set
-            {
-                if (value < 0) { return; };
-                _selection = value;
-                EnableChanges = true;
-                OnPropertyChanged(nameof(Selection));
-            }
-        }
-
         public OrderingEquipmentViewModel()
         {
             Navigation = new SecretaryNavigationViewModel();
-            EnableChanges = false;
+
+            _equipment = new ObservableCollection<MissingEquipmentItemViewModel>();
+
+            FillEquipmentList();
+        }
+
+        private void FillEquipmentList()
+        {
+            _equipment.Clear();
+            List<Equipment> equipment = Institution.Instance().EquipmentRepository.Equipment;
+            foreach (Equipment e in equipment)
+            {
+                if (e.Quantity == 0)
+                {
+                    string status = Institution.Instance().EquipmentOrderRepository.CheckIfOrdered(e);
+                    _equipment.Add(new MissingEquipmentItemViewModel(e, status));
+                }
+            }
+
+            if (_equipment.Count == 0)
+            {
+                // TODO: inform that everything IS in stock 
+            }
         }
     }
 }
