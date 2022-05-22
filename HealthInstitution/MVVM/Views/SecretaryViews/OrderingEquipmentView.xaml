@@ -1,8 +1,8 @@
 ﻿<UserControl x:Class="HealthInstitution.MVVM.Views.SecretaryViews.OrderingEquipmentView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.SecretaryViews"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:secretaryviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.SecretaryViewModels"
@@ -31,11 +31,16 @@
                 <materialDesign:Card>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="4*"></RowDefinition>
                             <RowDefinition Height="1*"></RowDefinition>
                         </Grid.RowDefinitions>
-
-
+                        <TextBlock HorizontalAlignment="Center"
+                                   Grid.Row="0"
+                                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                   VerticalAlignment="Center"
+                                   Text="Equipment that is out of stock"
+                                   FontWeight="DemiBold" />
                         <ListView ItemsSource="{Binding Equipment}"
                                   VerticalAlignment="Top"
                                   Width="610"
@@ -43,8 +48,8 @@
                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                   HorizontalAlignment="Center"
                                   IsManipulationEnabled="False"
-                                  Grid.Row="0"
-                                  Margin=" 0 20 0 0">
+                                  Grid.Row="1"
+                                  Margin=" 0 0 0 0">
                             <ListView.View>
                                 <GridView AllowsColumnReorder="False">
                                     <GridViewColumn Width="80"
@@ -91,7 +96,7 @@
                             </ListView.View>
                         </ListView>
 
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="2">
 
                             <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
                                     Width="190"

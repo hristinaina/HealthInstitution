@@ -4,5 +4,17 @@
     "EquipmentID": 7,
     "DeliverDate": "2022-05-23T16:25:59.9826561+02:00",
     "Quantity": 20
+  },
+  {
+    "ID": 2,
+    "EquipmentID": 8,
+    "DeliverDate": "2022-05-23T22:02:09.5969121+02:00",
+    "Quantity": 15
+  },
+  {
+    "ID": 3,
+    "EquipmentID": 8,
+    "DeliverDate": "2022-05-23T22:02:16.6436807+02:00",
+    "Quantity": 15
   }
 ]

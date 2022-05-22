@@ -39,7 +39,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             Navigation = new SecretaryNavigationViewModel();
 
             _equipment = new ObservableCollection<MissingEquipmentItemViewModel>();
-            OrderEquipment =  new OrderEquipmentCommand(this);
+            OrderEquipment = new OrderEquipmentCommand(this);
 
             FillEquipmentList();
         }

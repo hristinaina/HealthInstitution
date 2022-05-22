@@ -31,6 +31,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Equipment
             int quantity = int.Parse(_viewModel.Quantity);
 
             Institution.Instance().EquipmentOrderRepository.CreateOrder(equipment, quantity);
+            MessageBox.Show("Equipment has been successfully ordered!");
             _viewModel.DialogOpen = false;
 
             _viewModel.FillEquipmentList();
