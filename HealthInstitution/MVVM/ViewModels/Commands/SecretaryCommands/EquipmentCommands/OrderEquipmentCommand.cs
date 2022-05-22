@@ -30,8 +30,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Equipment
             Equipment equipment = Institution.Instance().EquipmentRepository.FindById(int.Parse(_viewModel.SelectedEquipment.Id));
             int quantity = int.Parse(_viewModel.Quantity);
 
-            // TODO: create EquipmentOrder
-            // TODO: napraviti fju koja kad prodje datum, dodaje te materijale u magacin (pogledati kako je Nemanja radio)
+            Institution.Instance().EquipmentOrderRepository.CreateOrder(equipment, quantity);
 
             _viewModel.FillEquipmentList();
         }

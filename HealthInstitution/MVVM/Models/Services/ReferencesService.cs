@@ -74,6 +74,8 @@ namespace HealthInstitution.MVVM.Models.Services
                 r.AddEquipment(e, a.Quantity);
                 e.ArrangeInRoom(r, a.Quantity);
             }
+
+            Institution.Instance().EquipmentOrderRepository.Deliver(Institution.Instance().EquipmentRepository);
         }
 
         public static void ConnectRenovations()

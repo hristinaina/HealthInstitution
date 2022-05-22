@@ -28,6 +28,14 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         }
 
+        public EquipmentOrder(int id, int equipmentId, DateTime deliverDate, int quantity)
+        {
+            _id = id;
+            _equipmentId = equipmentId;
+            _deliverDate = deliverDate;
+            _quantity = quantity;
+        }
+
         public bool isDelivered()
         {
             return _deliverDate < DateTime.Today;

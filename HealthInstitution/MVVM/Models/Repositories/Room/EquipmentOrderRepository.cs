@@ -41,6 +41,32 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             return null;
         }
 
+        private bool CheckID(int id)
+        {
+            foreach (EquipmentOrder e in _orders)
+            {
+                if (e.ID == id) return false;
+            }
+            return true;
+        }
+
+        public int GetNewID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
+
+        public void CreateOrder(Equipment equipment, int quantity)
+        {
+            int id = GetNewID();
+            DateTime deliverDate = DateTime.Now.AddDays(1);
+            _orders.Add(new EquipmentOrder(id, equipment.ID, deliverDate, quantity));
+        }
+
         public void Deliver(EquipmentRepository equipments)
         {
             List<EquipmentOrder> futureOrders = new List<EquipmentOrder>();
