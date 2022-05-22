@@ -2,13 +2,13 @@
   {
     "ID": 1,
     "Name": "Chair",
-    "Quantity": 50,
+    "Quantity": 70,
     "Type": 2
   },
   {
     "ID": 2,
     "Name": "Table",
-    "Quantity": 50,
+    "Quantity": 60,
     "Type": 3
   },
   {
