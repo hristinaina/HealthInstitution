@@ -48,7 +48,7 @@
                                Height="50"/>
                         </Grid>
                         <Grid Grid.Row="1" Margin="0 30 0 0">
-                            <ListView ItemsSource="{Binding Examinations}"
+                            <ListView ItemsSource="{Binding PendingMedicines}"
                                       SelectionMode="Single"
                                       SelectedIndex="{Binding Selection}"
                                       Width="650"
@@ -61,7 +61,7 @@
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock TextAlignment="Left"
-                                                           Text="{Binding Name}"
+                                                           Text="{Binding MedicineName}"
                                                            Width="200" />
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
@@ -107,7 +107,8 @@
                                 Margin="30,0,0,0"
                                 Width="180"
                                 Content="Approve"
-                                Grid.Column="0">
+                                Grid.Column="0"
+                                IsEnabled="{Binding EnableChanges}">
                             </Button>
                             <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 ToolTip="Return for revision"
@@ -117,7 +118,8 @@
                                 Margin="30,0,0,0"
                                 Width="180"
                                 Content="Revision"
-                                Grid.Column="1">
+                                Grid.Column="1"
+                                IsEnabled="{Binding EnableChanges}">
                                 <Button.CommandParameter>
                                     <StackPanel Height="330"
                                                 Width="320"
@@ -158,11 +160,50 @@
                                 ToolTip="Discard medicine suggestion"
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Left"
-                                
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                 Margin="30,0,0,0"
                                 Width="180"
                                 Content="Discard"
-                                Grid.Column="2">
+                                Grid.Column="2"
+                                IsEnabled="{Binding EnableChanges}">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="150"
+                                                Width="380"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Delete selected medicine suggestion"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBlock Text="Are you sure ?"
+                                                   HorizontalAlignment="Center" 
+                                                   Margin="0 10 0 0"/>
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 20 30 0"
+                                                    Content="YES, DELETE MEDICINE SUGGESTION"
+                                                    Command="{Binding DeletePendingMedicine}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="20 20 0 0"
+                                                    Content="DISCARD"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
                             </Button>
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
@@ -170,7 +211,8 @@
                                     Content="DONE"                 
                                     Width="180"
                                     Command="{Binding SaveCommand}"
-                                    Grid.Column="3">
+                                    Grid.Column="3"
+                                    IsEnabled="{Binding EnableChanges}">
                             </Button>
                         </Grid>
                     </Grid>

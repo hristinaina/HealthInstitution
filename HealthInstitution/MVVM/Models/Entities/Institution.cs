@@ -419,7 +419,6 @@ namespace HealthInstitution.MVVM.Models
             }
         }
 
-
         public bool AddAnamnesis(Examination examination, string anamnesis)
         {
             foreach (Examination i in _examinationRepository.Examinations)
@@ -427,6 +426,19 @@ namespace HealthInstitution.MVVM.Models
                 if (i.ID == examination.ID)
                 {
                     examination.Anamnesis = anamnesis;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool DeletePendingMedicine(PendingMedicine pendingMedicine)
+        {
+            foreach(PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
+            {
+                if (i.Id == pendingMedicine.Id)
+                {
+                    _pendingMedicineRepository.PendingMedicines.Remove(i);
                     return true;
                 }
             }

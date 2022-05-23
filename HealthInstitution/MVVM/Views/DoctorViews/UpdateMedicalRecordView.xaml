@@ -181,7 +181,7 @@
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Width="200"
-                                                        Header="History of Illness">
+                                                        Header="History of Illnesses">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBlock TextAlignment="Left"
@@ -511,7 +511,7 @@
                             </Button>
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
-                                    Margin="0 30 50 0"
+                                    Margin="0 30 60 0"
                                     Content="DONE"                 
                                     Width="210"
                                     Command="{Binding SaveCommand}">
