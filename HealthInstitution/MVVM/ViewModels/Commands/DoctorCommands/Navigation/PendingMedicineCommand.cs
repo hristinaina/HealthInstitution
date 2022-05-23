@@ -8,7 +8,7 @@ using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 using HealthInstitution.Stores;
 
-namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands.Navigation
+namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
     class PendingMedicineCommand : BaseCommand
     {

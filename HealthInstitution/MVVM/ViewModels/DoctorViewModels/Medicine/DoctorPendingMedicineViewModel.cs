@@ -13,5 +13,15 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
     class DoctorPendingMedicineViewModel : BaseViewModel
     {
+        public DoctorNavigationViewModel Navigation { get; }
+
+        public DoctorPendingMedicineViewModel()
+        {
+            bool isSpecialist = true;
+            Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
+            if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
+            Navigation = new DoctorNavigationViewModel(isSpecialist);
+        }
+
     }
 }
