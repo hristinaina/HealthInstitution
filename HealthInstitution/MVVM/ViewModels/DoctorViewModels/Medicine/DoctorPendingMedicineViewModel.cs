@@ -16,11 +16,12 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
     class DoctorPendingMedicineViewModel : BaseViewModel
     {
         public DoctorNavigationViewModel Navigation { get; }
-        private readonly ObservableCollection<PendingMedicineItemViewModel> _pendingMedicines;
 
+        private readonly ObservableCollection<PendingMedicineItemViewModel> _pendingMedicines;
         public IEnumerable<PendingMedicineItemViewModel> PendingMedicines => _pendingMedicines;
 
         public ICommand DeletePendingMedicine { get; }
+        public ICommand SendToRevision { get; }
 
         private PendingMedicineItemViewModel _selectedMedicine;
         public PendingMedicineItemViewModel SelectedMedicine => _selectedMedicine;
@@ -61,6 +62,20 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
+        private string _revisionReason;
+        public string RevisionReason
+        {
+            get
+            {
+                return _revisionReason;
+            }
+            set
+            {
+                _revisionReason = value;
+                OnPropertyChanged(nameof(RevisionReason));
+            }
+        }
+
         public DoctorPendingMedicineViewModel()
         {
             bool isSpecialist = true;
@@ -68,11 +83,21 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
             Navigation = new DoctorNavigationViewModel(isSpecialist);
 
+            // initializing
             _pendingMedicines = new ObservableCollection<PendingMedicineItemViewModel>();
 
+            // commands
             DeletePendingMedicine = new DeletePendingMedicineCommand(this);
+            SendToRevision = new RevisionPendingMedicineCommand(this);
 
+            // filling with data
+            SetProperties();
             FindPendingMedicines();
+        }
+
+        public void SetProperties()
+        {
+            if (_selectedMedicine != null) RevisionReason = _selectedMedicine.RevisionReason;
         }
 
 

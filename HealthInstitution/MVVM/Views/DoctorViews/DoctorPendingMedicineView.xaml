@@ -140,12 +140,12 @@
                                                 SpellCheck.IsEnabled="True"
                                                 materialDesign:HintAssist.Hint="Write a brief reason for the rejection..."
                                                 Height="80"
-                                                Text="{Binding Anamnesis}"/>
+                                                Text="{Binding RevisionReason}"/>
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsCancel="True"
                                                 Margin="0 30 0 0"
                                                 Content="SEND"
-                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                Command="{Binding SendToRevision}">
                                         </Button>
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsCancel="True"

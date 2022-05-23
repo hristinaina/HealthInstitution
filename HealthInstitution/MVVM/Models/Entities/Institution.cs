@@ -432,13 +432,27 @@ namespace HealthInstitution.MVVM.Models
             return false;
         }
 
-        public bool DeletePendingMedicine(PendingMedicine pendingMedicine)
+        public bool DeletePendingMedicine(PendingMedicine medicine)
         {
             foreach(PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
             {
-                if (i.Id == pendingMedicine.Id)
+                if (i.Id == medicine.Id)
                 {
                     _pendingMedicineRepository.PendingMedicines.Remove(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool SendToRevision(PendingMedicine medicine)
+        {
+            foreach (PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
+            {
+                if (i.Id == medicine.Id)
+                {
+                    _pendingMedicineRepository.PendingMedicines.Remove(i);
+                    _pendingMedicineRepository.PendingMedicines.Add(medicine);
                     return true;
                 }
             }

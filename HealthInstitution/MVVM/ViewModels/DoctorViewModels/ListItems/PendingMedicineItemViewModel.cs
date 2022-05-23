@@ -13,6 +13,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
     {
         private readonly PendingMedicine _pendingMedicine;
         public PendingMedicine PendingMedicine => _pendingMedicine;
+        private string _revisionReason;
+        public string RevisionReason => _revisionReason;
 
         public string MedicineName => _pendingMedicine.Name;
         public string Description => _pendingMedicine.Description;
