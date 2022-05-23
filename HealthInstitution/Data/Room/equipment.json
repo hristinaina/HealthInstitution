@@ -2,13 +2,13 @@
   {
     "ID": 1,
     "Name": "Chair",
-    "Quantity": 50,
+    "Quantity": 70,
     "Type": 2
   },
   {
     "ID": 2,
     "Name": "Table",
-    "Quantity": 50,
+    "Quantity": 60,
     "Type": 3
   },
   {
@@ -33,6 +33,24 @@
     "ID": 6,
     "Name": "Needles",
     "Quantity": 50,
+    "Type": 0
+  },
+  {
+    "ID": 7,
+    "Name": "Hanzaplasts",
+    "Quantity": 0,
+    "Type": 1
+  },
+  {
+    "ID": 8,
+    "Name": "Injections",
+    "Quantity": 0,
+    "Type": 1
+  },
+  {
+    "ID": 9,
+    "Name": "Pens",
+    "Quantity": 0,
     "Type": 0
   }
 ]

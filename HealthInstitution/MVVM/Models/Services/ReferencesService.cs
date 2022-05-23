@@ -91,6 +91,8 @@ namespace HealthInstitution.MVVM.Models.Services
 
             Institution.Instance().RenovationRepository.StartRenovations();
             Institution.Instance().RenovationRepository.EndRenovations();
+
+            Institution.Instance().EquipmentOrderRepository.Deliver(Institution.Instance().EquipmentRepository);
         }
 
         public static void FillMedicalRecord()
