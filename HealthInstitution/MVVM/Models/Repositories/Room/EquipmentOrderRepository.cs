@@ -67,7 +67,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             _orders.Add(new EquipmentOrder(id, equipment.ID, deliverDate, quantity));
         }
 
-        public void Deliver(EquipmentRepository equipments, RoomRepository rooms)
+        public void Deliver(EquipmentRepository equipments)
         {
             List<EquipmentOrder> futureOrders = new List<EquipmentOrder>();
             //Entities.Room warehouse = rooms.FindById(0);

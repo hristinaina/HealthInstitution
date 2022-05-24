@@ -18,6 +18,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public string Name => _equipment.Name;
         public string RoomNumber { get; set; }
         public string Quantity => _equipment.ArrangmentByRooms[_room].ToString();
+        public string SpecialMark => _equipment.ArrangmentByRooms[_room] == 0 ? "*" : " ";
 
         public EquipmentListItemViewModel(Equipment equipment, Room room)
         {

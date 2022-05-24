@@ -120,6 +120,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 if (e.Type == EquipmentType.HALLWAY_EQUIPMENT || e.Type == EquipmentType.ROOM_FURNITURE) continue;
                 foreach (Room r in e.ArrangmentByRooms.Keys)
                 {
+                    if (e.ArrangmentByRooms[r] > 5) continue;   // if quantity > 5 
                     _equipmentArrangement.Add(new EquipmentListItemViewModel(e, r));
                 }
             }
