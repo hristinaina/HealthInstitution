@@ -56,11 +56,6 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                     _equipment.Add(new MissingEquipmentItemViewModel(e, status));
                 }
             }
-
-            if (_equipment.Count == 0)
-            {
-                // TODO: inform that everything IS in stock 
-            }
         }
     }
 }
