@@ -112,7 +112,7 @@
                                                    HorizontalAlignment="Center"
                                                    Margin="10"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                        <TextBlock Text="From room with number:"
+                                        <TextBlock Text="To room with number:"
                                                    HorizontalAlignment="Center"
                                                    FontSize="14"
                                                    Margin="10"
@@ -127,7 +127,7 @@
                                                   ItemsSource="{Binding Rooms}"
                                                   SelectedItem="{Binding NewArrangementTargetRoom}"
                                                   Style="{StaticResource MaterialDesignFilledComboBox}"
-                                                  materialDesign:HintAssist.Hint="Choose new room"
+                                                  materialDesign:HintAssist.Hint="From room"
                                                   materialDesign:HintAssist.HintOpacity=".26"
                                                   IsEditable="True">
                                         </ComboBox>
@@ -141,11 +141,6 @@
                                                   materialDesign:HintAssist.Hint="Enter quantity"
                                                   materialDesign:HintAssist.HelperText="Must be a whole number"
                                                   IsEnabled="True" />
-                                        <DatePicker Width="250"
-                                                    SelectedDate="{Binding NewArrangementStartDate}"
-                                                    Margin="0 20 0 0"
-                                                    materialDesign:HintAssist.Hint="Pick Date"
-                                                    Style="{StaticResource MaterialDesignFilledDatePicker}" />
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"

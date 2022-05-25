@@ -4,10 +4,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
+using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.EquipmentCommands;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
@@ -97,11 +99,14 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             Navigation = new SecretaryNavigationViewModel();
             _equipmentArrangement = new ObservableCollection<EquipmentListItemViewModel>();
             _rooms = new List<Room>();
+            Rearrange = new RearrangeCommand(this);
             EnableChanges = false;
 
             FillEquipmentArrangementList();
             FillRooms();
         }
+
+        public ICommand Rearrange { get; set; }
 
         private void FillRooms()
         {
