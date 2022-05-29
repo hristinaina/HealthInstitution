@@ -70,6 +70,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
         public void Deliver(EquipmentRepository equipments)
         {
             List<EquipmentOrder> futureOrders = new List<EquipmentOrder>();
+            //Entities.Room warehouse = rooms.FindById(0);
 
             foreach (EquipmentOrder o in _orders)
             {
@@ -77,6 +78,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
                 {
                     Equipment e = equipments.FindById(o.EquipmentID);
                     e.Quantity += o.Quantity;
+                    //warehouse.AddEquipment(e, o.Quantity);
                 }
                 else futureOrders.Add(o);
             }
