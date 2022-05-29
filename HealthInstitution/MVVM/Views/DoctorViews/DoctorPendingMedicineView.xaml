@@ -208,11 +208,23 @@
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     IsDefault="True"
                                     Margin="0 -30 60 0"
-                                    Content="DONE"                 
+                                    Content="View Ingredients"                 
                                     Width="180"
-                                    Command="{Binding SaveCommand}"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                     Grid.Column="3"
                                     IsEnabled="{Binding EnableChanges}">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="330"
+                                                Width="320"
+                                                Margin="40 20 40 20">
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Margin="0 30 0 0"
+                                                Content="CANCEL"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                        </Button>
+                                    </StackPanel>
+                                </Button.CommandParameter>
                             </Button>
                         </Grid>
                     </Grid>
