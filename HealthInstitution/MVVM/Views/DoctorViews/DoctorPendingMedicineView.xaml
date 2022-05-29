@@ -214,13 +214,44 @@
                                     Grid.Column="3"
                                     IsEnabled="{Binding EnableChanges}">
                                 <Button.CommandParameter>
-                                    <StackPanel Height="330"
+                                    <StackPanel Height="400"
                                                 Width="320"
                                                 Margin="40 20 40 20">
+                                        <TextBlock Text="Ingredients"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Top"
+                                                   Margin="0, 20, 0, 0"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
+                                                   Height="50"/>
+                                        <Grid Margin="0 0 0 0">
+                                            <ListView ItemsSource="{Binding PendingMedicines}"
+                                                      SelectionMode="Single"
+                                                      SelectedIndex="{Binding Selection}"
+                                                      Width="300"
+                                                      VerticalAlignment="Center"
+                                                      Height="250">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn Width="200"
+                                                        Header="Name">
+                                                            <GridViewColumn.CellTemplate>
+                                                                <DataTemplate>
+                                                                    <TextBlock TextAlignment="Left"
+                                                                               Text="{Binding MedicineName}"
+                                                                               Width="200" />
+                                                                </DataTemplate>
+                                                            </GridViewColumn.CellTemplate>
+                                                        </GridViewColumn>
+                                                    </GridView>
+
+                                                </ListView.View>
+
+                                            </ListView>
+                                        </Grid>
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsCancel="True"
                                                 Margin="0 30 0 0"
-                                                Content="CANCEL"
+                                                Content="CLOSE"
                                                 Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                                         </Button>
                                     </StackPanel>
