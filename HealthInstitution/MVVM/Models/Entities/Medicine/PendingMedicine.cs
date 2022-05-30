@@ -15,6 +15,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private string _description;
         private string _revisionDescription;
         private State _state;
+        private List<Allergen> _allergens;
 
         [JsonProperty("Id")]
         public int Id { get => _id; set { _id = value; } }
@@ -26,7 +27,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         public string RevisionDescription { get => _revisionDescription; set { _revisionDescription = value; } }
         [JsonProperty("State")]
         public State State { get => _state; set { _state = value; } }
-
+        [JsonIgnore]
+        public List<Allergen> Allergens { get => _allergens; set { _allergens = value; } }
 
         public PendingMedicine()
         {
@@ -39,6 +41,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             _name = name;
             _description = description;
             _state = state;
+            _allergens = new List<Allergen>();
         }
 
 

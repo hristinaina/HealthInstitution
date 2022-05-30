@@ -224,7 +224,7 @@
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                                    Height="50"/>
                                         <Grid Margin="0 0 0 0">
-                                            <ListView ItemsSource="{Binding PendingMedicines}"
+                                            <ListView ItemsSource="{Binding Ingredients}"
                                                       SelectionMode="Single"
                                                       SelectedIndex="{Binding Selection}"
                                                       Width="300"
@@ -237,7 +237,7 @@
                                                             <GridViewColumn.CellTemplate>
                                                                 <DataTemplate>
                                                                     <TextBlock TextAlignment="Left"
-                                                                               Text="{Binding MedicineName}"
+                                                                               Text="{Binding AllergenName}"
                                                                                Width="200" />
                                                                 </DataTemplate>
                                                             </GridViewColumn.CellTemplate>

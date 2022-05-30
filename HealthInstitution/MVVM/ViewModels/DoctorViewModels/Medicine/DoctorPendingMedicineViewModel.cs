@@ -19,9 +19,14 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         private readonly ObservableCollection<PendingMedicineItemViewModel> _pendingMedicines;
         public IEnumerable<PendingMedicineItemViewModel> PendingMedicines => _pendingMedicines;
+        // allergen and ingredient are the same classes
+        private readonly ObservableCollection<AllergenItemViewModel> _ingredients;
+        public IEnumerable<AllergenItemViewModel> Ingredients => _ingredients;
 
         public ICommand DeletePendingMedicine { get; }
         public ICommand SendToRevision { get; }
+
+        public ICommand ReadIngredients { get; }
 
         private PendingMedicineItemViewModel _selectedMedicine;
         public PendingMedicineItemViewModel SelectedMedicine => _selectedMedicine;
@@ -59,6 +64,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 EnableChanges = true;
                 OnPropertyChanged(nameof(Selection));
                 _selectedMedicine = _pendingMedicines.ElementAt(_selection);
+                FindIngredients(_selectedMedicine.PendingMedicine);
             }
         }
 
@@ -78,6 +84,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public DoctorPendingMedicineViewModel()
         {
+            
             bool isSpecialist = true;
             Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
@@ -85,21 +92,24 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
             // initializing
             _pendingMedicines = new ObservableCollection<PendingMedicineItemViewModel>();
+            _ingredients = new ObservableCollection<AllergenItemViewModel>();
 
             // commands
             DeletePendingMedicine = new DeletePendingMedicineCommand(this);
             SendToRevision = new RevisionPendingMedicineCommand(this);
+            ReadIngredients = new ReadIngredientsCommand(this);
 
             // filling with data
             SetProperties();
             FindPendingMedicines();
+            _selectedMedicine = _pendingMedicines.ElementAt(0);
+            FindIngredients(_selectedMedicine.PendingMedicine);
         }
 
         public void SetProperties()
         {
             if (_selectedMedicine != null) RevisionReason = _selectedMedicine.RevisionReason;
         }
-
 
         public void FindPendingMedicines()
         {
@@ -109,6 +119,15 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             {
                 if (pendingMedicine.State == State.ON_HOLD)
                 _pendingMedicines.Add(new PendingMedicineItemViewModel(pendingMedicine));
+            }
+        }
+
+        public void FindIngredients(PendingMedicine medicine)
+        {
+            _ingredients.Clear();
+            foreach(Allergen allergen in medicine.Allergens)
+            {
+                _ingredients.Add(new AllergenItemViewModel(allergen));
             }
         }
 

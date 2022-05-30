@@ -170,6 +170,7 @@ namespace HealthInstitution.MVVM.Models
             ReferencesService.ConnectExaminationChanges();
             ReferencesService.ArrangeEquipment();
             ReferencesService.ConnectRenovations();
+            ReferencesService.ConnectPendingMedicineAllergens();
         }
 
 
