@@ -174,6 +174,7 @@ namespace HealthInstitution.MVVM.Models
             ReferencesService.ConnectExaminationChanges();
             ReferencesService.ArrangeEquipment();
             ReferencesService.ConnectRenovations();
+            ReferencesService.ConnectPendingMedicineAllergens();
         }
 
 
@@ -400,7 +401,7 @@ namespace HealthInstitution.MVVM.Models
             List<Allergen> allergens = record.Allergens;
             foreach (Allergen allergen in allergens)
             {
-                if (allergen.Id == newAllergen.Id) return false;
+                if (allergen.ID == newAllergen.ID) return false;
             }
             return true;
         }
@@ -422,6 +423,46 @@ namespace HealthInstitution.MVVM.Models
                 if (patient.ID == i.ID) patient.Record.HistoryOfIllnesses.Add(illness);
                 
             }
+        }
+
+        public bool AddAnamnesis(Examination examination, string anamnesis)
+        {
+            foreach (Examination i in _examinationRepository.Examinations)
+            {
+                if (i.ID == examination.ID)
+                {
+                    examination.Anamnesis = anamnesis;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool DeletePendingMedicine(PendingMedicine medicine)
+        {
+            foreach(PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
+            {
+                if (i.Id == medicine.Id)
+                {
+                    _pendingMedicineRepository.PendingMedicines.Remove(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool SendToRevision(PendingMedicine medicine)
+        {
+            foreach (PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
+            {
+                if (i.Id == medicine.Id)
+                {
+                    _pendingMedicineRepository.PendingMedicines.Remove(i);
+                    _pendingMedicineRepository.PendingMedicines.Add(medicine);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -110,9 +110,18 @@ namespace HealthInstitution.MVVM.Models.Services
 
         public static void ConnectMedicineAllergens()
         {
-            foreach (Medicine medicine in Institution.Instance().MedicineRepository.Medicine)
+            foreach (Medicine medicine in Institution.Instance().MedicineRepository.Medicines)
             {
                 List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
+                medicine.Allergens = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+            }
+        }
+
+        public static void ConnectPendingMedicineAllergens()
+        {
+            foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
+            {
+                List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.Id);
                 medicine.Allergens = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
             }
         }

@@ -117,54 +117,5 @@
     "Quantity": 28,
     "StartDate": "2022-06-08T00:00:00",
     "EndDate": "9999-04-25T18:43:37.0931955+02:00"
-  },
-  {
-    "RoomId": 2,
-    "EquipmentId": 6,
-    "Quantity": 28,
-    "StartDate": "2022-05-23T00:00:00",
-    "EndDate": "9999-04-25T18:43:37.0931955+02:00"
-  },
-  {
-    "RoomId": 5,
-    "EquipmentId": 7,
-    "Quantity": 0,
-    "StartDate": "2022-05-23T00:00:00",
-    "EndDate": "9999-04-25T18:43:37.0931955+02:00"
-  },
-  {
-    "RoomId": 4,
-    "EquipmentId": 7,
-    "Quantity": 11,
-    "StartDate": "2022-05-23T00:00:00",
-    "EndDate": "9999-04-25T18:43:37.0931955+02:00"
-  },
-  {
-    "RoomId": 5,
-    "EquipmentId": 8,
-    "Quantity": 2,
-    "StartDate": "2022-05-23T00:00:00",
-    "EndDate": "9999-04-25T18:43:37.0931955+02:00"
-  },
-  {
-    "RoomId": 8,
-    "EquipmentId": 8,
-    "Quantity": 0,
-    "StartDate": "2022-05-23T00:00:00",
-    "EndDate": "9999-04-25T18:43:37.0931955+02:00"
-  },
-  {
-    "RoomId": 9,
-    "EquipmentId": 9,
-    "Quantity": 5,
-    "StartDate": "2022-05-23T00:00:00",
-    "EndDate": "9999-04-25T18:43:37.0931955+02:00"
-  },
-  {
-    "RoomId": 13,
-    "EquipmentId": 9,
-    "Quantity": 5,
-    "StartDate": "2022-05-23T00:00:00",
-    "EndDate": "9999-04-25T18:43:37.0931955+02:00"
   }
 ]

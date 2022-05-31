@@ -3,24 +3,28 @@
     "Id": 10,
     "Name": "Ime",
     "Description": "Opis leka",
+    "RevisionDescription": "",
     "State": 0
   },
   {
     "Id": 9,
-    "Name": "Ime",
+    "Name": "Ime2",
     "Description": "Opis",
+    "RevisionDescription": "",
     "State": 0
   },
   {
     "Id": 3,
-    "Name": "Ime",
-    "Description": "Opis",
+    "Name": "Ime3",
+    "Description": "Opisano",
+    "RevisionDescription": "",
     "State": 0
   },
   {
     "Id": 4,
-    "Name": "Ime",
-    "Description": "Opis",
+    "Name": "Ime4",
+    "Description": "Opisss",
+    "RevisionDescription": "",
     "State": 0
   }
 ]

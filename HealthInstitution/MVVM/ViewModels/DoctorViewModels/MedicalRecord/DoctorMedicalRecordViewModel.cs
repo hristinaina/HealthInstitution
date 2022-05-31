@@ -14,8 +14,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
     {
         public DoctorNavigationViewModel Navigation { get; }
 
-        private ObservableCollection<AllergenViewModel> _allergens;
-        public IEnumerable<AllergenViewModel> Allergens => _allergens;
+        private ObservableCollection<AllergenItemViewModel> _allergens;
+        public IEnumerable<AllergenItemViewModel> Allergens => _allergens;
         private ObservableCollection<IllnessItemViewModel> _illnesses;
         public IEnumerable<IllnessItemViewModel> Illnesses => _illnesses;
         private Examination _examination;
@@ -71,7 +71,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             Doctor doctor = (Doctor) Institution.Instance().CurrentUser;
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
             Navigation = new DoctorNavigationViewModel(isSpecialist);
-            _allergens = new ObservableCollection<AllergenViewModel>();
+            _allergens = new ObservableCollection<AllergenItemViewModel>();
             _illnesses = new ObservableCollection<IllnessItemViewModel>();
             _examination = selectedExamination;
 
@@ -86,7 +86,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
             Navigation = new DoctorNavigationViewModel(isSpecialist);
-            _allergens = new ObservableCollection<AllergenViewModel>();
+            _allergens = new ObservableCollection<AllergenItemViewModel>();
             _illnesses = new ObservableCollection<IllnessItemViewModel>();
             _operation = selectedOperation;
             SetProperties(false);
@@ -119,14 +119,14 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             {
                 foreach (Allergen allergen in _examination.Patient.Record.Allergens)
                 {
-                    _allergens.Add(new AllergenViewModel(allergen));
+                    _allergens.Add(new AllergenItemViewModel(allergen));
                 }
             }
             else
             {
                 foreach (Allergen allergen in _operation.Patient.Record.Allergens)
                 {
-                    _allergens.Add(new AllergenViewModel(allergen));
+                    _allergens.Add(new AllergenItemViewModel(allergen));
                 }
             }
 

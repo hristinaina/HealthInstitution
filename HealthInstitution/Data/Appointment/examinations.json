@@ -122,5 +122,13 @@
     "Date": "2022-05-15T16:20:00+02:00",
     "Emergency": false,
     "Done": false
+  },
+  {
+    "Anamnesis": "anamneza",
+    "Review": null,
+    "ID": 15,
+    "Date": "2022-05-21T10:40:00+02:00",
+    "Emergency": false,
+    "Done": false
   }
 ]

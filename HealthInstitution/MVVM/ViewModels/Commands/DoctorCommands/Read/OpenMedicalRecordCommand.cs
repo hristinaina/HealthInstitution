@@ -15,7 +15,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
-        private readonly DoctorMedicalRecordViewModel _medicalRecord;
+        //private readonly DoctorMedicalRecordViewModel _medicalRecord;
         private DoctorExaminationViewModel _examinationViewModel;
         private DoctorOperationViewModel _operationViewModel;
         private bool _isExaminationViewModel;

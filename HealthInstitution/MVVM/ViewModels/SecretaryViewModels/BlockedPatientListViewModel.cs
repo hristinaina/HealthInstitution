@@ -52,8 +52,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public string Height { get; set; }
         public string Weight { get; set; }
 
-        private readonly ObservableCollection<AllergenViewModel> _allergens;
-        public IEnumerable<AllergenViewModel> Allergens => _allergens;
+        private readonly ObservableCollection<AllergenItemViewModel> _allergens;
+        public IEnumerable<AllergenItemViewModel> Allergens => _allergens;
 
 
         private readonly ObservableCollection<IllnessItemViewModel> _illnesses;
@@ -90,7 +90,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public BlockedPatientListViewModel()
         {
             _patients = new ObservableCollection<BlockedPatientItemViewModel>();
-            _allergens = new ObservableCollection<AllergenViewModel>();
+            _allergens = new ObservableCollection<AllergenItemViewModel>();
             _illnesses = new ObservableCollection<IllnessItemViewModel>();
             Navigation = new SecretaryNavigationViewModel();
             EnableChanges = false;
@@ -127,7 +127,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             Patient patient = Institution.Instance().PatientRepository.FindByID(id);
             foreach (Allergen allergen in patient.Record.Allergens)
             {
-                _allergens.Add(new AllergenViewModel(allergen));
+                _allergens.Add(new AllergenItemViewModel(allergen));
             }
         }
 

@@ -95,8 +95,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public PatientListViewModel()
         {
             _patients = new ObservableCollection<PatientListItemViewModel>();
-            _allergens = new ObservableCollection<AllergenViewModel>();
-            _allAllergens = new ObservableCollection<AllergenViewModel>();
+            _allergens = new ObservableCollection<AllergenItemViewModel>();
+            _allAllergens = new ObservableCollection<AllergenItemViewModel>();
             _gender = new ObservableCollection<string>();
             _illnesses = new ObservableCollection<IllnessItemViewModel>();
             Navigation = new SecretaryNavigationViewModel();
@@ -141,11 +141,11 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public string NewWeight { get; set; }
         public string NewGender { get; set; }
 
-        private readonly ObservableCollection<AllergenViewModel> _allergens;
-        public IEnumerable<AllergenViewModel> Allergens => _allergens;
+        private readonly ObservableCollection<AllergenItemViewModel> _allergens;
+        public IEnumerable<AllergenItemViewModel> Allergens => _allergens;
 
-        private readonly ObservableCollection<AllergenViewModel> _allAllergens;
-        public IEnumerable<AllergenViewModel> AllAllergens => _allAllergens;
+        private readonly ObservableCollection<AllergenItemViewModel> _allAllergens;
+        public IEnumerable<AllergenItemViewModel> AllAllergens => _allAllergens;
 
         private readonly ObservableCollection<string> _gender;
         public IEnumerable<string> Gender => _gender;
@@ -158,7 +158,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             List<Allergen> allergens = Institution.Instance().AllergenRepository.Allergens;
             foreach (Allergen allergen in allergens)
             {
-                _allAllergens.Add(new AllergenViewModel(allergen));
+                _allAllergens.Add(new AllergenItemViewModel(allergen));
             }
         }
 
@@ -170,7 +170,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             Patient patient = Institution.Instance().PatientRepository.FindByID(id);
             foreach (Allergen allergen in patient.Record.Allergens)
             {
-                _allergens.Add(new AllergenViewModel(allergen));
+                _allergens.Add(new AllergenItemViewModel(allergen));
             }
         }
 

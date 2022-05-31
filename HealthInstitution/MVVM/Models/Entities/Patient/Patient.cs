@@ -255,7 +255,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             {
                 foreach(Allergen allergen in allergens)
                 {
-                    if (i.Id == allergen.Id) return true;
+                    if (i.ID == allergen.ID) return true;
                 }
             }
 
