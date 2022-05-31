@@ -29,7 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         private ReferralItemViewModel _selectedReferral;
         public Patient SelectedPatient { get; set; }
         public Specialization SelectedSpecialization { get; set; }
-        public String SelectedDuration { get; set; }
+        public string SelectedDuration { get; set; }
 
         private bool _enableChanges;
         private int _selection;

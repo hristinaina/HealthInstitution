@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HealthInstitution.MVVM.Views.AdminViews
+namespace HealthInstitution.MVVM.Views.SecretaryViews
 {
     /// <summary>
-    /// Interaction logic for AdminEquipmentView.xaml
+    /// Interaction logic for OrderingEquipmentView.xaml
     /// </summary>
-    public partial class AdminEquipmentView : UserControl
+    public partial class OrderingEquipmentView : UserControl
     {
-        public AdminEquipmentView()
+        public OrderingEquipmentView()
         {
             InitializeComponent();
-        }
-
-        private void NotificationSnackbar_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
