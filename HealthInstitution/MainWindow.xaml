@@ -93,6 +93,7 @@
                 <viewsadmin:AdminDivideComplexRenovation />
             </DataTemplate>
         </Grid.Resources>
+        <!--<viewsadmin:Medicine></viewsadmin:Medicine>-->
         <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>
 </Window>
