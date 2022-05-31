@@ -396,7 +396,7 @@ namespace HealthInstitution.MVVM.Models
             List<Allergen> allergens = record.Allergens;
             foreach (Allergen allergen in allergens)
             {
-                if (allergen.Id == newAllergen.Id) return false;
+                if (allergen.ID == newAllergen.ID) return false;
             }
             return true;
         }

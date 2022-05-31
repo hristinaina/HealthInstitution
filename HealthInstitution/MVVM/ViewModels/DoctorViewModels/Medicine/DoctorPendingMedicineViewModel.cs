@@ -27,6 +27,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand SendToRevision { get; }
 
         public ICommand ReadIngredients { get; }
+        public ICommand ApprovePendingMedicine { get; }
 
         private PendingMedicineItemViewModel _selectedMedicine;
         public PendingMedicineItemViewModel SelectedMedicine => _selectedMedicine;
@@ -98,6 +99,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             DeletePendingMedicine = new DeletePendingMedicineCommand(this);
             SendToRevision = new RevisionPendingMedicineCommand(this);
             ReadIngredients = new ReadIngredientsCommand(this);
+            ApprovePendingMedicine = new AcceptPendingMedicineCommand(this);
 
             // filling with data
             SetProperties();

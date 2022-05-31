@@ -212,7 +212,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 {
                     if (allergen != null && i != null)
                     {
-                        if (i.Id == allergen.Id) continue;
+                        if (i.ID == allergen.ID) continue;
                     }
                 }
 
@@ -259,7 +259,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public void FillMedicinesList()
         {
             _medicines.Clear();
-            foreach(Medicine medicine in _institution.MedicineRepository.Medicine)
+            foreach(Medicine medicine in _institution.MedicineRepository.Medicines)
             {
                 _medicines.Add(medicine);
             }

@@ -22,11 +22,22 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonIgnore]
         public List<Allergen> Allergens { get => this._allergens; set { this._allergens = value; } }
 
+        public Medicine()
+        {
+        }
+
         public Medicine(int id, string name)
         {
             _id = id;
             _name = name;
             _allergens = new List<Allergen>();
+        }
+
+        public Medicine(int id, string name, List<Allergen> allergens)
+        {
+            _id = id;
+            _name = name;
+            _allergens = allergens;
         }
 
         public override string ToString()

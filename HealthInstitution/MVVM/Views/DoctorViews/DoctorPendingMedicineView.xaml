@@ -103,7 +103,7 @@
                                 ToolTip="Approve medicine suggestion"
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Left"
-                                
+                                Command="{Binding ApprovePendingMedicine}"
                                 Margin="30,0,0,0"
                                 Width="180"
                                 Content="Approve"
