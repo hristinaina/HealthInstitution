@@ -21,6 +21,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
         public override void Execute(object parameter)
         {
             _viewModel.DialogOpen = false;
+            _viewModel.EnableChanges = false;
 
             try
             {
