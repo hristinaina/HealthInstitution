@@ -87,7 +87,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blockadeType = 0;
             _deleted = false;
             _record = new MedicalRecord(height, weight, new List<Allergen>(), new List<string>());
-            // no need to fill _operations and _examinations lists because it is a new user so there would be none
             _notifications = new List<string>();
         }
 
@@ -135,13 +134,13 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public bool IsTrolling()
         {
-            if (GetEditingHistory() > 5)
+            if (GetEditingAttempts() > 5)
             {
                 _blocked = true;
                 _blockadeType = BlockadeType.SYSTEM;
                 return true;
             }
-            if (GetCreatingHistory() > 8)
+            if (GetCreatingAttempts() > 8)
             {
                 _blocked = true;
                 _blockadeType = BlockadeType.SYSTEM;
@@ -150,7 +149,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             return false;
         }
 
-        private int GetCreatingHistory()
+        private int GetCreatingAttempts()
         {
             int totalCreations = 0;
             foreach (ExaminationChange change in ExaminationChanges)
@@ -164,7 +163,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             return totalCreations;
         }
 
-        private int GetEditingHistory()
+        private int GetEditingAttempts()
         {
             int totalChanges = 0;
             foreach (ExaminationChange change in ExaminationChanges)

@@ -120,31 +120,36 @@
                           ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                           HorizontalAlignment="Center"
                           materialDesign:DataGridAssist.CellPadding="20 20 10 10"
-                          materialDesign:DataGridAssist.ColumnHeaderPadding="20 10 10 15">
+                          materialDesign:DataGridAssist.ColumnHeaderPadding="20 10 10 15"
+                          >
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="150"
                                             Header="Date"
                                             Binding="{Binding Date, Mode=OneWay}"
                                             ElementStyle="{StaticResource ColumnElementStyle}"
-                                            CellStyle="{StaticResource DisableSelection}" />
+                                            CellStyle="{StaticResource DisableSelection}"
+                                            CanUserSort="True" />
 
                         <DataGridTextColumn Width="100"
                                             Header="Time"
                                             Binding="{Binding Time, Mode=OneWay}"
                                             ElementStyle="{StaticResource ColumnElementStyle}"
-                                            CellStyle="{StaticResource DisableSelection}" />
+                                            CellStyle="{StaticResource DisableSelection}"
+                                            CanUserSort="True" />
 
                         <DataGridTextColumn Width="200"
                                             Header="Doctor"
                                             Binding="{Binding Doctor, Mode=OneWay}"
                                             ElementStyle="{StaticResource ColumnElementStyle}"
-                                            CellStyle="{StaticResource DisableSelection}" />
+                                            CellStyle="{StaticResource DisableSelection}"
+                                            CanUserSort="True" />
 
                         <DataGridTextColumn Width="150"
                                             Header="Specialization"
                                             Binding="{Binding Specialization, Mode=OneWay}"
                                             ElementStyle="{StaticResource ColumnElementStyle}"
-                                            CellStyle="{StaticResource DisableSelection}" />
+                                            CellStyle="{StaticResource DisableSelection}"
+                                            CanUserSort="True" />
                     </DataGrid.Columns>
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>

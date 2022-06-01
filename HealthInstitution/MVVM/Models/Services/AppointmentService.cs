@@ -2,9 +2,6 @@
 using HealthInstitution.MVVM.Models.Enumerations;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -31,27 +28,20 @@ namespace HealthInstitution.MVVM.Models.Services
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = DateTime.Now;
             DateTime endDateTime = DateTime.Now;
-            MoveDateTime(startTime, endTime, ref startDateTime, ref endDateTime);
+            startDateTime += ShiftDateTime(startTime, startDateTime);
+            endDateTime += ShiftDateTime(endTime, endDateTime);
 
             while (startDateTime < deadlineDate)
             {
                 if (startDateTime >= endDateTime)
                 {
-                    MoveDateTime(startTime, endTime, ref startDateTime, ref endDateTime);
+                    startDateTime += ShiftDateTime(startTime, startDateTime);
+                    endDateTime += ShiftDateTime(endTime, endDateTime);
                 }
                 while ((!patient.IsAvailable(startDateTime) || !doctor.IsAvailable(startDateTime)) && startDateTime < endDateTime)
                 {
-                    Appointment interrupting;
-                    if (!doctor.IsAvailable(startDateTime))
-                    {
-                        interrupting = doctor.FindInterruptingAppointment(startDateTime);
-                    }
-                    else
-                    {
-                        interrupting = patient.FindInterruptingAppointment(startDateTime);
-                    }
-                    startDateTime = FixTimeInterruption(interrupting);
-
+                    startDateTime = CheckInterruption(doctor, startDateTime);
+                    startDateTime = CheckInterruption(patient, startDateTime);
                 }
 
                 if (startDateTime < endDateTime && patient.IsAvailable(startDateTime) && doctor.IsAvailable(startDateTime))
@@ -70,8 +60,8 @@ namespace HealthInstitution.MVVM.Models.Services
                 {
                     startDateTime = DateTime.Now;
                     endDateTime = DateTime.Now;
-                    MoveDateTime(startTime, endTime, ref startDateTime, ref endDateTime);
-
+                    startDateTime += 2 * ShiftDateTime(startTime, startDateTime);
+                    endDateTime += 2 * ShiftDateTime(endTime, endDateTime);
                     suggestions = MakeAlternativeSuggestions(patient, startDateTime, endDateTime, deadlineDate);
                 }
             }
@@ -86,16 +76,8 @@ namespace HealthInstitution.MVVM.Models.Services
             {
                 while (!patient.IsAvailable(startDateTime) || !doctor.IsAvailable(startDateTime))
                 {
-                    Appointment interrupting;
-                    if (!doctor.IsAvailable(startDateTime))
-                    {
-                        interrupting = doctor.FindInterruptingAppointment(startDateTime);
-                    }
-                    else
-                    {
-                        interrupting = patient.FindInterruptingAppointment(startDateTime);
-                    }
-                    startDateTime = FixTimeInterruption(interrupting);
+                    startDateTime = CheckInterruption(doctor, startDateTime);
+                    startDateTime = CheckInterruption(patient, startDateTime);
                 }
                 suggestions.Add(new Examination(0, doctor, patient, startDateTime, null));
                 startDateTime += new TimeSpan(0, 15, 0);
@@ -109,28 +91,26 @@ namespace HealthInstitution.MVVM.Models.Services
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = DateTime.Now;
             DateTime endDateTime = DateTime.Now;
-            MoveDateTime(startTime, endTime, ref startDateTime, ref endDateTime);
+            startDateTime += ShiftDateTime(startTime, startDateTime);
+            endDateTime += ShiftDateTime(endTime, endDateTime);
 
-            while (suggestions.Count() < 3 && startDateTime < deadlineDate)
+            while (suggestions.Count < 3 && startDateTime < deadlineDate)
             {
                 if (startDateTime >= endDateTime)
                 {
-                    MoveDateTime(startTime, endTime, ref startDateTime, ref endDateTime);
+                    startDateTime += ShiftDateTime(startTime, startDateTime);
+                    endDateTime += ShiftDateTime(endTime, endDateTime);
                 }
                 while (!patient.IsAvailable(startDateTime) && startDateTime < endDateTime)
                 {
-                    if (!patient.IsAvailable(startDateTime))
-                    {
-                        Appointment interrupting = patient.FindInterruptingAppointment(startDateTime);
-
-                        startDateTime = FixTimeInterruption(interrupting);
-                    }
+                    startDateTime = CheckInterruption(patient, startDateTime);
                 }
                 AssignDoctor(patient, startTime, suggestions, startDateTime);
                 startDateTime += new TimeSpan(0, 15, 0);
             }
             return suggestions;
         }
+
 
         private static void AssignDoctor(Patient patient, DateTime startTime, List<Examination> suggestions, DateTime startDateTime)
         {
@@ -155,10 +135,21 @@ namespace HealthInstitution.MVVM.Models.Services
             return startDateTime;
         }
 
-        private static void MoveDateTime(DateTime startTime, DateTime endTime, ref DateTime startDateTime, ref DateTime endDateTime)
+
+        private static DateTime CheckInterruption(User user, DateTime startDateTime)
         {
-            startDateTime += new TimeSpan(1, startTime.Hour - startDateTime.Hour, startTime.Minute - startDateTime.Minute, 0);
-            endDateTime += new TimeSpan(1, endTime.Hour - endDateTime.Hour, endTime.Minute - endDateTime.Minute, 0);
+            if (!user.isAvailable(startDateTime))
+            {
+                Appointment interrupting = user.FindInterruptingAppointment(startDateTime);
+                startDateTime = FixTimeInterruption(interrupting);
+            }
+
+            return startDateTime;
+        }
+
+        private static TimeSpan ShiftDateTime(DateTime startTime, DateTime startDateTime)
+        {
+            return new TimeSpan(1, startTime.Hour - startDateTime.Hour, startTime.Minute - startDateTime.Minute, 0);
         }
 
     }

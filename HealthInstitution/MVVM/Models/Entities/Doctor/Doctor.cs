@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Entities
 {
-    public class Doctor : User
+    public class Doctor : User, IComparable, IComparable<Doctor>
     {
         private Specialization _specialization;
         private List<Examination> _examinations;
@@ -102,6 +102,35 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
 
             return scheduledAppointments;
+        }
+
+        public virtual bool Equals(Doctor? doctor) {
+            return FirstName == doctor.FirstName && LastName == doctor.LastName;
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+
+            Doctor other = obj as Doctor; // avoid double casting
+            if (other == null)
+            {
+                throw new ArgumentException("A Doctor object is required for comparison.", "obj");
+            }
+
+            return CompareTo(other);
+        }
+
+        public int CompareTo(Doctor other)
+        {
+            if (other is null)
+            {
+                return 1;
+            }
+            return -string.Compare(this.FirstName + this.LastName, other.FirstName + other.LastName, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
