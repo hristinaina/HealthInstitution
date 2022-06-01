@@ -517,19 +517,19 @@
                                     Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
                                 <Button.CommandParameter>
                                     <StackPanel Height="300"
-                                                            Width="400"
-                                                            Margin="40 20 40 20">
+                                                Width="400"
+                                                Margin="40 20 40 20">
                                         <TextBlock 
-                                                                Text="Equipment quantity"
-                                                                HorizontalAlignment="Center"
-                                                                Margin="0 20"
-                                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                            Text="Equipment quantity"
+                                            HorizontalAlignment="Center"
+                                            Margin="0 20"
+                                            Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                            IsCancel="True"
-                                                            Content="CLOSE"
-                                                            Margin="0 10 0 0"
-                                                            Width="400"
-                                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                                                IsCancel="True"
+                                                Content="CLOSE"
+                                                Margin="0 10 0 0"
+                                                Width="400"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
                                     </StackPanel>
                                 </Button.CommandParameter>
 
