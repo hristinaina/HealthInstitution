@@ -34,7 +34,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             foreach (Allergen allergen in _allergens)
             {
-                if (allergen.Id == id) return allergen;
+                if (allergen.ID == id) return allergen;
             }
             return null;
         }

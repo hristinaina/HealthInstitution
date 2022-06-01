@@ -53,12 +53,12 @@
                                 Margin="100 0 0 0">
                             <Button.CommandParameter>
                                 <StackPanel Height="360"
-                                Width="320"
-                                Margin="40 20 40 20">
+                                            Width="320"
+                                            Margin="40 20 40 20">
                                     <TextBlock Text="Schedule examination"
-                                   HorizontalAlignment="Center"
-                                   Margin="10"
-                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                               HorizontalAlignment="Center"
+                                               Margin="10"
+                                               Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
                                     <ComboBox Margin="0 20 0 0"
                                               Width="250"
                                               ItemsSource="{Binding Patients}"
@@ -82,7 +82,7 @@
                                                    Style="{StaticResource MaterialDesignFilledTimePicker}"
                                                    materialDesign:HintAssist.Hint="Pick time" />
                                     <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Center">
+                                                HorizontalAlignment="Center">
                                         <Button 
                                             Style="{StaticResource MaterialDesignFlatButton}"
                                             IsDefault="True"

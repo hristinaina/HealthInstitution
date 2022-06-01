@@ -109,16 +109,51 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public void Rearrange(Room destinationRoom, Room targetRoom, DateTime newArrangementStartDate, int newArrangementQuantity)
         {
+            User user = Institution.Instance().CurrentUser;
             if (targetRoom is null) throw new RearrangeTargetRoomNullException("Target room must be selected");
             else if (newArrangementQuantity == 0) throw new ZeroQuantityException("Quantity cannot be zero");
-            else if (newArrangementStartDate <= DateTime.Today) throw new DateException("Arrangement date must be in future");
-            else if (newArrangementQuantity > ArrangmentByRooms[destinationRoom]) throw new NotEnoughEquipmentException("Not enough equipment in selected room");
-            MoveFromRoom(destinationRoom, newArrangementStartDate, newArrangementQuantity);
-            MoveToNewRoom(targetRoom, newArrangementStartDate, newArrangementQuantity);
+            else if (newArrangementStartDate <= DateTime.Today && user is Admin) throw new DateException("Arrangement date must be in future");
+            else if (newArrangementQuantity > ArrangmentByRooms[destinationRoom] && user is Admin) throw new NotEnoughEquipmentException("Not enough equipment in selected room");
+            if (user is Admin)
+            {
+                MoveFromRoom(destinationRoom, newArrangementStartDate, newArrangementQuantity);
+                MoveToNewRoom(targetRoom, newArrangementStartDate, newArrangementQuantity);
+            }
+            else
+            {
+                MoveFromRoom(targetRoom, newArrangementStartDate, newArrangementQuantity);
+                MoveToNewRoom(destinationRoom, newArrangementStartDate, newArrangementQuantity);
+            }
+        }
+
+        private bool MoveFromWarehouse(Room room, int quantity)
+        {
+            if (Institution.Instance().CurrentUser is not Secretary) return false;
+            if (room.ID != 0) return false;
+            if (quantity > Quantity)
+                throw new NotEnoughEquipmentException("Not enough equipment in warehouse");
+            Quantity -= quantity;
+            return true;
+        }
+
+        private bool UpdateEquipmentInRoom(EquipmentArrangement pastArrangement, Room room, int quantity)
+        {
+            if (Institution.Instance().CurrentUser is Secretary)
+            {
+                pastArrangement.Quantity = quantity;
+                ArrangmentByRooms[room] = quantity;
+                pastArrangement.EndDate = DateTime.MaxValue;
+                return true;
+            };
+
+            return false;
         }
 
         public void MoveFromRoom(Room room, DateTime newArrangementStartDate, int quantity)
         {
+            if (MoveFromWarehouse(room, quantity)) return;
+            if (Institution.Instance().CurrentUser is Secretary && quantity > ArrangmentByRooms[room]) throw new NotEnoughEquipmentException("Not enough equipment in selected room");
+            
             EquipmentArrangement pastArrangement = Institution.Instance().EquipmentArragmentRepository.FindFirstBefore(room, this, newArrangementStartDate);
             List<EquipmentArrangement> futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(room, this, newArrangementStartDate);
 
@@ -130,6 +165,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
 
             int newDestinationRoomQuantity = pastArrangement.Quantity - quantity;
+            if (UpdateEquipmentInRoom(pastArrangement, room, newDestinationRoomQuantity)) return;
             Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, room, newDestinationRoomQuantity, newArrangementStartDate, newArrangementEndDate));
         }
 
@@ -138,7 +174,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             EquipmentArrangement pastArrangement = Institution.Instance().EquipmentArragmentRepository.FindFirstBefore(room, this, newArrangementStartDate);
             List<EquipmentArrangement> futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(room, this, newArrangementStartDate);
             DateTime newArrangementTargetEndDate = DateTime.MaxValue;
-
 
             if (pastArrangement is not null)
             {
@@ -151,14 +186,13 @@ namespace HealthInstitution.MVVM.Models.Entities
                 a.Quantity += quantity;
             }
 
-
             int newTargetRoomQuantity = 0;
             if (pastArrangement is not null)
             {
                 newTargetRoomQuantity = pastArrangement.Quantity;
             }
             newTargetRoomQuantity += quantity;
-
+            if (UpdateEquipmentInRoom(pastArrangement, room, newTargetRoomQuantity)) return;
             Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, room, newTargetRoomQuantity, newArrangementStartDate, newArrangementTargetEndDate));
         }
     }

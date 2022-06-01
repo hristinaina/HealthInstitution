@@ -50,10 +50,10 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
         {
             if (allergen == null) throw new EmptyFieldException("The allergen is not selected !");
 
-            PatientAllergen patientAllergen = new PatientAllergen(patient.ID, allergen.Id);
+            PatientAllergen patientAllergen = new PatientAllergen(patient.ID, allergen.ID);
             foreach (Allergen existingAllergen in patient.Record.Allergens)
             {
-                if (existingAllergen.Id == allergen.Id)
+                if (existingAllergen.ID == allergen.ID)
                 {
                     throw new ExistingAllergenException("This allergen already exists in medical record !");
                 }

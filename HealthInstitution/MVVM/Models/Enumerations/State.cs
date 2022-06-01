@@ -10,6 +10,7 @@ namespace HealthInstitution.MVVM.Models.Enumerations
     {
         ON_HOLD,
         ACCEPTED,
-        REJECTED
+        REJECTED,
+        REVISION
     }
 }

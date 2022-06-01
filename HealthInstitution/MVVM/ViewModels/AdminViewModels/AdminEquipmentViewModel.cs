@@ -238,6 +238,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 
             foreach (Equipment e in _allEquipment)
             {
+                if (e.Type == EquipmentType.EXAM_EQUIPMENT || e.Type == EquipmentType.OPERATION_EQUIPMENT) continue;
                 foreach (Room r in e.ArrangmentByRooms.Keys)
                 {
                     _equipment.Add(new EquipmentListItemViewModel(e, r));

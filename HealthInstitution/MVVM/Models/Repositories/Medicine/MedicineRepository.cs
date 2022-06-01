@@ -8,27 +8,27 @@ namespace HealthInstitution.MVVM.Models.Repositories
     public class MedicineRepository
     {
         private readonly string _fileName;
-        private List<Medicine> _medicine;
+        private List<Medicine> _medicines;
 
-        public List<Medicine> Medicine { get => _medicine; }
+        public List<Medicine> Medicines { get => _medicines; }
         public MedicineRepository(string fileName)
         {
             _fileName = fileName;
-            _medicine = new List<Medicine>();
+            _medicines = new List<Medicine>();
         }
 
         public void LoadFromFile()
         {
-            _medicine = FileService.Deserialize<Medicine>(_fileName);
+            _medicines = FileService.Deserialize<Medicine>(_fileName);
         }
 
         public void SaveToFile()
         {
-            FileService.Serialize<Medicine>(_fileName, _medicine);
+            FileService.Serialize<Medicine>(_fileName, _medicines);
         }
         public Medicine FindByID(int id)
         {
-            foreach (Medicine medicine in _medicine)
+            foreach (Medicine medicine in _medicines)
             {
                 if (medicine.ID == id) return medicine;
             }
@@ -38,6 +38,11 @@ namespace HealthInstitution.MVVM.Models.Repositories
         public Medicine PrescriptionMedicineToMedicine(PrescriptionMedicine prescriptionMedicine)
         {
             return FindByID(prescriptionMedicine.MedicineId);
+        }
+
+        public void Add(Medicine medicine)
+        {
+            _medicines.Add(medicine);
         }
     }
 }

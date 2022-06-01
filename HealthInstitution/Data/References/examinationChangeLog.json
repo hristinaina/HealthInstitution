@@ -100,20 +100,11 @@
   },
   {
     "ID": 11,
-    "PatientID": 1,
+    "PatientID": 4,
     "AppointmentID": 15,
     "ChangeStatus": 0,
-    "ChangeDate": "2022-05-18T10:05:36.6714923+02:00",
+    "ChangeDate": "2022-05-19T10:40:33.4881246+02:00",
     "Resolved": true,
-    "NewDate": "2022-05-19T11:55:00+02:00"
-  },
-  {
-    "ID": 12,
-    "PatientID": 1,
-    "AppointmentID": 16,
-    "ChangeStatus": 0,
-    "ChangeDate": "2022-06-01T15:15:26.1484128+02:00",
-    "Resolved": true,
-    "NewDate": "2022-06-23T15:15:00+02:00"
+    "NewDate": "2022-05-21T10:40:00+02:00"
   }
 ]

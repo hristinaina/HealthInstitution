@@ -78,7 +78,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             _notifications = new List<string>();
         }
 
-        // constructor used when secretary is creating new patient accounts
         public Patient(int id, string firstName, string lastName, string email, string password, Gender gender,
             double height, double weight)
             : base(id, firstName, lastName, email, password, gender)
@@ -236,7 +235,7 @@ namespace HealthInstitution.MVVM.Models.Entities
                     return appointment;
             }
 
-            return null; 
+            return null;
         }
 
         public List<string> GetHistoryOfIllness()
@@ -250,13 +249,13 @@ namespace HealthInstitution.MVVM.Models.Entities
             return historyOfIllness;
         }
 
-        public bool isAllergic(List<Allergen> allergens)
+        public bool IsAllergic(List<Allergen> allergens)
         {
             foreach (Allergen i in _record.Allergens)
             {
                 foreach(Allergen allergen in allergens)
                 {
-                    if (i.Id == allergen.Id) return true;
+                    if (i.ID == allergen.ID) return true;
                 }
             }
 

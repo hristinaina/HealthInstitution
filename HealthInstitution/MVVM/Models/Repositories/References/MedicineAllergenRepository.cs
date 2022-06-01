@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities.References;
+using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Repositories.References
@@ -42,6 +43,15 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
                     medicineAllergens.Add(reference);
             }
             return medicineAllergens;
+        }
+
+        public void Add(Medicine medicine)
+        {
+            foreach(Allergen allergen in medicine.Allergens)
+            {
+                MedicineAllergen medicineAllergen = new MedicineAllergen(medicine.ID, allergen.ID);
+                _references.Add(medicineAllergen);
+            }
         }
     }
 }

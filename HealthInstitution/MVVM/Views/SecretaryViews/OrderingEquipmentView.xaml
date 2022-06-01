@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="HealthInstitution.MVVM.Views.SecretaryViews.OrderingEquipmentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.SecretaryViews"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:secretaryviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.SecretaryViewModels"
+             xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
+             d:DataContext="{d:DesignInstance Type=secretaryviewmodels:OrderingEquipmentViewModel}"
+             mc:Ignorable="d"
+             Height="600"
+             Width="1200"
+             Background="White"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <components:SecretaryNavigationRail SelectedIndex="4"></components:SecretaryNavigationRail>
+
+        <materialDesign:Card Grid.Column="1">
+
+            <materialDesign:DialogHost DialogTheme="Inherit"
+                                       Grid.Column="0"
+                                       Grid.Row="0"
+                                       IsOpen="{Binding DialogOpen}">
+                <materialDesign:Card>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="4*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock HorizontalAlignment="Center"
+                                   Grid.Row="0"
+                                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                   VerticalAlignment="Center"
+                                   Text="Equipment that is out of stock"
+                                   FontWeight="DemiBold" />
+                        <ListView ItemsSource="{Binding Equipment}"
+                                  VerticalAlignment="Top"
+                                  Width="610"
+                                  SelectionMode="Single"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  HorizontalAlignment="Center"
+                                  IsManipulationEnabled="False"
+                                  Grid.Row="1"
+                                  Margin=" 0 0 0 0">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Width="80"
+                                                    Header="Id">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Center"
+                                                           Text="{Binding Id}"
+                                                           Width="50" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="130"
+                                                    Header="Name">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Name}"
+                                                           Width="130" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="200"
+                                                    Header="Type">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Type}"
+                                                           Width="200" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="200"
+                                                    Header="Status">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Status}"
+                                                           Width="200" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <Grid Grid.Row="2">
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Width="190"
+                                    ToolTip="Order dynamic equipment"
+                                    Content="Order equipment"
+                                    Background="#CC80DEEA"
+                                    BorderBrush="#6680DEEA"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    Height="32"
+                                    VerticalAlignment="Bottom"
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,0,0,50">
+                                <Button.CommandParameter>
+                                    <materialDesign:Card Grid.Column="1">
+                                        <StackPanel Height="300"
+                                                    Width="350"
+                                                    Margin="40 20 40 20">
+                                            <TextBlock Text="Order dynamic equipment"
+                                                       HorizontalAlignment="Center"
+                                                       Margin="10"
+                                                       Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                            <ComboBox Margin="0 20 0 0"
+                                                      Width="250"
+                                                      HorizontalAlignment="Center"
+                                                      Style="{StaticResource MaterialDesignFilledComboBox}"
+                                                      ItemsSource="{Binding Equipment}"
+                                                      SelectedItem="{Binding SelectedEquipment}"
+                                                      materialDesign:HintAssist.Hint="Search for equipment"
+                                                      materialDesign:HintAssist.HintOpacity=".26"
+                                                      IsEditable="True" />
+                                            <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                     Text="{Binding Quantity}"
+                                                     Width="250"
+                                                     VerticalAlignment="Center"
+                                                     TextWrapping="Wrap"
+                                                     MaxLength="30"
+                                                     Margin="0 20 0 0"
+                                                     materialDesign:HintAssist.Hint="Quantity" />
+                                            <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Center">
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsDefault="True"
+                                                        Margin="0 30 20 0"
+                                                        Content="ORDER"
+                                                        Command="{Binding OrderEquipment}">
+                                                    <Button.CommandParameter>
+                                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                            True
+                                                        </system:Boolean>
+                                                    </Button.CommandParameter>
+                                                </Button>
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                        IsCancel="True"
+                                                        Margin="20 30 0 0"
+                                                        Content="DISCARD"
+                                                        Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                    <Button.CommandParameter>
+                                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                            False
+                                                        </system:Boolean>
+                                                    </Button.CommandParameter>
+                                                </Button>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </materialDesign:Card>
+                                </Button.CommandParameter>
+                            </Button>
+                        </Grid>
+                        <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+
+                    </Grid>
+                </materialDesign:Card>
+            </materialDesign:DialogHost>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

@@ -7,13 +7,13 @@ using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
-    public class AllergenViewModel : BaseViewModel
+    public class AllergenItemViewModel : BaseViewModel
     {
         private readonly Allergen _allergen;
 
         public string AllergenName => _allergen.Name;
 
-        public AllergenViewModel(Allergen allergen)
+        public AllergenItemViewModel(Allergen allergen)
         {
             _allergen = allergen;
             if (_allergen == null)

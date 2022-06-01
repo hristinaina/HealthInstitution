@@ -37,6 +37,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly RoomRepository _roomRepository;
         private readonly RenovationRepository _renovationRepository;
         private readonly RoomRenovationRepository _roomRenovationRepository;
+        private readonly EquipmentOrderRepository _equipmentOrderRepository;
 
         private readonly MedicineRepository _medicineRepository;
         private readonly DayOffRepository _dayOffRepository;
@@ -85,6 +86,7 @@ namespace HealthInstitution.MVVM.Models
             _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
             _renovationRepository = new RenovationRepository(_appSettings.RenovationFileName);
             _roomRenovationRepository = new RoomRenovationRepository(_appSettings.RoomRenovationFileName);
+            _equipmentOrderRepository = new EquipmentOrderRepository(_appSettings.EquipmentOrderFileName);
 
             _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
             _referralRepository = new ReferralRepository(_appSettings.RefferalsFileName);
@@ -129,6 +131,7 @@ namespace HealthInstitution.MVVM.Models
             _prescriptionMedicineRepository.LoadFromFile();
             _prescriptionRepository.LoadFromFile();
             _examinationChangeRepository.LoadFromFile();
+            _equipmentOrderRepository.LoadFromFile();
         }
 
         public void SaveAll()
@@ -157,6 +160,7 @@ namespace HealthInstitution.MVVM.Models
             _prescriptionMedicineRepository.SaveToFile();
             _prescriptionRepository.SaveToFile();
             _examinationChangeRepository.SaveToFile();
+            _equipmentOrderRepository.SaveToFile();
         }
 
         private static void ConnectReferences()
@@ -170,6 +174,7 @@ namespace HealthInstitution.MVVM.Models
             ReferencesService.ConnectExaminationChanges();
             ReferencesService.ArrangeEquipment();
             ReferencesService.ConnectRenovations();
+            ReferencesService.ConnectPendingMedicineAllergens();
         }
 
 
@@ -197,6 +202,7 @@ namespace HealthInstitution.MVVM.Models
         public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
         public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
+        public EquipmentOrderRepository EquipmentOrderRepository { get => _equipmentOrderRepository; }
 
         public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
         {
@@ -372,7 +378,7 @@ namespace HealthInstitution.MVVM.Models
         {
             int id = Institution.Instance().PrescriptionRepository.GetNewId();
             Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, medicine);
-            if (examination.Patient.isAllergic(prescription.Medicine.Allergens)) throw new Exception("Patient is allergic !") ;
+            if (examination.Patient.IsAllergic(prescription.Medicine.Allergens)) throw new Exception("Patient is allergic !") ;
 
             _prescriptionRepository.Add(prescription);
             examination.AddPrescription(prescription);
@@ -395,7 +401,7 @@ namespace HealthInstitution.MVVM.Models
             List<Allergen> allergens = record.Allergens;
             foreach (Allergen allergen in allergens)
             {
-                if (allergen.Id == newAllergen.Id) return false;
+                if (allergen.ID == newAllergen.ID) return false;
             }
             return true;
         }
@@ -408,6 +414,55 @@ namespace HealthInstitution.MVVM.Models
                 if (patient.IsTrolling())
                 throw new PatientBlockedException("System has blocked your account !");
             }
+        }
+
+        public void AddIllness(Patient patient, string illness)
+        {
+            foreach(Patient i in _patientRepository.Patients)
+            {
+                if (patient.ID == i.ID) patient.Record.HistoryOfIllnesses.Add(illness);
+                
+            }
+        }
+
+        public bool AddAnamnesis(Examination examination, string anamnesis)
+        {
+            foreach (Examination i in _examinationRepository.Examinations)
+            {
+                if (i.ID == examination.ID)
+                {
+                    examination.Anamnesis = anamnesis;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool DeletePendingMedicine(PendingMedicine medicine)
+        {
+            foreach(PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
+            {
+                if (i.Id == medicine.Id)
+                {
+                    _pendingMedicineRepository.PendingMedicines.Remove(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool SendToRevision(PendingMedicine medicine)
+        {
+            foreach (PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
+            {
+                if (i.Id == medicine.Id)
+                {
+                    _pendingMedicineRepository.PendingMedicines.Remove(i);
+                    _pendingMedicineRepository.PendingMedicines.Add(medicine);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
