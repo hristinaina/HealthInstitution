@@ -1,5 +1,7 @@
-﻿using HealthInstitution.MVVM.Models.Enumerations;
+﻿using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Enumerations;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace HealthInstitution.MVVM.Models
@@ -36,7 +38,6 @@ namespace HealthInstitution.MVVM.Models
             FirstName = firstName;
             LastName = lastName;
         }
-
 
         public User(int id, string firstName, string lastName, string email, string password, Gender gender)
         {
@@ -78,5 +79,8 @@ namespace HealthInstitution.MVVM.Models
             return true;
 
         }
+
+        public bool isAvailable(DateTime dateTime) { return true; }
+        public Appointment FindInterruptingAppointment(DateTime dateTime) { return null; }
     }
 }

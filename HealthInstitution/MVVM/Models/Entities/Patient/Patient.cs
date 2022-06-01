@@ -133,13 +133,13 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public bool IsTrolling()
         {
-            if (GetEditingHistory() > 5)
+            if (GetEditingAttempts() > 5)
             {
                 _blocked = true;
                 _blockadeType = BlockadeType.SYSTEM;
                 return true;
             }
-            if (GetCreatingHistory() > 8)
+            if (GetCreatingAttempts() > 8)
             {
                 _blocked = true;
                 _blockadeType = BlockadeType.SYSTEM;
@@ -148,7 +148,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             return false;
         }
 
-        private int GetCreatingHistory()
+        private int GetCreatingAttempts()
         {
             int totalCreations = 0;
             foreach (ExaminationChange change in ExaminationChanges)
@@ -162,7 +162,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             return totalCreations;
         }
 
-        private int GetEditingHistory()
+        private int GetEditingAttempts()
         {
             int totalChanges = 0;
             foreach (ExaminationChange change in ExaminationChanges)
