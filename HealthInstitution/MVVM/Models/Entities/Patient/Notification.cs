@@ -44,6 +44,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         public Notification() { }
 
         public Notification(int id, string text, DateTime date, int patientId)
+
         {
             _id = id;
             _text = text;
