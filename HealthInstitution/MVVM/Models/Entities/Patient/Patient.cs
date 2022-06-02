@@ -1,5 +1,4 @@
-﻿using HealthInstitution.Data.Patient;
-using HealthInstitution.MVVM.Models.Entities.References;
+﻿using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.Models.Services;
 using Newtonsoft.Json;
@@ -144,6 +143,19 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
             pastAppointments = pastAppointments.OrderBy(x => x.Date).ToList();
             return pastAppointments;
+        }
+        public List<Appointment> GetPastExaminations()
+        {
+            List<Appointment> pastExaminations = new List<Appointment>();
+            foreach (Appointment appointment in GetAllAppointments())
+            {
+                if (DateTime.Compare(appointment.Date, DateTime.Now) < 0)
+                {
+                    pastExaminations.Add(appointment);
+                }
+            }
+            pastExaminations = pastExaminations.OrderBy(x => x.Date).ToList();
+            return pastExaminations;
         }
 
         public bool IsTrolling()

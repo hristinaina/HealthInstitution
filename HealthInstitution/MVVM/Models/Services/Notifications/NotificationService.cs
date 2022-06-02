@@ -1,5 +1,4 @@
-﻿using HealthInstitution.Data.Patient;
-using HealthInstitution.MVVM.Models.Entities;
+﻿using HealthInstitution.MVVM.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

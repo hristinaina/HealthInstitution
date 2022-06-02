@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthInstitution.Data.Patient
-{
+namespace HealthInstitution.MVVM.Models.Entities
+{ 
     public class Notification
     {
         private int _id;
@@ -41,11 +41,31 @@ namespace HealthInstitution.Data.Patient
             set { _patientId = value; }
         }
 
-        public Notification(string text, DateTime date, int patientId)
+        private int _timesPerDay;
+
+        public int TimesPerDay
+        {
+            get { return _timesPerDay; }
+            set { _timesPerDay = value; }
+        }
+
+        private int _daysLongitude;
+
+        public int DaysLongitude
+        {
+            get { return _daysLongitude; }
+            set { _daysLongitude = value; }
+        }
+
+
+
+        public Notification(string text, DateTime date, int patientId, int timesPerDay, int daysLongitude)
         {
             _text = text;
             _dateTime = date;
             _patientId = patientId;
+            _timesPerDay = timesPerDay;
+            _daysLongitude = daysLongitude;
         }
     }
 }
