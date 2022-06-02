@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Entities
-{ 
+{
     public class Notification
     {
         private int _id;
         [JsonProperty("Id")]
-        public int Id
+        public int ID
         {
             get { return _id; }
             set { _id = value; }
@@ -41,31 +41,14 @@ namespace HealthInstitution.MVVM.Models.Entities
             set { _patientId = value; }
         }
 
-        private int _timesPerDay;
+        public Notification() { }
 
-        public int TimesPerDay
+        public Notification(int id, string text, DateTime date, int patientId)
         {
-            get { return _timesPerDay; }
-            set { _timesPerDay = value; }
-        }
-
-        private int _daysLongitude;
-
-        public int DaysLongitude
-        {
-            get { return _daysLongitude; }
-            set { _daysLongitude = value; }
-        }
-
-
-
-        public Notification(string text, DateTime date, int patientId, int timesPerDay, int daysLongitude)
-        {
+            _id = id;
             _text = text;
             _dateTime = date;
             _patientId = patientId;
-            _timesPerDay = timesPerDay;
-            _daysLongitude = daysLongitude;
         }
     }
 }

@@ -19,11 +19,9 @@ namespace HealthInstitution.MVVM.Models.Entities
         private List<Examination> _examinations;
         private List<Operation> _operations;
         private List<ExaminationChange> _examinationChanges;
-        private List<string> _notificationsStrings;
         private List<Notification> _notifications;
 
-        [JsonProperty("Notifications")]
-        public List<string> NotificationsStrings { get => _notificationsStrings; set { _notificationsStrings = value; } }
+        [JsonIgnore]
         public List<Notification> Notifications
         {
             get
@@ -89,7 +87,6 @@ namespace HealthInstitution.MVVM.Models.Entities
         }
         public Patient()
         {
-            _notificationsStrings = new List<string>();
         }
 
         public Patient(int id, string firstName, string lastName, string email, string password, Gender gender,
@@ -100,7 +97,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blockadeType = 0;
             _deleted = false;
             _record = new MedicalRecord(height, weight, new List<Allergen>(), new List<string>());
-            _notificationsStrings = new List<string>();
         }
 
         public void UnblockPatient()
