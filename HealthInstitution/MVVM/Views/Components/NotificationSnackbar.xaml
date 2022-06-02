@@ -18,7 +18,7 @@
                                  Background="Black"
                                  HorizontalContentAlignment="Center"
                                  Foreground="White"
-                                 Message="{Binding Message}"
-                                 IsActive="{Binding MessageVisibility}" />
+                                 Message="{Binding Notification}"
+                                 IsActive="{Binding ShowNotification}" />
     </Grid>
 </UserControl>

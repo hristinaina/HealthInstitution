@@ -9,6 +9,26 @@ namespace HealthInstitution.MVVM.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private string _notification = "";
+
+        public string Notification
+        {
+            get { return _notification; }
+            set { _notification = value; OnPropertyChanged(nameof(Notification)); }
+        }
+        private bool _notificationVisibility = false;
+
+        public bool NotificationVisibility
+        {
+            get { return _notificationVisibility; }
+            set { _notificationVisibility = value; OnPropertyChanged(nameof(NotificationVisibility)); }
+        }
+
+        public void showNotification(string message) {
+            Notification = message;
+            NotificationVisibility = true;
+        }
+       
         private string _message = "";
         public string Message
         {
@@ -108,7 +128,6 @@ namespace HealthInstitution.MVVM.ViewModels
         }
         public DateTime MergeTime(DateTime date, DateTime time)
         {
-
             return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0, DateTimeKind.Local);
         }
 
