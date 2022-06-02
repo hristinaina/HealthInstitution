@@ -33,7 +33,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
         private bool isUpgoing(Prescription prescription)
         {
-            return true;
+            return _examination.Date + new TimeSpan(prescription.LongitudeInDays, 0, 0) < DateTime.Now;
         }
     }
 }

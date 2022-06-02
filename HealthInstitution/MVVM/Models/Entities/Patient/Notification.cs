@@ -41,31 +41,12 @@ namespace HealthInstitution.MVVM.Models.Entities
             set { _patientId = value; }
         }
 
-        private int _timesPerDay;
-
-        public int TimesPerDay
-        {
-            get { return _timesPerDay; }
-            set { _timesPerDay = value; }
-        }
-
-        private int _daysLongitude;
-
-        public int DaysLongitude
-        {
-            get { return _daysLongitude; }
-            set { _daysLongitude = value; }
-        }
-
-
-
-        public Notification(string text, DateTime date, int patientId, int timesPerDay, int daysLongitude)
+        
+        public Notification(string text, DateTime date, int patientId)
         {
             _text = text;
             _dateTime = date;
             _patientId = patientId;
-            _timesPerDay = timesPerDay;
-            _daysLongitude = daysLongitude;
         }
     }
 }
