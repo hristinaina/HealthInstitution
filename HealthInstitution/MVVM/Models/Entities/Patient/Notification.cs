@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Entities
-{ 
+{
     public class Notification
     {
         private int _id;
         [JsonProperty("Id")]
-        public int Id
+        public int ID
         {
             get { return _id; }
             set { _id = value; }
@@ -41,9 +41,12 @@ namespace HealthInstitution.MVVM.Models.Entities
             set { _patientId = value; }
         }
 
-        
-        public Notification(string text, DateTime date, int patientId)
+        public Notification() { }
+
+        public Notification(int id, string text, DateTime date, int patientId)
+
         {
+            _id = id;
             _text = text;
             _dateTime = date;
             _patientId = patientId;
