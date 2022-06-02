@@ -2,31 +2,37 @@
   {
     "ID": 1,
     "Name": "Paracetamol",
+    "Description": null,
     "State": 0
   },
   {
     "ID": 2,
     "Name": "Brufen",
+    "Description": null,
     "State": 0
   },
   {
     "ID": 3,
     "Name": "Ranital",
+    "Description": null,
     "State": 0
   },
   {
     "ID": 4,
     "Name": "Apaurin",
+    "Description": null,
     "State": 0
   },
   {
     "ID": 5,
     "Name": "Leksilijum",
+    "Description": null,
     "State": 0
   },
   {
     "ID": 6,
     "Name": "Bensedin",
+    "Description": null,
     "State": 0
   }
 ]

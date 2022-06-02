@@ -12,6 +12,7 @@ namespace HealthInstitution.MVVM.Models.Entities
     {
         private int _id;
         private string _name;
+        private string _description;
         private List<Allergen> _ingredients;
         private State _state;
 
@@ -20,7 +21,10 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonProperty("Name")]
 
         public string Name { get => _name; set { _name = value; } }
-        
+
+        [JsonProperty("Description")]
+        public string Description { get => _description; set { _description = value; } }
+
         [JsonIgnore]
         public List<Allergen> Ingredients { get => _ingredients; set { _ingredients = value; } }
 
@@ -30,11 +34,22 @@ namespace HealthInstitution.MVVM.Models.Entities
             set => _state = value;
         }
 
-        public Medicine(int id, string name)
+        public Medicine()
+        {
+            _ingredients = new List<Allergen>();
+        }
+
+        public Medicine(int id, string name) : this()
         {
             _id = id;
             _name = name;
-            _ingredients = new List<Allergen>();
+        }
+
+        public Medicine(string name, List<Allergen> ingredients, State s) : this()
+        {
+            _name = name;
+            _ingredients = ingredients;
+            _state = s;
         }
 
         public override string ToString()

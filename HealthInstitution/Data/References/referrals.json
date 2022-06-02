@@ -1,24 +1,24 @@
 [
   {
-    "Id": 1,
+    "ID": 1,
     "DoctorId": 3,
     "PatientId": 5,
     "Specialization": 8
   },
   {
-    "Id": 2,
+    "ID": 2,
     "DoctorId": 4,
     "PatientId": 3,
     "Specialization": 9
   },
   {
-    "Id": 3,
+    "ID": 3,
     "DoctorId": 1,
     "PatientId": 2,
     "Specialization": 0
   },
   {
-    "Id": 4,
+    "ID": 4,
     "DoctorId": 1,
     "PatientId": 5,
     "Specialization": 0

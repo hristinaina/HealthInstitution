@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,9 +34,42 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             foreach (PendingMedicine medicine in _pendingMedicines)
             {
-                if (medicine.Id == id) return medicine;
+                if (medicine.ID == id) return medicine;
             }
             return null;
+        }
+
+        private bool CheckID(int id)
+        {
+            foreach (PendingMedicine m in _pendingMedicines)
+            {
+                if (m.ID == id) return false;
+            }
+
+            foreach (Medicine m in Institution.Instance().MedicineRepository.Medicine)
+            {
+                if (m.ID == id) return false;
+            }
+
+            return true;
+        }
+
+        private int GetID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
+
+        public PendingMedicine AddNewMedicine(PendingMedicine newMedicine)
+        {
+            newMedicine.ID = GetID();
+            _pendingMedicines.Add(newMedicine);
+
+            return newMedicine;
         }
     }
 }

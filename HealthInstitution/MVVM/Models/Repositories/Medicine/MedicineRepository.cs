@@ -26,6 +26,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             FileService.Serialize<Medicine>(_fileName, _medicine);
         }
+
         public Medicine FindByID(int id)
         {
             foreach (Medicine medicine in _medicine)
@@ -38,6 +39,34 @@ namespace HealthInstitution.MVVM.Models.Repositories
         public Medicine PrescriptionMedicineToMedicine(PrescriptionMedicine prescriptionMedicine)
         {
             return FindByID(prescriptionMedicine.MedicineId);
+        }
+
+        private bool CheckID(int id)
+        {
+            foreach (Medicine m in _medicine)
+            {
+                if (m.ID == id) return false;
+            }
+
+            return true;
+        }
+
+        private int GetID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
+
+        public Medicine AddNewMedicine(Medicine newMedicine)
+        {
+            newMedicine.ID = GetID();
+            _medicine.Add(newMedicine);
+
+            return newMedicine;
         }
     }
 }

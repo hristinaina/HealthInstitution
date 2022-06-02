@@ -154,7 +154,7 @@ namespace HealthInstitution.MVVM.Models
             _medicineRepository.SaveToFile();
             _allergenRepository.SaveToFile();
             _patientAllergenRepository.SaveToFile();
-            _medicineAllergenRepository.LoadFromFile();
+            _medicineAllergenRepository.SaveToFile();
             _pendingMedicineRepository.SaveToFile();
             _doctorDaysOffRepository.SaveToFile();
             _prescriptionMedicineRepository.SaveToFile();
