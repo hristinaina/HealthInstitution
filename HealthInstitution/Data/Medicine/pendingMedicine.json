@@ -1,26 +1,32 @@
 [
   {
-    "Id": 10,
+    "ID": 10,
     "Name": "Ime",
     "Description": "Opis leka",
     "State": 0
   },
   {
-    "Id": 9,
+    "ID": 9,
     "Name": "Ime",
     "Description": "Opis",
     "State": 0
   },
   {
-    "Id": 3,
+    "ID": 3,
     "Name": "Ime",
     "Description": "Opis",
     "State": 0
   },
   {
-    "Id": 4,
+    "ID": 4,
     "Name": "Ime",
     "Description": "Opis",
+    "State": 0
+  },
+  {
+    "ID": 7,
+    "Name": "asd",
+    "Description": null,
     "State": 0
   }
 ]

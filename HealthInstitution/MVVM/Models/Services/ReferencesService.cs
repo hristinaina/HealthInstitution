@@ -115,6 +115,12 @@ namespace HealthInstitution.MVVM.Models.Services
                 List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
                 medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
             }
+
+            foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
+            {
+                List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
+                medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+            }
         }
 
         public static void ConnectDoctorDaysOff()

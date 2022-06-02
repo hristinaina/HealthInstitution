@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public string Name => _medicine.Name;
         public string State => _medicine.State.ToString();
 
+        public List<IngredientListItemViewModel> MedicineIngredients;
+
         //public MedicineListItemViewModel(Medicine medicine)
         //{
         //    _medicine = medicine;
@@ -25,6 +28,12 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public MedicineListItemViewModel(PendingMedicine medicine)
         {
             _medicine = medicine;
+            MedicineIngredients = new List<IngredientListItemViewModel>();
+
+            foreach (Allergen i in medicine.Ingredients)
+            {
+                MedicineIngredients.Add(new IngredientListItemViewModel(i));
+            }
         }
     }
 }

@@ -61,8 +61,11 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
                 OnPropertyChanged(nameof(SelectedState));
                 SelectedStateIndex = (int)_selectedMedicine.Medicine.State;
                 OnPropertyChanged(nameof(SelectedStateIndex));
+                SelectedIngredients = _selectedMedicine.MedicineIngredients;
+                OnPropertyChanged(nameof(SelectedIngredients));
             }
         }
+
 
         private IngredientListItemViewModel _newMedicineSelection;
 
@@ -89,6 +92,8 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public string SelectedName { get; set; }
         public string SelectedState { get; set; }
         public int SelectedStateIndex { get; set; }
+        public List<IngredientListItemViewModel> SelectedIngredients { get; set; }
+
 
         private readonly ObservableCollection<MedicineListItemViewModel> _medicine;
         public IEnumerable<MedicineListItemViewModel> Medicine => _medicine;

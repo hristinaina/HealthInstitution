@@ -14,5 +14,13 @@
   {
     "MedicineId": 2,
     "IngredientId": 3
+  },
+  {
+    "MedicineId": 7,
+    "IngredientId": 1
+  },
+  {
+    "MedicineId": 7,
+    "IngredientId": 2
   }
 ]

@@ -331,25 +331,24 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                                    HorizontalAlignment="Center"
                                                    Margin="10"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                        <TextBlock Text="NAME"
+                                        <TextBlock Text="{Binding SelectedName}"
                                                    HorizontalAlignment="Center"
                                                    Margin="15"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                        <ListView ItemsSource="{Binding Ingredients}"
+                                        <ListView ItemsSource="{Binding SelectedIngredients}"
                                                   VerticalAlignment="Top"
                                                   Height="300"
                                                   Width="280"
                                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                                   ScrollViewer.CanContentScroll="True"
-                                                  HorizontalAlignment="Center"
-                                                  SelectedIndex="{Binding Selection}">
+                                                  HorizontalAlignment="Center">
                                             <ListView.View>
                                                 <GridView AllowsColumnReorder="False">
                                                     <GridViewColumn Header="Ingredients">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
                                                                 <TextBlock TextAlignment="Left"
-                                                           Text="{Binding Name}"/>
+                                                                Text="{Binding Name}"/>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>
