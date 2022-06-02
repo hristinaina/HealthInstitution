@@ -62,7 +62,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
         {
             string message = "Appointment with id=" + rescheduledAppointment.ID.ToString() + " has been changed." +
                 " Changed date from " + oldDate.ToString() + " to " + newDate.ToString();
-            patient.Notifications.Add(message);
+            patient.NotificationsStrings.Add(message);
             doctor.Notifications.Add(message);
             Appointment newAppointment = SecretaryService.FindAppointment(patient, doctor, oldDate);
             newAppointment.Emergency = true;

@@ -8,7 +8,6 @@ namespace HealthInstitution.MVVM.Models.Repositories
     {
         private readonly string _fileName;
         private List<Patient> _patients;
-
         public List<Patient> Patients { get => _patients; }
         public PatientRepository(string patientFileName)
         {

@@ -1,4 +1,5 @@
-﻿using HealthInstitution.MVVM.Models.Entities.References;
+﻿using HealthInstitution.Data.Patient;
+using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.Models.Services;
 using Newtonsoft.Json;
@@ -19,9 +20,24 @@ namespace HealthInstitution.MVVM.Models.Entities
         private List<Examination> _examinations;
         private List<Operation> _operations;
         private List<ExaminationChange> _examinationChanges;
-        private List<string> _notifications;
+        private List<string> _notificationsStrings;
+        private List<Notification> _notifications;
 
-        public List<string> Notifications { get => _notifications; set { _notifications = value; } }
+        [JsonProperty("Notifications")]
+        public List<string> NotificationsStrings { get => _notificationsStrings; set { _notificationsStrings = value; } }
+        public List<Notification> Notifications
+        {
+            get
+            {
+                if (_notifications == null)
+                {
+                    _notifications = new List<Notification>();
+                }
+
+                return _notifications;
+            }
+            set => _notifications = value;
+        }
         [JsonProperty("Blocked")]
         public bool Blocked { get => _blocked; set { _blocked = value; } }
         [JsonProperty("BlockadeType")]
@@ -30,7 +46,6 @@ namespace HealthInstitution.MVVM.Models.Entities
         public bool Deleted { get => _deleted; set { _deleted = value; } }
         [JsonProperty("Record")]
         public MedicalRecord Record { get => _record; set { _record = value; } }
-        [JsonProperty("Notifications")]
         [JsonIgnore]
         public List<Examination> Examinations
         {
@@ -75,7 +90,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         }
         public Patient()
         {
-            _notifications = new List<string>();
+            _notificationsStrings = new List<string>();
         }
 
         public Patient(int id, string firstName, string lastName, string email, string password, Gender gender,
@@ -86,7 +101,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blockadeType = 0;
             _deleted = false;
             _record = new MedicalRecord(height, weight, new List<Allergen>(), new List<string>());
-            _notifications = new List<string>();
+            _notificationsStrings = new List<string>();
         }
 
         public void UnblockPatient()

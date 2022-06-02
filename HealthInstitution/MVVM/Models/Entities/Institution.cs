@@ -344,7 +344,6 @@ namespace HealthInstitution.MVVM.Models
                         throw new DateException("Cannot schedule in next 24 hours");
                     }
                 }
-               
                 if (doctor is null)
                 {
                     throw new EmptyFieldException("Doctor not selected !");
