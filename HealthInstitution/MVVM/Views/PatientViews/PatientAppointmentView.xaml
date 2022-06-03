@@ -22,7 +22,7 @@
 
         <components:NotificationSnackbar Grid.Column="1"
                                          Panel.ZIndex="2"
-                                         Margin="0,250,0,20"
+                                         Margin="0,50,0,50"
                                          NotificationHeight="20"
                                          VerticalAlignment="Bottom"
                                          Content="{Binding Message}"
