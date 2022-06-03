@@ -14,5 +14,10 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         {
             _equipment = equipment;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
