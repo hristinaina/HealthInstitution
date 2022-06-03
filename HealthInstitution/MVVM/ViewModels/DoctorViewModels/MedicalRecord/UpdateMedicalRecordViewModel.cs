@@ -25,6 +25,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand CreateReferralCommand { get; }
         public ICommand CreateReferralSpecCommand { get; }
         public ICommand CreatePrescriptionCommand { get; }
+        public ICommand UpdateEquipmentQuantityCommand { get; }
 
         private ObservableCollection<AllergenItemViewModel> _allergens;
         public IEnumerable<AllergenItemViewModel> Allergens => _allergens;
@@ -190,6 +191,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             CreateReferralCommand = new CreateReferralCommand(this);
             CreateReferralSpecCommand = new CreateReferralSpecCommand(this);
             CreatePrescriptionCommand = new CreatePrescriptionCommand(this);
+            UpdateEquipmentQuantityCommand = new UpdateEquipmentQuantityCommand(this);
 
             SetProperties();
             FillAllergensList();
@@ -200,7 +202,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             FillThreapyMealDependenciesList();
             FillMedicinesList();
             FillEquipments();
-            //SetSelectedEquipment();
+            SetSelectedEquipment();
         }
 
         public void SetProperties()
@@ -303,13 +305,36 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         {
             _equipments.Clear();
             foreach (Equipment equipment in _examination.Room.Equipment.Keys)
-                _equipments.Add(new EquipmentItemViewModel(equipment));
+            {
+                Equipment equipmentInRoom = new Equipment(equipment);  // copying equipment
+                equipmentInRoom.Quantity = equipment.ArrangmentByRooms[_examination.Room];
+                _equipments.Add(new EquipmentItemViewModel(equipmentInRoom));
+            }
         }
 
-       /* public void SetSelectedEquipment()
+        public void UpdateQuantity(Equipment equipment, int quantity)
+        {
+            foreach (Equipment i in _examination.Room.Equipment.Keys)
+            {
+                if (i.ID == equipment.ID) i.ArrangmentByRooms[_examination.Room] = quantity;
+            }
+            FillEquipments();
+        }
+
+        public void SetSelectedEquipment()
         {
             if (_equipments.Count > 0) SelectedEquipment = _equipments[0];
-        }*/
+        }
+
+        public int GetPreviousQuantityOfSelectedEquipment()
+        {
+            foreach (Equipment i in _examination.Room.Equipment.Keys)
+            {
+                if (i.ID == SelectedEquipment.Equipment.ID) return i.ArrangmentByRooms[_examination.Room];
+            }
+
+            return 0;
+        }
 
     }
 }

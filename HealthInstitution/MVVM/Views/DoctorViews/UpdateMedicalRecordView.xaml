@@ -578,7 +578,7 @@
                                                 Content="SAVE"
                                                 Margin="0 10 0 0"
                                                 Width="300"
-                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                                                Command="{Binding UpdateEquipmentQuantityCommand}"/>
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsCancel="True"
                                                 Content="CLOSE"

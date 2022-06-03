@@ -1,11 +1,8 @@
-﻿using HealthInstitution.MVVM.Models.Entities;
-using HealthInstitution.MVVM.Models.Entities.References;
-using HealthInstitution.MVVM.Models.Services;
+﻿using HealthInstitution.MVVM.Models.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HealthInstitution.MVVM.Models.Entities;
+
 
 namespace HealthInstitution.MVVM.Models.Repositories.Room
 {
@@ -110,6 +107,19 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
                 }
             }
             return arrangements;
+        }
+
+    public bool UpdateEquipmentQuantityInRoom(Entities.Room room, Equipment equipment)
+        {
+            foreach (EquipmentArrangement arrangement in CurrentArrangement)
+            {
+                if (arrangement.RoomId == room.ID && arrangement.EquipmentId == equipment.ID)
+                {
+                    arrangement.Quantity = equipment.ArrangmentByRooms[room];
+                    return true;
+                }
+            }
+            return false;
         }
  
     }
