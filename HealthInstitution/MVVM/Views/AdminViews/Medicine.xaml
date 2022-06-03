@@ -104,6 +104,7 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                     <StackPanel Height="400"
                                                 Width="320"
                                                 Margin="40 20 40 20">
+
                                         <TextBlock Text="Create new medicine"
                                                    HorizontalAlignment="Center"
                                                    Margin="10"
@@ -194,7 +195,7 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                                   AcceptsReturn="True"
                                                   TextWrapping="Wrap"
                                                   materialDesign:HintAssist.Hint="Enter ingredient name"
-                                                  Text="{Binding NewRoomName}"
+                                                  Text="{Binding NewIngredientName}"
                                                   IsEnabled="True" />
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Center">
@@ -229,7 +230,7 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                     Grid.Column="1"
                                     Width="170"
                                     ToolTip="Delete ingredients"
-                                    Content="Delete ingredient"
+                                    Content="Delete ingredients"
                                     Background="#66FFFFFF"
                                     BorderBrush="#6634565A"
                                     Height="32"
@@ -237,44 +238,37 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Left"
                                     Grid.Row="2"
-                                    IsEnabled="{Binding EnableChanges}">
+                                    IsEnabled="True">
                                 <Button.CommandParameter>
-                                    <StackPanel Height="420"
-                                                Width="400"
-                                                Margin="40 20 40 20">
-                                        <TextBlock Text="Change medicine with name:"
+                                    <StackPanel Height="380"
+                                                Width="350"
+                                                Margin="20 10 20 10">
+                                        <TextBlock Text="Ingredient list"
                                                    HorizontalAlignment="Center"
-                                                   Margin="10"
-                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
-                                        <TextBox  Margin="0 10 0 10"
-                                                  Width="250"
-                                                  Style="{StaticResource MaterialDesignFilledTextBox}"
-                                                  VerticalAlignment="Top"
-                                                  AcceptsReturn="True"
-                                                  TextWrapping="Wrap"
-                                                  materialDesign:HintAssist.Hint="Enter ingredient name"
-                                                  Text="{Binding SelectedName}"
-                                                  IsEnabled="True" />
-                                        <TextBlock Text="Neki opis zasto je odbijen"
-                                                   HorizontalAlignment="Center"
-                                                   FontSize="12"
                                                    Margin="10"
                                                    Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
                                         <ListView ItemsSource="{Binding Ingredients}"
                                                   VerticalAlignment="Top"
-                                                  Height="180"
+                                                  Height="250"
                                                   Width="280"
+                                                  SelectionMode="Single"
                                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                                   ScrollViewer.CanContentScroll="True"
                                                   HorizontalAlignment="Center"
-                                                  SelectedIndex="{Binding Selection}">
+                                                  SelectedIndex="{Binding IngredientSelection}">
                                             <ListView.View>
                                                 <GridView AllowsColumnReorder="False">
                                                     <GridViewColumn Header="Ingredients">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
-                                                                <TextBlock TextAlignment="Left"
-                                                                           Text="{Binding Name}"/>
+                                                                <TextBox  Margin="0 10 0 10"
+                                                                          Width="250"
+                                                                          Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                                          VerticalAlignment="Top"
+                                                                          AcceptsReturn="True"
+                                                                          TextWrapping="Wrap"
+                                                                          Text="{Binding Name}"
+                                                                          IsEnabled="True" />
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>
@@ -286,7 +280,8 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     IsDefault="True"
                                                     Margin="0 30 0 0"
-                                                    Content="CHANGE"
+                                                    Content="DELETE"
+                                                    IsEnabled="{Binding IngredientEnable}"
                                                     Command="{Binding DeleteIngredient}">
                                                 <Button.CommandParameter>
                                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -338,7 +333,7 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                         <ListView ItemsSource="{Binding SelectedIngredients}"
                                                   VerticalAlignment="Top"
                                                   Height="300"
-                                                  Width="280"
+                                                  Width="Auto"
                                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                                   ScrollViewer.CanContentScroll="True"
                                                   HorizontalAlignment="Center">
@@ -347,8 +342,8 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                                     <GridViewColumn Header="Ingredients">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
-                                                                <TextBlock TextAlignment="Left"
-                                                                Text="{Binding Name}"/>
+                                                                <TextBlock TextAlignment="Center"
+                                                                           Text="{Binding Name}"/>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>
@@ -377,7 +372,7 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                     Grid.Column="1"
                                     Width="170"
                                     ToolTip="Correct information about rejected medicine"
-                                    Content="Change information"
+                                    Content="Change medicine"
                                     Background="#66FFFFFF"
                                     BorderBrush="#6634565A"
                                     Height="32"
@@ -385,7 +380,7 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Left"
                                     Grid.Row="4"
-                                    IsEnabled="{Binding EnableChanges}">
+                                    IsEnabled="{Binding EnableMedicineChange}">
                                 <Button.CommandParameter>
                                     <StackPanel Height="420"
                                                 Width="400"
@@ -421,8 +416,8 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                                     <GridViewColumn Header="Ingredients">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
-                                                                <TextBlock TextAlignment="Left"
-                                                                           Text="{Binding Name}"/>
+                                                                <CheckBox Content="{Binding Name}"
+                                                                          IsChecked="{Binding Selected}"/>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>

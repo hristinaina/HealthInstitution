@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineCommands;
 
 namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
@@ -21,6 +22,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 
 
         private bool _enableChanges;
+        private bool _enableMedicineChange;
         private int _selection;
         public bool EnableChanges
         {
@@ -29,6 +31,16 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             {
                 _enableChanges = value;
                 OnPropertyChanged(nameof(EnableChanges));
+            }
+        }
+
+        public bool EnableMedicineChange
+        {
+            get => _enableMedicineChange;
+            set
+            {
+                _enableMedicineChange = value;
+                OnPropertyChanged(nameof(EnableMedicineChange));
             }
         }
 
@@ -59,6 +71,30 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
                 OnPropertyChanged(nameof(SelectedName));
                 SelectedState = _selectedMedicine.State;
                 OnPropertyChanged(nameof(SelectedState));
+                if (_selectedMedicine.Medicine.State == State.REJECTED)
+                {
+                    EnableMedicineChange = true;
+                    foreach (IngredientListItemViewModel ingredient in _ingredients)
+                    {
+                        if (SelectedMedicine.Medicine.Ingredients.Contains(ingredient.Ingredient))
+                        {
+                            ingredient.Selected = true;
+                        }
+                        else
+                        {
+                            ingredient.Selected = false;
+                        }
+                    }
+                }
+                else
+                {
+                    EnableMedicineChange = false;
+
+                    foreach (IngredientListItemViewModel ingredient in _ingredients)
+                    { 
+                        ingredient.Selected = false;
+                    }
+                }
                 SelectedStateIndex = (int)_selectedMedicine.Medicine.State;
                 OnPropertyChanged(nameof(SelectedStateIndex));
                 SelectedIngredients = _selectedMedicine.MedicineIngredients;
@@ -123,6 +159,48 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             }
         }
 
+        private string _newIngredientName;
+        public string NewIngredientName
+        {
+            get => _newIngredientName;
+            set
+            {
+                _newIngredientName = value;
+                OnPropertyChanged(nameof(NewIngredientName));
+            }
+        }
+
+        private bool _ingredientEnable;
+        public bool IngredientEnable
+        {
+            get => _ingredientEnable;
+            set
+            {
+                _ingredientEnable = value;
+                OnPropertyChanged(nameof(IngredientEnable));
+            }
+        }
+
+        private int _ingredientSelection;
+        public int IngredientSelection
+        {
+            get => _ingredientSelection;
+            set
+            {
+                if (value < 0)
+                {
+                    return;
+                }
+
+                IngredientEnable = true;
+                _ingredientSelection = value;
+                SelectedIngredient = _ingredients.ElementAt(_ingredientSelection).Ingredient;
+            }
+        }
+
+        public Allergen SelectedIngredient { get; set; }
+
+
         public AdminNavigationViewModel Navigation { get; }
 
         public ICommand CreateNewMedication { get; set; }
@@ -140,6 +218,8 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             Navigation = new AdminNavigationViewModel();
 
             CreateNewMedication = new CreateMedicineCommand(this);
+            CreateNewIngredient = new CreateIngredientCommand(this);
+            DeleteIngredient = new DeleteIngredientCommand(this);
 
             FillMedicineList();
             FillIngredientList();
@@ -151,7 +231,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 
             foreach (Allergen a in Institution.Instance().AllergenRepository.Allergens)
             {
-                _ingredients.Add(new IngredientListItemViewModel(a));
+                _ingredients.Add(new IngredientListItemViewModel(a, this));
             }
         }
 

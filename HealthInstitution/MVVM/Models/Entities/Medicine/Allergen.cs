@@ -22,6 +22,11 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         }
 
+        public Allergen(string name)
+        {
+            _name = name;
+        }
+
         public Allergen(int id, string name)
         {
             _id = id;
