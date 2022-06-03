@@ -28,6 +28,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         public PendingMedicine()
         {
             _ingredients = new List<Allergen>();
+            _description = "";
         }
 
         public PendingMedicine(int id, string name, string description, State state) : this()

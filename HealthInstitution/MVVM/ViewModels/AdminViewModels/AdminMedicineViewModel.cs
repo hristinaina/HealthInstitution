@@ -198,6 +198,21 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             }
         }
 
+        //private int _changeMedicineSelection;
+        //public int ChangeMedicineSelection
+        //{
+        //    get => _changeMedicineSelection;
+        //    set
+        //    {
+        //        if (value < 0)
+        //        {
+        //            return;
+        //        }
+
+        //        _changeMedicineSelection = value;
+        //    }
+        //}
+
         public Allergen SelectedIngredient { get; set; }
 
 
@@ -205,7 +220,6 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 
         public ICommand CreateNewMedication { get; set; }
         public ICommand CreateNewIngredient { get; set; }
-        public ICommand Details { get; set; }
         public ICommand ChangeMedicine { get; set; }
         public ICommand DeleteIngredient { get; set; }
 
@@ -220,6 +234,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             CreateNewMedication = new CreateMedicineCommand(this);
             CreateNewIngredient = new CreateIngredientCommand(this);
             DeleteIngredient = new DeleteIngredientCommand(this);
+            ChangeMedicine = new ChangeRejectedMedicineCommand(this);
 
             FillMedicineList();
             FillIngredientList();

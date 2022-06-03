@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Services;
 
@@ -30,6 +31,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             FileService.Serialize<PendingMedicine>(_fileName, _pendingMedicines);
         }
+
         public PendingMedicine FindByID(int id)
         {
             foreach (PendingMedicine medicine in _pendingMedicines)
@@ -37,6 +39,15 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 if (medicine.ID == id) return medicine;
             }
             return null;
+        }
+
+        private bool IsNameAvailable(PendingMedicine medicine, string name)
+        {
+            foreach (PendingMedicine m in _pendingMedicines)
+            {
+                if (m.Name.Equals(name) && !m.Equals(medicine)) return false;
+            }
+            return true;
         }
 
         private bool CheckID(int id)
@@ -66,10 +77,28 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         public PendingMedicine AddNewMedicine(PendingMedicine newMedicine)
         {
+            if (!IsNameAvailable(newMedicine, newMedicine.Name)) throw new NameNotAvailableException("Name already in use!");
             newMedicine.ID = GetID();
             _pendingMedicines.Add(newMedicine);
 
             return newMedicine;
+        }
+
+        public PendingMedicine ChangeMedicine(PendingMedicine medicine, string newName, List<Allergen> newIngredients)
+        {
+            if (newName is null || newName.Equals("")) throw new NameNotAvailableException("Name cannot be empty");
+            else if (!IsNameAvailable(medicine, newName)) throw new NameNotAvailableException("Name already in use!");
+
+            List<Allergen> alreadyIngredient = medicine.Ingredients.Except(newIngredients).ToList();
+            List<Allergen> addedIngredients = newIngredients.Except(medicine.Ingredients).ToList();
+
+            if ((!alreadyIngredient.Any() && !addedIngredients.Any()) && medicine.Name == newName)
+                throw new NoChangeException("Change must be made!");
+
+            medicine.Name = newName;
+            medicine.Ingredients = newIngredients;
+
+            return medicine;
         }
     }
 }
