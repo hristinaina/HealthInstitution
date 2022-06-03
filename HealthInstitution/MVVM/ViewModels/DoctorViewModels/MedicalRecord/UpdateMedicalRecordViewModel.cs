@@ -202,7 +202,6 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             FillThreapyMealDependenciesList();
             FillMedicinesList();
             FillEquipments();
-            SetSelectedEquipment();
         }
 
         public void SetProperties()
@@ -310,6 +309,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 equipmentInRoom.Quantity = equipment.ArrangmentByRooms[_examination.Room];
                 _equipments.Add(new EquipmentItemViewModel(equipmentInRoom));
             }
+            SetSelectedEquipment();
         }
 
         public void UpdateQuantity(Equipment equipment, int quantity)
