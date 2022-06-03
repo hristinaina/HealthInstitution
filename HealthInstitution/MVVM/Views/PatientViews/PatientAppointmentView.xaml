@@ -21,7 +21,8 @@
         </Grid.ColumnDefinitions>
 
         <components:NotificationSnackbar Grid.Column="1"
-                                         Panel.ZIndex="2"/>
+                                         Panel.ZIndex="2"
+                                         ActionContent="DISMISS"/>
         <components:PatientNavigationRail SelectedIndex="1"
                                           Grid.RowSpan="2"></components:PatientNavigationRail>
         <materialDesign:Card Grid.Column="1"

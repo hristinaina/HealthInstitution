@@ -2,6 +2,8 @@
 using HealthInstitution.Stores;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using HealthInstitution.MVVM.ViewModels.Commands;
 
 namespace HealthInstitution.MVVM.ViewModels
 {
@@ -24,9 +26,28 @@ namespace HealthInstitution.MVVM.ViewModels
             set { _notificationVisibility = value; OnPropertyChanged(nameof(NotificationVisibility)); }
         }
 
-        public void showNotification(string message) {
+        private ICommand _dismissNotification;
+        public ICommand DismissNotification
+        {
+            get
+            {
+                if (_dismissNotification is null)
+                {
+                    return new DismissNotificationCommand(this);
+                }
+                else
+                {
+                    return _dismissNotification;
+                }
+            }
+    }
+
+    public void showNotification(string message) {
             Notification = message;
             NotificationVisibility = true;
+        }
+        public void hideNotification() {
+            NotificationVisibility = false;
         }
        
         private string _message = "";

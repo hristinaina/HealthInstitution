@@ -42,7 +42,7 @@ namespace HealthInstitution.MVVM.Models.Services
                                 .WithIdentity(prescription.ID.ToString(), _patient.ID.ToString())
                                 .Build();
                 job.JobDataMap["message"] = message;
-                job.JobDataMap["model"] = _viewModel;
+                job.JobDataMap["method"] = _method;
 
                 // Trigger the job to run now, and then every 40 seconds
                 ITrigger trigger = TriggerBuilder.Create()

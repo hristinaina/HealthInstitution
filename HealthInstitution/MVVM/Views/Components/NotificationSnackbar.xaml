@@ -11,6 +11,10 @@
              d:DesignHeight="450"
              d:DesignWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="401*" />
+            <RowDefinition Height="49*" />
+        </Grid.RowDefinitions>
 
         <materialDesign:Snackbar x:Name="Notification"
                                  Height="150"
@@ -18,7 +22,14 @@
                                  Background="Black"
                                  HorizontalContentAlignment="Center"
                                  Foreground="White"
-                                 Message="{Binding Notification}"
-                                 IsActive="{Binding ShowNotification}" />
+                                 IsActive="{Binding NotificationVisibility}"
+                                 Margin="0,300,0,0"
+                                 Grid.RowSpan="2"
+                                 VerticalAlignment="Top">
+            <materialDesign:SnackbarMessage Name="Message"
+                                            Content="{Binding Notification}"
+                                            ActionContent=""
+                                            ActionCommand="{Binding DismissNotification}"/>
+        </materialDesign:Snackbar>
     </Grid>
 </UserControl>

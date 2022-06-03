@@ -1,6 +1,7 @@
 ﻿using HealthInstitution.MVVM.ViewModels;
 using Quartz;
 using System.Threading.Tasks;
+using System.Windows;
 using static HealthInstitution.MVVM.Models.Services.NotificationService;
 
 namespace HealthInstitution.MVVM.Models.Services.Notifications
@@ -10,7 +11,7 @@ namespace HealthInstitution.MVVM.Models.Services.Notifications
         public async Task Execute(IJobExecutionContext context)
         {
             JobDataMap dataMap = context.JobDetail.JobDataMap;
-            string message = dataMap.GetString("jobSays");
+            string message = dataMap.GetString("message");
             Del method = (Del)dataMap.Get("method");
             method(message);
         }

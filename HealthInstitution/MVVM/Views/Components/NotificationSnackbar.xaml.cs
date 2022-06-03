@@ -20,10 +20,15 @@ namespace HealthInstitution.MVVM.Views.Components
     /// </summary>
     public partial class NotificationSnackbar : UserControl
     {
+        public string ActionContent { get => Notification.Message.ActionContent.ToString(); set => Notification.Message.ActionContent = value; }
         public NotificationSnackbar()
         {
             InitializeComponent();
         }
 
+        private void Message_ActionClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
