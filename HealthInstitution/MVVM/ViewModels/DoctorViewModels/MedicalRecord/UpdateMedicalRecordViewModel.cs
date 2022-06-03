@@ -34,8 +34,6 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public IEnumerable<IllnessItemViewModel> Illnesses => _illnesses;
         private ObservableCollection<EquipmentItemViewModel> _equipments;
         public IEnumerable<EquipmentItemViewModel> Equipments => _equipments;
-        private ObservableCollection<Equipment> _spentEquipments;
-        public IEnumerable<Equipment> SpentEquipments => _spentEquipments;
         public EquipmentItemViewModel SelectedEquipment { get; set; }
         private Examination _examination;
         public Examination Examination { get => _examination; }

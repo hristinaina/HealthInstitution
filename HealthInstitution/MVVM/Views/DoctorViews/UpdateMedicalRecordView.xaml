@@ -568,7 +568,7 @@
                                             Width="300"
                                             VerticalAlignment="Center"
                                             TextWrapping="Wrap"
-                                            MaxLength="30"
+                                            MaxLength="5"
                                             Grid.Row="1"
                                             IsEnabled="True"
                                             Margin="0 20 0 0"
