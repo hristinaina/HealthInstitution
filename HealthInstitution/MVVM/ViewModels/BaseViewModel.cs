@@ -20,6 +20,13 @@ namespace HealthInstitution.MVVM.ViewModels
         }
         private bool _notificationVisibility = false;
 
+        private double _notificationHeight = 40;
+        public double NotificationHeight
+        {
+            get { return _notificationHeight; }
+            set { _notificationHeight = value; OnPropertyChanged(nameof(NotificationHeight)); }
+        }
+
         public bool NotificationVisibility
         {
             get { return _notificationVisibility; }
@@ -33,23 +40,29 @@ namespace HealthInstitution.MVVM.ViewModels
             {
                 if (_dismissNotification is null)
                 {
-                    return new DismissNotificationCommand(this);
+                    _dismissNotification = new DismissNotificationCommand(this);
                 }
-                else
-                {
-                    return _dismissNotification;
-                }
+                return _dismissNotification;
             }
-    }
+        }
 
-    public void showNotification(string message) {
-            Notification = message;
+        public void showNotification(string message)
+        {
+            if (Notification.Contains(message)) {
+                return;
+            }
+            Notification += message;
+            NotificationHeight += 40;
             NotificationVisibility = true;
         }
-        public void hideNotification() {
+
+        public void hideNotification()
+        {
+            Notification = "";
+            NotificationHeight = 0;
             NotificationVisibility = false;
         }
-       
+
         private string _message = "";
         public string Message
         {

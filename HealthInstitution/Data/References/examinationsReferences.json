@@ -11,7 +11,7 @@
     "DoctorID": 1,
     "PatientID": 1,
     "RoomID": 2,
-    "PerscriptionID": 1
+    "PerscriptionID": 2
   },
   {
     "ExaminationID": 3,

@@ -22,7 +22,21 @@
 
         <components:NotificationSnackbar Grid.Column="1"
                                          Panel.ZIndex="2"
-                                         ActionContent="DISMISS"/>
+                                         Margin="0,250,0,20"
+                                         NotificationHeight="20"
+                                         VerticalAlignment="Bottom"
+                                         Content="{Binding Message}"
+                                         IsActive="{Binding MessageVisibility}"/>
+
+        <components:NotificationSnackbar Grid.Column="1"
+                                         Grid.RowSpan="2"
+                                         Panel.ZIndex="3"
+                                         VerticalAlignment="Top"
+                                         IsActive="{Binding NotificationVisibility}"
+                                         Content="{Binding Notification}"
+                                         NotificationHeight="{Binding NotificationHeight}"
+                                         ActionContent="DISMISS"
+                                         ActionCommand="{Binding DismissNotification}"/>
         <components:PatientNavigationRail SelectedIndex="1"
                                           Grid.RowSpan="2"></components:PatientNavigationRail>
         <materialDesign:Card Grid.Column="1"

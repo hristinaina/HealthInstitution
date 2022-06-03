@@ -37,7 +37,7 @@ namespace HealthInstitution.MVVM.Models.Services
             string message = "";
             foreach (Prescription prescription in prescriptions)
             {
-                message = "Take medicine " + prescription.Medicine.Name;
+                message = "Please take medicine " + prescription.Medicine.Name + " !\n";
                 IJobDetail job = JobBuilder.Create<NotifyJob>()
                                 .WithIdentity(prescription.ID.ToString(), _patient.ID.ToString())
                                 .Build();
@@ -49,7 +49,7 @@ namespace HealthInstitution.MVVM.Models.Services
                   .WithIdentity(prescription.ID.ToString(), _patient.ID.ToString())
                   .StartNow()
                   .WithSimpleSchedule(x => x
-                      .WithIntervalInSeconds(40)
+                      .WithIntervalInSeconds(10)
                       .RepeatForever())
                   .Build();
 
