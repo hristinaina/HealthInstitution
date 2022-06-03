@@ -117,5 +117,19 @@
     "PatientID": 5,
     "RoomID": 5,
     "PerscriptionID": -1
+  },
+  {
+    "ExaminationID": 18,
+    "DoctorID": 1,
+    "PatientID": 3,
+    "RoomID": 5,
+    "PerscriptionID": -1
+  },
+  {
+    "ExaminationID": 19,
+    "DoctorID": 1,
+    "PatientID": 6,
+    "RoomID": 5,
+    "PerscriptionID": -1
   }
 ]

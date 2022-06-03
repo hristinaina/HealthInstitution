@@ -195,5 +195,11 @@ namespace HealthInstitution.MVVM.Models.Entities
             if (UpdateEquipmentInRoom(pastArrangement, room, newTargetRoomQuantity)) return;
             Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, room, newTargetRoomQuantity, newArrangementStartDate, newArrangementTargetEndDate));
         }
+
+        public override string ToString()
+        {
+            return _name;
+
+        }
     }
 }

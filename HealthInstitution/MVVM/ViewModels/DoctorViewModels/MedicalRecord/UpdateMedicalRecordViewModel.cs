@@ -32,9 +32,9 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public IEnumerable<Allergen> NewAllergens => _newAllergens;
         private ObservableCollection<IllnessItemViewModel> _illnesses;
         public IEnumerable<IllnessItemViewModel> Illnesses => _illnesses;
-        private ObservableCollection<EquipmentItemViewModel> _equipments;
-        public IEnumerable<EquipmentItemViewModel> Equipments => _equipments;
-
+        private ObservableCollection<Equipment> _equipments;
+        public IEnumerable<Equipment> Equipments => _equipments;
+        public Equipment SelectedEquipment { get; set; }
         private Examination _examination;
         public Examination Examination { get => _examination; }
         
@@ -124,6 +124,20 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             }
         }
 
+        private int _spentEquipment;
+        public int SpentEquipment
+        {
+            get
+            {
+                return _spentEquipment;
+            }
+            set
+            {
+                _spentEquipment = value;
+                OnPropertyChanged(nameof(SpentEquipment));
+            }
+        }
+
         private bool _enableChanges;
         public bool EnableChanges
         {
@@ -167,7 +181,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             _specializations = new ObservableCollection<Specialization>();
             _therapyMealDependencies = new ObservableCollection<TherapyMealDependency>();
             _medicines = new ObservableCollection<Medicine>();
-            _equipments = new ObservableCollection<EquipmentItemViewModel>();
+            _equipments = new ObservableCollection<Equipment>();
 
             SaveCommand = new UpdateMedicalRecordCommand(this);
             SaveAllergenCommand = new SaveAllergenCommand(this);
@@ -185,6 +199,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             FillSpecializationsList();
             FillThreapyMealDependenciesList();
             FillMedicinesList();
+            FillEquipments();
+            SetSelectedEquipment();
         }
 
         public void SetProperties()
@@ -193,6 +209,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             Height = Examination.Patient.Record.Height;
             Weight = Examination.Patient.Record.Weight;
             Anamnesis = Examination.Anamnesis;
+            SpentEquipment = 0;
         }
 
         public void FillAllergensList()
@@ -284,7 +301,14 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public void FillEquipments()
         {
-            // TODO : finish this
+            _equipments.Clear();
+            foreach (Equipment equipment in _examination.Room.Equipment.Keys)
+                _equipments.Add(equipment);
+        }
+
+        public void SetSelectedEquipment()
+        {
+            if (_equipments.Count > 0) SelectedEquipment = _equipments[0];
         }
 
     }
