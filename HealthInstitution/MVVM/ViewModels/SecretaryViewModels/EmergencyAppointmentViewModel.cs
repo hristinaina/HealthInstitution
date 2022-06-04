@@ -21,9 +21,11 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         private readonly ObservableCollection<AppointmentListItemViewModel> _appointments;
         public IEnumerable<AppointmentListItemViewModel> Appointments => _appointments;
-
         private AppointmentListItemViewModel _selectedAppointment;
+
         private readonly EmergencyAppointmentService _service;
+        private readonly ExaminationService _examinationService;
+        private readonly OperationService _operationService;
         public AppointmentListItemViewModel SelectedAppointment { get => _selectedAppointment; }
 
         private int _selection;
@@ -53,6 +55,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             Navigation = new SecretaryNavigationViewModel();
             _appointments = new ObservableCollection<AppointmentListItemViewModel>();
             _service = new EmergencyAppointmentService();
+            _examinationService = new ExaminationService();
+            _operationService = new OperationService();
 
             SelectedSpecialization = _viewModel.SelectedSpecialization;
             SelectedPatient = _viewModel.SelectedPatient;
@@ -68,8 +72,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _appointments.Clear();
             int newDuration = Int32.Parse(_viewModel.SelectedDuration);
-            List<Examination> examinations = Institution.Instance().ExaminationRepository.GetFutureExaminations(SelectedSpecialization, SelectedPatient);
-            List<Operation> operations = Institution.Instance().OperationRepository.GetFutureOperations(SelectedSpecialization, SelectedPatient);
+            List<Examination> examinations = _examinationService.GetFutureExaminations(SelectedSpecialization, SelectedPatient);
+            List<Operation> operations = _operationService.GetFutureOperations(SelectedSpecialization, SelectedPatient);
             AppointmentsNewDate = new();
 
             foreach (Operation appointment in operations)

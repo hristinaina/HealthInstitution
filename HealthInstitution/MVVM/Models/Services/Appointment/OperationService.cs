@@ -4,27 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Repositories;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
-    class ExaminationService
+    public class OperationService
     {
-        private readonly ExaminationRepository _examinationRepository;
 
-        public ExaminationService()
+        private readonly OperationRepository _operationRepository;
+        public OperationService()
         {
-            _examinationRepository = Institution.Instance().ExaminationRepository;
-        }
-        public void AddPrescription(Examination examination, Prescription prescription)
-        {
-            examination.Prescriptions.Add(prescription);
-            //_examinationRepository.Update(examination);
+            _operationRepository = Institution.Instance().OperationRepository;
         }
 
-        public List<Examination> GetFutureExaminations(Specialization specialization, Patient patient)
+        public List<Operation> GetFutureOperations(Specialization specialization, Patient patient)
         {
-            List<Examination> futureAppointments = new();
-            foreach (Examination appointment in _examinationRepository.Examinations)
+            List<Operation> futureAppointments = new();
+            foreach (Operation appointment in _operationRepository.Operations)
             {
                 if (DateTime.Compare(appointment.Date, DateTime.Now) > 0 &&
                     (appointment.Doctor.Specialization == specialization || appointment.Patient == patient))

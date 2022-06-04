@@ -108,21 +108,6 @@ namespace HealthInstitution.MVVM.Models.Repositories
             return _operations.Max(x => x.ID) + 1;
         }
 
-        public List<Operation> GetFutureOperations(Specialization specialization, Patient patient)
-        {
-            List<Operation> futureAppointments = new();
-            foreach (Operation appointment in Operations)
-            {
-                if (DateTime.Compare(appointment.Date, DateTime.Now) > 0 &&
-                    (appointment.Doctor.Specialization == specialization || appointment.Patient == patient))
-                {
-                    futureAppointments.Add(appointment);
-                }
-            }
-            futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
-            return futureAppointments;
-        }
-
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate)
         {
             foreach (Operation appointment in Operations)

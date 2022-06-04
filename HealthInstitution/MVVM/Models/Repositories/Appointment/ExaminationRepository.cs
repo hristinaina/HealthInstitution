@@ -110,21 +110,6 @@ namespace HealthInstitution.MVVM.Models
             }
         }
 
-        public List<Examination> GetFutureExaminations(Specialization specialization, Patient patient)
-        {
-            List<Examination> futureAppointments = new();
-            foreach (Examination appointment in Examinations)
-            {
-                if (DateTime.Compare(appointment.Date, DateTime.Now) > 0 &&
-                    (appointment.Doctor.Specialization == specialization || appointment.Patient == patient))
-                {
-                    futureAppointments.Add(appointment);
-                }
-            }
-            futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
-            return futureAppointments;
-        }
-
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate)
         {
             foreach (Examination appointment in Examinations)
