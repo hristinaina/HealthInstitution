@@ -53,6 +53,7 @@
                               BorderBrush="Transparent"
                               Background="Transparent"
                               SelectionMode="Single"
+                              SelectedItem="{Binding DoctorSelectedValue}"
                               ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                               HorizontalAlignment="Center"
                               materialDesign:DataGridAssist.CellPadding="20 20 10 10"
@@ -73,13 +74,13 @@
                                                 CanUserSort="True" />
                             <DataGridTextColumn Header="Specialization"
                                                 Width="150"
-                                                Binding="{Binding Speci, Mode=OneWay}"
+                                                Binding="{Binding Specialization, Mode=OneWay}"
                                                 ElementStyle="{StaticResource ColumnElementStyle}"
                                                 CellStyle="{StaticResource DisableSelection}"
                                                 CanUserSort="True" />
                             <DataGridTextColumn Header="Rating"
                                                 Width="100"
-                                                Binding="{Binding Specialization, Mode=OneWay}"
+                                                Binding="{Binding Rating, Mode=OneWay}"
                                                 ElementStyle="{StaticResource ColumnElementStyle}"
                                                 CellStyle="{StaticResource DisableSelection}"
                                                 CanUserSort="True" />
@@ -115,7 +116,7 @@
                              FontSize="12"
                              materialDesign:HintAssist.Hint="Search for doctor by first name"
                              Background="#A5FFFFFF"
-                             Text="{Binding SearchKeyWord}" />
+                             Text="{Binding FirstNameKeyWord}" />
                     <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
                              TextWrapping="NoWrap"
                              HorizontalAlignment="Center"
@@ -125,16 +126,17 @@
                              FontSize="12"
                              materialDesign:HintAssist.Hint="Search for doctor by last name"
                              Background="#A5FFFFFF"
-                             Text="{Binding SearchKeyWord}" />
+                             Text="{Binding LastNameKeyWord}" />
                     <ComboBox Width="250"
                               Margin="0 20 0 0"
                               Grid.Row="2"
                               HorizontalAlignment="Center"
                               VerticalAlignment="Top"
                               FontSize="12.5"
+                              MaxDropDownHeight="150"
                               Style="{StaticResource MaterialDesignComboBox}"
                               ItemsSource="{Binding Specializations}"
-                              SelectedItem="{Binding SelectedSpecialization}"
+                              SelectedIndex="{Binding SelectedSpecialization}"
                               materialDesign:HintAssist.Hint="     Chose specialization"
                               IsEditable="False" />
                     <Grid Grid.Row="3" VerticalAlignment="Top">
@@ -147,7 +149,6 @@
                                 Padding="0"
                                 Margin="0 0 20 0"
                                 VerticalAlignment="Top"
-                                IsDefault="True"
                                 Command="{Binding Search}">
                             <materialDesign:PackIcon Kind="Magnify" />
                         </Button>

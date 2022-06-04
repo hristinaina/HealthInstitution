@@ -46,6 +46,11 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
         }
 
+        public Doctor(string firstName, string lastName, Specialization specialization) : this(firstName, lastName)
+        {
+            _specialization = specialization;
+        }
+
         public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
         {
 

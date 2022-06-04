@@ -23,11 +23,11 @@ namespace HealthInstitution.MVVM.Models.Services.SearchingServices
             foreach (Doctor d in _repository.Doctors)
             {
                 bool add = false;
-                if (doctor.FirstName != "" && d.FirstName.Contains(doctor.FirstName))
+                if (doctor.FirstName != "" && d.FirstName.ToLower().Contains(doctor.FirstName.ToLower()))
                 {
                     add = true;
                 }
-                if (doctor.LastName != "" && d.LastName.Contains(doctor.LastName))
+                if (doctor.LastName != "" && d.LastName.ToLower().Contains(doctor.LastName.ToLower()))
                 {
                     add = true;
                 }
@@ -37,7 +37,7 @@ namespace HealthInstitution.MVVM.Models.Services.SearchingServices
                 }
                 if (add)
                 {
-                    doctors.Add(doctor);
+                    doctors.Add(d);
                 }
             }
             return doctors;
