@@ -49,5 +49,25 @@ namespace HealthInstitution.MVVM.Models.Services
             Patient patient = _patientRepository.FindByID(id);
             patient.Unblock();
         }
+
+        public void AddIllness(Patient patient, string illness)
+        {
+            foreach (Patient i in _patientRepository.Patients)
+            {
+                if (patient.ID == i.ID) patient.Record.HistoryOfIllnesses.Add(illness);
+
+            }
+        }
+        public bool IsAllergic(Patient patient, List<Allergen> allergens)
+        {
+            foreach (Allergen i in patient.Record.Allergens)
+            {
+                foreach (Allergen allergen in allergens)
+                {
+                    if (i.ID == allergen.ID) return true;
+                }
+            }
+            return false;
+        }
     }
 }

@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -28,7 +29,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
             try
             {
-                bool isRemoved = Institution.Instance().DeletePendingMedicine(pendingMedicine);
+                DoctorPendingMedicineService service = new();
+                bool isRemoved = service.Delete(pendingMedicine);
                 if (isRemoved)
                 {
                     Medicine medicine = new Medicine(pendingMedicine.ID, pendingMedicine.Name, pendingMedicine.Ingredients);

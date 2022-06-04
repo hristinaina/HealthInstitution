@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -26,7 +27,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
             try
             {
-                bool isOnRevision = Institution.Instance().SendToRevision((PendingMedicine)_viewModel.SelectedMedicine.PendingMedicine);
+                DoctorPendingMedicineService service = new();
+                bool isOnRevision = service.SendToRevision((PendingMedicine)_viewModel.SelectedMedicine.PendingMedicine);
 
                 if (isOnRevision) _viewModel.ShowMessage("Medicine suggestion successfully sent to revision !");
             }

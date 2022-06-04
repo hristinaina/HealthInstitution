@@ -8,6 +8,7 @@ using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 using HealthInstitution.Exceptions;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -27,8 +28,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             Specialization specialization = _viewModel.SelectedSpecialization;
 
             try
-            { 
-                bool isCreated = Institution.Instance().CreateReferral(-1, _viewModel.Examination.Patient.ID, specialization);
+            {
+                DoctorReferralService service = new();
+                bool isCreated = service.CreateReferral(-1, _viewModel.Examination.Patient.ID, specialization);
                 
                 if (isCreated)
                 {

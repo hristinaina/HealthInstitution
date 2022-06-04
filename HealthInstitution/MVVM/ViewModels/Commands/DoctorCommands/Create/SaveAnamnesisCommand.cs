@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -26,7 +27,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             examination.Anamnesis = _viewModel.Anamnesis;
             try
             {
-                bool isAdded = Institution.Instance().AddAnamnesis(examination, _viewModel.Anamnesis);
+                ExaminationService service = new ExaminationService();
+                bool isAdded = service.AddAnamnesis(examination, _viewModel.Anamnesis);
 
                 if (isAdded) _viewModel.ShowMessage("Anamnesis successfully added !");
             } 

@@ -296,18 +296,5 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
             return historyOfIllness;
         }
-
-        public bool IsAllergic(List<Allergen> allergens)
-        {
-            foreach (Allergen i in _record.Allergens)
-            {
-                foreach(Allergen allergen in allergens)
-                {
-                    if (i.ID == allergen.ID) return true;
-                }
-            }
-
-            return false;
-        }
     }
 }
