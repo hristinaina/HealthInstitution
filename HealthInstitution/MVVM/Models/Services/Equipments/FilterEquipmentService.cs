@@ -1,48 +1,24 @@
-﻿using HealthInstitution.Exceptions.AdminExceptions;
+﻿using System.Collections.Generic;
+using HealthInstitution.Exceptions.AdminExceptions;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Enumerations;
-using HealthInstitution.MVVM.Models.Services;
-using System.Collections.Generic;
 
-namespace HealthInstitution.MVVM.Models
+namespace HealthInstitution.MVVM.Models.Services.Equipments
 {
-    public class EquipmentRepository
+    public class FilterEquipmentService
     {
-        private readonly string _fileName;
-        private List<Equipment> _equipment;
+        private EquipmentRepository _equipment;
 
-        public List<Equipment> Equipment { get => _equipment; }
-
-        public EquipmentRepository(string fileName)
+        public FilterEquipmentService()
         {
-            _fileName = fileName;
-            _equipment = new List<Equipment>();
+            _equipment = Institution.Instance().EquipmentRepository;
         }
 
-        public void LoadFromFile()
-        {
-            _equipment = FileService.Deserialize<Equipment>(_fileName);
-        }
-
-        public void SaveToFile()
-        {
-            FileService.Serialize<Equipment>(_fileName, _equipment);
-        }
-
-        public Equipment FindById(int id)
-        {
-            foreach (Equipment e in _equipment)
-            {
-                if (e.ID == id) return e;
-            }
-            return null;
-        }
-
-        public Dictionary<Equipment, List<Room>> FilterByRoomType(RoomType type)
+        private Dictionary<Equipment, List<Room>> FilterByRoomType(RoomType type)
         {
             Dictionary<Equipment, List<Room>> filteredEquipment = new Dictionary<Equipment, List<Room>>();
 
-            foreach (Equipment e in _equipment)
+            foreach (Equipment e in _equipment.Equipment)
             {
                 foreach (Room r in e.ArrangmentByRooms.Keys)
                 {
@@ -56,7 +32,7 @@ namespace HealthInstitution.MVVM.Models
             return filteredEquipment;
         }
 
-        public Dictionary<Equipment, List<Room>> FilterByEquipmentType(Dictionary<Equipment, List<Room>> allEquipment, EquipmentType type)
+        private Dictionary<Equipment, List<Room>> FilterByEquipmentType(Dictionary<Equipment, List<Room>> allEquipment, EquipmentType type)
         {
             Dictionary<Equipment, List<Room>> filteredEquipment = new();
 
@@ -65,13 +41,13 @@ namespace HealthInstitution.MVVM.Models
                 if (e.Type == type)
                 {
                     if (!filteredEquipment.ContainsKey(e)) filteredEquipment.Add(e, new List<Room>());
-                    filteredEquipment[e] = allEquipment[e]; 
+                    filteredEquipment[e] = allEquipment[e];
                 }
             }
             return filteredEquipment;
         }
 
-        public Dictionary<Equipment, List<Room>> FilterByQuantity(Dictionary<Equipment, List<Room>> allEquipment, int minQuantity, int maxQuantity)
+        private Dictionary<Equipment, List<Room>> FilterByQuantity(Dictionary<Equipment, List<Room>> allEquipment, int minQuantity, int maxQuantity)
         {
             if (minQuantity >= maxQuantity) throw new EquipmentFilterQuantityException("Minimum quantity must be lower than maximum quantity");
             Dictionary<Equipment, List<Room>> filteredEquipment = new();
@@ -82,14 +58,14 @@ namespace HealthInstitution.MVVM.Models
                     if (e.ArrangmentByRooms[r] >= minQuantity && e.ArrangmentByRooms[r] <= maxQuantity)
                     {
                         if (!filteredEquipment.ContainsKey(e)) filteredEquipment.Add(e, new List<Room>());
-                        filteredEquipment[e].Add(r); 
+                        filteredEquipment[e].Add(r);
                     }
                 }
             }
             return filteredEquipment;
         }
 
-        public Dictionary<Equipment, List<Room>> FilterEquipment(RoomType roomType, int minQuantity, int maxQuantity, EquipmentType equipmentType)
+        public Dictionary<Equipment, List<Room>> Filter(RoomType roomType, int minQuantity, int maxQuantity, EquipmentType equipmentType)
         {
             Dictionary<Equipment, List<Room>> filteredEquipment = FilterByRoomType(roomType);
 

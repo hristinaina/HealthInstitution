@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using HealthInstitution.MVVM.Models.Services.Equipments;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentCommands
 {
@@ -40,11 +41,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
         
                 int minQuantity = int.Parse(_model.FilterMinQuantity), maxQuantity = int.Parse(_model.FilterMaxQuantity);
                 try
-                {
-                _model.FilteredEquipment = Institution.Instance().EquipmentRepository.FilterEquipment((RoomType)_model.FilterRoomType, minQuantity, maxQuantity, (EquipmentType)_model.FilterEquipmentType);
-
-                _model.DialogOpen = false;
-                _model.FilterEquipmentList();
+                { 
+                    FilterEquipmentService service = new FilterEquipmentService(); 
+                    _model.FilteredEquipment = service.Filter((RoomType)_model.FilterRoomType, minQuantity,
+                        maxQuantity, (EquipmentType)_model.FilterEquipmentType);
+                    
+                    _model.DialogOpen = false;
+                    _model.FilterEquipmentList();
                 } catch (EquipmentFilterQuantityException e)
                 {
                     _model.ShowMessage(e.Message);
