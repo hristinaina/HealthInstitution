@@ -24,7 +24,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
         public bool CreatePrescription(Prescription prescription, Examination examination)
         {
-            int id = Institution.Instance().PrescriptionRepository.GetNewId();
+            int id = Institution.Instance().PrescriptionRepository.GetID();
             prescription.ID = id;
             PatientManagementService patientService = new();
             

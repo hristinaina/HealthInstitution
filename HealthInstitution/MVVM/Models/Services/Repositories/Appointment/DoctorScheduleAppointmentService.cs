@@ -44,7 +44,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
             if (appointment.GetType() == typeof(Examination))
             {
-                appointmentId = _examinationRepository.NewId();
+                appointmentId = _examinationRepository.GetID();
                 Examination examination = new Examination(appointmentId, appointment.Doctor, appointment.Patient, dateTime,
                                           new List<Prescription>());
                 appointment.Patient.Examinations.Add(examination);
@@ -59,7 +59,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
             else
             {
-                appointmentId = _operationRepository.NewId();
+                appointmentId = _operationRepository.GetID();
                 Operation operation = new Operation(appointmentId, appointment.Doctor, appointment.Patient, dateTime, duration);
                 appointment.Patient.Operations.Add(operation);
                 appointment.Doctor.Operations.Add(operation);
