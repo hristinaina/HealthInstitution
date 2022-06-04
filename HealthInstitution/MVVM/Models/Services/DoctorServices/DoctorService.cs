@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
 
-namespace HealthInstitution.MVVM.Models.Services.DoctorServices
+namespace HealthInstitution.MVVM.Models.Services
 {
     class DoctorService
     {
         private Doctor _doctor;
-        public Doctor Doctor { get => _doctor; set { _doctor = value; } }
         private List<Examination> _examinations;
         private List<Operation> _operations;
 
@@ -49,10 +48,10 @@ namespace HealthInstitution.MVVM.Models.Services.DoctorServices
         // returns null if appointment can be reserved
         // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
         {
-            List<Appointment> appointments = new();
+            List<Entities.Appointment> appointments = new();
             foreach (Examination examination in _examinations) appointments.Add(examination);
             foreach (Operation operation in _operations) appointments.Add(operation);
-            foreach (Appointment appointment in appointments)
+            foreach (Entities.Appointment appointment in appointments)
             {
                 DateTime appointmentBegins = appointment.Date;
                 int duration = 15;

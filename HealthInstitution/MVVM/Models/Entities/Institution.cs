@@ -9,7 +9,7 @@ using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Repositories.References;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.Exceptions;
-using HealthInstitution.MVVM.Models.Services.DoctorServices;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -391,7 +391,8 @@ namespace HealthInstitution.MVVM.Models
             if (examination.Patient.IsAllergic(prescription.Medicine.Ingredients)) throw new Exception("Patient is allergic !");
 
             _prescriptionRepository.Add(prescription);
-            examination.AddPrescription(prescription);
+            ExaminationService examinationService = new ExaminationService();
+            examinationService.AddPrescription(examination, prescription);
             if ((medicine == null) || (dailyFrequency < 1) || (longitudeInDays < 1))
             {
                 throw new Exception("Wrong input !");
