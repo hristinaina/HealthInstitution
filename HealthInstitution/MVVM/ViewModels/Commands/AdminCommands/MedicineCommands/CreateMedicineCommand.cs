@@ -40,7 +40,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineComma
 
                 foreach (Allergen i in ingredients)
                 {
-                    Institution.Instance().MedicineAllergenRepository.AllergensInMedicine.Add(new MedicineAllergen(m.ID, i.ID));
+                    Institution.Instance().MedicineAllergenRepository.AllergensInMedicine
+                        .Add(new MedicineAllergen(m.ID, i.ID));
                 }
 
                 _model.DialogOpen = false;
@@ -48,6 +49,10 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineComma
                 _model.FillMedicineList();
             }
             catch (EmptyNameException e)
+            {
+                _model.ShowMessage(e.Message);
+            }
+            catch (NameNotAvailableException e)
             {
                 _model.ShowMessage(e.Message);
             }

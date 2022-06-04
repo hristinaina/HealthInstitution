@@ -46,6 +46,10 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineComma
             {
                 _model.ShowMessage(e.Message);
             }
+            catch (ZeroIngredientsException e)
+            {
+                _model.ShowMessage(e.Message);
+            }
             catch (NoChangeException e)
             {
                 _model.ShowMessage(e.Message);

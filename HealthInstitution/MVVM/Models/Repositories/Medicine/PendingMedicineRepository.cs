@@ -77,7 +77,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         public PendingMedicine AddNewMedicine(PendingMedicine newMedicine)
         {
-            if (!IsNameAvailable(newMedicine, newMedicine.Name)) throw new NameNotAvailableException("Name already in use!");
+            if (!IsNameAvailable(null, newMedicine.Name)) throw new NameNotAvailableException("Name already in use!");
             newMedicine.ID = GetID();
             _pendingMedicines.Add(newMedicine);
 
@@ -87,6 +87,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         public PendingMedicine ChangeMedicine(PendingMedicine medicine, string newName, List<Allergen> newIngredients)
         {
             if (newName is null || newName.Equals("")) throw new NameNotAvailableException("Name cannot be empty");
+            else if (newIngredients.Count == 0) throw new ZeroIngredientsException("Ingredient list cannot be empty");
             else if (!IsNameAvailable(medicine, newName)) throw new NameNotAvailableException("Name already in use!");
 
             List<Allergen> alreadyIngredient = medicine.Ingredients.Except(newIngredients).ToList();

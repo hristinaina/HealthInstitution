@@ -71,7 +71,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
                 OnPropertyChanged(nameof(SelectedName));
                 SelectedState = _selectedMedicine.State;
                 OnPropertyChanged(nameof(SelectedState));
-                if (_selectedMedicine.Medicine.State == State.REJECTED)
+                if (_selectedMedicine.Medicine.State == State.REVISION)
                 {
                     EnableMedicineChange = true;
                     foreach (IngredientListItemViewModel ingredient in _ingredients)
@@ -198,20 +198,6 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             }
         }
 
-        //private int _changeMedicineSelection;
-        //public int ChangeMedicineSelection
-        //{
-        //    get => _changeMedicineSelection;
-        //    set
-        //    {
-        //        if (value < 0)
-        //        {
-        //            return;
-        //        }
-
-        //        _changeMedicineSelection = value;
-        //    }
-        //}
 
         public Allergen SelectedIngredient { get; set; }
 

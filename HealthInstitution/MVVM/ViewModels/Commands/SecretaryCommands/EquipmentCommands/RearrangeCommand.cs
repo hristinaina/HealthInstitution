@@ -7,6 +7,7 @@ using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.Exceptions;
 using HealthInstitution.Exceptions.AdminExceptions;
+using HealthInstitution.MVVM.Models.Services.Equipments;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.EquipmentCommands
@@ -26,7 +27,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Equipment
             try
             {
                 DateTime newArrangementStartDate = DateTime.Now.AddHours(-1);
-                _model.SelectedEquipment.Equipment.Rearrange(_model.SelectedEquipment.Room, _model.NewArrangementTargetRoom, newArrangementStartDate, _model.NewArrangementQuantity);
+                EquipmentService service = new EquipmentService(_model.SelectedEquipment.Equipment);
+                service.Rearrange(_model.SelectedEquipment.Room, _model.NewArrangementTargetRoom, newArrangementStartDate, _model.NewArrangementQuantity);
                 
                 _model.DialogOpen = false;
                 _model.FillEquipmentArrangementList();

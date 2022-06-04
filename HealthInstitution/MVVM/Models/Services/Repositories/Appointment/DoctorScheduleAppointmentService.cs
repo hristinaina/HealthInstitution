@@ -8,6 +8,7 @@ using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models.Repositories;
 using HealthInstitution.MVVM.Models.Repositories.References;
 using HealthInstitution.MVVM.Models.Enumerations;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -51,14 +52,16 @@ namespace HealthInstitution.MVVM.Models.Services
             if (type == nameof(Examination))
             {
 
-                appointmentId = _examinationRepository.NewId();
+                appointmentId = _examinationRepository.GetID();
                 //int prescriptionId = _prescriptionRepository.GetNewId();
 
                 Examination examination = new Examination(appointmentId, doctor, patient, dateTime,
                                           new List<Prescription>());
                 patient.Examinations.Add(examination);
                 doctor.Examinations.Add(examination);
-                _roomRepository.FindAvailableRoom(examination, dateTime);
+
+                FindAvailableRoomService service = new FindAvailableRoomService();
+                service.FindAvailableRoom(examination, dateTime);
                 _examinationRepository.Add(examination);
                 _examinationReferencesRepository.Add(examination);
                 _examinationChangeRepository.Add(examination, dateTime, true, AppointmentStatus.CREATED);
@@ -67,11 +70,13 @@ namespace HealthInstitution.MVVM.Models.Services
 
             else if (type == nameof(Operation))
             {
-                appointmentId = _operationRepository.NewId();
+                appointmentId = _operationRepository.GetID();
                 Operation operation = new Operation(appointmentId, doctor, patient, dateTime, duration);
                 patient.Operations.Add(operation);
                 doctor.Operations.Add(operation);
-                _roomRepository.FindAvailableRoom(operation, dateTime);
+
+                FindAvailableRoomService service = new FindAvailableRoomService();
+                service.FindAvailableRoom(operation, dateTime);
                 _operationRepository.Add(operation);
                 _operationReferencesRepository.Add(operation);
 

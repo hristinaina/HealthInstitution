@@ -1,37 +1,37 @@
 [
   {
     "Id": 10,
-    "Name": "Ime",
-    "Description": "Opis leka",
+    "Name": "Probiotik",
     "RevisionDescription": "",
+    "Description": "",
     "State": 0
   },
   {
     "Id": 9,
-    "Name": "Ime2",
-    "Description": "Opis",
+    "Name": "Rapten Duo",
     "RevisionDescription": "",
+    "Description": "",
     "State": 0
   },
   {
-    "Id": 3,
-    "Name": "Ime3",
-    "Description": "Opisano",
+    "Id": 8,
+    "Name": "Probiotik Forte",
     "RevisionDescription": "",
-    "State": 0
-  },
-  {
-    "Id": 4,
-    "Name": "Ime4",
-    "Description": "Opisss",
-    "RevisionDescription": "",
+    "Description": "",
     "State": 0
   },
   {
     "Id": 7,
-    "Name": "asd",
-    "Description": null,
-    "RevisionDescription": null,
+    "Name": "Flogocid",
+    "RevisionDescription": "",
+    "Description": "",
+    "State": 0
+  },
+  {
+    "Id": 11,
+    "Name": "Kafetin",
+    "RevisionDescription": "a",
+    "Description": "",
     "State": 0
   }
 ]

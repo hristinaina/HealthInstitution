@@ -65,22 +65,8 @@ namespace HealthInstitution.MVVM.Models
             }
             return false;
         }
-
-        public bool Delete(int id)
-        {
-            foreach(Examination examination in _examinations)
-            {
-                if (examination.ID == id)
-                {
-                    _examinations.Remove(examination);
-                    return true;
-                }
-            }
-            return false;
-
-        }
-
-        public int NewId()
+        
+        public int GetID()
         {
             if (_examinations.Count == 0)
             {
