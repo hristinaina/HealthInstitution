@@ -33,7 +33,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
                 DoctorScheduleAppointmentService scheduleAppointmentService = new DoctorScheduleAppointmentService();
                 Examination examination = new Examination(0, datetime, false, false, "", new ExaminationReview());
                 examination.Doctor = (Doctor)Institution.Instance().CurrentUser;
-                examination.Patient = _viewModel.SelectedPatient;
+                examination.Patient = patient;
 
                 bool isCreated = scheduleAppointmentService.CreateAppointment(examination, datetime);
                 if (isCreated)
