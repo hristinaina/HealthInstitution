@@ -80,46 +80,18 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
         }
 
-        private bool IsNameAvailable(Allergen allergen, string name)
-        {
-            foreach (Allergen a in _allergens)
-            {
-                if (a.Name.Equals(name) && !a.Equals(allergen)) return false;
-            }
-            return true;
-        }
-
-        private bool isDeletable(Allergen allergen)
-        {
-            foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
-            {
-                foreach (Allergen a in medicine.Ingredients)
-                {
-                    if (a.Equals(allergen)) return false;
-                }
-            }
-
-            foreach (Medicine medicine in Institution.Instance().MedicineRepository.Medicines)
-            {
-                foreach (Allergen a in medicine.Ingredients)
-                {
-                    if (a.Equals(allergen)) return false;
-                }
-            }
-
-            return true;
-        }
-
         public void ChangeName(Allergen allergen, string name)
         {
-            if (!IsNameAvailable(allergen, name)) throw new NameNotAvailableException("Name already taken");
+            AllergenService a = new AllergenService(allergen);
+            if (!a.IsNameAvailable(name)) throw new NameNotAvailableException("Name already taken");
 
             allergen.Name = name;
         }
 
         public Allergen AddNewAllergen(Allergen allergen)
         {
-            if (!IsNameAvailable(allergen, allergen.Name)) throw new NameNotAvailableException("Name already in use!");
+            AllergenService a = new AllergenService(allergen);
+            if (!a.IsNameAvailable(allergen.Name)) throw new NameNotAvailableException("Name already in use!");
             
             allergen.ID = GetID();
             _allergens.Add(allergen);
@@ -128,7 +100,8 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         public void DeleteAllergen(Allergen allergen)
         {
-            if (!isDeletable(allergen)) throw new IngredientInUseException("Ingredient in use!");
+            AllergenService a = new AllergenService(allergen);
+            if (!a.isDeletable()) throw new IngredientInUseException("Ingredient in use!");
 
             _allergens.Remove(allergen);
         }
