@@ -2,7 +2,7 @@
 using HealthInstitution.MVVM.Models.Enumerations;
 using System;
 using System.Collections.Generic;
-using HealthInstitution.MVVM.Models.Services.DoctorServices;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Services
 {

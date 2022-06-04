@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
 
-namespace HealthInstitution.MVVM.Models.Services.DoctorServices
+namespace HealthInstitution.MVVM.Models.Services
 {
     class DoctorService
     {
@@ -22,10 +22,10 @@ namespace HealthInstitution.MVVM.Models.Services.DoctorServices
         }
 
         // schedule for certain day and 3 days after
-        public List<Appointment> GetSchedule(DateTime date, string type)
+        public List<Entities.Appointment> GetSchedule(DateTime date, string type)
         {
-            List<Appointment> appointments = new();
-            List<Appointment> scheduledAppointments = new();
+            List<Entities.Appointment> appointments = new();
+            List<Entities.Appointment> scheduledAppointments = new();
             
             if (type == nameof(Examination))
             {
@@ -36,7 +36,7 @@ namespace HealthInstitution.MVVM.Models.Services.DoctorServices
                 foreach (Operation operation in _operations) appointments.Add(operation);
             }
 
-            foreach (Appointment appointment in appointments)
+            foreach (Entities.Appointment appointment in appointments)
             {
                 if (appointment.Date >= date && date.AddDays(3) >= appointment.Date)
                     scheduledAppointments.Add(appointment);
@@ -45,14 +45,14 @@ namespace HealthInstitution.MVVM.Models.Services.DoctorServices
             return scheduledAppointments;
         }
 
-        public Appointment FindInterruptingAppointment(DateTime dateTime, int durationInMin = 15)
+        public Entities.Appointment FindInterruptingAppointment(DateTime dateTime, int durationInMin = 15)
         // returns null if appointment can be reserved
         // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
         {
-            List<Appointment> appointments = new();
+            List<Entities.Appointment> appointments = new();
             foreach (Examination examination in _examinations) appointments.Add(examination);
             foreach (Operation operation in _operations) appointments.Add(operation);
-            foreach (Appointment appointment in appointments)
+            foreach (Entities.Appointment appointment in appointments)
             {
                 DateTime appointmentBegins = appointment.Date;
                 int duration = 15;
@@ -75,7 +75,7 @@ namespace HealthInstitution.MVVM.Models.Services.DoctorServices
 
         public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
         {
-            Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
+            Entities.Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
             if (interruptingAppointment is null) return true;
             return false;
         }

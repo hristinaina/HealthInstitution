@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
 using HealthInstitution.MVVM.Models;
-using HealthInstitution.MVVM.Models.Services.DoctorServices;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
