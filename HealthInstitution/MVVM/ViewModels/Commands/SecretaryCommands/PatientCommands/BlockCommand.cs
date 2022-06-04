@@ -16,19 +16,19 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
     {
         private readonly Institution _institution;
         private PatientListViewModel _viewModel;
+        private readonly PatientService _service;
 
         public BlockCommand(PatientListViewModel viewModel)
         {
             _institution = Institution.Instance();
             _viewModel = viewModel;
+            _service = new PatientService();
         }
 
         public override void Execute(object parameter)
         {
-            Patient patient = Institution.Instance().PatientRepository.FindByID(_viewModel.SelectedPatientId);
-            SecretaryService.BlockPatient(patient);
-            string message = "The patient has ben successfully blocked.";
-            MessageBox.Show(message);
+            _service.BlockPatient(_viewModel.SelectedPatientId);
+            MessageBox.Show("The patient has been successfully blocked.");
             _viewModel.FillPatientList();
         }
     }

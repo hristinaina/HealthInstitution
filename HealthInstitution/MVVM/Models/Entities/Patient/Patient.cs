@@ -102,10 +102,32 @@ namespace HealthInstitution.MVVM.Models.Entities
             _record = new MedicalRecord(height, weight, new List<Allergen>(), new List<string>());
         }
 
-        public void UnblockPatient()
+        public void Delete()
+        {
+            _deleted = true;
+        }
+
+        public void Unblock()
         {
             _blocked = false;
             _blockadeType = BlockadeType.NONE;
+        }
+
+        public void Block()
+        {
+            _blocked = true;
+            _blockadeType = BlockadeType.SECRETARY;
+        }
+        public void Update(int id, string name, string lastName, string email, string password, Gender gender, double height, double weight)
+        {
+            ID = id;
+            FirstName = name;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+            Gender = gender;
+            Record.Height = height;
+            Record.Weight = weight;
         }
 
         public List<Appointment> GetAllAppointments()
@@ -286,18 +308,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
 
             return false;
-        }
-
-        public void Update(int id, string name, string lastName, string email, string password, Gender gender, double height, double weight)
-        {
-            ID = id;
-            FirstName = name;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-            Gender = gender;
-            Record.Height = height;
-            Record.Weight = weight;
         }
     }
 }

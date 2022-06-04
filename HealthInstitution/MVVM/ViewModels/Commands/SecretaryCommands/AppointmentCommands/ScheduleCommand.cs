@@ -19,6 +19,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
     {
         private readonly Institution _institution;
         private EmergencyAppointmentViewModel _viewModel;
+        private EmergencyAppointmentService _service;
 
         private readonly NavigationStore _navigationStore;
 
@@ -27,6 +28,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             _institution = Institution.Instance();
             _viewModel = viewModel;
             _navigationStore = NavigationStore.Instance();
+            _service = new EmergencyAppointmentService();
         }
 
         public override void Execute(object parameter)
@@ -55,19 +57,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             Institution.Instance().CreateAppointment(doctor, patient, oldDate, type, duration, false);
             MessageBox.Show("Emergency appointment has been successfully created !");
 
-            SendNotifications(appointmentToPostpone, oldDate, newDate, patient, doctor);
-        }
-
-        private void SendNotifications(Appointment rescheduledAppointment, DateTime oldDate, DateTime newDate, Patient patient, Doctor doctor)
-        {
-            string message = "Appointment with id=" + rescheduledAppointment.ID.ToString() + " has been changed." +
-                " Changed date from " + oldDate.ToString() + " to " + newDate.ToString();
-            Notification notification = Institution.Instance().NotificationRepository.CreateNotification(patient.ID, message);
-            patient.Notifications.Add(notification);
-            doctor.Notifications.Add(message);
-            Appointment newAppointment = SecretaryService.FindAppointment(patient, doctor, oldDate);
-            newAppointment.Emergency = true;
-            doctor.Notifications.Add("An emergency appointment with id=" + newAppointment.ID.ToString() + " has been scheduled!");
+            _service.SendNotifications(appointmentToPostpone, oldDate, newDate, patient, doctor);
             _navigationStore.CurrentViewModel = new AppointmentsViewModel();
         }
     }

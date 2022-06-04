@@ -157,6 +157,49 @@ namespace HealthInstitution.MVVM.Models.Services
             return new TimeSpan(1, startTime.Hour - startDateTime.Hour, startTime.Minute - startDateTime.Minute, 0);
         }
 
+        public static void DeleteFutureAppointments(Patient patient)
+        {
+            List<Examination> examinations = new List<Examination>(Institution.Instance().ExaminationRepository.Examinations.ToArray());
+            List<Operation> operations = new List<Operation>(Institution.Instance().OperationRepository.Operations.ToArray());
+
+            foreach (Examination appointment in examinations)
+            {
+                if (appointment.Date >= DateTime.Now && patient.ID == appointment.Patient.ID) DeleteAppointment(appointment);
+            }
+            foreach (Operation appointment in operations)
+            {
+                if (appointment.Date >= DateTime.Now && patient.ID == appointment.Patient.ID) DeleteAppointment(appointment);
+            }
+
+            Institution.Instance().ExaminationChangeRepository.DeleteUnresolvedRequestsByPatientId(patient.ID);
+        }
+
+        // secretary uses this function
+        public static void DeleteAppointment(Appointment appointment)
+        {
+            Patient patient = appointment.Patient;
+            Doctor doctor = appointment.Doctor;
+            Room room = appointment.Room;
+
+            Institution.Instance().ExaminationChangeRepository.RemoveByAppointmentId(appointment.ID);
+
+            if (appointment is Examination)
+            {
+                patient.Examinations.Remove((Examination)appointment);
+                doctor.Examinations.Remove((Examination)appointment);
+                room.Appointments.Remove(appointment);
+                Institution.Instance().ExaminationRepository.Remove((Examination)appointment);
+                Institution.Instance().ExaminationReferencesRepository.Remove((Examination)appointment);
+            }
+            else if (appointment is Operation)
+            {
+                patient.Operations.Remove((Operation)appointment);
+                doctor.Operations.Remove((Operation)appointment);
+                Institution.Instance().OperationRepository.Remove((Operation)appointment);
+                Institution.Instance().OperationReferencesRepository.Remove((Operation)appointment);
+                room.Appointments.Remove(appointment);
+            }
+        }
     }
 }
 

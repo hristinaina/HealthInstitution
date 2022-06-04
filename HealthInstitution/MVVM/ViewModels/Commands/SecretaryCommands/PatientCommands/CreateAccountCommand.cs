@@ -17,11 +17,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
     {
         private readonly Institution _institution;
         private PatientListViewModel _viewModel;
+        private readonly PatientService _service;
 
         public CreateAccountCommand(PatientListViewModel viewModel)
         {
             _institution = Institution.Instance();
             _viewModel = viewModel;
+            _service = new PatientService();
         }
 
         public override void Execute(object parameter)
@@ -29,14 +31,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
             bool validation = ValidateData();
             if (!validation) return;
 
-            int id = Institution.Instance().PatientRepository.GetNewID();
             Enum.TryParse(_viewModel.NewGender, out Gender gender);
             int newWeight = Int32.Parse(_viewModel.NewWeight);
             int newHeight = Int32.Parse(_viewModel.NewHeight);
 
-            Patient patient = new Patient(id, _viewModel.NewName, _viewModel.NewSurname, _viewModel.NewEmail, _viewModel.NewPassword, gender,
+            _service.CreatePatient(_viewModel.NewName, _viewModel.NewSurname, _viewModel.NewEmail, _viewModel.NewPassword, gender,
                 newHeight, newWeight);
-            Institution.Instance().PatientRepository.Patients.Add(patient);
             _viewModel.FillPatientList();
 
             MessageBox.Show("Successfully created patient account!");
