@@ -57,6 +57,10 @@ namespace HealthInstitution.MVVM.Models.Entities
             _result = result;
             _id = id;
         }
+        public bool IsStarted()
+        {
+            return _startDate <= DateTime.Today && !_started;
+        }
 
         public void StartRenovation()
         {
