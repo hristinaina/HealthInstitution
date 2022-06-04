@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Enumerations;
+using HealthInstitution.MVVM.Models.Services.Renovations;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -89,8 +90,9 @@ namespace HealthInstitution.MVVM.Models.Services
                 else renovation.RoomsUnderRenovation.Add(room);
             }
 
-            Institution.Instance().RenovationRepository.StartRenovations();
-            Institution.Instance().RenovationRepository.EndRenovations();
+            RenovationService renovationService = new RenovationService();
+            renovationService.StartRenovations();
+            renovationService.EndRenovations();
 
             Institution.Instance().EquipmentOrderRepository.Deliver(Institution.Instance().EquipmentRepository);
         }
