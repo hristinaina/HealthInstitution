@@ -53,8 +53,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         private void InitializeSearchParameters()
         {
             _searchKeyWord = "";
-            Search = new SearchAnamnesisCommand(this);
-            Reset = new ResetRecordCommand(this);
+            Search = new SearchCommand(this);
+            Reset = new ResetCommand(this);
         }
 
         public void FillAppointmentsList(List<Appointment> appointments)

@@ -127,6 +127,12 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             notifications.AddMissedNotifications();
         }
 
+        public PatientAppointmentViewModel(Doctor doctor) : this()
+        {
+            NewDoctor = doctor;
+            //DialogOpen = true;
+        }
+
         private void InitializeChangesParameters()
         {
             EnableChanges = false;

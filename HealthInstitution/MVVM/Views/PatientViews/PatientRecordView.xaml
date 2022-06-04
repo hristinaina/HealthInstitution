@@ -24,7 +24,6 @@
 
         <components:PatientNavigationRail SelectedIndex="0"></components:PatientNavigationRail>
 
-
         <materialDesign:Card Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
