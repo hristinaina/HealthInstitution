@@ -2,12 +2,77 @@
 using HealthInstitution.Stores;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using HealthInstitution.MVVM.ViewModels.Commands;
+using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Repositories;
 
 namespace HealthInstitution.MVVM.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private string _notification = "";
+
+        public string Notification
+        {
+            get { return _notification; }
+            set { _notification = value; OnPropertyChanged(nameof(Notification)); }
+        }
+        private bool _notificationVisibility = false;
+
+        private double _notificationHeight = 40;
+        public double NotificationHeight
+        {
+            get { return _notificationHeight; }
+            set { _notificationHeight = value; OnPropertyChanged(nameof(NotificationHeight)); }
+        }
+
+        public bool NotificationVisibility
+        {
+            get { return _notificationVisibility; }
+            set { _notificationVisibility = value; OnPropertyChanged(nameof(NotificationVisibility)); }
+        }
+
+        private ICommand _dismissNotification;
+        public ICommand DismissNotification
+        {
+            get
+            {
+                if (_dismissNotification is null)
+                {
+                    _dismissNotification = new DismissNotificationCommand(this);
+                }
+                return _dismissNotification;
+            }
+        }
+
+        public void showNotification(string message)
+        {
+            if (Notification.Contains(message))
+            {
+                return;
+            }
+            Notification += "\n" + message;
+            NotificationHeight += 40;
+            NotificationVisibility = true;
+
+            if (Institution.Instance().CurrentUser is Patient patient)
+            {
+                NotificationRepository repository = Institution.Instance().NotificationRepository;
+                Notification notification = repository.CreateNotification(patient.ID, message);
+                patient.Notifications.Add(notification);
+            }
+        }
+
+        public void hideNotification()
+        {
+            Notification = "";
+            NotificationHeight = 0;
+            NotificationVisibility = false;
+        }
 
         private string _message = "";
         public string Message
@@ -108,7 +173,6 @@ namespace HealthInstitution.MVVM.ViewModels
         }
         public DateTime MergeTime(DateTime date, DateTime time)
         {
-
             return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0, DateTimeKind.Local);
         }
 

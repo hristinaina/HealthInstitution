@@ -50,7 +50,10 @@ namespace HealthInstitution.MVVM.Models
 
         private readonly DoctorDaysOffRepository _doctorDaysOffRepository;
         private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
-        private ExaminationChangeRepository _examinationChangeRepository;
+        private readonly ExaminationChangeRepository _examinationChangeRepository;
+
+        private readonly NotificationRepository _notificationRepository;
+
 
         private User _currentUser;
         public User CurrentUser { get => _currentUser; set { _currentUser = value; } }
@@ -102,6 +105,8 @@ namespace HealthInstitution.MVVM.Models
             _prescriptionMedicineRepository = new PrescriptionMedicineRepository(_appSettings.PrescriptionMedicineFileName);
             _examinationChangeRepository = new ExaminationChangeRepository(_appSettings.ExaminationChangeFileName);
 
+            _notificationRepository = new NotificationRepository(_appSettings.PatientNotificationsFileName);
+
             LoadAll();
         }
 
@@ -132,6 +137,7 @@ namespace HealthInstitution.MVVM.Models
             _prescriptionRepository.LoadFromFile();
             _examinationChangeRepository.LoadFromFile();
             _equipmentOrderRepository.LoadFromFile();
+            _notificationRepository.LoadFromFile();
         }
 
         public void SaveAll()
@@ -161,6 +167,7 @@ namespace HealthInstitution.MVVM.Models
             _prescriptionRepository.SaveToFile();
             _examinationChangeRepository.SaveToFile();
             _equipmentOrderRepository.SaveToFile();
+            _notificationRepository.SaveToFile();
         }
 
         private static void ConnectReferences()
@@ -175,6 +182,7 @@ namespace HealthInstitution.MVVM.Models
             ReferencesService.ArrangeEquipment();
             ReferencesService.ConnectRenovations();
             ReferencesService.ConnectPendingMedicineAllergens();
+            ReferencesService.ConnectPatientNotifications();
         }
 
 
@@ -203,6 +211,7 @@ namespace HealthInstitution.MVVM.Models
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
         public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
         public EquipmentOrderRepository EquipmentOrderRepository { get => _equipmentOrderRepository; }
+        public NotificationRepository NotificationRepository { get => _notificationRepository; }
 
         public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
         {
@@ -344,7 +353,6 @@ namespace HealthInstitution.MVVM.Models
                         throw new DateException("Cannot schedule in next 24 hours");
                     }
                 }
-               
                 if (doctor is null)
                 {
                     throw new EmptyFieldException("Doctor not selected !");
@@ -377,7 +385,7 @@ namespace HealthInstitution.MVVM.Models
                                        TherapyMealDependency therapyMealDependency, Examination examination)
         {
             int id = Institution.Instance().PrescriptionRepository.GetNewId();
-            Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, medicine);
+            Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, DateTime.Now, medicine);
             if (examination.Patient.IsAllergic(prescription.Medicine.Allergens)) throw new Exception("Patient is allergic !") ;
 
             _prescriptionRepository.Add(prescription);
