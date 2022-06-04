@@ -57,60 +57,10 @@ namespace HealthInstitution.MVVM.Models.Entities
             _result = result;
             _id = id;
         }
+
         public bool IsStarted()
         {
             return _startDate <= DateTime.Today && !_started;
-        }
-
-        public void StartRenovation()
-        {
-            foreach (Room r in _roomsUnderRenovation) r.UnderRenovation = true;
-            _started = true;
-
-            if (_roomsUnderRenovation.Count() > 1 || _result.Count() > 1)
-            {
-                foreach (Room r in _roomsUnderRenovation)
-                {
-                    r.ReturnEquipmentToWarehouse(_endDate);
-                }
-            }
-
-        }
-
-
-        public void EndRenovation()
-        {
-            if (_roomsUnderRenovation.Count() > 1)
-            {
-                Room resultingRoom = _result[0];
-
-                //room is deleted
-                foreach (Room r in _roomsUnderRenovation)
-                {
-                    Institution.Instance().RoomRepository.Rooms.Remove(r);
-                    Institution.Instance().RoomRepository.DeletedRooms.Add(r);
-                }
-
-                Institution.Instance().RoomRepository.FutureRooms.Remove(resultingRoom);
-                Institution.Instance().RoomRepository.Rooms.Add(resultingRoom);
-            
-            } else if (_result.Count() > 1)
-            {
-                Room roomUnderRenovation = _roomsUnderRenovation[0];
-                Institution.Instance().RoomRepository.Rooms.Remove(roomUnderRenovation);
-                Institution.Instance().RoomRepository.DeletedRooms.Add(roomUnderRenovation);
-
-                foreach (Room r in _result)
-                {
-                    Institution.Instance().RoomRepository.FutureRooms.Remove(r);
-                    Institution.Instance().RoomRepository.Rooms.Add(r);
-                }
-            } else
-            { 
-                if (_roomsUnderRenovation.Count > 0)
-                _roomsUnderRenovation[0].UnderRenovation = false;
-
-            }
         }
     }
 }

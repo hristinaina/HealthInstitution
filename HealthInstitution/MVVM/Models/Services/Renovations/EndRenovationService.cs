@@ -11,12 +11,12 @@ namespace HealthInstitution.MVVM.Models.Services.Renovations
     class EndRenovationService
     {
         private Renovation _renovation;
-        private RoomRepository _repository;
+        private RoomRepository _rooms;
 
         public EndRenovationService(Renovation r)
         {
             _renovation = r;
-            _repository = Institution.Instance().RoomRepository;
+            _rooms = Institution.Instance().RoomRepository;
         }
 
         private void MergeRooms()
@@ -26,24 +26,24 @@ namespace HealthInstitution.MVVM.Models.Services.Renovations
             //rooms are deleted
             foreach (Room r in _renovation.RoomsUnderRenovation)
             {
-                _repository.Rooms.Remove(r);
-                _repository.DeletedRooms.Add(r);
+                _rooms.Rooms.Remove(r);
+                _rooms.DeletedRooms.Add(r);
             }
 
-            _repository.FutureRooms.Remove(resultingRoom);
-            _repository.Rooms.Add(resultingRoom);
+            _rooms.FutureRooms.Remove(resultingRoom);
+            _rooms.Rooms.Add(resultingRoom);
         }
 
         private void DivideRooms()
         {
             Room roomUnderRenovation = _renovation.RoomsUnderRenovation[0];
-            _repository.Rooms.Remove(roomUnderRenovation);
-            _repository.DeletedRooms.Add(roomUnderRenovation);
+            _rooms.Rooms.Remove(roomUnderRenovation);
+            _rooms.DeletedRooms.Add(roomUnderRenovation);
 
             foreach (Room r in _renovation.Result)
             {
-                _repository.FutureRooms.Remove(r);
-                _repository.Rooms.Add(r);
+                _rooms.FutureRooms.Remove(r);
+                _rooms.Rooms.Add(r);
             }
         }
 
