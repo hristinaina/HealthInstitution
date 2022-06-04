@@ -36,8 +36,9 @@ namespace HealthInstitution.MVVM.Models.Services.Equipments
         {
             Room warehouse = Institution.Instance().RoomRepository.FindById(0);
 
-            EquipmentArrangement destinationRoomArrangement = _arrangements.FindFirstBefore(room, _equipment, date);
-            List<EquipmentArrangement> futureArrangements = _arrangements.FindAllAfter(room, _equipment, date);
+            EquipmentArrangementService service = new EquipmentArrangementService();
+            EquipmentArrangement destinationRoomArrangement = service.FindFirstBefore(room, _equipment, date);
+            List<EquipmentArrangement> futureArrangements = service.FindAllAfter(room, _equipment, date);
 
             destinationRoomArrangement.EndDate = date;
             foreach (EquipmentArrangement a in futureArrangements)
@@ -45,8 +46,8 @@ namespace HealthInstitution.MVVM.Models.Services.Equipments
                 Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Remove(a);
             }
 
-            EquipmentArrangement warehouseArrangement = _arrangements.FindFirstBefore(warehouse, _equipment, date);
-            futureArrangements = _arrangements.FindAllAfter(warehouse, _equipment, date);
+            EquipmentArrangement warehouseArrangement = service.FindFirstBefore(warehouse, _equipment, date);
+            futureArrangements = service.FindAllAfter(warehouse, _equipment, date);
             DateTime newArrangementTargetEndDate = DateTime.MaxValue;
 
 
@@ -119,8 +120,9 @@ namespace HealthInstitution.MVVM.Models.Services.Equipments
             if (MoveFromWarehouse(room, quantity)) return;
             if (Institution.Instance().CurrentUser is Secretary && quantity > _equipment.ArrangmentByRooms[room]) throw new NotEnoughEquipmentException("Not enough equipment in selected room");
 
-            EquipmentArrangement pastArrangement = _arrangements.FindFirstBefore(room, _equipment, newArrangementStartDate);
-            List<EquipmentArrangement> futureArrangements = _arrangements.FindAllAfter(room, _equipment, newArrangementStartDate);
+            EquipmentArrangementService service = new EquipmentArrangementService();
+            EquipmentArrangement pastArrangement = service.FindFirstBefore(room, _equipment, newArrangementStartDate);
+            List<EquipmentArrangement> futureArrangements = service.FindAllAfter(room, _equipment, newArrangementStartDate);
 
             DateTime newArrangementEndDate = pastArrangement.EndDate;
             pastArrangement.EndDate = newArrangementStartDate;
@@ -136,8 +138,9 @@ namespace HealthInstitution.MVVM.Models.Services.Equipments
 
         private void MoveToNewRoom(Room room, DateTime newArrangementStartDate, int quantity)
         {
-            EquipmentArrangement pastArrangement = _arrangements.FindFirstBefore(room, _equipment, newArrangementStartDate);
-            List<EquipmentArrangement> futureArrangements = _arrangements.FindAllAfter(room, _equipment, newArrangementStartDate);
+            EquipmentArrangementService service = new EquipmentArrangementService();
+            EquipmentArrangement pastArrangement = service.FindFirstBefore(room, _equipment, newArrangementStartDate);
+            List<EquipmentArrangement> futureArrangements = service.FindAllAfter(room, _equipment, newArrangementStartDate);
             DateTime newArrangementTargetEndDate = DateTime.MaxValue;
 
             if (pastArrangement is not null)
