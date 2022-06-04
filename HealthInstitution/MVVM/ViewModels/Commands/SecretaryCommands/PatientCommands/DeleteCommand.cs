@@ -16,19 +16,19 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
     {
         private readonly Institution _institution;
         private PatientListViewModel _viewModel;
+        private readonly PatientService _service;
 
         public DeleteCommand(PatientListViewModel viewModel)
         {
             _institution = Institution.Instance();
             _viewModel = viewModel;
+            _service = new PatientService();
         }
 
         public override void Execute(object parameter)
         {
-            Patient patient = Institution.Instance().PatientRepository.FindByID(_viewModel.SelectedPatientId);
-            SecretaryService.DeletePatient(patient);
-            string message = "The patient has been successfully deleted.";
-            MessageBox.Show(message);
+            _service.DeletePatient(_viewModel.SelectedPatientId);
+            MessageBox.Show("The patient has been successfully deleted.");
             _viewModel.FillPatientList();
         }
     }

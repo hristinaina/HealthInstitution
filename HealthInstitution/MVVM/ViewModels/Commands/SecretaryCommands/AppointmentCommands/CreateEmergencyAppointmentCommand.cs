@@ -20,8 +20,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
         private AppointmentsViewModel _viewModel;
         private readonly NavigationStore _navigationStore;
         private int _newDuration;
-        private Doctor _doctor;
-        private DateTime _newDate;
+        private readonly EmergencyAppointmentService _service;
 
         public CreateEmergencyAppointmentCommand(AppointmentsViewModel viewModel)
         {
@@ -29,7 +28,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             _viewModel = viewModel;
             _navigationStore = NavigationStore.Instance();
             _newDuration = 0;
-            _doctor = null;
+            _service = new EmergencyAppointmentService();
         }
 
         public override void Execute(object parameter)
@@ -37,16 +36,16 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             bool validation = ValidateData();
             if (!validation) return;
 
+            _service.ChangeDuration(_newDuration);
             _viewModel.DialogOpen = false;
+
             try
             {
-                bool created = CreateAppointment();
+                bool created = _service.CreateAppointment(_viewModel.SelectedSpecialization, _viewModel.SelectedPatient);
                 if (created)
                 {
                     MessageBox.Show("Appointment has been successfully created!");
-                    Appointment newAppointment = SecretaryService.FindAppointment(_viewModel.SelectedPatient, _doctor, _newDate);
-                    newAppointment.Emergency = true;
-                    _doctor.Notifications.Add("An emergency appointment with id=" + newAppointment.ID.ToString() + " has been scheduled!");
+                    _service.NotifyDoctor();
                     return;
                 }
             }
@@ -60,40 +59,6 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             // if appointment hasn't been created
             MessageBox.Show("Please wait few seconds for the system to find appointments that could be postponed.");
             _navigationStore.CurrentViewModel = new EmergencyAppointmentViewModel(_viewModel);
-        }
-
-        public bool CreateAppointment()
-        {
-            Specialization specialization = _viewModel.SelectedSpecialization;
-            Patient patient = _viewModel.SelectedPatient;
-            DateTime startTime = DateTime.Now.AddMinutes(5);
-            DateTime currentTime = DateTime.Now.AddMinutes(5);
-            _newDate = currentTime;
-            string type = _newDuration == 15 ? nameof(Examination) : nameof(Operation);
-            bool done = false;
-
-            for (; currentTime < startTime.AddHours(2); currentTime = currentTime.AddMinutes(15))
-            {
-                bool specialistException = false;
-                foreach (Doctor doctor in Institution.Instance().DoctorRepository.Doctors)
-                {
-                    if (doctor.Specialization == specialization)
-                    {
-                        specialistException = true;
-                        done = Institution.Instance().CreateAppointment(doctor, patient, currentTime, type, _newDuration, false);
-                        if (done)
-                        {
-                            _newDate = currentTime;
-                            _doctor = doctor;
-                            return true;
-                        }
-                    }
-                }
-                if (!specialistException)
-                    throw new Exception("There are currently no doctors with selected specialization that work in this hospital.");
-
-            }
-            return done;
         }
 
         private bool ValidateData()
