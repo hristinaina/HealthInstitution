@@ -21,6 +21,7 @@ namespace HealthInstitution.MVVM.Models.Services
         private readonly DoctorRepository _doctorRepository;
         private readonly ExaminationRepository _examinationRepository;
         private readonly OperationRepository _operationRepository;
+        private readonly SecretaryAppointmentManagementService _service;
 
         public EmergencyAppointmentService()
         {
@@ -28,6 +29,7 @@ namespace HealthInstitution.MVVM.Models.Services
             _doctorRepository = Institution.Instance().DoctorRepository;
             _examinationRepository = Institution.Instance().ExaminationRepository;
             _operationRepository = Institution.Instance().OperationRepository;
+            _service = new SecretaryAppointmentManagementService();
         }
 
         public void ChangeDuration(int duration)
@@ -52,7 +54,7 @@ namespace HealthInstitution.MVVM.Models.Services
                     if (doctor.Specialization == specialization)
                     {
                         specialistException = true;
-                        done = Institution.Instance().CreateAppointment(doctor, patient, currentTime, type, _newDuration, false);
+                        done = _service.CreateAppointment(doctor, patient, currentTime, type, _newDuration, false);
                         if (done)
                         {
                             _newDate = currentTime;
@@ -109,7 +111,7 @@ namespace HealthInstitution.MVVM.Models.Services
             {
                 return false;
             }
-            Institution.Instance().ValidateAppointmentData(patient, doctor, dateTime, validation);
+            _service.ValidateAppointmentData(patient, doctor, dateTime, validation);
             return true;
         }
 

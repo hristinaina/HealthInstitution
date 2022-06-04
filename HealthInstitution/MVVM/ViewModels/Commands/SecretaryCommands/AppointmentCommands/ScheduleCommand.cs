@@ -20,7 +20,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
         private readonly Institution _institution;
         private EmergencyAppointmentViewModel _viewModel;
         private EmergencyAppointmentService _service;
-
+        private SecretaryAppointmentManagementService _appointmentService;
         private readonly NavigationStore _navigationStore;
 
         public ScheduleCommand(EmergencyAppointmentViewModel viewModel)
@@ -29,6 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             _viewModel = viewModel;
             _navigationStore = NavigationStore.Instance();
             _service = new EmergencyAppointmentService();
+            _appointmentService = new SecretaryAppointmentManagementService();
         }
 
         public override void Execute(object parameter)
@@ -54,7 +55,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             Doctor doctor = appointmentToPostpone.Doctor.Specialization == specialization ?
                 appointmentToPostpone.Doctor : Institution.Instance().DoctorRepository.FindDoctorBySpecialization(specialization);
 
-            Institution.Instance().CreateAppointment(doctor, patient, oldDate, type, duration, false);
+            _appointmentService.CreateAppointment(doctor, patient, oldDate, type, duration, false);
             MessageBox.Show("Emergency appointment has been successfully created !");
 
             _service.SendNotifications(appointmentToPostpone, oldDate, newDate, patient, doctor);

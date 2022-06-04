@@ -17,12 +17,14 @@ namespace HealthInstitution.MVVM.Models.Services
         private readonly ReferralRepository _referralRepository;
         private readonly PatientRepository _patientRepository;
         private readonly DoctorRepository _doctorRepository;
+        private readonly SecretaryAppointmentManagementService _service;
 
         public ReferralService()
         {
             _referralRepository = Institution.Instance().ReferralRepository;
             _patientRepository = Institution.Instance().PatientRepository;
             _doctorRepository = Institution.Instance().DoctorRepository;
+            _service = new SecretaryAppointmentManagementService();
         }
 
         public void RemoveReferral(int referralId)
@@ -88,7 +90,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
         private bool ScheduleAppointmentByDoctor(Doctor doctor, Patient patient, DateTime datetime)
         {
-            return Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Examination));
+            return _service.CreateAppointment(doctor, patient, datetime, nameof(Examination));
         }
 
         public void RemoveReferralsOfDeletedPatients()

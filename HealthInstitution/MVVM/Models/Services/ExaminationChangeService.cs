@@ -13,10 +13,13 @@ namespace HealthInstitution.MVVM.Models.Services
     {
         private readonly ExaminationChangeRepository _examinationChangeRepository;
         private readonly ExaminationRepository _examinationRepository;
+        private readonly SecretaryAppointmentManagementService _service;
+
         public ExaminationChangeService()
         {
             _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
             _examinationRepository = Institution.Instance().ExaminationRepository;
+            _service = new SecretaryAppointmentManagementService();
         }
 
         public string ApproveChange(int requestId)
@@ -27,7 +30,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
             if (request.ChangeStatus.ToString() == "EDITED")
             {
-                bool resolved = Institution.Instance().RescheduleExamination(appointment, request.NewDate);
+                bool resolved = _service.RescheduleExamination(appointment, request.NewDate);
                 if (resolved)
                 {
                     return "The request has been successfully accepted.";
@@ -39,7 +42,8 @@ namespace HealthInstitution.MVVM.Models.Services
             }
             else if (request.ChangeStatus.ToString() == "DELETED")
             {
-                SuggestionsService.DeleteAppointment(appointment);
+                SecretaryAppointmentManagementService service = new();
+                service.DeleteAppointment(appointment);
                 return "The appointment has been successfully deleted.";
             }
 
