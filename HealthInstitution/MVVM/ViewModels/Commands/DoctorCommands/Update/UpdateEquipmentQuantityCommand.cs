@@ -22,11 +22,28 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands {
         {
             Equipment equipment = new Equipment(_viewModel.SelectedEquipment.Equipment);
             Room room = _viewModel.Examination.Room;
-            int newQuantity = _viewModel.GetPreviousQuantityOfSelectedEquipment() - _viewModel.SpentEquipment;
-            _viewModel.SelectedEquipment.Equipment.ArrangmentByRooms[room] = newQuantity;
-            Institution.Instance().EquipmentArragmentRepository.UpdateEquipmentQuantityInRoom(room, _viewModel.SelectedEquipment.Equipment);
+            try
+            {
+                int newQuantity = _viewModel.GetPreviousQuantityOfSelectedEquipment() - _viewModel.SpentEquipment;
+                if (newQuantity < 0)
+                {
+                    throw new Exception();
+                }
 
-            _viewModel.UpdateQuantity(equipment, newQuantity);
+                _viewModel.SelectedEquipment.Equipment.ArrangmentByRooms[room] = newQuantity;
+                Institution.Instance().EquipmentArragmentRepository.UpdateEquipmentQuantityInRoom(room, _viewModel.SelectedEquipment.Equipment);
+
+                _viewModel.UpdateQuantity(equipment, newQuantity);
+                
+            } catch (Exception e)
+            {
+                _viewModel.DialogOpen = false;
+                _viewModel.ShowMessage("Input is not valid !");
+            }
+           
+           
         }
+
+     
     }
 }
