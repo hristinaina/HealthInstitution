@@ -32,7 +32,8 @@ namespace HealthInstitution.MVVM.Models.Services.Rooms
                 else a.Room.Appointments.Remove(a);
             }
 
-            List<Entities.Room> rooms = _rooms.FilterByRoomType(type);
+            FilterRoomService service = new FilterRoomService();
+            List<Entities.Room> rooms = service.FilterByRoomType(type);
             foreach (Entities.Room r in rooms)
             {
                 if (r.isAvailable(wantedTime, a))

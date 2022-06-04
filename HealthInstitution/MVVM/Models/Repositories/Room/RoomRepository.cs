@@ -140,15 +140,5 @@ namespace HealthInstitution.MVVM.Models.Repositories
             _rooms.Remove(r);
             _deletedRooms.Add(r);
         }
-
-        public List<Entities.Room> FilterByRoomType(RoomType type)
-        {
-            List<Entities.Room> filteredRooms = new();
-            foreach (Entities.Room r in _rooms)
-            {
-                if (r.Type == type) filteredRooms.Add(r);
-            }
-            return filteredRooms;
-        }
     }
 }
