@@ -16,40 +16,33 @@ namespace HealthInstitution.MVVM.Models.Services
 
         }
 
-        public void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime, bool validation, int duration = 15)
+        public void ValidateAppointmentData(Appointment appointment, DateTime datetime, bool validation)
         {
-            User currentUser = Institution.Instance().CurrentUser;
-            if (currentUser is Patient || currentUser is Secretary || currentUser is Doctor)
+            ExaminationService examinationService = new();
+            int duration = examinationService.GetDuration(appointment);
+
+            DoctorService doctorService = new DoctorService(appointment.Doctor);
+            if (DateTime.Compare(DateTime.Now, datetime) > 0 && validation)
             {
-                DoctorService doctorService = new DoctorService(doctor);
-                if (DateTime.Compare(DateTime.Now, dateTime) > 0 && validation)
-                {
-                    throw new DateException("Date must be in future !");
-                }
-                if (currentUser is not Doctor)
-                {
-                    if ((dateTime - DateTime.Now).TotalDays < 1 && validation)
-                    {
-                        throw new DateException("Cannot schedule in next 24 hours");
-                    }
-                }
-                if (doctor is null)
-                {
-                    throw new EmptyFieldException("Doctor not selected !");
-                }
-                if (patient is null)
-                {
-                    throw new EmptyFieldException("Patient not selected !");
-                }
-                if (!patient.IsAvailable(dateTime, duration))
-                {
-                    throw new UserNotAvailableException("Patient not available at selected time !");
-                }
-                if (!doctorService.IsAvailable(dateTime, duration))
-                {
-                    throw new UserNotAvailableException("Doctor not available at selected time !");
-                }
+                throw new DateException("Date must be in future !");
             }
+            if (appointment.Doctor is null)
+            {
+                throw new EmptyFieldException("Doctor not selected !");
+            }
+            if (appointment.Patient is null)
+            {
+                throw new EmptyFieldException("Patient not selected !");
+            }
+            if (!appointment.Patient.IsAvailable(datetime, duration))
+            {
+                throw new UserNotAvailableException("Patient not available at selected time !");
+            }
+            if (!doctorService.IsAvailable(datetime, duration))
+            {
+                throw new UserNotAvailableException("Doctor not available at selected time !");
+            }
+            
         }
     }
 }

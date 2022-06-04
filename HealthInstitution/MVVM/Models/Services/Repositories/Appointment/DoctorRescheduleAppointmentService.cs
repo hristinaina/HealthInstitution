@@ -30,7 +30,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
         public bool RescheduleExamination(Appointment appointment, DateTime dateTime, bool validation = true)
         {
-            new ValidationService().ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime, validation);
+            new ValidationService().ValidateAppointmentData(appointment, dateTime, validation);
 
             _roomRepository.FindAvailableRoom(appointment, dateTime);
             bool resolved = true;
