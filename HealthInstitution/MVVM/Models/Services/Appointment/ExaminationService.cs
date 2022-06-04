@@ -10,7 +10,7 @@ namespace HealthInstitution.MVVM.Models.Services
 {
     class ExaminationService
     {
-        private ExaminationRepository _examinationRepository;
+        private readonly ExaminationRepository _examinationRepository;
 
         public ExaminationService()
         {
@@ -19,7 +19,7 @@ namespace HealthInstitution.MVVM.Models.Services
         public void AddPrescription(Examination examination, Entities.Prescription prescription)
         {
             examination.Prescriptions.Add(prescription);
-            //Institution.Instance().ExaminationRepository.Update(examination);
+            //_examinationRepository.Update(examination);
         }
 
         public bool AddAnamnesis(Examination examination, string anamnesis)
@@ -49,5 +49,19 @@ namespace HealthInstitution.MVVM.Models.Services
             return duration;
         }
 
+        public List<Examination> GetFutureExaminations(Specialization specialization, Patient patient)
+        {
+            List<Examination> futureAppointments = new();
+            foreach (Examination appointment in _examinationRepository.Examinations)
+            {
+                if (DateTime.Compare(appointment.Date, DateTime.Now) > 0 &&
+                    (appointment.Doctor.Specialization == specialization || appointment.Patient == patient))
+                {
+                    futureAppointments.Add(appointment);
+                }
+            }
+            futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
+            return futureAppointments;
+        }
     }
 }
