@@ -66,29 +66,6 @@ namespace HealthInstitution.MVVM.Models.Repositories
             return false;
         }
 
-        public bool Delete(int id)
-        {
-            foreach(Operation i in _operations)
-            {
-                if (i.ID == id)
-                {
-                    _operations.Remove(i);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public void DeleteByPatientID(int patientId)
-        {
-            foreach (Operation operation in _operations)
-            {
-                if (operation.Patient.ID == patientId)
-                {
-                    _operations.Remove(operation);
-                }
-            }
-        }
         public void Remove(Operation operation)
         {
             _operations.Remove(operation);
@@ -99,7 +76,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
             _operations.Add(operation);
         }
 
-        public int NewId()
+        public int GetID()
         {
             if (_operations.Count == 0)
             {

@@ -36,10 +36,10 @@ namespace HealthInstitution.MVVM.Models.Repositories
             {
                 if (perscription.ID == id) return perscription;
             }
-            return new Prescription(GetNewId());
+            return new Prescription(GetID());
         }
 
-        public int GetNewId()
+        public int GetID()
         {
             if (_prescriptions.Count == 0)
             {

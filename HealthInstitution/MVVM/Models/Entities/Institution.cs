@@ -232,8 +232,8 @@ namespace HealthInstitution.MVVM.Models
             if (type == nameof(Examination))
             {
 
-                appointmentId = _examinationRepository.NewId();
-                //int prescriptionId = _prescriptionRepository.GetNewId();
+                appointmentId = _examinationRepository.GetID();
+                //int prescriptionId = _prescriptionRepository.GetID();
                 
                 Examination examination = new Examination(appointmentId, doctor, patient, dateTime,
                                           new List<Prescription>());
@@ -247,7 +247,7 @@ namespace HealthInstitution.MVVM.Models
             }
 
             else if (type == nameof(Operation)) {
-                appointmentId = _operationRepository.NewId();
+                appointmentId = _operationRepository.GetID();
                 Operation operation = new Operation(appointmentId, doctor, patient, dateTime, duration);
                 patient.Operations.Add(operation);
                 doctor.Operations.Add(operation);
@@ -379,7 +379,7 @@ namespace HealthInstitution.MVVM.Models
         public bool CreatePrescription(Medicine medicine, int longitudeInDays, int dailyFrequency,
                                        TherapyMealDependency therapyMealDependency, Examination examination)
         {
-            int id = Institution.Instance().PrescriptionRepository.GetNewId();
+            int id = Institution.Instance().PrescriptionRepository.GetID();
             Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, medicine);
             if (examination.Patient.IsAllergic(prescription.Medicine.Allergens)) throw new Exception("Patient is allergic !") ;
 
