@@ -18,7 +18,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public string Name => _medicine.Name;
         public string State => _medicine.State.ToString();
 
-        public string Description => _medicine.Description;
+        public string Description => _medicine.RevisionDescription;
 
         public List<IngredientListItemViewModel> MedicineIngredients;
 

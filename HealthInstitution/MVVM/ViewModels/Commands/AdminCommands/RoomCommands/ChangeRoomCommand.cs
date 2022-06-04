@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
 {
@@ -40,7 +41,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
                 try
                 {
                     int selectedNumber = int.Parse(_model.SelectedNumber);
-                    _model.SelectedRoom.Room.Change(_model.SelectedName, selectedNumber, (RoomType)_model.SelectedTypeIndex);
+                    RoomService room = new RoomService(_model.SelectedRoom.Room);
+                    room.Change(_model.SelectedName, selectedNumber, (RoomType)_model.SelectedTypeIndex);
 
                     _model.DialogOpen = false;
                     _model.FillRoomList();

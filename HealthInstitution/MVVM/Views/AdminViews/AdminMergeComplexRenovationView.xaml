@@ -21,8 +21,13 @@
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <components:NotificationSnackbar Grid.Row="1"
-                                         Panel.ZIndex="2"/>
+        <components:NotificationSnackbar Grid.Column="1"
+                                         Panel.ZIndex="2"
+                                         Margin="0,50,0,50"
+                                         NotificationHeight="20"
+                                         VerticalAlignment="Bottom"
+                                         Content="{Binding Message}"
+                                         IsActive="{Binding MessageVisibility}"/>
         <Grid Grid.Row="0">
             <TextBlock Text="Schedule complex renovation"
                        HorizontalAlignment="Center"

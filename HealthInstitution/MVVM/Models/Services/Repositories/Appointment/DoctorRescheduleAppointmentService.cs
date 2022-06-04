@@ -7,6 +7,7 @@ using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Repositories;
 using HealthInstitution.MVVM.Models.Repositories.References;
 using HealthInstitution.MVVM.Models.Enumerations;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -32,7 +33,8 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             new ValidationService().ValidateAppointmentData(appointment, dateTime, validation);
 
-            _roomRepository.FindAvailableRoom(appointment, dateTime);
+            FindAvailableRoomService service = new FindAvailableRoomService();
+            service.FindAvailableRoom(appointment, dateTime);
             bool resolved = true;
             if (resolved)
             {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Exceptions.AdminExceptions;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.Models.Repositories
 {
@@ -106,83 +107,40 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
         }
 
-        public Entities.Room CreateRoom(int id, string name, int number, RoomType type, bool future = false, List<int> ignoredNumbers = null)
+        public Entities.Room AddRoom(Entities.Room room, bool future = false, List<int> ignoredNumbers = null)
         {
-            if (number == 0)
+            if (room.Number == 0)
             {
                 throw new ZeroRoomNumberException("Room number cannot be zero");
             }
-            else if (name is null || name.Equals(""))
+            else if (room.Name is null || room.Name.Equals(""))
             {
                 throw new EmptyNameException("Room name cannot be empty");
-            } else if (!CheckNumber(number, ignoredNumbers))
+            } else if (!CheckNumber(room.Number, ignoredNumbers))
             {
                 throw new RoomNumberAlreadyTakenException("Room number already taken");
             }
 
-            Entities.Room r = new Entities.Room(id, number, name, type);
+            room.ID = GetID();
+
             if (!future) 
             { 
-                _rooms.Add(r);
+                _rooms.Add(room);
             } else
             {
-                _futureRooms.Add(r);
+                _futureRooms.Add(room);
             }
 
-            return r;
+            return room;
         }
 
         public void DeleteRoom(Entities.Room r)
         {
-            if (!r.IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
-            r.ReturnEquipmentToWarehouse(DateTime.Today);
+            RoomService room = new RoomService(r);
+            if (!room.IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
+            room.ReturnEquipmentToWarehouse(DateTime.Today);
             _rooms.Remove(r);
             _deletedRooms.Add(r);
-        }
-
-        public List<Entities.Room> FilterByRoomType(RoomType type)
-        {
-            List<Entities.Room> filteredRooms = new();
-            foreach (Entities.Room r in _rooms)
-            {
-                if (r.Type == type) filteredRooms.Add(r);
-            }
-            return filteredRooms;
-        }
-
-        public void FindAvailableRoom(Appointment a, DateTime wantedTime)
-        {
-            RoomType type = RoomType.EXAM_ROOM;
-            bool changing = false;
-            if (a is Operation) type = RoomType.OPERATING_ROOM; 
-
-            if (a.Room != null)
-            {
-                changing = true;
-                if (a.Room.isAvailable(wantedTime, a))
-                {
-                    a.Date = wantedTime;
-                    return;
-                }
-                else a.Room.Appointments.Remove(a);
-            }
-
-            List<Entities.Room> rooms = FilterByRoomType(type);
-            foreach (Entities.Room r in rooms)
-            {
-                if(r.isAvailable(wantedTime, a))
-                {
-                    r.Appointments.Add(a);
-                    a.Room = r;
-                    if (changing) a.Date = wantedTime;
-                    return;
-                }
-            }
-
-            if (a.Room == null)
-            {
-                throw new Exception("There are no available rooms for this appointment. Please choose another date or time!");
-            }
         }
     }
 }

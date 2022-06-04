@@ -33,7 +33,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
                 bool isRemoved = service.Delete(pendingMedicine);
                 if (isRemoved)
                 {
-                    Medicine medicine = new Medicine(pendingMedicine.ID, pendingMedicine.Name, pendingMedicine.Allergens);
+                    Medicine medicine = new Medicine(pendingMedicine.ID, pendingMedicine.Name, pendingMedicine.Ingredients);
                     Institution.Instance().MedicineRepository.Add(medicine);
 
                     _viewModel.ShowMessage("Medicine successfully saved !");
