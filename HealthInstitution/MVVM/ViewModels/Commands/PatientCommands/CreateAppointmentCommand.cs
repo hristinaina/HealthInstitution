@@ -2,6 +2,7 @@
 using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.Stores;
 using System;
@@ -38,7 +39,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
             try
             {
-                bool done = Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Examination));
+                PatientAppointmentSchedulingService service = new PatientAppointmentSchedulingService(_viewModel.Patient);
+                bool done = service.CreateAppointment(doctor, patient, datetime, nameof(Examination));
                 if (done)
                 {
                     _viewModel.ShowMessage("Appointment successfully scheduled !");

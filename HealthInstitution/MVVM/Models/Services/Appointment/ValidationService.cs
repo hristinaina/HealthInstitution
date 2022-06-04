@@ -20,10 +20,12 @@ namespace HealthInstitution.MVVM.Models.Services
         public void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime, bool validation, int duration = 15)
         {
             User currentUser = Institution.Instance().CurrentUser;
+            PatientService patientService = new PatientService(patient);
+            DoctorService doctorService = new DoctorService(doctor);
+
             if (currentUser is Patient || currentUser is Secretary || currentUser is Doctor)
             {
-                PatientService patientService = new PatientService(patient);
-                DoctorService doctorService = new DoctorService(doctor);
+
                 if (DateTime.Compare(DateTime.Now, dateTime) > 0 && validation)
                 {
                     throw new DateException("Date must be in future !");
