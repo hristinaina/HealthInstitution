@@ -17,13 +17,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
     {
         private readonly Institution _institution;
         private PatientListViewModel _viewModel;
-        private readonly PatientService _service;
+        private readonly PatientManagementService _service;
 
         public SaveAccountCommand(PatientListViewModel viewModel)
         {
             _institution = Institution.Instance();
             _viewModel = viewModel;
-            _service = new PatientService();
+            _service = new PatientManagementService();
         }
 
         public override void Execute(object parameter)

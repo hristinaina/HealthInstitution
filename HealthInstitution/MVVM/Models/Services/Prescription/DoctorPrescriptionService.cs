@@ -26,7 +26,7 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             int id = Institution.Instance().PrescriptionRepository.GetNewId();
             prescription.ID = id;
-            PatientService patientService = new();
+            PatientManagementService patientService = new();
             
             if (patientService.IsAllergic(examination.Patient, prescription.Medicine.Ingredients)) throw new Exception("Patient is allergic !");
 

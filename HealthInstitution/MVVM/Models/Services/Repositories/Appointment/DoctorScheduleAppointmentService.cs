@@ -32,34 +32,23 @@ namespace HealthInstitution.MVVM.Models.Services
             _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
         }
 
-        public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
+        public bool CreateAppointment(Appointment appointment, DateTime dateTime, bool validation = true)
         {
-            DoctorService doctorService = new DoctorService(doctor);
-          
-            if (!doctorService.IsAvailable(dateTime, duration))
-            {
-                return false;
-            }
-            if (!patient.IsAvailable(dateTime, duration))
-            {
-                return false;
-            }
+            DoctorService doctorService = new DoctorService(appointment.Doctor);
+            ExaminationService examinationService = new ExaminationService();
+            int duration = examinationService.GetDuration(appointment);
             
-            new ValidationService().ValidateAppointmentData(patient, doctor, dateTime, validation, duration);
+            new ValidationService().ValidateAppointmentData(appointment, dateTime, validation);
 
             int appointmentId = 0;
 
-            if (type == nameof(Examination))
+            if (appointment.GetType() == typeof(Examination))
             {
-
-                appointmentId = _examinationRepository.GetID();
-                //int prescriptionId = _prescriptionRepository.GetNewId();
-
-                Examination examination = new Examination(appointmentId, doctor, patient, dateTime,
+                appointmentId = _examinationRepository.NewId();
+                Examination examination = new Examination(appointmentId, appointment.Doctor, appointment.Patient, dateTime,
                                           new List<Prescription>());
-                patient.Examinations.Add(examination);
-                doctor.Examinations.Add(examination);
-
+                appointment.Patient.Examinations.Add(examination);
+                appointment.Doctor.Examinations.Add(examination);
                 FindAvailableRoomService service = new FindAvailableRoomService();
                 service.FindAvailableRoom(examination, dateTime);
                 _examinationRepository.Add(examination);
@@ -68,13 +57,12 @@ namespace HealthInstitution.MVVM.Models.Services
 
             }
 
-            else if (type == nameof(Operation))
+            else
             {
-                appointmentId = _operationRepository.GetID();
-                Operation operation = new Operation(appointmentId, doctor, patient, dateTime, duration);
-                patient.Operations.Add(operation);
-                doctor.Operations.Add(operation);
-
+                appointmentId = _operationRepository.NewId();
+                Operation operation = new Operation(appointmentId, appointment.Doctor, appointment.Patient, dateTime, duration);
+                appointment.Patient.Operations.Add(operation);
+                appointment.Doctor.Operations.Add(operation);
                 FindAvailableRoomService service = new FindAvailableRoomService();
                 service.FindAvailableRoom(operation, dateTime);
                 _operationRepository.Add(operation);

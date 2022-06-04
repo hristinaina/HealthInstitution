@@ -30,7 +30,10 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             try
             {
                 DoctorScheduleAppointmentService scheduleAppointmentService = new DoctorScheduleAppointmentService();
-                bool isCreated = scheduleAppointmentService.CreateAppointment(doctor, patient, datetime, nameof(Operation), _viewModel.Duration);
+                Operation operation = new Operation(0, doctor, patient, datetime, _viewModel.Duration);
+                operation.Doctor = (Doctor)Institution.Instance().CurrentUser;
+                operation.Patient = _viewModel.SelectedPatient;
+                bool isCreated = scheduleAppointmentService.CreateAppointment(operation, datetime);
                 
                 if (isCreated)
                 {

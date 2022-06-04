@@ -29,7 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             _viewModel.AddIllness(_viewModel.NewIllness);
             try
             {
-                PatientService service = new PatientService();
+                PatientManagementService service = new PatientManagementService();
                 service.AddIllness(patient, _viewModel.NewIllness);
             } catch (Exception e)
             {
