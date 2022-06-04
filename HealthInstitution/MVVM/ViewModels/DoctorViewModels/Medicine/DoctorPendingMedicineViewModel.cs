@@ -127,7 +127,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public void FindIngredients(PendingMedicine medicine)
         {
             _ingredients.Clear();
-            foreach(Allergen allergen in medicine.Allergens)
+            foreach(Allergen allergen in medicine.Ingredients)
             {
                 _ingredients.Add(new AllergenItemViewModel(allergen));
             }

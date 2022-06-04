@@ -77,7 +77,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         public PendingMedicine AddNewMedicine(PendingMedicine newMedicine)
         {
-            if (!IsNameAvailable(newMedicine, newMedicine.Name)) throw new NameNotAvailableException("Name already in use!");
+            if (!IsNameAvailable(null, newMedicine.Name)) throw new NameNotAvailableException("Name already in use!");
             newMedicine.ID = GetID();
             _pendingMedicines.Add(newMedicine);
 

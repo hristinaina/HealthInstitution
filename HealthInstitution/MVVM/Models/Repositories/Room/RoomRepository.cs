@@ -115,7 +115,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
             }
             else if (room.Name is null || room.Name.Equals(""))
             {
-                throw new EmptyRoomNameException("Room name cannot be empty");
+                throw new EmptyNameException("Room name cannot be empty");
             } else if (!CheckNumber(room.Number, ignoredNumbers))
             {
                 throw new RoomNumberAlreadyTakenException("Room number already taken");

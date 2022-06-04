@@ -21,7 +21,12 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
         </Grid.ColumnDefinitions>
 
         <components:NotificationSnackbar Grid.Column="1"
-                                         Panel.ZIndex="2" Loaded="NotificationSnackbar_Loaded"/>
+                                         Panel.ZIndex="2"
+                                         Margin="0,50,0,50"
+                                         NotificationHeight="20"
+                                         VerticalAlignment="Bottom"
+                                         Content="{Binding Message}"
+                                         IsActive="{Binding MessageVisibility}"/>
         <components:AdminNavigationRail SelectedIndex="3"></components:AdminNavigationRail>
         <materialDesign:Card Grid.Column="1">
 
@@ -101,7 +106,7 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                     Grid.Row="0"
                                     HorizontalAlignment="Left">
                                 <Button.CommandParameter>
-                                    <StackPanel Height="400"
+                                    <StackPanel Height="380"
                                                 Width="320"
                                                 Margin="40 20 40 20">
 
@@ -120,7 +125,7 @@ xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
                                                   IsEnabled="True" />
                                         <ListView ItemsSource="{Binding Ingredients}"
                                                   VerticalAlignment="Top"
-                                                  Height="200"
+                                                  Height="180"
                                                   Width="280"
                                                   SelectionMode="Single" 
                                                   ScrollViewer.HorizontalScrollBarVisibility="Hidden"

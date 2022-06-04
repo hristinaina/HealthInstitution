@@ -134,7 +134,7 @@ namespace HealthInstitution.MVVM.Models.Services
             foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
             {
                 List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
-                medicine.Allergens = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+                medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
             }
         }
 
