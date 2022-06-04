@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthInstitution.MVVM.Models.Services.Equipments;
 
 namespace HealthInstitution.MVVM.Models.Entities
 {
@@ -79,7 +80,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             foreach (Equipment e in _equipment.Keys)
             {
-                e.ReturnToWarehouse(date, this);
+                EquipmentService equipment = new EquipmentService(e);
+                equipment.ReturnToWarehouse(date, this);
             }
         }
         public bool isAvailable(DateTime appointmentTime, Appointment appointment)
