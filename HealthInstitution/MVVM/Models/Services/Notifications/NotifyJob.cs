@@ -1,5 +1,5 @@
-﻿using HealthInstitution.MVVM.ViewModels;
-using Quartz;
+﻿using Quartz;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using static HealthInstitution.MVVM.Models.Services.NotificationService;

@@ -20,6 +20,7 @@ namespace HealthInstitution.MVVM.Models.Entities
         private List<Operation> _operations;
         private List<ExaminationChange> _examinationChanges;
         private List<Notification> _notifications;
+        private int _notificationsPreference;
 
         [JsonIgnore]
         public List<Notification> Notifications
@@ -43,6 +44,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         public bool Deleted { get => _deleted; set { _deleted = value; } }
         [JsonProperty("Record")]
         public MedicalRecord Record { get => _record; set { _record = value; } }
+        [JsonProperty("NotificationsPreference")]
+        public int NotificationsPreference { get => _notificationsPreference; set { _notificationsPreference = value; } }
         [JsonIgnore]
         public List<Examination> Examinations
         {

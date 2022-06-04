@@ -4,6 +4,9 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.MVVM.ViewModels.Commands;
+using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Repositories;
 
 namespace HealthInstitution.MVVM.ViewModels
 {
@@ -48,12 +51,20 @@ namespace HealthInstitution.MVVM.ViewModels
 
         public void showNotification(string message)
         {
-            if (Notification.Contains(message)) {
+            if (Notification.Contains(message))
+            {
                 return;
             }
-            Notification += message;
+            Notification += "\n" + message;
             NotificationHeight += 40;
             NotificationVisibility = true;
+
+            if (Institution.Instance().CurrentUser is Patient patient)
+            {
+                NotificationRepository repository = Institution.Instance().NotificationRepository;
+                Notification notification = repository.CreateNotification(patient.ID, message);
+                patient.Notifications.Add(notification);
+            }
         }
 
         public void hideNotification()

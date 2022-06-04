@@ -63,5 +63,13 @@ namespace HealthInstitution.MVVM.Models.Repositories
             _notifications.Add(notification);
             return notification;
         }
+
+        public Notification CreateNotification(int patientID, string text, DateTime time)
+        {
+            int id = GetNewID();
+            Notification notification = new(id, text, time, patientID);
+            _notifications.Add(notification);
+            return notification;
+        }
     }
 }

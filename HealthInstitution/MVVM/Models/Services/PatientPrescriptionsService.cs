@@ -10,11 +10,11 @@ namespace HealthInstitution.MVVM.Models.Services
     class PatientPrescriptionsService
     {
         public List<Prescription> _prescriptions;
-        public List<Examination> _examination;
+        public List<Examination> _examinations;
 
         public PatientPrescriptionsService(Patient patient)
         {
-            _examination = patient.Examinations;
+            _examinations = patient.Examinations;
             _prescriptions = GetUpgoingPrescriptions();
         }
 
@@ -22,7 +22,8 @@ namespace HealthInstitution.MVVM.Models.Services
         {
 
             List<Prescription> upgoingPrescriptions = new();
-            foreach (Examination examination in _examination) {
+            foreach (Examination examination in _examinations)
+            {
                 foreach (Prescription prescription in examination.Prescriptions)
                 {
                     if (isUpgoing(examination, prescription))
@@ -32,6 +33,35 @@ namespace HealthInstitution.MVVM.Models.Services
                 }
             }
             return upgoingPrescriptions;
+        }
+
+        public List<Prescription> GetAllPrescriptions()
+        {
+            List<Prescription> prescriptions = new();
+            foreach (Examination examination in _examinations)
+            {
+                foreach (Prescription prescription in examination.Prescriptions)
+                {
+                    prescriptions.Add(prescription);
+                }
+            }
+            return prescriptions;
+
+        }
+
+        public DateTime GetPrescriptionDate(Prescription p)
+        {
+            foreach (Examination examination in _examinations)
+            {
+                foreach (Prescription prescription in examination.Prescriptions)
+                {
+                    if (p.ID == prescription.ID)
+                    {
+                        return examination.Date;
+                    }
+                }
+            }
+            return DateTime.Now;
         }
 
         private bool isUpgoing(Examination examination, Prescription prescription)

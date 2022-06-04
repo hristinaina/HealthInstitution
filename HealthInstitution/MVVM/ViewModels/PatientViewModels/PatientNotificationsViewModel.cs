@@ -1,5 +1,6 @@
 ﻿using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     class PatientNotificationsViewModel : BaseViewModel
     {
         private Institution _institution;
-        protected Patient _patient;
+        private Patient _patient;
 
 
         private ObservableCollection<NotificationListItemViewModel> _notifications;
@@ -23,11 +25,11 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             set { _notifications = new ObservableCollection<NotificationListItemViewModel>(value); }
         }
         public IEnumerable<string> Hours { get; private set; }
-        private int _hour;
+        private int _selectedHour;
         public int SelectedHour {
-            get  { return _hour - 1; }
+            get  { return _selectedHour; }
 
-            set { _hour = int.Parse(Hours.ElementAt(value)) + 1; OnPropertyChanged(nameof(SelectedHour)); }
+            set { _selectedHour = value; OnPropertyChanged(nameof(SelectedHour)); }
         }
         private bool _dialogOpen;
         public bool DialogOpen
@@ -40,9 +42,11 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             }
         }
 
+        public string HoursText { get => "You are getting medicine reminders " + _patient.NotificationsPreference + "h early."; }
+
 
         public PatientNavigationViewModel Navigation { get; }
-
+        public ICommand SaveChanges { get; set; }
 
         public PatientNotificationsViewModel()
         {
@@ -52,6 +56,9 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _notifications = new ObservableCollection<NotificationListItemViewModel>();
             Hours =  new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
             FillNotificationsList();
+            _selectedHour = _patient.NotificationsPreference;
+
+            SaveChanges = new SaveChangesCommand(this, _patient);
 
             // ..............
         }
@@ -64,6 +71,10 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
                 _notifications.Add(new NotificationListItemViewModel(notification));
             }
             OnPropertyChanged(nameof(Notifications));
+        }
+
+        public void TextChanged() {
+            OnPropertyChanged(HoursText);
         }
 
     }

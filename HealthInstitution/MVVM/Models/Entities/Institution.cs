@@ -385,7 +385,7 @@ namespace HealthInstitution.MVVM.Models
                                        TherapyMealDependency therapyMealDependency, Examination examination)
         {
             int id = Institution.Instance().PrescriptionRepository.GetNewId();
-            Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, medicine);
+            Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, DateTime.Now, medicine);
             if (examination.Patient.IsAllergic(prescription.Medicine.Allergens)) throw new Exception("Patient is allergic !") ;
 
             _prescriptionRepository.Add(prescription);

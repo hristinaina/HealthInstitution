@@ -18,21 +18,21 @@
     "DoctorID": 1,
     "PatientID": 1,
     "RoomID": 2,
-    "PerscriptionID": 2
+    "PerscriptionID": 3
   },
   {
     "ExaminationID": 4,
     "DoctorID": 1,
     "PatientID": 1,
     "RoomID": 2,
-    "PerscriptionID": 2
+    "PerscriptionID": 4
   },
   {
     "ExaminationID": 5,
     "DoctorID": 7,
     "PatientID": 1,
     "RoomID": 1,
-    "PerscriptionID": 1
+    "PerscriptionID": 5
   },
   {
     "ExaminationID": 6,

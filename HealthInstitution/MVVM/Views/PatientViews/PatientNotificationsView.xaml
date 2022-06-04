@@ -46,7 +46,7 @@
                             <ColumnDefinition Width="1.4*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Padding="50 0 0 0 "
-                                   Text="You are getting medicine reminders 3 hours early."
+                                   Text="{Binding HoursText}"
                                    VerticalAlignment="Center"></TextBlock>
                         <Button Grid.Column="3"
                                 Style="{StaticResource MaterialDesignFlatButton}"
@@ -76,8 +76,8 @@
                                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                 IsDefault="True"
                                                 Margin="0 20 20 0"
-                                                Content="CONFIRM (REQUIRES RELOGIN)"
-                                                Command="">
+                                                Content="SAVE (REQUIRES RELOGIN)"
+                                                Command="{Binding SaveChanges}">
                                             <Button.CommandParameter>
                                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                     True
@@ -104,6 +104,7 @@
                     <DataGrid ItemsSource="{Binding Notifications}"
                               AutoGenerateColumns="False"
                               Width="1000"
+                              Height="400"
                               VerticalAlignment="Top"
                               Grid.Row="2"
                               BorderBrush="Transparent"
@@ -119,7 +120,7 @@
                                                 Binding="{Binding Date, Mode=OneWay}"
                                                 ElementStyle="{StaticResource ColumnElementStyle}"
                                                 CellStyle="{StaticResource DisableSelection}"
-                                                CanUserSort="True" />
+                                                CanUserSort="False" />
                             <DataGridTextColumn Width="800"
                                                 Header="Content"
                                                 Binding="{Binding Text, Mode=OneWay}"

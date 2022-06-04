@@ -124,6 +124,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             Del delegateMethod = showNotification;
             NotificationService notifications = new NotificationService(_patient, delegateMethod);
             notifications.ExecuteRealTimeNotifications();
+            notifications.AddMissedNotifications();
         }
 
         private void InitializeChangesParameters()
