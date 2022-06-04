@@ -113,10 +113,10 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blockadeType = BlockadeType.NONE;
         }
 
-        public void Block()
+        public void Block(BlockadeType blockadeType)
         {
             _blocked = true;
-            _blockadeType = BlockadeType.SECRETARY;
+            _blockadeType = _blockadeType;
         }
         public void Update(int id, string name, string lastName, string email, string password, Gender gender, double height, double weight)
         {
@@ -129,56 +129,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             Record.Height = height;
             Record.Weight = weight;
         }
-
-        public bool IsTrolling()
-        {
-            if (GetEditingAttempts() > 5)
-            {
-                _blocked = true;
-                _blockadeType = BlockadeType.SYSTEM;
-                return true;
-            }
-            if (GetCreatingAttempts() > 8)
-            {
-                _blocked = true;
-                _blockadeType = BlockadeType.SYSTEM;
-                return true;
-            }
-            return false;
-        }
-
-        private int GetCreatingAttempts()
-        {
-            int totalCreations = 0;
-            foreach (ExaminationChange change in ExaminationChanges)
-            {
-                if (change.ChangeStatus == AppointmentStatus.CREATED)
-                {
-                    totalCreations += 1;
-                }
-            }
-
-            return totalCreations;
-        }
-
-        private int GetEditingAttempts()
-        {
-            int totalChanges = 0;
-            foreach (ExaminationChange change in ExaminationChanges)
-            {
-                if (change.ChangeStatus == AppointmentStatus.EDITED)
-                {
-                    totalChanges += 1;
-                }
-                if (change.ChangeStatus == AppointmentStatus.DELETED)
-                {
-                    totalChanges += 1;
-                }
-            }
-
-            return totalChanges;
-        }
-
         public List<string> GetHistoryOfIllness()
         {
             List<string> historyOfIllness = new List<string>();

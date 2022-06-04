@@ -41,7 +41,7 @@ namespace HealthInstitution.MVVM.Models.Services
         public void BlockPatient(int id)
         {
             Patient patient = _patientRepository.FindByID(id);
-            patient.Block();
+            patient.Block(BlockadeType.SECRETARY);
         }
 
         public void UnblockPatient(int id)

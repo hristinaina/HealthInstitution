@@ -220,7 +220,8 @@ namespace HealthInstitution.MVVM.Models
             CheckTrolling();
             PatientService patientService = new PatientService(patient);
             DoctorService doctorService = new DoctorService(doctor);
-            if (CurrentUser is Patient && patient.IsTrolling())
+            TrollingService trollingService = new TrollingService(patient);
+            if (CurrentUser is Patient && trollingService.IsTrolling())
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
@@ -427,10 +428,10 @@ namespace HealthInstitution.MVVM.Models
 
         public void CheckTrolling()
         {
-            if (CurrentUser is Patient)
+            if (CurrentUser is Patient patient)
             {
-                Patient patient = (Patient)CurrentUser;
-                if (patient.IsTrolling())
+                TrollingService trollingService = new TrollingService(patient);
+                if (trollingService.IsTrolling())
                     throw new PatientBlockedException("System has blocked your account !");
             }
         }
