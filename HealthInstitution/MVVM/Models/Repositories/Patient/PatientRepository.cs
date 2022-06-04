@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Repositories
@@ -51,6 +52,14 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 if (CheckID(i)) return i;
                 i++;
             }
+        }
+
+        public void CreatePatient(string firstName, string lastName, string email, string password, Gender gender,
+            double height, double weight)
+        {
+            int id = GetNewID();
+            Patient patient = new(id, firstName, lastName, email, password, gender, height, weight);
+            Patients.Add(patient);
         }
     }
 }

@@ -42,5 +42,10 @@ namespace HealthInstitution.MVVM.Models.Entities.References
             _resolved = resolved;
             _newDate = change;
         }
+
+        public void Resolve()
+        {
+            _resolved = true;
+        }
     }
 }
