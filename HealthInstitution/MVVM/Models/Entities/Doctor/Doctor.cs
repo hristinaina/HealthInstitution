@@ -45,6 +45,12 @@ namespace HealthInstitution.MVVM.Models.Entities
         public Doctor(string firstName, string lastName) : base(firstName, lastName)
         {
         }
+
+
+        public Doctor(string firstName, string lastName, Specialization specialization) : base(firstName, lastName)
+        {
+            _specialization = specialization;
+        }
         public virtual bool Equals(Doctor? doctor) {
             return FirstName == doctor.FirstName && LastName == doctor.LastName;
         }
