@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Repositories;
 using HealthInstitution.Repositories;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -96,7 +97,8 @@ namespace HealthInstitution.MVVM.Models.Services
 
         private bool CheckNewAppointmentTime(Doctor doctor, Patient patient, DateTime dateTime, int duration, bool validation = false)
         {
-            if (!doctor.IsAvailable(dateTime, duration))
+            DoctorService service = new DoctorService(doctor);
+            if (!service.IsAvailable(dateTime, duration))
             {
                 return false;
             }
@@ -130,7 +132,8 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             string message = "Appointment with id=" + rescheduledAppointment.ID.ToString() + " has been changed." +
                 " Changed date from " + oldDate.ToString() + " to " + newDate.ToString();
-            patient.Notifications.Add(message);
+            Notification notification = Institution.Instance().NotificationRepository.CreateNotification(patient.ID, message);
+            patient.Notifications.Add(notification);
             doctor.Notifications.Add(message);
             Appointment newAppointment = FindAppointment(patient, doctor, oldDate);
             newAppointment.Emergency = true;
