@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -27,7 +28,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             {
                 Operation operation = _viewModel.SelectedOperation.Operation;
                 DateTime datetime = _viewModel.MergeTime(_viewModel.SelectedDate, _viewModel.SelectedTime);
-                bool isRescheduled = Institution.Instance().RescheduleExamination((Operation)operation, datetime);
+                DoctorRescheduleAppointmentService doctorRescheduleAppointmentService = new();
+                bool isRescheduled = doctorRescheduleAppointmentService.RescheduleExamination((Operation)operation, datetime);
                 if (isRescheduled) _viewModel.ShowMessage("Operation successfully rescheduled !");
             } catch (Exception e)
             {

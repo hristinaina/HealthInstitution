@@ -9,6 +9,7 @@ using HealthInstitution.MVVM.Models.Repositories;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
+using HealthInstitution.MVVM.Models.Services;
 
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
@@ -122,7 +123,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public void FillOperationsList()
         {
             _operations.Clear();
-            foreach (Operation operation in _doctor.GetSchedule(DateTime.Today, nameof(Operation)))
+            DoctorService doctorService = new DoctorService(_doctor);
+            foreach (Operation operation in doctorService.GetSchedule(DateTime.Today, nameof(Operation)))
             {
                 _operations.Add(new OperationItemViewModel(operation));
             }

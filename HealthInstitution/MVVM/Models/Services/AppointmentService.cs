@@ -2,6 +2,7 @@
 using HealthInstitution.MVVM.Models.Enumerations;
 using System;
 using System.Collections.Generic;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -31,6 +32,8 @@ namespace HealthInstitution.MVVM.Models.Services
             startDateTime += ShiftDateTime(startTime, startDateTime);
             endDateTime += ShiftDateTime(endTime, endDateTime);
 
+            DoctorService doctorService = new DoctorService(doctor);
+
             while (startDateTime < deadlineDate)
             {
                 if (startDateTime >= endDateTime)
@@ -38,13 +41,13 @@ namespace HealthInstitution.MVVM.Models.Services
                     startDateTime += ShiftDateTime(startTime, startDateTime);
                     endDateTime += ShiftDateTime(endTime, endDateTime);
                 }
-                while ((!patient.IsAvailable(startDateTime) || !doctor.IsAvailable(startDateTime)) && startDateTime < endDateTime)
+                while ((!patient.IsAvailable(startDateTime) || !doctorService.IsAvailable(startDateTime)) && startDateTime < endDateTime)
                 {
                     startDateTime = CheckInterruption(doctor, startDateTime);
                     startDateTime = CheckInterruption(patient, startDateTime);
                 }
 
-                if (startDateTime < endDateTime && patient.IsAvailable(startDateTime) && doctor.IsAvailable(startDateTime))
+                if (startDateTime < endDateTime && patient.IsAvailable(startDateTime) && doctorService.IsAvailable(startDateTime))
                 {
                     suggestions.Add(new Examination(0, doctor, patient, startDateTime, null));
                     break;
@@ -72,9 +75,10 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1);
+            DoctorService doctorService = new DoctorService(doctor);
             while (suggestions.Count != 3)
             {
-                while (!patient.IsAvailable(startDateTime) || !doctor.IsAvailable(startDateTime))
+                while (!patient.IsAvailable(startDateTime) || !doctorService.IsAvailable(startDateTime))
                 {
                     startDateTime = CheckInterruption(doctor, startDateTime);
                     startDateTime = CheckInterruption(patient, startDateTime);
@@ -116,7 +120,8 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             foreach (Doctor doctor in Institution.Instance().DoctorRepository.GetGeneralPractitioners())
             {
-                if (doctor.IsAvailable(startTime))
+                DoctorService doctorService = new DoctorService(doctor);
+                if (doctorService.IsAvailable(startTime))
                 {
                     suggestions.Add(new Examination(0, doctor, patient, startDateTime, null));
                 }

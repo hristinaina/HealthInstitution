@@ -1,0 +1,465 @@
+﻿<UserControl x:Class="HealthInstitution.MVVM.Views.AdminViews.Medicine"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HealthInstitution.MVVM.Views.AdminViews"
+xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:adminviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.AdminViewModels"
+             d:DataContext="{d:DesignInstance Type=adminviewmodels:AdminMedicineViewModel}"
+             mc:Ignorable="d"
+             Height="600"
+             Width="1200"
+             Background="White"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <components:NotificationSnackbar Grid.Column="1"
+                                         Panel.ZIndex="2" Loaded="NotificationSnackbar_Loaded"/>
+        <components:AdminNavigationRail SelectedIndex="3"></components:AdminNavigationRail>
+        <materialDesign:Card Grid.Column="1">
+
+            <materialDesign:DialogHost DialogTheme="Inherit"
+                                       Grid.Column="0"
+                                       IsOpen="{Binding DialogOpen}"
+                                       Grid.Row="0">
+                <materialDesign:Card>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+
+                        <ListView ItemsSource="{Binding Medicine}"
+                                  VerticalAlignment="Top"
+                                  Grid.Column="0"
+                                  SelectionMode="Single" 
+                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                  ScrollViewer.CanContentScroll="True"
+                                  HorizontalAlignment="Center"
+                                  SelectedIndex="{Binding Selection}">
+                            <ListView.View>
+                                <GridView AllowsColumnReorder="False">
+                                    <GridViewColumn Width="100"
+                                                    Header="ID">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding ID}"
+                                                           Width="20" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="150"
+                                                    Header="Name">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding Name}"
+                                                           Width="100" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="200"
+                                                    Header="State">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextAlignment="Left"
+                                                           Text="{Binding State}"
+                                                           Width="200" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                                <RowDefinition Height="4*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Width="170"
+                                    ToolTip="Create new medicine"
+                                    Content="New medicine"
+                                    Background="#CC80DEEA"
+                                    BorderBrush="#6680DEEA"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    Height="32"
+                                    VerticalAlignment="Bottom"
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Left">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="400"
+                                                Width="320"
+                                                Margin="40 20 40 20">
+
+                                        <TextBlock Text="Create new medicine"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBox  Margin="0 10 0 10"
+                                                  Width="250"
+                                                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                  VerticalAlignment="Top"
+                                                  AcceptsReturn="True"
+                                                  TextWrapping="Wrap"
+                                                  materialDesign:HintAssist.Hint="Enter medicine name"
+                                                  Text="{Binding NewMedicineName}"
+                                                  IsEnabled="True" />
+                                        <ListView ItemsSource="{Binding Ingredients}"
+                                                  VerticalAlignment="Top"
+                                                  Height="200"
+                                                  Width="280"
+                                                  SelectionMode="Single" 
+                                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                                  ScrollViewer.CanContentScroll="True"
+                                                  HorizontalAlignment="Center"
+                                                  SelectedValue="{Binding NewMedicineSelection}">
+                                            <ListView.View>
+                                                <GridView AllowsColumnReorder="False">
+                                                    <GridViewColumn Header="Ingredients">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox Content="{Binding Name}"
+                                                                          IsChecked="{Binding Selected}"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="CREATE"
+                                                    Command="{Binding CreateNewMedication}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="CANCEL"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Width="170"
+                                    ToolTip="Create new ingredient"
+                                    Content="New ingredient"
+                                    Background="#66FFFFFF"
+                                    BorderBrush="#6634565A"
+                                    Height="32"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left"
+                                    Grid.Row="1"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="200"
+                                                Width="320"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Create new ingredient"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBox  Margin="0 10 0 10"
+                                                  Width="250"
+                                                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                  VerticalAlignment="Top"
+                                                  AcceptsReturn="True"
+                                                  TextWrapping="Wrap"
+                                                  materialDesign:HintAssist.Hint="Enter ingredient name"
+                                                  Text="{Binding NewIngredientName}"
+                                                  IsEnabled="True" />
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="CREATE"
+                                                    Command="{Binding CreateNewIngredient}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="CANCEL"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Grid.Column="1"
+                                    Width="170"
+                                    ToolTip="Change or delete ingredients"
+                                    Content="Ingredients"
+                                    Background="#66FFFFFF"
+                                    BorderBrush="#6634565A"
+                                    Height="32"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Grid.Row="2"
+                                    IsEnabled="True">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="380"
+                                                Width="350"
+                                                Margin="20 10 20 10">
+                                        <TextBlock Text="Ingredient list"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <ListView ItemsSource="{Binding Ingredients}"
+                                                  VerticalAlignment="Top"
+                                                  Height="250"
+                                                  Width="280"
+                                                  SelectionMode="Single"
+                                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                                  ScrollViewer.CanContentScroll="True"
+                                                  HorizontalAlignment="Center"
+                                                  SelectedIndex="{Binding IngredientSelection}">
+                                            <ListView.View>
+                                                <GridView AllowsColumnReorder="False">
+                                                    <GridViewColumn Header="Ingredients">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBox  Margin="0 10 0 10"
+                                                                          Width="250"
+                                                                          Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                                          VerticalAlignment="Top"
+                                                                          AcceptsReturn="True"
+                                                                          TextWrapping="Wrap"
+                                                                          Text="{Binding Name}"
+                                                                          IsEnabled="True" />
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="DELETE"
+                                                    IsEnabled="{Binding IngredientEnable}"
+                                                    Command="{Binding DeleteIngredient}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="CANCEL"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Grid.Column="1"
+                                    Width="170"
+                                    ToolTip="Details"
+                                    Content="Details"
+                                    Background="#66FFFFFF"
+                                    BorderBrush="#6634565A"
+                                    Height="32"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Grid.Row="3"
+                                    IsEnabled="{Binding EnableChanges}">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="500"
+                                                Width="320"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Details about:"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBlock Text="{Binding SelectedName}"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="15"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <ListView ItemsSource="{Binding SelectedIngredients}"
+                                                  VerticalAlignment="Top"
+                                                  Height="300"
+                                                  Width="Auto"
+                                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                                  ScrollViewer.CanContentScroll="True"
+                                                  HorizontalAlignment="Center">
+                                            <ListView.View>
+                                                <GridView AllowsColumnReorder="False">
+                                                    <GridViewColumn Header="Ingredients">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock TextAlignment="Center"
+                                                                           Text="{Binding Name}"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="BACK"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+
+                            <Button Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                                    Grid.Column="1"
+                                    Width="170"
+                                    ToolTip="Correct information about rejected medicine"
+                                    Content="Change medicine"
+                                    Background="#66FFFFFF"
+                                    BorderBrush="#6634565A"
+                                    Height="32"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Grid.Row="4"
+                                    IsEnabled="{Binding EnableMedicineChange}">
+                                <Button.CommandParameter>
+                                    <StackPanel Height="380"
+                                                Width="400"
+                                                Margin="40 20 40 20">
+                                        <TextBlock Text="Change medicine with name:"
+                                                   HorizontalAlignment="Center"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <TextBox  Margin="0 10 0 10"
+                                                  Width="250"
+                                                  Style="{StaticResource MaterialDesignFilledTextBox}"
+                                                  VerticalAlignment="Top"
+                                                  AcceptsReturn="True"
+                                                  TextWrapping="Wrap"
+                                                  materialDesign:HintAssist.Hint="Change medicine name"
+                                                  Text="{Binding SelectedName}"
+                                                  IsEnabled="True" />
+                                        <TextBlock Text="{Binding SelectedMedicine.Description}"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="12"
+                                                   Margin="10"
+                                                   Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                        <ListView ItemsSource="{Binding Ingredients}"
+                                                  VerticalAlignment="Top"
+                                                  Height="150"
+                                                  Width="280"
+                                                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                                  ScrollViewer.CanContentScroll="True"
+                                                  HorizontalAlignment="Center"
+                                                  SelectedIndex="{Binding Selection}">
+                                            <ListView.View>
+                                                <GridView AllowsColumnReorder="False">
+                                                    <GridViewColumn Header="Ingredients">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox Content="{Binding Name}"
+                                                                          IsChecked="{Binding Selected}"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Center">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsDefault="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="CHANGE"
+                                                    Command="{Binding ChangeMedicine}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    IsCancel="True"
+                                                    Margin="0 30 0 0"
+                                                    Content="CANCEL"
+                                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Button.CommandParameter>
+                            </Button>
+                        </Grid>
+                        <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+
+                    </Grid>
+                </materialDesign:Card>
+            </materialDesign:DialogHost>
+
+
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

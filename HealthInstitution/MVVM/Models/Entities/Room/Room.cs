@@ -108,7 +108,7 @@ namespace HealthInstitution.MVVM.Models.Entities
 
         public void Change(string newName, int newNumber, RoomType newType)
         {
-            if (newName is null || newName.Equals("")) throw new EmptyRoomNameException("Room name cannot be empty");
+            if (newName is null || newName.Equals("")) throw new EmptyNameException("Room name cannot be empty");
             else if (newNumber == 0) throw new ZeroRoomNumberException("Room number cannot be 0");
             else if (!Institution.Instance().RoomRepository.CheckNumber(newNumber, new List<int> { _number })) throw new RoomNumberAlreadyTakenException("Room number already taken");
             else if (newType != _type && !IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be changed, because it has scheduled appointments");

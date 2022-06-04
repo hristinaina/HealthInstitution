@@ -10,6 +10,7 @@ using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.AppointmentCommands;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
@@ -118,7 +119,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         private static bool CheckNewAppointmentTime(Doctor doctor, Patient patient, DateTime dateTime, int duration, bool validation = false)
         {
-            if (!doctor.IsAvailable(dateTime, duration))
+            DoctorService doctorService = new DoctorService(doctor);
+            if (!doctorService.IsAvailable(dateTime, duration))
             {
                 return false;
             }

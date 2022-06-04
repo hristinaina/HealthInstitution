@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static HealthInstitution.MVVM.Models.Services.NotificationService;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
@@ -119,6 +120,11 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
             InitializeCommands();
             InitializeSuggestionsParrameters();
+
+            Del delegateMethod = showNotification;
+            NotificationService notifications = new NotificationService(_patient, delegateMethod);
+            notifications.ExecuteRealTimeNotifications();
+            notifications.AddMissedNotifications();
         }
 
         public PatientAppointmentViewModel(Doctor doctor) : this()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Services;
@@ -57,6 +58,79 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 allergens.Add(FindByID(reference.IngredientId));
             }
             return allergens;
+        }
+
+        private bool CheckID(int id)
+        {
+            foreach (Allergen m in _allergens)
+            {
+                if (m.ID == id) return false;
+            }
+
+            return true;
+        }
+
+        private int GetID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
+
+        private bool IsNameAvailable(Allergen allergen, string name)
+        {
+            foreach (Allergen a in _allergens)
+            {
+                if (a.Name.Equals(name) && !a.Equals(allergen)) return false;
+            }
+            return true;
+        }
+
+        private bool isDeletable(Allergen allergen)
+        {
+            foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
+            {
+                foreach (Allergen a in medicine.Ingredients)
+                {
+                    if (a.Equals(allergen)) return false;
+                }
+            }
+
+            foreach (Medicine medicine in Institution.Instance().MedicineRepository.Medicines)
+            {
+                foreach (Allergen a in medicine.Ingredients)
+                {
+                    if (a.Equals(allergen)) return false;
+                }
+            }
+
+            return true;
+        }
+
+        public void ChangeName(Allergen allergen, string name)
+        {
+            if (!IsNameAvailable(allergen, name)) throw new NameNotAvailableException("Name already taken");
+
+            allergen.Name = name;
+        }
+
+        public Allergen AddNewAllergen(Allergen allergen)
+        {
+            if (!IsNameAvailable(allergen, allergen.Name)) throw new NameNotAvailableException("Name already in use!");
+            
+            allergen.ID = GetID();
+            _allergens.Add(allergen);
+            return allergen;
+        }
+
+        public void DeleteAllergen(Allergen allergen)
+        {
+            if (!isDeletable(allergen)) throw new IngredientInUseException("Ingredient in use!");
+
+            _allergens.Remove(allergen);
         }
     }
 }

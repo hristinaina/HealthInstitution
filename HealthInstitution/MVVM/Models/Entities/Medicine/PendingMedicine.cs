@@ -14,11 +14,12 @@ namespace HealthInstitution.MVVM.Models.Entities
         private string _name;
         private string _description;
         private string _revisionDescription;
+        private List<Allergen> _ingredients;
         private State _state;
         private List<Allergen> _allergens;
 
         [JsonProperty("Id")]
-        public int Id { get => _id; set { _id = value; } }
+        public int ID { get => _id; set { _id = value; } }
         [JsonProperty("Name")]
         public string Name { get => _name; set { _name = value; } }
         [JsonProperty("Description")]
@@ -30,12 +31,17 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonIgnore]
         public List<Allergen> Allergens { get => _allergens; set { _allergens = value; } }
 
+        [JsonIgnore]
+        public List<Allergen> Ingredients { get => _ingredients; set { _ingredients = value; } }
+
+
         public PendingMedicine()
         {
-
+            _ingredients = new List<Allergen>();
+            _description = "";
         }
 
-        public PendingMedicine(int id, string name, string description, State state)
+        public PendingMedicine(int id, string name, string description, State state) : this()
         {
             _id = id;
             _name = name;
@@ -44,6 +50,12 @@ namespace HealthInstitution.MVVM.Models.Entities
             _allergens = new List<Allergen>();
         }
 
+        public PendingMedicine(string name, List<Allergen> ingredients, State state) : this()
+        {
+            _name = name;
+            _ingredients = ingredients;
+            _state = state;
+        }
 
     }
 }

@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -24,8 +25,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             _viewModel.DialogOpen = false;
 
             Appointment examination = _viewModel.SelectedExamination.Examination;
-
-            Institution.Instance().CancelExamination((Examination)examination);
+            DoctorCancelAppointmentService doctorCancelAppointmentService = new();
+            doctorCancelAppointmentService.CancelExamination((Examination)examination);
             _viewModel.FillExaminationsList();
         
         }

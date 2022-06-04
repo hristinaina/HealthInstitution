@@ -19,9 +19,23 @@ namespace HealthInstitution.MVVM.Models.Entities
         private List<Examination> _examinations;
         private List<Operation> _operations;
         private List<ExaminationChange> _examinationChanges;
-        private List<string> _notifications;
+        private List<Notification> _notifications;
+        private int _notificationsPreference;
 
-        public List<string> Notifications { get => _notifications; set { _notifications = value; } }
+        [JsonIgnore]
+        public List<Notification> Notifications
+        {
+            get
+            {
+                if (_notifications == null)
+                {
+                    _notifications = new List<Notification>();
+                }
+
+                return _notifications;
+            }
+            set => _notifications = value;
+        }
         [JsonProperty("Blocked")]
         public bool Blocked { get => _blocked; set { _blocked = value; } }
         [JsonProperty("BlockadeType")]
@@ -30,7 +44,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         public bool Deleted { get => _deleted; set { _deleted = value; } }
         [JsonProperty("Record")]
         public MedicalRecord Record { get => _record; set { _record = value; } }
-        [JsonProperty("Notifications")]
+        [JsonProperty("NotificationsPreference")]
+        public int NotificationsPreference { get => _notificationsPreference; set { _notificationsPreference = value; } }
         [JsonIgnore]
         public List<Examination> Examinations
         {
@@ -75,7 +90,6 @@ namespace HealthInstitution.MVVM.Models.Entities
         }
         public Patient()
         {
-            _notifications = new List<string>();
         }
 
         public Patient(int id, string firstName, string lastName, string email, string password, Gender gender,
@@ -86,7 +100,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blockadeType = 0;
             _deleted = false;
             _record = new MedicalRecord(height, weight, new List<Allergen>(), new List<string>());
-            _notifications = new List<string>();
         }
 
         public void UnblockPatient()
@@ -129,6 +142,19 @@ namespace HealthInstitution.MVVM.Models.Entities
             }
             pastAppointments = pastAppointments.OrderBy(x => x.Date).ToList();
             return pastAppointments;
+        }
+        public List<Appointment> GetPastExaminations()
+        {
+            List<Appointment> pastExaminations = new List<Appointment>();
+            foreach (Appointment appointment in GetAllAppointments())
+            {
+                if (DateTime.Compare(appointment.Date, DateTime.Now) < 0)
+                {
+                    pastExaminations.Add(appointment);
+                }
+            }
+            pastExaminations = pastExaminations.OrderBy(x => x.Date).ToList();
+            return pastExaminations;
         }
 
         public bool IsTrolling()

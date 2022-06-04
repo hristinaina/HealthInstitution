@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -28,7 +29,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
             try
             {
-                bool isCreated = Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Operation), _viewModel.Duration);
+                DoctorScheduleAppointmentService scheduleAppointmentService = new DoctorScheduleAppointmentService();
+                bool isCreated = scheduleAppointmentService.CreateAppointment(doctor, patient, datetime, nameof(Operation), _viewModel.Duration);
                 
                 if (isCreated)
                 {

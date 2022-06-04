@@ -1,26 +1,38 @@
 [
   {
     "ID": 1,
-    "Name": "Paracetamol"
+    "Name": "Paracetamol",
+    "Description": null,
+    "State": 0
   },
   {
     "ID": 2,
-    "Name": "Brufen"
+    "Name": "Brufen",
+    "Description": null,
+    "State": 0
   },
   {
     "ID": 3,
-    "Name": "Ranital"
+    "Name": "Ranital",
+    "Description": null,
+    "State": 0
   },
   {
     "ID": 4,
-    "Name": "Apaurin"
+    "Name": "Apaurin",
+    "Description": null,
+    "State": 0
   },
   {
     "ID": 5,
-    "Name": "Leksilijum"
+    "Name": "Leksilijum",
+    "Description": null,
+    "State": 0
   },
   {
     "ID": 6,
-    "Name": "Bensedin"
+    "Name": "Bensedin",
+    "Description": null,
+    "State": 0
   }
 ]
