@@ -44,7 +44,14 @@
   {
     "RoomId": 5,
     "EquipmentId": 5,
-    "Quantity": 13,
+    "Quantity": 20,
+    "StartDate": "2022-05-23T00:00:00",
+    "EndDate": "9999-04-25T18:43:37.0931955+02:00"
+  },
+  {
+    "RoomId": 5,
+    "EquipmentId": 4,
+    "Quantity": 18,
     "StartDate": "2022-05-23T00:00:00",
     "EndDate": "9999-04-25T18:43:37.0931955+02:00"
   },
@@ -107,7 +114,7 @@
   {
     "RoomId": 14,
     "EquipmentId": 1,
-    "Quantity": 7,
+    "Quantity": 9,
     "StartDate": "2022-05-11T00:00:00",
     "EndDate": "9999-04-25T18:43:37.0931955+02:00"
   },

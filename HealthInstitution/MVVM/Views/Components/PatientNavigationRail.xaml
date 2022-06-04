@@ -43,7 +43,6 @@
                             Command="{Binding Navigation.Appointments}"
                             Height="70"
                             BorderThickness="0,0,0,0" />
-                    <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
                 </StackPanel>
             </TabItem.Header>
         </TabItem>
@@ -59,7 +58,6 @@
                             Command="{Binding Navigation.Search}"
                             Height="70"
                             BorderThickness="0,0,0,0" />
-                    <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
                 </StackPanel>
             </TabItem.Header>
         </TabItem>
@@ -74,8 +72,8 @@
                             Padding="-4"
                             Command="{Binding Navigation.Survey}"
                             Height="70"
-                            BorderThickness="0,0,0,0" />
-                    <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+                            BorderThickness="0,0,0,0"
+                            />
                 </StackPanel>
             </TabItem.Header>
         </TabItem>
@@ -93,7 +91,27 @@
                             BorderBrush="#6680DEEA"
                             Command="{Binding Navigation.LogOut}"
                             Height="32" />
-                    <!--IsEnabled="{Binding DataContext.ControlsEnabled, RelatrTiveSource={RelativeSource FindAncestor, Ancestoype=Window}}"-->
+                </StackPanel>
+            </TabItem.Header>
+        </TabItem>
+        <TabItem Width="100"
+                 Height="32"
+                 Background="#DDFFFFFF">
+            <TabItem.Header>
+                <StackPanel Width="auto"
+                            Height="auto">
+                    <Button Style="{StaticResource MaterialDesignFlatSecondaryDarkBgButton}"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding Navigation.Notifications}"
+                            Height="40">
+                        <materialDesign:PackIcon Kind="Bell"
+                                                 Height="30"
+                                                 Width="30"
+                                                 HorizontalAlignment="Stretch"
+                                                 VerticalAlignment="Stretch" />
+                    </Button>
                 </StackPanel>
             </TabItem.Header>
         </TabItem>

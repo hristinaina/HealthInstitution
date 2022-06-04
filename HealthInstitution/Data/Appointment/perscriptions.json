@@ -1,29 +1,34 @@
 [
   {
+    "LastNotification": "2022-05-04T17:43:37.0931955+02:00",
     "ID": 1,
-    "LongitudeInDays": 2,
-    "TimesADay": 4,
+    "LongitudeInDays": 5,
+    "TimesADay": 5,
     "TherapyMealDependency": 3
   },
   {
+    "LastNotification": "2022-06-03T17:43:37.0931955+02:00",
     "ID": 2,
-    "LongitudeInDays": 7,
+    "LongitudeInDays": 100,
     "TimesADay": 3,
     "TherapyMealDependency": 3
   },
   {
+    "LastNotification": "2022-04-29T17:43:37.0931955+02:00",
     "ID": 3,
     "LongitudeInDays": 3,
     "TimesADay": 2,
     "TherapyMealDependency": 0
   },
   {
+    "LastNotification": "2022-04-28T17:43:37.0931955+02:00",
     "ID": 4,
     "LongitudeInDays": 5,
     "TimesADay": 3,
     "TherapyMealDependency": 0
   },
   {
+    "LastNotification": "2022-04-08T17:43:37.0931955+02:00",
     "ID": 5,
     "LongitudeInDays": 5,
     "TimesADay": 5,

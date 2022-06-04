@@ -147,6 +147,15 @@ namespace HealthInstitution.MVVM.Models.Services
             }
         }
 
+        public static void ConnectPatientNotifications()
+        {
+            foreach (Notification notification in Institution.Instance().NotificationRepository.Notifications)
+            {
+                Patient patient = Institution.Instance().PatientRepository.FindByID(notification.PatientId);
+                patient.Notifications.Add(notification);
+            }
+        }
+
         public static bool CheckIfEmailIsAvailable(string email, Patient patient = null)
         {
             string patientEmail = null;

@@ -32,7 +32,6 @@ namespace HealthInstitution.MVVM.Models.Entities
                 _allergens = value;
             }
         }
-       
         [JsonIgnore]
         public List<Referral> Referrals
         {

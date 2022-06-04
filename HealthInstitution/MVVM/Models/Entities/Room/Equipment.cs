@@ -41,6 +41,15 @@ namespace HealthInstitution.MVVM.Models.Entities
             _arrangmentByRooms = new Dictionary<Room, int>();
         }
 
+        // constructor copy
+        public Equipment(Equipment equipment)
+        {
+            _id = equipment.ID;
+            _name = equipment.Name;
+            _quantity = equipment.Quantity;
+            _type = equipment.Type;
+        }
+
         public Equipment(int id, string name, int quantity, EquipmentType type)
         {
             _id = id;
@@ -194,6 +203,12 @@ namespace HealthInstitution.MVVM.Models.Entities
             newTargetRoomQuantity += quantity;
             if (UpdateEquipmentInRoom(pastArrangement, room, newTargetRoomQuantity)) return;
             Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, room, newTargetRoomQuantity, newArrangementStartDate, newArrangementTargetEndDate));
+        }
+
+        public override string ToString()
+        {
+            return _name;
+
         }
     }
 }
