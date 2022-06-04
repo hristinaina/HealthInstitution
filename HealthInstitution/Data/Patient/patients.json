@@ -1,8 +1,5 @@
 [
   {
-    "Notifications": [
-      "Appointment with id=5 has been changed. Changed date from 5/14/2022 5:36:13 PM to 5/14/2022 6:21:13 PM"
-    ],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": false,
@@ -14,6 +11,7 @@
         "jos nesto"
       ]
     },
+    "NotificationsPreference": 1,
     "ID": 1,
     "FirstName": "Test",
     "LastName": "Patient",
@@ -22,7 +20,6 @@
     "Gender": 0
   },
   {
-    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": false,
@@ -34,6 +31,7 @@
         "jos nesto..."
       ]
     },
+    "NotificationsPreference": 1,
     "ID": 2,
     "FirstName": "Test99",
     "LastName": "Patient",
@@ -42,7 +40,6 @@
     "Gender": 1
   },
   {
-    "Notifications": [],
     "Blocked": true,
     "BlockadeType": 1,
     "Deleted": false,
@@ -54,6 +51,7 @@
         "jos nesto..."
       ]
     },
+    "NotificationsPreference": 1,
     "ID": 3,
     "FirstName": "Test3",
     "LastName": "Patient",
@@ -62,7 +60,6 @@
     "Gender": 2
   },
   {
-    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": true,
@@ -74,6 +71,7 @@
         "jos nesto..."
       ]
     },
+    "NotificationsPreference": 1,
     "ID": 4,
     "FirstName": "Test9",
     "LastName": "Patient9",
@@ -82,9 +80,6 @@
     "Gender": 1
   },
   {
-    "Notifications": [
-      "Appointment with id=9 has been changed. Changed date from 5/14/2022 5:33:29 PM to 5/14/2022 6:18:29 PM"
-    ],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": false,
@@ -96,6 +91,7 @@
         "jos nesto..."
       ]
     },
+    "NotificationsPreference": 1,
     "ID": 5,
     "FirstName": "Test5",
     "LastName": "Prezime",
@@ -104,7 +100,6 @@
     "Gender": 2
   },
   {
-    "Notifications": [],
     "Blocked": true,
     "BlockadeType": 1,
     "Deleted": false,
@@ -117,6 +112,7 @@
         "glavobolja"
       ]
     },
+    "NotificationsPreference": 1,
     "ID": 6,
     "FirstName": "Test6",
     "LastName": "Prezime",
@@ -125,7 +121,6 @@
     "Gender": 2
   },
   {
-    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": true,
@@ -137,6 +132,7 @@
         "jos nesto..."
       ]
     },
+    "NotificationsPreference": 1,
     "ID": 0,
     "FirstName": "hristinane",
     "LastName": "pravilijepaimena",
@@ -145,7 +141,6 @@
     "Gender": 1
   },
   {
-    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": false,
@@ -157,6 +152,7 @@
         "jos nesto..."
       ]
     },
+    "NotificationsPreference": 1,
     "ID": 8,
     "FirstName": "neko",
     "LastName": "nekovic",
@@ -165,7 +161,6 @@
     "Gender": 1
   },
   {
-    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": false,
@@ -176,6 +171,7 @@
         "Imao glavobolju poslije nastup"
       ]
     },
+    "NotificationsPreference": 1,
     "ID": 7,
     "FirstName": "Harry",
     "LastName": "Styles",
@@ -184,7 +180,6 @@
     "Gender": 2
   },
   {
-    "Notifications": [],
     "Blocked": false,
     "BlockadeType": 0,
     "Deleted": true,
@@ -193,6 +188,7 @@
       "Weight": 10.0,
       "HistoryOfIllnesses": []
     },
+    "NotificationsPreference": 1,
     "ID": 9,
     "FirstName": "golub",
     "LastName": "golubic",

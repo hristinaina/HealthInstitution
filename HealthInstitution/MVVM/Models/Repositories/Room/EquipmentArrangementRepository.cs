@@ -1,11 +1,8 @@
-﻿using HealthInstitution.MVVM.Models.Entities;
-using HealthInstitution.MVVM.Models.Entities.References;
-using HealthInstitution.MVVM.Models.Services;
+﻿using HealthInstitution.MVVM.Models.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HealthInstitution.MVVM.Models.Entities;
+
 
 namespace HealthInstitution.MVVM.Models.Repositories.Room
 {
@@ -51,66 +48,5 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             FileService.Serialize<EquipmentArrangement>(_fileName, _validArrangement);
         }
 
-        public EquipmentArrangement FindCurrentArrangement(Entities.Room r, Equipment e)
-        {
-            foreach (EquipmentArrangement a in CurrentArrangement)
-            {
-                if (a.RoomId == r.ID && a.EquipmentId == e.ID) return a;
-            }
-            return null;
-        }
-
-        public EquipmentArrangement FindFirstBefore(Entities.Room r, Equipment e, DateTime date)
-        {
-            EquipmentArrangement arrangement = null;
-            foreach (EquipmentArrangement a in _validArrangement)
-            {
-                if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate < date)
-                {
-                    if (arrangement is null || a.StartDate > arrangement.StartDate) arrangement = a;
-                }
-            }
-            return arrangement;
-        }
-
-        public List<EquipmentArrangement> FindAllBefore(Entities.Room r, Equipment e, DateTime date)
-        {
-            List<EquipmentArrangement> arrangements = new List<EquipmentArrangement>();
-            foreach (EquipmentArrangement a in _validArrangement)
-            {
-                if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate < date)
-                {
-                    arrangements.Add(a);
-                }
-            }
-            return arrangements;
-        }
-
-        public EquipmentArrangement FindFirstAfter(Entities.Room r, Equipment e, DateTime date)
-        {
-            EquipmentArrangement arrangement = null;
-            foreach (EquipmentArrangement a in _validArrangement)
-            {
-                if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate > date)
-                {
-                    if (arrangement is null || a.StartDate < arrangement.StartDate) arrangement = a;
-                }
-            }
-            return arrangement;
-        }
-
-        public List<EquipmentArrangement> FindAllAfter(Entities.Room r, Equipment e, DateTime date)
-        {
-            List<EquipmentArrangement> arrangements = new List<EquipmentArrangement>();
-            foreach (EquipmentArrangement a in _validArrangement)
-            {
-                if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate > date)
-                {
-                    arrangements.Add(a);
-                }
-            }
-            return arrangements;
-        }
- 
     }
 }

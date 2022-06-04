@@ -65,22 +65,8 @@ namespace HealthInstitution.MVVM.Models
             }
             return false;
         }
-
-        public bool Delete(int id)
-        {
-            foreach(Examination examination in _examinations)
-            {
-                if (examination.ID == id)
-                {
-                    _examinations.Remove(examination);
-                    return true;
-                }
-            }
-            return false;
-
-        }
-
-        public int NewId()
+        
+        public int GetID()
         {
             if (_examinations.Count == 0)
             {
@@ -108,21 +94,6 @@ namespace HealthInstitution.MVVM.Models
                     _examinations.Remove(examination);
                 }
             }
-        }
-
-        public List<Examination> GetFutureExaminations(Specialization specialization, Patient patient)
-        {
-            List<Examination> futureAppointments = new();
-            foreach (Examination appointment in Examinations)
-            {
-                if (DateTime.Compare(appointment.Date, DateTime.Now) > 0 &&
-                    (appointment.Doctor.Specialization == specialization || appointment.Patient == patient))
-                {
-                    futureAppointments.Add(appointment);
-                }
-            }
-            futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
-            return futureAppointments;
         }
 
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate)

@@ -41,6 +41,15 @@ namespace HealthInstitution.MVVM.Models.Entities
             _arrangmentByRooms = new Dictionary<Room, int>();
         }
 
+        // constructor copy
+        public Equipment(Equipment equipment)
+        {
+            _id = equipment.ID;
+            _name = equipment.Name;
+            _quantity = equipment.Quantity;
+            _type = equipment.Type;
+        }
+
         public Equipment(int id, string name, int quantity, EquipmentType type)
         {
             _id = id;
@@ -54,112 +63,10 @@ namespace HealthInstitution.MVVM.Models.Entities
             _arrangmentByRooms = arragment;
         }
 
-        public void ArrangeInRoom(Room r, int quantity)
+        public override string ToString()
         {
-            if (!_arrangmentByRooms.ContainsKey(r))
-            {
-                _arrangmentByRooms[r] = 0;
-            }
-            _arrangmentByRooms[r] += quantity;
-        }
+            return _name;
 
-        public int GetQuantityInRoom(Room r)
-        {
-            return _arrangmentByRooms[r];
-        }
-
-        public void ReturnToWarehouse(DateTime date, Room room)
-        {
-            Room warehouse = Institution.Instance().RoomRepository.FindById(0);
-
-            EquipmentArrangement destinationRoomArrangement = Institution.Instance().EquipmentArragmentRepository.FindFirstBefore(room, this, date);
-            List<EquipmentArrangement> futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(room, this, date);
-
-            destinationRoomArrangement.EndDate = date;
-            foreach (EquipmentArrangement a in futureArrangements)
-            {
-                Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Remove(a);
-            }
-
-            EquipmentArrangement warehouseArrangement = Institution.Instance().EquipmentArragmentRepository.FindFirstBefore(warehouse, this, date);
-            futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(warehouse, this, date);
-            DateTime newArrangementTargetEndDate = DateTime.MaxValue;
-
-
-            if (warehouseArrangement is not null)
-            {
-                newArrangementTargetEndDate = warehouseArrangement.EndDate;
-                warehouseArrangement.EndDate = date;
-            }
-            foreach (EquipmentArrangement a in futureArrangements)
-            {
-                a.Quantity += destinationRoomArrangement.Quantity;
-            }
-
-            int newWarehouseQuantity = 0;
-            if (warehouseArrangement is not null)
-            {
-                newWarehouseQuantity = warehouseArrangement.Quantity;
-            }
-            newWarehouseQuantity += destinationRoomArrangement.Quantity;
-
-            Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, warehouse, newWarehouseQuantity, date, newArrangementTargetEndDate));
-
-        }
-
-        public void Rearrange(Room destinationRoom, Room targetRoom, DateTime newArrangementStartDate, int newArrangementQuantity)
-        {
-            if (targetRoom is null) throw new RearrangeTargetRoomNullException("Target room must be selected");
-            else if (newArrangementQuantity == 0) throw new ZeroQuantityException("Quantity cannot be zero");
-            else if (newArrangementStartDate <= DateTime.Today) throw new DateException("Arrangement date must be in future");
-            else if (newArrangementQuantity > ArrangmentByRooms[destinationRoom]) throw new NotEnoughEquipmentException("Not enough equipment in selected room");
-            MoveFromRoom(destinationRoom, newArrangementStartDate, newArrangementQuantity);
-            MoveToNewRoom(targetRoom, newArrangementStartDate, newArrangementQuantity);
-        }
-
-        public void MoveFromRoom(Room room, DateTime newArrangementStartDate, int quantity)
-        {
-            EquipmentArrangement pastArrangement = Institution.Instance().EquipmentArragmentRepository.FindFirstBefore(room, this, newArrangementStartDate);
-            List<EquipmentArrangement> futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(room, this, newArrangementStartDate);
-
-            DateTime newArrangementEndDate = pastArrangement.EndDate;
-            pastArrangement.EndDate = newArrangementStartDate;
-            foreach (EquipmentArrangement a in futureArrangements)
-            {
-                a.Quantity -= quantity;
-            }
-
-            int newDestinationRoomQuantity = pastArrangement.Quantity - quantity;
-            Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, room, newDestinationRoomQuantity, newArrangementStartDate, newArrangementEndDate));
-        }
-
-        public void MoveToNewRoom(Room room, DateTime newArrangementStartDate, int quantity)
-        {
-            EquipmentArrangement pastArrangement = Institution.Instance().EquipmentArragmentRepository.FindFirstBefore(room, this, newArrangementStartDate);
-            List<EquipmentArrangement> futureArrangements = Institution.Instance().EquipmentArragmentRepository.FindAllAfter(room, this, newArrangementStartDate);
-            DateTime newArrangementTargetEndDate = DateTime.MaxValue;
-
-
-            if (pastArrangement is not null)
-            {
-                newArrangementTargetEndDate = pastArrangement.EndDate;
-                pastArrangement.EndDate = newArrangementStartDate;
-            }
-
-            foreach (EquipmentArrangement a in futureArrangements)
-            {
-                a.Quantity += quantity;
-            }
-
-
-            int newTargetRoomQuantity = 0;
-            if (pastArrangement is not null)
-            {
-                newTargetRoomQuantity = pastArrangement.Quantity;
-            }
-            newTargetRoomQuantity += quantity;
-
-            Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Add(new EquipmentArrangement(this, room, newTargetRoomQuantity, newArrangementStartDate, newArrangementTargetEndDate));
         }
     }
 }

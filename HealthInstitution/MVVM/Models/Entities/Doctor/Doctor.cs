@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Entities
 {
-    public class Doctor : User
+    public class Doctor : User, IComparable, IComparable<Doctor>
     {
         private Specialization _specialization;
         private List<Examination> _examinations;
@@ -46,62 +46,38 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
         }
 
-        public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
-        {
 
-            Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
-            if (interruptingAppointment is null) return true;
-            return false;
+        public Doctor(string firstName, string lastName, Specialization specialization) : base(firstName, lastName)
+        {
+            _specialization = specialization;
+        }
+        public virtual bool Equals(Doctor? doctor) {
+            return FirstName == doctor.FirstName && LastName == doctor.LastName;
         }
 
-        public Appointment FindInterruptingAppointment(DateTime dateTime, int durationInMin = 15)
-            // returns null if appointment can be reserved
-            // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
+        public int CompareTo(object obj)
         {
-            List<Appointment> appointments = new();
-            foreach (Examination examination in _examinations) appointments.Add(examination);
-            foreach (Operation operation in _operations) appointments.Add(operation);
-            foreach (Appointment appointment in appointments)
+            if (obj == null)
             {
-                DateTime appointmentBegin = appointment.Date;
-                int duration = 15;
-                if (appointment.GetType() == typeof(Operation))
-                {
-                    Operation operation = (Operation)appointment;
-                    duration = operation.Duration;
-                }
-                DateTime appointmentEnd = appointmentBegin.AddMinutes(duration);
-                if (DateTime.Compare(appointment.Date.Date, dateTime.Date) != 0) continue;
-                if (DateTime.Compare(dateTime, appointmentBegin) >= 0 &&
-                    DateTime.Compare(dateTime, appointmentEnd) < 0) return appointment;  
-                if (DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentBegin) > 0 &&
-                    DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentEnd) <= 0)
-                    return appointment;
+                return 1;
             }
 
-            return null; 
+            Doctor other = obj as Doctor; // avoid double casting
+            if (other == null)
+            {
+                throw new ArgumentException("A Doctor object is required for comparison.", "obj");
+            }
+
+            return CompareTo(other);
         }
 
-        // schedule for certain day and 3 days after
-        public List<Appointment> GetSchedule(DateTime date, string type)
+        public int CompareTo(Doctor other)
         {
-            List<Appointment> appointments = new();
-            List<Appointment> scheduledAppointments = new();
-            if (type == nameof(Examination))
+            if (other is null)
             {
-                foreach (Examination examination in _examinations) appointments.Add(examination);
-            } else
-            {
-                foreach (Operation operation in _operations) appointments.Add(operation);
+                return 1;
             }
-
-            foreach (Appointment appointment in appointments)
-            {
-                if (appointment.Date >= date && date.AddDays(3) >= appointment.Date)
-                    scheduledAppointments.Add(appointment);
-            }
-
-            return scheduledAppointments;
+            return -string.Compare(this.FirstName + this.LastName, other.FirstName + other.LastName, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

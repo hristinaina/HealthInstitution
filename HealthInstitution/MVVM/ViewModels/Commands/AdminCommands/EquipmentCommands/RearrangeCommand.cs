@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using HealthInstitution.MVVM.Models.Services.Equipments;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentCommands
 {
@@ -29,7 +30,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
             {
                 DateTime newArrangementStartDate = _model.ParseDate(_model.NewArrangementStartDate);
 
-                _model.SelectedEquipment.Equipment.Rearrange(_model.SelectedEquipment.Room, _model.NewArrangemenTargetRoom, newArrangementStartDate, _model.NewArrangementQuantity);
+                EquipmentService service = new EquipmentService(_model.SelectedEquipment.Equipment);
+                service.Rearrange(_model.SelectedEquipment.Room, _model.NewArrangemenTargetRoom, newArrangementStartDate, _model.NewArrangementQuantity);
 
                 _model.DialogOpen = false;
             } catch (RearrangeTargetRoomNullException e)

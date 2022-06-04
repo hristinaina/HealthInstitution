@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities.References;
@@ -16,17 +17,20 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
 
         private readonly Institution _institution;
         private AppointmentRequestsViewModel _viewModel;
+        private readonly ExaminationChangeService _service;
 
         public RejectCommand(AppointmentRequestsViewModel viewModel)
         {
             _institution = Institution.Instance();
             _viewModel = viewModel;
+            _service = new ExaminationChangeService();
         }
 
         public override void Execute(object parameter)
         {
-            ExaminationChange change = Institution.Instance().ExaminationChangeRepository.FindByID(_viewModel.SelectedRequestId);
-            SecretaryService.RejectChange(change);
+            _service.RejectChange(_viewModel.SelectedRequestId);
+            string message = "This request has been successfully rejected.";
+            MessageBox.Show(message);
             _viewModel.FillRequestsList();
         }
     }

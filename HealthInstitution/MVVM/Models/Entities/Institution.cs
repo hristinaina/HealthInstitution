@@ -9,6 +9,8 @@ using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Repositories.References;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.Exceptions;
+using HealthInstitution.MVVM.Models.Services;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -37,6 +39,7 @@ namespace HealthInstitution.MVVM.Models
         private readonly RoomRepository _roomRepository;
         private readonly RenovationRepository _renovationRepository;
         private readonly RoomRenovationRepository _roomRenovationRepository;
+        private readonly EquipmentOrderRepository _equipmentOrderRepository;
 
         private readonly MedicineRepository _medicineRepository;
         private readonly DayOffRepository _dayOffRepository;
@@ -49,7 +52,10 @@ namespace HealthInstitution.MVVM.Models
 
         private readonly DoctorDaysOffRepository _doctorDaysOffRepository;
         private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
-        private ExaminationChangeRepository _examinationChangeRepository;
+        private readonly ExaminationChangeRepository _examinationChangeRepository;
+
+        private readonly NotificationRepository _notificationRepository;
+
 
         private User _currentUser;
         public User CurrentUser { get => _currentUser; set { _currentUser = value; } }
@@ -85,6 +91,7 @@ namespace HealthInstitution.MVVM.Models
             _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
             _renovationRepository = new RenovationRepository(_appSettings.RenovationFileName);
             _roomRenovationRepository = new RoomRenovationRepository(_appSettings.RoomRenovationFileName);
+            _equipmentOrderRepository = new EquipmentOrderRepository(_appSettings.EquipmentOrderFileName);
 
             _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
             _referralRepository = new ReferralRepository(_appSettings.RefferalsFileName);
@@ -99,6 +106,8 @@ namespace HealthInstitution.MVVM.Models
             _doctorDaysOffRepository = new DoctorDaysOffRepository(_appSettings.DoctorDaysOffFileName);
             _prescriptionMedicineRepository = new PrescriptionMedicineRepository(_appSettings.PrescriptionMedicineFileName);
             _examinationChangeRepository = new ExaminationChangeRepository(_appSettings.ExaminationChangeFileName);
+
+            _notificationRepository = new NotificationRepository(_appSettings.PatientNotificationsFileName);
 
             LoadAll();
         }
@@ -129,6 +138,8 @@ namespace HealthInstitution.MVVM.Models
             _prescriptionMedicineRepository.LoadFromFile();
             _prescriptionRepository.LoadFromFile();
             _examinationChangeRepository.LoadFromFile();
+            _equipmentOrderRepository.LoadFromFile();
+            _notificationRepository.LoadFromFile();
         }
 
         public void SaveAll()
@@ -151,12 +162,14 @@ namespace HealthInstitution.MVVM.Models
             _medicineRepository.SaveToFile();
             _allergenRepository.SaveToFile();
             _patientAllergenRepository.SaveToFile();
-            _medicineAllergenRepository.LoadFromFile();
+            _medicineAllergenRepository.SaveToFile();
             _pendingMedicineRepository.SaveToFile();
             _doctorDaysOffRepository.SaveToFile();
             _prescriptionMedicineRepository.SaveToFile();
             _prescriptionRepository.SaveToFile();
             _examinationChangeRepository.SaveToFile();
+            _equipmentOrderRepository.SaveToFile();
+            _notificationRepository.SaveToFile();
         }
 
         private static void ConnectReferences()
@@ -170,6 +183,8 @@ namespace HealthInstitution.MVVM.Models
             ReferencesService.ConnectExaminationChanges();
             ReferencesService.ArrangeEquipment();
             ReferencesService.ConnectRenovations();
+            ReferencesService.ConnectPendingMedicineAllergens();
+            ReferencesService.ConnectPatientNotifications();
         }
 
 
@@ -197,18 +212,20 @@ namespace HealthInstitution.MVVM.Models
         public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
         public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
+        public EquipmentOrderRepository EquipmentOrderRepository { get => _equipmentOrderRepository; }
+        public NotificationRepository NotificationRepository { get => _notificationRepository; }
 
         public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
         {
             CheckTrolling();
-
+            DoctorService doctorService = new DoctorService(doctor);
             if (CurrentUser is Patient && patient.IsTrolling())
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
             if (CurrentUser is Secretary)
             {
-                if (!doctor.IsAvailable(dateTime, duration))
+                if (!doctorService.IsAvailable(dateTime, duration))
                 {
                     return false;
                 }
@@ -220,18 +237,19 @@ namespace HealthInstitution.MVVM.Models
             ValidateAppointmentData(patient, doctor, dateTime, validation, duration);
 
             int appointmentId = 0;
+            FindAvailableRoomService service = new FindAvailableRoomService();
 
             if (type == nameof(Examination))
             {
 
-                appointmentId = _examinationRepository.NewId();
-                //int prescriptionId = _prescriptionRepository.GetNewId();
+                appointmentId = _examinationRepository.GetID();
+                //int prescriptionId = _prescriptionRepository.GetID();
                 
                 Examination examination = new Examination(appointmentId, doctor, patient, dateTime,
                                           new List<Prescription>());
                 patient.Examinations.Add(examination);
                 doctor.Examinations.Add(examination);
-                _roomRepository.FindAvailableRoom(examination, dateTime);
+                service.FindAvailableRoom(examination, dateTime);
                 _examinationRepository.Add(examination);
                 _examinationReferencesRepository.Add(examination);
                 _examinationChangeRepository.Add(examination, dateTime, true, AppointmentStatus.CREATED);
@@ -239,11 +257,11 @@ namespace HealthInstitution.MVVM.Models
             }
 
             else if (type == nameof(Operation)) {
-                appointmentId = _operationRepository.NewId();
+                appointmentId = _operationRepository.GetID();
                 Operation operation = new Operation(appointmentId, doctor, patient, dateTime, duration);
                 patient.Operations.Add(operation);
                 doctor.Operations.Add(operation);
-                _roomRepository.FindAvailableRoom(operation, dateTime);
+                service.FindAvailableRoom(operation, dateTime);
                 _operationRepository.Add(operation);
                 _operationReferencesRepository.Add(operation);
 
@@ -259,7 +277,8 @@ namespace HealthInstitution.MVVM.Models
 
             ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime, validation);
 
-            _roomRepository.FindAvailableRoom(appointment, dateTime);
+            FindAvailableRoomService service = new FindAvailableRoomService();
+            service.FindAvailableRoom(appointment, dateTime);
             bool resolved = true;
             if (CurrentUser is Patient) {
                 resolved = appointment.IsEditable();
@@ -327,6 +346,7 @@ namespace HealthInstitution.MVVM.Models
         {
             if (CurrentUser is Patient || CurrentUser is Secretary || CurrentUser is Doctor)
             {
+                DoctorService doctorService = new DoctorService(doctor);
                 if (DateTime.Compare(DateTime.Now, dateTime) > 0 && validation)
                 {
                     throw new DateException("Date must be in future !");
@@ -338,7 +358,6 @@ namespace HealthInstitution.MVVM.Models
                         throw new DateException("Cannot schedule in next 24 hours");
                     }
                 }
-               
                 if (doctor is null)
                 {
                     throw new EmptyFieldException("Doctor not selected !");
@@ -351,53 +370,11 @@ namespace HealthInstitution.MVVM.Models
                 {
                     throw new UserNotAvailableException("Patient not available at selected time !");
                 }
-                if (!doctor.IsAvailable(dateTime, duration))
+                if (!doctorService.IsAvailable(dateTime, duration))
                 {
                     throw new UserNotAvailableException("Doctor not available at selected time !");
                 }
             }       
-        }
-
-        public bool CreateReferral(int doctorId, int patientId, Specialization specialization)
-        {
-            int id = Institution.Instance().ReferralRepository.GetNewID();
-            Referral referral = new Referral(id, patientId, doctorId, specialization);
-            _referralRepository.Add(referral);
-            return true;
-        }
-
-
-        public bool CreatePrescription(Medicine medicine, int longitudeInDays, int dailyFrequency,
-                                       TherapyMealDependency therapyMealDependency, Examination examination)
-        {
-            int id = Institution.Instance().PrescriptionRepository.GetNewId();
-            Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, medicine);
-            if (examination.Patient.isAllergic(prescription.Medicine.Allergens)) throw new Exception("Patient is allergic !") ;
-
-            _prescriptionRepository.Add(prescription);
-            examination.AddPrescription(prescription);
-            if ((medicine == null) || (dailyFrequency < 1) || (longitudeInDays < 1))
-            {
-                throw new Exception("Wrong input !");
-            }
-            PrescriptionMedicine prescriptionMedicine = new PrescriptionMedicine(medicine.ID, prescription.ID);
-            _prescriptionMedicineRepository.Add(prescriptionMedicine);
-            ExaminationReference examinationReference = new ExaminationReference(examination.ID, examination.Doctor.ID,
-                                                                                 examination.Patient.ID, examination.Room.ID,
-                                                                                 prescription.ID);
-            Institution.Instance().ExaminationReferencesRepository.Add(examinationReference);
-            
-            return true;
-        }
-
-        public bool AddAllergen(MedicalRecord record, Allergen newAllergen)
-        {
-            List<Allergen> allergens = record.Allergens;
-            foreach (Allergen allergen in allergens)
-            {
-                if (allergen.Id == newAllergen.Id) return false;
-            }
-            return true;
         }
 
         public void CheckTrolling()
@@ -407,14 +384,6 @@ namespace HealthInstitution.MVVM.Models
                 Patient patient = (Patient)CurrentUser;
                 if (patient.IsTrolling())
                 throw new PatientBlockedException("System has blocked your account !");
-            }
-        }
-
-        public void AddIllness(Patient patient, string illness)
-        {
-            foreach(Patient i in _patientRepository.Patients)
-            {
-                if (patient.ID == i.ID) patient.Record.HistoryOfIllnesses.Add(illness);
             }
         }
     }

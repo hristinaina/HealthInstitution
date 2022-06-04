@@ -41,6 +41,9 @@
             <DataTemplate DataType="{x:Type viewmodelsPatient:PatientSurveyViewModel}">
                 <viewsPatient:PatientSurveyView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsPatient:PatientNotificationsViewModel}">
+                <viewsPatient:PatientNotificationsView />
+            </DataTemplate>
             
             <DataTemplate DataType="{x:Type viewmodelsDoctor:DoctorExaminationViewModel}">
                 <viewsdoctor:DoctorExaminationView />
@@ -53,6 +56,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelsDoctor:UpdateMedicalRecordViewModel}">
                 <viewsdoctor:UpdateMedicalRecordView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsDoctor:DoctorPendingMedicineViewModel}">
+                <viewsdoctor:DoctorPendingMedicineView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodelsSecretary:BlockedPatientListViewModel}">
@@ -70,7 +76,17 @@
             <DataTemplate DataType="{x:Type viewmodelsSecretary:EmergencyAppointmentViewModel}">
                 <viewsSecretary:EmergencyAppointmentView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsSecretary:ArrangingEquipmentViewModel}">
+                <viewsSecretary:ArrangingEquipmentView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsSecretary:OrderingEquipmentViewModel}">
+                <viewsSecretary:OrderingEquipmentView />
+            </DataTemplate>
 
+
+            <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminMedicineViewModel}">
+                <viewsadmin:Medicine />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminRoomViewModel}">
                 <viewsadmin:AdminRoomView />
             </DataTemplate>
@@ -87,6 +103,7 @@
                 <viewsadmin:AdminDivideComplexRenovation />
             </DataTemplate>
         </Grid.Resources>
+        <!--<viewsadmin:Medicine></viewsadmin:Medicine>-->
         <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>
 </Window>

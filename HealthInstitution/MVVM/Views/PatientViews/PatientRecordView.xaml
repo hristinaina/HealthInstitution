@@ -24,7 +24,6 @@
 
         <components:PatientNavigationRail SelectedIndex="0"></components:PatientNavigationRail>
 
-
         <materialDesign:Card Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -49,55 +48,55 @@
                                      BorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"
                                      OpacityMask="{DynamicResource {x:Static SystemColors.GradientActiveCaptionBrushKey}}">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1.5*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Column="0"
-                                   Grid.Row="0"
-                                   Grid.ColumnSpan="5"
-                                   HorizontalAlignment="Center"
-                                   FontSize="16"
-                                   VerticalAlignment="Center"
-                                   Text="Patient information"
-                                   FontWeight="DemiBold" />
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="1"
-                                   Text="First name:"
-                                   FontWeight="Bold" />
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="2"
-                                   Text="{Binding Patient.FirstName}"/>
-                        <TextBlock Grid.Row="2"
-                                   Grid.Column="1"
-                                   Text="Last name:"
-                                   FontWeight="Bold"/>
-                        <TextBlock Grid.Row="2"
-                                   Grid.Column="2"
-                                   Text="{Binding Patient.LastName}" />
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="3"
-                                   Text="Weight (kg):"
-                                   FontWeight="Bold" />
-                        <TextBlock Grid.Row="1"
-                                   Grid.Column="4"
-                                   Text="{Binding Patient.Record.Weight}" />
-                        <TextBlock Grid.Row="2"
-                                   Grid.Column="3"
-                                   Text="Height (cm):"
-                                   FontWeight="Bold" />
-                        <TextBlock Grid.Row="2"
-                                   Grid.Column="4"
-                                   Text="{Binding Patient.Record.Height}" />
-                    </Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1.5*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0"
+                                       Grid.Row="0"
+                                       Grid.ColumnSpan="5"
+                                       HorizontalAlignment="Center"
+                                       FontSize="16"
+                                       VerticalAlignment="Center"
+                                       Text="Patient information"
+                                       FontWeight="DemiBold" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="First name:"
+                                       FontWeight="Bold" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="2"
+                                       Text="{Binding Patient.FirstName}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="1"
+                                       Text="Last name:"
+                                       FontWeight="Bold" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="2"
+                                       Text="{Binding Patient.LastName}" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="3"
+                                       Text="Weight (kg):"
+                                       FontWeight="Bold" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="4"
+                                       Text="{Binding Patient.Record.Weight}" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="3"
+                                       Text="Height (cm):"
+                                       FontWeight="Bold" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="4"
+                                       Text="{Binding Patient.Record.Height}" />
+                        </Grid>
                 </materialDesign:Card>
                 <TextBlock Grid.Column="0"
                            Grid.Row="2"
@@ -105,7 +104,7 @@
                            FontSize="15"
                            VerticalAlignment="Center"
                            Text="Appointments history"
-                           FontWeight="DemiBold"/>
+                           FontWeight="DemiBold" />
                 <TextBlock Grid.Row="3"
                            HorizontalAlignment="Center"
                            FontSize="11"
@@ -126,25 +125,29 @@
                                             Header="Date"
                                             Binding="{Binding Date, Mode=OneWay}"
                                             ElementStyle="{StaticResource ColumnElementStyle}"
-                                            CellStyle="{StaticResource DisableSelection}" />
+                                            CellStyle="{StaticResource DisableSelection}"
+                                            CanUserSort="True" />
 
                         <DataGridTextColumn Width="100"
                                             Header="Time"
                                             Binding="{Binding Time, Mode=OneWay}"
                                             ElementStyle="{StaticResource ColumnElementStyle}"
-                                            CellStyle="{StaticResource DisableSelection}" />
+                                            CellStyle="{StaticResource DisableSelection}"
+                                            CanUserSort="True" />
 
                         <DataGridTextColumn Width="200"
                                             Header="Doctor"
                                             Binding="{Binding Doctor, Mode=OneWay}"
                                             ElementStyle="{StaticResource ColumnElementStyle}"
-                                            CellStyle="{StaticResource DisableSelection}" />
+                                            CellStyle="{StaticResource DisableSelection}"
+                                            CanUserSort="True" />
 
                         <DataGridTextColumn Width="150"
                                             Header="Specialization"
                                             Binding="{Binding Specialization, Mode=OneWay}"
                                             ElementStyle="{StaticResource ColumnElementStyle}"
-                                            CellStyle="{StaticResource DisableSelection}" />
+                                            CellStyle="{StaticResource DisableSelection}"
+                                            CanUserSort="True" />
                     </DataGrid.Columns>
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
@@ -162,16 +165,16 @@
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
                         <ColumnDefinition Width="4.5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
-                         TextWrapping="NoWrap"
-                         HorizontalAlignment="Center"
-                         VerticalAlignment="Top"
-                         Grid.Column="1"
-                         MaxWidth="400"
-                         FontSize="12"
-                         materialDesign:HintAssist.Hint="Search for anamnesis by keyword"
-                         Background="#A5FFFFFF"
-                         Text="{Binding SearchKeyWord}"/>
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                             TextWrapping="NoWrap"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Top"
+                             Grid.Column="1"
+                             MaxWidth="400"
+                             FontSize="12"
+                             materialDesign:HintAssist.Hint="Search for anamnesis by keyword"
+                             Background="#A5FFFFFF"
+                             Text="{Binding SearchKeyWord}" />
                     <Button Grid.Column="2"
                             Style="{StaticResource MaterialDesignFlatButton}"
                             HorizontalAlignment="Center"
@@ -190,7 +193,7 @@
                             VerticalAlignment="Top"
                             Command="{Binding Reset}">
                         <materialDesign:PackIcon Kind="Refresh" />
-                    </Button> 
+                    </Button>
 
                 </Grid>
             </Grid>

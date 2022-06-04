@@ -22,5 +22,11 @@ namespace HealthInstitution.MVVM.Models.Entities
             _rating = rating;
             _comment = comment;
         }
+
+        public ExaminationReview()
+        {
+            _rating = 0;
+            _comment = " ";
+        }
     }
 }

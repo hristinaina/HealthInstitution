@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Enumerations;
+using HealthInstitution.MVVM.Models.Services.Equipments;
+using HealthInstitution.MVVM.Models.Services.Renovations;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -71,8 +74,10 @@ namespace HealthInstitution.MVVM.Models.Services
 
                 Room r = Institution.Instance().RoomRepository.FindById(a.RoomId);
                 Equipment e = Institution.Instance().EquipmentRepository.FindById(a.EquipmentId);
-                r.AddEquipment(e, a.Quantity);
-                e.ArrangeInRoom(r, a.Quantity);
+                RoomService room = new RoomService(r);
+                room.AddEquipment(e, a.Quantity);
+                EquipmentService equipment = new EquipmentService(e);
+                equipment.ArrangeInRoom(r, a.Quantity);
             }
         }
 
@@ -89,8 +94,11 @@ namespace HealthInstitution.MVVM.Models.Services
                 else renovation.RoomsUnderRenovation.Add(room);
             }
 
-            Institution.Instance().RenovationRepository.StartRenovations();
-            Institution.Instance().RenovationRepository.EndRenovations();
+            RenovationService renovationService = new RenovationService();
+            renovationService.StartRenovations();
+            renovationService.EndRenovations();
+
+            Institution.Instance().EquipmentOrderRepository.Deliver(Institution.Instance().EquipmentRepository);
         }
 
         public static void FillMedicalRecord()
@@ -108,10 +116,25 @@ namespace HealthInstitution.MVVM.Models.Services
 
         public static void ConnectMedicineAllergens()
         {
-            foreach (Medicine medicine in Institution.Instance().MedicineRepository.Medicine)
+            foreach (Medicine medicine in Institution.Instance().MedicineRepository.Medicines)
             {
                 List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
-                medicine.Allergens = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+                medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+            }
+
+            foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
+            {
+                List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
+                medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+            }
+        }
+
+        public static void ConnectPendingMedicineAllergens()
+        {
+            foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
+            {
+                List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
+                medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
             }
         }
 
@@ -133,6 +156,15 @@ namespace HealthInstitution.MVVM.Models.Services
                 PrescriptionMedicine prescriptionMedicine = Institution.Instance().PrescriptionMedicineRepository.
                                                              FindByPrescriptionID(prescription.ID);
                 prescription.Medicine = Institution.Instance().MedicineRepository.PrescriptionMedicineToMedicine(prescriptionMedicine);
+            }
+        }
+
+        public static void ConnectPatientNotifications()
+        {
+            foreach (Notification notification in Institution.Instance().NotificationRepository.Notifications)
+            {
+                Patient patient = Institution.Instance().PatientRepository.FindByID(notification.PatientId);
+                patient.Notifications.Add(notification);
             }
         }
 

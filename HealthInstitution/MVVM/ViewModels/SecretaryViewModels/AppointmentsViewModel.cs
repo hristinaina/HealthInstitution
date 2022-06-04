@@ -15,6 +15,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
     public class AppointmentsViewModel : BaseViewModel
     {
+
+        private readonly ReferralService _service;
         public SecretaryNavigationViewModel Navigation { get; }
 
         private readonly ObservableCollection<ReferralItemViewModel> _referrals;
@@ -29,7 +31,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         private ReferralItemViewModel _selectedReferral;
         public Patient SelectedPatient { get; set; }
         public Specialization SelectedSpecialization { get; set; }
-        public String SelectedDuration { get; set; }
+        public string SelectedDuration { get; set; }
 
         private bool _enableChanges;
         private int _selection;
@@ -93,6 +95,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         public AppointmentsViewModel()
         {
+            _service = new ReferralService();
             EnableChanges = false;
             Navigation = new SecretaryNavigationViewModel();
 
@@ -107,7 +110,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             CreateReferralAppointment = new CreateReferralAppointmentCommand(this);
             CreateEmergencyAppointment = new CreateEmergencyAppointmentCommand(this);
 
-            SecretaryService.RemoveReferralsOfDeletedPatients();
+            _service.RemoveReferralsOfDeletedPatients();
             FillReferralsList();
             FillPatientsBox();
             FillSpecializations();
@@ -136,7 +139,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _referrals.Clear();
             List<Referral> referrals = Institution.Instance().ReferralRepository.Referrals;
-            if (phrase != null) referrals = SecretaryService.SearchMatchingReferrals(phrase);
+            if (phrase != null) referrals = _service.SearchMatchingReferrals(phrase);
             foreach (Referral referral in referrals)
             {
                 _referrals.Add(new ReferralItemViewModel(referral));

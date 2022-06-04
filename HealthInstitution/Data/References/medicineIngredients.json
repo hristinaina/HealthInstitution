@@ -14,5 +14,69 @@
   {
     "MedicineId": 2,
     "IngredientId": 3
+  },
+  {
+    "MedicineId": 3,
+    "IngredientId": 1
+  },
+  {
+    "MedicineId": 3,
+    "IngredientId": 3
+  },
+  {
+    "MedicineId": 4,
+    "IngredientId": 1
+  },
+  {
+    "MedicineId": 5,
+    "IngredientId": 3
+  },
+  {
+    "MedicineId": 5,
+    "IngredientId": 2
+  },
+  {
+    "MedicineId": 6,
+    "IngredientId": 3
+  },
+  {
+    "MedicineId": 8,
+    "IngredientId": 1
+  },
+  {
+    "MedicineId": 8,
+    "IngredientId": 2
+  },
+  {
+    "MedicineId": 9,
+    "IngredientId": 1
+  },
+  {
+    "MedicineId": 8,
+    "IngredientId": 3
+  },
+  {
+    "MedicineId": 9,
+    "IngredientId": 2
+  },
+  {
+    "MedicineId": 10,
+    "IngredientId": 3
+  },
+  {
+    "MedicineId": 7,
+    "IngredientId": 1
+  },
+  {
+    "MedicineId": 7,
+    "IngredientId": 2
+  },
+  {
+    "MedicineId": 11,
+    "IngredientId": 1
+  },
+  {
+    "MedicineId": 11,
+    "IngredientId": 2
   }
 ]

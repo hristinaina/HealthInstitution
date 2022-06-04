@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Services;
@@ -34,7 +35,7 @@ namespace HealthInstitution.MVVM.Models.Repositories
         {
             foreach (Allergen allergen in _allergens)
             {
-                if (allergen.Id == id) return allergen;
+                if (allergen.ID == id) return allergen;
             }
             return null;
         }
@@ -57,6 +58,52 @@ namespace HealthInstitution.MVVM.Models.Repositories
                 allergens.Add(FindByID(reference.IngredientId));
             }
             return allergens;
+        }
+
+        private bool CheckID(int id)
+        {
+            foreach (Allergen m in _allergens)
+            {
+                if (m.ID == id) return false;
+            }
+
+            return true;
+        }
+
+        private int GetID()
+        {
+            int i = 1;
+            while (true)
+            {
+                if (CheckID(i)) return i;
+                i++;
+            }
+        }
+
+        public void ChangeName(Allergen allergen, string name)
+        {
+            AllergenService a = new AllergenService(allergen);
+            if (!a.IsNameAvailable(name)) throw new NameNotAvailableException("Name already taken");
+
+            allergen.Name = name;
+        }
+
+        public Allergen AddNewAllergen(Allergen allergen)
+        {
+            AllergenService a = new AllergenService(allergen);
+            if (!a.IsNameAvailable(allergen.Name)) throw new NameNotAvailableException("Name already in use!");
+            
+            allergen.ID = GetID();
+            _allergens.Add(allergen);
+            return allergen;
+        }
+
+        public void DeleteAllergen(Allergen allergen)
+        {
+            AllergenService a = new AllergenService(allergen);
+            if (!a.isDeletable()) throw new IngredientInUseException("Ingredient in use!");
+
+            _allergens.Remove(allergen);
         }
     }
 }

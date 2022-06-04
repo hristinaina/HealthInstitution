@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using HealthInstitution.MVVM.Models.Entities;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
 {
@@ -25,10 +26,10 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
 
         public override void Execute(object parameter)
         {
-            int id = Institution.Instance().RoomRepository.GetID();
             try
             {
-                Institution.Instance().RoomRepository.CreateRoom(id, _model.NewRoomName, _model.NewRoomNumber, (RoomType)_model.NewRoomType);
+                Room r = new Room(_model.NewRoomName, _model.NewRoomNumber, (RoomType)_model.NewRoomType);
+                Institution.Instance().RoomRepository.AddRoom(r);
                 _model.DialogOpen = false;
                 _model.FillRoomList();
                 _model.NewRoomNumber = 0;
@@ -37,7 +38,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
             } catch(ZeroRoomNumberException e)
             {
                 _model.ShowMessage(e.Message);
-            } catch(EmptyRoomNameException e)
+            } catch(EmptyNameException e)
             {
                 _model.ShowMessage(e.Message);
             } catch(RoomNumberAlreadyTakenException e)

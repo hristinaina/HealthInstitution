@@ -50,15 +50,20 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                     
                     List<Room> roomsUnderRenovation = new List<Room> { _model.FirstSelectedRoom, _model.SecondSelectedRoom };
 
-                    int id = Institution.Instance().RoomRepository.GetID();
                     List<int> numbersForIgnoring = new List<int> { _model.FirstSelectedRoom.Number, _model.SecondSelectedRoom.Number };
-                    Room resultingRoom = Institution.Instance().RoomRepository.CreateRoom(id, _model.NewRoomName, _model.NewRoomNumber, (RoomType)_model.NewRoomType, true, numbersForIgnoring);
+
+                    Room room = new Room(_model.NewRoomName, _model.NewRoomNumber, (RoomType)_model.NewRoomType);
+                    Room resultingRoom = Institution.Instance().RoomRepository.AddRoom(room, true, numbersForIgnoring);
+                    
                     List<Room> result = new List<Room> { resultingRoom };
 
                     renovation.RoomsUnderRenovation = roomsUnderRenovation;
                     renovation.Result = result;
                     Institution.Instance().RenovationRepository.Renovations.Add(renovation);
                 
+                    _model.FirstSelectedRoom.Renovations.Add(renovation);
+                    _model.SecondSelectedRoom.Renovations.Add(renovation);
+
                     Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.FirstSelectedRoom.ID, false));
                     Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.SecondSelectedRoom.ID, false));
                     Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, resultingRoom.ID, true));
@@ -69,7 +74,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                 {
                     _model.ShowMessage(e.Message);
                 }
-                catch (EmptyRoomNameException e)
+                catch (EmptyNameException e)
                 {
                     _model.ShowMessage(e.Message);
                 }

@@ -17,11 +17,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
     {
         private readonly Institution _institution;
         private PatientListViewModel _viewModel;
+        private readonly PatientManagementService _service;
 
         public SaveAccountCommand(PatientListViewModel viewModel)
         {
             _institution = Institution.Instance();
             _viewModel = viewModel;
+            _service = new PatientManagementService();
         }
 
         public override void Execute(object parameter)
@@ -29,19 +31,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
             bool validation = ValidateData();
             if (!validation) return;
 
-            Patient patient = Institution.Instance().PatientRepository.FindByID(_viewModel.SelectedPatientId);
-
-            if (!ReferencesService.CheckIfEmailIsAvailable(_viewModel.Email, patient))
-            {
-                MessageBox.Show("Account with this email already exist! Please choose a new one!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
+            int id = _viewModel.SelectedPatientId;
             Enum.TryParse(_viewModel.GetGender, out Gender gender);
             int weight = Int32.Parse(_viewModel.Weight);
             int height =  Int32.Parse(_viewModel.Height);
 
-            patient.Update(_viewModel.SelectedPatientId, _viewModel.FirstName, _viewModel.LastName, _viewModel.Email, _viewModel.Password, gender,
+            _service.UpdatePatient(id, _viewModel.FirstName, _viewModel.LastName, _viewModel.Email, _viewModel.Password, gender,
                 height, weight);
             _viewModel.FillPatientList();
 
@@ -72,6 +67,19 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
             if (!isWeightDouble)
             {
                 MessageBox.Show("Weight must be a number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return ValidateEmail();
+        }
+
+        private bool ValidateEmail()
+        {
+            Patient patient = Institution.Instance().PatientRepository.FindByID(_viewModel.SelectedPatientId);
+
+            if (!ReferencesService.CheckIfEmailIsAvailable(_viewModel.Email, patient))
+            {
+                MessageBox.Show("Account with this email already exist! Please choose a new one!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
             return true;

@@ -11,7 +11,6 @@ namespace HealthInstitution.MVVM.Models.Entities
         private DateTime _dateTime;
         private bool _isEmergency;
         private bool _isDone;
-        private DateTime _time;
 
         [JsonProperty("ID")]
         public int ID { get => _id; set { _id = value; } }
@@ -47,7 +46,6 @@ namespace HealthInstitution.MVVM.Models.Entities
             _dateTime = dateTime;
             _room = room;
         }
-
 
         public bool IsEditable()
         {

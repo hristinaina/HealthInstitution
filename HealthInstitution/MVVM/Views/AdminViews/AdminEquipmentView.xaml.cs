@@ -24,5 +24,10 @@ namespace HealthInstitution.MVVM.Views.AdminViews
         {
             InitializeComponent();
         }
+
+        private void NotificationSnackbar_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

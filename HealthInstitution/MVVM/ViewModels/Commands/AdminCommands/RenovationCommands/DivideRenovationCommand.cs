@@ -51,16 +51,22 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
 
                     int id = Institution.Instance().RoomRepository.GetID();
                     List<Room> roomUnderRenovation = new List<Room> { _model.SelectedRoom};
-                    Room firstResultingRoom = Institution.Instance().RoomRepository.CreateRoom(Institution.Instance().RoomRepository.GetID(), _model.FirstNewRoomName, _model.FirstNewRoomNumber, (RoomType)_model.FirstNewRoomType, true, new List<int> { _model.SelectedRoom.Number });
 
-                    id = Institution.Instance().RoomRepository.GetID();
-                    Room secondResultingRoom = Institution.Instance().RoomRepository.CreateRoom(id, _model.SecondNewRoomName, _model.SecondNewRoomNumber, (RoomType)_model.SecondNewRoomType, true, new List<int> { _model.SelectedRoom.Number });
+                    Room firstRoom = new Room(_model.FirstNewRoomName, _model.FirstNewRoomNumber,
+                        (RoomType)_model.FirstNewRoomType);
+                    Room firstResultingRoom = Institution.Instance().RoomRepository.AddRoom(firstRoom, true, new List<int> { _model.SelectedRoom.Number });
+
+                    Room secondRoom = new Room(_model.SecondNewRoomName, _model.SecondNewRoomNumber,
+                        (RoomType)_model.SecondNewRoomType);
+                    Room secondResultingRoom = Institution.Instance().RoomRepository.AddRoom(secondRoom, true, new List<int> { _model.SelectedRoom.Number });
                 
+
                     List<Room> result = new List<Room> { firstResultingRoom, secondResultingRoom };
 
                     renovation.Result = result;
                     renovation.RoomsUnderRenovation = roomUnderRenovation;
                     Institution.Instance().RenovationRepository.Renovations.Add(renovation);
+                    _model.SelectedRoom.Renovations.Add(renovation);
 
                     Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.SelectedRoom.ID, false));
                     Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, firstResultingRoom.ID, true));
@@ -73,7 +79,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                 {
                     _model.ShowMessage(e.Message);
                 }
-                catch (EmptyRoomNameException e)
+                catch (EmptyNameException e)
                 {
                     _model.ShowMessage(e.Message);
                 }

@@ -24,8 +24,149 @@
 
         <components:PatientNavigationRail SelectedIndex="2"></components:PatientNavigationRail>
 
+
         <materialDesign:Card Grid.Column="1">
-            <TextBox Text="Comming soon..." />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="2.5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="7*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock HorizontalAlignment="Center"
+                           Grid.ColumnSpan="2"
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           VerticalAlignment="Center"
+                           Text="Search in doctors database"
+                           FontWeight="DemiBold" />
+                <Grid Grid.Row="1" 
+                          Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding Doctors}"
+                              AutoGenerateColumns="False"
+                              VerticalAlignment="Top"
+                              BorderBrush="Transparent"
+                              Background="Transparent"
+                              SelectionMode="Single"
+                              SelectedItem="{Binding DoctorSelectedValue}"
+                              ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                              HorizontalAlignment="Center"
+                              materialDesign:DataGridAssist.CellPadding="20 20 10 10"
+                              materialDesign:DataGridAssist.ColumnHeaderPadding="20 10 10 15">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="First Name"
+                                                Width="150"
+                                                Binding="{Binding FirstName, Mode=OneWay}"
+                                                ElementStyle="{StaticResource ColumnElementStyle}"
+                                                CellStyle="{StaticResource DisableSelection}"
+                                                CanUserSort="True" />
+
+                            <DataGridTextColumn Header="Last Name"
+                                                Width="150"
+                                                Binding="{Binding LastName, Mode=OneWay}"
+                                                ElementStyle="{StaticResource ColumnElementStyle}"
+                                                CellStyle="{StaticResource DisableSelection}"
+                                                CanUserSort="True" />
+                            <DataGridTextColumn Header="Specialization"
+                                                Width="150"
+                                                Binding="{Binding Specialization, Mode=OneWay}"
+                                                ElementStyle="{StaticResource ColumnElementStyle}"
+                                                CellStyle="{StaticResource DisableSelection}"
+                                                CanUserSort="True" />
+                            <DataGridTextColumn Header="Rating"
+                                                Width="100"
+                                                Binding="{Binding Rating, Mode=OneWay}"
+                                                ElementStyle="{StaticResource ColumnElementStyle}"
+                                                CellStyle="{StaticResource DisableSelection}"
+                                                CanUserSort="True" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                            Grid.Row="1"
+                            Width="170"
+                            ToolTip="Schedule appointment with selected doctor"
+                            Content="New appointment"
+                            Background="#CC80DEEA"
+                            BorderBrush="#6680DEEA"
+                            IsEnabled="{Binding DoctorSelected}"
+                            Command="{Binding CreateAppointment}"
+                            Height="32"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center" />
+                </Grid>
+                <Grid Grid.Column="0"
+                      Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="4*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                             TextWrapping="NoWrap"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Bottom"
+                             Grid.Row="0"
+                             Width="250"
+                             FontSize="12"
+                             materialDesign:HintAssist.Hint="Search for doctor by first name"
+                             Background="#A5FFFFFF"
+                             Text="{Binding FirstNameKeyWord}" />
+                    <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
+                             TextWrapping="NoWrap"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Grid.Row="1"
+                             Width="250"
+                             FontSize="12"
+                             materialDesign:HintAssist.Hint="Search for doctor by last name"
+                             Background="#A5FFFFFF"
+                             Text="{Binding LastNameKeyWord}" />
+                    <ComboBox Width="250"
+                              Margin="0 20 0 0"
+                              Grid.Row="2"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Top"
+                              FontSize="12.5"
+                              MaxDropDownHeight="150"
+                              Style="{StaticResource MaterialDesignComboBox}"
+                              ItemsSource="{Binding Specializations}"
+                              SelectedIndex="{Binding SelectedSpecialization}"
+                              materialDesign:HintAssist.Hint="     Chose specialization"
+                              IsEditable="False" />
+                    <Grid Grid.Row="3" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Right"
+                                Padding="0"
+                                Margin="0 0 20 0"
+                                VerticalAlignment="Top"
+                                Command="{Binding Search}">
+                            <materialDesign:PackIcon Kind="Magnify" />
+                        </Button>
+                        <Button Grid.Column="3"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Left"
+                                Padding="0"
+                                Margin="20 0 0 0"
+                                VerticalAlignment="Top"
+                                Command="{Binding Reset}">
+                            <materialDesign:PackIcon Kind="Refresh" />
+                        </Button>
+                    </Grid>
+
+                </Grid>
+                <Grid>
+                </Grid>
+            </Grid>
         </materialDesign:Card>
     </Grid>
 </UserControl>

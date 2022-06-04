@@ -46,6 +46,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                     renovation.RoomsUnderRenovation = roomUnderRenovation;
                     renovation.Result = roomUnderRenovation;
 
+                    _model.NewRenovationRoom.Renovations.Add(renovation);
                     Institution.Instance().RenovationRepository.Renovations.Add(renovation);
                     Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, false));
                     Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, true));

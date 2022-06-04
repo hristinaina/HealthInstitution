@@ -13,13 +13,18 @@ namespace HealthInstitution.MVVM.Models.Entities
         private string _name;
 
         [JsonProperty("Id")]
-        public int Id { get => _id; set { _id = value; } }
+        public int ID { get => _id; set { _id = value; } }
         [JsonProperty("Name")]
         public string Name { get => _name; set { _name = value; } }
 
         public Allergen()
         {
 
+        }
+
+        public Allergen(string name)
+        {
+            _name = name;
         }
 
         public Allergen(int id, string name)

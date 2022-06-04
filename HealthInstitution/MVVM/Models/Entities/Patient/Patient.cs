@@ -19,9 +19,23 @@ namespace HealthInstitution.MVVM.Models.Entities
         private List<Examination> _examinations;
         private List<Operation> _operations;
         private List<ExaminationChange> _examinationChanges;
-        private List<string> _notifications;
+        private List<Notification> _notifications;
+        private int _notificationsPreference;
 
-        public List<string> Notifications { get => _notifications; set { _notifications = value; } }
+        [JsonIgnore]
+        public List<Notification> Notifications
+        {
+            get
+            {
+                if (_notifications == null)
+                {
+                    _notifications = new List<Notification>();
+                }
+
+                return _notifications;
+            }
+            set => _notifications = value;
+        }
         [JsonProperty("Blocked")]
         public bool Blocked { get => _blocked; set { _blocked = value; } }
         [JsonProperty("BlockadeType")]
@@ -30,7 +44,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         public bool Deleted { get => _deleted; set { _deleted = value; } }
         [JsonProperty("Record")]
         public MedicalRecord Record { get => _record; set { _record = value; } }
-        [JsonProperty("Notifications")]
+        [JsonProperty("NotificationsPreference")]
+        public int NotificationsPreference { get => _notificationsPreference; set { _notificationsPreference = value; } }
         [JsonIgnore]
         public List<Examination> Examinations
         {
@@ -75,10 +90,8 @@ namespace HealthInstitution.MVVM.Models.Entities
         }
         public Patient()
         {
-            _notifications = new List<string>();
         }
 
-        // constructor used when secretary is creating new patient accounts
         public Patient(int id, string firstName, string lastName, string email, string password, Gender gender,
             double height, double weight)
             : base(id, firstName, lastName, email, password, gender)
@@ -87,14 +100,34 @@ namespace HealthInstitution.MVVM.Models.Entities
             _blockadeType = 0;
             _deleted = false;
             _record = new MedicalRecord(height, weight, new List<Allergen>(), new List<string>());
-            // no need to fill _operations and _examinations lists because it is a new user so there would be none
-            _notifications = new List<string>();
         }
 
-        public void UnblockPatient()
+        public void Delete()
+        {
+            _deleted = true;
+        }
+
+        public void Unblock()
         {
             _blocked = false;
             _blockadeType = BlockadeType.NONE;
+        }
+
+        public void Block()
+        {
+            _blocked = true;
+            _blockadeType = BlockadeType.SECRETARY;
+        }
+        public void Update(int id, string name, string lastName, string email, string password, Gender gender, double height, double weight)
+        {
+            ID = id;
+            FirstName = name;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+            Gender = gender;
+            Record.Height = height;
+            Record.Weight = weight;
         }
 
         public List<Appointment> GetAllAppointments()
@@ -132,16 +165,29 @@ namespace HealthInstitution.MVVM.Models.Entities
             pastAppointments = pastAppointments.OrderBy(x => x.Date).ToList();
             return pastAppointments;
         }
+        public List<Appointment> GetPastExaminations()
+        {
+            List<Appointment> pastExaminations = new List<Appointment>();
+            foreach (Appointment appointment in GetAllAppointments())
+            {
+                if (DateTime.Compare(appointment.Date, DateTime.Now) < 0)
+                {
+                    pastExaminations.Add(appointment);
+                }
+            }
+            pastExaminations = pastExaminations.OrderBy(x => x.Date).ToList();
+            return pastExaminations;
+        }
 
         public bool IsTrolling()
         {
-            if (GetEditingHistory() > 5)
+            if (GetEditingAttempts() > 5)
             {
                 _blocked = true;
                 _blockadeType = BlockadeType.SYSTEM;
                 return true;
             }
-            if (GetCreatingHistory() > 8)
+            if (GetCreatingAttempts() > 8)
             {
                 _blocked = true;
                 _blockadeType = BlockadeType.SYSTEM;
@@ -150,7 +196,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             return false;
         }
 
-        private int GetCreatingHistory()
+        private int GetCreatingAttempts()
         {
             int totalCreations = 0;
             foreach (ExaminationChange change in ExaminationChanges)
@@ -164,7 +210,7 @@ namespace HealthInstitution.MVVM.Models.Entities
             return totalCreations;
         }
 
-        private int GetEditingHistory()
+        private int GetEditingAttempts()
         {
             int totalChanges = 0;
             foreach (ExaminationChange change in ExaminationChanges)
@@ -237,7 +283,7 @@ namespace HealthInstitution.MVVM.Models.Entities
                     return appointment;
             }
 
-            return null; 
+            return null;
         }
 
         public List<string> GetHistoryOfIllness()
@@ -249,31 +295,6 @@ namespace HealthInstitution.MVVM.Models.Entities
                 historyOfIllness.Add(illness);
             }
             return historyOfIllness;
-        }
-
-        public bool isAllergic(List<Allergen> allergens)
-        {
-            foreach (Allergen i in _record.Allergens)
-            {
-                foreach(Allergen allergen in allergens)
-                {
-                    if (i.Id == allergen.Id) return true;
-                }
-            }
-
-            return false;
-        }
-
-        public void Update(int id, string name, string lastName, string email, string password, Gender gender, double height, double weight)
-        {
-            ID = id;
-            FirstName = name;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-            Gender = gender;
-            Record.Height = height;
-            Record.Weight = weight;
         }
     }
 }
