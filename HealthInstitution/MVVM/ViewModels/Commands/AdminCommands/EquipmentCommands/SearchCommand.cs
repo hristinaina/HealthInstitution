@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using HealthInstitution.MVVM.Models.Services.Equipments;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentCommands
 {
@@ -25,8 +26,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
             
             try 
             {
-                _model.FilteredEquipment = Institution.Instance().EquipmentRepository.Search(_model.SearchPhrase);
-
+                //_model.FilteredEquipment = Institution.Instance().EquipmentRepository.Search(_model.SearchPhrase);
+                SearchEquipmentService service = new SearchEquipmentService();
+                _model.FilteredEquipment = service.Search(_model.SearchPhrase);
 
                 _model.FilterEquipmentList();
             } catch (EmptySearchPhraseException e)
