@@ -8,6 +8,7 @@ using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 using HealthInstitution.Exceptions;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -28,7 +29,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             {
                 if (_viewModel.SelectedDoctor == null) throw new EmptyFieldException("Doctor is not selected !");
                 Doctor doctor = _viewModel.SelectedDoctor;
-                bool isCreated = Institution.Instance().CreateReferral(doctor.ID, _viewModel.Examination.Patient.ID, doctor.Specialization);
+                DoctorReferralService service = new();
+                bool isCreated = service.CreateReferral(doctor.ID, _viewModel.Examination.Patient.ID, doctor.Specialization);
 
                 if (isCreated)
                 {

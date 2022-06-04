@@ -374,49 +374,6 @@ namespace HealthInstitution.MVVM.Models
             }       
         }
 
-        public bool CreateReferral(int doctorId, int patientId, Specialization specialization)
-        {
-            int id = Institution.Instance().ReferralRepository.GetNewID();
-            Referral referral = new Referral(id, patientId, doctorId, specialization);
-            _referralRepository.Add(referral);
-            return true;
-        }
-
-
-        public bool CreatePrescription(Medicine medicine, int longitudeInDays, int dailyFrequency,
-                                       TherapyMealDependency therapyMealDependency, Examination examination)
-        {
-            int id = Institution.Instance().PrescriptionRepository.GetNewId();
-            Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, DateTime.Now, medicine);
-            if (examination.Patient.IsAllergic(prescription.Medicine.Ingredients)) throw new Exception("Patient is allergic !");
-
-            _prescriptionRepository.Add(prescription);
-            ExaminationService examinationService = new ExaminationService();
-            examinationService.AddPrescription(examination, prescription);
-            if ((medicine == null) || (dailyFrequency < 1) || (longitudeInDays < 1))
-            {
-                throw new Exception("Wrong input !");
-            }
-            PrescriptionMedicine prescriptionMedicine = new PrescriptionMedicine(medicine.ID, prescription.ID);
-            _prescriptionMedicineRepository.Add(prescriptionMedicine);
-            ExaminationReference examinationReference = new ExaminationReference(examination.ID, examination.Doctor.ID,
-                                                                                 examination.Patient.ID, examination.Room.ID,
-                                                                                 prescription.ID);
-            Institution.Instance().ExaminationReferencesRepository.Add(examinationReference);
-            
-            return true;
-        }
-
-        public bool AddAllergen(MedicalRecord record, Allergen newAllergen)
-        {
-            List<Allergen> allergens = record.Allergens;
-            foreach (Allergen allergen in allergens)
-            {
-                if (allergen.ID == newAllergen.ID) return false;
-            }
-            return true;
-        }
-
         public void CheckTrolling()
         {
             if (CurrentUser is Patient)
@@ -425,55 +382,6 @@ namespace HealthInstitution.MVVM.Models
                 if (patient.IsTrolling())
                 throw new PatientBlockedException("System has blocked your account !");
             }
-        }
-
-        public void AddIllness(Patient patient, string illness)
-        {
-            foreach(Patient i in _patientRepository.Patients)
-            {
-                if (patient.ID == i.ID) patient.Record.HistoryOfIllnesses.Add(illness);
-                
-            }
-        }
-
-        public bool AddAnamnesis(Examination examination, string anamnesis)
-        {
-            foreach (Examination i in _examinationRepository.Examinations)
-            {
-                if (i.ID == examination.ID)
-                {
-                    examination.Anamnesis = anamnesis;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public bool DeletePendingMedicine(PendingMedicine medicine)
-        {
-            foreach(PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
-            {
-                if (i.ID == medicine.ID)
-                {
-                    _pendingMedicineRepository.PendingMedicines.Remove(i);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public bool SendToRevision(PendingMedicine medicine)
-        {
-            foreach (PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
-            {
-                if (i.ID == medicine.ID)
-                {
-                    _pendingMedicineRepository.PendingMedicines.Remove(i);
-                    _pendingMedicineRepository.PendingMedicines.Add(medicine);
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

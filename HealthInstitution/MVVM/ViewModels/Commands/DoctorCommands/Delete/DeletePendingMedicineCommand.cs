@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -25,7 +26,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
             try
             {
-                bool isDeleted = Institution.Instance().DeletePendingMedicine((PendingMedicine)_viewModel.SelectedMedicine.PendingMedicine);
+                DoctorPendingMedicineService service = new();
+                bool isDeleted = service.Delete((PendingMedicine)_viewModel.SelectedMedicine.PendingMedicine);
 
                 if (isDeleted) _viewModel.ShowMessage("Medicine suggestion successfully deleted !");
             }

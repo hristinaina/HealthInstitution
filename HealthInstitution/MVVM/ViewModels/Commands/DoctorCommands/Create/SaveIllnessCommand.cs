@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -28,7 +29,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             _viewModel.AddIllness(_viewModel.NewIllness);
             try
             {
-                Institution.Instance().AddIllness(patient, _viewModel.NewIllness);
+                PatientService service = new PatientService();
+                service.AddIllness(patient, _viewModel.NewIllness);
             } catch (Exception e)
             {
                 _viewModel.ShowMessage(e.Message);

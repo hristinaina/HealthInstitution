@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
@@ -25,9 +26,10 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
             try
             {
-                bool isCreated = Institution.Instance().CreatePrescription(_viewModel.SelectedMedicine, _viewModel.LongitudeInDays,
-                                                                           _viewModel.DailyFrequency, _viewModel.SelectedDependency,
-                                                                           _viewModel.Examination);
+                DoctorPrescriptionService service = new();
+                bool isCreated = service.CreatePrescription(_viewModel.SelectedMedicine, _viewModel.LongitudeInDays,
+                                                            _viewModel.DailyFrequency, _viewModel.SelectedDependency,
+                                                            _viewModel.Examination);
                 if (isCreated) _viewModel.ShowMessage("Prescription successfully created !");
                 
             } catch (Exception e)
