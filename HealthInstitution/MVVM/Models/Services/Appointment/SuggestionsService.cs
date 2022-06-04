@@ -6,23 +6,8 @@ using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
-    public static class AppointmentService
+    public static class SuggestionsService
     {
-        public static List<Appointment> SearchByAnamnesis(Patient patient, string keyWord)
-        {
-            List<Appointment> searchResults = new List<Appointment>();
-            foreach (Appointment appointment in patient.GetPastAppointments())
-            {
-                if (appointment is Examination examination)
-                {
-                    if (examination.Anamnesis.ToLower().Contains(keyWord.ToLower()))
-                    {
-                        searchResults.Add(appointment);
-                    }
-                }
-            }
-            return searchResults;
-        }
 
         public static List<Examination> MakeSuggestions(Patient patient, SchedulingPriority priority, Doctor doctor, DateTime deadlineDate, DateTime startTime, DateTime endTime)
         {

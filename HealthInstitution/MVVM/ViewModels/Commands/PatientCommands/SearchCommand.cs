@@ -25,7 +25,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
         {
             if (_viewModel is PatientRecordViewModel recordViewModel)
             {
-                recordViewModel.FillAppointmentsList(AppointmentService.SearchByAnamnesis(recordViewModel.Patient, recordViewModel.SearchKeyWord));
+                AnamnesisSearchService service = new AnamnesisSearchService(recordViewModel.Patient);
+                List<Appointment> appointments = service.SearchByAnamnesis(recordViewModel.SearchKeyWord);
+                recordViewModel.FillAppointmentsList(appointments);
             }
             if (_viewModel is PatientSearchViewModel searchViewModel)
             {

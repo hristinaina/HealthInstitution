@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Services.SearchingServices
 {
-    class DoctorsSearchService
+    class DoctorsSearchService : SearchService
     {
         DoctorRepository _repository;
 
@@ -23,11 +23,11 @@ namespace HealthInstitution.MVVM.Models.Services.SearchingServices
             foreach (Doctor d in _repository.Doctors)
             {
                 bool add = false;
-                if (doctor.FirstName != "" && d.FirstName.ToLower().Contains(doctor.FirstName.ToLower()))
+                if (isMatching(doctor.FirstName, d.FirstName))
                 {
                     add = true;
                 }
-                if (doctor.LastName != "" && d.LastName.ToLower().Contains(doctor.LastName.ToLower()))
+                if (isMatching(doctor.LastName, d.LastName))
                 {
                     add = true;
                 }

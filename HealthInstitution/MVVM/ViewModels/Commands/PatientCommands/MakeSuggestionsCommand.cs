@@ -29,7 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             DateTime deadlineDate = _viewModel.SuggestionDeadlineDate;
             DateTime startTime = _viewModel.SuggestionStartTime;
             DateTime endTime = _viewModel.SuggestionEndTime;
-            _viewModel.FillSuggestionsList(AppointmentService.MakeSuggestions(patient, priority, doctor, deadlineDate, startTime, endTime));
+            _viewModel.FillSuggestionsList(SuggestionsService.MakeSuggestions(patient, priority, doctor, deadlineDate, startTime, endTime));
         }
     }
 }
