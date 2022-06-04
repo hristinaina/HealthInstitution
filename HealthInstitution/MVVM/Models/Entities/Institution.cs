@@ -11,6 +11,7 @@ using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.Models.Services.Rooms;
+using HealthInstitution.MVVM.Models.Services.DoctorServices;
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -218,8 +219,10 @@ namespace HealthInstitution.MVVM.Models
         public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
         {
             CheckTrolling();
+            PatientService patientService = new PatientService(patient);
             DoctorService doctorService = new DoctorService(doctor);
-            if (CurrentUser is Patient && patient.IsTrolling())
+            TrollingService trollingService = new TrollingService(patient);
+            if (CurrentUser is Patient && trollingService.IsTrolling())
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
@@ -229,7 +232,7 @@ namespace HealthInstitution.MVVM.Models
                 {
                     return false;
                 }
-                if (!patient.IsAvailable(dateTime, duration))
+                if (!patientService.IsAvailable(dateTime, duration))
                 {
                     return false;
                 }
@@ -346,6 +349,7 @@ namespace HealthInstitution.MVVM.Models
         {
             if (CurrentUser is Patient || CurrentUser is Secretary || CurrentUser is Doctor)
             {
+                PatientService patientService = new PatientService(patient);
                 DoctorService doctorService = new DoctorService(doctor);
                 if (DateTime.Compare(DateTime.Now, dateTime) > 0 && validation)
                 {
@@ -366,7 +370,7 @@ namespace HealthInstitution.MVVM.Models
                 {
                     throw new EmptyFieldException("Patient not selected !");
                 }
-                if (!patient.IsAvailable(dateTime, duration))
+                if (!patientService.IsAvailable(dateTime, duration))
                 {
                     throw new UserNotAvailableException("Patient not available at selected time !");
                 }
@@ -382,7 +386,8 @@ namespace HealthInstitution.MVVM.Models
             if (CurrentUser is Patient)
             {
                 Patient patient = (Patient)CurrentUser;
-                if (patient.IsTrolling())
+                TrollingService service = new TrollingService(patient);
+                if (service.IsTrolling())
                 throw new PatientBlockedException("System has blocked your account !");
             }
         }

@@ -39,7 +39,7 @@ namespace HealthInstitution.MVVM.Models.Services
             }
             else if (request.ChangeStatus.ToString() == "DELETED")
             {
-                AppointmentService.DeleteAppointment(appointment);
+                //AppointmentService.DeleteAppointment(appointment);
                 return "The appointment has been successfully deleted.";
             }
 

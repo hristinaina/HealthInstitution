@@ -35,13 +35,14 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             Patient patient = _patientRepository.FindByID(id);
             patient.Delete();
-            AppointmentService.DeleteFutureAppointments(patient);
+            //SecretaryAppointmentManagementService service = new();
+            //service.DeleteFutureAppointments(patient);
         }
 
         public void BlockPatient(int id)
         {
             Patient patient = _patientRepository.FindByID(id);
-            patient.Block();
+            patient.Block(BlockadeType.SECRETARY);
         }
 
         public void UnblockPatient(int id)
