@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows;
-using static HealthInstitution.MVVM.Models.Services.NotificationService;
+using static HealthInstitution.MVVM.Models.Services.NotificationReceiveService;
 
 namespace HealthInstitution.MVVM.Models.Services.Notifications
 {
