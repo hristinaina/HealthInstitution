@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -26,7 +27,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             patient.Record.Weight = _viewModel.Weight;
             patient.Record.Height = _viewModel.Height;
             examination.Patient = patient;
-            Institution.Instance().RescheduleExamination(examination, examination.Date);
+            DoctorRescheduleAppointmentService doctorRescheduleAppointmentService = new();
+            doctorRescheduleAppointmentService.RescheduleExamination(examination, examination.Date);
         }
     }
 }
