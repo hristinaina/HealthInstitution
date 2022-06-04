@@ -9,17 +9,15 @@ namespace HealthInstitution.MVVM.Models.Services
 {
     class ExaminationService
     {
-        private Examination _examination;
-        public Examination Examination { get => _examination; set { _examination = value; } }
 
-        public ExaminationService(Examination examination)
+        public ExaminationService()
         {
-            _examination = examination;
+           
         }
-        public void AddPrescription(Prescription prescription)
+        public void AddPrescription(Examination examination, Prescription prescription)
         {
-            _examination.Prescriptions.Add(prescription);
-            Institution.Instance().ExaminationRepository.Update(_examination);
+            examination.Prescriptions.Add(prescription);
+            //Institution.Instance().ExaminationRepository.Update(examination);
         }
 
     }

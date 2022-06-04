@@ -391,8 +391,8 @@ namespace HealthInstitution.MVVM.Models
             if (examination.Patient.IsAllergic(prescription.Medicine.Allergens)) throw new Exception("Patient is allergic !") ;
 
             _prescriptionRepository.Add(prescription);
-            ExaminationService examinationService = new ExaminationService(examination);
-            examinationService.AddPrescription(prescription);
+            ExaminationService examinationService = new ExaminationService();
+            examinationService.AddPrescription(examination, prescription);
             if ((medicine == null) || (dailyFrequency < 1) || (longitudeInDays < 1))
             {
                 throw new Exception("Wrong input !");

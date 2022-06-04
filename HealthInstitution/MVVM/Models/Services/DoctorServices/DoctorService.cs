@@ -10,7 +10,6 @@ namespace HealthInstitution.MVVM.Models.Services
     class DoctorService
     {
         private Doctor _doctor;
-        public Doctor Doctor { get => _doctor; set { _doctor = value; } }
         private List<Examination> _examinations;
         private List<Operation> _operations;
 
@@ -22,10 +21,10 @@ namespace HealthInstitution.MVVM.Models.Services
         }
 
         // schedule for certain day and 3 days after
-        public List<Entities.Appointment> GetSchedule(DateTime date, string type)
+        public List<Appointment> GetSchedule(DateTime date, string type)
         {
-            List<Entities.Appointment> appointments = new();
-            List<Entities.Appointment> scheduledAppointments = new();
+            List<Appointment> appointments = new();
+            List<Appointment> scheduledAppointments = new();
             
             if (type == nameof(Examination))
             {
@@ -36,7 +35,7 @@ namespace HealthInstitution.MVVM.Models.Services
                 foreach (Operation operation in _operations) appointments.Add(operation);
             }
 
-            foreach (Entities.Appointment appointment in appointments)
+            foreach (Appointment appointment in appointments)
             {
                 if (appointment.Date >= date && date.AddDays(3) >= appointment.Date)
                     scheduledAppointments.Add(appointment);
@@ -45,7 +44,7 @@ namespace HealthInstitution.MVVM.Models.Services
             return scheduledAppointments;
         }
 
-        public Entities.Appointment FindInterruptingAppointment(DateTime dateTime, int durationInMin = 15)
+        public Appointment FindInterruptingAppointment(DateTime dateTime, int durationInMin = 15)
         // returns null if appointment can be reserved
         // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
         {
@@ -75,7 +74,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
         public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
         {
-            Entities.Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
+            Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
             if (interruptingAppointment is null) return true;
             return false;
         }
