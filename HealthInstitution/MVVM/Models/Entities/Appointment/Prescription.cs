@@ -40,7 +40,6 @@ namespace HealthInstitution.MVVM.Models.Entities
        
         public Prescription()
         {
-
         }
 
         public Prescription(int id, int longitudeInDays, int dailyFrequency,

@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthInstitution.Exceptions.AdminExceptions
+namespace HealthInstitution.Exceptions
 {
-    class EmptyRoomNameException : Exception
+    class ZeroIngredientsException : Exception
     {
-        public EmptyRoomNameException()
+        public ZeroIngredientsException()
         {
         }
 
-        public EmptyRoomNameException(string message)
+        public ZeroIngredientsException(string message)
             : base(message)
         {
         }

@@ -161,7 +161,7 @@ namespace HealthInstitution.MVVM.Models
             _medicineRepository.SaveToFile();
             _allergenRepository.SaveToFile();
             _patientAllergenRepository.SaveToFile();
-            _medicineAllergenRepository.LoadFromFile();
+            _medicineAllergenRepository.SaveToFile();
             _pendingMedicineRepository.SaveToFile();
             _doctorDaysOffRepository.SaveToFile();
             _prescriptionMedicineRepository.SaveToFile();
@@ -388,7 +388,7 @@ namespace HealthInstitution.MVVM.Models
         {
             int id = Institution.Instance().PrescriptionRepository.GetNewId();
             Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, DateTime.Now, medicine);
-            if (examination.Patient.IsAllergic(prescription.Medicine.Allergens)) throw new Exception("Patient is allergic !") ;
+            if (examination.Patient.IsAllergic(prescription.Medicine.Ingredients)) throw new Exception("Patient is allergic !");
 
             _prescriptionRepository.Add(prescription);
             examination.AddPrescription(prescription);
@@ -452,7 +452,7 @@ namespace HealthInstitution.MVVM.Models
         {
             foreach(PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
             {
-                if (i.Id == medicine.Id)
+                if (i.ID == medicine.ID)
                 {
                     _pendingMedicineRepository.PendingMedicines.Remove(i);
                     return true;
@@ -465,7 +465,7 @@ namespace HealthInstitution.MVVM.Models
         {
             foreach (PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
             {
-                if (i.Id == medicine.Id)
+                if (i.ID == medicine.ID)
                 {
                     _pendingMedicineRepository.PendingMedicines.Remove(i);
                     _pendingMedicineRepository.PendingMedicines.Add(medicine);

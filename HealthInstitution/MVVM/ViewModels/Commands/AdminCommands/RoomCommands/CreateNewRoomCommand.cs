@@ -37,7 +37,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
             } catch(ZeroRoomNumberException e)
             {
                 _model.ShowMessage(e.Message);
-            } catch(EmptyRoomNameException e)
+            } catch(EmptyNameException e)
             {
                 _model.ShowMessage(e.Message);
             } catch(RoomNumberAlreadyTakenException e)

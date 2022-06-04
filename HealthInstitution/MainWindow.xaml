@@ -83,6 +83,10 @@
                 <viewsSecretary:OrderingEquipmentView />
             </DataTemplate>
 
+
+            <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminMedicineViewModel}">
+                <viewsadmin:Medicine />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminRoomViewModel}">
                 <viewsadmin:AdminRoomView />
             </DataTemplate>
@@ -99,6 +103,7 @@
                 <viewsadmin:AdminDivideComplexRenovation />
             </DataTemplate>
         </Grid.Resources>
+        <!--<viewsadmin:Medicine></viewsadmin:Medicine>-->
         <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>
 </Window>

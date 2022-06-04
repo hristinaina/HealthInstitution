@@ -12,32 +12,38 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
     public class MedicineAllergenRepository
     {
         private readonly string _fileName;
-        private List<MedicineAllergen> _references;
+        private List<MedicineAllergen> _allergensInMedicine;
 
-        public MedicineAllergenRepository(string FileName)
+        public List<MedicineAllergen> AllergensInMedicine
         {
-            _fileName = FileName;
-            _references = new List<MedicineAllergen>();
+            get => _allergensInMedicine;
+            set => _allergensInMedicine = value;
+        }
+
+        public MedicineAllergenRepository(string fileName)
+        {
+            _fileName = fileName;
+            _allergensInMedicine = new List<MedicineAllergen>();
         }
         public List<MedicineAllergen> GetReferences()
         {
-            return _references;
+            return _allergensInMedicine;
         }
 
         public void LoadFromFile()
         {
-            _references = FileService.Deserialize<MedicineAllergen>(_fileName);
+            _allergensInMedicine = FileService.Deserialize<MedicineAllergen>(_fileName);
         }
 
         public void SaveToFile()
         {
-            FileService.Serialize<MedicineAllergen>(_fileName, _references);
+            FileService.Serialize<MedicineAllergen>(_fileName, _allergensInMedicine);
         }
 
         public List<MedicineAllergen> FindByMedicineID(int medicineId)
         {
             List<MedicineAllergen> medicineAllergens = new();
-            foreach (MedicineAllergen reference in _references)
+            foreach (MedicineAllergen reference in _allergensInMedicine)
             {
                 if (reference.MedicineId == medicineId)
                     medicineAllergens.Add(reference);
@@ -47,10 +53,10 @@ namespace HealthInstitution.MVVM.Models.Repositories.References
 
         public void Add(Medicine medicine)
         {
-            foreach(Allergen allergen in medicine.Allergens)
+            foreach(Allergen allergen in medicine.Ingredients)
             {
                 MedicineAllergen medicineAllergen = new MedicineAllergen(medicine.ID, allergen.ID);
-                _references.Add(medicineAllergen);
+                _allergensInMedicine.Add(medicineAllergen);
             }
         }
     }

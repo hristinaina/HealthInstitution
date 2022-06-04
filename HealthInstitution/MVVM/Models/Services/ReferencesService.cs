@@ -113,7 +113,13 @@ namespace HealthInstitution.MVVM.Models.Services
             foreach (Medicine medicine in Institution.Instance().MedicineRepository.Medicines)
             {
                 List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
-                medicine.Allergens = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+                medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+            }
+
+            foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
+            {
+                List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
+                medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
             }
         }
 
@@ -121,7 +127,7 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
             {
-                List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.Id);
+                List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
                 medicine.Allergens = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
             }
         }
