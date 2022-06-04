@@ -9,6 +9,7 @@ using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Repositories.References;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.Exceptions;
+using HealthInstitution.MVVM.Models.Services.DoctorServices;
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -216,14 +217,14 @@ namespace HealthInstitution.MVVM.Models
         public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
         {
             CheckTrolling();
-
+            DoctorService doctorService = new DoctorService(doctor);
             if (CurrentUser is Patient && patient.IsTrolling())
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
             if (CurrentUser is Secretary)
             {
-                if (!doctor.IsAvailable(dateTime, duration))
+                if (!doctorService.IsAvailable(dateTime, duration))
                 {
                     return false;
                 }
@@ -342,6 +343,7 @@ namespace HealthInstitution.MVVM.Models
         {
             if (CurrentUser is Patient || CurrentUser is Secretary || CurrentUser is Doctor)
             {
+                DoctorService doctorService = new DoctorService(doctor);
                 if (DateTime.Compare(DateTime.Now, dateTime) > 0 && validation)
                 {
                     throw new DateException("Date must be in future !");
@@ -365,7 +367,7 @@ namespace HealthInstitution.MVVM.Models
                 {
                     throw new UserNotAvailableException("Patient not available at selected time !");
                 }
-                if (!doctor.IsAvailable(dateTime, duration))
+                if (!doctorService.IsAvailable(dateTime, duration))
                 {
                     throw new UserNotAvailableException("Doctor not available at selected time !");
                 }

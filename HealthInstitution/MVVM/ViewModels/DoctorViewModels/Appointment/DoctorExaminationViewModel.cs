@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
 using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.Models.Services.DoctorServices;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
@@ -121,8 +122,9 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public void FillExaminationsList()
         {
+            DoctorService doctorService = new DoctorService(_doctor);
             _examinations.Clear();
-            foreach (Examination examination in _doctor.GetSchedule(DateTime.Today, nameof(Examination)))
+            foreach (Examination examination in doctorService.GetSchedule(DateTime.Today, nameof(Examination)))
             {
                 _examinations.Add(new ExaminationItemViewModel(examination));
             }
