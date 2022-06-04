@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.Models.Entities
 {
@@ -28,7 +29,8 @@ namespace HealthInstitution.MVVM.Models.Entities
             {
                 foreach (Entities.Room r in value)
                 {
-                    if (r.IsUnderRenovation(_startDate, _endDate)) throw new RoomUnderRenovationException("Room already under renovation at that time");
+                    RoomService room = new RoomService(r);
+                    if (room.IsUnderRenovation(_startDate, _endDate)) throw new RoomUnderRenovationException("Room already under renovation at that time");
                 }
                 _roomsUnderRenovation = value;
             }

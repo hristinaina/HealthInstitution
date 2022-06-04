@@ -8,6 +8,7 @@ using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.MVVM.Models.Services.Equipments;
 using HealthInstitution.MVVM.Models.Services.Renovations;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -73,7 +74,8 @@ namespace HealthInstitution.MVVM.Models.Services
 
                 Room r = Institution.Instance().RoomRepository.FindById(a.RoomId);
                 Equipment e = Institution.Instance().EquipmentRepository.FindById(a.EquipmentId);
-                r.AddEquipment(e, a.Quantity);
+                RoomService room = new RoomService(r);
+                room.AddEquipment(e, a.Quantity);
                 EquipmentService equipment = new EquipmentService(e);
                 equipment.ArrangeInRoom(r, a.Quantity);
             }

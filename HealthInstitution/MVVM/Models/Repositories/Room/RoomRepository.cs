@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Exceptions.AdminExceptions;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.Models.Repositories
 {
@@ -135,8 +136,9 @@ namespace HealthInstitution.MVVM.Models.Repositories
 
         public void DeleteRoom(Entities.Room r)
         {
-            if (!r.IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
-            r.ReturnEquipmentToWarehouse(DateTime.Today);
+            RoomService room = new RoomService(r);
+            if (!room.IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
+            room.ReturnEquipmentToWarehouse(DateTime.Today);
             _rooms.Remove(r);
             _deletedRooms.Add(r);
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.Models.Services.Renovations
 {
@@ -25,8 +26,8 @@ namespace HealthInstitution.MVVM.Models.Services.Renovations
             {
                 foreach (Room r in _renovation.RoomsUnderRenovation)
                 {
-                    //!!!
-                    r.ReturnEquipmentToWarehouse(_renovation.EndDate);
+                    RoomService room = new RoomService(r);
+                    room.ReturnEquipmentToWarehouse(_renovation.EndDate);
                 }
             }
 

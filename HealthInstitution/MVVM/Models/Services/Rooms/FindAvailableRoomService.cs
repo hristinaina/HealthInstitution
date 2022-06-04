@@ -24,7 +24,8 @@ namespace HealthInstitution.MVVM.Models.Services.Rooms
             if (a.Room != null)
             {
                 changing = true;
-                if (a.Room.isAvailable(wantedTime, a))
+                RoomService room = new RoomService(a.Room);
+                if (room.isAvailable(wantedTime, a))
                 {
                     a.Date = wantedTime;
                     return;
@@ -36,7 +37,8 @@ namespace HealthInstitution.MVVM.Models.Services.Rooms
             List<Entities.Room> rooms = service.FilterByRoomType(type);
             foreach (Entities.Room r in rooms)
             {
-                if (r.isAvailable(wantedTime, a))
+                RoomService room = new RoomService(r);
+                if (room.isAvailable(wantedTime, a))
                 {
                     r.Appointments.Add(a);
                     a.Room = r;
