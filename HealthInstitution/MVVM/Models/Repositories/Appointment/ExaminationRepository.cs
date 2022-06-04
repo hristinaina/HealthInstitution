@@ -85,19 +85,15 @@ namespace HealthInstitution.MVVM.Models
             _examinations.Remove(examination);
         }
 
-        public List<Examination> GetFutureExaminations(Specialization specialization, Patient patient)
+        public void DeleteByPatientID(int patientId)
         {
-            List<Examination> futureAppointments = new();
-            foreach (Examination appointment in Examinations)
+            foreach (Examination examination in _examinations)
             {
-                if (DateTime.Compare(appointment.Date, DateTime.Now) > 0 &&
-                    (appointment.Doctor.Specialization == specialization || appointment.Patient == patient))
+                if (examination.Patient.ID == patientId)
                 {
-                    futureAppointments.Add(appointment);
+                    _examinations.Remove(examination);
                 }
             }
-            futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
-            return futureAppointments;
         }
 
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate)

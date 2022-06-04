@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using static HealthInstitution.MVVM.Models.Services.NotificationService;
+using static HealthInstitution.MVVM.Models.Services.NotificationReceiveService;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
@@ -122,7 +122,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             InitializeSuggestionsParrameters();
 
             Del delegateMethod = showNotification;
-            NotificationService notifications = new NotificationService(_patient, delegateMethod);
+            NotificationReceiveService notifications = new NotificationReceiveService(_patient, delegateMethod);
             notifications.ExecuteRealTimeNotifications();
             notifications.AddMissedNotifications();
         }

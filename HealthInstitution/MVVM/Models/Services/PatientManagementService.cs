@@ -9,11 +9,11 @@ using HealthInstitution.MVVM.Models.Repositories;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
-    public class PatientService
+    public class PatientManagementService
     {
         private readonly PatientRepository _patientRepository;
 
-        public PatientService()
+        public PatientManagementService()
         {
             _patientRepository = Institution.Instance().PatientRepository;
         }
