@@ -111,7 +111,8 @@ namespace HealthInstitution.MVVM.Models.Services
             {
                 return false;
             }
-            _service.ValidateAppointmentData(patient, doctor, dateTime, validation);
+            ValidationService validationService = new();
+            validationService.ValidateAppointmentData(patient, doctor, dateTime, validation);
             return true;
         }
 

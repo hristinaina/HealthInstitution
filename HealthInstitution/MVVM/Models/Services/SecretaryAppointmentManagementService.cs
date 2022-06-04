@@ -88,39 +88,48 @@ namespace HealthInstitution.MVVM.Models.Services
                 return false;
             }
 
-            ValidateAppointmentData(patient, doctor, dateTime, validation, duration);
+            ValidationService validationService = new(); 
+            validationService.ValidateAppointmentData(patient, doctor, dateTime, validation, duration);
             int appointmentId = 0;
 
             if (type == nameof(Examination))
             {
                 appointmentId = _examinationRepository.NewId();
-                Examination examination = new Examination(appointmentId, doctor, patient, dateTime,
-                                          new List<Prescription>());
-                patient.Examinations.Add(examination);
-                doctor.Examinations.Add(examination);
-                _roomRepository.FindAvailableRoom(examination, dateTime);
-                _examinationRepository.Add(examination);
-                _examinationReferencesRepository.Add(examination);
-                _examinationChangeRepository.Add(examination, dateTime, true, AppointmentStatus.CREATED);
-
+                Examination examination = new Examination(appointmentId, doctor, patient, dateTime, new List<Prescription>());
+                CreateExamination(examination, patient, doctor, dateTime);
             }
             else if (type == nameof(Operation))
             {
                 appointmentId = _operationRepository.NewId();
                 Operation operation = new Operation(appointmentId, doctor, patient, dateTime, duration);
-                patient.Operations.Add(operation);
-                doctor.Operations.Add(operation);
-                _roomRepository.FindAvailableRoom(operation, dateTime);
-                _operationRepository.Add(operation);
-                _operationReferencesRepository.Add(operation);
-
+                CreateOperation(operation, patient, doctor, dateTime);
             }
             return true;
         }
 
+        private void CreateExamination(Examination examination, Patient patient, Doctor doctor, DateTime dateTime)
+        {
+            patient.Examinations.Add(examination);
+            doctor.Examinations.Add(examination);
+            _roomRepository.FindAvailableRoom(examination, dateTime);
+            _examinationRepository.Add(examination);
+            _examinationReferencesRepository.Add(examination);
+            _examinationChangeRepository.Add(examination, dateTime, true, AppointmentStatus.CREATED);
+        }
+
+        private void CreateOperation(Operation operation, Patient patient, Doctor doctor, DateTime dateTime)
+        {
+            patient.Operations.Add(operation);
+            doctor.Operations.Add(operation);
+            _roomRepository.FindAvailableRoom(operation, dateTime);
+            _operationRepository.Add(operation);
+            _operationReferencesRepository.Add(operation);
+        }
+
         public bool RescheduleExamination(Appointment appointment, DateTime dateTime, bool validation = true)
         {
-            ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime, validation);
+            ValidationService validationService = new();
+            validationService.ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime, validation);
 
             _roomRepository.FindAvailableRoom(appointment, dateTime);
             bool resolved = true;
@@ -141,37 +150,6 @@ namespace HealthInstitution.MVVM.Models.Services
                 _operationReferencesRepository.Add((Operation)appointment);
             }
             return resolved;
-        }
-
-        public void ValidateAppointmentData(Patient patient, Doctor doctor, DateTime dateTime, bool validation, int duration = 15)
-        {
-            DoctorService doctorService = new DoctorService(doctor);
-            PatientService patientService = new PatientService(patient);
-
-            if (DateTime.Compare(DateTime.Now, dateTime) > 0 && validation)
-            {
-                throw new DateException("Date must be in future !");
-            }
-            if ((dateTime - DateTime.Now).TotalDays < 1 && validation)
-            {
-                throw new DateException("Cannot schedule in next 24 hours");
-            }
-            if (doctor is null)
-            {
-                throw new EmptyFieldException("Doctor not selected !");
-            }
-            if (patient is null)
-            {
-                throw new EmptyFieldException("Patient not selected !");
-            }
-            if (!patientService.IsAvailable(dateTime, duration))
-            {
-                throw new UserNotAvailableException("Patient not available at selected time !");
-            }
-            if (!doctorService.IsAvailable(dateTime, duration))
-            {
-                throw new UserNotAvailableException("Doctor not available at selected time !");
-            }
         }
     }
 }
