@@ -8,6 +8,7 @@ using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models.Repositories;
 using HealthInstitution.MVVM.Models.Repositories.References;
 using HealthInstitution.MVVM.Models.Enumerations;
+using HealthInstitution.MVVM.Models.Services.DoctorServices;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -33,13 +34,14 @@ namespace HealthInstitution.MVVM.Models.Services
 
         public bool CreateAppointment(Doctor doctor, Patient patient, DateTime dateTime, string type, int duration = 15, bool validation = true)
         {
+            PatientService patientService = new PatientService(patient);
             DoctorService doctorService = new DoctorService(doctor);
           
             if (!doctorService.IsAvailable(dateTime, duration))
             {
                 return false;
             }
-            if (!patient.IsAvailable(dateTime, duration))
+            if (!patientService.IsAvailable(dateTime, duration))
             {
                 return false;
             }

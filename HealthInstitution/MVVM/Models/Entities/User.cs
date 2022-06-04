@@ -80,7 +80,5 @@ namespace HealthInstitution.MVVM.Models
 
         }
 
-        public bool isAvailable(DateTime dateTime) { return true; }
-        public Appointment FindInterruptingAppointment(DateTime dateTime) { return null; }
     }
 }

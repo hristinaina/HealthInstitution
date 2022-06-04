@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services.PatientServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,8 @@ namespace HealthInstitution.MVVM.Models.Services.SearchingServices
         List<Appointment> _apointments;
         public AnamnesisSearchService(Patient patient)
         {
-            _apointments = patient.GetAllAppointments();
+            PatientAppointmentsService service = new PatientAppointmentsService(patient);
+            _apointments = service.GetAllAppointments();
         }
 
         public List<Appointment> SearchByAnamnesis(string keyWord)

@@ -3,6 +3,7 @@ using HealthInstitution.MVVM.Models.Enumerations;
 using System;
 using System.Collections.Generic;
 using HealthInstitution.MVVM.Models.Services;
+using HealthInstitution.MVVM.Models.Services.DoctorServices;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -16,8 +17,9 @@ namespace HealthInstitution.MVVM.Models.Services
             DateTime endDateTime = DateTime.Now;
             startDateTime += ShiftDateTime(startTime, startDateTime);
             endDateTime += ShiftDateTime(endTime, endDateTime);
-
+            PatientService patientService = new PatientService(patient);
             DoctorService doctorService = new DoctorService(doctor);
+
 
             while (startDateTime < deadlineDate)
             {
@@ -26,13 +28,13 @@ namespace HealthInstitution.MVVM.Models.Services
                     startDateTime += ShiftDateTime(startTime, startDateTime);
                     endDateTime += ShiftDateTime(endTime, endDateTime);
                 }
-                while ((!patient.IsAvailable(startDateTime) || !doctorService.IsAvailable(startDateTime)) && startDateTime < endDateTime)
+                while ((!patientService.IsAvailable(startDateTime) || !doctorService.IsAvailable(startDateTime)) && startDateTime < endDateTime)
                 {
                     startDateTime = CheckInterruption(doctor, startDateTime);
                     startDateTime = CheckInterruption(patient, startDateTime);
                 }
 
-                if (startDateTime < endDateTime && patient.IsAvailable(startDateTime) && doctorService.IsAvailable(startDateTime))
+                if (startDateTime < endDateTime && patientService.IsAvailable(startDateTime) && doctorService.IsAvailable(startDateTime))
                 {
                     suggestions.Add(new Examination(0, doctor, patient, startDateTime, null));
                     break;
@@ -60,10 +62,11 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1);
+            PatientService patientService = new PatientService(patient);
             DoctorService doctorService = new DoctorService(doctor);
             while (suggestions.Count != 3)
             {
-                while (!patient.IsAvailable(startDateTime) || !doctorService.IsAvailable(startDateTime))
+                while (!patientService.IsAvailable(startDateTime) || !doctorService.IsAvailable(startDateTime))
                 {
                     startDateTime = CheckInterruption(doctor, startDateTime);
                     startDateTime = CheckInterruption(patient, startDateTime);
@@ -82,6 +85,7 @@ namespace HealthInstitution.MVVM.Models.Services
             DateTime endDateTime = DateTime.Now;
             startDateTime += ShiftDateTime(startTime, startDateTime);
             endDateTime += ShiftDateTime(endTime, endDateTime);
+            PatientService patientService = new PatientService(patient);
 
             while (suggestions.Count < 3 && startDateTime < deadlineDate)
             {
@@ -90,7 +94,7 @@ namespace HealthInstitution.MVVM.Models.Services
                     startDateTime += ShiftDateTime(startTime, startDateTime);
                     endDateTime += ShiftDateTime(endTime, endDateTime);
                 }
-                while (!patient.IsAvailable(startDateTime) && startDateTime < endDateTime)
+                while (!patientService.IsAvailable(startDateTime) && startDateTime < endDateTime)
                 {
                     startDateTime = CheckInterruption(patient, startDateTime);
                 }
@@ -128,12 +132,20 @@ namespace HealthInstitution.MVVM.Models.Services
 
         private static DateTime CheckInterruption(User user, DateTime startDateTime)
         {
-            if (!user.isAvailable(startDateTime))
+            IUserAvailability availability;
+            if (user is Patient patient)
             {
-                Appointment interrupting = user.FindInterruptingAppointment(startDateTime);
+                availability = new PatientService(patient);
+            }
+            else  {
+                Doctor doctor = (Doctor)user;
+                availability = new DoctorService(doctor);
+            }
+            if (availability.IsAvailable(startDateTime))
+            {
+                Appointment interrupting = availability.FindInterruptingAppointment(startDateTime);
                 startDateTime = FixTimeInterruption(interrupting);
             }
-
             return startDateTime;
         }
 

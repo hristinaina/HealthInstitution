@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
-    class NotificationService
+    class NotificationRecieveService
     {
         private Patient _patient;
         private Del _method;
         public delegate void Del(string message);
 
-        public NotificationService(Patient patient, Del method)
+        public NotificationRecieveService(Patient patient, Del method)
         {
             _patient = patient;
             _method = method;
