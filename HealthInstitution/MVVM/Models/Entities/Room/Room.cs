@@ -42,7 +42,14 @@ namespace HealthInstitution.MVVM.Models.Entities
             _renovations = new List<Renovation>();
         }
 
-        public Room(int id, int number, string name, RoomType type) : this()
+        public Room(string name, int number, RoomType type) : this()
+        {
+            _number = number;
+            _name = name;
+            _type = type;
+        }
+
+        public Room(int id, string name, int number, RoomType type) : this()
         {
             _id = id;
             _number = number;

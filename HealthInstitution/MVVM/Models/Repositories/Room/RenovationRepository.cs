@@ -66,7 +66,7 @@ namespace HealthInstitution.MVVM.Models.Repositories.Room
             return true;
         }
 
-        public int GetID()
+        private int GetID()
         {
             int i = 1;
             while (true)

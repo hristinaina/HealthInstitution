@@ -25,6 +25,7 @@ namespace HealthInstitution.MVVM.Models.Services.Renovations
             {
                 foreach (Room r in _renovation.RoomsUnderRenovation)
                 {
+                    //!!!
                     r.ReturnEquipmentToWarehouse(_renovation.EndDate);
                 }
             }

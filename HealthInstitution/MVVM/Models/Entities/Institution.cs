@@ -9,6 +9,7 @@ using HealthInstitution.MVVM.Models.Entities.References;
 using HealthInstitution.MVVM.Models.Repositories.References;
 using HealthInstitution.MVVM.Models.Enumerations;
 using HealthInstitution.Exceptions;
+using HealthInstitution.MVVM.Models.Services.Rooms;
 
 namespace HealthInstitution.MVVM.Models
 {
@@ -226,6 +227,7 @@ namespace HealthInstitution.MVVM.Models
             ValidateAppointmentData(patient, doctor, dateTime, validation, duration);
 
             int appointmentId = 0;
+            FindAvailableRoomService service = new FindAvailableRoomService();
 
             if (type == nameof(Examination))
             {
@@ -237,7 +239,7 @@ namespace HealthInstitution.MVVM.Models
                                           new List<Prescription>());
                 patient.Examinations.Add(examination);
                 doctor.Examinations.Add(examination);
-                _roomRepository.FindAvailableRoom(examination, dateTime);
+                service.FindAvailableRoom(examination, dateTime);
                 _examinationRepository.Add(examination);
                 _examinationReferencesRepository.Add(examination);
                 _examinationChangeRepository.Add(examination, dateTime, true, AppointmentStatus.CREATED);
@@ -249,7 +251,7 @@ namespace HealthInstitution.MVVM.Models
                 Operation operation = new Operation(appointmentId, doctor, patient, dateTime, duration);
                 patient.Operations.Add(operation);
                 doctor.Operations.Add(operation);
-                _roomRepository.FindAvailableRoom(operation, dateTime);
+                service.FindAvailableRoom(operation, dateTime);
                 _operationRepository.Add(operation);
                 _operationReferencesRepository.Add(operation);
 
@@ -265,7 +267,8 @@ namespace HealthInstitution.MVVM.Models
 
             ValidateAppointmentData(appointment.Patient, appointment.Doctor, dateTime, validation);
 
-            _roomRepository.FindAvailableRoom(appointment, dateTime);
+            FindAvailableRoomService service = new FindAvailableRoomService();
+            service.FindAvailableRoom(appointment, dateTime);
             bool resolved = true;
             if (CurrentUser is Patient) {
                 resolved = appointment.IsEditable();
