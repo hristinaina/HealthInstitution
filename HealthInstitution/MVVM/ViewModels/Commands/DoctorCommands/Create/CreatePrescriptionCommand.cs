@@ -27,9 +27,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             try
             {
                 DoctorPrescriptionService service = new();
-                bool isCreated = service.CreatePrescription(_viewModel.SelectedMedicine, _viewModel.LongitudeInDays,
-                                                            _viewModel.DailyFrequency, _viewModel.SelectedDependency,
-                                                            _viewModel.Examination);
+                Prescription prescription = new Prescription(0, _viewModel.LongitudeInDays, _viewModel.DailyFrequency,
+                                                             _viewModel.SelectedDependency, DateTime.Now, _viewModel.SelectedMedicine);
+                bool isCreated = service.CreatePrescription(prescription, _viewModel.Examination);
                 if (isCreated) _viewModel.ShowMessage("Prescription successfully created !");
                 
             } catch (Exception e)

@@ -22,22 +22,21 @@ namespace HealthInstitution.MVVM.Models.Services
             _prescriptionMedicineRepository = Institution.Instance().PrescriptionMedicineRepository;
         }
 
-        public bool CreatePrescription(Medicine medicine, int longitudeInDays, int dailyFrequency,
-                                       TherapyMealDependency therapyMealDependency, Examination examination)
+        public bool CreatePrescription(Prescription prescription, Examination examination)
         {
             int id = Institution.Instance().PrescriptionRepository.GetNewId();
-            Prescription prescription = new Prescription(id, longitudeInDays, dailyFrequency, therapyMealDependency, DateTime.Now, medicine);
+            prescription.ID = id;
             PatientService patientService = new();
             if (patientService.IsAllergic(examination.Patient, prescription.Medicine.Ingredients)) throw new Exception("Patient is allergic !");
 
             _prescriptionRepository.Add(prescription);
             ExaminationService examinationService = new ExaminationService();
             examinationService.AddPrescription(examination, prescription);
-            if ((medicine == null) || (dailyFrequency < 1) || (longitudeInDays < 1))
+            if ((prescription.Medicine == null) || (prescription.TimesADay < 1) || (prescription.LongitudeInDays < 1))
             {
                 throw new Exception("Wrong input !");
             }
-            PrescriptionMedicine prescriptionMedicine = new PrescriptionMedicine(medicine.ID, prescription.ID);
+            PrescriptionMedicine prescriptionMedicine = new PrescriptionMedicine(prescription.Medicine.ID, prescription.ID);
             _prescriptionMedicineRepository.Add(prescriptionMedicine);
             ExaminationReference examinationReference = new ExaminationReference(examination.ID, examination.Doctor.ID,
                                                                                  examination.Patient.ID, examination.Room.ID,
