@@ -16,7 +16,7 @@ namespace HealthInstitution.MVVM.Models.Services
         {
             _examinationRepository = Institution.Instance().ExaminationRepository;
         }
-        public void AddPrescription(Examination examination, Prescription prescription)
+        public void AddPrescription(Examination examination, Entities.Prescription prescription)
         {
             examination.Prescriptions.Add(prescription);
             //Institution.Instance().ExaminationRepository.Update(examination);

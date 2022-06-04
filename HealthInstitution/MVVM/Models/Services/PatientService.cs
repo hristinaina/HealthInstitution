@@ -58,5 +58,16 @@ namespace HealthInstitution.MVVM.Models.Services
 
             }
         }
+        public bool IsAllergic(Patient patient, List<Allergen> allergens)
+        {
+            foreach (Allergen i in patient.Record.Allergens)
+            {
+                foreach (Allergen allergen in allergens)
+                {
+                    if (i.ID == allergen.ID) return true;
+                }
+            }
+            return false;
+        }
     }
 }
