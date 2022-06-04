@@ -10,7 +10,7 @@ using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.AppointmentCommands;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
-using HealthInstitution.MVVM.Models.Services.DoctorServices;
+using HealthInstitution.MVVM.Models.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {

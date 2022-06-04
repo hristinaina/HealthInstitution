@@ -44,11 +44,5 @@ namespace HealthInstitution.MVVM.Models.Entities
             Prescriptions = prescriptions;
         }
 
-        public void AddPrescription(Prescription prescription)
-        {
-            Prescriptions.Add(prescription);
-            Institution.Instance().ExaminationRepository.Update(this);
-        }
-
     }
 }
