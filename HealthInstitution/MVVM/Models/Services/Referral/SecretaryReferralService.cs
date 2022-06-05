@@ -12,13 +12,13 @@ using HealthInstitution.Repositories;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
-    public class ReferralService
+    public class SecretaryReferralService
     {
         private readonly ReferralRepository _referralRepository;
         private readonly PatientRepository _patientRepository;
         private readonly DoctorRepository _doctorRepository;
 
-        public ReferralService()
+        public SecretaryReferralService()
         {
             _referralRepository = Institution.Instance().ReferralRepository;
             _patientRepository = Institution.Instance().PatientRepository;
