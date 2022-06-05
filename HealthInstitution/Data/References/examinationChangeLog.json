@@ -133,5 +133,14 @@
     "ChangeDate": "2022-06-04T15:23:06.9022957+02:00",
     "Resolved": true,
     "NewDate": "2022-06-06T03:06:00+02:00"
+  },
+  {
+    "ID": 15,
+    "PatientID": 1,
+    "AppointmentID": 19,
+    "ChangeStatus": 2,
+    "ChangeDate": "2022-06-05T02:03:28.1893962+02:00",
+    "Resolved": true,
+    "NewDate": "2022-06-24T02:03:00+02:00"
   }
 ]

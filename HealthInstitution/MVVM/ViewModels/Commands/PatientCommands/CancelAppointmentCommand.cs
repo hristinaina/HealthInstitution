@@ -2,6 +2,7 @@
 using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services.Repositories.Appointment;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.Stores;
 using System;
@@ -36,7 +37,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
             try
             {
-                bool doneCompletely = Institution.Instance().CancelExamination((Examination)examination);
+
+                PatientCancelAppointmentService service = new PatientCancelAppointmentService((Examination)examination);
+                bool doneCompletely = service.CancelExamination();
                 if (doneCompletely)
                 {
                     _viewModel.ShowMessage("Appointment successfully canceled !");
