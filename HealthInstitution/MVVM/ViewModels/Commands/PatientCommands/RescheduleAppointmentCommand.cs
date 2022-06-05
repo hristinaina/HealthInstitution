@@ -2,6 +2,7 @@
 using HealthInstitution.Exceptions;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.Stores;
 using System;
@@ -31,7 +32,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
             try
             {
-                bool doneCompletely = Institution.Instance().RescheduleExamination((Examination)examination, datetime);
+                PatientRescheduleAppointmentService service = new PatientRescheduleAppointmentService(examination);
+                bool doneCompletely = service.RescheduleExamination(datetime);
                 if (doneCompletely)
                 {
                     _viewModel.ShowMessage("Appointment successfully rescheduled !");
