@@ -24,6 +24,11 @@ namespace HealthInstitution.MVVM.Models.Entities
         {
             _prescriptions = new List<Prescription>();
         }
+
+        public Examination(Doctor doctor, Patient patient, DateTime datetime) : base(doctor, patient, datetime)
+        {
+        }
+
         public Examination(int id, DateTime date, bool isEmergency, bool done,
                            string anamnesis, ExaminationReview review)
                            : base(id, date, isEmergency, done)

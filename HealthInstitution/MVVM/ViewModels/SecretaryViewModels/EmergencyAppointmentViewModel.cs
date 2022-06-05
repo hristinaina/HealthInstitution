@@ -90,7 +90,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
             foreach (Appointment appointment in filteredAppointments)
             {
-                if (_service.GetDuration(appointment) >= newDuration)
+                if (new ExaminationService().GetDuration(appointment) >= newDuration)
                     _appointments.Add(new AppointmentListItemViewModel(appointment));
                 if (_appointments.Count >= 5) break;
             }
