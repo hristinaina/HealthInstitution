@@ -7,6 +7,7 @@ using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Repositories;
 using HealthInstitution.Repositories;
 using HealthInstitution.MVVM.Models.Services;
+using HealthInstitution.MVVM.Models.Services.DoctorServices;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -96,13 +97,15 @@ namespace HealthInstitution.MVVM.Models.Services
         }
 
         private bool CheckNewAppointmentTime(Doctor doctor, Patient patient, DateTime dateTime, int duration, bool validation = false)
+
         {
-            DoctorService service = new DoctorService(doctor);
-            if (!service.IsAvailable(dateTime, duration))
+            PatientService patientService = new PatientService(patient);
+            DoctorService doctorService = new DoctorService(doctor);
+            if (!doctorService.IsAvailable(dateTime, duration))
             {
                 return false;
             }
-            if (!patient.IsAvailable(dateTime, duration))
+            if (!doctorService.IsAvailable(dateTime, duration))
             {
                 return false;
             }

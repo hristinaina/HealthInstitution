@@ -21,6 +21,14 @@
             <ColumnDefinition Width="1*"></ColumnDefinition>
             <ColumnDefinition Width="6*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <components:NotificationSnackbar Grid.Column="1"
+                                         Panel.ZIndex="2"
+                                         Margin="0,50,0,50"
+                                         NotificationHeight="20"
+                                         VerticalAlignment="Bottom"
+                                         Content="{Binding Message}"
+                                         IsActive="{Binding MessageVisibility}" />
+
 
         <components:PatientNavigationRail SelectedIndex="2"></components:PatientNavigationRail>
 

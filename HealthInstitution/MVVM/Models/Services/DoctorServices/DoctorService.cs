@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services.DoctorServices;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
-    class DoctorService
+    class DoctorService : IUserAvailability
     {
         private Doctor _doctor;
         private List<Examination> _examinations;
