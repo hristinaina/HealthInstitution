@@ -50,14 +50,15 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             Specialization specialization = _viewModel.SelectedSpecialization;
             Patient patient = _viewModel.SelectedPatient;
             int duration = _viewModel.SelectedDuration;
-            string type = duration == 15 ? nameof(Examination) : nameof(Operation);
             Doctor doctor = appointmentToPostpone.Doctor.Specialization == specialization ?
                 appointmentToPostpone.Doctor : Institution.Instance().DoctorRepository.FindDoctorBySpecialization(specialization);
 
-            Institution.Instance().CreateAppointment(doctor, patient, oldDate, type, duration, false);
+            Examination appointment = new(doctor, patient, oldDate);
+            new SecretaryScheduleAppointmentService().ScheduleAppointment(appointment, duration, false);
+
             MessageBox.Show("Emergency appointment has been successfully created !");
 
-            _service.SendNotifications(appointmentToPostpone, oldDate, newDate, patient, doctor);
+            _service.SendNotifications(appointmentToPostpone, appointment);
             _navigationStore.CurrentViewModel = new AppointmentsViewModel();
         }
     }

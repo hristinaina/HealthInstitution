@@ -88,7 +88,8 @@ namespace HealthInstitution.MVVM.Models.Services
 
         private bool ScheduleAppointmentByDoctor(Doctor doctor, Patient patient, DateTime datetime)
         {
-            return Institution.Instance().CreateAppointment(doctor, patient, datetime, nameof(Examination));
+            Examination appointment = new(doctor, patient, datetime);
+            return new SecretaryScheduleAppointmentService().ScheduleAppointment(appointment, 15);
         }
 
         public void RemoveReferralsOfDeletedPatients()

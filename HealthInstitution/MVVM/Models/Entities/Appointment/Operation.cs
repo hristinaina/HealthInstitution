@@ -14,12 +14,6 @@ namespace HealthInstitution.MVVM.Models.Entities
         [JsonProperty("Duration")]
         public int Duration { get => _durationInMin; set { _durationInMin = value; } }
 
-
-        public Operation(int id, DateTime date, bool isEmergency, bool done, int duration) 
-                         : base(id, date, isEmergency, done)
-        {
-            _durationInMin = duration;
-        }
         public Operation(int id, Doctor doctor, Patient patient, DateTime date, int duration)
         {
             ID = id;

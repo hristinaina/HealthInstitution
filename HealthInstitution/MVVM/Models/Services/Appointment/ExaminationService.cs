@@ -37,15 +37,12 @@ namespace HealthInstitution.MVVM.Models.Services
 
         public int GetDuration(Appointment appointment)
         {
-            int duration = 0;
-            Type type = appointment.GetType();
-            if (type.Equals(typeof(Examination))) duration = 15;
-            else
+            int duration = 15;
+            if (appointment.GetType() == typeof(Operation))
             {
-                Operation operation = (Operation)appointment;
-                duration = operation.Duration;
+                Operation o = (Operation)appointment;
+                duration = o.Duration;
             }
-
             return duration;
         }
 
