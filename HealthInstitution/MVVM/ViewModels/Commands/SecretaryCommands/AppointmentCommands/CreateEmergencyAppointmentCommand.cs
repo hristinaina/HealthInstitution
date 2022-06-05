@@ -41,7 +41,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
 
             try
             {
-                bool created = _service.CreateAppointment(_viewModel.SelectedSpecialization, _viewModel.SelectedPatient);
+                bool created = _service.CreateEmergencyAppointment(_viewModel.SelectedSpecialization, _viewModel.SelectedPatient);
                 if (created)
                 {
                     MessageBox.Show("Appointment has been successfully created!");

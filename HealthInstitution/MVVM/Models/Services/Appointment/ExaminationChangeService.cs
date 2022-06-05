@@ -27,7 +27,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
             if (request.ChangeStatus.ToString() == "EDITED")
             {
-                bool resolved = Institution.Instance().RescheduleExamination(appointment, request.NewDate);
+                bool resolved = new DoctorRescheduleAppointmentService().RescheduleExamination(appointment, request.NewDate);
                 if (resolved)
                 {
                     return "The request has been successfully accepted.";
@@ -39,10 +39,9 @@ namespace HealthInstitution.MVVM.Models.Services
             }
             else if (request.ChangeStatus.ToString() == "DELETED")
             {
-                AppointmentService.DeleteAppointment(appointment);
+                new SecretaryDeleteAppointmentService().DeleteAppointment(appointment);
                 return "The appointment has been successfully deleted.";
             }
-
             return null;
         }
 

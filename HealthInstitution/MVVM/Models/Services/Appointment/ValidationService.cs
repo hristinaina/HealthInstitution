@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.Exceptions;
+using HealthInstitution.MVVM.Models.Services.DoctorServices;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -21,6 +22,7 @@ namespace HealthInstitution.MVVM.Models.Services
             ExaminationService examinationService = new();
             int duration = examinationService.GetDuration(appointment);
 
+            PatientService patientService = new PatientService(appointment.Patient);
             DoctorService doctorService = new DoctorService(appointment.Doctor);
             if (DateTime.Compare(DateTime.Now, datetime) > 0 && validation)
             {
@@ -34,7 +36,7 @@ namespace HealthInstitution.MVVM.Models.Services
             {
                 throw new EmptyFieldException("Patient not selected !");
             }
-            if (!appointment.Patient.IsAvailable(datetime, duration))
+            if (!patientService.IsAvailable(datetime, duration))
             {
                 throw new UserNotAvailableException("Patient not available at selected time !");
             }

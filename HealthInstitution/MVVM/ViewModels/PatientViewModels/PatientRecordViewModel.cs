@@ -1,5 +1,6 @@
 ﻿using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.MVVM.Models.Services.PatientServices;
 using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
@@ -44,7 +45,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _institution = Institution.Instance();
             _patient = (Patient)_institution.CurrentUser;
             _appointments = new ObservableCollection<AppointmentListItemViewModel>();
-            FillAppointmentsList(_patient.GetPastAppointments());
+            PatientAppointmentsService service = new PatientAppointmentsService(_patient);
+            FillAppointmentsList(service.GetPastAppointments());
             InitializeSearchParameters();
 
             // ..............

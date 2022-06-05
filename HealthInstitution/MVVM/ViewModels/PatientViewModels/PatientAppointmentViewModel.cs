@@ -1,6 +1,7 @@
 ﻿using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Services;
+using HealthInstitution.MVVM.Models.Services.PatientServices;
 using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
@@ -177,7 +178,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public void FillAppointmentsList()
         {
             _appointments.Clear();
-            foreach (Appointment appointment in _patient.GetFutureAppointments())
+            PatientAppointmentsService service = new PatientAppointmentsService(_patient);
+            foreach (Appointment appointment in service.GetFutureAppointments())
             {
                 _appointments.Add(new AppointmentListItemViewModel(appointment));
             }

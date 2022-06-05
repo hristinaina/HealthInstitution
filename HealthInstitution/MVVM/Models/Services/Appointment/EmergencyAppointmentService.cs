@@ -7,6 +7,7 @@ using HealthInstitution.MVVM.Models.Entities;
 using HealthInstitution.MVVM.Models.Repositories;
 using HealthInstitution.Repositories;
 using HealthInstitution.MVVM.Models.Services;
+using HealthInstitution.MVVM.Models.Services.DoctorServices;
 
 namespace HealthInstitution.MVVM.Models.Services
 {
@@ -34,7 +35,7 @@ namespace HealthInstitution.MVVM.Models.Services
             _newDuration = duration;
         }
 
-        public bool CreateAppointment(Specialization specialization, Patient patient)
+        public bool CreateEmergencyAppointment(Specialization specialization, Patient patient)
         {
             _patient = patient;
             DateTime startTime = DateTime.Now.AddMinutes(5);
@@ -51,7 +52,8 @@ namespace HealthInstitution.MVVM.Models.Services
                     if (doctor.Specialization == specialization)
                     {
                         specialistException = true;
-                        done = Institution.Instance().CreateAppointment(doctor, patient, currentTime, type, _newDuration, false);
+                        Examination appointment = new(doctor, patient, currentTime);
+                        done = new SecretaryScheduleAppointmentService().ScheduleAppointment(appointment, _newDuration, false);
                         if (done)
                         {
                             _newDate = currentTime;
@@ -84,7 +86,8 @@ namespace HealthInstitution.MVVM.Models.Services
                 startTime = startTime.AddMinutes(15);
                 try
                 {
-                    bool done = CheckNewAppointmentTime(appointment.Doctor, appointment.Patient, startTime, duration, false);
+                    Examination examination = new(appointment.Doctor, appointment.Patient, startTime);
+                    bool done = CheckNewAppointmentTime(examination, duration, false);
                     if (done)
                     {
                         appointments.Add(appointment, startTime);
@@ -95,30 +98,20 @@ namespace HealthInstitution.MVVM.Models.Services
             }
         }
 
-        private bool CheckNewAppointmentTime(Doctor doctor, Patient patient, DateTime dateTime, int duration, bool validation = false)
+        private bool CheckNewAppointmentTime(Appointment examination, int duration, bool validation = false)
         {
-            DoctorService service = new DoctorService(doctor);
-            if (!service.IsAvailable(dateTime, duration))
+            PatientService patientService = new PatientService(examination.Patient);
+            DoctorService doctorService = new DoctorService(examination.Doctor);
+            if (!doctorService.IsAvailable(examination.Date, duration))
             {
                 return false;
             }
-            if (!patient.IsAvailable(dateTime, duration))
+            if (!doctorService.IsAvailable(examination.Date, duration))
             {
                 return false;
             }
-            Institution.Instance().ValidateAppointmentData(patient, doctor, dateTime, validation);
+            new ValidationService().ValidateAppointmentData(examination, examination.Date, validation);
             return true;
-        }
-
-        public int GetDuration(Appointment appointment)
-        {
-            int duration = 15;
-            if (appointment.GetType() == typeof(Operation))
-            {
-                Operation o = (Operation)appointment;
-                duration = o.Duration;
-            }
-            return duration;
         }
 
         public void NotifyDoctor()
@@ -128,16 +121,16 @@ namespace HealthInstitution.MVVM.Models.Services
             _doctor.Notifications.Add("An emergency appointment with id=" + newAppointment.ID.ToString() + " has been scheduled!");
         }
 
-        public void SendNotifications(Appointment rescheduledAppointment, DateTime oldDate, DateTime newDate, Patient patient, Doctor doctor)
+        public void SendNotifications(Appointment rescheduledAppointment, Appointment newAppointment)
         {
+            Appointment emergencyAppointment = FindAppointment(newAppointment.Patient, newAppointment.Doctor, newAppointment.Date);
             string message = "Appointment with id=" + rescheduledAppointment.ID.ToString() + " has been changed." +
-                " Changed date from " + oldDate.ToString() + " to " + newDate.ToString();
-            Notification notification = Institution.Instance().NotificationRepository.CreateNotification(patient.ID, message);
-            patient.Notifications.Add(notification);
-            doctor.Notifications.Add(message);
-            Appointment newAppointment = FindAppointment(patient, doctor, oldDate);
-            newAppointment.Emergency = true;
-            doctor.Notifications.Add("An emergency appointment with id=" + newAppointment.ID.ToString() + " has been scheduled!");
+                " Changed date from " + emergencyAppointment.Date.ToString() + " to " + rescheduledAppointment.Date.ToString();
+            Notification notification = Institution.Instance().NotificationRepository.CreateNotification(emergencyAppointment.Patient.ID, message);
+            emergencyAppointment.Patient.Notifications.Add(notification);
+            emergencyAppointment.Doctor.Notifications.Add(message);
+            emergencyAppointment.Emergency = true;
+            emergencyAppointment.Doctor.Notifications.Add("An emergency appointment with id=" + emergencyAppointment.ID.ToString() + " has been scheduled!");
         }
 
     }

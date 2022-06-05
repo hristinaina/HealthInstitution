@@ -16,7 +16,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
     public class AppointmentsViewModel : BaseViewModel
     {
 
-        private readonly ReferralService _service;
+        private readonly SecretaryReferralService _service;
         public SecretaryNavigationViewModel Navigation { get; }
 
         private readonly ObservableCollection<ReferralItemViewModel> _referrals;
@@ -95,7 +95,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         public AppointmentsViewModel()
         {
-            _service = new ReferralService();
+            _service = new SecretaryReferralService();
             EnableChanges = false;
             Navigation = new SecretaryNavigationViewModel();
 

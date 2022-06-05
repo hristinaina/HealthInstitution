@@ -18,13 +18,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
     {
         private readonly Institution _institution;
         private AppointmentsViewModel _viewModel;
-        private readonly ReferralService _service;
+        private readonly SecretaryReferralService _service;
 
         public CreateReferralAppointmentCommand(AppointmentsViewModel viewModel)
         {
             _institution = Institution.Instance();
             _viewModel = viewModel;
-            _service = new ReferralService();
+            _service = new SecretaryReferralService();
         }
 
         public override void Execute(object parameter)
