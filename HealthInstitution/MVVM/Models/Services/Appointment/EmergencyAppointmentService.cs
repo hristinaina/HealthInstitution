@@ -121,8 +121,9 @@ namespace HealthInstitution.MVVM.Models.Services
             _doctor.Notifications.Add("An emergency appointment with id=" + newAppointment.ID.ToString() + " has been scheduled!");
         }
 
-        public void SendNotifications(Appointment rescheduledAppointment, Appointment emergencyAppointment)
+        public void SendNotifications(Appointment rescheduledAppointment, Appointment newAppointment)
         {
+            Appointment emergencyAppointment = FindAppointment(newAppointment.Patient, newAppointment.Doctor, newAppointment.Date);
             string message = "Appointment with id=" + rescheduledAppointment.ID.ToString() + " has been changed." +
                 " Changed date from " + emergencyAppointment.Date.ToString() + " to " + rescheduledAppointment.Date.ToString();
             Notification notification = Institution.Instance().NotificationRepository.CreateNotification(emergencyAppointment.Patient.ID, message);
