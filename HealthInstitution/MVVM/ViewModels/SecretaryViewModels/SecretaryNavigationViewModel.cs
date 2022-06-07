@@ -18,6 +18,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public ICommand LogOut { get; }
         public ICommand OrderingEquipment { get; }
         public ICommand ArrangingEquipment { get; }
+        public ICommand DoctorDaysOff { get; }
 
         public SecretaryNavigationViewModel()
         {
@@ -28,6 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             Appointments = new AppointmentsCommand();
             OrderingEquipment = new OrderingEquipmentCommand();
             ArrangingEquipment = new ArrangingEquipmentCommand();
+            DoctorDaysOff = new DoctorDaysOffCommand();
         }
     }
 }
