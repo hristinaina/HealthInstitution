@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using HealthInstitution.MVVM.Models;
+using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
@@ -10,11 +14,13 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
     {
         public SecretaryNavigationViewModel Navigation { get; }
 
-        //private readonly ObservableCollection<MissingEquipmentItemViewModel> _equipment;
-        //public IEnumerable<MissingEquipmentItemViewModel> Equipment => _equipment;
-        //public MissingEquipmentItemViewModel SelectedEquipment { get; set; }
+        private readonly ObservableCollection<DaysOffItemViewModel> _requests;
+        public IEnumerable<DaysOffItemViewModel> Requests => _requests;
+        private DaysOffItemViewModel _selectedRequest { get; set; }
+        public DaysOffItemViewModel SelectedRequest { get => _selectedRequest; set => _selectedRequest = value; }
 
-        //public ICommand OrderEquipment { get; set; }
+        public ICommand AcceptRequestCommand { get; set; }
+        public ICommand RejectRequestCommand { get; set; }
 
         private bool _dialogOpen;
         public bool DialogOpen
@@ -27,28 +33,57 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             }
         }
 
+        private bool _enableChanges;
+        public bool EnableChanges
+        {
+            get => _enableChanges;
+            set
+            {
+                _enableChanges = value;
+                OnPropertyChanged(nameof(EnableChanges));
+            }
+        }
+
+        private int _selection;
+        public int Selection
+        {
+            get => _selection;
+            set
+            {
+                if (value < 0) { return; }
+                _selection = value;
+                OnPropertyChanged(nameof(Selection));
+                _selectedRequest = _requests.ElementAt(_selection);
+                AcceptRequestCommand = new AcceptRequestCommand(this);
+                RejectRequestCommand = new RejectRequestCommand(this);
+                EnableChanges = true;
+            }
+        }
+
         public DoctorDaysOffViewModel()
         {
             Navigation = new SecretaryNavigationViewModel();
+            EnableChanges = false;
 
-            //_equipment = new ObservableCollection<MissingEquipmentItemViewModel>();
+            _requests = new ObservableCollection<DaysOffItemViewModel>();
             //OrderEquipment = new OrderEquipmentCommand(this);
 
-            //FillEquipmentList();
+            FillRequestsList();
         }
 
-        public void FillEquipmentList()
+        public void FillRequestsList()
         {
-            /*_equipment.Clear();
-            List<Equipment> equipment = Institution.Instance().EquipmentRepository.Equipment;
-            foreach (Equipment e in equipment)
+            _requests.Clear();
+            foreach (DayOff df in Institution.Instance().DayOffRepository.DaysOff)
             {
-                if (e.Quantity == 0)
-                {
-                    string status = Institution.Instance().EquipmentOrderRepository.CheckIfOrdered(e);
-                    _equipment.Add(new MissingEquipmentItemViewModel(e, status));
-                }
-            }*/
+                if (df.State == Models.Enumerations.State.ON_HOLD) _requests.Add(new DaysOffItemViewModel(df));
+            }
+
+            if (_requests.Count != 0)
+            {
+                Selection = 0;
+                OnPropertyChanged(nameof(Selection));
+            }
         }
     }
 }
