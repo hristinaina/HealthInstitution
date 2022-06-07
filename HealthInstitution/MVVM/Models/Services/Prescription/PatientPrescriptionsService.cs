@@ -66,7 +66,7 @@ namespace HealthInstitution.MVVM.Models.Services
 
         private bool isUpgoing(Examination examination, Prescription prescription)
         {
-            return examination.Date + new TimeSpan(prescription.LongitudeInDays, 0, 0, 0) > DateTime.Now;
+            return examination.Date + new TimeSpan(prescription.LongitudeInDays, 0, 0, 0) > DateTime.Now && examination.Date < DateTime.Now;
         }
     }
 }

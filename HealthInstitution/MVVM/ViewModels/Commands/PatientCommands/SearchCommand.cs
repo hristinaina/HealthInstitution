@@ -35,7 +35,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
                 DoctorsSearchService service = new DoctorsSearchService(Institution.Instance().DoctorRepository);
                 Doctor search = new Doctor(searchViewModel.FirstNameKeyWord, searchViewModel.LastNameKeyWord, (Specialization)searchViewModel.SelectedSpecialization);
                 List<Doctor> doctors = service.SearchForDoctor(search);
-                searchViewModel.FillDoctorsList(doctors);
+                searchViewModel.FillAllDoctorsList(doctors);
             }
         }
     }

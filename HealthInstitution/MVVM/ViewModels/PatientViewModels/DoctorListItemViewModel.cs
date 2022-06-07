@@ -22,5 +22,9 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         {
             _doctor = doctor;
         }
+
+        public static implicit operator Doctor(DoctorListItemViewModel d) => d._doctor;
+        public static explicit operator DoctorListItemViewModel(Doctor d) => new DoctorListItemViewModel(d);
+
     }
 }

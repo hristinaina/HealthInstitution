@@ -135,7 +135,7 @@
                                     VerticalAlignment="Bottom"
                                     Grid.Row="0"
                                     HorizontalAlignment="Left">
-                                <Button.CommandParameter>
+                                <Button.CommandParameter >
                                     <StackPanel Height="370"
                                                 Width="320"
                                                 Margin="40 20 40 20">

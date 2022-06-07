@@ -1,8 +1,8 @@
 [
   {
     "OperationId": 1,
-    "DoctorID": 1,
-    "PatientID": 1,
+    "DoctorID": 3,
+    "PatientID": 2,
     "RoomID": 1
   },
   {
@@ -14,25 +14,25 @@
   {
     "OperationId": 3,
     "DoctorID": 2,
-    "PatientID": 1,
+    "PatientID": 2,
     "RoomID": 1
   },
   {
     "OperationId": 4,
     "DoctorID": 2,
     "PatientID": 1,
-    "RoomID": 1
+    "RoomID": 2
   },
   {
     "OperationId": 5,
     "DoctorID": 2,
-    "PatientID": 1,
+    "PatientID": 2,
     "RoomID": 1
   },
   {
     "OperationId": 6,
     "DoctorID": 2,
-    "PatientID": 1,
+    "PatientID": 2,
     "RoomID": 1
   },
   {
@@ -62,19 +62,19 @@
   {
     "OperationId": 11,
     "DoctorID": 2,
-    "PatientID": 1,
+    "PatientID": 3,
     "RoomID": 1
   },
   {
     "OperationId": 12,
     "DoctorID": 2,
-    "PatientID": 1,
+    "PatientID": 4,
     "RoomID": 1
   },
   {
     "OperationId": 13,
     "DoctorID": 2,
-    "PatientID": 1,
+    "PatientID": 3,
     "RoomID": 1
   },
   {

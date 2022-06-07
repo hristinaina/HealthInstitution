@@ -29,7 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             }
             if (_viewModel is PatientSearchViewModel searchViewModel)
             {
-                searchViewModel.FillDoctorsList(Institution.Instance().DoctorRepository.Doctors);
+                searchViewModel.FillAllDoctorsList(Institution.Instance().DoctorRepository.Doctors);
             }
         }
     }

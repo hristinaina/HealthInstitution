@@ -7,7 +7,7 @@
     "TherapyMealDependency": 3
   },
   {
-    "LastNotification": "2022-06-04T17:43:37.0931955+02:00",
+    "LastNotification": "2022-05-06T23:43:37.0931955+02:00",
     "ID": 2,
     "LongitudeInDays": 100,
     "TimesADay": 3,
@@ -16,7 +16,7 @@
   {
     "LastNotification": "2022-04-29T17:43:37.0931955+02:00",
     "ID": 3,
-    "LongitudeInDays": 3,
+    "LongitudeInDays": 99,
     "TimesADay": 2,
     "TherapyMealDependency": 0
   },

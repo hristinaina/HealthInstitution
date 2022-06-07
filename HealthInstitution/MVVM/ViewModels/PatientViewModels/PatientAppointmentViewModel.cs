@@ -193,10 +193,13 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             OnPropertyChanged(nameof(Appointments));
         }
 
-        private void FillDoctorsList()
+        protected void FillDoctorsList(List<Doctor> doctors = null)
         {
+            if (doctors is null) {
+                doctors = _institution.DoctorRepository.GetGeneralPractitioners();
+            }
             _doctors.Clear();
-            foreach (Doctor doctor in _institution.DoctorRepository.GetGeneralPractitioners())
+            foreach (Doctor doctor in doctors)
             {
                 _doctors.Add(doctor);
             }
