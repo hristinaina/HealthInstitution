@@ -29,39 +29,39 @@
   <ItemGroup>
 
 
-    <Resource Include="Style\Poppins\Poppins-Black.ttf">
+    <Resource Include="Desktop\Style\Poppins\Poppins-Black.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Style\Poppins\Poppins-BlackItalic.ttf">
+    <Resource Include="Desktop\Style\Poppins\Poppins-BlackItalic.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Style\Poppins\Poppins-Bold.ttf">
+    <Resource Include="Desktop\Style\Poppins\Poppins-Bold.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Style\Poppins\Poppins-BoldItalic.ttf" />
-    <Resource Include="Style\Poppins\Poppins-ExtraBold.ttf" />
-    <Resource Include="Style\Poppins\Poppins-ExtraBoldItalic.ttf" />
-    <Resource Include="Style\Poppins\Poppins-ExtraLight.ttf" />
-    <Resource Include="Style\Poppins\Poppins-ExtraLightItalic.ttf" />
-    <Resource Include="Style\Poppins\Poppins-Italic.ttf" />
-    <Resource Include="Style\Poppins\Poppins-Light.ttf" />
-    <Resource Include="Style\Poppins\Poppins-LightItalic.ttf" />
-    <Resource Include="Style\Poppins\Poppins-Medium.ttf" />
-    <Resource Include="Style\Poppins\Poppins-MediumItalic.ttf" />
-    <Resource Include="Style\Poppins\Poppins-Regular.ttf" />
-    <Resource Include="Style\Poppins\Poppins-SemiBold.ttf" />
-    <Resource Include="Style\Poppins\Poppins-SemiBoldItalic.ttf" />
-    <Resource Include="Style\Poppins\Poppins-Thin.ttf" />
-    <Resource Include="Style\Poppins\Poppins-ThinItalic.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-BoldItalic.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-ExtraBold.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-ExtraBoldItalic.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-ExtraLight.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-ExtraLightItalic.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-Italic.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-Light.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-LightItalic.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-Medium.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-MediumItalic.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-Regular.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-SemiBold.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-SemiBoldItalic.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-Thin.ttf" />
+    <Resource Include="Desktop\Style\Poppins\Poppins-ThinItalic.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Style\Poppins\OFL.txt" />
+    <Resource Include="Desktop\Style\Poppins\OFL.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Style\Images\cardiology.png" />
+    <Resource Include="Desktop\Style\Images\cardiology.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Style\Images\cardiology.ico" />
+    <Resource Include="Desktop\Style\Images\cardiology.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.4.0" />
@@ -73,6 +73,9 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml" />
   </ItemGroup>
 
   <ItemGroup>

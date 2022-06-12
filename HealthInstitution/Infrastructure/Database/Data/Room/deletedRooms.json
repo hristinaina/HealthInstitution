@@ -1,0 +1,30 @@
+[
+  {
+    "ID": 12,
+    "Name": "im",
+    "Number": 705,
+    "Type": 0,
+    "UnderRenovation": false
+  },
+  {
+    "ID": 16,
+    "Name": "Soba za razdvajanje",
+    "Number": 900,
+    "Type": 0,
+    "UnderRenovation": true
+  },
+  {
+    "ID": 14,
+    "Name": "Soba za spajanje 2",
+    "Number": 708,
+    "Type": 2,
+    "UnderRenovation": true
+  },
+  {
+    "ID": 13,
+    "Name": "Soba za spajanje 1",
+    "Number": 707,
+    "Type": 2,
+    "UnderRenovation": true
+  }
+]

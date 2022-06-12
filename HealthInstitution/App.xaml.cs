@@ -1,13 +1,9 @@
 ﻿using System.Windows;
 using System;
-using HealthInstitution.MVVM.Models;
-using HealthInstitution.MVVM.Models.Entities;
+using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.Stores;
-using System.Collections.Generic;
-using HealthInstitution.MVVM.Models.Services;
-using HealthInstitution.MVVM.Views.DoctorViews;
-using HealthInstitution.MVVM.ViewModels.AdminViewModels;
+using HealthInstitution.Core.Services;
 
 namespace HealthInstitution
 {
@@ -21,7 +17,7 @@ namespace HealthInstitution
         private readonly NavigationStore _navigation;
         public App()
         {
-            AppSettings.SetInstance(FileService.Deserialize<AppSettings>("../../../Data/databasePaths.json")[0]);
+            AppConfiguration.SetInstance(FileService.Deserialize<AppConfiguration>("../../../Infrastructure/Database/Data/databasePaths.json")[0]);
             
             _institution = Institution.Instance();
 
