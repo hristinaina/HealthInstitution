@@ -33,6 +33,7 @@
         <components:PatientNavigationRail SelectedIndex="0"></components:PatientNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
+        <materialDesign:DialogHost>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"></RowDefinition>
@@ -167,11 +168,13 @@
                 </DataGrid>
                 <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="2.5*"></ColumnDefinition>
                         <ColumnDefinition Width="3*"></ColumnDefinition>
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                        <ColumnDefinition Width="4.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="2.5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
                              TextWrapping="NoWrap"
@@ -202,9 +205,15 @@
                             Command="{Binding Reset}">
                         <materialDesign:PackIcon Kind="Refresh" />
                     </Button>
-
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                            Grid.Column="5"
+                            VerticalAlignment="Top"
+                            Margin="0 15 0 0"
+                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                            Content="Rate appointment"></Button>
                 </Grid>
-            </Grid>
+                </Grid>
+        </materialDesign:DialogHost>
         </materialDesign:Card>
     </Grid>
 </UserControl>

@@ -16,7 +16,7 @@ namespace HealthInstitution.Core
         private string _comment;
 
         [JsonProperty("Service")]
-        public int Rating { get => _service; set { _service = value; } }
+        public int Service { get => _service; set { _service = value; } }
         [JsonProperty("Hygene")]
         public int Hygene { get => _hygene; set { _hygene = value; } }
         [JsonProperty("Satisfaction")]

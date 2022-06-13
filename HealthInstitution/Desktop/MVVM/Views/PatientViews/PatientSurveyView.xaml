@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:patientviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.PatientViewModels"
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
-             d:DataContext="{d:DesignInstance Type=patientviewmodels:PatientRecordViewModel}"
+             d:DataContext="{d:DesignInstance Type=patientviewmodels:PatientSurveyViewModel}"
              mc:Ignorable="d"
              Height="650"
              Width="1200"
@@ -132,16 +132,16 @@
                 <RadioButton Grid.Row="3" Grid.Column="6" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene4"/>
                 <RadioButton Grid.Row="3" Grid.Column="7" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene5"/>
                 
-                <RadioButton Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="overall1"/>
-                <RadioButton Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="overall2"/>
-                <RadioButton Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="overall3"/>
-                <RadioButton Grid.Row="4" Grid.Column="6" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="overall4"/>
-                <RadioButton Grid.Row="4" Grid.Column="7" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="overall5"/>
+                <RadioButton Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction1"/>
+                <RadioButton Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction2"/>
+                <RadioButton Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction3"/>
+                <RadioButton Grid.Row="4" Grid.Column="6" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction4"/>
+                <RadioButton Grid.Row="4" Grid.Column="7" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction5"/>
                 
-                <RadioButton Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggest1"/>
-                <RadioButton Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggest2"/>
-                <RadioButton Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggest3"/>
-                <RadioButton Grid.Row="5" Grid.Column="6" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggest4"/>
+                <RadioButton Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion1"/>
+                <RadioButton Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion2"/>
+                <RadioButton Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion3"/>
+                <RadioButton Grid.Row="5" Grid.Column="6" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion4"/>
                 <RadioButton Grid.Row="5" Grid.Column="7" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggest5"/>
 
                 <TextBlock HorizontalAlignment="Left"
@@ -159,7 +159,7 @@
                          Height="100"
                          TextWrapping="Wrap"
                          MaxLength="400"
-                         materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+                         Text="{Binding Comment}"
                          VerticalScrollBarVisibility="Auto" />
                 <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                         Grid.Column="1"
@@ -167,7 +167,9 @@
                         Grid.Row="8"
                         VerticalAlignment="Top"
                         Margin="0 40 0 0"
+                        Command="{Binding Submit}"
                         HorizontalAlignment="Center"
+                        
                         Content="Submit"></Button>
             </Grid>
         </materialDesign:Card>
