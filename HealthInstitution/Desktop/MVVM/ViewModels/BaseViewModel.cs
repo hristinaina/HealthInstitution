@@ -1,12 +1,11 @@
-﻿using System.ComponentModel;
+﻿using HealthInstitution.Core;
+using HealthInstitution.Core.Repositories;
+using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.Stores;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using HealthInstitution.MVVM.ViewModels.Commands;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
-using HealthInstitution.Core.Repositories;
 
 namespace HealthInstitution.MVVM.ViewModels
 {
@@ -128,7 +127,8 @@ namespace HealthInstitution.MVVM.ViewModels
                 {
                     dateTokens = date.Split("-");
                 }
-                else { 
+                else
+                {
                     dateTokens = date.Split("/");
                 }
                 string tmp = dateTokens[0];

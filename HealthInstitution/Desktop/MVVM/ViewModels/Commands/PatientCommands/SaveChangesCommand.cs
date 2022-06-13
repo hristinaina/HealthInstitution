@@ -1,18 +1,13 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
     class SaveChangesCommand : BaseCommand
     {
-        private PatientNotificationsViewModel _viewModel;
-        private Patient _patient;
+        private readonly PatientNotificationsViewModel _viewModel;
+        private readonly Patient _patient;
 
         public SaveChangesCommand(PatientNotificationsViewModel patientNotificationsViewModel, Patient patient)
         {

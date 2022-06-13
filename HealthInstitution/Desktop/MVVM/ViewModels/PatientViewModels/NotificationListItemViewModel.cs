@@ -1,15 +1,10 @@
 ﻿using HealthInstitution.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     class NotificationListItemViewModel : BaseViewModel
     {
-        Notification _notification;
+        readonly Notification _notification;
         public Notification Appointment { get => _notification; }
 
         public int Id => _notification.ID;

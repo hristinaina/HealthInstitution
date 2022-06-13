@@ -1,21 +1,16 @@
 ﻿using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     class PatientNotificationsViewModel : BaseViewModel
     {
-        private Institution _institution;
-        private Patient _patient;
+        private readonly Institution _institution;
+        private readonly Patient _patient;
 
 
         private ObservableCollection<NotificationListItemViewModel> _notifications;
@@ -26,8 +21,9 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         }
         public IEnumerable<string> Hours { get; private set; }
         private int _selectedHour;
-        public int SelectedHour {
-            get  { return _selectedHour; }
+        public int SelectedHour
+        {
+            get { return _selectedHour; }
 
             set { _selectedHour = value; OnPropertyChanged(nameof(SelectedHour)); }
         }
@@ -54,7 +50,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _patient = (Patient)_institution.CurrentUser;
             Navigation = new PatientNavigationViewModel();
             _notifications = new ObservableCollection<NotificationListItemViewModel>();
-            Hours =  new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+            Hours = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
             FillNotificationsList();
             _selectedHour = _patient.NotificationsPreference;
 
@@ -73,7 +69,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             OnPropertyChanged(nameof(Notifications));
         }
 
-        public void TextChanged() {
+        public void TextChanged()
+        {
             OnPropertyChanged(HoursText);
         }
 

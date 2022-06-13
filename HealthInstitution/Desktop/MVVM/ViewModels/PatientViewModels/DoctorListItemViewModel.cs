@@ -1,15 +1,10 @@
 ﻿using HealthInstitution.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     public class DoctorListItemViewModel
     {
-        Doctor _doctor;
+        readonly Doctor _doctor;
         public int Id => _doctor.ID;
         public Doctor Appointment { get => _doctor; }
 

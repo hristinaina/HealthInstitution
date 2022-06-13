@@ -1,34 +1,31 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Core.Services.PatientServices;
-using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     public class PatientRecordViewModel : BaseViewModel
     {
-        private Institution _institution;
+        private readonly Institution _institution;
         protected Patient _patient;
         public PatientNavigationViewModel Navigation { get; }
         public Patient Patient => _patient;
 
 
         private ObservableCollection<AppointmentListItemViewModel> _appointments;
-        public IEnumerable<AppointmentListItemViewModel> Appointments {
+        public IEnumerable<AppointmentListItemViewModel> Appointments
+        {
             get { return _appointments; }
             set { _appointments = new ObservableCollection<AppointmentListItemViewModel>(value); }
         }
 
         private string _searchKeyWord;
-        public string SearchKeyWord {
+        public string SearchKeyWord
+        {
             get { return _searchKeyWord; }
             set { _searchKeyWord = value; OnPropertyChanged(SearchKeyWord); }
         }

@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.Core
 {
@@ -17,7 +12,7 @@ namespace HealthInstitution.Core
 
         [JsonProperty("ExaminationID")]
         public int ExaminationID { get => _examinationID; set { _examinationID = value; } }
-        [JsonProperty ("DoctorID")]
+        [JsonProperty("DoctorID")]
         public int DoctorID { get => _doctorId; set { _doctorId = value; } }
         [JsonProperty("PatientID")]
         public int PatientID { get => _patientId; set { _patientId = value; } }

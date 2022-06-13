@@ -1,52 +1,48 @@
-﻿using HealthInstitution.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace HealthInstitution.Core
 {
     public class ExaminationQuery
     {
-        private Patient _patient;
+        private readonly Patient _patient;
 
         public Patient Patient
         {
             get { return _patient; }
         }
 
-        private Doctor _doctor;
+        private readonly Doctor _doctor;
 
         public Doctor Doctor
         {
             get { return _doctor; }
         }
 
-        private DateTime _startTime;
+        private readonly DateTime _startTime;
 
         public DateTime StartTime
         {
             get { return _startTime; }
         }
 
-        private DateTime _endTime;
+        private readonly DateTime _endTime;
 
         public DateTime EndTime
         {
             get { return _endTime; }
         }
 
-        private DateTime _deadlineDate;
+        private readonly DateTime _deadlineDate;
 
         public DateTime DeadlineDate
         {
             get { return _deadlineDate; }
         }
 
-        private SchedulingPriority _priority;
+        private readonly SchedulingPriority _priority;
 
-        public SchedulingPriority Priority {
+        public SchedulingPriority Priority
+        {
             get { return _priority; }
         }
 

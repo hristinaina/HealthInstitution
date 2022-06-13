@@ -1,16 +1,11 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
 {
     class CheckCommand : BaseCommand
     {
-        PatientSurveyViewModel _viewModel;
+        readonly PatientSurveyViewModel _viewModel;
 
         public CheckCommand(PatientSurveyViewModel viewModel)
         {
@@ -22,7 +17,8 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
             string fullParameter = parameter.ToString();
             string type = fullParameter.Substring(0, fullParameter.Length - 1);
             int value = fullParameter[fullParameter.Length - 1] - '0';
-            switch (type) {
+            switch (type)
+            {
                 case "service":
                     _viewModel.Service = value;
                     break;

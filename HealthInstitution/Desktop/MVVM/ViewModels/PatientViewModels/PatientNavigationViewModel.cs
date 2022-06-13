@@ -1,11 +1,6 @@
 ﻿using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.Views.PatientViews
@@ -21,7 +16,8 @@ namespace HealthInstitution.MVVM.Views.PatientViews
         public ICommand LogOut { get; }
         public ICommand Notifications { get; }
 
-        public PatientNavigationViewModel() {
+        public PatientNavigationViewModel()
+        {
             LogOut = new LogOutCommand();
             Record = new RecordContentCommand();
             Appointments = new AppointmentsContentCommand();
