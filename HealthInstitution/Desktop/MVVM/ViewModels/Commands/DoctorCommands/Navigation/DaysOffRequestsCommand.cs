@@ -8,20 +8,21 @@ using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 using HealthInstitution.Stores;
 
+
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
-    class MyAppointmentsCommand : BaseCommand
+    class DaysOffRequestsCommand : BaseCommand
     {
         private readonly NavigationStore _navigationStore;
 
-        public MyAppointmentsCommand()
+        public DaysOffRequestsCommand()
         {
             _navigationStore = NavigationStore.Instance();
         }
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new DoctorExaminationViewModel();
+            _navigationStore.CurrentViewModel = new DoctorDaysOffViewModel();
         }
     }
 }
