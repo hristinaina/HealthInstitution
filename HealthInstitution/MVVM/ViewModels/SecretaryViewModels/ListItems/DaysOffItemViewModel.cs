@@ -11,6 +11,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
     {
         DayOff _dayOff;
 
+        public int ID => _dayOff.ID;
         public string Doctor => _dayOff.Doctor.ToString();
         public DateTime BeginDate => _dayOff.BeginDate;
         public DateTime EndDate => _dayOff.EndDate;
