@@ -55,8 +55,6 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 _selection = value;
                 OnPropertyChanged(nameof(Selection));
                 _selectedRequest = _requests.ElementAt(_selection);
-                AcceptRequestCommand = new AcceptRequestCommand(this);
-                RejectRequestCommand = new RejectRequestCommand(this);
                 EnableChanges = true;
             }
         }
@@ -67,7 +65,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             EnableChanges = false;
 
             _requests = new ObservableCollection<DaysOffItemViewModel>();
-            //OrderEquipment = new OrderEquipmentCommand(this);
+            AcceptRequestCommand = new AcceptRequestCommand(this);
+            RejectRequestCommand = new RejectRequestCommand(this);
 
             FillRequestsList();
         }

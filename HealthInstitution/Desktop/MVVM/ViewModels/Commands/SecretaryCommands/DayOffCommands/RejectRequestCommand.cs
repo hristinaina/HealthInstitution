@@ -29,7 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
         {
             _viewModel.DialogOpen = false;
             MessageBox.Show("The request has been rejected! Notification sent to doctor.");
-            _service.AcceptRequest(_viewModel.SelectedRequest.ID); 
+            _service.RejectRequest(_viewModel.SelectedRequest.ID); 
             _viewModel.FillRequestsList();
         }
     }
