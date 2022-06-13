@@ -60,6 +60,9 @@
             <DataTemplate DataType="{x:Type viewmodelsDoctor:DoctorPendingMedicineViewModel}">
                 <viewsdoctor:DoctorPendingMedicineView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsDoctor:DoctorDaysOffViewModel}">
+                <viewsdoctor:DoctorDaysOffView/>
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodelsSecretary:BlockedPatientListViewModel}">
                 <viewsSecretary:BlockedPatientListView />

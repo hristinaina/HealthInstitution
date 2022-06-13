@@ -7,8 +7,6 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
-using HealthInstitution.Core;
-using HealthInstitution.Core; 
 
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels

@@ -30,5 +30,20 @@ namespace HealthInstitution.MVVM.Models.Services.DoctorServices
             dayOff.State = State.REJECTED;
             dayOff.Doctor.Notifications.Add("Your request for days ofF from date " + dayOff.BeginDate.ToString() + " to date " + dayOff.EndDate.ToString() + " has been REJECTED!");
         }
+
+        public List<DayOff> FindByDoctorID(int id)
+        {
+            List<DayOff> daysOffRequests = new();
+
+            foreach (DayOff dayOff in _dayOffRepository.DaysOff)
+            {
+                if (dayOff.Doctor.ID == id)
+                {
+                    if (dayOff.BeginDate >= DateTime.Now) daysOffRequests.Add(dayOff);
+                }
+            }
+
+            return daysOffRequests;
+        }
     }
 }
