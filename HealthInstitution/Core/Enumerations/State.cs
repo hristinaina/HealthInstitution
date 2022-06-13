@@ -10,7 +10,6 @@ namespace HealthInstitution.Core
     {
         ON_HOLD,
         ACCEPTED,
-        REJECTED,
-        REVISION
+        REJECTED
     }
 }
