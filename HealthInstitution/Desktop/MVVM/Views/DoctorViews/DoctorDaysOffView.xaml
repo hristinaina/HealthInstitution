@@ -115,20 +115,14 @@
                         </ListView>
                     </Grid>
                     <Grid Grid.Row="2" Margin="100 -50 0 0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
                         <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 ToolTip="Request days off"
                                 VerticalAlignment="Top"
-                                HorizontalAlignment="Left"
+                                HorizontalAlignment="Center"
                                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                Margin="30,0,0,0"
+                                Margin="-180,0,0,0"
                                 Width="180"
                                 Content="Request days off"
-                                Grid.Column="0"
                                 IsEnabled="True">
                             <Button.CommandParameter>
                                 <StackPanel 
@@ -139,6 +133,30 @@
                                                HorizontalAlignment="Center"
                                                Margin="0 40"
                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                    <DatePicker Width="250"
+                                                Margin="0 20 0 0"
+                                                materialDesign:HintAssist.Hint="Pick start date"
+                                                SelectedDate="{Binding StartDate}"
+                                                Style="{StaticResource MaterialDesignFilledDatePicker}" />
+                                    <DatePicker Width="250"
+                                                Margin="0 20 0 0"
+                                                materialDesign:HintAssist.Hint="Pick end date"
+                                                SelectedDate="{Binding EndDate}"
+                                                Style="{StaticResource MaterialDesignFilledDatePicker}" />
+                                    <TextBox
+                                            Margin="0 0 0 20"
+                                            HorizontalAlignment="Left"
+                                            Width="400"
+                                            TextWrapping="Wrap"
+                                            VerticalAlignment="Stretch"
+                                            MinWidth="280"
+                                            AcceptsReturn="True"
+                                            VerticalScrollBarVisibility="Auto"
+                                            SpellCheck.IsEnabled="True"
+                                            materialDesign:HintAssist.Hint="Reason"
+                                            Height="80"
+                                            Text="{Binding Reason}"
+                                            Grid.Column="0"/>
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
                                            IsCancel="True"
                                            Margin="0 30 0 0"
