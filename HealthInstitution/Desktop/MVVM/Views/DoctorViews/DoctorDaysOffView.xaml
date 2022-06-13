@@ -50,7 +50,7 @@
                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" 
                                Height="50"/>
                     </Grid>
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" Margin="0 50 0 50">
                         <ListView ItemsSource="{Binding DaysOffRequests}"
                                   SelectionMode="Single"
                                   SelectedIndex="{Binding Selection}"
@@ -114,7 +114,7 @@
                             </ListView.View>
                         </ListView>
                     </Grid>
-                    <Grid Grid.Row="2" Margin="100 0 0 30">
+                    <Grid Grid.Row="2" Margin="100 -50 0 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
