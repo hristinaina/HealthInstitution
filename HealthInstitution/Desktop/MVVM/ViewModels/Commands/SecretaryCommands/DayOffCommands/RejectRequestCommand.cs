@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using HealthInstitution.Commands;
+using HealthInstitution.Core;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.Models.Services.DoctorServices;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
