@@ -1,7 +1,4 @@
-﻿using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
-using HealthInstitution.Core.Services;
+﻿using HealthInstitution.Core.Services;
 using System.Collections.Generic;
 
 namespace HealthInstitution.Core

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using HealthInstitution.Commands;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineCommands

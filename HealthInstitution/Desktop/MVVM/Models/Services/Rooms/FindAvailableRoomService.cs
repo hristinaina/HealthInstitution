@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 
 namespace HealthInstitution.Core.Services.Rooms

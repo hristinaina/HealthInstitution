@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services.Equipments;
 
 namespace HealthInstitution.Core.Services.Rooms

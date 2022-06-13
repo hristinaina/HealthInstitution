@@ -1,5 +1,4 @@
 ﻿using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.MVVM.Views.PatientViews;
 using System;
 using System.Collections.Generic;

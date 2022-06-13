@@ -1,7 +1,5 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using HealthInstitution.Stores;
 using System;
@@ -10,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Exceptions;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCommands

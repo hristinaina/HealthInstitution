@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
 
 namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 {

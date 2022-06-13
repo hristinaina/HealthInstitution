@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Commands;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 

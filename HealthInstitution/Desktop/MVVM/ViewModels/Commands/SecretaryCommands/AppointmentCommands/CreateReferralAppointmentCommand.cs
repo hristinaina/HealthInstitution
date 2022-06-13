@@ -7,7 +7,6 @@ using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 

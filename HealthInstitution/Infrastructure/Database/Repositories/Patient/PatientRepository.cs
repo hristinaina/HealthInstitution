@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories

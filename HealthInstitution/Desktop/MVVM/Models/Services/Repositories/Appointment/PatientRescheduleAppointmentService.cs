@@ -1,6 +1,4 @@
-﻿using HealthInstitution.Core;
-using HealthInstitution.Core;
-using HealthInstitution.Core.Repositories;
+﻿using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Services.Rooms;
 using HealthInstitution.Core.Services.ValidationServices;

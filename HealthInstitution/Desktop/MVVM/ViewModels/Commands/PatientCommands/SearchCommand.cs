@@ -1,7 +1,5 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
-using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.SearchingServices;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using System;
