@@ -23,6 +23,26 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
         public override void Execute(object parameter)
         {
             _viewModel.DialogOpen = false;
+            try
+            {
+                int id = Institution.Instance().DayOffRepository.FindNewID();
+                DateTime startDate = Convert.ToDateTime(_viewModel.StartDate);
+                DateTime endDate = Convert.ToDateTime(_viewModel.EndDate);
+                Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
+                DayOff dayOff = new DayOff(id, startDate, endDate, _viewModel.IsEmegency,
+                                           _viewModel.Reason, doctor);
+                DayOffService service = new DayOffService();
+                bool isAppplied = service.ApplyForDaysOff(dayOff, doctor);
+
+                if (!isAppplied) _viewModel.ShowMessage("Request is rejected automatically !");
+                else _viewModel.ShowMessage("Request is successfully sent! ");
+               
+            }
+            catch (Exception e)
+            {
+                _viewModel.ShowMessage(e.Message);
+            }
+            
         }
     }
 }

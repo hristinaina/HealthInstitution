@@ -42,5 +42,22 @@ namespace HealthInstitution.Core
             _state = (State)state;
             _doctor = null;
         }
+
+        public DayOff(int id, DateTime beginDate, DateTime endDate, bool emergency,
+                      string reason, Doctor doctor)
+        {
+            _id = id;
+            _beginDate = beginDate;
+            _endDate = endDate;
+            _emergency = emergency;
+            _reason = reason;
+            _state = State.ON_HOLD;
+            _doctor = doctor;
+        }
+
+        public DayOff()
+        {
+
+        }
     }
 }

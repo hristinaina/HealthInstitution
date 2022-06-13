@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using HealthInstitution.Core;
 using System.Collections.ObjectModel;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
-using HealthInstitution.MVVM.Models.Services.DoctorServices;
+using HealthInstitution.Core.Services;
 using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
@@ -20,6 +20,10 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public IEnumerable<DayOffListItemViewModel> DaysOffRequests => _daysOffRequests;
 
         public ICommand RequestDaysOff { get; }
+
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string Reason { get; set; }
         
         private int _selection;
         public int Selection
@@ -43,6 +47,8 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 OnPropertyChanged(nameof(DialogOpen));
             }
         }
+
+        public bool IsEmegency { get; set; }
 
         public DoctorDaysOffViewModel()
         {

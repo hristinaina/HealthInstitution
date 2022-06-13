@@ -114,7 +114,7 @@
                             </ListView.View>
                         </ListView>
                     </Grid>
-                    <Grid Grid.Row="2" Margin="100 -50 0 0">
+                    <Grid Grid.Row="2" Margin="120 -50 0 0">
                         <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 ToolTip="Request days off"
                                 VerticalAlignment="Top"
@@ -126,7 +126,7 @@
                                 IsEnabled="True">
                             <Button.CommandParameter>
                                 <StackPanel 
-                                    Height="400"
+                                    Height="540"
                                     Width="400"
                                     Margin="0 0 0 0">
                                     <TextBlock Text="Request days off"
@@ -134,40 +134,50 @@
                                                Margin="0 40"
                                                Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
                                     <DatePicker Width="250"
-                                                Margin="0 20 0 0"
-                                                materialDesign:HintAssist.Hint="Pick start date"
+                                                Margin="0 0 0 0"
+                                                materialDesign:HintAssist.Hint="Pick a start date"
                                                 SelectedDate="{Binding StartDate}"
                                                 Style="{StaticResource MaterialDesignFilledDatePicker}" />
                                     <DatePicker Width="250"
                                                 Margin="0 20 0 0"
-                                                materialDesign:HintAssist.Hint="Pick end date"
+                                                materialDesign:HintAssist.Hint="Pick a end date"
                                                 SelectedDate="{Binding EndDate}"
                                                 Style="{StaticResource MaterialDesignFilledDatePicker}" />
                                     <TextBox
-                                            Margin="0 0 0 20"
+                                            Margin="75 30 0 20"
                                             HorizontalAlignment="Left"
-                                            Width="400"
+                                            Width="250"
                                             TextWrapping="Wrap"
                                             VerticalAlignment="Stretch"
-                                            MinWidth="280"
+                                            MinWidth="200"
                                             AcceptsReturn="True"
                                             VerticalScrollBarVisibility="Auto"
                                             SpellCheck.IsEnabled="True"
-                                            materialDesign:HintAssist.Hint="Reason"
+                                            materialDesign:HintAssist.Hint="Brief reason..."
                                             Height="80"
                                             Text="{Binding Reason}"
                                             Grid.Column="0"/>
+                                    <CheckBox
+                                        Margin="100 0 0 0"
+                                        VerticalAlignment="Center"
+                                        IsChecked="{Binding IsEmergency}">
+                                        <TextBlock
+                                            Text="Emergency"/>
+                                    </CheckBox>
+
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                           IsCancel="True"
-                                           Margin="0 30 0 0"
-                                           Content="DONE"
-                                           Command="{Binding RequestDaysOff}">
+                                            IsCancel="True"
+                                            Margin="0 25 0 0"
+                                            Content="DONE"
+                                            Width="250"
+                                            Command="{Binding RequestDaysOff}">
                                     </Button>
                                     <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                           IsCancel="True"
-                                           Margin="0 30 0 0"
-                                           Content="CANCEL"
-                                           Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            IsCancel="True"
+                                            Margin="0 20 0 0"
+                                            Content="CANCEL"
+                                            Width="250"
+                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                                     </Button>
                                 </StackPanel>
                             </Button.CommandParameter>

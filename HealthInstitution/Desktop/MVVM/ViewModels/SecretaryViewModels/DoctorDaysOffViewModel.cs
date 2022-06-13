@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.Core;
-using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels

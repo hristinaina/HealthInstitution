@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 
-namespace HealthInstitution.MVVM.Models.Services.DoctorServices
+namespace HealthInstitution.Core.Services
 {
     public class DayOffService
     {
@@ -44,6 +44,23 @@ namespace HealthInstitution.MVVM.Models.Services.DoctorServices
             }
 
             return daysOffRequests;
+        }
+
+        public bool CheckAvailability(DayOff dayOff, Doctor doctor)
+        {
+            DoctorService service = new DoctorService(doctor);
+            int durationInMin = (int)(dayOff.EndDate - dayOff.BeginDate).TotalMinutes;
+            if (service.IsAvailable(dayOff.BeginDate, durationInMin)) return true;
+            return false;
+        }
+
+        public bool ApplyForDaysOff(DayOff dayOff, Doctor doctor)
+        {
+            if (!CheckAvailability(dayOff, doctor)) return false;
+            Institution.Instance().DayOffRepository.DaysOff.Add(dayOff);
+            DoctorDaysOff doctorDaysOff = new DoctorDaysOff(doctor.ID, dayOff.ID);
+            Institution.Instance().DoctorDaysOffRepository.DoctorDaysOff.Add(doctorDaysOff);
+            return true;
         }
     }
 }

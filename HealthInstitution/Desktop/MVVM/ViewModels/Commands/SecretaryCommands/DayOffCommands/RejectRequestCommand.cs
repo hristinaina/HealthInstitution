@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.Core;
-using HealthInstitution.MVVM.Models;
-using HealthInstitution.MVVM.Models.Services.DoctorServices;
+using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
