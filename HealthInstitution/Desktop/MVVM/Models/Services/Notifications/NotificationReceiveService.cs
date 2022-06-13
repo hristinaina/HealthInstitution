@@ -34,7 +34,7 @@ namespace HealthInstitution.Core.Services
             string message;
             foreach (Prescription prescription in prescriptions)
             {
-                message = "Please take medicine " + prescription.Medicine.Name + " !";
+                message = "Please take medicine " + prescription.Medicine.Name + " in " +_patient.NotificationsPreference + "h !";
                 IJobDetail job = JobBuilder.Create<NotifyJob>()
                                 .WithIdentity(prescription.ID.ToString(), _patient.ID.ToString())
                                 .Build();
@@ -74,7 +74,7 @@ namespace HealthInstitution.Core.Services
         {
             foreach (Notification notification in _patient.Notifications.ToList())
             {
-                if ((DateTime.Now - notification.DateTime).Days < 3)
+                if ((DateTime.Now - notification.DateTime).Days > 3)
                 {
                     _patient.Notifications.Remove(notification);
                 }
@@ -85,6 +85,7 @@ namespace HealthInstitution.Core.Services
 
             foreach (Prescription prescription in prescriptions)
             {
+                if (prescription.Medicine is null) continue;
                 DateTime lastTime = prescription.LastNotification;
                 if ((DateTime.Now - lastTime).Days > 2)
                 {

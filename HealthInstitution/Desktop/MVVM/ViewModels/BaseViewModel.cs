@@ -124,7 +124,13 @@ namespace HealthInstitution.MVVM.ViewModels
             }
             else
             {
-                dateTokens = date.Split("-");
+                if (date.Contains("-"))
+                {
+                    dateTokens = date.Split("-");
+                }
+                else { 
+                    dateTokens = date.Split("/");
+                }
                 string tmp = dateTokens[0];
                 dateTokens[0] = dateTokens[1];
                 dateTokens[1] = tmp;

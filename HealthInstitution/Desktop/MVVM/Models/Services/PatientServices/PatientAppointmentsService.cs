@@ -10,12 +10,12 @@ namespace HealthInstitution.Core.Services.PatientServices
     public class PatientAppointmentsService
     {
         private List<Examination> _examinations;
-        private List<Examination> _operations;
+        private List<Operation> _operations;
 
         public PatientAppointmentsService(Patient patient)
         {
             _examinations = patient.Examinations;
-            _operations = patient.Examinations;
+            _operations = patient.Operations;
         }
 
         public List<Appointment> GetAllAppointments()

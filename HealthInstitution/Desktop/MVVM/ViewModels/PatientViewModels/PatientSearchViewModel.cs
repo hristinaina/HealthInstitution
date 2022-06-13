@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
-    public class PatientSearchViewModel : BaseViewModel
+    public class PatientSearchViewModel : PatientAppointmentViewModel
     {
         private Institution _institution;
         protected Patient _patient;
@@ -47,8 +47,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             set { _selectedSpecialization = value; OnPropertyChanged(nameof(SelectedSpecialization)); }
         }
 
-        private readonly ObservableCollection<DoctorListItemViewModel> _doctors;
-        public IEnumerable<DoctorListItemViewModel> Doctors => _doctors;
+        private readonly ObservableCollection<DoctorListItemViewModel> _allDoctors;
+        public IEnumerable<DoctorListItemViewModel> AllDoctors => _allDoctors;
 
         private bool _doctorSelected;
 
@@ -63,38 +63,36 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public DoctorListItemViewModel DoctorSelectedValue
         {
             get { return _doctor; }
-            set { _doctor = value; DoctorSelected = true;  OnPropertyChanged(nameof(DoctorSelectedValue)); }
+            set { _doctor = value; DoctorSelected = true; OnPropertyChanged(nameof(DoctorSelectedValue)); NewDoctor = value; OnPropertyChanged(nameof(NewDoctor)); }
         }
 
         public ICommand Search { get; set; }
         public ICommand Reset { get; set; }
-        public ICommand CreateAppointment { get; set; }
-
 
         public PatientSearchViewModel()
         {
             _institution = Institution.Instance();
             _patient = (Patient)_institution.CurrentUser;
             Navigation = new PatientNavigationViewModel();
-            _doctors = new();
+            _allDoctors = new();
             _specializations = new();
 
             Search = new SearchCommand(this);
             Reset = new ResetCommand(this);
-            CreateAppointment = new SetSchedulingView(this);
 
-            FillDoctorsList(Institution.Instance().DoctorRepository.Doctors);
+            FillAllDoctorsList(Institution.Instance().DoctorRepository.Doctors);
             FillSpecializationList();
+            FillDoctorsList(Institution.Instance().DoctorRepository.Doctors);
 
         }
-        public void FillDoctorsList(List<Doctor> doctors)
+        public void FillAllDoctorsList(List<Doctor> doctors)
         {
-            _doctors.Clear();
+            _allDoctors.Clear();
             foreach (Doctor doctor in doctors)
             {
-                _doctors.Add(new DoctorListItemViewModel(doctor));
+                _allDoctors.Add(new DoctorListItemViewModel(doctor));
             }
-            if (_doctors.Count != 0)
+            if (_allDoctors.Count != 0)
             {
                 DoctorSelected = false;
                 SelectedSpecialization = -1;
@@ -105,7 +103,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
                 OnPropertyChanged(nameof(FirstNameKeyWord));
                 OnPropertyChanged(nameof(LastNameKeyWord));
             }
-            OnPropertyChanged(nameof(Doctors));
+            OnPropertyChanged(nameof(AllDoctors));
         }
 
         public void FillSpecializationList()
