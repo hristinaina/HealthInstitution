@@ -46,17 +46,21 @@ namespace HealthInstitution.Core.Services
             return daysOffRequests;
         }
 
-        public bool CheckAvailability(DayOff dayOff, Doctor doctor)
+        public bool ValidateRequest(DayOff dayOff, Doctor doctor)
         {
             DoctorService service = new DoctorService(doctor);
             int durationInMin = (int)(dayOff.EndDate - dayOff.BeginDate).TotalMinutes;
-            if (service.IsAvailable(dayOff.BeginDate, durationInMin)) return true;
-            return false;
+            if (!service.IsAvailable(dayOff.BeginDate, durationInMin)) return false;
+            if ((dayOff.BeginDate - DateTime.Now).TotalDays <= 2) return false;
+            if ((dayOff.Emergency is true) && ((dayOff.EndDate - dayOff.BeginDate).TotalDays > 5)) 
+                return false;
+            if (dayOff.BeginDate > dayOff.EndDate) return false;
+            return true;
         }
 
         public bool ApplyForDaysOff(DayOff dayOff, Doctor doctor)
         {
-            if (!CheckAvailability(dayOff, doctor)) return false;
+            if (!ValidateRequest(dayOff, doctor)) return false;
             Institution.Instance().DayOffRepository.DaysOff.Add(dayOff);
             DoctorDaysOff doctorDaysOff = new DoctorDaysOff(doctor.ID, dayOff.ID);
             Institution.Instance().DoctorDaysOffRepository.DoctorDaysOff.Add(doctorDaysOff);

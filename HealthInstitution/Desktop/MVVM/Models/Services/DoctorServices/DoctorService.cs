@@ -50,6 +50,7 @@ namespace HealthInstitution.Core.Services
         // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
         {
             List<Appointment> appointments = new();
+            DateTime dateTimeEnds = dateTime.AddMinutes(durationInMin);
             foreach (Examination examination in _examinations) appointments.Add(examination);
             foreach (Operation operation in _operations) appointments.Add(operation);
             foreach (Appointment appointment in appointments)
@@ -64,10 +65,10 @@ namespace HealthInstitution.Core.Services
                 DateTime appointmentEnds = appointmentBegins.AddMinutes(duration);
                 if (DateTime.Compare(appointment.Date.Date, dateTime.Date) != 0) continue;
                 if (DateTime.Compare(dateTime, appointmentBegins) >= 0 &&
-                    DateTime.Compare(dateTime, appointmentEnds) < 0) return appointment;
+                     DateTime.Compare(dateTime, appointmentEnds) < 0) return appointment;
                 if (DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentBegins) > 0 &&
-                    DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentEnds) <= 0)
-                    return appointment;
+                    DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentEnds) <= 0) return appointment;
+                if (appointmentBegins < dateTime && dateTimeEnds < appointmentEnds) return appointment;
             }
 
             return null;

@@ -32,6 +32,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
                 DayOff dayOff = new DayOff(id, startDate, endDate, _viewModel.IsEmegency,
                                            _viewModel.Reason, doctor);
                 DayOffService service = new DayOffService();
+                if (_viewModel.IsEmegency is true) dayOff.State = State.ACCEPTED;
                 bool isAppplied = service.ApplyForDaysOff(dayOff, doctor);
 
                 if (!isAppplied) _viewModel.ShowMessage("Request is rejected automatically !");
@@ -42,6 +43,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             {
                 _viewModel.ShowMessage(e.Message);
             }
+
+            _viewModel.FindDaysOffRequests();
             
         }
     }
