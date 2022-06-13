@@ -127,6 +127,18 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 _examinations.Add(new ExaminationItemViewModel(examination));
             }
             OnPropertyChanged(nameof(Examinations));
+            ChangeSelectionIndex();
+        }
+
+        public void ChangeSelectionIndex()
+        {
+            if (_examinations.Count != 0)
+            {
+                Selection = 0;
+                EnableChanges = true;
+                OnPropertyChanged(nameof(Selection));
+                OnPropertyChanged(nameof(EnableChanges));
+            }
         }
 
         private void FillPatientsList()

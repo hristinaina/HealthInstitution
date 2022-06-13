@@ -104,7 +104,6 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             // filling with data
             SetProperties();
             FindPendingMedicines();
-            _selectedMedicine = _pendingMedicines.ElementAt(0);
             FindIngredients(_selectedMedicine.PendingMedicine);
         }
 
@@ -121,6 +120,19 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             {
                 if (pendingMedicine.State == State.ON_HOLD)
                 _pendingMedicines.Add(new PendingMedicineItemViewModel(pendingMedicine));
+            }
+            ChangeSelectionIndex();
+        }
+
+        public void ChangeSelectionIndex()
+        {
+            if (_pendingMedicines.Count != 0)
+            {
+                Selection = 0;
+                _selectedMedicine = _pendingMedicines.ElementAt(0);
+                EnableChanges = true;
+                OnPropertyChanged(nameof(Selection));
+                OnPropertyChanged(nameof(EnableChanges));
             }
         }
 
