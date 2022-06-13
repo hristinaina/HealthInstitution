@@ -30,7 +30,7 @@
                                          IsActive="{Binding MessageVisibility}" />
 
 
-        <components:PatientNavigationRail SelectedIndex="0"></components:PatientNavigationRail>
+        <components:PatientNavigationRail SelectedIndex="3"></components:PatientNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
             <Grid>
@@ -57,10 +57,11 @@
                     <ColumnDefinition Width="1.5*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center"
+                           Grid.Column="1"
                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                            VerticalAlignment="Top"
                            Padding="0 25 0 0"
-                           Grid.ColumnSpan="9"
+                           Grid.ColumnSpan="7"
                            Text="Survey about hospital"
                            FontWeight="DemiBold" />
                 <TextBlock HorizontalAlignment="Left"

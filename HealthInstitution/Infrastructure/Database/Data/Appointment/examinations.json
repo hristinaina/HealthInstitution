@@ -1,10 +1,7 @@
 [
   {
     "Anamnesis": "bla bla bla ...",
-    "Review": {
-      "Rating": 5.0,
-      "Comment": "good"
-    },
+    "Review": null,
     "ID": 1,
     "Date": "2022-04-29T18:43:37.0931955+02:00",
     "Emergency": false,
@@ -12,10 +9,7 @@
   },
   {
     "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
-    "Review": {
-      "Rating": 0.0,
-      "Comment": ""
-    },
+    "Review": null,
     "ID": 2,
     "Date": "2022-04-30T18:43:37.0931955+02:00",
     "Emergency": true,
@@ -23,10 +17,7 @@
   },
   {
     "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
-    "Review": {
-      "Rating": 0.0,
-      "Comment": ""
-    },
+    "Review": null,
     "ID": 3,
     "Date": "2022-04-26T18:43:37.0931955+02:00",
     "Emergency": true,
@@ -34,10 +25,7 @@
   },
   {
     "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
-    "Review": {
-      "Rating": 0.0,
-      "Comment": ""
-    },
+    "Review": null,
     "ID": 4,
     "Date": "2022-04-23T18:43:37.0931955+02:00",
     "Emergency": false,
