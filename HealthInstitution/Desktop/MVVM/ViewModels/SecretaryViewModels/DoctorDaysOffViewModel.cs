@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using HealthInstitution.Core;
 using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands;
 
@@ -76,7 +77,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             _requests.Clear();
             foreach (DayOff df in Institution.Instance().DayOffRepository.DaysOff)
             {
-                if (df.State == Models.Enumerations.State.ON_HOLD) _requests.Add(new DaysOffItemViewModel(df));
+                if (df.State == State.ON_HOLD) _requests.Add(new DaysOffItemViewModel(df));
             }
 
             if (_requests.Count != 0)

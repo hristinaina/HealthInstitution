@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HealthInstitution.MVVM.Models;
+using HealthInstitution.Core;
 
 namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
