@@ -10,5 +10,9 @@
   {
     "DoctorID": 4,
     "DaysOffId": 3
+  },
+  {
+    "DoctorID": 3,
+    "DaysOffId": 4
   }
 ]
