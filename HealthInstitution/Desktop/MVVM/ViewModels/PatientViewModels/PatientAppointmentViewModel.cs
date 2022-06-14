@@ -1,16 +1,12 @@
 ﻿using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.PatientServices;
-using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using static HealthInstitution.Core.Services.NotificationReceiveService;
 
@@ -22,7 +18,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
         private readonly Patient _patient;
         public Patient Patient { get => _patient; }
-        private Institution _institution;
+        private readonly Institution _institution;
 
         private readonly ObservableCollection<AppointmentListItemViewModel> _appointments;
         public IEnumerable<AppointmentListItemViewModel> Appointments => _appointments;
@@ -39,7 +35,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         }
 
 
-        private ObservableCollection<Doctor> _doctors;
+        private readonly ObservableCollection<Doctor> _doctors;
         public ObservableCollection<Doctor> Doctors => _doctors;
         public Doctor NewDoctor { get; set; }
         public DateTime NewDate { get; set; }
@@ -195,7 +191,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
         protected void FillDoctorsList(List<Doctor> doctors = null)
         {
-            if (doctors is null) {
+            if (doctors is null)
+            {
                 doctors = _institution.DoctorRepository.GetGeneralPractitioners();
             }
             _doctors.Clear();

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Commands;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services.Equipments;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 

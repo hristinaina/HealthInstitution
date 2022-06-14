@@ -1,6 +1,4 @@
-﻿using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
+﻿using HealthInstitution.Core;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.EquipmentCommands;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels.ListItems;
 

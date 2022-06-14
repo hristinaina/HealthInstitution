@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:patientviewmodels="clr-namespace:HealthInstitution.MVVM.ViewModels.PatientViewModels"
              xmlns:components="clr-namespace:HealthInstitution.MVVM.Views.Components"
-             d:DataContext="{d:DesignInstance Type=patientviewmodels:PatientRecordViewModel}"
+             d:DataContext="{d:DesignInstance Type=patientviewmodels:PatientSurveyViewModel}"
              mc:Ignorable="d"
              Height="650"
              Width="1200"
@@ -33,7 +33,145 @@
         <components:PatientNavigationRail SelectedIndex="3"></components:PatientNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
-            <TextBox Text="Comming soon..." />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="7*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center"
+                           Grid.Column="1"
+                           Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                           VerticalAlignment="Top"
+                           Padding="0 25 0 0"
+                           Grid.ColumnSpan="7"
+                           Text="Survey about hospital"
+                           FontWeight="DemiBold" />
+                <TextBlock HorizontalAlignment="Left"
+                           Grid.Column="1"
+                           Grid.Row="1"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Text="Please rate the following from 1 (not satisfied) to 5 (very satisfied):" />
+                <TextBlock HorizontalAlignment="Left"
+                           Grid.Column="1"
+                           Grid.Row="2"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Text="How are you satisfied with quality of our services ?" />
+                <TextBlock HorizontalAlignment="Left"
+                           Grid.Column="1"
+                           Grid.Row="3"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Text="Is hygene level in our institution satisfactory ?" />
+                <TextBlock HorizontalAlignment="Left"
+                           Grid.Column="1"
+                           Grid.Row="4"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Text="What is your overall satisfaction with our institution ?" />
+                <TextBlock HorizontalAlignment="Left"
+                           Grid.Column="1"
+                           Grid.Row="5"
+                           VerticalAlignment="Center"
+                           Text="Would you suggest us to your friends ?" />
+                <TextBlock HorizontalAlignment="Center"
+                           Grid.Column="3"
+                           Grid.Row="1"
+                           VerticalAlignment="Center"
+                           Text="1" />
+                <TextBlock HorizontalAlignment="Center"
+                           Grid.Column="4"
+                           Grid.Row="1"
+                           VerticalAlignment="Center"
+                           Text="2" />
+                <TextBlock HorizontalAlignment="Center"
+                           Grid.Column="5"
+                           Grid.Row="1"
+                           VerticalAlignment="Center"
+                           Text="3" />
+                <TextBlock HorizontalAlignment="Center"
+                           Grid.Column="6"
+                           Grid.Row="1"
+                           VerticalAlignment="Center"
+                           Text="4" />
+                <TextBlock HorizontalAlignment="Center"
+                           Grid.Column="7"
+                           Grid.Row="1"
+                           VerticalAlignment="Center"
+                           Text="5" />
+
+                <RadioButton Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center" GroupName="Service" Command="{Binding Check}" CommandParameter="service1"/>
+                <RadioButton Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" GroupName="Service" Command="{Binding Check}" CommandParameter="service2"/>
+                <RadioButton Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center" GroupName="Service" Command="{Binding Check}" CommandParameter="service3"/>
+                <RadioButton Grid.Row="2" Grid.Column="6" HorizontalAlignment="Center" GroupName="Service" Command="{Binding Check}" CommandParameter="service4"/>
+                <RadioButton Grid.Row="2" Grid.Column="7" HorizontalAlignment="Center" GroupName="Service" Command="{Binding Check}" CommandParameter="service5"/>
+                
+                <RadioButton Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene1"/>
+                <RadioButton Grid.Row="3" Grid.Column="4" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene2"/>
+                <RadioButton Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene3"/>
+                <RadioButton Grid.Row="3" Grid.Column="6" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene4"/>
+                <RadioButton Grid.Row="3" Grid.Column="7" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene5"/>
+                
+                <RadioButton Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction1"/>
+                <RadioButton Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction2"/>
+                <RadioButton Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction3"/>
+                <RadioButton Grid.Row="4" Grid.Column="6" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction4"/>
+                <RadioButton Grid.Row="4" Grid.Column="7" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction5"/>
+                
+                <RadioButton Grid.Row="5" Grid.Column="3" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion1"/>
+                <RadioButton Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion2"/>
+                <RadioButton Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion3"/>
+                <RadioButton Grid.Row="5" Grid.Column="6" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion4"/>
+                <RadioButton Grid.Row="5" Grid.Column="7" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggest5"/>
+
+                <TextBlock HorizontalAlignment="Left"
+                           Grid.Column="1"
+                           Grid.Row="6"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Text="Feel free to leave a comment: " />
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         Grid.Column="1"
+                         Grid.ColumnSpan="7"
+                         Grid.Row="7"
+                         VerticalAlignment="Top"
+                         Height="100"
+                         TextWrapping="Wrap"
+                         MaxLength="400"
+                         Text="{Binding Comment}"
+                         VerticalScrollBarVisibility="Auto" />
+                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="7"
+                        Grid.Row="8"
+                        VerticalAlignment="Top"
+                        Margin="0 40 0 0"
+                        Command="{Binding Submit}"
+                        HorizontalAlignment="Center"
+                        
+                        Content="Submit"></Button>
+            </Grid>
         </materialDesign:Card>
     </Grid>
 </UserControl>

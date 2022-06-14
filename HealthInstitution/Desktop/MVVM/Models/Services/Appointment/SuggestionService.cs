@@ -1,8 +1,5 @@
-﻿using HealthInstitution.Core;
-using HealthInstitution.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.DoctorServices;
 
 namespace HealthInstitution.Core.Services

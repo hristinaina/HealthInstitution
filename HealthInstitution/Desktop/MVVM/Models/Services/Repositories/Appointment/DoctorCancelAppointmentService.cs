@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
-using HealthInstitution.Core;
 
 namespace HealthInstitution.Core.Services
 {

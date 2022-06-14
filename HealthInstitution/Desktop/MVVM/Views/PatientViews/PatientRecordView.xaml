@@ -33,6 +33,7 @@
         <components:PatientNavigationRail SelectedIndex="0"></components:PatientNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
+        <materialDesign:DialogHost>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"></RowDefinition>
@@ -167,11 +168,13 @@
                 </DataGrid>
                 <Grid Grid.Row="5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="2.5*"></ColumnDefinition>
                         <ColumnDefinition Width="3*"></ColumnDefinition>
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
                         <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                        <ColumnDefinition Width="4.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="2.5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBox Style="{StaticResource MaterialDesignFilledTextBox}"
                              TextWrapping="NoWrap"
@@ -202,9 +205,197 @@
                             Command="{Binding Reset}">
                         <materialDesign:PackIcon Kind="Refresh" />
                     </Button>
+                    <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                            Grid.Column="5"
+                            VerticalAlignment="Top"
+                            Margin="0 15 0 0"
+                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                            Content="Rate appointment">
+                            <Button.CommandParameter>
+                                <StackPanel Height="340"
+                                            Width="800"
+                                            Margin="15 20 15 20">
+                                    <TextBlock Text="Survey about doctor"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,10,0,0"
+                                               Style="{StaticResource MaterialDesignHeadline5TextBlock}" />
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="1*"></RowDefinition>
+                                            <RowDefinition Height="1*"></RowDefinition>
+                                            <RowDefinition Height="1*"></RowDefinition>
+                                            <RowDefinition Height="1*"></RowDefinition>
+                                            <RowDefinition Height="2*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="11*"></ColumnDefinition>
+                                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock HorizontalAlignment="Left"
+                                                   Grid.Column="1"
+                                                   Grid.Row="0"
+                                                   FontWeight="Bold"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0 20 0 0 "
+                                                   TextWrapping="Wrap"
+                                                   Text="Please rate the following from 1 (not satisfied) to 5 (very satisfied):" />
+                                        <TextBlock HorizontalAlignment="Left"
+                                                   Grid.Column="1"
+                                                   Grid.Row="1"
+                                                   VerticalAlignment="Center"
+                                                   TextWrapping="Wrap"
+                                                   Text="How are you satisfied with quality of doctor's services ?" />
+                                        <TextBlock HorizontalAlignment="Left"
+                                                   Grid.Column="1"
+                                                   Grid.Row="2"
+                                                   VerticalAlignment="Center"
+                                                   Text="Would you suggest this doctor to your friends ?" />
+                                        
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   Grid.Column="3"
+                                                   Grid.Row="0"
+                                                   VerticalAlignment="Center"
+                                                   Text="1" />
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   Grid.Column="4"
+                                                   Grid.Row="0"
+                                                   VerticalAlignment="Center"
+                                                   Text="2" />
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   Grid.Column="5"
+                                                   Grid.Row="0"
+                                                   VerticalAlignment="Center"
+                                                   Text="3" />
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   Grid.Column="6"
+                                                   Grid.Row="0"
+                                                   VerticalAlignment="Center"
+                                                   Text="4" />
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   Grid.Column="7"
+                                                   Grid.Row="0"
+                                                   VerticalAlignment="Center"
+                                                   Text="5" />
 
+                                        <RadioButton Grid.Row="1"
+                                                     Grid.Column="3"
+                                                     HorizontalAlignment="Center"
+                                                     GroupName="Service"
+                                                     Command="{Binding Check}"
+                                                     CommandParameter="service1" />
+                                        <RadioButton Grid.Row="1"
+                                                     Grid.Column="4"
+                                                     HorizontalAlignment="Center"
+                                                     GroupName="Service"
+                                                     Command="{Binding Check}"
+                                                     CommandParameter="service2" />
+                                        <RadioButton Grid.Row="1"
+                                                     Grid.Column="5"
+                                                     HorizontalAlignment="Center"
+                                                     GroupName="Service"
+                                                     Command="{Binding Check}"
+                                                     CommandParameter="service3" />
+                                        <RadioButton Grid.Row="1"
+                                                     Grid.Column="6"
+                                                     HorizontalAlignment="Center"
+                                                     GroupName="Service"
+                                                     Command="{Binding Check}"
+                                                     CommandParameter="service4" />
+                                        <RadioButton Grid.Row="1"
+                                                     Grid.Column="7"
+                                                     HorizontalAlignment="Center"
+                                                     GroupName="Service"
+                                                     Command="{Binding Check}"
+                                                     CommandParameter="service5" />
+
+                                        <RadioButton Grid.Row="2"
+                                                     Grid.Column="3"
+                                                     HorizontalAlignment="Center"
+                                                     GroupName="WouldSuggest"
+                                                     Command="{Binding Check}"
+                                                     CommandParameter="suggestion1" />
+                                        <RadioButton Grid.Row="2"
+                                                     Grid.Column="4"
+                                                     HorizontalAlignment="Center"
+                                                     GroupName="WouldSuggest"
+                                                     Command="{Binding Check}"
+                                                     CommandParameter="suggestion2" />
+                                        <RadioButton Grid.Row="2"
+                                                     Grid.Column="5"
+                                                     HorizontalAlignment="Center"
+                                                     GroupName="WouldSuggest"
+                                                     Command="{Binding Check}"
+                                                     CommandParameter="suggestion3" />
+                                        <RadioButton Grid.Row="2"
+                                                     Grid.Column="6"
+                                                     HorizontalAlignment="Center"
+                                                     GroupName="WouldSuggest"
+                                                     Command="{Binding Check}"
+                                                     CommandParameter="suggestion4" />
+                                        <RadioButton Grid.Row="2"
+                                                     Grid.Column="7"
+                                                     HorizontalAlignment="Center"
+                                                     GroupName="WouldSuggest"
+                                                     Command="{Binding Check}"
+                                                     CommandParameter="suggest5" />
+
+                                        <TextBlock HorizontalAlignment="Left"
+                                                   Grid.Column="1"
+                                                   Grid.Row="3"
+                                                   FontWeight="Bold"
+                                                   VerticalAlignment="Center"
+                                                   TextWrapping="Wrap"
+                                                   Margin="0 20 0 0"
+                                                   Text="Feel free to leave a comment: " />
+                                        <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                 Grid.Column="1"
+                                                 Grid.ColumnSpan="7"
+                                                 Grid.Row="4"
+                                                 VerticalAlignment="Top"
+                                                 Height="100"
+                                                 TextWrapping="Wrap"
+                                                 MaxLength="400"
+                                                 Text="{Binding Comment}"
+                                                 VerticalScrollBarVisibility="Auto" />
+                                    </Grid>
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsDefault="True"
+                                                Margin="0 30 20 0"
+                                                Content="SUBMIT"
+                                                Command="{Binding CreateAppointment}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    True
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Margin="20 30 0 0"
+                                                Content="DISCARD"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Button.CommandParameter>
+                        </Button>
                 </Grid>
-            </Grid>
+                </Grid>
+        </materialDesign:DialogHost>
         </materialDesign:Card>
     </Grid>
 </UserControl>

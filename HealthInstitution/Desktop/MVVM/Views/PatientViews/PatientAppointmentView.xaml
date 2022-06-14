@@ -127,8 +127,6 @@
                                     Width="170"
                                     ToolTip="Schedule appointment"
                                     Content="New appointment"
-                                    Background="#CC80DEEA"
-                                    BorderBrush="#6680DEEA"
                                     Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                     IsDefault="True"
                                     Height="32"

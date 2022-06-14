@@ -1,21 +1,16 @@
 ﻿using HealthInstitution.Core;
-using HealthInstitution.Core;
-using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     public class PatientSearchViewModel : PatientAppointmentViewModel
     {
-        private Institution _institution;
+        private readonly Institution _institution;
         protected Patient _patient;
         public PatientNavigationViewModel Navigation { get; }
 

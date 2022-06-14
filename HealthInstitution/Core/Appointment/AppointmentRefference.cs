@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HealthInstitution.Core
+﻿namespace HealthInstitution.Core
 {
     public class AppointmentRefference
     {
-        private int _appoinmentId;
-        private int _doctorId;
-        private int _patientId;
-        private int _roomId;
-        private int _perscriptionId;
+        private readonly int _appoinmentId;
+        private readonly int _doctorId;
+        private readonly int _patientId;
+        private readonly int _roomId;
+        private readonly int _perscriptionId;
 
         public AppointmentRefference(int appointmentId, int doctoriId, int patientId,
                                      int roomId, int perscriptionId)

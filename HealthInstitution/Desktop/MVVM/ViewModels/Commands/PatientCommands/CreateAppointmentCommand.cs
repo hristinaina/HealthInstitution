@@ -1,24 +1,18 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Core;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
-using HealthInstitution.Stores;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
     public class CreateAppointmentCommand : BaseCommand
     {
-        private PatientAppointmentViewModel _viewModel;
-        private bool _usingSuggestion;
+        private readonly PatientAppointmentViewModel _viewModel;
+        private readonly bool _usingSuggestion;
 
-        public CreateAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel, bool usingSuggestion=false)
+        public CreateAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel, bool usingSuggestion = false)
         {
             _viewModel = patientAppointmentViewModel;
             _usingSuggestion = usingSuggestion;
@@ -32,7 +26,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             Doctor doctor = _viewModel.NewDoctor;
             DateTime datetime = _viewModel.MergeTime(_viewModel.NewDate, _viewModel.NewTime);
 
-            if (_usingSuggestion) {
+            if (_usingSuggestion)
+            {
                 doctor = _viewModel.SelectedSuggestion.Doctor;
                 datetime = _viewModel.MergeTime(_viewModel.SelectedSuggestion.Date, _viewModel.SelectedSuggestion.Time);
             }

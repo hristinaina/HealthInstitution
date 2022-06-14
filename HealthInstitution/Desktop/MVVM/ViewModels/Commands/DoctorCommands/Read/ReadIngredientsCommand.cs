@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Commands;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 using HealthInstitution.Stores;
 

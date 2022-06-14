@@ -1,21 +1,15 @@
 ﻿using HealthInstitution.Commands;
+using HealthInstitution.Core;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
-using HealthInstitution.Stores;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
     class RescheduleAppointmentCommand : BaseCommand
     {
-        private PatientAppointmentViewModel _viewModel;
+        private readonly PatientAppointmentViewModel _viewModel;
 
         public RescheduleAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel)
         {

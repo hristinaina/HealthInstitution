@@ -1,20 +1,14 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
-using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.SearchingServices;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
     class SearchCommand : BaseCommand
     {
-        private BaseViewModel _viewModel;
+        private readonly BaseViewModel _viewModel;
 
         public SearchCommand(BaseViewModel viewModel)
         {

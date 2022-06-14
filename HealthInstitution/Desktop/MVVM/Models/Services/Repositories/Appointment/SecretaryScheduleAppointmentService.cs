@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Services.DoctorServices;

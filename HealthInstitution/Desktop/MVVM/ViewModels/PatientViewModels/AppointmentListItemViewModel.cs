@@ -1,15 +1,10 @@
 ﻿using HealthInstitution.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     public class AppointmentListItemViewModel : BaseViewModel
     {
-        Appointment _appointment;
+        readonly Appointment _appointment;
         public Appointment Appointment { get => _appointment; }
 
         public int Id => _appointment.ID;
@@ -21,7 +16,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public string Specialization => _appointment.Doctor.Specialization.ToString();
         public string Anamnesis
         {
-            get {
+            get
+            {
                 if (_appointment is Examination) return ((Examination)_appointment).Anamnesis;
                 return "";
             }

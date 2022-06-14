@@ -1,7 +1,6 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using HealthInstitution.Core;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
 {
