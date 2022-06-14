@@ -1,7 +1,6 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
-using System;
 using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels

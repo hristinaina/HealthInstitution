@@ -5,8 +5,8 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
 {
     class CheckCommand : BaseCommand
     {
-        private PatientSurveyViewModel _surveyViewModel;
-        private PatientRecordViewModel _recordViewModel;
+        private readonly PatientSurveyViewModel _surveyViewModel;
+        private readonly PatientRecordViewModel _recordViewModel;
 
         public CheckCommand(PatientSurveyViewModel viewModel)
         {

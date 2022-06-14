@@ -1,13 +1,11 @@
-﻿using System;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
+﻿using HealthInstitution.Core;
+using HealthInstitution.Core.Exceptions;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
+using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
-using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
-using HealthInstitution.Core.Exceptions;
 
 namespace HealthInstitution.Commands
 {
@@ -41,7 +39,7 @@ namespace HealthInstitution.Commands
                     _loginVM.ShowMessage("Wrong credentials !");
                 }
             }
-            catch (PatientBlockedException e) 
+            catch (PatientBlockedException e)
             {
                 _loginVM.ShowMessage(e.Message);
             }
