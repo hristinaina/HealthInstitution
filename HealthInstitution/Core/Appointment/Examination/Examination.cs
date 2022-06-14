@@ -8,12 +8,12 @@ namespace HealthInstitution.Core
     {
         private string _anamnesis;
         private List<Prescription> _prescriptions;
-        private ExaminationReview _review;
+        private Review _review;
 
         [JsonProperty("Anamnesis")]
         public string Anamnesis { get => _anamnesis; set { _anamnesis = value; } }
         [JsonProperty("Review")]
-        public ExaminationReview Review { get => _review; set { _review = value; } }
+        public Review Review { get => _review; set { _review = value; } }
         [JsonIgnore]
         public List<Prescription> Prescriptions { get => _prescriptions; set { _prescriptions = value; } }
 
@@ -27,7 +27,7 @@ namespace HealthInstitution.Core
         }
 
         public Examination(int id, DateTime date, bool isEmergency, bool done,
-                           string anamnesis, ExaminationReview review)
+                           string anamnesis, Review review)
                            : base(id, date, isEmergency, done)
         {
             _anamnesis = anamnesis;

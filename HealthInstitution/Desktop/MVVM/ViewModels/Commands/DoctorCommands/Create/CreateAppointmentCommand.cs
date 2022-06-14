@@ -30,7 +30,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             try
             {
                 DoctorScheduleAppointmentService scheduleAppointmentService = new DoctorScheduleAppointmentService();
-                Examination examination = new Examination(0, datetime, false, false, "", new ExaminationReview());
+                Examination examination = new Examination(0, datetime, false, false, "", new Review());
                 examination.Doctor = (Doctor)Institution.Instance().CurrentUser;
                 examination.Patient = patient;
 
