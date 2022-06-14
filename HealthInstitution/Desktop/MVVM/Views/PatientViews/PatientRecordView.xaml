@@ -33,7 +33,7 @@
         <components:PatientNavigationRail SelectedIndex="0"></components:PatientNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
-        <materialDesign:DialogHost>
+        <materialDesign:DialogHost IsOpen="{Binding DialogOpen}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"></RowDefinition>
@@ -119,6 +119,7 @@
                            FontSize="11"
                            Text="Click on appointment to see detailed anamnesis." />
                 <DataGrid ItemsSource="{Binding Appointments}"
+                          SelectedItem="{Binding SelectedAppointment}"
                           AutoGenerateColumns="False"
                           VerticalAlignment="Top"
                           Grid.Row="4"

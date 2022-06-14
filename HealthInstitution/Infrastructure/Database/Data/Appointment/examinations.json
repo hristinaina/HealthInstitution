@@ -1,7 +1,11 @@
 [
   {
     "Anamnesis": "bla bla bla ...",
-    "Review": null,
+    "Review": {
+      "Service": 5,
+      "Suggestion": 3,
+      "Comment": "Examination was fine."
+    },
     "ID": 1,
     "Date": "2022-04-29T18:43:37.0931955+02:00",
     "Emergency": false,
@@ -17,7 +21,11 @@
   },
   {
     "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
-    "Review": null,
+    "Review": {
+      "Service": 1,
+      "Suggestion": 2,
+      "Comment": "Bad. Very bad."
+    },
     "ID": 3,
     "Date": "2022-04-26T18:43:37.0931955+02:00",
     "Emergency": true,

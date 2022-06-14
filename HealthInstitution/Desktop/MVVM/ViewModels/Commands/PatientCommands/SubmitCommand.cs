@@ -32,7 +32,7 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
                 service.AssignReview((Examination)_recordViewModel.SelectedAppointment);
                 _recordViewModel.CanReview = false;
                 _recordViewModel.ShowMessage("Thank you for your feedback !");
-                //_recordViewModel.ResetReview();
+                _recordViewModel.DialogOpen = false;
             }
             else {
                 CreateReviewService service = new CreateReviewService(_surveyViewModel.Service, _surveyViewModel.Suggestion, _surveyViewModel.Hygiene, _surveyViewModel.Satisfaction, _surveyViewModel.Comment);

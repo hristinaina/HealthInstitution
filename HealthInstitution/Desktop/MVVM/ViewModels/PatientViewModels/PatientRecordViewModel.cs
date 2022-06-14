@@ -16,7 +16,6 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public PatientNavigationViewModel Navigation { get; }
         public Patient Patient => _patient;
 
-
         private ObservableCollection<AppointmentListItemViewModel> _appointments;
         public IEnumerable<AppointmentListItemViewModel> Appointments
         {
@@ -33,7 +32,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public ICommand Search { get; set; }
         public ICommand Reset { get; set; }
 
-       
+
         private AppointmentListItemViewModel _selectedAppointment;
 
         public bool CanReview { get; set; }
@@ -41,12 +40,24 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public AppointmentListItemViewModel SelectedAppointment
         {
             get { return _selectedAppointment; }
-            set { _selectedAppointment = value; 
-                if ((Appointment) _selectedAppointment is Examination examination && examination.Review != null)
-                CanReview = true;
-                OnPropertyChanged(nameof(SelectedAppointment)); 
-                OnPropertyChanged(nameof(CanReview)); }
+            set
+            {
+                _selectedAppointment = value;
+                if ((Appointment)_selectedAppointment is Examination examination && examination.Review == null)
+                    CanReview = true;
+                OnPropertyChanged(nameof(SelectedAppointment));
+                OnPropertyChanged(nameof(CanReview));
+            }
         }
+
+        private bool _dialogOpen;
+
+        public bool DialogOpen
+        {
+            get { return _dialogOpen; }
+            set { _dialogOpen = value; OnPropertyChanged(nameof(DialogOpen)); }
+        }
+
 
         private int _service;
         private int _suggestion;
