@@ -12,13 +12,13 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public PatientNavigationViewModel Navigation { get; }
 
         private int _service;
-        private int _hygene;
+        private int _hygiene;
         private int _satisfaction;
         private int _suggestion;
         private string _comment;
 
         public int Service { get => _service; set { _service = value; } }
-        public int Hygene { get => _hygene; set { _hygene = value; } }
+        public int Hygiene { get => _hygiene; set { _hygiene = value; } }
         public int Satisfacion { get => _satisfaction; set { _satisfaction = value; } }
         public int Suggestion { get => _suggestion; set { _suggestion = value; } }
         public string Comment { get => _comment; set { _comment = value; } }
