@@ -137,6 +137,7 @@ namespace HealthInstitution.Core
             _examinationChangeRepository.LoadFromFile();
             _equipmentOrderRepository.LoadFromFile();
             _notificationRepository.LoadFromFile();
+            _reviewRepository.LoadFromFile();
         }
 
         public void SaveAll()
