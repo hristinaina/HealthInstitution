@@ -2,6 +2,7 @@
 using HealthInstitution.Core;
 using HealthInstitution.Desktop.MVVM.Models.Services;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
+using HealthInstitution.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +31,14 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
                 CreateReviewService service = new CreateReviewService(_recordViewModel.Service, _recordViewModel.Suggestion, _recordViewModel.Comment);
                 service.AssignReview((Examination)_recordViewModel.SelectedAppointment);
                 _recordViewModel.CanReview = false;
+                _recordViewModel.ShowMessage("Thank you for your feedback !");
+                //_recordViewModel.ResetReview();
             }
             else {
-                CreateReviewService service = new CreateReviewService(_surveyViewModel.Service, _surveyViewModel.Suggestion, _surveyViewModel.Hygiene, _surveyViewModel.Satisfacion, _surveyViewModel.Comment);
+                CreateReviewService service = new CreateReviewService(_surveyViewModel.Service, _surveyViewModel.Suggestion, _surveyViewModel.Hygiene, _surveyViewModel.Satisfaction, _surveyViewModel.Comment);
                 service.AssignReview();
+                NavigationStore.Instance().CurrentViewModel = new PatientRecordViewModel();
+                NavigationStore.Instance().CurrentViewModel.ShowMessage("Thank you for your feedback !");
             }
         }
     }

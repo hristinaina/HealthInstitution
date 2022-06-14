@@ -142,7 +142,7 @@
                 <RadioButton Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion2"/>
                 <RadioButton Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion3"/>
                 <RadioButton Grid.Row="5" Grid.Column="6" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion4"/>
-                <RadioButton Grid.Row="5" Grid.Column="7" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggest5"/>
+                <RadioButton Grid.Row="5" Grid.Column="7" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion5"/>
 
                 <TextBlock HorizontalAlignment="Left"
                            Grid.Column="1"

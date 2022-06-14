@@ -152,5 +152,40 @@
     "Service": 4,
     "Suggestion": 3,
     "Comment": null
+  },
+  {
+    "Hygiene": 0,
+    "Satisfaction": 0,
+    "Service": 1,
+    "Suggestion": 0,
+    "Comment": null
+  },
+  {
+    "Hygiene": 0,
+    "Satisfaction": 0,
+    "Service": 0,
+    "Suggestion": 0,
+    "Comment": null
+  },
+  {
+    "Hygiene": 0,
+    "Satisfaction": 0,
+    "Service": 1,
+    "Suggestion": 3,
+    "Comment": null
+  },
+  {
+    "Hygiene": 4,
+    "Satisfaction": 2,
+    "Service": 1,
+    "Suggestion": 3,
+    "Comment": "Very nice but not so nice."
+  },
+  {
+    "Hygiene": 5,
+    "Satisfaction": 4,
+    "Service": 1,
+    "Suggestion": 3,
+    "Comment": null
   }
 ]

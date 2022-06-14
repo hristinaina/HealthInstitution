@@ -35,20 +35,20 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
                         _surveyViewModel.Service = value;
                     }
                     break;
-                case "hygene":
+                case "hygiene":
                     _surveyViewModel.Hygiene = value;
                     break;
                 case "satisfaction":
-                    _surveyViewModel.Satisfacion = value;
+                    _surveyViewModel.Satisfaction = value;
                     break;
                 case "suggestion":
                     if (_recordViewModel != null)
                     {
-                        _recordViewModel.Service = value;
+                        _recordViewModel.Suggestion = value;
                     }
                     else
                     {
-                        _surveyViewModel.Service = value;
+                        _surveyViewModel.Suggestion = value;
                     }
                     break;
             }
