@@ -4,24 +4,24 @@ namespace HealthInstitution.Core
 {
     public class HospitalReview : Review
     {
-        private int _hygene;
+        private int _hygiene;
         private int _satisfaction;
      
-        [JsonProperty("Hygene")]
-        public int Hygene { get => _hygene; set { _hygene = value; } }
+        [JsonProperty("Hygiene")]
+        public int Hygiene { get => _hygiene; set { _hygiene = value; } }
         [JsonProperty("Satisfaction")]
         public int Satisfacion { get => _satisfaction; set { _satisfaction = value; } }
 
 
-        public HospitalReview(int service, int hygene, int satisfaction, int suggestion, string comment) : base(service, suggestion, comment)
+        public HospitalReview(int service, int hygiene, int satisfaction, int suggestion, string comment) : base(service, suggestion, comment)
         {
-            _hygene = hygene;
+            _hygiene = hygiene;
             _satisfaction = satisfaction;
         }
 
         public HospitalReview() : base()
         {
-            _hygene = 0;
+            _hygiene = 0;
             _satisfaction = 0;
         }
     }
