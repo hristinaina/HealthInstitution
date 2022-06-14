@@ -50,6 +50,7 @@ namespace HealthInstitution.Core
         private readonly ExaminationChangeRepository _examinationChangeRepository;
 
         private readonly NotificationRepository _notificationRepository;
+        private readonly ReviewRepository _reviewRepository;
 
 
         private User _currentUser;
@@ -103,6 +104,7 @@ namespace HealthInstitution.Core
             _examinationChangeRepository = new ExaminationChangeRepository(_appSettings.ExaminationChangeFileName);
 
             _notificationRepository = new NotificationRepository(_appSettings.PatientNotificationsFileName);
+            _reviewRepository = new ReviewRepository(_appSettings.ReviewsFileName);
 
             LoadAll();
         }
@@ -165,6 +167,7 @@ namespace HealthInstitution.Core
             _examinationChangeRepository.SaveToFile();
             _equipmentOrderRepository.SaveToFile();
             _notificationRepository.SaveToFile();
+            _reviewRepository.SaveToFile();
         }
 
         private static void ConnectReferences()
@@ -209,5 +212,6 @@ namespace HealthInstitution.Core
         public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
         public EquipmentOrderRepository EquipmentOrderRepository { get => _equipmentOrderRepository; }
         public NotificationRepository NotificationRepository { get => _notificationRepository; }
+        public ReviewRepository ReviewRepository { get => _reviewRepository; }
     }
 }

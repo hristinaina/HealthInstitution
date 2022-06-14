@@ -38,6 +38,7 @@ namespace HealthInstitution
         private string _prescriptionMedicineFileName;
         private string _examinationChangeFileName;
         private string _patientNotificationsFileName;
+        private string _reviewsFileName;
 
         public string PatientsFileName { get => _patientsFileName; set => _patientsFileName = value; }
         public string DoctorsFileName { get => _doctorsFileName; set => _doctorsFileName = value; }
@@ -66,8 +67,10 @@ namespace HealthInstitution
         public string DoctorDaysOffFileName { get => _doctorDaysOffFileName; set => _doctorDaysOffFileName = value; }
         public string PrescriptionMedicineFileName { get => _prescriptionMedicineFileName; set => _prescriptionMedicineFileName = value; }
         public string ExaminationChangeFileName { get => _examinationChangeFileName; set => _examinationChangeFileName = value; }
-
         public string PatientNotificationsFileName { get => _patientNotificationsFileName; set => _patientNotificationsFileName = value; }
+        public string ReviewsFileName { get => _reviewsFileName; set => _reviewsFileName = value; }
+
+
         private AppConfiguration() { }
 
         private static AppConfiguration s_instance = null;
