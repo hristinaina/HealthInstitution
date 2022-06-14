@@ -32,6 +32,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _patient = (Patient)_institution.CurrentUser;
             Navigation = new PatientNavigationViewModel();
             Check = new CheckCommand(this);
+            Submit = new SubmitCommand(this);
         }
 
     }

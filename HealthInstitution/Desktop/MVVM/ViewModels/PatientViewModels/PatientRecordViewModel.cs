@@ -27,11 +27,44 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public string SearchKeyWord
         {
             get { return _searchKeyWord; }
-            set { _searchKeyWord = value; OnPropertyChanged(SearchKeyWord); }
+            set { _searchKeyWord = value; OnPropertyChanged(nameof(SearchKeyWord)); }
         }
         public ICommand Search { get; set; }
         public ICommand Reset { get; set; }
 
+        private int _service;
+        private int _suggestion;
+        private string _comment;
+
+        public int Service
+        {
+            get { return _service; }
+            set { _service = value; OnPropertyChanged(nameof(Service)); }
+        }
+        public int Suggestion
+        {
+            get { return _suggestion; }
+            set { _suggestion = value; OnPropertyChanged(nameof(Suggestion)); }
+        }
+        public string Comment
+        {
+            get { return _comment; }
+            set { _comment = value; OnPropertyChanged(nameof(Comment)); }
+        }
+
+        private AppointmentListItemViewModel _selectedAppointment;
+
+        public bool CanReview { get; set; }
+
+        public AppointmentListItemViewModel SelectedAppointment
+        {
+            get { return _selectedAppointment; }
+            set { _selectedAppointment = value; 
+                if ((Appointment) _selectedAppointment is Examination examination && examination.Review != null)
+                CanReview = true;
+                OnPropertyChanged(nameof(SelectedAppointment)); 
+                OnPropertyChanged(nameof(CanReview)); }
+        }
 
 
         public PatientRecordViewModel()
@@ -44,8 +77,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             PatientAppointmentsService service = new PatientAppointmentsService(_patient);
             FillAppointmentsList(service.GetPastAppointments());
             InitializeSearchParameters();
-
-            // ..............
+            CanReview = false;
         }
 
         private void InitializeSearchParameters()

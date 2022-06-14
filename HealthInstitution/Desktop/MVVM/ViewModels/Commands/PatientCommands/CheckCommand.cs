@@ -23,7 +23,7 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
                     _viewModel.Service = value;
                     break;
                 case "hygene":
-                    _viewModel.Hygene = value;
+                    _viewModel.Hygiene = value;
                     break;
                 case "satisfaction":
                     _viewModel.Satisfacion = value;
