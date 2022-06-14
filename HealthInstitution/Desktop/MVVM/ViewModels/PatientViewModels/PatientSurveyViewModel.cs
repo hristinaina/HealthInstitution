@@ -21,7 +21,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public int Hygiene { get => _hygiene; set { _hygiene = value; } }
         public int Satisfacion { get => _satisfaction; set { _satisfaction = value; } }
         public int Suggestion { get => _suggestion; set { _suggestion = value; } }
-        public string Comment { get => _comment; set { _comment = value; } }
+        public string Comment { get => _comment; set { _comment = value; OnPropertyChanged(nameof(Comment)); } }
 
         public ICommand Check { get; set; }
         public ICommand Submit { get; set; }

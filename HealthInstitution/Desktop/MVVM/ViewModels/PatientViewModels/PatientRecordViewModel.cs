@@ -1,5 +1,6 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Core.Services.PatientServices;
+using HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
 using System.Collections.Generic;
@@ -32,26 +33,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public ICommand Search { get; set; }
         public ICommand Reset { get; set; }
 
-        private int _service;
-        private int _suggestion;
-        private string _comment;
-
-        public int Service
-        {
-            get { return _service; }
-            set { _service = value; OnPropertyChanged(nameof(Service)); }
-        }
-        public int Suggestion
-        {
-            get { return _suggestion; }
-            set { _suggestion = value; OnPropertyChanged(nameof(Suggestion)); }
-        }
-        public string Comment
-        {
-            get { return _comment; }
-            set { _comment = value; OnPropertyChanged(nameof(Comment)); }
-        }
-
+       
         private AppointmentListItemViewModel _selectedAppointment;
 
         public bool CanReview { get; set; }
@@ -66,6 +48,16 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
                 OnPropertyChanged(nameof(CanReview)); }
         }
 
+        private int _service;
+        private int _suggestion;
+        private string _comment;
+
+        public int Service { get => _service; set { _service = value; } }
+        public int Suggestion { get => _suggestion; set { _suggestion = value; } }
+        public string Comment { get => _comment; set { _comment = value; OnPropertyChanged(nameof(Comment)); } }
+
+        public ICommand Check { get; set; }
+        public ICommand Submit { get; set; }
 
         public PatientRecordViewModel()
         {
@@ -78,6 +70,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             FillAppointmentsList(service.GetPastAppointments());
             InitializeSearchParameters();
             CanReview = false;
+            Check = new CheckCommand(this);
+            Submit = new SubmitCommand(this);
         }
 
         private void InitializeSearchParameters()

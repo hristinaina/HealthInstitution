@@ -5,11 +5,17 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
 {
     class CheckCommand : BaseCommand
     {
-        readonly PatientSurveyViewModel _viewModel;
+        private PatientSurveyViewModel _surveyViewModel;
+        private PatientRecordViewModel _recordViewModel;
 
         public CheckCommand(PatientSurveyViewModel viewModel)
         {
-            _viewModel = viewModel;
+            _surveyViewModel = viewModel;
+        }
+
+        public CheckCommand(PatientRecordViewModel viewModel)
+        {
+            _recordViewModel = viewModel;
         }
 
         public override void Execute(object parameter)
@@ -20,16 +26,30 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
             switch (type)
             {
                 case "service":
-                    _viewModel.Service = value;
+                    if (_recordViewModel != null)
+                    {
+                        _recordViewModel.Service = value;
+                    }
+                    else
+                    {
+                        _surveyViewModel.Service = value;
+                    }
                     break;
                 case "hygene":
-                    _viewModel.Hygiene = value;
+                    _surveyViewModel.Hygiene = value;
                     break;
                 case "satisfaction":
-                    _viewModel.Satisfacion = value;
+                    _surveyViewModel.Satisfacion = value;
                     break;
                 case "suggestion":
-                    _viewModel.Suggestion = value;
+                    if (_recordViewModel != null)
+                    {
+                        _recordViewModel.Service = value;
+                    }
+                    else
+                    {
+                        _surveyViewModel.Service = value;
+                    }
                     break;
             }
         }

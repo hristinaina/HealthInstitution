@@ -138,5 +138,19 @@
     "Service": 0,
     "Suggestion": 0,
     "Comment": " "
+  },
+  {
+    "Hygiene": 0,
+    "Satisfaction": 0,
+    "Service": 4,
+    "Suggestion": 5,
+    "Comment": null
+  },
+  {
+    "Hygiene": 0,
+    "Satisfaction": 0,
+    "Service": 4,
+    "Suggestion": 3,
+    "Comment": null
   }
 ]
