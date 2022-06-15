@@ -12,7 +12,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         private DayOff _dayOff;
         public DayOff DayOff { get => _dayOff; set { _dayOff = value; } }
 
-        public string StartDate => _dayOff.BeginDate.ToString("dd/MM/yyyy");
+        public string StartDate => _dayOff.StartDate.ToString("dd/MM/yyyy");
         public string EndDate => _dayOff.EndDate.ToString("dd/MM/yyyy");
         public bool Emergency => _dayOff.Emergency;
         public string Reason => _dayOff.Reason;

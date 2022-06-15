@@ -8,7 +8,7 @@ namespace HealthInstitution.Core
     public class DayOff
     {
         private int _id;
-        private DateTime _beginDate;
+        private DateTime _startDate;
         private DateTime _endDate;
         private bool _emergency;
         private string _reason;
@@ -18,7 +18,7 @@ namespace HealthInstitution.Core
         [JsonProperty("ID")]
         public int ID { get => _id; set { _id = value; } }
         [JsonProperty("BeginDate")]
-        public DateTime BeginDate { get => _beginDate; set { _beginDate = value; } }
+        public DateTime StartDate { get => _startDate; set { _startDate = value; } }
         [JsonProperty("EndDate")]
         public DateTime EndDate { get => _endDate; set { _endDate = value; } }
         [JsonProperty("Emergency")]
@@ -35,7 +35,7 @@ namespace HealthInstitution.Core
                       string reason, int state)
         {
             _id = id;
-            _beginDate = beginDate;
+            _startDate = beginDate;
             _endDate = endDate;
             _emergency = emergency;
             _reason = reason;
@@ -47,7 +47,7 @@ namespace HealthInstitution.Core
                       string reason, Doctor doctor)
         {
             _id = id;
-            _beginDate = beginDate;
+            _startDate = beginDate;
             _endDate = endDate;
             _emergency = emergency;
             _reason = reason;

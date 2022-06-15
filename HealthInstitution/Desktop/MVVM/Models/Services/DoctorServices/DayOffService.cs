@@ -21,14 +21,14 @@ namespace HealthInstitution.Core.Services
         {
             DayOff dayOff = _dayOffRepository.FindByID(id);
             dayOff.State = State.ACCEPTED;
-            dayOff.Doctor.Notifications.Add("Your request for days ofF from date " + dayOff.BeginDate.ToString() + " to date " + dayOff.EndDate.ToString() + " has been ACCEPTED!");
+            dayOff.Doctor.Notifications.Add("Your request for days ofF from date " + dayOff.StartDate.ToString() + " to date " + dayOff.EndDate.ToString() + " has been ACCEPTED!");
         }
 
         public void RejectRequest(int id)
         {
             DayOff dayOff = _dayOffRepository.FindByID(id);
             dayOff.State = State.REJECTED;
-            dayOff.Doctor.Notifications.Add("Your request for days ofF from date " + dayOff.BeginDate.ToString() + " to date " + dayOff.EndDate.ToString() + " has been REJECTED!");
+            dayOff.Doctor.Notifications.Add("Your request for days ofF from date " + dayOff.StartDate.ToString() + " to date " + dayOff.EndDate.ToString() + " has been REJECTED!");
         }
 
         public List<DayOff> FindByDoctorID(int id)
@@ -39,7 +39,7 @@ namespace HealthInstitution.Core.Services
             {
                 if (dayOff.Doctor.ID == id)
                 {
-                    if (dayOff.BeginDate >= DateTime.Now) daysOffRequests.Add(dayOff);
+                    if (dayOff.StartDate >= DateTime.Now) daysOffRequests.Add(dayOff);
                 }
             }
 
@@ -49,12 +49,13 @@ namespace HealthInstitution.Core.Services
         public bool ValidateRequest(DayOff dayOff, Doctor doctor)
         {
             DoctorService service = new DoctorService(doctor);
-            int durationInMin = (int)(dayOff.EndDate - dayOff.BeginDate).TotalMinutes;
-            if (!service.IsAvailable(dayOff.BeginDate, durationInMin)) return false;
-            if ((dayOff.BeginDate - DateTime.Now).TotalDays <= 2) return false;
-            if ((dayOff.Emergency is true) && ((dayOff.EndDate - dayOff.BeginDate).TotalDays > 5)) 
+            int durationInMin = (int)(dayOff.EndDate - dayOff.StartDate).TotalMinutes;
+            if (!service.IsAvailable(dayOff.StartDate, durationInMin)) return false;
+            if ((dayOff.StartDate - DateTime.Now).TotalDays <= 2) return false;
+            if ((dayOff.Emergency is true) && ((dayOff.EndDate - dayOff.StartDate).TotalDays > 5)) 
                 return false;
-            if (dayOff.BeginDate > dayOff.EndDate) return false;
+            if (dayOff.StartDate > dayOff.EndDate) return false;
+            if (dayOff.StartDate <= DateTime.Now) return false;
             return true;
         }
 

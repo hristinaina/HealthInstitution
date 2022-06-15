@@ -63,12 +63,14 @@ namespace HealthInstitution.Core.Services
                     duration = operation.Duration;
                 }
                 DateTime appointmentEnds = appointmentBegins.AddMinutes(duration);
+                if (appointmentBegins < dateTimeEnds && dateTime < appointmentEnds) return appointment;
                 if (DateTime.Compare(appointment.Date.Date, dateTime.Date) != 0) continue;
                 if (DateTime.Compare(dateTime, appointmentBegins) >= 0 &&
                      DateTime.Compare(dateTime, appointmentEnds) < 0) return appointment;
                 if (DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentBegins) > 0 &&
                     DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentEnds) <= 0) return appointment;
-                if (appointmentBegins < dateTime && dateTimeEnds < appointmentEnds) return appointment;
+               
+                //if (appointmentBegins < dateTime && dateTimeEnds < appointmentEnds) return appointment;
             }
 
             return null;
@@ -76,9 +78,10 @@ namespace HealthInstitution.Core.Services
 
         public bool IsOnVacation(DateTime dateTime, int durationInMin = 15)
         {
+            DateTime dateTimeEnds = dateTime.AddMinutes(durationInMin);
             foreach (DayOff dayOff in _doctor.DaysOff)
             {
-                if (dayOff.BeginDate < dateTime && dateTime.AddMinutes(durationInMin) < dayOff.EndDate)
+                if (dayOff.StartDate < dateTimeEnds && dateTime < dayOff.EndDate)
                     return true;
             }
             return false;
