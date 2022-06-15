@@ -74,9 +74,20 @@ namespace HealthInstitution.Core.Services
             return null;
         }
 
+        public bool IsOnVacation(DateTime dateTime, int durationInMin = 15)
+        {
+            foreach (DayOff dayOff in _doctor.DaysOff)
+            {
+                if (dayOff.BeginDate < dateTime && dateTime.AddMinutes(durationInMin) < dayOff.EndDate)
+                    return true;
+            }
+            return false;
+        }
+
         public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
         {
             Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
+            if (IsOnVacation(dateTime, durationInMin)) return false;
             if (interruptingAppointment is null) return true;
             return false;
         }
