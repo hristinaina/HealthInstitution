@@ -1,0 +1,162 @@
+[
+  {
+    "Anamnesis": "bla bla bla ...",
+    "Review": {
+      "Service": 5,
+      "Suggestion": 3,
+      "Comment": "Examination was fine."
+    },
+    "ID": 1,
+    "Date": "2022-04-29T18:43:37.0931955+02:00",
+    "Emergency": false,
+    "Done": true
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": null,
+    "ID": 2,
+    "Date": "2022-04-30T18:43:37.0931955+02:00",
+    "Emergency": true,
+    "Done": false
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": {
+      "Service": 1,
+      "Suggestion": 2,
+      "Comment": "Bad. Very bad."
+    },
+    "ID": 3,
+    "Date": "2022-04-26T18:43:37.0931955+02:00",
+    "Emergency": true,
+    "Done": false
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": null,
+    "ID": 4,
+    "Date": "2022-04-23T18:43:37.0931955+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": null,
+    "ID": 5,
+    "Date": "2022-04-03T18:43:37.0931955+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": null,
+    "ID": 6,
+    "Date": "2022-05-11T10:43:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": null,
+    "ID": 7,
+    "Date": "2022-05-12T10:43:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": null,
+    "ID": 8,
+    "Date": "2022-05-20T10:35:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": null,
+    "ID": 9,
+    "Date": "2022-05-14T03:43:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": null,
+    "ID": 10,
+    "Date": "2022-05-11T15:57:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": null,
+    "ID": 11,
+    "Date": "2022-06-16T15:57:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": "Lorem ipsum dolor sit amet. Etiam in sapien auctor, luctus diam eu, accumsan ligula.",
+    "Review": null,
+    "ID": 12,
+    "Date": "2022-06-30T15:57:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": null,
+    "Review": null,
+    "ID": 13,
+    "Date": "2022-05-13T16:20:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": null,
+    "Review": null,
+    "ID": 14,
+    "Date": "2022-05-15T16:20:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": "anamneza",
+    "Review": null,
+    "ID": 15,
+    "Date": "2022-05-21T10:40:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": null,
+    "Review": null,
+    "ID": 16,
+    "Date": "2022-06-06T15:11:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": null,
+    "Review": null,
+    "ID": 17,
+    "Date": "2022-06-06T04:11:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": null,
+    "Review": null,
+    "ID": 18,
+    "Date": "2022-06-06T03:06:00+02:00",
+    "Emergency": false,
+    "Done": false
+  },
+  {
+    "Anamnesis": null,
+    "Review": null,
+    "ID": 20,
+    "Date": "2022-06-23T22:46:00+02:00",
+    "Emergency": false,
+    "Done": false
+  }
+]

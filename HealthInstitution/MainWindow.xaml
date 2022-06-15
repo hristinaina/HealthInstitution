@@ -82,6 +82,9 @@
             <DataTemplate DataType="{x:Type viewmodelsSecretary:OrderingEquipmentViewModel}">
                 <viewsSecretary:OrderingEquipmentView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsSecretary:DoctorDaysOffViewModel}">
+                <viewsSecretary:DoctorDaysOffView />
+            </DataTemplate>
 
 
             <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminMedicineViewModel}">

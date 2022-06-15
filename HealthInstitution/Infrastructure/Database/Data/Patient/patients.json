@@ -1,0 +1,199 @@
+[
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 190.0,
+      "Weight": 80.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto"
+      ]
+    },
+    "NotificationsPreference": 4,
+    "ID": 1,
+    "FirstName": "Test",
+    "LastName": "Patient",
+    "Email": "p",
+    "Password": "p",
+    "Gender": 0
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 170.0,
+      "Weight": 60.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
+    },
+    "NotificationsPreference": 1,
+    "ID": 2,
+    "FirstName": "Test99",
+    "LastName": "Patient",
+    "Email": "p2@mail",
+    "Password": "p",
+    "Gender": 1
+  },
+  {
+    "Blocked": true,
+    "BlockadeType": 1,
+    "Deleted": false,
+    "Record": {
+      "Height": 170.0,
+      "Weight": 60.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
+    },
+    "NotificationsPreference": 1,
+    "ID": 3,
+    "FirstName": "Test3",
+    "LastName": "Patient",
+    "Email": "p3@mail",
+    "Password": "p",
+    "Gender": 2
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": true,
+    "Record": {
+      "Height": 179.0,
+      "Weight": 69.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
+    },
+    "NotificationsPreference": 1,
+    "ID": 4,
+    "FirstName": "Test9",
+    "LastName": "Patient9",
+    "Email": "p4@mail9",
+    "Password": "p9",
+    "Gender": 1
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 170.0,
+      "Weight": 60.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
+    },
+    "NotificationsPreference": 1,
+    "ID": 5,
+    "FirstName": "Test5",
+    "LastName": "Prezime",
+    "Email": "p5@mail",
+    "Password": "p",
+    "Gender": 2
+  },
+  {
+    "Blocked": true,
+    "BlockadeType": 1,
+    "Deleted": false,
+    "Record": {
+      "Height": 170.0,
+      "Weight": 60.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto...",
+        "glavobolja"
+      ]
+    },
+    "NotificationsPreference": 1,
+    "ID": 6,
+    "FirstName": "Test6",
+    "LastName": "Prezime",
+    "Email": "p6@mail",
+    "Password": "p",
+    "Gender": 2
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": true,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
+    },
+    "NotificationsPreference": 1,
+    "ID": 0,
+    "FirstName": "hristinane",
+    "LastName": "pravilijepaimena",
+    "Email": "p",
+    "Password": "p",
+    "Gender": 1
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 0.0,
+      "Weight": 0.0,
+      "HistoryOfIllnesses": [
+        "nesto",
+        "jos nesto..."
+      ]
+    },
+    "NotificationsPreference": 1,
+    "ID": 8,
+    "FirstName": "neko",
+    "LastName": "nekovic",
+    "Email": "p89",
+    "Password": "p",
+    "Gender": 1
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": false,
+    "Record": {
+      "Height": 180.0,
+      "Weight": 80.0,
+      "HistoryOfIllnesses": [
+        "Imao glavobolju poslije nastup"
+      ]
+    },
+    "NotificationsPreference": 1,
+    "ID": 7,
+    "FirstName": "Harry",
+    "LastName": "Styles",
+    "Email": "itsharry@gmail.com",
+    "Password": "123",
+    "Gender": 2
+  },
+  {
+    "Blocked": false,
+    "BlockadeType": 0,
+    "Deleted": true,
+    "Record": {
+      "Height": 30.0,
+      "Weight": 10.0,
+      "HistoryOfIllnesses": []
+    },
+    "NotificationsPreference": 1,
+    "ID": 9,
+    "FirstName": "golub",
+    "LastName": "golubic",
+    "Email": "golub",
+    "Password": "golub",
+    "Gender": 1
+  }
+]
