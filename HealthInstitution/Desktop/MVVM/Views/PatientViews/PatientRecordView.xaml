@@ -33,7 +33,7 @@
         <components:PatientNavigationRail SelectedIndex="0"></components:PatientNavigationRail>
 
         <materialDesign:Card Grid.Column="1">
-        <materialDesign:DialogHost>
+        <materialDesign:DialogHost IsOpen="{Binding DialogOpen}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"></RowDefinition>
@@ -119,6 +119,7 @@
                            FontSize="11"
                            Text="Click on appointment to see detailed anamnesis." />
                 <DataGrid ItemsSource="{Binding Appointments}"
+                          SelectedItem="{Binding SelectedAppointment}"
                           AutoGenerateColumns="False"
                           VerticalAlignment="Top"
                           Grid.Row="4"
@@ -209,6 +210,7 @@
                             Grid.Column="5"
                             VerticalAlignment="Top"
                             Margin="0 15 0 0"
+                            IsEnabled="{Binding CanReview}"
                             Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                             Content="Rate appointment">
                             <Button.CommandParameter>
@@ -371,7 +373,7 @@
                                                 IsDefault="True"
                                                 Margin="0 30 20 0"
                                                 Content="SUBMIT"
-                                                Command="{Binding CreateAppointment}">
+                                                Command="{Binding Submit}">
                                             <Button.CommandParameter>
                                                 <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                                     True

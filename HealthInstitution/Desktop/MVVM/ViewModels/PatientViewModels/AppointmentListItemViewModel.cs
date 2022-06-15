@@ -27,6 +27,10 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         {
             _appointment = appointment;
         }
+
+        public static implicit operator Appointment(AppointmentListItemViewModel a) => a._appointment;
+        public static explicit operator AppointmentListItemViewModel(Appointment a) => new AppointmentListItemViewModel(a);
+
     }
 
 }

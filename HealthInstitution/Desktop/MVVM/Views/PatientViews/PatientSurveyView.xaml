@@ -82,7 +82,7 @@
                            Grid.Row="3"
                            VerticalAlignment="Center"
                            TextWrapping="Wrap"
-                           Text="Is hygene level in our institution satisfactory ?" />
+                           Text="Is hygiene level in our institution satisfactory ?" />
                 <TextBlock HorizontalAlignment="Left"
                            Grid.Column="1"
                            Grid.Row="4"
@@ -126,11 +126,11 @@
                 <RadioButton Grid.Row="2" Grid.Column="6" HorizontalAlignment="Center" GroupName="Service" Command="{Binding Check}" CommandParameter="service4"/>
                 <RadioButton Grid.Row="2" Grid.Column="7" HorizontalAlignment="Center" GroupName="Service" Command="{Binding Check}" CommandParameter="service5"/>
                 
-                <RadioButton Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene1"/>
-                <RadioButton Grid.Row="3" Grid.Column="4" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene2"/>
-                <RadioButton Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene3"/>
-                <RadioButton Grid.Row="3" Grid.Column="6" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene4"/>
-                <RadioButton Grid.Row="3" Grid.Column="7" HorizontalAlignment="Center" GroupName="Hygene" Command="{Binding Check}" CommandParameter="hygene5"/>
+                <RadioButton Grid.Row="3" Grid.Column="3" HorizontalAlignment="Center" GroupName="Hygiene" Command="{Binding Check}" CommandParameter="hygiene1"/>
+                <RadioButton Grid.Row="3" Grid.Column="4" HorizontalAlignment="Center" GroupName="Hygiene" Command="{Binding Check}" CommandParameter="hygiene2"/>
+                <RadioButton Grid.Row="3" Grid.Column="5" HorizontalAlignment="Center" GroupName="Hygiene" Command="{Binding Check}" CommandParameter="hygiene3"/>
+                <RadioButton Grid.Row="3" Grid.Column="6" HorizontalAlignment="Center" GroupName="Hygiene" Command="{Binding Check}" CommandParameter="hygiene4"/>
+                <RadioButton Grid.Row="3" Grid.Column="7" HorizontalAlignment="Center" GroupName="Hygiene" Command="{Binding Check}" CommandParameter="hygiene5"/>
                 
                 <RadioButton Grid.Row="4" Grid.Column="3" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction1"/>
                 <RadioButton Grid.Row="4" Grid.Column="4" HorizontalAlignment="Center" GroupName="Overall" Command="{Binding Check}" CommandParameter="satisfaction2"/>
@@ -142,7 +142,7 @@
                 <RadioButton Grid.Row="5" Grid.Column="4" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion2"/>
                 <RadioButton Grid.Row="5" Grid.Column="5" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion3"/>
                 <RadioButton Grid.Row="5" Grid.Column="6" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion4"/>
-                <RadioButton Grid.Row="5" Grid.Column="7" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggest5"/>
+                <RadioButton Grid.Row="5" Grid.Column="7" HorizontalAlignment="Center" GroupName="WouldSuggest" Command="{Binding Check}" CommandParameter="suggestion5"/>
 
                 <TextBlock HorizontalAlignment="Left"
                            Grid.Column="1"

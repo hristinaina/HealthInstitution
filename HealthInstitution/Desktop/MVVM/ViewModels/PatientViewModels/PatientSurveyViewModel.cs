@@ -12,16 +12,16 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public PatientNavigationViewModel Navigation { get; }
 
         private int _service;
-        private int _hygene;
+        private int _hygiene;
         private int _satisfaction;
         private int _suggestion;
         private string _comment;
 
         public int Service { get => _service; set { _service = value; } }
-        public int Hygene { get => _hygene; set { _hygene = value; } }
-        public int Satisfacion { get => _satisfaction; set { _satisfaction = value; } }
+        public int Hygiene { get => _hygiene; set { _hygiene = value; } }
+        public int Satisfaction { get => _satisfaction; set { _satisfaction = value; } }
         public int Suggestion { get => _suggestion; set { _suggestion = value; } }
-        public string Comment { get => _comment; set { _comment = value; } }
+        public string Comment { get => _comment; set { _comment = value; OnPropertyChanged(nameof(Comment)); } }
 
         public ICommand Check { get; set; }
         public ICommand Submit { get; set; }
@@ -31,9 +31,19 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _institution = Institution.Instance();
             _patient = (Patient)_institution.CurrentUser;
             Navigation = new PatientNavigationViewModel();
+            Comment = "";
             Check = new CheckCommand(this);
+            Submit = new SubmitCommand(this);
         }
 
+        internal void ResetReview()
+        {
+            Service = 0;
+            Hygiene = 0;
+            Satisfaction = 0;
+            Suggestion = 0;
+            Comment = "";
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Core.Services.PatientServices;
+using HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
 using System.Collections.Generic;
@@ -15,7 +16,6 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public PatientNavigationViewModel Navigation { get; }
         public Patient Patient => _patient;
 
-
         private ObservableCollection<AppointmentListItemViewModel> _appointments;
         public IEnumerable<AppointmentListItemViewModel> Appointments
         {
@@ -27,12 +27,48 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public string SearchKeyWord
         {
             get { return _searchKeyWord; }
-            set { _searchKeyWord = value; OnPropertyChanged(SearchKeyWord); }
+            set { _searchKeyWord = value; OnPropertyChanged(nameof(SearchKeyWord)); }
         }
         public ICommand Search { get; set; }
         public ICommand Reset { get; set; }
 
 
+        private AppointmentListItemViewModel _selectedAppointment;
+
+        public bool CanReview { get; set; }
+
+        public AppointmentListItemViewModel SelectedAppointment
+        {
+            get { return _selectedAppointment; }
+            set
+            {
+                _selectedAppointment = value;
+                if ((Appointment)_selectedAppointment is Examination examination && examination.Review == null)
+                    CanReview = true;
+                OnPropertyChanged(nameof(SelectedAppointment));
+                OnPropertyChanged(nameof(CanReview));
+            }
+        }
+
+        private bool _dialogOpen;
+
+        public bool DialogOpen
+        {
+            get { return _dialogOpen; }
+            set { _dialogOpen = value; OnPropertyChanged(nameof(DialogOpen)); }
+        }
+
+
+        private int _service;
+        private int _suggestion;
+        private string _comment;
+
+        public int Service { get => _service; set { _service = value; } }
+        public int Suggestion { get => _suggestion; set { _suggestion = value; } }
+        public string Comment { get => _comment; set { _comment = value; OnPropertyChanged(nameof(Comment)); } }
+
+        public ICommand Check { get; set; }
+        public ICommand Submit { get; set; }
 
         public PatientRecordViewModel()
         {
@@ -44,8 +80,9 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             PatientAppointmentsService service = new PatientAppointmentsService(_patient);
             FillAppointmentsList(service.GetPastAppointments());
             InitializeSearchParameters();
-
-            // ..............
+            CanReview = false;
+            Check = new CheckCommand(this);
+            Submit = new SubmitCommand(this);
         }
 
         private void InitializeSearchParameters()
