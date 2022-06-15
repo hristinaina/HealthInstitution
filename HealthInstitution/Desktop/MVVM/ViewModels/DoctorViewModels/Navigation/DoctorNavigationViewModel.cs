@@ -14,6 +14,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public ICommand MyAppointments { get; }
         public ICommand MyOperations { get; }
         public ICommand PendingMedicine { get; }
+        public ICommand DaysOffRequests { get; }
         public ICommand LogOut { get; }
         public bool Specialization { get; }
 
@@ -23,6 +24,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             MyAppointments = new MyAppointmentsCommand();
             MyOperations = new MyOperationsCommand(isSpecialist);
             PendingMedicine = new PendingMedicineCommand();
+            DaysOffRequests = new DaysOffRequestsCommand();
             Specialization = isSpecialist;
         }
     }

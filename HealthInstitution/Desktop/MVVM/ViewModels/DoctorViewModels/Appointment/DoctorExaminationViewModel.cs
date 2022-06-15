@@ -5,7 +5,6 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
@@ -127,6 +126,18 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 _examinations.Add(new ExaminationItemViewModel(examination));
             }
             OnPropertyChanged(nameof(Examinations));
+            ChangeSelectionIndex();
+        }
+
+        public void ChangeSelectionIndex()
+        {
+            if (_examinations.Count != 0)
+            {
+                Selection = 0;
+                EnableChanges = true;
+                OnPropertyChanged(nameof(Selection));
+                OnPropertyChanged(nameof(EnableChanges));
+            }
         }
 
         private void FillPatientsList()
