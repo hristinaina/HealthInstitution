@@ -26,6 +26,10 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
         {
             if (_recordViewModel != null)
             {
+                if (_recordViewModel.Service * _recordViewModel.Suggestion == 0) {
+                    _recordViewModel.ShowMessage("Please finish the survey !");
+                    return;
+                }
                 _reviewService = new CreateReviewService(_recordViewModel.Service, _recordViewModel.Suggestion, _recordViewModel.Comment);
                 _reviewService.AssignReview((Examination)_recordViewModel.SelectedAppointment);
                 _recordViewModel.CanReview = false;
@@ -34,6 +38,11 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
             }
             else
             {
+                if (_surveyViewModel.Service * _surveyViewModel.Suggestion * _surveyViewModel.Hygiene * _surveyViewModel.Satisfaction == 0)
+                {
+                    _surveyViewModel.ShowMessage("Please finish the survey !");
+                    return;
+                }
                 _reviewService = new CreateReviewService(_surveyViewModel.Service, _surveyViewModel.Suggestion, _surveyViewModel.Hygiene, _surveyViewModel.Satisfaction, _surveyViewModel.Comment);
                 _reviewService.AssignReview();
                 NavigationStore.Instance().CurrentViewModel = new PatientRecordViewModel();
