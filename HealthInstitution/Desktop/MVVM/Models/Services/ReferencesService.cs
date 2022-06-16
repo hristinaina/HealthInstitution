@@ -83,7 +83,7 @@ namespace HealthInstitution.Core.Services
 
         public static void ConnectRenovations()
         {
-            foreach (RoomRenovation roomUnderRenovation in Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations)
+            foreach (RoomRenovation roomUnderRenovation in Institution.Instance().RoomRenovationRepository.GetRooms())
             {
                 Renovation renovation = Institution.Instance().RenovationRepository.FindById(roomUnderRenovation.RenovationId);
                 Room room = Institution.Instance().RoomRepository.FindById(roomUnderRenovation.RoomId);

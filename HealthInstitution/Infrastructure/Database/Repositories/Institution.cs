@@ -34,7 +34,7 @@ namespace HealthInstitution.Core
         private readonly EquipmentArrangementRepository _equipmentArragmentRepository;
         private readonly IRoomRepository _roomRepository;
         private readonly RenovationRepository _renovationRepository;
-        private readonly RoomRenovationRepository _roomRenovationRepository;
+        private readonly IRoomRenovationRepository _roomRenovationRepository;
         private readonly EquipmentOrderRepository _equipmentOrderRepository;
 
         private readonly MedicineRepository _medicineRepository;
@@ -200,7 +200,7 @@ namespace HealthInstitution.Core
         public EquipmentRepository EquipmentRepository { get => _equipmentRepository; }
         public IRoomRepository RoomRepository { get => _roomRepository; }
         public RenovationRepository RenovationRepository { get => _renovationRepository; }
-        public RoomRenovationRepository RoomRenovationRepository { get => _roomRenovationRepository; }
+        public IRoomRenovationRepository RoomRenovationRepository { get => _roomRenovationRepository; }
         public MedicineRepository MedicineRepository { get => _medicineRepository; }
         public DayOffRepository DayOffRepository { get => _dayOffRepository; }
         public ReferralRepository ReferralRepository { get => _referralRepository; }

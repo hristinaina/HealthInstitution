@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCommands
 {
@@ -46,8 +47,11 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
 
                     _model.NewRenovationRoom.Renovations.Add(renovation);
                     Institution.Instance().RenovationRepository.Renovations.Add(renovation);
-                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, false));
-                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, true));
+
+                    IRoomRenovationRepositoryService service = new RoomRenovationRepositoryService();
+
+                    service.GetRooms().Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, false));
+                    service.GetRooms().Add(new RoomRenovation(renovation.ID, _model.NewRenovationRoom.ID, true));
 
                     _model.DialogOpen = false;
                     _model.FillRenovationList();

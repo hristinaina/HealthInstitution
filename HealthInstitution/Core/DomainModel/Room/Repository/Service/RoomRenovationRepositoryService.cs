@@ -15,5 +15,10 @@ namespace HealthInstitution.Core.Repository
         {
             return _repository.GetRooms();
         }
+
+        public void SetRooms(List<RoomRenovation> rooms)
+        {
+            _repository.SetRooms(rooms);
+        }
     }
 }

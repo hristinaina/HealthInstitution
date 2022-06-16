@@ -5,19 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services.Renovations
 {
     class RenovationService
     {
         private RenovationRepository _renovations;
-        private RoomRenovationRepository _roomsUnderRenovation;
+        private IRoomRenovationRepositoryService _roomsUnderRenovation;
         private readonly EndRenovationService _endRenovationService;
 
         public RenovationService()
         {
             _renovations = Institution.Instance().RenovationRepository;
-            _roomsUnderRenovation = Institution.Instance().RoomRenovationRepository;
+            _roomsUnderRenovation = new RoomRenovationRepositoryService();
             _endRenovationService = new EndRenovationService();
         }
 
@@ -56,14 +57,15 @@ namespace HealthInstitution.Core.Services.Renovations
             _endRenovationService.EndRenovation(r);
 
             List<RoomRenovation> notCompletedRenovations = new List<RoomRenovation>();
-            foreach (RoomRenovation roomUnderRenovation in _roomsUnderRenovation.RoomsUnderRenovations)
+            foreach (RoomRenovation roomUnderRenovation in _roomsUnderRenovation.GetRooms())
             {
                 if (r.ID != roomUnderRenovation.RenovationId)
                 {
                     notCompletedRenovations.Add(roomUnderRenovation);
                 }
             }
-            _roomsUnderRenovation.RoomsUnderRenovations = notCompletedRenovations;
+
+            _roomsUnderRenovation.SetRooms(notCompletedRenovations);
 
             _renovations.Renovations.Remove(r);
         }

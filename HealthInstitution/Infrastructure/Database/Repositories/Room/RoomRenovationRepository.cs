@@ -10,7 +10,7 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
 
         private List<RoomRenovation> _roomsUnderRenovation;
 
-        public List<RoomRenovation> RoomsUnderRenovations { get => _roomsUnderRenovation; set => _roomsUnderRenovation = value; }
+        public List<RoomRenovation> RoomsUnderRenovation { get => _roomsUnderRenovation; set => _roomsUnderRenovation = value; }
 
         public RoomRenovationRepository(string fileName)
         {
@@ -30,7 +30,12 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
 
         public List<RoomRenovation> GetRooms()
         {
-            return RoomsUnderRenovations;
+            return _roomsUnderRenovation;
+        }
+
+        public void SetRooms(List<RoomRenovation> rooms)
+        {
+            _roomsUnderRenovation = rooms;
         }
     }
 }

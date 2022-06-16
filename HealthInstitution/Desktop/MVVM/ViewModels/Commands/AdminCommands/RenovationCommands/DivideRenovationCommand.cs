@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using HealthInstitution.Core.Exceptions;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCommands
 {
@@ -65,9 +66,11 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                     Institution.Instance().RenovationRepository.Renovations.Add(renovation);
                     _model.SelectedRoom.Renovations.Add(renovation);
 
-                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, _model.SelectedRoom.ID, false));
-                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, firstResultingRoom.ID, true));
-                    Institution.Instance().RoomRenovationRepository.RoomsUnderRenovations.Add(new RoomRenovation(renovation.ID, secondResultingRoom.ID, true));
+                    IRoomRenovationRepositoryService service = new RoomRenovationRepositoryService();
+
+                    service.GetRooms().Add(new RoomRenovation(renovation.ID, _model.SelectedRoom.ID, false));
+                    service.GetRooms().Add(new RoomRenovation(renovation.ID, firstResultingRoom.ID, true));
+                    service.GetRooms().Add(new RoomRenovation(renovation.ID, secondResultingRoom.ID, true));
 
 
                     NavigationStore.Instance().CurrentViewModel = new AdminRenovationViewModel();
