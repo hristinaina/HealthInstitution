@@ -5,17 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Desktop.MVVM.Models.Services.Appointment;
 
 namespace HealthInstitution.Core.Services
 {
     class ExaminationService : AppointmentService
     {
-        private readonly ExaminationRepository _examinationRepository;
+        private readonly IExaminationRepositoryService _examinationRepository;
 
         public ExaminationService()
         {
-            _examinationRepository = Institution.Instance().ExaminationRepository;
+            _examinationRepository = new ExaminationRepositoryService();
         }
         public void AddPrescription(Examination examination, Prescription prescription)
         {
@@ -25,7 +26,7 @@ namespace HealthInstitution.Core.Services
 
         public bool AddAnamnesis(Examination examination, string anamnesis)
         {
-            foreach (Examination i in _examinationRepository.Examinations)
+            foreach (Examination i in _examinationRepository.GetExaminations())
             {
                 if (i.ID == examination.ID)
                 {
@@ -50,7 +51,7 @@ namespace HealthInstitution.Core.Services
         public List<Examination> GetFutureExaminations(Specialization specialization, Patient patient)
         {
             List<Examination> futureAppointments = new();
-            foreach (Examination appointment in _examinationRepository.Examinations)
+            foreach (Examination appointment in _examinationRepository.GetExaminations())
             {
                 if (DateTime.Compare(appointment.Date, DateTime.Now) > 0 &&
                     (appointment.Doctor.Specialization == specialization || appointment.Patient == patient))

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HealthInstitution.Core
 {
@@ -15,5 +16,6 @@ namespace HealthInstitution.Core
         public void DeleteUnresolvedRequestsByPatientId(int patientId);
 
         public void RemoveByAppointmentId(int appointmentId);
+        List<ExaminationChange> GetChanges();
     }
 }

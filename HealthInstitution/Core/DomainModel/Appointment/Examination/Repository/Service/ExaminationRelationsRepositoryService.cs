@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public class ExaminationRelationsRepositoryService : IExaminationRelationsService
+    public class ExaminationRelationsRepositoryService : IExaminationRelationsRepositoryService
     {
         IExaminationRelationsRepository _repository;
 
@@ -33,6 +33,11 @@ namespace HealthInstitution.Core.Repository
         public void Remove(Examination examination)
         {
             _repository.Remove(examination);
+        }
+
+        public List<ExaminationReference> GetRelations()
+        {
+            return _repository.GetRelations();
         }
     }
 }

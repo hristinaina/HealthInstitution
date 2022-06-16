@@ -2,6 +2,7 @@
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.DoctorServices;
 using HealthInstitution.Core.Services.Rooms;
 using HealthInstitution.Core.Services.ValidationServices;
@@ -12,16 +13,16 @@ namespace HealthInstitution.Services
 {
     public class PatientScheduleExaminationService : IScheduleExamination
     {
-        private readonly ExaminationRepository _examinationRepository;
-        private readonly ExaminationReferencesRepository _examinationReferencesRepository;
-        private readonly ExaminationChangeRepository _examinationChangeRepository;
+        private readonly IExaminationRepositoryService _examinationRepository;
+        private readonly IExaminationRelationsRepositoryService _examinationReferencesRepository;
+        private readonly IExaminationChangeRepositoryService _examinationChangeRepository;
 
 
         public PatientScheduleExaminationService()
         {
-            _examinationRepository = Institution.Instance().ExaminationRepository;
-            _examinationReferencesRepository = Institution.Instance().ExaminationReferencesRepository;
-            _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
+            _examinationRepository = new ExaminationRepositoryService();
+            _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
+            _examinationChangeRepository = new ExaminationChangeRepositoryService();
         }
 
         public bool CreateExamination(Patient patient, Doctor doctor, DateTime dateTime)

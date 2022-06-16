@@ -20,14 +20,14 @@ namespace HealthInstitution.Core.Services
 
         private readonly DoctorRepository _doctorRepository;
         private readonly IExaminationRepositoryService _examinationRepository;
-        private readonly OperationRepository _operationRepository;
+        private readonly IOperationRepositoryService _operationRepository;
 
         public EmergencyAppointmentService()
         {
             _doctor = null;
             _doctorRepository = Institution.Instance().DoctorRepository;
             _examinationRepository = new ExaminationRepositoryService();
-            _operationRepository = Institution.Instance().OperationRepository;
+            _operationRepository = new OperationRepositoryService();
         }
 
         public void ChangeDuration(int duration)

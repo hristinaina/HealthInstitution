@@ -5,17 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories.References;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
     public class ExaminationChangeService
     {
-        private readonly ExaminationChangeRepository _examinationChangeRepository;
-        private readonly ExaminationRepository _examinationRepository;
+        private readonly IExaminationChangeRepositoryService _examinationChangeRepository;
+        private readonly IExaminationRepositoryService _examinationRepository;
         public ExaminationChangeService()
         {
-            _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
-            _examinationRepository = Institution.Instance().ExaminationRepository;
+            _examinationChangeRepository = new ExaminationChangeRepositoryService();
+            _examinationRepository = new ExaminationRepositoryService();
         }
 
         public string ApproveChange(int requestId)
@@ -52,7 +53,7 @@ namespace HealthInstitution.Core.Services
 
         public void RemoveOutdatedRequests()
         {
-            foreach (ExaminationChange request in _examinationChangeRepository.Changes)
+            foreach (ExaminationChange request in _examinationChangeRepository.GetChanges())
             {
                 if (!request.Resolved && request.NewDate <= DateTime.Now)
                 {

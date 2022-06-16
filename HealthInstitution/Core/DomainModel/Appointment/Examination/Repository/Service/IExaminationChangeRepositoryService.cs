@@ -19,5 +19,7 @@ namespace HealthInstitution.Core.Repository
         public void DeleteUnresolvedRequestsByPatientId(int patientId);
 
         public void RemoveByAppointmentId(int appointmentId);
+
+        public List<ExaminationChange> GetChanges();
     }
 }

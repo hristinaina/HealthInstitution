@@ -6,25 +6,26 @@ using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Rooms;
 
 namespace HealthInstitution.Core.Services
 {
     class DoctorRescheduleAppointmentService
     {
-        private ExaminationRepository _examinationRepository;
+        private IExaminationRepositoryService _examinationRepository;
         private RoomRepository _roomRepository;
-        private ExaminationReferencesRepository _examinationReferencesRepository;
-        private ExaminationChangeRepository _examinationChangeRepository;
+        private IExaminationRelationsRepositoryService _examinationReferencesRepository;
+        private IExaminationChangeRepositoryService _examinationChangeRepository;
         private OperationReferencesRepository _operationReferencesRepository;
 
 
         public DoctorRescheduleAppointmentService()
         {
-            _examinationRepository = Institution.Instance().ExaminationRepository;
+            _examinationRepository = new ExaminationRepositoryService();
             _roomRepository = Institution.Instance().RoomRepository;
-            _examinationReferencesRepository = Institution.Instance().ExaminationReferencesRepository;
-            _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
+            _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
+            _examinationChangeRepository = new ExaminationChangeRepositoryService();
             _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
         }
 

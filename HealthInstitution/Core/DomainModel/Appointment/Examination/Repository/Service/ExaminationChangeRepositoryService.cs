@@ -35,6 +35,11 @@ namespace HealthInstitution.Core.Repository
             return _repository.FindByID(id);
         }
 
+        public List<ExaminationChange> GetChanges()
+        {
+            return _repository.GetChanges();
+        }
+
         public int GetNewID()
         {
             return _repository.GetNewID();

@@ -192,10 +192,13 @@ namespace HealthInstitution.Core
         public SecretaryRepository SecretaryRepository { get => _secretaryRepository; }
         public AdminRepository AdminRepository { get => _adminRepository; }
         public PrescriptionRepository PrescriptionRepository { get => _prescriptionRepository; }
+
         public ExaminationRepository ExaminationRepository { get => _examinationRepository; }
-        public OperationRepository OperationRepository { get => _operationRepository; }
         public ExaminationReferencesRepository ExaminationReferencesRepository { get => _examinationReferencesRepository; }
+        public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
+        public OperationRepository OperationRepository { get => _operationRepository; }
         public OperationReferencesRepository OperationReferencesRepository { get => _operationReferencesRepository; }
+       
         public EquipmentRepository EquipmentRepository { get => _equipmentRepository; }
         public RoomRepository RoomRepository { get => _roomRepository; }
         public RenovationRepository RenovationRepository { get => _renovationRepository; }
@@ -209,7 +212,6 @@ namespace HealthInstitution.Core
         public PendingMedicineRepository PendingMedicineRepository { get => _pendingMedicineRepository; }
         public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
         public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
-        public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
         public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
         public EquipmentOrderRepository EquipmentOrderRepository { get => _equipmentOrderRepository; }
         public NotificationRepository NotificationRepository { get => _notificationRepository; }

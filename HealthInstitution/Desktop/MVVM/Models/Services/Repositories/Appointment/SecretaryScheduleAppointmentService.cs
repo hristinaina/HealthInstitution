@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.DoctorServices;
 using HealthInstitution.Core.Services.Rooms;
 
@@ -11,19 +12,19 @@ namespace HealthInstitution.Core.Services
 {
     public class SecretaryScheduleAppointmentService
     {
-        private readonly ExaminationRepository _examinationRepository;
+        private readonly IExaminationRepositoryService _examinationRepository;
         private readonly OperationRepository _operationRepository;
-        private readonly ExaminationReferencesRepository _examinationReferencesRepository;
+        private readonly IExaminationRelationsRepositoryService _examinationReferencesRepository;
         private readonly OperationReferencesRepository _operationReferencesRepository;
-        private readonly ExaminationChangeRepository _examinationChangeRepository;
+        private readonly IExaminationChangeRepositoryService _examinationChangeRepository;
 
         public SecretaryScheduleAppointmentService()
         {
-            _examinationRepository = Institution.Instance().ExaminationRepository;
+            _examinationRepository = new ExaminationRepositoryService();
             _operationRepository = Institution.Instance().OperationRepository;
-            _examinationReferencesRepository = Institution.Instance().ExaminationReferencesRepository;
+            _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
             _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
-            _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
+            _examinationChangeRepository = new ExaminationChangeRepositoryService();
         }
 
         public bool ScheduleAppointment(Appointment appointment, int duration, bool validation = true)

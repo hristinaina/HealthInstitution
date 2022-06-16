@@ -105,5 +105,10 @@ namespace HealthInstitution.Core
             }
             return null;
         }
+
+        public List<Examination> GetExaminations()
+        {
+            return _examinations;
+        }
     }
 }

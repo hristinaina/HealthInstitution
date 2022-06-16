@@ -31,9 +31,19 @@ namespace HealthInstitution.Core.Repository
             return _repository.FindAppointment(doctor, patient, oldDate);
                 }
 
+        public Appointment FindByID(int appointmentID)
+        {
+            return _repository.FindByID(appointmentID);
+        }
+
         public List<Examination> FindByPatientID(int patientId)
         {
             return _repository.FindByPatientID(patientId);
+        }
+
+        public List<Examination> GetExaminations()
+        {
+            return _repository.GetExaminations();
         }
 
         public int GetNewID()

@@ -18,5 +18,6 @@ namespace HealthInstitution.Core
         public void DeleteByPatientID(int patientId);
 
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate);
+        List<Examination> GetExaminations();
     }
 }
