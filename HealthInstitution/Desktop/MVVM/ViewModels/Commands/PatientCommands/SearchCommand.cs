@@ -1,7 +1,7 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.Core;
-using HealthInstitution.Core.Services.SearchingServices;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
+using HealthInstitution.Services;
 using System.Collections.Generic;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
@@ -9,6 +9,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
     class SearchCommand : BaseCommand
     {
         private readonly BaseViewModel _viewModel;
+        IAnamnesisSearch _anamnesisSearch;
+        IDoctorSearch _doctorSearch;
 
         public SearchCommand(BaseViewModel viewModel)
         {
@@ -19,16 +21,16 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
         {
             if (_viewModel is PatientRecordViewModel recordViewModel)
             {
-                AnamnesisSearchService service = new AnamnesisSearchService(recordViewModel.Patient);
-                List<Appointment> appointments = service.SearchByAnamnesis(recordViewModel.SearchKeyWord);
+                _anamnesisSearch = new AnamnesisSearchService(recordViewModel.Patient);
+                List<Appointment> appointments = _anamnesisSearch.SearchByAnamnesis(recordViewModel.SearchKeyWord);
                 recordViewModel.FillAppointmentsList(appointments);
             }
             if (_viewModel is PatientSearchViewModel searchViewModel)
             {
 
-                DoctorsSearchService service = new DoctorsSearchService(Institution.Instance().DoctorRepository);
+                DoctorsSearchService _doctorSearch = new DoctorsSearchService(Institution.Instance().DoctorRepository);
                 Doctor search = new Doctor(searchViewModel.FirstNameKeyWord, searchViewModel.LastNameKeyWord, (Specialization)searchViewModel.SelectedSpecialization);
-                List<Doctor> doctors = service.SearchForDoctor(search);
+                List<Doctor> doctors = _doctorSearch.SearchForDoctor(search);
                 searchViewModel.FillAllDoctorsList(doctors);
             }
         }

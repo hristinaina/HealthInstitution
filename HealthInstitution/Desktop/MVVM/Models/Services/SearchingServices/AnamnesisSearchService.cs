@@ -1,16 +1,12 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Core.Services.PatientServices;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HealthInstitution.Core.Services.SearchingServices
+namespace HealthInstitution.Services
 {
-    class AnamnesisSearchService : SearchService
+    public class AnamnesisSearchService : SearchService, IAnamnesisSearch
     {
-        List<Appointment> _apointments;
+        private readonly List<Appointment> _apointments;
         public AnamnesisSearchService(Patient patient)
         {
             PatientAppointmentsService service = new PatientAppointmentsService(patient);
@@ -24,7 +20,7 @@ namespace HealthInstitution.Core.Services.SearchingServices
             {
                 if (appointment is Examination examination)
                 {
-                    if (isMatching(examination.Anamnesis, keyWord))
+                    if (IsMatching(examination.Anamnesis, keyWord))
                     {
                         searchResults.Add(appointment);
                     }

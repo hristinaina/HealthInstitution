@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HealthInstitution.Core.Services.SearchingServices
+﻿namespace HealthInstitution.Services
 {
-    class SearchService
+    public abstract class SearchService : IMatch
     {
-        protected bool isMatching(string first, string second)
+        public bool IsMatching(string first, string second)
         {
             return second != "" && first.ToLower().Contains(second.ToLower());
         }
+
     }
 }
