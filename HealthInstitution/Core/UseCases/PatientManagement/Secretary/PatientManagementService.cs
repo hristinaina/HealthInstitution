@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core;
+using HealthInstitution.Core.PatientManagement;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
-    public class PatientManagementService
+    public class PatientManagementService : IPatientManagementService
     {
         private IPatientRepositoryService _patientService;
 
