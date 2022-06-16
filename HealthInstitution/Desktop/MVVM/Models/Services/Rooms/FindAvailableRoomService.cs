@@ -39,7 +39,7 @@ namespace HealthInstitution.Core.Services
             List<Room> rooms = service.FilterByRoomType(type);
             foreach (Room r in rooms)
             {
-                if (roomService.isAvailable(wantedTime, a, a.Room))
+                if (roomService.isAvailable(wantedTime, a, r))
                 {
                     r.Appointments.Add(a);
                     a.Room = r;

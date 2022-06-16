@@ -6,6 +6,6 @@ namespace HealthInstitution.Services
 {
     public interface IScheduleExamination
     {
-        public bool CreateExamination(Patient patient, Doctor doctor, DateTime dateTime);
+        public bool CreateExamination(Patient patient, Core.Doctor doctor, DateTime dateTime);
     }
 }

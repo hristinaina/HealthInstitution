@@ -25,7 +25,7 @@ namespace HealthInstitution.Services
             _trollingService = new TrollingService();
         }
 
-        public bool CreateExamination(Patient patient, Doctor doctor, DateTime dateTime)
+        public bool CreateExamination(Patient patient, Core.Doctor doctor, DateTime dateTime)
         {
             if (_trollingService.IsTrolling(patient))
             {

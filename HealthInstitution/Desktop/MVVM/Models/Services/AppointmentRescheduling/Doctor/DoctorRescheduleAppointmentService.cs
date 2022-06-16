@@ -1,12 +1,13 @@
 ﻿using System;
+using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
-namespace HealthInstitution.Core.Services
+namespace HealthInstitution.Services.Doctor
 {
-    class DoctorRescheduleAppointmentService
+    class DoctorRescheduleAppointmentService : IRescheduleExamination, IRescheduleOperation
     {
         private IExaminationRepositoryService _examinationRepository;
         private IRoomRepositoryService _roomRepository;
@@ -24,35 +25,35 @@ namespace HealthInstitution.Core.Services
             _operationReferencesRepository = new OperationRelationsRepositoryService();
         }
 
-        public bool RescheduleExamination(Appointment appointment, DateTime dateTime, bool validation = true)
+        public bool RescheduleAppointment(Appointment appointment, DateTime dateTime, bool validation = true)
         {
             new ValidationService().ValidateAppointmentData(appointment, dateTime, validation);
 
             FindAvailableRoomService service = new FindAvailableRoomService();
             service.FindAvailableRoom(appointment, dateTime);
-            bool resolved = true;
-            if (resolved)
-            {
-                appointment.Date = dateTime;
-            }
+        
+            appointment.Date = dateTime;
 
-            if (appointment is Examination)
-            {
 
-                _examinationReferencesRepository.Remove((Examination)appointment);
-                _examinationReferencesRepository.Add((Examination)appointment);
-                _examinationChangeRepository.Add((Examination)appointment, dateTime, resolved, AppointmentStatus.EDITED);
+            if (appointment is Examination) return RescheduleExamination((Examination)appointment, dateTime);
+            else return RescheduleOperation((Operation)appointment, dateTime);
+        }
 
-            }
+        public bool RescheduleExamination(Examination examination, DateTime dateTime)
+        {
+           
+            _examinationReferencesRepository.Remove(examination);
+            _examinationReferencesRepository.Add(examination);
+            _examinationChangeRepository.Add(examination, dateTime, true, AppointmentStatus.EDITED);
+            return true;
 
-            else if (appointment is Operation)
-            {
-                _operationReferencesRepository.Remove((Operation)appointment);
-                _operationReferencesRepository.Add((Operation)appointment);
-            }
+        }
 
-            return resolved;
-
+        public bool RescheduleOperation(Operation operation, DateTime dateTime)
+        {
+            _operationReferencesRepository.Remove(operation);
+            _operationReferencesRepository.Add(operation);
+            return true;
         }
     }
 }
