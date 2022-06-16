@@ -92,7 +92,7 @@ namespace HealthInstitution.Core.Repositories
             return true;
         }
 
-        public int GetID()
+        public int GetNewID()
         {
             int i = 1;
             while (true)
@@ -116,7 +116,7 @@ namespace HealthInstitution.Core.Repositories
                 throw new RoomNumberAlreadyTakenException("Room number already taken");
             }
 
-            room.ID = GetID();
+            room.ID = GetNewID();
 
             if (!future) 
             { 
@@ -131,11 +131,26 @@ namespace HealthInstitution.Core.Repositories
 
         public void DeleteRoom(Room r)
         {
-            RoomService room = new RoomService(r);
-            if (!room.IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
-            room.ReturnEquipmentToWarehouse(DateTime.Today);
+            RoomService service = new RoomService();
+            if (!service.IsChangeable(r)) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
+            service.ReturnEquipmentToWarehouse(DateTime.Today, r);
             _rooms.Remove(r);
             _deletedRooms.Add(r);
+        }
+
+        public List<Room> GetCurrentRooms()
+        {
+            return _rooms;
+        }
+
+        public List<Room> GetDeletedRooms()
+        {
+            return _deletedRooms;
+        }
+
+        public List<Room> GetFutureRooms()
+        {
+            return _futureRooms;
         }
     }
 }

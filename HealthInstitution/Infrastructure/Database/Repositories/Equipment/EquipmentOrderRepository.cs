@@ -64,7 +64,7 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             _orders.Add(new EquipmentOrder(id, equipment.ID, deliverDate, quantity));
         }
 
-        public void Deliver(EquipmentRepository equipments)
+        public void Deliver(IEquipmentRepositoryService equipments)
         {
             List<EquipmentOrder> futureOrders = new List<EquipmentOrder>();
             //Room warehouse = rooms.FindById(0);
@@ -73,7 +73,7 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             {
                 if (o.isDelivered())
                 {
-                    Equipment e = equipments.FindById(o.EquipmentID);
+                    Equipment e = equipments.FindByID(o.EquipmentID);
                     e.Quantity += o.Quantity;
                     //warehouse.AddEquipment(e, o.Quantity);
                 }
@@ -98,6 +98,11 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             if (ordered != 0) status = "Ordered: " + ordered.ToString();
 
             return status;
+        }
+
+        public List<EquipmentOrder> GetOrders()
+        {
+            return _orders;
         }
     }
 }

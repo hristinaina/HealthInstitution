@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Equipments;
 using HealthInstitution.Core.Services.Renovations;
 using HealthInstitution.Core.Services.Rooms;
@@ -67,15 +68,16 @@ namespace HealthInstitution.Core.Services
 
         public static void ArrangeEquipment()
         {
+            EquipmentService equipmentService = new EquipmentService();
+            RoomService roomService = new RoomService();
             foreach (EquipmentArrangement a in Institution.Instance().EquipmentArragmentRepository.CurrentArrangement)
             {
 
                 Room r = Institution.Instance().RoomRepository.FindById(a.RoomId);
                 Equipment e = Institution.Instance().EquipmentRepository.FindById(a.EquipmentId);
-                RoomService room = new RoomService(r);
-                room.AddEquipment(e, a.Quantity);
-                EquipmentService equipment = new EquipmentService(e);
-                equipment.ArrangeInRoom(r, a.Quantity);
+                
+                roomService.AddEquipment(e, a.Quantity, r);
+                equipmentService.ArrangeInRoom(r, a.Quantity, e);
             }
         }
 
@@ -96,7 +98,7 @@ namespace HealthInstitution.Core.Services
             renovationService.StartRenovations();
             renovationService.EndRenovations();
 
-            Institution.Instance().EquipmentOrderRepository.Deliver(Institution.Instance().EquipmentRepository);
+            Institution.Instance().EquipmentOrderRepository.Deliver(new EquipmentRepositoryService());
         }
 
         public static void FillMedicalRecord()

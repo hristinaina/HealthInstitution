@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Commands;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Equipments;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
@@ -31,7 +32,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands {
                 }
 
                 _viewModel.SelectedEquipment.Equipment.ArrangmentByRooms[room] = newQuantity;
-                EquipmentArrangementService service = new EquipmentArrangementService();
+                IEquipmentArrangementRepositoryService service = new EquipmentArrangementRepositoryService();
                 service.UpdateEquipmentQuantityInRoom(room, _viewModel.SelectedEquipment.Equipment);
 
                 _viewModel.UpdateQuantity(equipment, newQuantity);

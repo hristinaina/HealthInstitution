@@ -24,10 +24,10 @@ namespace HealthInstitution.Core.Services.Renovations
 
             if (_renovation.RoomsUnderRenovation.Count() > 1 || _renovation.Result.Count() > 1)
             {
+                RoomService room = new RoomService();
                 foreach (Room r in _renovation.RoomsUnderRenovation)
                 {
-                    RoomService room = new RoomService(r);
-                    room.ReturnEquipmentToWarehouse(_renovation.EndDate);
+                    room.ReturnEquipmentToWarehouse(_renovation.EndDate, r);
                 }
             }
 

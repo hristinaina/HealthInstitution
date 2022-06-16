@@ -28,5 +28,9 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             FileService.Serialize<RoomRenovation>(_fileName, _roomsUnderRenovation);
         }
 
+        public List<RoomRenovation> GetRooms()
+        {
+            return RoomsUnderRenovations;
+        }
     }
 }

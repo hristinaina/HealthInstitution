@@ -25,8 +25,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Equipment
             try
             {
                 DateTime newArrangementStartDate = DateTime.Now.AddHours(-1);
-                EquipmentService service = new EquipmentService(_model.SelectedEquipment.Equipment);
-                service.Rearrange(_model.SelectedEquipment.Room, _model.NewArrangementTargetRoom, newArrangementStartDate, _model.NewArrangementQuantity);
+                EquipmentService service = new EquipmentService();
+                service.Rearrange(_model.SelectedEquipment.Room, _model.NewArrangementTargetRoom, newArrangementStartDate, _model.NewArrangementQuantity, _model.SelectedEquipment.Equipment);
                 
                 _model.DialogOpen = false;
                 _model.FillEquipmentArrangementList();

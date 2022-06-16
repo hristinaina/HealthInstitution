@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IRoomRenovationRepository
+    public interface IRoomRenovationRepositoryService
     {
         public List<RoomRenovation> GetRooms();
     }

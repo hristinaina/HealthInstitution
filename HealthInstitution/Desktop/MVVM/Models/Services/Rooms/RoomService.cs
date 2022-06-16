@@ -7,45 +7,43 @@ namespace HealthInstitution.Core.Services.Rooms
 {
     public class RoomService
     {
-        private Room _room;
 
-        public RoomService(Room r)
+        public RoomService()
         {
-            _room = r;
         }
 
-        public bool IsChangeable()
+        public bool IsChangeable(Room room)
         {
-            foreach (Appointment a in _room.Appointments)
+            foreach (Appointment a in room.Appointments)
             {
                 if (a.Date >= DateTime.Today) return false;
             }
             return true;
         }
 
-        public void AddEquipment(Equipment e, int quantity)
+        public void AddEquipment(Equipment e, int quantity, Room room)
         {
-            if (!_room.Equipment.ContainsKey(e))
+            if (!room.Equipment.ContainsKey(e))
             {
-                _room.Equipment[e] = 0;
+                room.Equipment[e] = 0;
             }
-            _room.Equipment[e] += quantity;
+            room.Equipment[e] += quantity;
         }
 
-        public void ReturnEquipmentToWarehouse(DateTime date)
+        public void ReturnEquipmentToWarehouse(DateTime date, Room room)
         {
-            foreach (Equipment e in _room.Equipment.Keys)
+            EquipmentService equipmentService = new EquipmentService();
+            foreach (Equipment e in room.Equipment.Keys)
             {
-                EquipmentService equipment = new EquipmentService(e);
-                equipment.ReturnToWarehouse(date, _room);
+                equipmentService.ReturnToWarehouse(date, room, e);
             }
         }
-        public bool isAvailable(DateTime appointmentTime, Appointment appointment)
+        public bool isAvailable(DateTime appointmentTime, Appointment appointment, Room room)
         {
-            if (_room.UnderRenovation) return false;
+            if (room.UnderRenovation) return false;
 
             bool free = true;
-            foreach (Appointment a in _room.Appointments)
+            foreach (Appointment a in room.Appointments)
             {
                 if (a.Date.Date == appointmentTime.Date && a.ID != appointment.ID)
                 {
@@ -59,9 +57,9 @@ namespace HealthInstitution.Core.Services.Rooms
             return free;
         }
 
-        public bool IsUnderRenovation(DateTime startDate, DateTime endDate)
+        public bool IsUnderRenovation(DateTime startDate, DateTime endDate, Room room)
         {
-            foreach (Renovation r in _room.Renovations)
+            foreach (Renovation r in room.Renovations)
             {
                 if ((r.StartDate < endDate && r.StartDate > startDate) || (r.EndDate < endDate && r.EndDate > startDate))
                 {
@@ -71,15 +69,15 @@ namespace HealthInstitution.Core.Services.Rooms
             return false;
         }
 
-        public void Change(string newName, int newNumber, RoomType newType)
+        public void Change(string newName, int newNumber, RoomType newType, Room room)
         {
             if (newName is null || newName.Equals("")) throw new EmptyNameException("Room name cannot be empty");
             else if (newNumber == 0) throw new ZeroRoomNumberException("Room number cannot be 0");
-            else if (!Institution.Instance().RoomRepository.CheckNumber(newNumber, new List<int> { _room.Number })) throw new RoomNumberAlreadyTakenException("Room number already taken");
-            else if (newType != _room.Type && !IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be changed, because it has scheduled appointments");
-            _room.Name = newName;
-            _room.Number = newNumber;
-            _room.Type = newType;
+            else if (!Institution.Instance().RoomRepository.CheckNumber(newNumber, new List<int> { room.Number })) throw new RoomNumberAlreadyTakenException("Room number already taken");
+            else if (newType != room.Type && !IsChangeable(room)) throw new RoomCannotBeChangedException("Room cannot be changed, because it has scheduled appointments");
+            room.Name = newName;
+            room.Number = newNumber;
+            room.Type = newType;
         }
     }
 }

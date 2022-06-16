@@ -27,10 +27,11 @@ namespace HealthInstitution.Core
         public List<Room> RoomsUnderRenovation { get => _roomsUnderRenovation;
             set
             {
+                RoomService roomService = new RoomService();
                 foreach (Room r in value)
                 {
-                    RoomService room = new RoomService(r);
-                    if (room.IsUnderRenovation(_startDate, _endDate)) throw new RoomUnderRenovationException("Room already under renovation at that time");
+                    
+                    if (roomService.IsUnderRenovation(_startDate, _endDate, r)) throw new RoomUnderRenovationException("Room already under renovation at that time");
                 }
                 _roomsUnderRenovation = value;
             }

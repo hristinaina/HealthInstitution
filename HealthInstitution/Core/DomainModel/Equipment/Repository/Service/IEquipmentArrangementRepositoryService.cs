@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IEquipmentArrangementRepository
+    public interface IEquipmentArrangementRepositoryService
     {
         public EquipmentArrangement FindCurrentArrangement(Room r, Equipment e);
 
@@ -18,6 +18,5 @@ namespace HealthInstitution.Core.Repository
         public bool UpdateEquipmentQuantityInRoom(Room room, Equipment equipment);
 
         public List<EquipmentArrangement> GetArrangements();
-        public List<EquipmentArrangement> GetCurrentArrangements();
     }
 }

@@ -46,7 +46,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
                 {
                     Renovation renovation = Institution.Instance().RenovationRepository.Create(_model.StartDate, _model.EndDate);
 
-                    int id = Institution.Instance().RoomRepository.GetID();
+                    int id = Institution.Instance().RoomRepository.GetNewID();
                     List<Room> roomUnderRenovation = new List<Room> { _model.SelectedRoom};
 
                     Room firstRoom = new Room(_model.FirstNewRoomName, _model.FirstNewRoomNumber,

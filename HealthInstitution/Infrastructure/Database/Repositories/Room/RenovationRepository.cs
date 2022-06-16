@@ -56,6 +56,10 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             return new Renovation(GetID(), startDate, endDate);
         }
 
+        public List<Renovation> GetRenovations()
+        {
+            return _renovations;
+        }
 
         private bool CheckID(int id)
         {
