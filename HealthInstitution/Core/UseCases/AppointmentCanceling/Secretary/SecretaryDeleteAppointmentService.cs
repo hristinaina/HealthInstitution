@@ -7,10 +7,11 @@ using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Repository;
+using HealthInstitution.Core.UseCases.AppointmentCanceling.Secretary;
 
 namespace HealthInstitution.Core.Services
 {
-    public class SecretaryDeleteAppointmentService
+    public class SecretaryDeleteAppointmentService : ISecretaryDeleteAppointmentService
     {
         private readonly IExaminationRepositoryService _examinationRepository;
         private readonly IOperationRepositoryService _operationRepository;

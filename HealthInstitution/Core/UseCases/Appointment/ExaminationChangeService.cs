@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Repository;
+using HealthInstitution.Core.UseCases;
 using HealthInstitution.Services;
 using HealthInstitution.Services.Doctor;
 
 namespace HealthInstitution.Core.Services
 {
-    public class ExaminationChangeService
+    public class ExaminationChangeService : IExaminationChangeService
     {
         private readonly IExaminationChangeRepositoryService _examinationChangeRepository;
         private readonly IExaminationRepositoryService _examinationRepository;
