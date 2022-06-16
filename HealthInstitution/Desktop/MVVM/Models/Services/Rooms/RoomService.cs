@@ -74,7 +74,7 @@ namespace HealthInstitution.Core.Services.Rooms
             if (newName is null || newName.Equals("")) throw new EmptyNameException("Room name cannot be empty");
             else if (newNumber == 0) throw new ZeroRoomNumberException("Room number cannot be 0");
             else if (!Institution.Instance().RoomRepository.CheckNumber(newNumber, new List<int> { room.Number })) throw new RoomNumberAlreadyTakenException("Room number already taken");
-            else if (newType != room.Type && !IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be changed, because it has scheduled appointments");
+            else if (newType != room.Type && !IsChangeable(room)) throw new RoomCannotBeChangedException("Room cannot be changed, because it has scheduled appointments");
             room.Name = newName;
             room.Number = newNumber;
             room.Type = newType;

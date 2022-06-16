@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Equipments;
 using HealthInstitution.Core.Services.Renovations;
 using HealthInstitution.Core.Services.Rooms;
@@ -97,7 +98,7 @@ namespace HealthInstitution.Core.Services
             renovationService.StartRenovations();
             renovationService.EndRenovations();
 
-            Institution.Instance().EquipmentOrderRepository.Deliver(Institution.Instance().EquipmentRepository);
+            Institution.Instance().EquipmentOrderRepository.Deliver(new EquipmentRepositoryService());
         }
 
         public static void FillMedicalRecord()

@@ -18,7 +18,7 @@ namespace HealthInstitution.Core.Repository
 
         public List<Equipment> GetEquipment()
         {
-            return _repository.GetEquipment()
+            return _repository.GetEquipment();
         }
     }
 }
