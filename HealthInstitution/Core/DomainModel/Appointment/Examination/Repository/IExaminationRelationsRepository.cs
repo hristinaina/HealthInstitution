@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.Core
 {
-    public interface IExaminationRelationsRepository
+    public interface IExaminationRelationsRepository : IRepository
     {
         public ExaminationReference FindByExaminationID(int id);
 

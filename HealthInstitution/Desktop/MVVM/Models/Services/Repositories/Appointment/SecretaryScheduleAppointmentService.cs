@@ -13,17 +13,17 @@ namespace HealthInstitution.Core.Services
     public class SecretaryScheduleAppointmentService
     {
         private readonly IExaminationRepositoryService _examinationRepository;
-        private readonly OperationRepository _operationRepository;
+        private readonly IOperationRepositoryService _operationRepository;
         private readonly IExaminationRelationsRepositoryService _examinationReferencesRepository;
-        private readonly OperationReferencesRepository _operationReferencesRepository;
+        private readonly IOperationRelationsRepositoryService _operationReferencesRepository;
         private readonly IExaminationChangeRepositoryService _examinationChangeRepository;
 
         public SecretaryScheduleAppointmentService()
         {
             _examinationRepository = new ExaminationRepositoryService();
-            _operationRepository = Institution.Instance().OperationRepository;
+            _operationRepository = new OperationRepositoryService();
             _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
-            _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
+            _operationReferencesRepository =  new OperationRelationsRepositoryService();
             _examinationChangeRepository = new ExaminationChangeRepositoryService();
         }
 

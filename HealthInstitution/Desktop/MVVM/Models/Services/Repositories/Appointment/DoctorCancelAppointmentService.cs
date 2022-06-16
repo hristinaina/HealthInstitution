@@ -16,8 +16,8 @@ namespace HealthInstitution.Core.Services
         private RoomRepository _roomRepository;
         private IExaminationRelationsRepositoryService _examinationReferencesRepository;
         private IExaminationChangeRepositoryService _examinationChangeRepository;
-        private OperationRepository _operationRepository;
-        private OperationReferencesRepository _operationReferencesRepository;
+        private IOperationRepositoryService _operationRepository;
+        private IOperationRelationsRepositoryService _operationReferencesRepository;
 
 
         public DoctorCancelAppointmentService()
@@ -26,8 +26,8 @@ namespace HealthInstitution.Core.Services
             _roomRepository = Institution.Instance().RoomRepository;
             _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
             _examinationChangeRepository = new ExaminationChangeRepositoryService();
-            _operationRepository = Institution.Instance().OperationRepository;
-            _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
+            _operationRepository = new OperationRepositoryService();
+            _operationReferencesRepository = new OperationRelationsRepositoryService();
         }
 
 

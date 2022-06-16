@@ -40,6 +40,11 @@ namespace HealthInstitution.Core.Repository
             return _repository.GetNewID();
         }
 
+        public List<Operation> GetOperations()
+        {
+            return _repository.GetOperations();
+        }
+
         public void Remove(Operation operation)
         {
             _repository.Remove(operation);

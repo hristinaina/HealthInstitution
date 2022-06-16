@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.Core
 {
-    public interface IExaminationRepository
+    public interface IExaminationRepository : IRepository
     {
         public List<Examination> FindByPatientID(int patientId);
 

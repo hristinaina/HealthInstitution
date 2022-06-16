@@ -13,24 +13,24 @@ namespace HealthInstitution.Core.Services
     public class SecretaryDeleteAppointmentService
     {
         private readonly IExaminationRepositoryService _examinationRepository;
-        private readonly OperationRepository _operationRepository;
+        private readonly IOperationRepositoryService _operationRepository;
         private readonly IExaminationRelationsRepositoryService _examinationReferencesRepository;
-        private readonly OperationReferencesRepository _operationReferencesRepository;
+        private readonly IOperationRelationsRepositoryService _operationReferencesRepository;
         private readonly IExaminationChangeRepositoryService _examinationChangeRepository;
 
         public SecretaryDeleteAppointmentService()
         {
             _examinationRepository = new ExaminationRepositoryService();
-            _operationRepository = Institution.Instance().OperationRepository;
+            _operationRepository = new OperationRepositoryService();
             _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
-            _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
+            _operationReferencesRepository = new OperationRelationsRepositoryService();
             _examinationChangeRepository = new ExaminationChangeRepositoryService();
         }
 
         public void DeleteFutureAppointments(Patient patient)
         {
             List<Examination> examinations = new List<Examination>(_examinationRepository.GetExaminations().ToArray());
-            List<Operation> operations = new List<Operation>(_operationRepository.Operations.ToArray());
+            List<Operation> operations = new List<Operation>(_operationRepository.GetOperations().ToArray());
 
             foreach (Examination appointment in examinations)
             {

@@ -17,7 +17,7 @@ namespace HealthInstitution.Core.Services
         private RoomRepository _roomRepository;
         private IExaminationRelationsRepositoryService _examinationReferencesRepository;
         private IExaminationChangeRepositoryService _examinationChangeRepository;
-        private OperationReferencesRepository _operationReferencesRepository;
+        private IOperationRelationsRepositoryService _operationReferencesRepository;
 
 
         public DoctorRescheduleAppointmentService()
@@ -26,7 +26,7 @@ namespace HealthInstitution.Core.Services
             _roomRepository = Institution.Instance().RoomRepository;
             _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
             _examinationChangeRepository = new ExaminationChangeRepositoryService();
-            _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
+            _operationReferencesRepository = new OperationRelationsRepositoryService();
         }
 
         public bool RescheduleExamination(Appointment appointment, DateTime dateTime, bool validation = true)

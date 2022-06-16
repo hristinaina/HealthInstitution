@@ -21,6 +21,6 @@ namespace HealthInstitution.Core.Repository
         public int GetNewID();
 
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate);
-
+        List<Operation> GetOperations();
     }
 }

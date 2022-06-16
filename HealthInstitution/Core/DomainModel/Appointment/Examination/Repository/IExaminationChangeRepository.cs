@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.Core
 {
-    public interface IExaminationChangeRepository
+    public interface IExaminationChangeRepository : IRepository
     {
         public ExaminationChange FindByAppointmentID(int id);
 

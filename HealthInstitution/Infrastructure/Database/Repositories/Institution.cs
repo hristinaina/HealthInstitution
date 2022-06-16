@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Infrastructure.Database.Repositories;
 using HealthInstitution.Core.Repositories.References;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core
 {
@@ -21,13 +22,12 @@ namespace HealthInstitution.Core
         private readonly AdminRepository _adminRepository;
 
         private readonly PrescriptionRepository _prescriptionRepository;
-        private readonly ExaminationRepository _examinationRepository;
 
-        private readonly OperationRepository _operationRepository;
-
-        private readonly ExaminationReferencesRepository _examinationReferencesRepository;
-
-        private readonly OperationReferencesRepository _operationReferencesRepository;
+        private readonly IExaminationRepository _examinationRepository;
+        private readonly IExaminationRelationsRepository _examinationReferencesRepository;
+        private readonly IExaminationChangeRepository _examinationChangeRepository;
+        private readonly IOperationRepository _operationRepository;
+        private readonly IOperationRelationsRepository _operationReferencesRepository;
 
         private readonly EquipmentRepository _equipmentRepository;
         private readonly EquipmentArrangementRepository _equipmentArragmentRepository;
@@ -47,7 +47,6 @@ namespace HealthInstitution.Core
 
         private readonly DoctorDaysOffRepository _doctorDaysOffRepository;
         private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
-        private readonly ExaminationChangeRepository _examinationChangeRepository;
 
         private readonly NotificationRepository _notificationRepository;
         private readonly ReviewRepository _reviewRepository;
@@ -192,13 +191,13 @@ namespace HealthInstitution.Core
         public SecretaryRepository SecretaryRepository { get => _secretaryRepository; }
         public AdminRepository AdminRepository { get => _adminRepository; }
         public PrescriptionRepository PrescriptionRepository { get => _prescriptionRepository; }
-
-        public ExaminationRepository ExaminationRepository { get => _examinationRepository; }
-        public ExaminationReferencesRepository ExaminationReferencesRepository { get => _examinationReferencesRepository; }
-        public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
-        public OperationRepository OperationRepository { get => _operationRepository; }
-        public OperationReferencesRepository OperationReferencesRepository { get => _operationReferencesRepository; }
-       
+        
+        public IExaminationRepository ExaminationRepository { get => _examinationRepository; }
+        public IExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
+        public IExaminationRelationsRepository ExaminationReferencesRepository { get => _examinationReferencesRepository; }
+        public IOperationRepository OperationRepository { get => _operationRepository; }
+        public IOperationRelationsRepository OperationReferencesRepository { get => _operationReferencesRepository; }
+        
         public EquipmentRepository EquipmentRepository { get => _equipmentRepository; }
         public RoomRepository RoomRepository { get => _roomRepository; }
         public RenovationRepository RenovationRepository { get => _renovationRepository; }

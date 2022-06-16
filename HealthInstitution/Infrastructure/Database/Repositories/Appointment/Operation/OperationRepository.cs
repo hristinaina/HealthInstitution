@@ -93,5 +93,10 @@ namespace HealthInstitution.Core.Repositories
             }
             return null;
         }
+
+        public List<Operation> GetOperations()
+        {
+            return _operations;
+        }
     }
 }
