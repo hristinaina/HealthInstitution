@@ -4,7 +4,7 @@ using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class OperationReferencesRepository : BaseRepository, IOperationReferencesRepository
+    public class OperationReferencesRepository : BaseRepository, IOperationRelationsRepository
     {
         private List<OperationReference> _references;
 

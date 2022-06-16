@@ -38,14 +38,14 @@ namespace HealthInstitution.Core.Services
 
             if (duration == 15)
             {
-                int appointmentId = _examinationRepository.GetID();
+                int appointmentId = _examinationRepository.GetNewID();
                 Examination examination = new Examination(appointmentId, appointment.Doctor, appointment.Patient, appointment.Date,
                                           new List<Prescription>());
                 CreateExamination(examination, appointment);
             }
             else
             {
-                int appointmentId = _operationRepository.GetID();
+                int appointmentId = _operationRepository.GetNewID();
                 Operation operation = new Operation(appointmentId, appointment.Doctor, appointment.Patient, appointment.Date, duration);
                 CreateOperation(operation, appointment);
             }

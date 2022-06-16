@@ -44,7 +44,7 @@ namespace HealthInstitution.Core.Services
 
             if (appointment.GetType() == typeof(Examination))
             {
-                appointmentId = _examinationRepository.GetID();
+                appointmentId = _examinationRepository.GetNewID();
                 Examination examination = new Examination(appointmentId, appointment.Doctor, appointment.Patient, dateTime,
                                           new List<Prescription>());
                 appointment.Patient.Examinations.Add(examination);
@@ -59,7 +59,7 @@ namespace HealthInstitution.Core.Services
 
             else
             {
-                appointmentId = _operationRepository.GetID();
+                appointmentId = _operationRepository.GetNewID();
                 Operation operation = new Operation(appointmentId, appointment.Doctor, appointment.Patient, dateTime, duration);
                 appointment.Patient.Operations.Add(operation);
                 appointment.Doctor.Operations.Add(operation);

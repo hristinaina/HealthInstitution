@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace HealthInstitution.Core
+namespace HealthInstitution.Core.Repository
 {
-    public interface IExaminationRepository
+    public interface IExaminationService
     {
         public List<Examination> FindByPatientID(int patientId);
 
@@ -18,5 +21,6 @@ namespace HealthInstitution.Core
         public void DeleteByPatientID(int patientId);
 
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate);
+
     }
 }

@@ -1,6 +1,12 @@
-﻿namespace HealthInstitution.Core
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HealthInstitution.Core.Repository
 {
-    public interface IExaminationReferencesRepository
+    public interface IExaminationRelationsService
     {
         public ExaminationReference FindByExaminationID(int id);
 
@@ -9,5 +15,6 @@
         public void Add(ExaminationReference examinationReference);
 
         public void Remove(Examination examination);
+
     }
 }

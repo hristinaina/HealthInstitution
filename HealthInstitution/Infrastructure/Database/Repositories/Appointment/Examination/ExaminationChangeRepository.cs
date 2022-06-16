@@ -34,7 +34,7 @@ namespace HealthInstitution.Core.Repositories.References
             }
             return null;
         }
-        public int NewId()
+        public int GetNewID()
         {
             if (_references.Count == 0)
             {
@@ -45,7 +45,7 @@ namespace HealthInstitution.Core.Repositories.References
 
         public void Add(Examination examination, DateTime dateTime, bool resolved, AppointmentStatus status)
         {
-            ExaminationChange change = new ExaminationChange(NewId(), examination.Patient.ID, examination.ID, status, DateTime.Now, resolved, dateTime);
+            ExaminationChange change = new ExaminationChange(GetNewID(), examination.Patient.ID, examination.ID, status, DateTime.Now, resolved, dateTime);
             _references.Add(change);
             examination.Patient.ExaminationChanges.Add(change);
         }

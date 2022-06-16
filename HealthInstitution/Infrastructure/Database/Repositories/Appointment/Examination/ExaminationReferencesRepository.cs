@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class ExaminationReferencesRepository : BaseRepository, IExaminationReferencesRepository
+    public class ExaminationReferencesRepository : BaseRepository, IExaminationRelationsRepository
     {
         private List<ExaminationReference> _references;
 

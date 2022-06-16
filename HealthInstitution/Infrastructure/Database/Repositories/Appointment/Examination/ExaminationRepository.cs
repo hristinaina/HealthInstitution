@@ -64,7 +64,7 @@ namespace HealthInstitution.Core
             return false;
         }
         
-        public int GetID()
+        public int GetNewID()
         {
             if (_examinations.Count == 0)
             {

@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace HealthInstitution.Core
+namespace HealthInstitution.Core.Repository
 {
-    public interface IExaminationChangeRepository
+    public interface IExaminationChangeService
     {
         public ExaminationChange FindByAppointmentID(int id);
 
