@@ -110,31 +110,31 @@ namespace HealthInstitution.Core.Services
                 patient.Record.Referrals = Institution.Instance().ReferralRepository.FindByPatientID(patient.ID);
 
                 List<PatientAllergen> patientAllergens = Institution.Instance().PatientAllergenRepository.FindByPatientID(patient.ID);
-                patient.Record.Allergens = Institution.Instance().AllergenRepository.PatientAllergenToAllergen(patientAllergens);
+                patient.Record.Allergens = new AllergenRepositoryService().PatientAllergenToAllergen(patientAllergens);
             }
         }
 
         public static void ConnectMedicineAllergens()
         {
-            foreach (Medicine medicine in Institution.Instance().MedicineRepository.Medicines)
+            foreach (Medicine medicine in new MedicineRepositoryService().GetMedicines())
             {
-                List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
-                medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+                List<MedicineAllergen> medicineAllergens = new MedicineAllergenRepositoryService().FindByMedicineID(medicine.ID);
+                medicine.Ingredients = new AllergenRepositoryService().MedicineAllergenToAllergen(medicineAllergens);
             }
 
-            foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
+            foreach (PendingMedicine medicine in new PendingMedicineRepositoryService().GetPendingMedicines())
             {
-                List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
-                medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+                List<MedicineAllergen> medicineAllergens = new MedicineAllergenRepositoryService().FindByMedicineID(medicine.ID);
+                medicine.Ingredients = new AllergenRepositoryService().MedicineAllergenToAllergen(medicineAllergens);
             }
         }
 
         public static void ConnectPendingMedicineAllergens()
         {
-            foreach (PendingMedicine medicine in Institution.Instance().PendingMedicineRepository.PendingMedicines)
+            foreach (PendingMedicine medicine in new PendingMedicineRepositoryService().GetPendingMedicines() )
             {
-                List<MedicineAllergen> medicineAllergens = Institution.Instance().MedicineAllergenRepository.FindByMedicineID(medicine.ID);
-                medicine.Ingredients = Institution.Instance().AllergenRepository.MedicineAllergenToAllergen(medicineAllergens);
+                List<MedicineAllergen> medicineAllergens = new MedicineAllergenRepositoryService().FindByMedicineID(medicine.ID);
+                medicine.Ingredients = new AllergenRepositoryService().MedicineAllergenToAllergen(medicineAllergens);
             }
         }
 
@@ -142,8 +142,8 @@ namespace HealthInstitution.Core.Services
         {
             foreach (Doctor doctor in Institution.Instance().DoctorRepository.Doctors)
             {
-                List<DoctorDaysOff> doctorDaysOff = Institution.Instance().DoctorDaysOffRepository.FindByDoctorID(doctor.ID);
-                doctor.DaysOff = Institution.Instance().DayOffRepository.DoctorDaysOffToDaysOff(doctorDaysOff);
+                List<DoctorDaysOff> doctorDaysOff = new DoctorDaysOffRepositoryService().FindByDoctorID(doctor.ID);
+                doctor.DaysOff = new DayOffRepositoryService().DoctorDaysOffToDaysOff(doctorDaysOff);
 
                 foreach (DayOff dayOff in doctor.DaysOff) dayOff.Doctor = doctor;
             }
@@ -155,7 +155,7 @@ namespace HealthInstitution.Core.Services
             {
                 PrescriptionMedicine prescriptionMedicine = Institution.Instance().PrescriptionMedicineRepository.
                                                              FindByPrescriptionID(prescription.ID);
-                prescription.Medicine = Institution.Instance().MedicineRepository.PrescriptionMedicineToMedicine(prescriptionMedicine);
+                prescription.Medicine = new MedicineRepositoryService().PrescriptionMedicineToMedicine(prescriptionMedicine);
             }
         }
 

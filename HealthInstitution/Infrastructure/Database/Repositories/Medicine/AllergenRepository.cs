@@ -99,5 +99,10 @@ namespace HealthInstitution.Core.Repositories
 
             _allergens.Remove(allergen);
         }
+
+        public List<Allergen> GetAllergens()
+        {
+            return _allergens;
+        }
     }
 }

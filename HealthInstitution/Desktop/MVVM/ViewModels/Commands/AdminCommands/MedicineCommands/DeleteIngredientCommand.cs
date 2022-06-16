@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineCommands
 {
@@ -23,7 +24,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineComma
         {
             try
             {
-                Institution.Instance().AllergenRepository.DeleteAllergen(_model.SelectedIngredient);
+                new AllergenRepositoryService().DeleteAllergen(_model.SelectedIngredient);
 
                 _model.DialogOpen = false;
                 _model.FillIngredientList();

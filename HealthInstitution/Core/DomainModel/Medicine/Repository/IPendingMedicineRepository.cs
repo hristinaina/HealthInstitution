@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IPendingMedicineRepository
+    public interface IPendingMedicineRepository : IRepository
     {
         public PendingMedicine FindByID(int id);
 

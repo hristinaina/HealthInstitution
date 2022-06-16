@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineCommands
 {
@@ -37,7 +38,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineComma
 
                 foreach (Allergen i in ingredients)
                 {
-                    Institution.Instance().MedicineAllergenRepository.AllergensInMedicine
+                    new MedicineAllergenRepositoryService().GetMedicineAllergens()
                         .Add(new MedicineAllergen(m.ID, i.ID));
                 }
 

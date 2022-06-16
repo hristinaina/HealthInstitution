@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
-
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
@@ -113,7 +113,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public void FindPendingMedicines()
         {
             _pendingMedicines.Clear();
-            List<PendingMedicine> pendingMedicines = Institution.Instance().PendingMedicineRepository.PendingMedicines;
+            List<PendingMedicine> pendingMedicines = new PendingMedicineRepositoryService().GetPendingMedicines();
             foreach(PendingMedicine pendingMedicine in pendingMedicines)
             {
                 if (pendingMedicine.State == State.ON_HOLD)

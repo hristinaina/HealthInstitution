@@ -14,5 +14,6 @@ namespace HealthInstitution.Core.Repository
         public void ChangeName(Allergen allergen, string name);
         public Allergen AddNewAllergen(Allergen allergen);
         public void DeleteAllergen(Allergen allergen);
+        public List<Allergen> GetAllergens();
     }
 }

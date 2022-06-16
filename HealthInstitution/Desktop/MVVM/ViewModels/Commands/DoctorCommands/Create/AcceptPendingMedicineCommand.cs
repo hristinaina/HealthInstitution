@@ -7,6 +7,7 @@ using HealthInstitution.Commands;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 using HealthInstitution.Core.Services;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -33,7 +34,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
                 if (isRemoved)
                 {
                     Medicine medicine = new Medicine(pendingMedicine.ID, pendingMedicine.Name, pendingMedicine.Ingredients);
-                    Institution.Instance().MedicineRepository.Add(medicine);
+                    new MedicineRepositoryService().Add(medicine);
 
                     _viewModel.ShowMessage("Medicine successfully saved !");
                 }

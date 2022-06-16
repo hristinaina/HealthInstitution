@@ -53,5 +53,10 @@ namespace HealthInstitution.Core.Repositories.References
                 _allergensInMedicine.Add(medicineAllergen);
             }
         }
+
+        public List<MedicineAllergen> GetMedicineAllergens()
+        {
+            return _allergensInMedicine;
+        }
     }
 }

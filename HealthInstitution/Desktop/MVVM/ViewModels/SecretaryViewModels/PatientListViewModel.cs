@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
@@ -154,7 +155,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             if (_allAllergens != null)
                 _allAllergens.Clear();
-            List<Allergen> allergens = Institution.Instance().AllergenRepository.Allergens;
+            List<Allergen> allergens = new AllergenRepositoryService().GetAllergens();
             foreach (Allergen allergen in allergens)
             {
                 _allAllergens.Add(new AllergenItemViewModel(allergen));

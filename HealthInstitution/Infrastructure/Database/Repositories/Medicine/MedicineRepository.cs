@@ -71,5 +71,10 @@ namespace HealthInstitution.Core.Repositories
 
             return newMedicine;
         }
+
+        public List<Medicine> GetMedicines()
+        {
+            return _medicines;
+        }
     }
 }

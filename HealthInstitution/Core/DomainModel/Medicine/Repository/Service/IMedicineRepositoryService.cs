@@ -12,5 +12,6 @@ namespace HealthInstitution.Core.Repository
         public Medicine PrescriptionMedicineToMedicine(PrescriptionMedicine prescriptionMedicine);
         public void Add(Medicine medicine);
         public Medicine AddNewMedicine(Medicine newMedicine);
+        public List<Medicine> GetMedicines();
     }
 }

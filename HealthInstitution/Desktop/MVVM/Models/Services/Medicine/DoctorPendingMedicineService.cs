@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
     class DoctorPendingMedicineService
     {
-        private PendingMedicineRepository _pendingMedicineRepository;
+        private IPendingMedicineRepository _pendingMedicineRepository;
 
         public DoctorPendingMedicineService()
         {
@@ -19,12 +20,12 @@ namespace HealthInstitution.Core.Services
 
         public bool SendToRevision(PendingMedicine medicine)
         {
-            foreach (PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
+            foreach (PendingMedicine i in _pendingMedicineRepository.GetPendingMedicines())
             {
                 if (i.ID == medicine.ID)
                 {
-                    _pendingMedicineRepository.PendingMedicines.Remove(i);
-                    _pendingMedicineRepository.PendingMedicines.Add(medicine);
+                    _pendingMedicineRepository.GetPendingMedicines().Remove(i);
+                    _pendingMedicineRepository.GetPendingMedicines().Add(medicine);
                     return true;
                 }
             }
@@ -33,11 +34,11 @@ namespace HealthInstitution.Core.Services
 
         public bool Delete(PendingMedicine medicine)
         {
-            foreach (PendingMedicine i in _pendingMedicineRepository.PendingMedicines)
+            foreach (PendingMedicine i in _pendingMedicineRepository.GetPendingMedicines())
             {
                 if (i.ID == medicine.ID)
                 {
-                    _pendingMedicineRepository.PendingMedicines.Remove(i);
+                    _pendingMedicineRepository.GetPendingMedicines().Remove(i);
                     return true;
                 }
             }

@@ -35,5 +35,10 @@ namespace HealthInstitution.Core.Repositories
             }
             return doctorsDaysOff;
         }
+
+        public List<DoctorDaysOff> GetDoctorDaysOff()
+        {
+            return _references;
+        }
     }
 }

@@ -10,9 +10,9 @@ namespace HealthInstitution.Core.Repository
     {
         private readonly IMedicineRepository _medicineRepository;
 
-        public MedicineRepositoryService(IMedicineRepository medicineRepository)
+        public MedicineRepositoryService()
         {
-            _medicineRepository = medicineRepository;
+            _medicineRepository = Institution.Instance().MedicineRepository;
         }
 
         public Medicine FindByID(int id)
@@ -33,6 +33,11 @@ namespace HealthInstitution.Core.Repository
         public Medicine AddNewMedicine(Medicine newMedicine)
         {
             return _medicineRepository.AddNewMedicine(newMedicine);
+        }
+
+        public List<Medicine> GetMedicines()
+        {
+            return _medicineRepository.GetMedicines();
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineCommands;
 
 namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
@@ -228,7 +229,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         {
             _ingredients.Clear();
 
-            foreach (Allergen a in Institution.Instance().AllergenRepository.Allergens)
+            foreach (Allergen a in new AllergenRepositoryService().GetAllergens())
             {
                 _ingredients.Add(new IngredientListItemViewModel(a, this));
             }
@@ -238,7 +239,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         {
             _medicine.Clear();
 
-            foreach (PendingMedicine m in Institution.Instance().PendingMedicineRepository.PendingMedicines)
+            foreach (PendingMedicine m in new PendingMedicineRepositoryService().GetPendingMedicines())
             {
                 _medicine.Add(new MedicineListItemViewModel(m));
             }

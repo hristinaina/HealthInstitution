@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    class MedicineAllergenRepositorySerivce : IMedicineAllergenRepositoryService
+    class MedicineAllergenRepositoryService : IMedicineAllergenRepositoryService
     {
         private readonly IMedicineAllergenRepository _medicineAllergenRepository;
 
-        public MedicineAllergenRepositorySerivce(IMedicineAllergenRepository medicineAllergenRepository)
+        public MedicineAllergenRepositoryService()
         {
-            _medicineAllergenRepository = medicineAllergenRepository;
+            _medicineAllergenRepository = Institution.Instance().MedicineAllergenRepository;
         }
 
         public List<MedicineAllergen> FindByMedicineID(int medicineId)
@@ -23,6 +23,11 @@ namespace HealthInstitution.Core.Repository
         public void Add(Medicine medicine)
         {
             _medicineAllergenRepository.Add(medicine);
+        }
+
+        public List<MedicineAllergen> GetMedicineAllergens()
+        {
+            return _medicineAllergenRepository.GetMedicineAllergens();
         }
     }
 }
