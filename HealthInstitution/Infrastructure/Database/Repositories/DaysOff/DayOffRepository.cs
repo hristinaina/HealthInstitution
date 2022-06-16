@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
-namespace HealthInstitution.Core.Repositories
+namespace HealthInstitution.Core.Repository
 {
     public class DayOffRepository : BaseRepository, IDayOffRepository
     {
@@ -52,6 +51,11 @@ namespace HealthInstitution.Core.Repositories
 
             }
             return daysOff;
+        }
+
+        public List<DayOff> GetDaysOff()
+        {
+            return _daysOff;
         }
     }
 }

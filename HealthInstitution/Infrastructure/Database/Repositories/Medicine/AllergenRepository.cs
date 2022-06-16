@@ -76,16 +76,16 @@ namespace HealthInstitution.Core.Repositories
 
         public void ChangeName(Allergen allergen, string name)
         {
-            AllergenService a = new AllergenService(allergen);
-            if (!a.IsNameAvailable(name)) throw new NameNotAvailableException("Name already taken");
+            AllergenService service = new AllergenService(allergen);
+            if (!service.IsNameAvailable(name)) throw new NameNotAvailableException("Name already taken");
 
             allergen.Name = name;
         }
 
         public Allergen AddNewAllergen(Allergen allergen)
         {
-            AllergenService a = new AllergenService(allergen);
-            if (!a.IsNameAvailable(allergen.Name)) throw new NameNotAvailableException("Name already in use!");
+            AllergenService service = new AllergenService(allergen);
+            if (!service.IsNameAvailable(allergen.Name)) throw new NameNotAvailableException("Name already in use!");
             
             allergen.ID = GetID();
             _allergens.Add(allergen);
