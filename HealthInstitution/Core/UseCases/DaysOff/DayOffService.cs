@@ -9,7 +9,7 @@ using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
-    public class DayOffService
+    public class DayOffService : IDaysOffService
     {
         private readonly IDayOffRepository _dayOffRepository;
 

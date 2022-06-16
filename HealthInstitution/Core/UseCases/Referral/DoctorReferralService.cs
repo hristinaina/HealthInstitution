@@ -9,7 +9,7 @@ using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
-    class DoctorReferralService
+    class DoctorReferralService : IDoctorReferralService
     {
         private IReferralRepositoryService _referralService;
 
