@@ -12,11 +12,11 @@ using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.EquipmentCommands
 {
-    public class RearrangeCommand : BaseCommand
+    public class DynamicRearrangeCommand : BaseCommand
     {
         private ArrangingEquipmentViewModel _model;
 
-        public RearrangeCommand(ArrangingEquipmentViewModel model)
+        public DynamicRearrangeCommand(ArrangingEquipmentViewModel model)
         {
             _model = model;
         }

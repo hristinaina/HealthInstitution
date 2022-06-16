@@ -12,6 +12,12 @@
     <StartupObject>HealthInstitution.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Core\UseCases\AppointmentScheduling\NewFolder\**" />
+    <EmbeddedResource Remove="Core\UseCases\AppointmentScheduling\NewFolder\**" />
+    <None Remove="Core\UseCases\AppointmentScheduling\NewFolder\**" />
+    <Page Remove="Core\UseCases\AppointmentScheduling\NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
 
     <Reference Update="System">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll</HintPath>
