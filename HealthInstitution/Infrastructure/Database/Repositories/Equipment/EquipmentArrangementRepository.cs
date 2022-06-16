@@ -109,19 +109,6 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             return arrangements;
         }
 
-        public bool UpdateEquipmentQuantityInRoom(Room room, Equipment equipment)
-        {
-            foreach (EquipmentArrangement arrangement in CurrentArrangement)
-            {
-                if (arrangement.RoomId == room.ID && arrangement.EquipmentId == equipment.ID)
-                {
-                    arrangement.Quantity = equipment.ArrangmentByRooms[room];
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public List<EquipmentArrangement> GetArrangements()
         {
             return _validArrangement;

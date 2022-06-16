@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using HealthInstitution.Core.Repository;
+using HealthInstitution.Core.Reposirory;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class ReviewRepository : BaseRepository
+    public class ReviewRepository : BaseRepository, IReviewRepository
     {
         private List<HospitalReview> _reviews;
         public List<HospitalReview> Reviews { get => _reviews; }
@@ -22,6 +22,11 @@ namespace HealthInstitution.Core.Repositories
         public override void SaveToFile()
         {
             FileService.Serialize(_fileName, _reviews);
+        }
+
+        public List<HospitalReview> GetReviews()
+        {
+            return _reviews;
         }
     }
 }

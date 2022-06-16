@@ -1,13 +1,7 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using HealthInstitution.Core.Services.Equipments;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentCommands
@@ -15,10 +9,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
     class SearchCommand : BaseCommand
     {
         private AdminEquipmentViewModel _model;
+        private SearchEquipmentService _search;
 
         public SearchCommand(AdminEquipmentViewModel model)
         {
             _model = model;
+            _search = new SearchEquipmentService();
         }
 
         public override void Execute(object parameter)
@@ -26,9 +22,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
             
             try 
             {
-                //_model.FilteredEquipment = Institution.Instance().EquipmentRepository.Search(_model.SearchPhrase);
-                SearchEquipmentService service = new SearchEquipmentService();
-                _model.FilteredEquipment = service.Search(_model.SearchPhrase);
+                _model.FilteredEquipment = _search.Search(_model.SearchPhrase);
 
                 _model.FilterEquipmentList();
             } catch (EmptySearchPhraseException e)

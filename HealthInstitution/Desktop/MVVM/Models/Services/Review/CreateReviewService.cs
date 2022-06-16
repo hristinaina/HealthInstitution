@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Core;
+using HealthInstitution.Core.Reposirory;
 
 namespace HealthInstitution.Services
 {
@@ -24,7 +25,9 @@ namespace HealthInstitution.Services
         public void AssignReview()
         {
             HospitalReview review = (HospitalReview)_review;
-            Institution.Instance().ReviewRepository.Reviews.Add(review);
+
+            IReviewRepositoryService reviews = new ReviewRepositoryService();
+            reviews.GetReviews().Add(review);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Equipments;
+using HealthInstitution.Desktop.MVVM.Models.Services.Equipments;
 
 namespace HealthInstitution.Core.Services
 {
@@ -34,10 +35,10 @@ namespace HealthInstitution.Core.Services
 
         public void ReturnEquipmentToWarehouse(DateTime date, Room room)
         {
-            EquipmentService equipmentService = new EquipmentService();
+            IEquipmentArrangementService equipmentService = new EquipmentArrangementService();
             foreach (Equipment e in room.Equipment.Keys)
             {
-                equipmentService.ReturnToWarehouse(date, room, e);
+                equipmentService.ReturnEquipmentToWarehouse(date, room, e);
             }
         }
         public bool isAvailable(DateTime appointmentTime, Appointment appointment, Room room)

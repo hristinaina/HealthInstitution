@@ -8,6 +8,7 @@ using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Equipments;
 using HealthInstitution.Core.Services.Renovations;
 using HealthInstitution.Core.Services;
+using HealthInstitution.Desktop.MVVM.Models.Services.Equipments;
 
 namespace HealthInstitution.Core.Services
 {
@@ -74,7 +75,7 @@ namespace HealthInstitution.Core.Services
 
         public static void ArrangeEquipment()
         {
-            EquipmentService equipmentService = new EquipmentService();
+            IEquipmentArrangementService equipmentService = new EquipmentArrangementService();
             RoomService roomService = new RoomService();
             foreach (EquipmentArrangement a in Institution.Instance().EquipmentArragmentRepository.GetCurrentArrangements())
             {

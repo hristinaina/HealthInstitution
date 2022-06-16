@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using HealthInstitution.Core.Reposirory;
 using HealthInstitution.Core.Repositories;
 
 namespace HealthInstitution.Core.Services.SurveyResults
 {
     public class HospitalSurveyResultsService
     {
-        private ReviewRepository _reviews;
+        private IReviewRepositoryService _reviews;
 
         public HospitalSurveyResultsService()
         {
-            _reviews = Institution.Instance().ReviewRepository;
+            _reviews = new ReviewRepositoryService();
         }
 
         public Dictionary<string, List<double>> GetResults()
@@ -22,7 +23,7 @@ namespace HealthInstitution.Core.Services.SurveyResults
                 ["Satisfaction"] = new List<double>() { 0, 0, 0, 0, 0, 0}
             };
 
-            foreach (HospitalReview review in _reviews.Reviews)
+            foreach (HospitalReview review in _reviews.GetReviews())
             {
                 results["Service"][review.Service]++;
                 results["Suggestion"][review.Suggestion]++;
@@ -55,8 +56,12 @@ namespace HealthInstitution.Core.Services.SurveyResults
         {
             List<string> comments = new List<string>();
 
-            foreach (HospitalReview review in _reviews.Reviews)
+            foreach (HospitalReview review in _reviews.GetReviews())
             {
+                if (review.Comment is null || review.Comment.Equals(""))
+                {
+                    continue;
+                }
                 comments.Add(review.Comment);
             }
 

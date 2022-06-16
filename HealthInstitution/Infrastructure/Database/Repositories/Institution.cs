@@ -3,6 +3,7 @@ using HealthInstitution.Core.Repositories;
 using HealthInstitution.Repositories;
 using System;
 using System.Collections.Generic;
+using HealthInstitution.Core.Reposirory;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Infrastructure.Database.Repositories;
 using HealthInstitution.Core.Repositories.References;
@@ -49,7 +50,7 @@ namespace HealthInstitution.Core
         private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
 
         private readonly NotificationRepository _notificationRepository;
-        private readonly ReviewRepository _reviewRepository;
+        private readonly IReviewRepository _reviewRepository;
 
 
         private User _currentUser;
@@ -213,6 +214,6 @@ namespace HealthInstitution.Core
         public IEquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
         public IEquipmentOrderRepository EquipmentOrderRepository { get => _equipmentOrderRepository; }
         public NotificationRepository NotificationRepository { get => _notificationRepository; }
-        public ReviewRepository ReviewRepository { get => _reviewRepository; }
+        public IReviewRepository ReviewRepository { get => _reviewRepository; }
     }
 }
