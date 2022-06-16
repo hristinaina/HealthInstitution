@@ -3,26 +3,25 @@ using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class AdminRepository
+    public class AdminRepository : BaseRepository
     {
-        private readonly string _adminFileName;
         private List<Admin> _administrators;
 
         public List<Admin> Administrators { get => _administrators; }
-        public AdminRepository(string adminFileName)
+        public AdminRepository(string fileName)
         {
-            _adminFileName = adminFileName;
+            _fileName = fileName;
             _administrators = new List<Admin>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
-            _administrators = FileService.Deserialize<Admin>(_adminFileName);
+            _administrators = FileService.Deserialize<Admin>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
-            FileService.Serialize<Admin>(_adminFileName, _administrators);
+            FileService.Serialize<Admin>(_fileName, _administrators);
         }
     }
 }

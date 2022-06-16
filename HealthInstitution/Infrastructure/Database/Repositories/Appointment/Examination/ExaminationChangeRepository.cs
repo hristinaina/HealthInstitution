@@ -1,16 +1,12 @@
-﻿using HealthInstitution.Core;
-using HealthInstitution.Core.Services;
+﻿using HealthInstitution.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repositories.References
 {
-    public class ExaminationChangeRepository
+    public class ExaminationChangeRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<ExaminationChange> _references;
 
         public List<ExaminationChange> Changes { get => _references; }
@@ -20,12 +16,12 @@ namespace HealthInstitution.Core.Repositories.References
             _references = new List<ExaminationChange>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _references = FileService.Deserialize<ExaminationChange>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<ExaminationChange>(_fileName, _references);
         }

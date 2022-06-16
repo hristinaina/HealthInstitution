@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core
 {
-    public class ExaminationRepository
+    public class ExaminationRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<Examination> _examinations;
 
         public List<Examination> Examinations { get => _examinations; }
@@ -18,13 +16,13 @@ namespace HealthInstitution.Core
             _examinations = new List<Examination>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _examinations = FileService.Deserialize<Examination>(_fileName);
 
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Examination>(_fileName, _examinations);
         }

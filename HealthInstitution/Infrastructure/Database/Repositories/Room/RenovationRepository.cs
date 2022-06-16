@@ -6,9 +6,8 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.Infrastructure.Database.Repositories
 {
-    public class RenovationRepository
+    public class RenovationRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<Renovation> _renovations;
 
         public List<Renovation> Renovations { get => _renovations; }
@@ -19,13 +18,13 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             _renovations = new List<Renovation>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _renovations = FileService.Deserialize<Renovation>(_fileName);
 
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Renovation>(_fileName, _renovations);
         }

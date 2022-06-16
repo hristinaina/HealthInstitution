@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
-using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class AllergenRepository
+    public class AllergenRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<Allergen> _allergens;
         public List<Allergen> Allergens { get => _allergens; }
 
@@ -22,12 +15,12 @@ namespace HealthInstitution.Core.Repositories
             _allergens = new List<Allergen>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _allergens = FileService.Deserialize<Allergen>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Allergen>(_fileName, _allergens);
         }

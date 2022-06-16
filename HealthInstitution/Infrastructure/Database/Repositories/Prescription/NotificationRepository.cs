@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class NotificationRepository
+    public class NotificationRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<Notification> _notifications;
         public List<Notification> Notifications { get => _notifications; }
         public NotificationRepository(string patientFileName)
@@ -19,12 +14,12 @@ namespace HealthInstitution.Core.Repositories
             _notifications = new List<Notification>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _notifications = FileService.Deserialize<Notification>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize(_fileName, _notifications);
         }

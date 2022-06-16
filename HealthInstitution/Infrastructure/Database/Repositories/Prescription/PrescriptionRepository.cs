@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class PrescriptionRepository
+    public class PrescriptionRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<Prescription> _prescriptions;
 
         public List<Prescription> Prescriptions { get => _prescriptions; }
@@ -20,13 +15,13 @@ namespace HealthInstitution.Core.Repositories
             _prescriptions = new List<Prescription>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _prescriptions = FileService.Deserialize<Prescription>(_fileName);
 
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Prescription>(_fileName, _prescriptions);
         }

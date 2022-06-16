@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class OperationRepository
+    public class OperationRepository : BaseRepository
     {
 
-        private readonly string _fileName;
         private List<Operation> _operations;
 
         public List<Operation> Operations { get => _operations; }
@@ -21,12 +17,12 @@ namespace HealthInstitution.Core.Repositories
             _operations = new List<Operation>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _operations = FileService.Deserialize<Operation>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Operation>(_fileName, _operations);
         }

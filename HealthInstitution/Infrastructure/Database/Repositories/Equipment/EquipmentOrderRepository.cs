@@ -2,15 +2,11 @@
 using HealthInstitution.Core.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.Infrastructure.Database.Repositories
 {
-    public class EquipmentOrderRepository
+    public class EquipmentOrderRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<EquipmentOrder> _orders;
 
         public List<EquipmentOrder> Rooms { get => _orders; }
@@ -21,12 +17,12 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             _orders = new List<EquipmentOrder>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _orders = FileService.Deserialize<EquipmentOrder>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
 
             FileService.Serialize<EquipmentOrder>(_fileName, _orders);

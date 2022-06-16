@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HealthInstitution.Core.Services;
-using HealthInstitution.Core;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class DayOffRepository
+    public class DayOffRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<DayOff> _daysOff;
 
         public List<DayOff> DaysOff { get => _daysOff; }
@@ -20,12 +15,12 @@ namespace HealthInstitution.Core.Repositories
             _daysOff = new List<DayOff>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _daysOff = FileService.Deserialize<DayOff>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<DayOff>(_fileName, _daysOff);
         }

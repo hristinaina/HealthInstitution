@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.Core
 {
-    public class EquipmentRepository
+    public class EquipmentRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<Equipment> _equipment;
 
         public List<Equipment> Equipment { get => _equipment; }
@@ -16,12 +15,12 @@ namespace HealthInstitution.Core
             _equipment = new List<Equipment>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _equipment = FileService.Deserialize<Equipment>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Equipment>(_fileName, _equipment);
         }

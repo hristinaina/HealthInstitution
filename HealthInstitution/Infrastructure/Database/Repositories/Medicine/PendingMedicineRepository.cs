@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class PendingMedicineRepository
+    public class PendingMedicineRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<PendingMedicine> _pendingMedicines;
         public List<PendingMedicine> PendingMedicines { get => _pendingMedicines; }
 
@@ -22,12 +16,12 @@ namespace HealthInstitution.Core.Repositories
             _pendingMedicines = new List<PendingMedicine>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _pendingMedicines = FileService.Deserialize<PendingMedicine>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<PendingMedicine>(_fileName, _pendingMedicines);
         }

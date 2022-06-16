@@ -6,9 +6,8 @@ using HealthInstitution.Core;
 
 namespace HealthInstitution.Infrastructure.Database.Repositories
 {
-    public class EquipmentArrangementRepository
+    public class EquipmentArrangementRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<EquipmentArrangement> _validArrangement;
 
         public List<EquipmentArrangement> ValidArrangement { get => _validArrangement; }
@@ -32,7 +31,7 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             _validArrangement = new List<EquipmentArrangement>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             List<EquipmentArrangement> allArragments = FileService.Deserialize<EquipmentArrangement>(_fileName);
             if (_validArrangement is null) _validArrangement = new List<EquipmentArrangement>();
@@ -43,7 +42,7 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             }
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<EquipmentArrangement>(_fileName, _validArrangement);
         }

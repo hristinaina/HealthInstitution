@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core;
+﻿using System.Collections.Generic;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class DoctorDaysOffRepository
+    public class DoctorDaysOffRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<DoctorDaysOff> _references;
 
         public List<DoctorDaysOff> DoctorDaysOff { get => _references; }
@@ -20,12 +14,12 @@ namespace HealthInstitution.Core.Repositories
             _references = new List<DoctorDaysOff>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _references = FileService.Deserialize<DoctorDaysOff>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<DoctorDaysOff>(_fileName, _references);
         }

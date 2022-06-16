@@ -1,15 +1,10 @@
 ﻿using HealthInstitution.Core.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repositories.References
 {
-    public class PrescriptionMedicineRepository
+    public class PrescriptionMedicineRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<PrescriptionMedicine> _references;
 
         public PrescriptionMedicineRepository(string FileName)
@@ -22,12 +17,12 @@ namespace HealthInstitution.Core.Repositories.References
             return _references;
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _references = FileService.Deserialize<PrescriptionMedicine>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<PrescriptionMedicine>(_fileName, _references);
         }

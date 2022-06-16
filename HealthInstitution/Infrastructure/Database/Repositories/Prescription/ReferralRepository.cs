@@ -1,16 +1,10 @@
 ﻿using HealthInstitution.Core.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories.References
 {
-    public class ReferralRepository
+    public class ReferralRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<Referral> _references;
 
         public ReferralRepository(string FileName)
@@ -26,12 +20,12 @@ namespace HealthInstitution.Core.Repositories.References
             return _references;
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _references = FileService.Deserialize<Referral>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Referral>(_fileName, _references);
         }

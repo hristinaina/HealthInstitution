@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class PatientRepository
+    public class PatientRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<Patient> _patients;
         public List<Patient> Patients { get => _patients; }
         public PatientRepository(string patientFileName)
@@ -15,12 +13,12 @@ namespace HealthInstitution.Core.Repositories
             _patients = new List<Patient>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _patients = FileService.Deserialize<Patient>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Patient>(_fileName, _patients);
         }

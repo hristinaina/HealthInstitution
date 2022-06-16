@@ -4,9 +4,8 @@ using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Repositories
 {
-    public class DoctorRepository
+    public class DoctorRepository : BaseRepository
     {
-        private readonly string _fileName;
         private List<Doctor> _doctors;
 
         public List<Doctor> Doctors { get => _doctors; }
@@ -16,12 +15,12 @@ namespace HealthInstitution.Repositories
             _doctors = new List<Doctor>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _doctors = FileService.Deserialize<Doctor>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Doctor>(_fileName, _doctors);
         }
