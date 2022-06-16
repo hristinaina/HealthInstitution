@@ -32,10 +32,10 @@ namespace HealthInstitution.Core.Repositories
             {
                 if (perscription.ID == id) return perscription;
             }
-            return new Prescription(GetID());
+            return new Prescription(GetNewID());
         }
 
-        public int GetID()
+        public int GetNewID()
         {
             if (_prescriptions.Count == 0)
             {

@@ -22,7 +22,7 @@ namespace HealthInstitution.Core.Services
 
         public bool CreatePrescription(Prescription prescription, Examination examination)
         {
-            int id = Institution.Instance().PrescriptionRepository.GetID();
+            int id = Institution.Instance().PrescriptionRepository.GetNewID();
             prescription.ID = id;
             PatientManagementService patientService = new();
 

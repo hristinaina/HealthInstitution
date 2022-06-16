@@ -4,7 +4,7 @@ using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class ReviewRepository : BaseRepository, IReviewRepository
+    public class ReviewRepository : BaseRepository
     {
         private List<HospitalReview> _reviews;
         public List<HospitalReview> Reviews { get => _reviews; }

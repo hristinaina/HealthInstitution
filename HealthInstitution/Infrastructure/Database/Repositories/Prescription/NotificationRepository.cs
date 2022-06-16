@@ -42,7 +42,7 @@ namespace HealthInstitution.Core.Repositories
             return true;
         }
 
-        public int GetNewID()
+        private int GetNewID()
         {
             int i = 1;
             while (true)
