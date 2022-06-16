@@ -96,5 +96,10 @@ namespace HealthInstitution.Core.Repositories
 
             return medicine;
         }
-    }
+
+        public List<PendingMedicine> GetPendingMedicines()
+        {
+            return _pendingMedicines;
+        }
+    } 
 }
