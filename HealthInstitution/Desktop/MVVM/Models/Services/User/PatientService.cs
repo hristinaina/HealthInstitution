@@ -28,8 +28,6 @@ namespace HealthInstitution.Core.Services.DoctorServices
         }
 
         public Appointment FindInterruptingAppointment(DateTime startDateTime, int durationInMin = 15)
-        // returns null if appointment can be reserved
-        // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
         {
             DateTime endDateTime = startDateTime.AddMinutes(durationInMin);
             foreach (Appointment appointment in _appointments)
