@@ -55,5 +55,10 @@ namespace HealthInstitution.Repositories
             }
             return null;
         }
+
+        public List<Doctor> GetDoctors()
+        {
+            return _doctors;
+        }
     }
 }

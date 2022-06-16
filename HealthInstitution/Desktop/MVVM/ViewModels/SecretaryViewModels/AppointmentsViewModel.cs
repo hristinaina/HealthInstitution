@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.Core;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.AppointmentCommands;
 
@@ -14,7 +15,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
     public class AppointmentsViewModel : BaseViewModel
     {
-
+        private IPatientRepositoryService _patientService;
+        private IReferralRepositoryService _referralService;
         private readonly SecretaryReferralService _service;
         public SecretaryNavigationViewModel Navigation { get; }
 
@@ -94,6 +96,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         public AppointmentsViewModel()
         {
+            _patientService = new PatientRepositoryService();
+            _referralService = new ReferralRepositoryService();
             _service = new SecretaryReferralService();
             EnableChanges = false;
             Navigation = new SecretaryNavigationViewModel();
@@ -118,7 +122,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public void FillPatientsBox()
         {
             _patients.Clear();
-            foreach (Patient patient in Institution.Instance().PatientRepository.Patients)
+            foreach (Patient patient in _patientService.GetPatients())
             {
                 if(!patient.Deleted) _patients.Add(patient);
             }
@@ -137,7 +141,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public void FillReferralsList(string phrase = null)
         {
             _referrals.Clear();
-            List<Referral> referrals = Institution.Instance().ReferralRepository.Referrals;
+            List<Referral> referrals = _referralService.GetReferrals();
             if (phrase != null) referrals = _service.SearchMatchingReferrals(phrase);
             foreach (Referral referral in referrals)
             {

@@ -10,11 +10,13 @@ using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.AppointmentCommands
 {
     public class ScheduleCommand : BaseCommand
     {
+        private IDoctorRepositoryService _doctorService;
         private readonly Institution _institution;
         private EmergencyAppointmentViewModel _viewModel;
         private EmergencyAppointmentService _service;
@@ -27,6 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             _viewModel = viewModel;
             _navigationStore = NavigationStore.Instance();
             _service = new EmergencyAppointmentService();
+            _doctorService = new DoctorRepositoryService();
         }
 
         public override void Execute(object parameter)
@@ -49,7 +52,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             Patient patient = _viewModel.SelectedPatient;
             int duration = _viewModel.SelectedDuration;
             Doctor doctor = appointmentToPostpone.Doctor.Specialization == specialization ?
-                appointmentToPostpone.Doctor : Institution.Instance().DoctorRepository.FindDoctorBySpecialization(specialization);
+                appointmentToPostpone.Doctor : _doctorService.FindDoctorBySpecialization(specialization);
 
             Examination appointment = new(doctor, patient, oldDate);
             new SecretaryScheduleAppointmentService().ScheduleAppointment(appointment, duration, false);

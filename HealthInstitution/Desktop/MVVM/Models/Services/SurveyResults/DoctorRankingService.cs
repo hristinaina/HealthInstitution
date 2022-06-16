@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.SurveyResults;
 using HealthInstitution.Repositories;
 
@@ -8,12 +9,12 @@ namespace HealthInstitution.Core
     public class DoctorRankingService
     {
         private DoctorSurveyResultsService _surveyResults;
-        private DoctorRepository _doctors;
+        private IDoctorRepositoryService _doctorService;
 
         public DoctorRankingService()
         {
             _surveyResults = new DoctorSurveyResultsService();
-            _doctors = Institution.Instance().DoctorRepository;
+            _doctorService = new DoctorRepositoryService();
         }
 
         public List<Tuple<Doctor, double>> GetBest()
@@ -21,7 +22,7 @@ namespace HealthInstitution.Core
             List<Tuple<Doctor, double>> bestDoctors = new List<Tuple<Doctor, double>>() { null, null, null };
             
 
-            foreach (Doctor doctor in _doctors.Doctors)
+            foreach (Doctor doctor in _doctorService.GetDoctors())
             {
                 Dictionary<string, List<double>> score = _surveyResults.GetResults(doctor);
                 if (double.IsNaN(score["Service"][0]))
@@ -54,7 +55,7 @@ namespace HealthInstitution.Core
             List<Tuple<Doctor, double>> worstDoctors = new List<Tuple<Doctor, double>>() { null, null, null };
 
 
-            foreach (Doctor doctor in _doctors.Doctors)
+            foreach (Doctor doctor in _doctorService.GetDoctors())
             {
                 Dictionary<string, List<double>> score = _surveyResults.GetResults(doctor);
                 if (double.IsNaN(score["Service"][0]))

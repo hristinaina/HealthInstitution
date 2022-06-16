@@ -26,6 +26,7 @@ namespace HealthInstitution.Core.Repositories
         {
             FileService.Serialize<Prescription>(_fileName, _prescriptions);
         }
+
         public Prescription FindByID(int id)
         {
             foreach (Prescription perscription in _prescriptions)
@@ -47,6 +48,11 @@ namespace HealthInstitution.Core.Repositories
         public void Add(Prescription prescription)
         {
             _prescriptions.Add(prescription);
+        }
+
+        public List<Prescription> GetPrescriptions()
+        {
+            return _prescriptions;
         }
     }
 }

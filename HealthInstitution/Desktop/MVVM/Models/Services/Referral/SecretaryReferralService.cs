@@ -8,35 +8,36 @@ using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Repositories;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
     public class SecretaryReferralService
     {
-        private readonly ReferralRepository _referralRepository;
-        private readonly PatientRepository _patientRepository;
-        private readonly DoctorRepository _doctorRepository;
+        private IReferralRepositoryService _referralService;
+        private IDoctorRepositoryService _doctorService;
+        private IPatientRepositoryService _patientService;
 
         public SecretaryReferralService()
         {
-            _referralRepository = Institution.Instance().ReferralRepository;
-            _patientRepository = Institution.Instance().PatientRepository;
-            _doctorRepository = Institution.Instance().DoctorRepository;
+            _referralService = new ReferralRepositoryService();
+            _doctorService = new DoctorRepositoryService();
+            _patientService = new PatientRepositoryService();
         }
 
         public void RemoveReferral(int referralId)
         {
-            Referral referral = _referralRepository.FindByID(referralId);
-            Patient patient = _patientRepository.FindByID(referral.PatientId);
+            Referral referral = _referralService.FindByID(referralId);
+            Patient patient = _patientService.FindByID(referral.PatientId);
 
             patient.Record.Referrals.Remove(referral);
-            _referralRepository.Referrals.Remove(referral);
+            _referralService.GetReferrals().Remove(referral);
         }
 
         public void UseReferral(int referralId, DateTime datetime)
         {
-            Referral referral = _referralRepository.FindByID(referralId);
-            Patient patient = _patientRepository.FindByID(referral.PatientId);
+            Referral referral = _referralService.FindByID(referralId);
+            Patient patient = _patientService.FindByID(referral.PatientId);
 
             bool done = ScheduleAppointment(referral, patient, datetime);
             if (!done)
@@ -49,7 +50,7 @@ namespace HealthInstitution.Core.Services
         {
             if (referral.DoctorId != -1)
             {
-                Doctor doctor = _doctorRepository.FindByID(referral.DoctorId);
+                Doctor doctor = _doctorService.FindByID(referral.DoctorId);
                 if (!ScheduleAppointmentByDoctor(doctor, patient, datetime))
                 {
                     return false;
@@ -69,7 +70,7 @@ namespace HealthInstitution.Core.Services
         {
             bool done = false;
             bool specializationException = false;
-            foreach (Doctor doctor in _doctorRepository.Doctors)
+            foreach (Doctor doctor in _doctorService.GetDoctors())
             {
                 if (doctor.Specialization == specialization)
                 {
@@ -93,13 +94,13 @@ namespace HealthInstitution.Core.Services
 
         public void RemoveReferralsOfDeletedPatients()
         {
-            List<Referral> referrals = new List<Referral>(_referralRepository.Referrals.ToArray());
+            List<Referral> referrals = new List<Referral>(_referralService.GetReferrals().ToArray());
             foreach (Referral referral in referrals)
             {
-                Patient patient = _patientRepository.FindByID(referral.PatientId);
+                Patient patient = _patientService.FindByID(referral.PatientId);
                 if (patient.Deleted == true)
                 {
-                    _referralRepository.Referrals.Remove(referral);
+                    _referralService.GetReferrals().Remove(referral);
                 }
             }
         }
@@ -108,9 +109,9 @@ namespace HealthInstitution.Core.Services
         {
             List<Referral> matchingReferrals = new();
 
-            foreach (Referral r in _referralRepository.Referrals)
+            foreach (Referral r in _referralService.GetReferrals())
             {
-                Patient patient = _patientRepository.FindByID(r.PatientId);
+                Patient patient = _patientService.FindByID(r.PatientId);
                 string name = patient.FirstName + " " + patient.LastName;
                 if (name.ToLower().Contains(phrase.ToLower()))
                 {

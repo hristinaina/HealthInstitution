@@ -43,5 +43,10 @@ namespace HealthInstitution.Core.Repositories.References
         {
             _references.Add(prescriptionMedicine);
         }
+
+        public List<PrescriptionMedicine> GetPrescriptionMedicines()
+        {
+            return _references;
+        }
     }
 }

@@ -24,15 +24,11 @@ namespace HealthInstitution.Core.Repositories
         {
             FileService.Serialize(_fileName, _notifications);
         }
-        public Notification FindByID(int id)
-        {
-            foreach (Notification notification in _notifications)
-            {
-                if (notification.ID == id) return notification;
-            }
-            return null;
-        }
 
+        public List<Notification> GetNotifications() 
+        {
+            return _notifications;
+        }
         private bool CheckID(int id)
         {
             foreach (Notification n in _notifications)
@@ -56,14 +52,6 @@ namespace HealthInstitution.Core.Repositories
         {
             int id = GetNewID();
             Notification notification = new(id, text, DateTime.Now, patientID);
-            _notifications.Add(notification);
-            return notification;
-        }
-
-        public Notification CreateNotification(int patientID, string text, DateTime time)
-        {
-            int id = GetNewID();
-            Notification notification = new(id, text, time, patientID);
             _notifications.Add(notification);
             return notification;
         }

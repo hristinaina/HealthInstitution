@@ -21,7 +21,7 @@ namespace HealthInstitution.Core.Services
                 if (change.Resolved && change.ChangeStatus == AppointmentStatus.DELETED) {
                     return;
                 } 
-                Patient p = Institution.Instance().PatientRepository.FindByID(change.PatientID);
+                Patient p = new PatientRepositoryService().FindByID(change.PatientID);
                 p.ExaminationChanges.Add(change);
             }
         }
@@ -33,11 +33,10 @@ namespace HealthInstitution.Core.Services
             {
                 IExaminationRepositoryService examinations = new ExaminationRepositoryService();
                 Examination examination = (Examination) examinations.FindByID(relation.ExaminationID);
-                Doctor doctor = Institution.Instance().DoctorRepository.FindByID(relation.DoctorID);
-                Patient patient = Institution.Instance().PatientRepository.FindByID(relation.PatientID);
-                Prescription prescription = Institution.Instance().PrescriptionRepository.FindByID(relation.PerscriptionID);
-                Room room = Institution.Instance().RoomRepository.FindById(relation.RoomID);
-
+                Doctor doctor = new DoctorRepositoryService().FindByID(reference.DoctorID);
+                Patient patient = new PatientRepositoryService().FindByID(reference.PatientID);
+                Prescription prescription = new PrescriptionRepositoryService().FindByID(reference.PerscriptionID);
+                 Room room = Institution.Instance().RoomRepository.FindById(relation.RoomID);
 
                 examination.Doctor = doctor;
                 examination.Patient = patient;
@@ -58,8 +57,8 @@ namespace HealthInstitution.Core.Services
             {
                 IOperationRepositoryService operations = new OperationRepositoryService();
                 Operation operation = operations.FindByID(reference.OperationId);
-                Doctor doctor = Institution.Instance().DoctorRepository.FindByID(reference.DoctorID);
-                Patient patient = Institution.Instance().PatientRepository.FindByID(reference.PatientID);
+                Doctor doctor = new DoctorRepositoryService().FindByID(reference.DoctorID);
+                Patient patient = new PatientRepositoryService().FindByID(reference.PatientID);
                 Room room = Institution.Instance().RoomRepository.FindById(reference.RoomID);
 
                 operation.Doctor = doctor;
@@ -115,9 +114,9 @@ namespace HealthInstitution.Core.Services
                 IExaminationRepositoryService examinations = new ExaminationRepositoryService();
                 patient.Examinations = examinations.FindByPatientID(patient.ID);
                 patient.Operations = operations.FindByPatientID(patient.ID);
-                patient.Record.Referrals = Institution.Instance().ReferralRepository.FindByPatientID(patient.ID);
+                patient.Record.Referrals = new ReferralRepositoryService().FindByPatientID(patient.ID);
 
-                List<PatientAllergen> patientAllergens = Institution.Instance().PatientAllergenRepository.FindByPatientID(patient.ID);
+                List<PatientAllergen> patientAllergens = new PatientAllergenRepositoryService().FindByPatientID(patient.ID);
                 patient.Record.Allergens = new AllergenRepositoryService().PatientAllergenToAllergen(patientAllergens);
             }
         }
@@ -148,7 +147,7 @@ namespace HealthInstitution.Core.Services
 
         public static void ConnectDoctorDaysOff()
         {
-            foreach (Doctor doctor in Institution.Instance().DoctorRepository.Doctors)
+            foreach (Doctor doctor in new DoctorRepositoryService().GetDoctors())
             {
                 List<DoctorDaysOff> doctorDaysOff = new DoctorDaysOffRepositoryService().FindByDoctorID(doctor.ID);
                 doctor.DaysOff = new DayOffRepositoryService().DoctorDaysOffToDaysOff(doctorDaysOff);
@@ -159,9 +158,9 @@ namespace HealthInstitution.Core.Services
 
         public static void ConnectPrescriptionRepository()
         {
-            foreach (Prescription prescription in Institution.Instance().PrescriptionRepository.Prescriptions)
+            foreach (Prescription prescription in new PrescriptionRepositoryService().GetPrescriptions())
             {
-                PrescriptionMedicine prescriptionMedicine = Institution.Instance().PrescriptionMedicineRepository.
+                PrescriptionMedicine prescriptionMedicine = new PrescriptionMedicineRepositoryService().
                                                              FindByPrescriptionID(prescription.ID);
                 prescription.Medicine = new MedicineRepositoryService().PrescriptionMedicineToMedicine(prescriptionMedicine);
             }
@@ -169,9 +168,9 @@ namespace HealthInstitution.Core.Services
 
         public static void ConnectPatientNotifications()
         {
-            foreach (Notification notification in Institution.Instance().NotificationRepository.Notifications)
+            foreach (Notification notification in new NotificationRepositoryService().GetNotifications())
             {
-                Patient patient = Institution.Instance().PatientRepository.FindByID(notification.PatientId);
+                Patient patient = new PatientRepositoryService().FindByID(notification.PatientId);
                 patient.Notifications.Add(notification);
             }
         }
@@ -183,8 +182,8 @@ namespace HealthInstitution.Core.Services
             {
                 patientEmail = patient.Email;
             }
-            if (!User.CheckEmail(email, Institution.Instance().PatientRepository.Patients, patientEmail)) return false;
-            if (!User.CheckEmail(email, Institution.Instance().DoctorRepository.Doctors)) return false;
+            if (!User.CheckEmail(email, new PatientRepositoryService().GetPatients(), patientEmail)) return false;
+            if (!User.CheckEmail(email, new DoctorRepositoryService().GetDoctors())) return false;
             if (!User.CheckEmail(email, Institution.Instance().SecretaryRepository.Secretaries)) return false;
             if (!User.CheckEmail(email, Institution.Instance().AdminRepository.Administrators)) return false;
             return true;

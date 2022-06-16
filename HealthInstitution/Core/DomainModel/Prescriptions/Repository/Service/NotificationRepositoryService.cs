@@ -20,14 +20,9 @@ namespace HealthInstitution.Core.Repository
             return _notificationRepository.CreateNotification(patientID, text);
         }
 
-        public Notification CreateNotification(int patientID, string text, DateTime time)
+        public List<Notification> GetNotifications()
         {
-            return _notificationRepository.CreateNotification(patientID, text, time);
-        }
-
-        public Notification FindByID(int id)
-        {
-            return _notificationRepository.FindByID(id);
+            return _notificationRepository.GetNotifications();
         }
     }
 }

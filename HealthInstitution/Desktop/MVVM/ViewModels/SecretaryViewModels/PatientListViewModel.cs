@@ -14,6 +14,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
     public class PatientListViewModel : BaseViewModel
     {
+        private IPatientRepositoryService _patientService;
         public SecretaryNavigationViewModel Navigation { get; }
         private readonly ObservableCollection<PatientListItemViewModel> _patients;
         public IEnumerable<PatientListItemViewModel> Patients => _patients;
@@ -56,15 +57,15 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 OnPropertyChanged(nameof(FirstName));
                 LastName = _selectedPatient.Surname;
                 OnPropertyChanged(nameof(LastName));
-                Email = Institution.Instance().PatientRepository.FindByID(Convert.ToInt32(_selectedPatient.Id)).Email;
+                Email = _patientService.FindByID(Convert.ToInt32(_selectedPatient.Id)).Email;
                 OnPropertyChanged(nameof(Email));
-                Height = Institution.Instance().PatientRepository.FindByID(Convert.ToInt32(_selectedPatient.Id)).Record.Height.ToString();
+                Height = _patientService.FindByID(Convert.ToInt32(_selectedPatient.Id)).Record.Height.ToString();
                 OnPropertyChanged(nameof(Height));
-                Weight = Institution.Instance().PatientRepository.FindByID(Convert.ToInt32(_selectedPatient.Id)).Record.Weight.ToString();
+                Weight = _patientService.FindByID(Convert.ToInt32(_selectedPatient.Id)).Record.Weight.ToString();
                 OnPropertyChanged(nameof(Weight));
-                Password = Institution.Instance().PatientRepository.FindByID(Convert.ToInt32(_selectedPatient.Id)).Password;
+                Password = _patientService.FindByID(Convert.ToInt32(_selectedPatient.Id)).Password;
                 OnPropertyChanged(nameof(Password));
-                GetGender = Institution.Instance().PatientRepository.FindByID(Convert.ToInt32(_selectedPatient.Id)).Gender.ToString();
+                GetGender = _patientService.FindByID(Convert.ToInt32(_selectedPatient.Id)).Gender.ToString();
                 OnPropertyChanged(nameof(GetGender));
 
                 FillAllergenList();
@@ -94,6 +95,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         public PatientListViewModel()
         {
+            _patientService = new PatientRepositoryService();
             _patients = new ObservableCollection<PatientListItemViewModel>();
             _allergens = new ObservableCollection<AllergenItemViewModel>();
             _allAllergens = new ObservableCollection<AllergenItemViewModel>();
@@ -117,7 +119,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _patients.Clear();
 
-            List<Patient> allPatients = Institution.Instance().PatientRepository.Patients;
+            List<Patient> allPatients = _patientService.GetPatients();
             foreach (Patient patient in allPatients)
             {
                 if (!patient.Blocked && !patient.Deleted)
@@ -167,7 +169,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             _allergens.Clear();
             int id = 1;
             if (_selectedPatient != null) id = Convert.ToInt32(_selectedPatient.Id);
-            Patient patient = Institution.Instance().PatientRepository.FindByID(id);
+            Patient patient = _patientService.FindByID(id);
             foreach (Allergen allergen in patient.Record.Allergens)
             {
                 _allergens.Add(new AllergenItemViewModel(allergen));
@@ -187,7 +189,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             _illnesses.Clear();
             int id = 1;
             if (_selectedPatient != null) id = Convert.ToInt32(_selectedPatient.Id);
-            List<string> allIllnesses = Institution.Instance().PatientRepository.FindByID(id).GetHistoryOfIllness();
+            List<string> allIllnesses = _patientService.FindByID(id).GetHistoryOfIllness();
             foreach (string illness in allIllnesses)
             {
                 _illnesses.Add(new IllnessItemViewModel(illness));

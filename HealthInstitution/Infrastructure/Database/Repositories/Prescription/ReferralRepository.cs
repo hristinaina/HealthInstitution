@@ -16,11 +16,6 @@ namespace HealthInstitution.Core.Repositories.References
 
         public List<Referral> Referrals { get => _references; }
 
-        public List<Referral> GetReferences()
-        {
-            return _references;
-        }
-
         public override void LoadFromFile()
         {
             _references = FileService.Deserialize<Referral>(_fileName);
@@ -73,6 +68,11 @@ namespace HealthInstitution.Core.Repositories.References
                 if (CheckID(i)) return i;
                 i++;
             }
+        }
+
+        public List<Referral> GetReferrals()
+        {
+            return _references;
         }
     }
 }

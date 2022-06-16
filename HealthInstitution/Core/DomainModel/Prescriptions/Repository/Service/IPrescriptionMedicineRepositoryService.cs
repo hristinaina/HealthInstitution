@@ -11,5 +11,7 @@ namespace HealthInstitution.Core.Repository
         public PrescriptionMedicine FindByPrescriptionID(int prescriptionId);
 
         public void Add(PrescriptionMedicine prescriptionMedicine);
+
+        public List<PrescriptionMedicine> GetPrescriptionMedicines();
     }
 }

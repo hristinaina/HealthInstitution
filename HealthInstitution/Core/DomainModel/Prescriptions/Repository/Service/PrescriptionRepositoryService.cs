@@ -30,5 +30,10 @@ namespace HealthInstitution.Core.Repository
         {
             return _prescriptionRepository.GetNewID();
         }
+
+        public List<Prescription> GetPrescriptions()
+        {
+            return _prescriptionRepository.GetPrescriptions();
+        }
     }
 }

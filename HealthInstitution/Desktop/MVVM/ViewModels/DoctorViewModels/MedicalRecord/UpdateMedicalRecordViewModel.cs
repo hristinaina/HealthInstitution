@@ -13,6 +13,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
     class UpdateMedicalRecordViewModel : BaseViewModel
     {
+        private IDoctorRepositoryService _doctorService;
         public DoctorNavigationViewModel Navigation { get; }
 
         private Institution _institution;
@@ -164,6 +165,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public UpdateMedicalRecordViewModel(Examination examination)
         {
+            _doctorService = new DoctorRepositoryService();
             bool isSpecialist = true;
             Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
             _patient = examination.Patient;
@@ -250,7 +252,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public void FillDoctorsList()
         {
             _doctors.Clear();
-            foreach (Doctor doctor in _institution.DoctorRepository.Doctors)
+            foreach (Doctor doctor in _doctorService.GetDoctors())
             {
                 _doctors.Add(doctor);
             }
