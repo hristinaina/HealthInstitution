@@ -40,8 +40,8 @@
     "Gender": 1
   },
   {
-    "Blocked": true,
-    "BlockadeType": 1,
+    "Blocked": false,
+    "BlockadeType": 0,
     "Deleted": false,
     "Record": {
       "Height": 170.0,
