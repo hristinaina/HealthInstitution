@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Infrastructure.Database.Repositories;
 using HealthInstitution.Core.Repositories.References;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core
 {
