@@ -29,6 +29,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 
             Examination examination = _viewModel.SelectedExamination.Examination;
             DateTime datetime = _viewModel.MergeTime(_viewModel.SelectedDate, _viewModel.SelectedTime);
+            examination.Date = DateTime.Parse(_viewModel.SelectedDate);
+            examination.Patient = _viewModel.SelectedPatient;
 
             try
             {
