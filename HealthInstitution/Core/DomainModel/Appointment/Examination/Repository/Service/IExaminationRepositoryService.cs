@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IExaminationService
+    public interface IExaminationRepositoryService
     {
         public List<Examination> FindByPatientID(int patientId);
 

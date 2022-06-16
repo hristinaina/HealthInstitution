@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public class ExaminationService : IExaminationService
+    public class ExaminationRepositoryService : IExaminationRepositoryService
     {
         IExaminationRepository _repository;
 
-        public ExaminationService()
+        public ExaminationRepositoryService()
         {
             _repository = Institution.Instance().ExaminationRepository;
         }

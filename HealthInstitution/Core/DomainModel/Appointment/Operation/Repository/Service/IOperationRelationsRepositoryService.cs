@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository { 
-    public interface IOperationRelationsService
+    public interface IOperationRelationsRepositoryService
     {
         public List<OperationReference> GetReferences();
 

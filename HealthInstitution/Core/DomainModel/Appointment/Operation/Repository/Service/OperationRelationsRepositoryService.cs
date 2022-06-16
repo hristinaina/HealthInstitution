@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public class OperationRelationsService : IOperationRelationsService
+    public class OperationRelationsRepositoryService : IOperationRelationsRepositoryService
     {
         IOperationRelationsRepository _repository;
 
-        public OperationRelationsService()
+        public OperationRelationsRepositoryService()
         {
             _repository = Institution.Instance().OperationReferencesRepository;
         }

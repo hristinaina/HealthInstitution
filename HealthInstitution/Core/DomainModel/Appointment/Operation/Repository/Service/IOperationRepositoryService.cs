@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IOperationService
+    public interface IOperationRepositoryService
     {
         public Operation FindByID(int id);
 

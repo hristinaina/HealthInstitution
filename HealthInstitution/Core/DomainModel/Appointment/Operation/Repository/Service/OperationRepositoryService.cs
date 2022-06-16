@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public class OperationService : IOperationRepository
+    public class OperationRepositoryService : IOperationRepository
     {
         IOperationRepository _repository;
-        public OperationService()
+        public OperationRepositoryService()
         {
             _repository = Institution.Instance().OperationRepository;
         }

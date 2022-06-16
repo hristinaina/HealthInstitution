@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public class ExaminationChangeService : IExaminationChangeService
+    public class ExaminationChangeRepositoryService : IExaminationChangeRepositoryService
     {
         IExaminationChangeRepository _repository;
 
-        public ExaminationChangeService()
+        public ExaminationChangeRepositoryService()
         {
             _repository = Institution.Instance().ExaminationChangeRepository;
         }
