@@ -34,8 +34,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             try
             {
 
-                PatientCancelExaminationService service = new PatientCancelExaminationService();
-                bool doneCompletely = service.CancelExamination((Examination)examination);
+                bool doneCompletely = _service.CancelExamination((Examination)examination);
                 if (doneCompletely)
                 {
                     _viewModel.ShowMessage("Appointment successfully canceled !");

@@ -1,6 +1,5 @@
-﻿using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
+﻿using HealthInstitution.Core;
+using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Services.DoctorServices;
@@ -8,17 +7,14 @@ using HealthInstitution.Core.Services.Rooms;
 using HealthInstitution.Core.Services.ValidationServices;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.Services
 {
     public class PatientScheduleExaminationService : IScheduleExamination
     {
-        private ExaminationRepository _examinationRepository;
-        private ExaminationReferencesRepository _examinationReferencesRepository;
-        private ExaminationChangeRepository _examinationChangeRepository;
+        private readonly ExaminationRepository _examinationRepository;
+        private readonly ExaminationReferencesRepository _examinationReferencesRepository;
+        private readonly ExaminationChangeRepository _examinationChangeRepository;
 
 
         public PatientScheduleExaminationService()

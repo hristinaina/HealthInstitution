@@ -3,19 +3,14 @@ using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Services.Rooms;
 using HealthInstitution.Core.Services.ValidationServices;
-using HealthInstitution.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HealthInstitution.Services
 {
-    class PatientRescheduleExaminationService : IRescheduleExamination
+    internal class PatientRescheduleExaminationService : IRescheduleExamination
     {
-        private ExaminationReferencesRepository examinationReferencesRepository;
-        private ExaminationChangeRepository examinationChangeRepository;
+        private readonly ExaminationReferencesRepository examinationReferencesRepository;
+        private readonly ExaminationChangeRepository examinationChangeRepository;
 
 
         public PatientRescheduleExaminationService()
