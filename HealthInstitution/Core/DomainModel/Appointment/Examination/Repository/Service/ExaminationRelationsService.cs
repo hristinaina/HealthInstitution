@@ -32,7 +32,7 @@ namespace HealthInstitution.Core.Repository
 
         public void Remove(Examination examination)
         {
-            _repository.FindByExaminationID(examination);
+            _repository.Remove(examination);
         }
     }
 }
