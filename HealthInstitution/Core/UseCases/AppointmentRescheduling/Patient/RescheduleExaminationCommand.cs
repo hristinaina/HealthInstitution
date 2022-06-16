@@ -8,12 +8,12 @@ using System;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
-    class RescheduleAppointmentCommand : BaseCommand
+    class RescheduleExaminationCommand : BaseCommand
     {
         private readonly PatientAppointmentViewModel _viewModel;
         private IRescheduleExamination _service;
 
-        public RescheduleAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel)
+        public RescheduleExaminationCommand(PatientAppointmentViewModel patientAppointmentViewModel)
         {
             _viewModel = patientAppointmentViewModel;
             _service = new PatientRescheduleExaminationService();

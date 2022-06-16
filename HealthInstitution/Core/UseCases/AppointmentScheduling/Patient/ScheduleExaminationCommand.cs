@@ -8,40 +8,39 @@ using System;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
-    class CancelAppointmentCommand : BaseCommand
+    public class ScheduleExaminationCommand : BaseCommand
     {
         private readonly PatientAppointmentViewModel _viewModel;
-        private ICancelExamination _service;
+        private readonly bool _usingSuggestion;
+        private IScheduleExamination _service;
 
-        public CancelAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel)
+        public ScheduleExaminationCommand(PatientAppointmentViewModel patientAppointmentViewModel, bool usingSuggestion = false)
         {
             _viewModel = patientAppointmentViewModel;
-            _service = new PatientCancelExaminationService();
+            _usingSuggestion = usingSuggestion;
+            _service = new PatientScheduleExaminationService();
         }
 
         public override void Execute(object parameter)
         {
-
             _viewModel.DialogOpen = false;
 
-            Appointment examination = _viewModel.SelectedAppointment.Appointment;
-            if (examination is Operation)
+            Patient patient = _viewModel.Patient;
+            Doctor doctor = _viewModel.NewDoctor;
+            DateTime datetime = _viewModel.MergeTime(_viewModel.NewDate, _viewModel.NewTime);
+
+            if (_usingSuggestion)
             {
-                _viewModel.ShowMessage("Cannot cancel operation !");
-                return;
+                doctor = _viewModel.SelectedSuggestion.Doctor;
+                datetime = _viewModel.MergeTime(_viewModel.SelectedSuggestion.Date, _viewModel.SelectedSuggestion.Time);
             }
 
             try
             {
-
-                bool doneCompletely = _service.CancelExamination((Examination)examination);
-                if (doneCompletely)
+                bool done = _service.CreateExamination(patient, doctor, datetime);
+                if (done)
                 {
-                    _viewModel.ShowMessage("Appointment successfully canceled !");
-                }
-                else
-                {
-                    _viewModel.ShowMessage("Request sent to secretariat !");
+                    _viewModel.ShowMessage("Appointment successfully scheduled !");
                 }
             }
             catch (PatientBlockedException e)
@@ -52,7 +51,6 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             {
                 _viewModel.ShowMessage(e.Message);
             }
-
             _viewModel.FillAppointmentsList();
         }
     }

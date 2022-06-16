@@ -22,8 +22,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public Patient Patient { get => _patient; }
         private readonly Institution _institution;
 
-        private readonly ObservableCollection<AppointmentListItemViewModel> _appointments;
-        public IEnumerable<AppointmentListItemViewModel> Appointments => _appointments;
+        private readonly ObservableCollection<AppointmentListItem> _appointments;
+        public IEnumerable<AppointmentListItem> Appointments => _appointments;
 
         private bool _dialogOpen;
         public bool DialogOpen
@@ -81,8 +81,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             OnPropertyChanged(nameof(SelectedTime));
         }
 
-        private AppointmentListItemViewModel _selectedAppointment;
-        public AppointmentListItemViewModel SelectedAppointment { get => _selectedAppointment; }
+        private AppointmentListItem _selectedAppointment;
+        public AppointmentListItem SelectedAppointment { get => _selectedAppointment; }
 
         public Doctor SelectedDoctor { get; set; }
         public string SelectedDate { get; set; }
@@ -98,11 +98,11 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public DateTime SuggestionStartTime { get; set; }
         public DateTime SuggestionEndTime { get; set; }
         public bool SuggestionPriority { get; set; }
-        private ObservableCollection<AppointmentListItemViewModel> _appointmentSuggestions;
+        private ObservableCollection<AppointmentListItem> _appointmentSuggestions;
         private readonly INotify _notifyService;
 
-        public IEnumerable<AppointmentListItemViewModel> AppointmentSuggestions { get => _appointmentSuggestions; }
-        public AppointmentListItemViewModel SelectedSuggestion { get; set; }
+        public IEnumerable<AppointmentListItem> AppointmentSuggestions { get => _appointmentSuggestions; }
+        public AppointmentListItem SelectedSuggestion { get; set; }
         public ICommand UseSuggestion { get; set; }
 
         public PatientAppointmentViewModel()
@@ -112,7 +112,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _doctorService = new DoctorRepositoryService();
             _institution = Institution.Instance();
             _patient = (Patient)_institution.CurrentUser;
-            _appointments = new ObservableCollection<AppointmentListItemViewModel>();
+            _appointments = new ObservableCollection<AppointmentListItem>();
             _doctors = new ObservableCollection<Doctor>();
 
             InitializeChangesParameters();
@@ -152,7 +152,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
         private void InitializeSuggestionsParrameters()
         {
-            _appointmentSuggestions = new ObservableCollection<AppointmentListItemViewModel>();
+            _appointmentSuggestions = new ObservableCollection<AppointmentListItem>();
             Suggestions = new MakeSuggestionsCommand(this);
             SuggestionDeadlineDate = DateTime.Now;
             SuggestionStartTime = DateTime.Now;
@@ -165,7 +165,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _appointmentSuggestions.Clear();
             foreach (Examination examination in suggestions)
             {
-                _appointmentSuggestions.Add(new AppointmentListItemViewModel(examination));
+                _appointmentSuggestions.Add(new AppointmentListItem(examination));
             }
             if (_appointmentSuggestions.Count != 0)
             {
@@ -182,7 +182,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             PatientAppointmentsService service = new PatientAppointmentsService(_patient);
             foreach (Appointment appointment in service.GetFutureAppointments())
             {
-                _appointments.Add(new AppointmentListItemViewModel(appointment));
+                _appointments.Add(new AppointmentListItem(appointment));
             }
             if (_appointments.Count != 0)
             {
