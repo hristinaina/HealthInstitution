@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
