@@ -3,9 +3,11 @@ using HealthInstitution.Core.Services.PatientServices;
 using HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
+using HealthInstitution.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using static HealthInstitution.Services.NotificationReceiveService;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
@@ -62,6 +64,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         private int _service;
         private int _suggestion;
         private string _comment;
+        private readonly INotify _notifyService;
 
         public int Service { get => _service; set { _service = value; } }
         public int Suggestion { get => _suggestion; set { _suggestion = value; } }
@@ -83,6 +86,10 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             CanReview = false;
             Check = new CheckCommand(this);
             Submit = new SubmitSurveyCommand(this);
+            Del delegateMethod = showNotification;
+            _notifyService = new NotificationReceiveService(_patient, delegateMethod);
+            _notifyService.ExecuteRealTimeNotifications();
+            _notifyService.AddMissedNotifications();
         }
 
         private void InitializeSearchParameters()
