@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Repositories;
 using System.Collections.Generic;
 
@@ -6,16 +7,16 @@ namespace HealthInstitution.Services
 {
     public class DoctorsSearchService : SearchService, IDoctorSearch
     {
-        private readonly DoctorRepository _repository;
-        public DoctorsSearchService(DoctorRepository repository)
+        private readonly IDoctorRepositoryService _repository;
+        public DoctorsSearchService()
         {
-            _repository = repository;
+            _repository = new DoctorRepositoryService();
         }
 
         public List<Doctor> SearchForDoctor(Doctor doctor)
         {
             List<Doctor> doctors = new List<Doctor>();
-            foreach (Doctor d in _repository.Doctors)
+            foreach (Doctor d in _repository.GetDoctors())
             {
                 bool add = false;
                 if (IsMatching(doctor.FirstName, d.FirstName))

@@ -1,5 +1,6 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.Commands;
 using HealthInstitution.Stores;
 using System;
@@ -60,13 +61,12 @@ namespace HealthInstitution.MVVM.ViewModels
 
             if (Institution.Instance().CurrentUser is Patient patient)
             {
-                NotificationRepository repository = Institution.Instance().NotificationRepository;
-                Notification notification = repository.CreateNotification(patient.ID, message);
+                Notification notification = new NotificationRepositoryService().CreateNotification(patient.ID, message);
                 patient.Notifications.Add(notification);
             }
         }
 
-        public void hideNotification()
+        public void HideNotification()
         {
             Notification = "";
             NotificationHeight = 0;

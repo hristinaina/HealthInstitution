@@ -1,13 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface INotificationRepository
+    public interface INotificationRepository : IRepository
     {
-        public Notification FindByID(int id);
-
         public Notification CreateNotification(int patientID, string text);
 
-        public Notification CreateNotification(int patientID, string text, DateTime time);
+        public List<Notification> GetNotifications();
     }
 }

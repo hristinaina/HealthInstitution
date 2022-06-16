@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Equipments;
 using HealthInstitution.Core.Services.Renovations;
 using HealthInstitution.Core.Services.Rooms;
@@ -29,9 +30,9 @@ namespace HealthInstitution.Core.Services
             foreach (ExaminationReference reference in Institution.Instance().ExaminationReferencesRepository.GetReferences())
             {
                 Examination examination = Institution.Instance().ExaminationRepository.FindByID(reference.ExaminationID);
-                Doctor doctor = Institution.Instance().DoctorRepository.FindByID(reference.DoctorID);
+                Doctor doctor = new DoctorRepositoryService().FindByID(reference.DoctorID);
                 Patient patient = Institution.Instance().PatientRepository.FindByID(reference.PatientID);
-                Prescription prescription = Institution.Instance().PrescriptionRepository.FindByID(reference.PerscriptionID);
+                Prescription prescription = new PrescriptionRepositoryService().FindByID(reference.PerscriptionID);
                 Room room = Institution.Instance().RoomRepository.FindById(reference.RoomID);
 
 
@@ -51,7 +52,7 @@ namespace HealthInstitution.Core.Services
             foreach (OperationReference reference in Institution.Instance().OperationReferencesRepository.GetReferences())
             {
                 Operation operation = Institution.Instance().OperationRepository.FindByID(reference.OperationId);
-                Doctor doctor = Institution.Instance().DoctorRepository.FindByID(reference.DoctorID);
+                Doctor doctor = new DoctorRepositoryService().FindByID(reference.DoctorID);
                 Patient patient = Institution.Instance().PatientRepository.FindByID(reference.PatientID);
                 Room room = Institution.Instance().RoomRepository.FindById(reference.RoomID);
 
@@ -105,7 +106,7 @@ namespace HealthInstitution.Core.Services
             {
                 patient.Examinations = Institution.Instance().ExaminationRepository.FindByPatientID(patient.ID);
                 patient.Operations = Institution.Instance().OperationRepository.FindByPatientID(patient.ID);
-                patient.Record.Referrals = Institution.Instance().ReferralRepository.FindByPatientID(patient.ID);
+                patient.Record.Referrals = new ReferralRepositoryService().FindByPatientID(patient.ID);
 
                 List<PatientAllergen> patientAllergens = Institution.Instance().PatientAllergenRepository.FindByPatientID(patient.ID);
                 patient.Record.Allergens = Institution.Instance().AllergenRepository.PatientAllergenToAllergen(patientAllergens);
@@ -138,7 +139,7 @@ namespace HealthInstitution.Core.Services
 
         public static void ConnectDoctorDaysOff()
         {
-            foreach (Doctor doctor in Institution.Instance().DoctorRepository.Doctors)
+            foreach (Doctor doctor in new DoctorRepositoryService().GetDoctors())
             {
                 List<DoctorDaysOff> doctorDaysOff = Institution.Instance().DoctorDaysOffRepository.FindByDoctorID(doctor.ID);
                 doctor.DaysOff = Institution.Instance().DayOffRepository.DoctorDaysOffToDaysOff(doctorDaysOff);
@@ -149,9 +150,9 @@ namespace HealthInstitution.Core.Services
 
         public static void ConnectPrescriptionRepository()
         {
-            foreach (Prescription prescription in Institution.Instance().PrescriptionRepository.Prescriptions)
+            foreach (Prescription prescription in new PrescriptionRepositoryService().GetPrescriptions())
             {
-                PrescriptionMedicine prescriptionMedicine = Institution.Instance().PrescriptionMedicineRepository.
+                PrescriptionMedicine prescriptionMedicine = new PrescriptionMedicineRepositoryService().
                                                              FindByPrescriptionID(prescription.ID);
                 prescription.Medicine = Institution.Instance().MedicineRepository.PrescriptionMedicineToMedicine(prescriptionMedicine);
             }
@@ -159,7 +160,7 @@ namespace HealthInstitution.Core.Services
 
         public static void ConnectPatientNotifications()
         {
-            foreach (Notification notification in Institution.Instance().NotificationRepository.Notifications)
+            foreach (Notification notification in new NotificationRepositoryService().GetNotifications())
             {
                 Patient patient = Institution.Instance().PatientRepository.FindByID(notification.PatientId);
                 patient.Notifications.Add(notification);
@@ -174,7 +175,7 @@ namespace HealthInstitution.Core.Services
                 patientEmail = patient.Email;
             }
             if (!User.CheckEmail(email, Institution.Instance().PatientRepository.Patients, patientEmail)) return false;
-            if (!User.CheckEmail(email, Institution.Instance().DoctorRepository.Doctors)) return false;
+            if (!User.CheckEmail(email, new DoctorRepositoryService().GetDoctors())) return false;
             if (!User.CheckEmail(email, Institution.Instance().SecretaryRepository.Secretaries)) return false;
             if (!User.CheckEmail(email, Institution.Instance().AdminRepository.Administrators)) return false;
             return true;

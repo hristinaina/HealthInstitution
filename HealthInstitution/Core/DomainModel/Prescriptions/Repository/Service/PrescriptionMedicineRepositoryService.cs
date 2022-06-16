@@ -19,5 +19,10 @@ namespace HealthInstitution.Core.Repository
         {
             return _prescriptionMedicineRepository.FindByPrescriptionID(prescriptionId);
         }
+
+        public List<PrescriptionMedicine> GetPrescriptionMedicines()
+        {
+            return _prescriptionMedicineRepository.GetPrescriptionMedicines();
+        }
     }
 }

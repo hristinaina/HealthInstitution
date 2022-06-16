@@ -13,5 +13,7 @@ namespace HealthInstitution.Core.Repository
         public List<Doctor> GetGeneralPractitioners();
 
         public Doctor FindDoctorBySpecialization(Specialization specialization);
+
+        public List<Doctor> GetDoctors();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IReferralRepository
+    public interface IReferralRepository :IRepository
     {
         public Referral FindByID(int id);
 
@@ -11,5 +11,7 @@ namespace HealthInstitution.Core.Repository
         public void Add(Referral referral);
 
         public int GetNewID();
+
+        public List<Referral> GetReferrals();
     }
 }

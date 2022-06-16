@@ -8,10 +8,8 @@ namespace HealthInstitution.Core.Repository
 {
     public interface INotificationRepositoryService
     {
-        public Notification FindByID(int id);
-
         public Notification CreateNotification(int patientID, string text);
 
-        public Notification CreateNotification(int patientID, string text, DateTime time);
+        public List<Notification> GetNotifications();
     }
 }

@@ -25,6 +25,11 @@ namespace HealthInstitution.Core.Repository
             return _doctorRepository.FindDoctorBySpecialization(specialization);
         }
 
+        public List<Doctor> GetDoctors()
+        {
+            return _doctorRepository.GetDoctors();
+        }
+
         public List<Doctor> GetGeneralPractitioners()
         {
             return _doctorRepository.GetGeneralPractitioners();

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.SurveyResults;
 
 namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 {
     public class AdminSurveysViewModel : BaseViewModel
     {
+        private IDoctorRepositoryService _doctorService;
         private readonly Admin _admin;
         private Institution _institution;
         private HospitalSurveyResultsService _hospitalSurveyResults;
@@ -69,13 +71,14 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public AdminNavigationViewModel Navigation { get; }
         public AdminSurveysViewModel()
         {
+            _doctorService = new DoctorRepositoryService();
             _institution = Institution.Instance();
             Navigation = new AdminNavigationViewModel();
 
             _hospitalSurveyResults = new HospitalSurveyResultsService();
             _doctorSurveyResults = new DoctorSurveyResultsService();
 
-            _doctors = _institution.DoctorRepository.Doctors;
+            _doctors = _doctorService.GetDoctors();
 
             //_results = new Dictionary<string, List<double>>();
             //_surveyComments = new List<string>();

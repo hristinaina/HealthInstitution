@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Infrastructure.Database.Repositories;
 using HealthInstitution.Core.Repositories.References;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core
 {
@@ -16,11 +17,11 @@ namespace HealthInstitution.Core
         private readonly AppConfiguration _appSettings;
 
         private readonly PatientRepository _patientRepository;
-        private readonly DoctorRepository _doctorRepository;
+        private readonly IDoctorRepository _doctorRepository;
         private readonly SecretaryRepository _secretaryRepository;
         private readonly AdminRepository _adminRepository;
 
-        private readonly PrescriptionRepository _prescriptionRepository;
+        private readonly IPrescriptionRepository _prescriptionRepository;
         private readonly ExaminationRepository _examinationRepository;
 
         private readonly OperationRepository _operationRepository;
@@ -38,7 +39,7 @@ namespace HealthInstitution.Core
 
         private readonly MedicineRepository _medicineRepository;
         private readonly DayOffRepository _dayOffRepository;
-        private readonly ReferralRepository _referralRepository;
+        private readonly IReferralRepository _referralRepository;
 
         private readonly AllergenRepository _allergenRepository;
         private readonly PatientAllergenRepository _patientAllergenRepository;
@@ -46,10 +47,10 @@ namespace HealthInstitution.Core
         private readonly PendingMedicineRepository _pendingMedicineRepository;
 
         private readonly DoctorDaysOffRepository _doctorDaysOffRepository;
-        private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
+        private readonly IPrescriptionMedicineRepository _prescriptionMedicineRepository;
         private readonly ExaminationChangeRepository _examinationChangeRepository;
 
-        private readonly NotificationRepository _notificationRepository;
+        private readonly INotificationRepository _notificationRepository;
         private readonly ReviewRepository _reviewRepository;
 
 
@@ -188,10 +189,10 @@ namespace HealthInstitution.Core
 
 
         public PatientRepository PatientRepository { get => _patientRepository; }
-        public DoctorRepository DoctorRepository { get => _doctorRepository; }
+        public IDoctorRepository DoctorRepository { get => _doctorRepository; }
         public SecretaryRepository SecretaryRepository { get => _secretaryRepository; }
         public AdminRepository AdminRepository { get => _adminRepository; }
-        public PrescriptionRepository PrescriptionRepository { get => _prescriptionRepository; }
+        public IPrescriptionRepository PrescriptionRepository { get => _prescriptionRepository; }
         public ExaminationRepository ExaminationRepository { get => _examinationRepository; }
         public OperationRepository OperationRepository { get => _operationRepository; }
         public ExaminationReferencesRepository ExaminationReferencesRepository { get => _examinationReferencesRepository; }
@@ -202,17 +203,17 @@ namespace HealthInstitution.Core
         public RoomRenovationRepository RoomRenovationRepository { get => _roomRenovationRepository; }
         public MedicineRepository MedicineRepository { get => _medicineRepository; }
         public DayOffRepository DayOffRepository { get => _dayOffRepository; }
-        public ReferralRepository ReferralRepository { get => _referralRepository; }
+        public IReferralRepository ReferralRepository { get => _referralRepository; }
         public AllergenRepository AllergenRepository { get => _allergenRepository; }
         public PatientAllergenRepository PatientAllergenRepository { get => _patientAllergenRepository; }
         public MedicineAllergenRepository MedicineAllergenRepository { get => _medicineAllergenRepository; }
         public PendingMedicineRepository PendingMedicineRepository { get => _pendingMedicineRepository; }
         public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
-        public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
+        public IPrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
         public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
         public EquipmentOrderRepository EquipmentOrderRepository { get => _equipmentOrderRepository; }
-        public NotificationRepository NotificationRepository { get => _notificationRepository; }
+        public INotificationRepository NotificationRepository { get => _notificationRepository; }
         public ReviewRepository ReviewRepository { get => _reviewRepository; }
     }
 }

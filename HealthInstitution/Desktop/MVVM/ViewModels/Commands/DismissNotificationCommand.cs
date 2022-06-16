@@ -13,7 +13,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands
 
         public override void Execute(object parameter)
         {
-            _viewModel.hideNotification();
+            _viewModel.HideNotification();
         }
     }
 }

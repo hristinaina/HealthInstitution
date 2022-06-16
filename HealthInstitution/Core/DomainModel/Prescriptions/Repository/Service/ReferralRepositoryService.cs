@@ -34,5 +34,10 @@ namespace HealthInstitution.Core.Repository
         {
             return _referralRepository.GetNewID();
         }
+
+        public List<Referral> GetReferrals()
+        {
+            return _referralRepository.GetReferrals();
+        }
     }
 }

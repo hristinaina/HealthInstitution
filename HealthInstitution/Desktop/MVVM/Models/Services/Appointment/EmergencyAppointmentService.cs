@@ -8,6 +8,7 @@ using HealthInstitution.Core.Repositories;
 using HealthInstitution.Repositories;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.DoctorServices;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
@@ -18,16 +19,18 @@ namespace HealthInstitution.Core.Services
         private Patient _patient;
         private int _newDuration;
 
-        private readonly DoctorRepository _doctorRepository;
+        private readonly IDoctorRepositoryService _doctorService;
         private readonly ExaminationRepository _examinationRepository;
         private readonly OperationRepository _operationRepository;
+        private readonly INotificationRepositoryService _notificationRepositoryService;
 
         public EmergencyAppointmentService()
         {
             _doctor = null;
-            _doctorRepository = Institution.Instance().DoctorRepository;
+            _doctorService = new DoctorRepositoryService();
             _examinationRepository = Institution.Instance().ExaminationRepository;
             _operationRepository = Institution.Instance().OperationRepository;
+            _notificationRepositoryService = new NotificationRepositoryService();
         }
 
         public void ChangeDuration(int duration)
@@ -47,7 +50,7 @@ namespace HealthInstitution.Core.Services
             for (; currentTime < startTime.AddHours(2); currentTime = currentTime.AddMinutes(15))
             {
                 bool specialistException = false;
-                foreach (Doctor doctor in _doctorRepository.Doctors)
+                foreach (Doctor doctor in _doctorService.GetDoctors())
                 {
                     if (doctor.Specialization == specialization)
                     {
@@ -126,7 +129,7 @@ namespace HealthInstitution.Core.Services
             Appointment emergencyAppointment = FindAppointment(newAppointment.Patient, newAppointment.Doctor, newAppointment.Date);
             string message = "Appointment with id=" + rescheduledAppointment.ID.ToString() + " has been changed." +
                 " Changed date from " + emergencyAppointment.Date.ToString() + " to " + rescheduledAppointment.Date.ToString();
-            Notification notification = Institution.Instance().NotificationRepository.CreateNotification(emergencyAppointment.Patient.ID, message);
+            Notification notification = _notificationRepositoryService.CreateNotification(emergencyAppointment.Patient.ID, message);
             emergencyAppointment.Patient.Notifications.Add(notification);
             emergencyAppointment.Doctor.Notifications.Add(message);
             emergencyAppointment.Emergency = true;

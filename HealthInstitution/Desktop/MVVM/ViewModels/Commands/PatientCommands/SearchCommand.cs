@@ -1,5 +1,6 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
 using HealthInstitution.Services;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             if (_viewModel is PatientSearchViewModel searchViewModel)
             {
 
-                _doctorSearch = new DoctorsSearchService(Institution.Instance().DoctorRepository);
+                _doctorSearch = new DoctorsSearchService();
                 Doctor search = new Doctor(searchViewModel.FirstNameKeyWord, searchViewModel.LastNameKeyWord, (Specialization)searchViewModel.SelectedSpecialization);
                 List<Doctor> doctors = _doctorSearch.SearchForDoctor(search);
                 searchViewModel.FillAllDoctorsList(doctors);

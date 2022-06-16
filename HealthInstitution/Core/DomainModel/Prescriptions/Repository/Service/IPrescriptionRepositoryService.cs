@@ -14,5 +14,6 @@ namespace HealthInstitution.Core.Repository
 
         public void Add(Prescription prescription);
 
+        public List<Prescription> GetPrescriptions();
     }
 }

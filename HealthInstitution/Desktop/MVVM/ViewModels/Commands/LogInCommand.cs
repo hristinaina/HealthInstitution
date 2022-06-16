@@ -1,5 +1,6 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Core.Exceptions;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
@@ -11,12 +12,14 @@ namespace HealthInstitution.Commands
 {
     public class LogInCommand : BaseCommand
     {
+        private IDoctorRepositoryService _doctorService;
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
         private readonly LogInViewModel _loginVM;
 
         public LogInCommand(LogInViewModel loginVM)
         {
+            _doctorService = new DoctorRepositoryService();
             _loginVM = loginVM;
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();
@@ -72,7 +75,7 @@ namespace HealthInstitution.Commands
                 return true;
             }
 
-            _institution.CurrentUser = User.FindUser(_institution.DoctorRepository.Doctors, email, password);
+            _institution.CurrentUser = User.FindUser(_doctorService.GetDoctors(), email, password);
             if (_institution.CurrentUser != null)
             {
                 _navigationStore.CurrentViewModel = new DoctorExaminationViewModel();

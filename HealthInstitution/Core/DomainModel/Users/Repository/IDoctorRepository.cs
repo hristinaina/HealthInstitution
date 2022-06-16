@@ -2,12 +2,14 @@
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IDoctorRepository
+    public interface IDoctorRepository : IRepository
     {
         public Doctor FindByID(int id);
 
         public List<Doctor> GetGeneralPractitioners();
 
         public Doctor FindDoctorBySpecialization(Specialization specialization);
+
+        public List<Doctor> GetDoctors();
     }
 }

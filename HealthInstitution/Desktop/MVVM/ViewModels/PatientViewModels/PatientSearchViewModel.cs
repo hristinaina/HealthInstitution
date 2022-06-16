@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
 using HealthInstitution.Services;
@@ -12,6 +13,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     public class PatientSearchViewModel : PatientAppointmentViewModel
     {
+        private IDoctorRepositoryService _doctorService;
         private readonly Institution _institution;
         protected Patient _patient;
         public PatientNavigationViewModel Navigation { get; }
@@ -68,6 +70,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
         public PatientSearchViewModel()
         {
+            _doctorService = new DoctorRepositoryService();
             _institution = Institution.Instance();
             _patient = (Patient)_institution.CurrentUser;
             Navigation = new PatientNavigationViewModel();
@@ -77,9 +80,9 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             Search = new SearchCommand(this);
             Reset = new ResetCommand(this);
 
-            FillAllDoctorsList(Institution.Instance().DoctorRepository.Doctors);
+            FillAllDoctorsList(_doctorService.GetDoctors());
             FillSpecializationList();
-            FillDoctorsList(Institution.Instance().DoctorRepository.Doctors);
+            FillDoctorsList(_doctorService.GetDoctors());
 
             Del delegateMethod = showNotification;
             _notifyService = new NotificationReceiveService(_patient, delegateMethod);

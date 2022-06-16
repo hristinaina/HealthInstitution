@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.PatientServices;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
@@ -14,6 +15,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
     public class PatientAppointmentViewModel : BaseViewModel
     {
+        private IDoctorRepositoryService _doctorService;
         public PatientNavigationViewModel Navigation { get; }
 
         private readonly Patient _patient;
@@ -107,6 +109,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         {
             Navigation = new PatientNavigationViewModel();
 
+            _doctorService = new DoctorRepositoryService();
             _institution = Institution.Instance();
             _patient = (Patient)_institution.CurrentUser;
             _appointments = new ObservableCollection<AppointmentListItemViewModel>();
@@ -195,7 +198,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         {
             if (doctors is null)
             {
-                doctors = _institution.DoctorRepository.GetGeneralPractitioners();
+                doctors = _doctorService.GetGeneralPractitioners();
             }
             _doctors.Clear();
             foreach (Doctor doctor in doctors)
