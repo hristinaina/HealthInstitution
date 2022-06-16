@@ -4,7 +4,7 @@
     {
         public Prescription FindByID(int id);
 
-        public int GetID();
+        public int GetNewID();
 
         public void Add(Prescription prescription);
 
