@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Commands;
 using HealthInstitution.Core;
-using HealthInstitution.MVVM.Models;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
 

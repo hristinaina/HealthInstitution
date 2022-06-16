@@ -50,6 +50,7 @@ namespace HealthInstitution.Core.Services
         // else returns appointment that interrupts (scheduled appoint.) - for the next free appointment calculation
         {
             List<Appointment> appointments = new();
+            DateTime dateTimeEnds = dateTime.AddMinutes(durationInMin);
             foreach (Examination examination in _examinations) appointments.Add(examination);
             foreach (Operation operation in _operations) appointments.Add(operation);
             foreach (Appointment appointment in appointments)
@@ -62,20 +63,34 @@ namespace HealthInstitution.Core.Services
                     duration = operation.Duration;
                 }
                 DateTime appointmentEnds = appointmentBegins.AddMinutes(duration);
+                if (appointmentBegins < dateTimeEnds && dateTime < appointmentEnds) return appointment;
                 if (DateTime.Compare(appointment.Date.Date, dateTime.Date) != 0) continue;
                 if (DateTime.Compare(dateTime, appointmentBegins) >= 0 &&
-                    DateTime.Compare(dateTime, appointmentEnds) < 0) return appointment;
+                     DateTime.Compare(dateTime, appointmentEnds) < 0) return appointment;
                 if (DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentBegins) > 0 &&
-                    DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentEnds) <= 0)
-                    return appointment;
+                    DateTime.Compare(dateTime.AddMinutes(durationInMin), appointmentEnds) <= 0) return appointment;
+               
+                //if (appointmentBegins < dateTime && dateTimeEnds < appointmentEnds) return appointment;
             }
 
             return null;
         }
 
+        public bool IsOnVacation(DateTime dateTime, int durationInMin = 15)
+        {
+            DateTime dateTimeEnds = dateTime.AddMinutes(durationInMin);
+            foreach (DayOff dayOff in _doctor.DaysOff)
+            {
+                if (dayOff.StartDate < dateTimeEnds && dateTime < dayOff.EndDate)
+                    return true;
+            }
+            return false;
+        }
+
         public bool IsAvailable(DateTime dateTime, int durationInMin = 15)
         {
             Appointment interruptingAppointment = FindInterruptingAppointment(dateTime, durationInMin);
+            if (IsOnVacation(dateTime, durationInMin)) return false;
             if (interruptingAppointment is null) return true;
             return false;
         }

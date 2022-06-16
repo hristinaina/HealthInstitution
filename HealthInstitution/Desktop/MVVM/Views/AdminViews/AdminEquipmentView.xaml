@@ -28,6 +28,7 @@
                                          Content="{Binding Message}"
                                          IsActive="{Binding MessageVisibility}"/>
         <components:AdminNavigationRail SelectedIndex="1"></components:AdminNavigationRail>
+
         <materialDesign:Card Grid.Column="1">
             <materialDesign:DialogHost DialogTheme="Inherit"
                                            Grid.Column="0"
@@ -80,8 +81,8 @@
                                             Command="{Binding Search}"
                                             Margin="19,10,0,0"/>
                             </Grid>
-                        </Grid>
-                        <ListView     ItemsSource="{Binding Equipment}"
+                            <ListView Grid.Row="1"
+                                      ItemsSource="{Binding Equipment}"
                                       VerticalAlignment="Center"
                                       Width="514"
                                       Height="470"
@@ -125,7 +126,7 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-
+                        </Grid>
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*"></RowDefinition>

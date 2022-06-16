@@ -4,6 +4,7 @@ using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels;
 using HealthInstitution.Stores;
 using HealthInstitution.Core.Services;
+using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 
 namespace HealthInstitution
 {
@@ -27,9 +28,7 @@ namespace HealthInstitution
 
         protected override void OnStartup(StartupEventArgs e)
         {
-
             _navigation.CurrentViewModel = new LogInViewModel();
-            //_navigation.CurrentViewModel = new AdminRoomViewModel();
             MainWindow = new MainWindow()
             {
                 DataContext = new MainViewModel(_navigation)

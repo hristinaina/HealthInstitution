@@ -38,6 +38,15 @@ namespace HealthInstitution.Core.Repositories
             return null;
         }
 
+        public int FindNewID()
+        {
+            if (_daysOff.Count == 0)
+            {
+                return 1;
+            }
+            return _daysOff.Max(x => x.ID) + 1;
+        }
+
         public List<DayOff> DoctorDaysOffToDaysOff(List<DoctorDaysOff> doctorDaysOff)
         {
             List<DayOff> daysOff = new();

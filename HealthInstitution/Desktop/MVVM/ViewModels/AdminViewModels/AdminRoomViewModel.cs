@@ -1,14 +1,10 @@
 ﻿using HealthInstitution.Core;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.Commands.AdminCommands;
 using HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
