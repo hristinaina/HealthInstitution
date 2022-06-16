@@ -6,11 +6,13 @@ using System.Collections.ObjectModel;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
 using HealthInstitution.Core.Services;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
     class DoctorExaminationViewModel : BaseViewModel
     {
+        private IPatientRepositoryService _patientService;
         private readonly ObservableCollection<ExaminationItemViewModel> _examinations;
 
         private Institution _institution;
@@ -90,6 +92,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 
         public DoctorExaminationViewModel()
         {
+            _patientService = new PatientRepositoryService();
             bool isSpecialist = true;
             Doctor doctor = (Doctor)Institution.Instance().CurrentUser;
             if (doctor.Specialization == Specialization.NONE) isSpecialist = false;
@@ -143,7 +146,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         private void FillPatientsList()
         {
             _patients.Clear();
-            foreach (Patient patient in _institution.PatientRepository.Patients)
+            foreach (Patient patient in _patientService.GetPatients())
             {
                 _patients.Add(patient);
             }

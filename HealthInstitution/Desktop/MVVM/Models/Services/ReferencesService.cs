@@ -20,7 +20,7 @@ namespace HealthInstitution.Core.Services
                 if (change.Resolved && change.ChangeStatus == AppointmentStatus.DELETED) {
                     return;
                 } 
-                Patient p = Institution.Instance().PatientRepository.FindByID(change.PatientID);
+                Patient p = new PatientRepositoryService().FindByID(change.PatientID);
                 p.ExaminationChanges.Add(change);
             }
         }
@@ -31,7 +31,7 @@ namespace HealthInstitution.Core.Services
             {
                 Examination examination = Institution.Instance().ExaminationRepository.FindByID(reference.ExaminationID);
                 Doctor doctor = new DoctorRepositoryService().FindByID(reference.DoctorID);
-                Patient patient = Institution.Instance().PatientRepository.FindByID(reference.PatientID);
+                Patient patient = new PatientRepositoryService().FindByID(reference.PatientID);
                 Prescription prescription = new PrescriptionRepositoryService().FindByID(reference.PerscriptionID);
                 Room room = Institution.Instance().RoomRepository.FindById(reference.RoomID);
 
@@ -53,7 +53,7 @@ namespace HealthInstitution.Core.Services
             {
                 Operation operation = Institution.Instance().OperationRepository.FindByID(reference.OperationId);
                 Doctor doctor = new DoctorRepositoryService().FindByID(reference.DoctorID);
-                Patient patient = Institution.Instance().PatientRepository.FindByID(reference.PatientID);
+                Patient patient = new PatientRepositoryService().FindByID(reference.PatientID);
                 Room room = Institution.Instance().RoomRepository.FindById(reference.RoomID);
 
                 operation.Doctor = doctor;
@@ -102,13 +102,13 @@ namespace HealthInstitution.Core.Services
 
         public static void FillMedicalRecord()
         {
-            foreach (Patient patient in Institution.Instance().PatientRepository.Patients)
+            foreach (Patient patient in new PatientRepositoryService().GetPatients())
             {
                 patient.Examinations = Institution.Instance().ExaminationRepository.FindByPatientID(patient.ID);
                 patient.Operations = Institution.Instance().OperationRepository.FindByPatientID(patient.ID);
                 patient.Record.Referrals = new ReferralRepositoryService().FindByPatientID(patient.ID);
 
-                List<PatientAllergen> patientAllergens = Institution.Instance().PatientAllergenRepository.FindByPatientID(patient.ID);
+                List<PatientAllergen> patientAllergens = new PatientAllergenRepositoryService().FindByPatientID(patient.ID);
                 patient.Record.Allergens = Institution.Instance().AllergenRepository.PatientAllergenToAllergen(patientAllergens);
             }
         }
@@ -162,7 +162,7 @@ namespace HealthInstitution.Core.Services
         {
             foreach (Notification notification in new NotificationRepositoryService().GetNotifications())
             {
-                Patient patient = Institution.Instance().PatientRepository.FindByID(notification.PatientId);
+                Patient patient = new PatientRepositoryService().FindByID(notification.PatientId);
                 patient.Notifications.Add(notification);
             }
         }
@@ -174,7 +174,7 @@ namespace HealthInstitution.Core.Services
             {
                 patientEmail = patient.Email;
             }
-            if (!User.CheckEmail(email, Institution.Instance().PatientRepository.Patients, patientEmail)) return false;
+            if (!User.CheckEmail(email, new PatientRepositoryService().GetPatients(), patientEmail)) return false;
             if (!User.CheckEmail(email, new DoctorRepositoryService().GetDoctors())) return false;
             if (!User.CheckEmail(email, Institution.Instance().SecretaryRepository.Secretaries)) return false;
             if (!User.CheckEmail(email, Institution.Instance().AdminRepository.Administrators)) return false;

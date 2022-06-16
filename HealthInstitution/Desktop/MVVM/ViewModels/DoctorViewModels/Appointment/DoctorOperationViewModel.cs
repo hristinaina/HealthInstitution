@@ -10,12 +10,13 @@ using HealthInstitution.Core;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
 using HealthInstitution.Core.Services;
-
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
     class DoctorOperationViewModel : BaseViewModel
     {
+        private IPatientRepositoryService _patientService;
         private readonly ObservableCollection<OperationItemViewModel> _operations;
 
         private Institution _institution;
@@ -100,6 +101,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
             _operations = new ObservableCollection<OperationItemViewModel>();
             Navigation = new DoctorNavigationViewModel(isSpecialist);
 
+            _patientService = new PatientRepositoryService();
             _institution = Institution.Instance();
             _doctor = (Doctor)_institution.CurrentUser;
             _patients = new ObservableCollection<Patient>();
@@ -134,7 +136,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         private void FillPatientsList()
         {
             _patients.Clear();
-            foreach (Patient patient in _institution.PatientRepository.Patients)
+            foreach (Patient patient in _patientService.GetPatients())
             {
                 _patients.Add(patient);
             }

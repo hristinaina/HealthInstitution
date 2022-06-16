@@ -16,10 +16,12 @@ namespace HealthInstitution.Commands
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
         private readonly LogInViewModel _loginVM;
+        private IPatientRepositoryService _patientService;
 
         public LogInCommand(LogInViewModel loginVM)
         {
             _doctorService = new DoctorRepositoryService();
+            _patientService = new PatientRepositoryService();
             _loginVM = loginVM;
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();
@@ -57,7 +59,7 @@ namespace HealthInstitution.Commands
         // check which user type it is and redirect to the corresponding main page
         private bool Login(string email, string password)
         {
-            _institution.CurrentUser = User.FindUser(_institution.PatientRepository.Patients, email, password);
+            _institution.CurrentUser = User.FindUser(_patientService.GetPatients(), email, password);
             if (_institution.CurrentUser != null)
             {
                 Patient user = (Patient)_institution.CurrentUser;

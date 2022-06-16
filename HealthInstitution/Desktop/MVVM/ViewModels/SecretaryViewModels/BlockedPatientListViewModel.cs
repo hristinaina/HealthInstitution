@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
@@ -13,6 +14,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
     public class BlockedPatientListViewModel : BaseViewModel
     {
+        private IPatientRepositoryService _patientService;
         public SecretaryNavigationViewModel Navigation { get; }
 
         private readonly ObservableCollection<BlockedPatientItemViewModel> _patients;
@@ -74,11 +76,11 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
                 OnPropertyChanged(nameof(FirstName));
                 LastName = _selectedPatient.Surname;
                 OnPropertyChanged(nameof(LastName));
-                Email = Institution.Instance().PatientRepository.FindByID(Convert.ToInt32(_selectedPatient.Id)).Email;
+                Email = _patientService.FindByID(Convert.ToInt32(_selectedPatient.Id)).Email;
                 OnPropertyChanged(nameof(Email));
-                Height = Institution.Instance().PatientRepository.FindByID(Convert.ToInt32(_selectedPatient.Id)).Record.Height.ToString();
+                Height = _patientService.FindByID(Convert.ToInt32(_selectedPatient.Id)).Record.Height.ToString();
                 OnPropertyChanged(nameof(Height));
-                Weight = Institution.Instance().PatientRepository.FindByID(Convert.ToInt32(_selectedPatient.Id)).Record.Weight.ToString();
+                Weight = _patientService.FindByID(Convert.ToInt32(_selectedPatient.Id)).Record.Weight.ToString();
                 OnPropertyChanged(nameof(Weight));
 
                 FillAllergenList();
@@ -88,6 +90,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         public BlockedPatientListViewModel()
         {
+            _patientService = new PatientRepositoryService();
             _patients = new ObservableCollection<BlockedPatientItemViewModel>();
             _allergens = new ObservableCollection<AllergenItemViewModel>();
             _illnesses = new ObservableCollection<IllnessItemViewModel>();
@@ -103,7 +106,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _patients.Clear();
 
-            List<Patient> blockedPatients = Institution.Instance().PatientRepository.Patients;
+            List<Patient> blockedPatients = _patientService.GetPatients();
             foreach (Patient patient in blockedPatients)
             {
                 if (patient.Blocked && !patient.Deleted)
@@ -123,7 +126,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             _allergens.Clear();
             int id = 1;
             if (_selectedPatient != null) id = Convert.ToInt32(_selectedPatient.Id);
-            Patient patient = Institution.Instance().PatientRepository.FindByID(id);
+            Patient patient = _patientService.FindByID(id);
             foreach (Allergen allergen in patient.Record.Allergens)
             {
                 _allergens.Add(new AllergenItemViewModel(allergen));
@@ -135,7 +138,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             _illnesses.Clear();
             int id = 1;
             if (_selectedPatient != null) id = Convert.ToInt32(_selectedPatient.Id);
-            List<string> allIllnesses = Institution.Instance().PatientRepository.FindByID(id).GetHistoryOfIllness();
+            List<string> allIllnesses = _patientService.FindByID(id).GetHistoryOfIllness();
             foreach (string illness in allIllnesses)
             {
                 _illnesses.Add(new IllnessItemViewModel(illness));

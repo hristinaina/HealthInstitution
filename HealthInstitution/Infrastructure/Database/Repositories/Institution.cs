@@ -16,7 +16,7 @@ namespace HealthInstitution.Core
     {
         private readonly AppConfiguration _appSettings;
 
-        private readonly PatientRepository _patientRepository;
+        private readonly IPatientRepository _patientRepository;
         private readonly IDoctorRepository _doctorRepository;
         private readonly SecretaryRepository _secretaryRepository;
         private readonly AdminRepository _adminRepository;
@@ -42,7 +42,7 @@ namespace HealthInstitution.Core
         private readonly IReferralRepository _referralRepository;
 
         private readonly AllergenRepository _allergenRepository;
-        private readonly PatientAllergenRepository _patientAllergenRepository;
+        private readonly IPatientAllergenRepository _patientAllergenRepository;
         private readonly MedicineAllergenRepository _medicineAllergenRepository;
         private readonly PendingMedicineRepository _pendingMedicineRepository;
 
@@ -188,7 +188,7 @@ namespace HealthInstitution.Core
         }
 
 
-        public PatientRepository PatientRepository { get => _patientRepository; }
+        public IPatientRepository PatientRepository { get => _patientRepository; }
         public IDoctorRepository DoctorRepository { get => _doctorRepository; }
         public SecretaryRepository SecretaryRepository { get => _secretaryRepository; }
         public AdminRepository AdminRepository { get => _adminRepository; }
@@ -205,7 +205,7 @@ namespace HealthInstitution.Core
         public DayOffRepository DayOffRepository { get => _dayOffRepository; }
         public IReferralRepository ReferralRepository { get => _referralRepository; }
         public AllergenRepository AllergenRepository { get => _allergenRepository; }
-        public PatientAllergenRepository PatientAllergenRepository { get => _patientAllergenRepository; }
+        public IPatientAllergenRepository PatientAllergenRepository { get => _patientAllergenRepository; }
         public MedicineAllergenRepository MedicineAllergenRepository { get => _medicineAllergenRepository; }
         public PendingMedicineRepository PendingMedicineRepository { get => _pendingMedicineRepository; }
         public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }

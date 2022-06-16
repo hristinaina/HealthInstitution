@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 
@@ -13,12 +14,14 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
 {
     public class SaveAccountCommand : BaseCommand
     {
+        private IPatientRepositoryService _patientService;
         private readonly Institution _institution;
         private PatientListViewModel _viewModel;
         private readonly PatientManagementService _service;
 
         public SaveAccountCommand(PatientListViewModel viewModel)
         {
+            _patientService = new PatientRepositoryService();
             _institution = Institution.Instance();
             _viewModel = viewModel;
             _service = new PatientManagementService();
@@ -73,7 +76,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
 
         private bool ValidateEmail()
         {
-            Patient patient = Institution.Instance().PatientRepository.FindByID(_viewModel.SelectedPatientId);
+            Patient patient = _patientService.FindByID(_viewModel.SelectedPatientId);
 
             if (!ReferencesService.CheckIfEmailIsAvailable(_viewModel.Email, patient))
             {

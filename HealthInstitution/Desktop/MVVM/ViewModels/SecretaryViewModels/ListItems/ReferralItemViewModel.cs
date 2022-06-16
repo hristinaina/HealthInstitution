@@ -12,9 +12,10 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
     {
         Referral _referral;
         private IDoctorRepositoryService _doctorService;
+        private IPatientRepositoryService _patientService;
 
         public string Id => _referral.Id.ToString();
-        public string Patient => Institution.Instance().PatientRepository.FindByID(_referral.PatientId).FirstName + " " + Institution.Instance().PatientRepository.FindByID(_referral.PatientId).LastName;
+        public string Patient => _patientService.FindByID(_referral.PatientId).FirstName + " " + _patientService.FindByID(_referral.PatientId).LastName;
         public string Specialization => _referral.Specialization.ToString();
         public string Doctor => (_referral.DoctorId != -1) ? _doctorService.FindByID(_referral.DoctorId).FirstName
             + " " + _doctorService.FindByID(_referral.DoctorId).LastName : " / ";

@@ -15,6 +15,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 {
     public class AppointmentsViewModel : BaseViewModel
     {
+        private IPatientRepositoryService _patientService;
         private IReferralRepositoryService _referralService;
         private readonly SecretaryReferralService _service;
         public SecretaryNavigationViewModel Navigation { get; }
@@ -95,6 +96,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         public AppointmentsViewModel()
         {
+            _patientService = new PatientRepositoryService();
             _referralService = new ReferralRepositoryService();
             _service = new SecretaryReferralService();
             EnableChanges = false;
@@ -120,7 +122,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public void FillPatientsBox()
         {
             _patients.Clear();
-            foreach (Patient patient in Institution.Instance().PatientRepository.Patients)
+            foreach (Patient patient in _patientService.GetPatients())
             {
                 if(!patient.Deleted) _patients.Add(patient);
             }

@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using HealthInstitution.Commands;
 using HealthInstitution.Core;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
     class SaveAllergenCommand : BaseCommand
     {
+        private IPatientAllergenRepositoryService _patientAllergenService;
         private UpdateMedicalRecordViewModel _viewModel;
 
         public SaveAllergenCommand(UpdateMedicalRecordViewModel medicalRecordViewModel)
         {
+            _patientAllergenService = new PatientAllergenRepositoryService();
             _viewModel = medicalRecordViewModel;
         }
 
@@ -27,7 +30,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
  
             try
             {
-                bool isAdded = Institution.Instance().PatientAllergenRepository.Add(_viewModel.NewAllergen, _viewModel.Patient);
+                bool isAdded = _patientAllergenService.Add(_viewModel.NewAllergen, _viewModel.Patient);
                 if (isAdded)
                 {
                     _viewModel.AddAllergen(_viewModel.NewAllergen);

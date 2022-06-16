@@ -23,6 +23,7 @@ namespace HealthInstitution.Core.Repositories
         {
             FileService.Serialize<Patient>(_fileName, _patients);
         }
+
         public Patient FindByID(int id)
         {
             foreach (Patient patient in _patients)
@@ -41,7 +42,7 @@ namespace HealthInstitution.Core.Repositories
             return true;
         }
 
-        public int GetNewID()
+        private int GetNewID()
         {
             int i = 1;
             while (true)
@@ -57,6 +58,11 @@ namespace HealthInstitution.Core.Repositories
             int id = GetNewID();
             Patient patient = new(id, firstName, lastName, email, password, gender, height, weight);
             Patients.Add(patient);
+        }
+
+        public List<Patient> GetPatients()
+        {
+            return _patients;
         }
     }
 }
