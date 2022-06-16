@@ -18,6 +18,7 @@ namespace HealthInstitution.Core.Services.PatientServices
         {
             _examinations = patient.Examinations;
             _operations = patient.Operations;
+            _appointmentService = new AppointmentService();
         }
 
         public List<Appointment> GetAllAppointments()
@@ -47,7 +48,7 @@ namespace HealthInstitution.Core.Services.PatientServices
             List<Appointment> pastAppointments = new List<Appointment>();
             foreach (Appointment appointment in GetAllAppointments())
             {
-                if (!_appointmentService.IsDone(appointment.Date))
+                if (_appointmentService.IsDone(appointment.Date))
                 {
                     pastAppointments.Add(appointment);
                 }
@@ -60,7 +61,7 @@ namespace HealthInstitution.Core.Services.PatientServices
             List<Appointment> pastExaminations = new List<Appointment>();
             foreach (Appointment appointment in GetAllAppointments())
             {
-                if (!_appointmentService.IsDone(appointment.Date))
+                if (_appointmentService.IsDone(appointment.Date))
                 {
                     pastExaminations.Add(appointment);
                 }

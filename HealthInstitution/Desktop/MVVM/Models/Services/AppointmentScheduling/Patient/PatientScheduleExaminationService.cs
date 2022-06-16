@@ -12,46 +12,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthInstitution.Core.Services
+namespace HealthInstitution.Services
 {
-    class PatientScheduleAppointmentService
+    public class PatientScheduleExaminationService : IScheduleExamination
     {
-        private Appointment _appointment;
-        private Patient _patient;
         private ExaminationRepository _examinationRepository;
-        private RoomRepository _roomRepository;
         private ExaminationReferencesRepository _examinationReferencesRepository;
         private ExaminationChangeRepository _examinationChangeRepository;
-        private OperationRepository _operationRepository;
-        private OperationReferencesRepository _operationReferencesRepository;
 
 
-        public PatientScheduleAppointmentService(Patient patient)
+        public PatientScheduleExaminationService()
         {
-            _patient = patient;
             _examinationRepository = Institution.Instance().ExaminationRepository;
-            _roomRepository = Institution.Instance().RoomRepository;
             _examinationReferencesRepository = Institution.Instance().ExaminationReferencesRepository;
             _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
-            _operationRepository = Institution.Instance().OperationRepository;
-            _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
         }
 
-        public bool CreateAppointment(Doctor doctor, DateTime dateTime)
+        public bool CreateExamination(Patient patient, Doctor doctor, DateTime dateTime)
         {
-            TrollingService trollingService = new TrollingService(_patient);
+            TrollingService trollingService = new TrollingService(patient);
             if (trollingService.IsTrolling())
             {
                 throw new PatientBlockedException("System has blocked your account !");
             }
 
-
             int appointmentId = _examinationRepository.GetID();
 
-            Examination examination = new Examination(appointmentId, doctor, _patient, dateTime,
+            Examination examination = new Examination(appointmentId, doctor, patient, dateTime,
                                       new List<Prescription>());
             new PatientAppointmentValidationService(examination, dateTime).ValidateAppointmentData();
-            _patient.Examinations.Add(examination);
+            patient.Examinations.Add(examination);
             doctor.Examinations.Add(examination);
             FindAvailableRoomService service = new FindAvailableRoomService();
             service.FindAvailableRoom(examination, dateTime);
@@ -59,8 +49,8 @@ namespace HealthInstitution.Core.Services
             _examinationReferencesRepository.Add(examination);
             _examinationChangeRepository.Add(examination, dateTime, true, AppointmentStatus.CREATED);
 
-
             return true;
         }
+
     }
 }
