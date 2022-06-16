@@ -47,8 +47,16 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
                 OnPropertyChanged(nameof(DialogOpen));
             }
         }
-
-        public bool IsEmegency { get; set; }
+        private bool _isEmergency;
+        public bool IsEmegency 
+        {
+            get => _isEmergency; 
+            set
+            {
+                _isEmergency = value;
+                OnPropertyChanged(nameof(IsEmegency));
+            }
+        }
 
         public DoctorDaysOffViewModel()
         {
