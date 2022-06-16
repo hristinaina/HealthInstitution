@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
+using HealthInstitution.Core.Repository;
 
-namespace HealthInstitution.Core.Services.Rooms
+namespace HealthInstitution.Core.Services
 {
     public class FindAvailableRoomService
     {
-        private RoomRepository _rooms;
+        private IRoomRepositoryService _rooms;
 
         public FindAvailableRoomService()
         {
-            _rooms = Institution.Instance().RoomRepository;
+            _rooms = new RoomRepositoryService();
         }
 
         public void FindAvailableRoom(Appointment a, DateTime wantedTime)

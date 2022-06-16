@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 {
@@ -153,7 +154,8 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 
         private void FillRooms()
         {
-            foreach (Room r in Institution.Instance().RoomRepository.Rooms)
+            IRoomRepositoryService rooms = new RoomRepositoryService();
+            foreach (Room r in rooms.GetCurrentRooms())
             {
                 if (r.ID == 0) continue;
                 _rooms.Add(r);

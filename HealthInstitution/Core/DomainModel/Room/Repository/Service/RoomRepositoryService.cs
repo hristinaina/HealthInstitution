@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core.Services.Rooms;
+using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repository
 {

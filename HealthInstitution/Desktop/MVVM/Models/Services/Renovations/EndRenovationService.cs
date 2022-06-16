@@ -1,66 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core;
-using HealthInstitution.Core.Repositories;
+﻿using System.Linq;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services.Renovations
 {
     class EndRenovationService
     {
-        private Renovation _renovation;
-        private RoomRepository _rooms;
+        private IRoomRepositoryService _rooms;
 
-        public EndRenovationService(Renovation r)
+        public EndRenovationService()
         {
-            _renovation = r;
-            _rooms = Institution.Instance().RoomRepository;
+            _rooms = new RoomRepositoryService();
         }
 
-        private void MergeRooms()
+        private void MergeRooms(Renovation renovation)
         {
-            Room resultingRoom = _renovation.Result[0];
+            Room resultingRoom = renovation.Result[0];
 
             //rooms are deleted
-            foreach (Room r in _renovation.RoomsUnderRenovation)
+            foreach (Room r in renovation.RoomsUnderRenovation)
             {
-                _rooms.Rooms.Remove(r);
-                _rooms.DeletedRooms.Add(r);
+                _rooms.GetCurrentRooms().Remove(r);
+                _rooms.GetDeletedRooms().Add(r);
             }
 
-            _rooms.FutureRooms.Remove(resultingRoom);
-            _rooms.Rooms.Add(resultingRoom);
+            _rooms.GetFutureRooms().Remove(resultingRoom);
+            _rooms.GetCurrentRooms().Add(resultingRoom);
         }
 
-        private void DivideRooms()
+        private void DivideRooms(Renovation renovation)
         {
-            Room roomUnderRenovation = _renovation.RoomsUnderRenovation[0];
-            _rooms.Rooms.Remove(roomUnderRenovation);
-            _rooms.DeletedRooms.Add(roomUnderRenovation);
+            Room roomUnderRenovation = renovation.RoomsUnderRenovation[0];
+            _rooms.GetCurrentRooms().Remove(roomUnderRenovation);
+            _rooms.GetDeletedRooms().Add(roomUnderRenovation);
 
-            foreach (Room r in _renovation.Result)
+            foreach (Room r in renovation.Result)
             {
-                _rooms.FutureRooms.Remove(r);
-                _rooms.Rooms.Add(r);
+                _rooms.GetFutureRooms().Remove(r);
+                _rooms.GetCurrentRooms().Add(r);
             }
         }
 
-        public void EndRenovation()
+        public void EndRenovation(Renovation renovation)
         {
-            if (_renovation.RoomsUnderRenovation.Count() > 1)
+            if (renovation.RoomsUnderRenovation.Count() > 1)
             {
-                MergeRooms();
+                MergeRooms(renovation);
             }
-            else if (_renovation.Result.Count() > 1)
+            else if (renovation.Result.Count() > 1)
             {
-                DivideRooms();
+                DivideRooms(renovation);
             }
             else
             {
-                if (_renovation.RoomsUnderRenovation.Count > 0)
-                    _renovation.RoomsUnderRenovation[0].UnderRenovation = false;
+                if (renovation.RoomsUnderRenovation.Count > 0)
+                    renovation.RoomsUnderRenovation[0].UnderRenovation = false;
             }
         }
     }

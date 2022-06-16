@@ -8,6 +8,7 @@ using System.Windows.Input;
 using HealthInstitution.Core;
 using HealthInstitution.Core;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.EquipmentCommands;
 
@@ -110,7 +111,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
 
         private void FillRooms()
         {
-            foreach (Room r in Institution.Instance().RoomRepository.Rooms)
+            IRoomRepositoryService rooms = new RoomRepositoryService();
+            foreach (Room r in rooms.GetCurrentRooms())
             {
                 _rooms.Add(r);
             }

@@ -12,11 +12,13 @@ namespace HealthInstitution.Core.Services.Renovations
     {
         private RenovationRepository _renovations;
         private RoomRenovationRepository _roomsUnderRenovation;
+        private readonly EndRenovationService _endRenovationService;
 
         public RenovationService()
         {
             _renovations = Institution.Instance().RenovationRepository;
             _roomsUnderRenovation = Institution.Instance().RoomRenovationRepository;
+            _endRenovationService = new EndRenovationService();
         }
 
 
@@ -50,8 +52,8 @@ namespace HealthInstitution.Core.Services.Renovations
         private void EndRenovation(int id)
         {
             Renovation r = _renovations.FindById(id);
-            EndRenovationService service = new EndRenovationService(r);
-            service.EndRenovation();
+            
+            _endRenovationService.EndRenovation(r);
 
             List<RoomRenovation> notCompletedRenovations = new List<RoomRenovation>();
             foreach (RoomRenovation roomUnderRenovation in _roomsUnderRenovation.RoomsUnderRenovations)

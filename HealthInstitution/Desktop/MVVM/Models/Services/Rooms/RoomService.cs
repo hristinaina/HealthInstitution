@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Services.Equipments;
 
-namespace HealthInstitution.Core.Services.Rooms
+namespace HealthInstitution.Core.Services
 {
     public class RoomService
     {

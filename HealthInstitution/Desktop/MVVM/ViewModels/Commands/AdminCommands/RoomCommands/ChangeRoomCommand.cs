@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using HealthInstitution.Core.Services.Rooms;
+using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
 {

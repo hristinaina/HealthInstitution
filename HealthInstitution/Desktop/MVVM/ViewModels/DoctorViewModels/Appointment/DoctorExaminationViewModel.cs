@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
 using HealthInstitution.Core.Services;
 
@@ -152,9 +153,11 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         private void FillRoomsList()
         {
             _rooms.Clear();
-            foreach (Room room in _institution.RoomRepository.Rooms)
+
+            IRoomRepositoryService rooms = new RoomRepositoryService();
+            foreach (Room r in rooms.GetCurrentRooms())
             {
-                _rooms.Add(room);
+                _rooms.Add(r);
             }
         }
     }

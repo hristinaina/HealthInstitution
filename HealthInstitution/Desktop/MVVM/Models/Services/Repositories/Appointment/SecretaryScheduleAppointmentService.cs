@@ -5,7 +5,7 @@ using System.Text;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Services.DoctorServices;
-using HealthInstitution.Core.Services.Rooms;
+using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Services
 {

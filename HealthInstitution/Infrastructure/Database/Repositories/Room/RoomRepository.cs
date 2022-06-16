@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Repository;
-using HealthInstitution.Core.Services.Rooms;
 
 namespace HealthInstitution.Core.Repositories
 {

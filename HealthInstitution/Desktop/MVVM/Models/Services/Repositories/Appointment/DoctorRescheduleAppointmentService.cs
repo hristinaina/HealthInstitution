@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
-using HealthInstitution.Core.Services.Rooms;
+using HealthInstitution.Core.Repository;
+using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Services
 {
     class DoctorRescheduleAppointmentService
     {
         private ExaminationRepository _examinationRepository;
-        private RoomRepository _roomRepository;
+        private IRoomRepositoryService _roomRepository;
         private ExaminationReferencesRepository _examinationReferencesRepository;
         private ExaminationChangeRepository _examinationChangeRepository;
         private OperationReferencesRepository _operationReferencesRepository;
@@ -22,7 +18,7 @@ namespace HealthInstitution.Core.Services
         public DoctorRescheduleAppointmentService()
         {
             _examinationRepository = Institution.Instance().ExaminationRepository;
-            _roomRepository = Institution.Instance().RoomRepository;
+            _roomRepository = new RoomRepositoryService();
             _examinationReferencesRepository = Institution.Instance().ExaminationReferencesRepository;
             _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
             _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;

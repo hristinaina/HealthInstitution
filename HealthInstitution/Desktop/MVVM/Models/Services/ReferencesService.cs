@@ -7,7 +7,7 @@ using HealthInstitution.Core;
 using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Equipments;
 using HealthInstitution.Core.Services.Renovations;
-using HealthInstitution.Core.Services.Rooms;
+using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Services
 {

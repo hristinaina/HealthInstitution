@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core;
+﻿using System.Collections.Generic;
 using HealthInstitution.Core.Repositories;
+using HealthInstitution.Core.Repository;
 
-namespace HealthInstitution.Core.Services.Rooms
+namespace HealthInstitution.Core.Services
 {
     class FilterRoomService
     {
-        private RoomRepository _rooms;
+        private IRoomRepositoryService _rooms;
 
         public FilterRoomService()
         {
-            _rooms = Institution.Instance().RoomRepository;
+            _rooms = new RoomRepositoryService();
         }
 
         public List<Room> FilterByRoomType(RoomType type)
         {
             List<Room> filteredRooms = new();
-            foreach (Room r in _rooms.Rooms)
+            foreach (Room r in _rooms.GetCurrentRooms())
             {
                 if (r.Type == type) filteredRooms.Add(r);
             }
