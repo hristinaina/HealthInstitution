@@ -102,8 +102,12 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         private readonly INotify _notifyService;
 
         public IEnumerable<AppointmentListItem> AppointmentSuggestions { get => _appointmentSuggestions; }
-        public AppointmentListItem SelectedSuggestion { get; set; }
+        private AppointmentListItem _selectedSuggestion;
+        public AppointmentListItem SelectedSuggestion { get => _selectedSuggestion; set { _selectedSuggestion = value; EnableScheduling = true; } }
         public ICommand UseSuggestion { get; set; }
+
+        private bool _enableScheduling;
+        public bool EnableScheduling { get => _enableScheduling; set { _enableScheduling = value; OnPropertyChanged(nameof(EnableScheduling)); } }
 
         public PatientAppointmentViewModel()
         {
@@ -144,10 +148,10 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
         private void InitializeCommands()
         {
-            CreateAppointment = new CreateAppointmentCommand(this);
-            RescheduleAppointment = new RescheduleAppointmentCommand(this);
-            CancelAppointment = new CancelAppointmentCommand(this);
-            UseSuggestion = new CreateAppointmentCommand(this, usingSuggestion: true);
+            CreateAppointment = new ScheduleExaminationCommand(this);
+            RescheduleAppointment = new RescheduleExaminationCommand(this);
+            CancelAppointment = new CancelExaminationCommand(this);
+            UseSuggestion = new ScheduleExaminationCommand(this, usingSuggestion: true);
         }
 
         private void InitializeSuggestionsParrameters()

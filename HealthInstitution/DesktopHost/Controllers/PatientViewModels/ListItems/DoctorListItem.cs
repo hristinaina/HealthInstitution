@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
-    public class DoctorListItemViewModel
+    public class DoctorListItem
     {
         readonly Doctor _doctor;
         public int Id => _doctor.ID;
@@ -13,13 +13,13 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public string Specialization => _doctor.Specialization.ToString();
         public double Rating => _doctor.Rating;
 
-        public DoctorListItemViewModel(Doctor doctor)
+        public DoctorListItem(Doctor doctor)
         {
             _doctor = doctor;
         }
 
-        public static implicit operator Doctor(DoctorListItemViewModel d) => d._doctor;
-        public static explicit operator DoctorListItemViewModel(Doctor d) => new DoctorListItemViewModel(d);
+        public static implicit operator Doctor(DoctorListItem d) => d._doctor;
+        public static explicit operator DoctorListItem(Doctor d) => new DoctorListItem(d);
 
     }
 }
