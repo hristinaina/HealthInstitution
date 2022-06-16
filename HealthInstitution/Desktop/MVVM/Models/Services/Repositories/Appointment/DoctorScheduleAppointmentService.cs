@@ -5,7 +5,6 @@ using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Core;
-using HealthInstitution.Core.Services.Rooms;
 using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
