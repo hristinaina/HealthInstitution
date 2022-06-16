@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Repositories;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.DoctorServices;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
@@ -19,15 +19,15 @@ namespace HealthInstitution.Core.Services
         private int _newDuration;
 
         private readonly DoctorRepository _doctorRepository;
-        private readonly ExaminationRepository _examinationRepository;
-        private readonly OperationRepository _operationRepository;
+        private readonly IExaminationRepositoryService _examinationRepository;
+        private readonly IOperationRepositoryService _operationRepository;
 
         public EmergencyAppointmentService()
         {
             _doctor = null;
             _doctorRepository = Institution.Instance().DoctorRepository;
-            _examinationRepository = Institution.Instance().ExaminationRepository;
-            _operationRepository = Institution.Instance().OperationRepository;
+            _examinationRepository = new ExaminationRepositoryService();
+            _operationRepository = new OperationRepositoryService();
         }
 
         public void ChangeDuration(int duration)

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HealthInstitution.Core
 {
-    public interface IExaminationChangeRepository
+    public interface IExaminationChangeRepository : IRepository
     {
         public ExaminationChange FindByAppointmentID(int id);
 
@@ -15,5 +16,6 @@ namespace HealthInstitution.Core
         public void DeleteUnresolvedRequestsByPatientId(int patientId);
 
         public void RemoveByAppointmentId(int appointmentId);
+        List<ExaminationChange> GetChanges();
     }
 }

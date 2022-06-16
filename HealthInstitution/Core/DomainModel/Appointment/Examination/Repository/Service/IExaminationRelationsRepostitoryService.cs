@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IExaminationRelationsService
+    public interface IExaminationRelationsRepositoryService
     {
         public ExaminationReference FindByExaminationID(int id);
 
@@ -15,6 +15,8 @@ namespace HealthInstitution.Core.Repository
         public void Add(ExaminationReference examinationReference);
 
         public void Remove(Examination examination);
+        public List<ExaminationReference> GetRelations();
+
 
     }
 }

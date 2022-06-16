@@ -6,22 +6,22 @@ namespace HealthInstitution.Core.Services
 {
     class DoctorCancelAppointmentService
     {
-        private ExaminationRepository _examinationRepository;
+        private IExaminationRepositoryService _examinationRepository;
         private IRoomRepositoryService _roomRepository;
-        private ExaminationReferencesRepository _examinationReferencesRepository;
-        private ExaminationChangeRepository _examinationChangeRepository;
-        private OperationRepository _operationRepository;
-        private OperationReferencesRepository _operationReferencesRepository;
+        private IExaminationRelationsRepositoryService _examinationReferencesRepository;
+        private IExaminationChangeRepositoryService _examinationChangeRepository;
+        private IOperationRepositoryService _operationRepository;
+        private IOperationRelationsRepositoryService _operationReferencesRepository;
 
 
         public DoctorCancelAppointmentService()
         {
-            _examinationRepository = Institution.Instance().ExaminationRepository;
+            _examinationRepository = new ExaminationRepositoryService() ;
             _roomRepository = new RoomRepositoryService();
-            _examinationReferencesRepository = Institution.Instance().ExaminationReferencesRepository;
-            _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
-            _operationRepository = Institution.Instance().OperationRepository;
-            _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
+            _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
+            _examinationChangeRepository = new ExaminationChangeRepositoryService();
+            _operationRepository = new OperationRepositoryService();
+            _operationReferencesRepository = new OperationRelationsRepositoryService();
         }
 
 

@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IOperationRelationsRepository
+    public interface IOperationRelationsRepository : IRepository
     {
         public List<OperationReference> GetReferences();
 

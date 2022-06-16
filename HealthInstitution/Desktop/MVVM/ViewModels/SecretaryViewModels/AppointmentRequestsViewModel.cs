@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands;
 
@@ -15,6 +16,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
     {
         private readonly ExaminationChangeService _service;
         public SecretaryNavigationViewModel Navigation { get; }
+        private IExaminationChangeRepositoryService _changes; 
 
         private readonly ObservableCollection<AppointmentChangeViewModel> _requests;
         public IEnumerable<AppointmentChangeViewModel> Requests => _requests;
@@ -57,6 +59,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _requests = new ObservableCollection<AppointmentChangeViewModel>();
             _service = new ExaminationChangeService();
+            _changes = new ExaminationChangeRepositoryService();
             Navigation = new SecretaryNavigationViewModel();
             Approve = new ApproveCommand(this);
             Reject = new RejectCommand(this);
@@ -71,7 +74,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             // automaticaly remove/resolve requests for which secretary was late to do so == outdated requests
             _service.RemoveOutdatedRequests();
 
-            List<ExaminationChange> requests = Institution.Instance().ExaminationChangeRepository.Changes;
+            List<ExaminationChange> requests = _changes.GetChanges();
             foreach (ExaminationChange request in requests)
             {
                 if (!request.Resolved)

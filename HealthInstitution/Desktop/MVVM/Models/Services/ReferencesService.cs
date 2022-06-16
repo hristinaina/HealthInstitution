@@ -15,7 +15,8 @@ namespace HealthInstitution.Core.Services
     {
         public static void ConnectExaminationChanges()
         {
-            foreach (ExaminationChange change in Institution.Instance().ExaminationChangeRepository.Changes)
+            IExaminationChangeRepositoryService changes = new ExaminationChangeRepositoryService();
+            foreach (ExaminationChange change in changes.GetChanges())
             {
                 if (change.Resolved && change.ChangeStatus == AppointmentStatus.DELETED) {
                     return;
@@ -27,13 +28,15 @@ namespace HealthInstitution.Core.Services
 
         public static void ConnectExaminationReferences()
         {
-            foreach (ExaminationReference reference in Institution.Instance().ExaminationReferencesRepository.GetReferences())
+            IExaminationRelationsRepositoryService examinationRelations = new ExaminationRelationsRepositoryService();
+            foreach (ExaminationReference relation in examinationRelations.GetRelations())
             {
-                Examination examination = Institution.Instance().ExaminationRepository.FindByID(reference.ExaminationID);
-                Doctor doctor = Institution.Instance().DoctorRepository.FindByID(reference.DoctorID);
-                Patient patient = Institution.Instance().PatientRepository.FindByID(reference.PatientID);
-                Prescription prescription = Institution.Instance().PrescriptionRepository.FindByID(reference.PerscriptionID);
-                Room room = Institution.Instance().RoomRepository.FindById(reference.RoomID);
+                IExaminationRepositoryService examinations = new ExaminationRepositoryService();
+                Examination examination = (Examination) examinations.FindByID(relation.ExaminationID);
+                Doctor doctor = Institution.Instance().DoctorRepository.FindByID(relation.DoctorID);
+                Patient patient = Institution.Instance().PatientRepository.FindByID(relation.PatientID);
+                Prescription prescription = Institution.Instance().PrescriptionRepository.FindByID(relation.PerscriptionID);
+                Room room = Institution.Instance().RoomRepository.FindById(relation.RoomID);
 
 
                 examination.Doctor = doctor;
@@ -49,9 +52,12 @@ namespace HealthInstitution.Core.Services
 
         public static void ConnectOperationReferences()
         {
-            foreach (OperationReference reference in Institution.Instance().OperationReferencesRepository.GetReferences())
+            IOperationRelationsRepositoryService relations = new OperationRelationsRepositoryService();
+
+            foreach (OperationReference reference in relations.GetReferences())
             {
-                Operation operation = Institution.Instance().OperationRepository.FindByID(reference.OperationId);
+                IOperationRepositoryService operations = new OperationRepositoryService();
+                Operation operation = operations.FindByID(reference.OperationId);
                 Doctor doctor = Institution.Instance().DoctorRepository.FindByID(reference.DoctorID);
                 Patient patient = Institution.Instance().PatientRepository.FindByID(reference.PatientID);
                 Room room = Institution.Instance().RoomRepository.FindById(reference.RoomID);
@@ -104,9 +110,11 @@ namespace HealthInstitution.Core.Services
         public static void FillMedicalRecord()
         {
             foreach (Patient patient in Institution.Instance().PatientRepository.Patients)
-            {
-                patient.Examinations = Institution.Instance().ExaminationRepository.FindByPatientID(patient.ID);
-                patient.Operations = Institution.Instance().OperationRepository.FindByPatientID(patient.ID);
+            { 
+                IOperationRepositoryService operations = new OperationRepositoryService();
+                IExaminationRepositoryService examinations = new ExaminationRepositoryService();
+                patient.Examinations = examinations.FindByPatientID(patient.ID);
+                patient.Operations = operations.FindByPatientID(patient.ID);
                 patient.Record.Referrals = Institution.Instance().ReferralRepository.FindByPatientID(patient.ID);
 
                 List<PatientAllergen> patientAllergens = Institution.Instance().PatientAllergenRepository.FindByPatientID(patient.ID);

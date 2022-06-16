@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.Core
 {
-    public interface IExaminationRepository
+    public interface IExaminationRepository : IRepository
     {
         public List<Examination> FindByPatientID(int patientId);
 
@@ -18,5 +18,7 @@ namespace HealthInstitution.Core
         public void DeleteByPatientID(int patientId);
 
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate);
+        List<Examination> GetExaminations();
+        Examination FindByID(int appointmentID);
     }
 }

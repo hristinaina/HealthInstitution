@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using HealthInstitution.Core.Repository;
+using System.Collections.Generic;
 
 namespace HealthInstitution.Core.Services.SurveyResults
 {
     public class DoctorSurveyResultsService
     {
-        private ExaminationRepository _examinations;
+        private IExaminationRepositoryService _examinations;
 
         public DoctorSurveyResultsService()
         {
-            _examinations = Institution.Instance().ExaminationRepository;
+            _examinations = new ExaminationRepositoryService();
         }
 
         public Dictionary<string, List<double>> GetResults(Doctor doctor)
@@ -19,7 +20,7 @@ namespace HealthInstitution.Core.Services.SurveyResults
                 ["Suggestion"] = new List<double>() { 0, 0, 0, 0, 0, 0 },
             };
 
-            foreach (Examination examination in _examinations.Examinations)
+            foreach (Examination examination in _examinations.GetExaminations())
             {
                 if (examination.Doctor.Equals(doctor) && examination.Review is not null)
                 {
@@ -54,7 +55,7 @@ namespace HealthInstitution.Core.Services.SurveyResults
             List<string> comments = new List<string>();
 
 
-            foreach (Examination examination in _examinations.Examinations)
+            foreach (Examination examination in _examinations.GetExaminations())
             {
                 if (examination.Doctor.Equals(doctor) && examination.Review is not null)
                 {

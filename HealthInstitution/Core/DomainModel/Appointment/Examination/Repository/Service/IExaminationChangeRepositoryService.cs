@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IExaminationChangeService
+    public interface IExaminationChangeRepositoryService
     {
         public ExaminationChange FindByAppointmentID(int id);
 
@@ -19,5 +19,7 @@ namespace HealthInstitution.Core.Repository
         public void DeleteUnresolvedRequestsByPatientId(int patientId);
 
         public void RemoveByAppointmentId(int appointmentId);
+
+        public List<ExaminationChange> GetChanges();
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
@@ -13,11 +14,13 @@ namespace HealthInstitution.Core.Services
     {
         private PrescriptionRepository _prescriptionRepository;
         private PrescriptionMedicineRepository _prescriptionMedicineRepository;
+        private IExaminationRelationsRepositoryService _examinationRelationsRepository;
 
         public DoctorPrescriptionService()
         {
             _prescriptionRepository = Institution.Instance().PrescriptionRepository;
             _prescriptionMedicineRepository = Institution.Instance().PrescriptionMedicineRepository;
+            _examinationRelationsRepository = new ExaminationRelationsRepositoryService();
         }
 
         public bool CreatePrescription(Prescription prescription, Examination examination)
@@ -40,7 +43,7 @@ namespace HealthInstitution.Core.Services
             ExaminationReference examinationReference = new ExaminationReference(examination.ID, examination.Doctor.ID,
                                                                                  examination.Patient.ID, examination.Room.ID,
                                                                                  prescription.ID);
-            Institution.Instance().ExaminationReferencesRepository.Add(examinationReference);
+            _examinationRelationsRepository.Add(examinationReference);
 
             return true;
         }

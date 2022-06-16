@@ -1,20 +1,21 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Services
 {
     internal class PatientCancelExaminationService : ICancelExamination
     {
-        private readonly ExaminationRepository _examinationRepository;
-        private readonly ExaminationReferencesRepository _examinationReferencesRepository;
-        private readonly ExaminationChangeRepository _examinationChangeRepository;
+        private readonly IExaminationRepositoryService _examinationRepository;
+        private readonly IExaminationRelationsRepositoryService _examinationReferencesRepository;
+        private readonly IExaminationChangeRepositoryService _examinationChangeRepository;
 
         public PatientCancelExaminationService()
         {
-            _examinationRepository = Institution.Instance().ExaminationRepository;
-            _examinationReferencesRepository = Institution.Instance().ExaminationReferencesRepository;
-            _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
+            _examinationRepository = new ExaminationRepositoryService();
+            _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
+            _examinationChangeRepository = new ExaminationChangeRepositoryService();
         }
 
         public bool CancelExamination(Examination examination)

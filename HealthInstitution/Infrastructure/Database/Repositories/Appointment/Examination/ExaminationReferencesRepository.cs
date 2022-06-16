@@ -56,5 +56,10 @@ namespace HealthInstitution.Core.Repositories
             ExaminationReference reference = FindByExaminationID(examination.ID);
             _references.Remove(reference);
         }
+
+        public List<ExaminationReference> GetRelations()
+        {
+            return _references;
+        }
     }
 }

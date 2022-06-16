@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public class OperationService : IOperationRepository
+    public class OperationRepositoryService : IOperationRepositoryService
     {
         IOperationRepository _repository;
-        public OperationService()
+        public OperationRepositoryService()
         {
             _repository = Institution.Instance().OperationRepository;
         }
@@ -38,6 +38,11 @@ namespace HealthInstitution.Core.Repository
         public int GetNewID()
         {
             return _repository.GetNewID();
+        }
+
+        public List<Operation> GetOperations()
+        {
+            return _repository.GetOperations();
         }
 
         public void Remove(Operation operation)

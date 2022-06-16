@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IOperationService
+    public interface IOperationRepositoryService
     {
         public Operation FindByID(int id);
 
@@ -21,6 +21,6 @@ namespace HealthInstitution.Core.Repository
         public int GetNewID();
 
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate);
-
+        List<Operation> GetOperations();
     }
 }

@@ -4,27 +4,30 @@ using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
+using HealthInstitution.Core;
+using HealthInstitution.Core.Services.Rooms;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
     class DoctorScheduleAppointmentService
     {
-        private ExaminationRepository _examinationRepository;
+        private IExaminationRepositoryService _examinationRepository;
         private IRoomRepositoryService _roomRepository;
-        private ExaminationReferencesRepository _examinationReferencesRepository;
-        private ExaminationChangeRepository _examinationChangeRepository;
-        private OperationRepository _operationRepository;
-        private OperationReferencesRepository _operationReferencesRepository;
+        private IExaminationRelationsRepositoryService _examinationReferencesRepository;
+        private IExaminationChangeRepositoryService _examinationChangeRepository;
+        private IOperationRepositoryService _operationRepository;
+        private IOperationRelationsRepositoryService _operationReferencesRepository;
 
 
         public DoctorScheduleAppointmentService()
         {
-            _examinationRepository = Institution.Instance().ExaminationRepository;
+            _examinationRepository = new ExaminationRepositoryService();
             _roomRepository = new RoomRepositoryService();
-            _examinationReferencesRepository = Institution.Instance().ExaminationReferencesRepository;
-            _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
-            _operationRepository = Institution.Instance().OperationRepository;
-            _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
+            _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
+            _examinationChangeRepository = new ExaminationChangeRepositoryService();
+            _operationRepository = new OperationRepositoryService();
+            _operationReferencesRepository = new OperationRelationsRepositoryService();
         }
 
         public bool CreateAppointment(Appointment appointment, DateTime dateTime, bool validation = true)

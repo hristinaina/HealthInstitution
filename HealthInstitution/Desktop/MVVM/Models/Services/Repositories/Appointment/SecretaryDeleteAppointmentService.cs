@@ -6,30 +6,31 @@ using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repositories.References;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
     public class SecretaryDeleteAppointmentService
     {
-        private readonly ExaminationRepository _examinationRepository;
-        private readonly OperationRepository _operationRepository;
-        private readonly ExaminationReferencesRepository _examinationReferencesRepository;
-        private readonly OperationReferencesRepository _operationReferencesRepository;
-        private readonly ExaminationChangeRepository _examinationChangeRepository;
+        private readonly IExaminationRepositoryService _examinationRepository;
+        private readonly IOperationRepositoryService _operationRepository;
+        private readonly IExaminationRelationsRepositoryService _examinationReferencesRepository;
+        private readonly IOperationRelationsRepositoryService _operationReferencesRepository;
+        private readonly IExaminationChangeRepositoryService _examinationChangeRepository;
 
         public SecretaryDeleteAppointmentService()
         {
-            _examinationRepository = Institution.Instance().ExaminationRepository;
-            _operationRepository = Institution.Instance().OperationRepository;
-            _examinationReferencesRepository = Institution.Instance().ExaminationReferencesRepository;
-            _operationReferencesRepository = Institution.Instance().OperationReferencesRepository;
-            _examinationChangeRepository = Institution.Instance().ExaminationChangeRepository;
+            _examinationRepository = new ExaminationRepositoryService();
+            _operationRepository = new OperationRepositoryService();
+            _examinationReferencesRepository = new ExaminationRelationsRepositoryService();
+            _operationReferencesRepository = new OperationRelationsRepositoryService();
+            _examinationChangeRepository = new ExaminationChangeRepositoryService();
         }
 
         public void DeleteFutureAppointments(Patient patient)
         {
-            List<Examination> examinations = new List<Examination>(_examinationRepository.Examinations.ToArray());
-            List<Operation> operations = new List<Operation>(_operationRepository.Operations.ToArray());
+            List<Examination> examinations = new List<Examination>(_examinationRepository.GetExaminations().ToArray());
+            List<Operation> operations = new List<Operation>(_operationRepository.GetOperations().ToArray());
 
             foreach (Examination appointment in examinations)
             {

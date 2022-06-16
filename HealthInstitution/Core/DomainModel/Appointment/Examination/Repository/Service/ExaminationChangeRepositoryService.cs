@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public class ExaminationChangeService : IExaminationChangeService
+    public class ExaminationChangeRepositoryService : IExaminationChangeRepositoryService
     {
         IExaminationChangeRepository _repository;
 
-        public ExaminationChangeService()
+        public ExaminationChangeRepositoryService()
         {
             _repository = Institution.Instance().ExaminationChangeRepository;
         }
@@ -33,6 +33,11 @@ namespace HealthInstitution.Core.Repository
         public ExaminationChange FindByID(int id)
         {
             return _repository.FindByID(id);
+        }
+
+        public List<ExaminationChange> GetChanges()
+        {
+            return _repository.GetChanges();
         }
 
         public int GetNewID()

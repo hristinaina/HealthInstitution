@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IOperationRepository
+    public interface IOperationRepository : IRepository
     {
         public Operation FindByID(int id);
 
@@ -18,5 +18,6 @@ namespace HealthInstitution.Core.Repository
         public int GetNewID();
 
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate);
+        List<Operation> GetOperations();
     }
 }

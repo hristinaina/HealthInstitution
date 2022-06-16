@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IExaminationService
+    public interface IExaminationRepositoryService
     {
         public List<Examination> FindByPatientID(int patientId);
 
@@ -22,5 +22,7 @@ namespace HealthInstitution.Core.Repository
 
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate);
 
+        public List<Examination> GetExaminations();
+        Appointment FindByID(int appointmentID);
     }
 }
