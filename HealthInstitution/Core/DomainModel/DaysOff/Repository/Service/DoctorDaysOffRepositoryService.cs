@@ -10,14 +10,19 @@ namespace HealthInstitution.Core.Repository
     {
         private readonly IDoctorDaysOffRepository _doctorDaysOffRepository;
 
-        public DoctorDaysOffRepositoryService(IDoctorDaysOffRepository doctorDaysOffRepository)
+        public DoctorDaysOffRepositoryService()
         {
-            _doctorDaysOffRepository = doctorDaysOffRepository;
+            _doctorDaysOffRepository = Institution.Instance().DoctorDaysOffRepository;
         }
 
         public List<DoctorDaysOff> FindByDoctorID(int doctorId)
         {
             return _doctorDaysOffRepository.FindByDoctorID(doctorId);
+        }
+
+        public List<DoctorDaysOff> GetDoctorDaysOff()
+        {
+            return _doctorDaysOffRepository.GetDoctorDaysOff();
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IDayOffRepository
+    public interface IDayOffRepository : IRepository
     {
         public DayOff FindByID(int id);
 

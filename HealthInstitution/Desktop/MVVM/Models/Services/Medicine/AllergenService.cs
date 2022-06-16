@@ -1,26 +1,27 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
     public class AllergenService
     {
         private Allergen _allergen;
-        private AllergenRepository _allergens;
-        private MedicineRepository _medicine;
-        private PendingMedicineRepository _pendingMedicine;
+        private IAllergenRepositoryService _allergens;
+        private IMedicineRepositoryService _medicine;
+        private IPendingMedicineRepositoryService _pendingMedicine;
 
         public AllergenService(Allergen a)
         {
             _allergen = a;
-            _allergens = Institution.Instance().AllergenRepository;
-            _medicine = Institution.Instance().MedicineRepository;
-            _pendingMedicine = Institution.Instance().PendingMedicineRepository;
+            _allergens = new AllergenRepositoryService();
+            _medicine = new MedicineRepositoryService();
+            _pendingMedicine = new PendingMedicineRepositoryService();
         }
 
         public bool IsNameAvailable(string name)
         {
-            foreach (Allergen a in _allergens.Allergens)
+            foreach (Allergen a in _allergens.GetAllergens())
             {
                 if (a.Name.Equals(name) && !a.Equals(_allergen)) return false;
             }
@@ -29,7 +30,7 @@ namespace HealthInstitution.Core.Services
 
         public bool isDeletable()
         {
-            foreach (PendingMedicine medicine in _pendingMedicine.PendingMedicines)
+            foreach (PendingMedicine medicine in _pendingMedicine.GetPendingMedicines())
             {
                 foreach (Allergen a in medicine.Ingredients)
                 {
@@ -37,7 +38,7 @@ namespace HealthInstitution.Core.Services
                 }
             }
 
-            foreach (Medicine medicine in _medicine.Medicines)
+            foreach (Medicine medicine in _medicine.GetMedicines())
             {
                 foreach (Allergen a in medicine.Ingredients)
                 {

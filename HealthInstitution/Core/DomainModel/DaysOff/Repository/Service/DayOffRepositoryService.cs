@@ -8,11 +8,11 @@ namespace HealthInstitution.Core.Repository
 {
     class DayOffRepositoryService : IDayOffRepositoryService
     {
-        private readonly DayOffRepository _dayOffRepository;
+        private readonly IDayOffRepository _dayOffRepository;
 
-        public DayOffRepositoryService(DayOffRepository dayOffRepository)
+        public DayOffRepositoryService()
         {
-            _dayOffRepository = dayOffRepository;
+            _dayOffRepository = Institution.Instance().DayOffRepository;
         }
 
         public DayOff FindByID(int id)

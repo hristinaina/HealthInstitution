@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 {
@@ -22,7 +23,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             {
                 try
                 {
-                    Institution.Instance().AllergenRepository.ChangeName(_ingredient, value);
+                    new AllergenRepositoryService().ChangeName(_ingredient, value);
                 }
                 catch (NameNotAvailableException e)
                 {

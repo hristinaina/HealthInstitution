@@ -8,6 +8,7 @@ using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Services;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {
@@ -25,7 +26,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             _viewModel.DialogOpen = false;
             try
             {
-                int id = Institution.Instance().DayOffRepository.FindNewID();
+                int id = new DayOffRepositoryService().FindNewID();
                 DateTime startDate = Convert.ToDateTime(_viewModel.StartDate);
                 DateTime endDate = Convert.ToDateTime(_viewModel.EndDate);
                 Doctor doctor = (Doctor)Institution.Instance().CurrentUser;

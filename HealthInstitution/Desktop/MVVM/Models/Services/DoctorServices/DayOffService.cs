@@ -11,7 +11,7 @@ namespace HealthInstitution.Core.Services
 {
     public class DayOffService
     {
-        private readonly DayOffRepository _dayOffRepository;
+        private readonly IDayOffRepository _dayOffRepository;
 
         public DayOffService()
         {
@@ -20,14 +20,14 @@ namespace HealthInstitution.Core.Services
 
         public void AcceptRequest(int id)
         {
-            DayOff dayOff = _dayOffRepository.FindByID(id);
+            DayOff dayOff = new DayOffRepositoryService().FindByID(id);
             dayOff.State = State.ACCEPTED;
             dayOff.Doctor.Notifications.Add("Your request for days ofF from date " + dayOff.StartDate.ToString() + " to date " + dayOff.EndDate.ToString() + " has been ACCEPTED!");
         }
 
         public void RejectRequest(int id)
         {
-            DayOff dayOff = _dayOffRepository.FindByID(id);
+            DayOff dayOff = new DayOffRepositoryService().FindByID(id);
             dayOff.State = State.REJECTED;
             dayOff.Doctor.Notifications.Add("Your request for days ofF from date " + dayOff.StartDate.ToString() + " to date " + dayOff.EndDate.ToString() + " has been REJECTED!");
         }
@@ -36,7 +36,7 @@ namespace HealthInstitution.Core.Services
         {
             List<DayOff> daysOffRequests = new();
 
-            foreach (DayOff dayOff in _dayOffRepository.DaysOff)
+            foreach (DayOff dayOff in new DayOffRepositoryService().GetDaysOff())
             {
                 if (dayOff.Doctor.ID == id)
                 {
@@ -63,9 +63,9 @@ namespace HealthInstitution.Core.Services
         public bool ApplyForDaysOff(DayOff dayOff, Doctor doctor)
         {
             if (!ValidateRequest(dayOff, doctor)) return false;
-            Institution.Instance().DayOffRepository.DaysOff.Add(dayOff);
+            new DayOffRepositoryService().GetDaysOff().Add(dayOff);
             DoctorDaysOff doctorDaysOff = new DoctorDaysOff(doctor.ID, dayOff.ID);
-            Institution.Instance().DoctorDaysOffRepository.DoctorDaysOff.Add(doctorDaysOff);
+            new DoctorDaysOffRepositoryService().GetDoctorDaysOff().Add(doctorDaysOff);
             return true;
         }
     }

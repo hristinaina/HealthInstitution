@@ -37,16 +37,16 @@ namespace HealthInstitution.Core
         private readonly RoomRenovationRepository _roomRenovationRepository;
         private readonly EquipmentOrderRepository _equipmentOrderRepository;
 
-        private readonly MedicineRepository _medicineRepository;
-        private readonly DayOffRepository _dayOffRepository;
+        private readonly IMedicineRepository _medicineRepository;
+        private readonly IDayOffRepository _dayOffRepository;
         private readonly ReferralRepository _referralRepository;
 
-        private readonly AllergenRepository _allergenRepository;
+        private readonly IAllergenRepository _allergenRepository;
         private readonly PatientAllergenRepository _patientAllergenRepository;
-        private readonly MedicineAllergenRepository _medicineAllergenRepository;
-        private readonly PendingMedicineRepository _pendingMedicineRepository;
+        private readonly IMedicineAllergenRepository _medicineAllergenRepository;
+        private readonly IPendingMedicineRepository _pendingMedicineRepository;
 
-        private readonly DoctorDaysOffRepository _doctorDaysOffRepository;
+        private readonly IDoctorDaysOffRepository _doctorDaysOffRepository;
         private readonly PrescriptionMedicineRepository _prescriptionMedicineRepository;
         private readonly ExaminationChangeRepository _examinationChangeRepository;
 
@@ -201,14 +201,14 @@ namespace HealthInstitution.Core
         public RoomRepository RoomRepository { get => _roomRepository; }
         public RenovationRepository RenovationRepository { get => _renovationRepository; }
         public RoomRenovationRepository RoomRenovationRepository { get => _roomRenovationRepository; }
-        public MedicineRepository MedicineRepository { get => _medicineRepository; }
-        public DayOffRepository DayOffRepository { get => _dayOffRepository; }
+        public IMedicineRepository MedicineRepository { get => _medicineRepository; }
+        public IDayOffRepository DayOffRepository { get => _dayOffRepository; }
         public ReferralRepository ReferralRepository { get => _referralRepository; }
-        public AllergenRepository AllergenRepository { get => _allergenRepository; }
+        public IAllergenRepository AllergenRepository { get => _allergenRepository; }
         public PatientAllergenRepository PatientAllergenRepository { get => _patientAllergenRepository; }
-        public MedicineAllergenRepository MedicineAllergenRepository { get => _medicineAllergenRepository; }
-        public PendingMedicineRepository PendingMedicineRepository { get => _pendingMedicineRepository; }
-        public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
+        public IMedicineAllergenRepository MedicineAllergenRepository { get => _medicineAllergenRepository; }
+        public IPendingMedicineRepository PendingMedicineRepository { get => _pendingMedicineRepository; }
+        public IDoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
         public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
         public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }

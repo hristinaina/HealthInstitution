@@ -8,17 +8,18 @@ using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core
 {
     class CreateMedicineService
     {
 
-        private PendingMedicineRepository _repository;
+        private IPendingMedicineRepositoryService _repository;
 
         public CreateMedicineService()
         {
-            _repository = Institution.Instance().PendingMedicineRepository;
+            _repository = new PendingMedicineRepositoryService();
         }
         public PendingMedicine Create(string name, List<Allergen> ingredients)
         {

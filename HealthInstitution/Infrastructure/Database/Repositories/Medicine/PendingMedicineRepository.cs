@@ -52,7 +52,7 @@ namespace HealthInstitution.Core.Repositories
                 if (m.ID == id) return false;
             }
 
-            foreach (Medicine m in Institution.Instance().MedicineRepository.Medicines)
+            foreach (Medicine m in new MedicineRepositoryService().GetMedicines())
             {
                 if (m.ID == id) return false;
             }

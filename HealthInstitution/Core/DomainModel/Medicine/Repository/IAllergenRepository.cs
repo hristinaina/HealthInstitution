@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IAllergenRepository
+    public interface IAllergenRepository : IRepository
     {
         public Allergen FindByID(int id);
 
@@ -16,5 +16,7 @@ namespace HealthInstitution.Core.Repository
         public Allergen AddNewAllergen(Allergen allergen);
 
         public void DeleteAllergen(Allergen allergen);
+
+        public List<Allergen> GetAllergens();
     }
 }

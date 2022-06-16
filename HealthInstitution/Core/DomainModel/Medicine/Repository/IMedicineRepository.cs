@@ -1,6 +1,8 @@
-﻿namespace HealthInstitution.Core.Repository
+﻿using System.Collections.Generic;
+
+namespace HealthInstitution.Core.Repository
 {
-    public interface IMedicineRepository
+    public interface IMedicineRepository : IRepository
     {
         public Medicine FindByID(int id);
 
@@ -9,5 +11,7 @@
         public void Add(Medicine medicine);
 
         public Medicine AddNewMedicine(Medicine newMedicine);
+
+        public List<Medicine> GetMedicines();
     }
 }

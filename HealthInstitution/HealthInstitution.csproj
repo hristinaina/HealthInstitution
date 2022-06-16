@@ -93,7 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\DomainModel\Equipment\Repository\" />
-    <Folder Include="Core\DomainModel\Medicine\Repository\" />
   </ItemGroup>
 
 

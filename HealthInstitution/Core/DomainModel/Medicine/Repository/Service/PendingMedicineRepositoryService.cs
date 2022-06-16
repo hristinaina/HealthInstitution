@@ -11,9 +11,9 @@ namespace HealthInstitution.Core.Repository
     {
         private readonly IPendingMedicineRepository _pendingMedicineRepository;
 
-        public PendingMedicineRepositoryService(IPendingMedicineRepository pendingMedicineRepository)
+        public PendingMedicineRepositoryService()
         {
-            _pendingMedicineRepository = pendingMedicineRepository;
+            _pendingMedicineRepository = Institution.Instance().PendingMedicineRepository;
         }
 
         public PendingMedicine FindByID(int id)
@@ -43,6 +43,11 @@ namespace HealthInstitution.Core.Repository
             else if (!IsNameAvailable(medicine, newName)) throw new NameNotAvailableException("Name already in use!");
             
             return _pendingMedicineRepository.ChangeMedicine(medicine, newName, newIngredients);
+        }
+
+        public List<PendingMedicine> GetPendingMedicines()
+        {
+            return _pendingMedicineRepository.GetPendingMedicines();
         }
     }
 }

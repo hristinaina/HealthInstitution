@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands;
-
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
 {
@@ -225,7 +225,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         {
             _newAllergens.Clear();
 
-            foreach(Allergen allergen in Institution.Instance().AllergenRepository.Allergens)
+            foreach(Allergen allergen in new AllergenRepositoryService().GetAllergens())
             {
                 foreach (Allergen i in _examination.Patient.Record.Allergens)
                 {
@@ -278,7 +278,7 @@ namespace HealthInstitution.MVVM.ViewModels.DoctorViewModels
         public void FillMedicinesList()
         {
             _medicines.Clear();
-            foreach(Medicine medicine in _institution.MedicineRepository.Medicines)
+            foreach(Medicine medicine in new MedicineRepositoryService().GetMedicines())
             {
                 _medicines.Add(medicine);
             }

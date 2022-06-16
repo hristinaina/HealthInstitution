@@ -12,9 +12,9 @@ namespace HealthInstitution.Core.Repository
     {
         private readonly IAllergenRepository _allergenRepository;
 
-        public AllergenRepositoryService(IAllergenRepository allergenRepository)
+        public AllergenRepositoryService()
         {
-            _allergenRepository = allergenRepository;
+            _allergenRepository = Institution.Instance().AllergenRepository;
         }
 
         public Allergen FindByID(int id)
@@ -54,6 +54,11 @@ namespace HealthInstitution.Core.Repository
             if (!service.IsNameAvailable(allergen.Name)) throw new NameNotAvailableException("Name already in use!");
 
             _allergenRepository.DeleteAllergen(allergen);
+        }
+
+        public List<Allergen> GetAllergens()
+        {
+            return _allergenRepository.GetAllergens();
         }
     }
 }

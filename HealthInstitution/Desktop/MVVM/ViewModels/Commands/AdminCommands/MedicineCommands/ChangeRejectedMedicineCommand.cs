@@ -9,6 +9,7 @@ using HealthInstitution.Core;
 using HealthInstitution.Core;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineCommands
 {
@@ -34,7 +35,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineComma
 
             try
             {
-                PendingMedicine m = Institution.Instance().PendingMedicineRepository
+                PendingMedicine m = new PendingMedicineRepositoryService()
                     .ChangeMedicine(_model.SelectedMedicine.Medicine, _model.SelectedName, newIngredients);
 
                 m.State = State.ON_HOLD;

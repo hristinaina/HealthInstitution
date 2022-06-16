@@ -9,6 +9,9 @@ namespace HealthInstitution.Core.Repository
     public interface IMedicineAllergenRepositoryService
     {
         public List<MedicineAllergen> FindByMedicineID(int medicineId);
+        
         public void Add(Medicine medicine);
+
+        public List<MedicineAllergen> GetMedicineAllergens();
     }
 }
