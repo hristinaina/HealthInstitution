@@ -5,7 +5,7 @@ using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services.Equipments
 {
-    public class SearchEquipmentService
+    public class SearchEquipmentService : ISearchEquipmentService
     {
         private IEquipmentRepositoryService _equipment;
 

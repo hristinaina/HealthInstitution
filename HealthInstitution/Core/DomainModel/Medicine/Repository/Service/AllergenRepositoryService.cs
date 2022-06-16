@@ -34,24 +34,24 @@ namespace HealthInstitution.Core.Repository
 
         public void ChangeName(Allergen allergen, string name)
         {
-            AllergenService service = new AllergenService(allergen);
-            if (!service.IsNameAvailable(name)) throw new NameNotAvailableException("Name already taken");
-            _allergenRepository.ChangeName(allergen, name);
+            AllergenValidationService service = new AllergenValidationService();
+            if (!service.IsNameAvailable(name, allergen)) throw new NameNotAvailableException("Name already taken");
 
+            _allergenRepository.ChangeName(allergen, name);
         }
 
         public Allergen AddNewAllergen(Allergen allergen)
         {
-            AllergenService service = new AllergenService(allergen);
-            if (!service.IsNameAvailable(allergen.Name)) throw new NameNotAvailableException("Name already in use!");
+            AllergenValidationService service = new AllergenValidationService();
+            if (!service.IsNameAvailable(allergen.Name, allergen)) throw new NameNotAvailableException("Name already in use!");
 
             return _allergenRepository.AddNewAllergen(allergen);
         }
 
         public void DeleteAllergen(Allergen allergen)
         {
-            AllergenService service = new AllergenService(allergen);
-            if (!service.IsNameAvailable(allergen.Name)) throw new NameNotAvailableException("Name already in use!");
+            AllergenValidationService service = new AllergenValidationService();
+            if (!service.IsDeletable(allergen)) throw new IngredientInUseException("Ingredient in use!");
 
             _allergenRepository.DeleteAllergen(allergen);
         }

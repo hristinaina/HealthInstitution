@@ -16,10 +16,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
     class FilterCommand : BaseCommand
     {
         private AdminEquipmentViewModel _model;
+        private IFilterEquipmentService _filter;
 
         public FilterCommand(AdminEquipmentViewModel model)
         {
             _model = model;
+            _filter = new FilterEquipmentService();
         }
 
         private bool CheckPrerequisites()
@@ -41,9 +43,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
         
                 int minQuantity = int.Parse(_model.FilterMinQuantity), maxQuantity = int.Parse(_model.FilterMaxQuantity);
                 try
-                { 
-                    FilterEquipmentService service = new FilterEquipmentService(); 
-                    _model.FilteredEquipment = service.Filter((RoomType)_model.FilterRoomType, minQuantity,
+                {
+                    _model.FilteredEquipment = _filter.Filter((RoomType)_model.FilterRoomType, minQuantity,
                         maxQuantity, (EquipmentType)_model.FilterEquipmentType);
                     
                     _model.DialogOpen = false;

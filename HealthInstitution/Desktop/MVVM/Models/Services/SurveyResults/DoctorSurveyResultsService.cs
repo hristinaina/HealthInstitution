@@ -59,6 +59,10 @@ namespace HealthInstitution.Core.Services.SurveyResults
             {
                 if (examination.Doctor.Equals(doctor) && examination.Review is not null)
                 {
+                    if (examination.Review.Comment is null || examination.Review.Comment.Equals(""))
+                    {
+                        continue;
+                    }
                     comments.Add(examination.Review.Comment);
                 }
             }

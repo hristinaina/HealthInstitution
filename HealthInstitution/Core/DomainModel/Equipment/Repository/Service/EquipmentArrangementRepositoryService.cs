@@ -38,11 +38,6 @@ namespace HealthInstitution.Core.Repository
             return _repository.FindAllAfter(r, e, date);
         }
 
-        public bool UpdateEquipmentQuantityInRoom(Room room, Equipment equipment)
-        {
-            return _repository.UpdateEquipmentQuantityInRoom(room, equipment);
-        }
-
         public List<EquipmentArrangement> GetArrangements()
         {
             return _repository.GetArrangements();

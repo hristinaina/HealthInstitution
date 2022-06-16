@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using HealthInstitution.Commands;
+using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.Equipments;
+using HealthInstitution.Desktop.MVVM.Models.Services.Equipments;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.EquipmentCommands
@@ -25,7 +27,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Equipment
             try
             {
                 DateTime newArrangementStartDate = DateTime.Now.AddHours(-1);
-                EquipmentService service = new EquipmentService();
+                IEquipmentRearrangementService service = new EquipmentRearrangementService();
                 service.Rearrange(_model.SelectedEquipment.Room, _model.NewArrangementTargetRoom, newArrangementStartDate, _model.NewArrangementQuantity, _model.SelectedEquipment.Equipment);
                 
                 _model.DialogOpen = false;

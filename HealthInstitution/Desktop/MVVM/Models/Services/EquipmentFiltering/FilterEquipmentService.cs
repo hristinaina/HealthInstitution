@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services.Equipments
 {
-    public class FilterEquipmentService
+    public class FilterEquipmentService : IFilterEquipmentService
     {
         private IEquipmentRepositoryService _equipment;
 
