@@ -1,4 +1,6 @@
-﻿namespace HealthInstitution.Core
+﻿using System.Collections.Generic;
+
+namespace HealthInstitution.Core
 {
     public interface IExaminationRelationsRepository
     {
@@ -9,5 +11,6 @@
         public void Add(ExaminationReference examinationReference);
 
         public void Remove(Examination examination);
+        List<ExaminationReference> GetRelations();
     }
 }

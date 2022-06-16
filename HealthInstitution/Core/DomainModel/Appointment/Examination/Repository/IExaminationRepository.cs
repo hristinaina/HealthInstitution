@@ -19,5 +19,6 @@ namespace HealthInstitution.Core
 
         public Appointment FindAppointment(Doctor doctor, Patient patient, DateTime oldDate);
         List<Examination> GetExaminations();
+        Examination FindByID(int appointmentID);
     }
 }

@@ -110,5 +110,6 @@ namespace HealthInstitution.Core
         {
             return _examinations;
         }
+
     }
 }
