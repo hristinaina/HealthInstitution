@@ -82,7 +82,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             InitializeSearchParameters();
             CanReview = false;
             Check = new CheckCommand(this);
-            Submit = new SubmitCommand(this);
+            Submit = new SubmitSurveyCommand(this);
         }
 
         private void InitializeSearchParameters()

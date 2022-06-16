@@ -33,7 +33,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             Navigation = new PatientNavigationViewModel();
             Comment = "";
             Check = new CheckCommand(this);
-            Submit = new SubmitCommand(this);
+            Submit = new SubmitSurveyCommand(this);
         }
 
         internal void ResetReview()
