@@ -11,13 +11,13 @@ namespace HealthInstitution.Core.Services.Renovations
 {
     class RenovationService
     {
-        private RenovationRepository _renovations;
+        private IRenovationRepositoryService _renovations;
         private IRoomRenovationRepositoryService _roomsUnderRenovation;
         private readonly EndRenovationService _endRenovationService;
 
         public RenovationService()
         {
-            _renovations = Institution.Instance().RenovationRepository;
+            _renovations = new RenovationRepositoryService();
             _roomsUnderRenovation = new RoomRenovationRepositoryService();
             _endRenovationService = new EndRenovationService();
         }
@@ -26,7 +26,7 @@ namespace HealthInstitution.Core.Services.Renovations
 
         public void StartRenovations()
         {
-            foreach (Renovation r in _renovations.Renovations)
+            foreach (Renovation r in _renovations.GetRenovations())
             {
                 if (r.IsStarted())
                 {
@@ -39,7 +39,7 @@ namespace HealthInstitution.Core.Services.Renovations
         public void EndRenovations()
         {
             List<int> endedRenovations = new List<int>();
-            foreach (Renovation r in _renovations.Renovations)
+            foreach (Renovation r in _renovations.GetRenovations())
             {
                 if (r.EndDate <= DateTime.Today) endedRenovations.Add(r.ID);
             }
@@ -67,7 +67,7 @@ namespace HealthInstitution.Core.Services.Renovations
 
             _roomsUnderRenovation.SetRooms(notCompletedRenovations);
 
-            _renovations.Renovations.Remove(r);
+            _renovations.GetRenovations().Remove(r);
         }
     }
 }

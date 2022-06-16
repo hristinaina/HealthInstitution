@@ -79,6 +79,5 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
                 i++;
             }
         }
-
     }
 }

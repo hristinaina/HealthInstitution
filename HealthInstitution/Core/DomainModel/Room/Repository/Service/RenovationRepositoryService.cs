@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace HealthInstitution.Core.Repository
 {
@@ -20,6 +21,11 @@ namespace HealthInstitution.Core.Repository
         public Renovation Create(DateTime startDate, DateTime endDate)
         {
             return _repository.Create(startDate, endDate);
+        }
+
+        public List<Renovation> GetRenovations()
+        {
+            return _repository.GetRenovations();
         }
     }
 }

@@ -63,14 +63,17 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
 
                     renovation.Result = result;
                     renovation.RoomsUnderRenovation = roomUnderRenovation;
-                    Institution.Instance().RenovationRepository.Renovations.Add(renovation);
+                    
+                    IRenovationRepositoryService renovations = new RenovationRepositoryService();
+                    renovations.GetRenovations().Add(renovation);
+
                     _model.SelectedRoom.Renovations.Add(renovation);
 
-                    IRoomRenovationRepositoryService service = new RoomRenovationRepositoryService();
+                    IRoomRenovationRepositoryService roomRenovations = new RoomRenovationRepositoryService();
 
-                    service.GetRooms().Add(new RoomRenovation(renovation.ID, _model.SelectedRoom.ID, false));
-                    service.GetRooms().Add(new RoomRenovation(renovation.ID, firstResultingRoom.ID, true));
-                    service.GetRooms().Add(new RoomRenovation(renovation.ID, secondResultingRoom.ID, true));
+                    roomRenovations.GetRooms().Add(new RoomRenovation(renovation.ID, _model.SelectedRoom.ID, false));
+                    roomRenovations.GetRooms().Add(new RoomRenovation(renovation.ID, firstResultingRoom.ID, true));
+                    roomRenovations.GetRooms().Add(new RoomRenovation(renovation.ID, secondResultingRoom.ID, true));
 
 
                     NavigationStore.Instance().CurrentViewModel = new AdminRenovationViewModel();

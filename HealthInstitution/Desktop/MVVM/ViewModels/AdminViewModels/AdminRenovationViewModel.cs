@@ -142,7 +142,9 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         {
             _renovations.Clear();
 
-            foreach (Renovation r in _institution.RenovationRepository.Renovations)
+            IRenovationRepositoryService service = new RenovationRepositoryService();
+
+            foreach (Renovation r in service.GetRenovations())
             {
                 _renovations.Add(new RenovationListItemViewModel(r));
             }

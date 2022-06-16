@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IRenovationRepository
+    public interface IRenovationRepository : IRepository
     {
         public Renovation FindById(int id);
 
