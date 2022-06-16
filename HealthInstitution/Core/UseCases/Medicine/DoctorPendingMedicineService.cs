@@ -9,7 +9,7 @@ using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
-    class DoctorPendingMedicineService
+    class DoctorPendingMedicineService : IDoctorPendingMedicineService
     {
         private IPendingMedicineRepository _pendingMedicineRepository;
 

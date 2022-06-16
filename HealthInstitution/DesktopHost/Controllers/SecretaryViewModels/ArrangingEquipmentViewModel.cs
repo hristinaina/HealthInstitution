@@ -100,7 +100,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             Navigation = new SecretaryNavigationViewModel();
             _equipmentArrangement = new ObservableCollection<EquipmentListItemViewModel>();
             _rooms = new List<Room>();
-            Rearrange = new RearrangeCommand(this);
+            Rearrange = new DynamicRearrangeCommand(this);
             EnableChanges = false;
 
             FillEquipmentArrangementList();

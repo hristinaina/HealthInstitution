@@ -12,10 +12,10 @@
     <StartupObject>HealthInstitution.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Infrastructure\Database\Repositories\Doctor\**" />
-    <EmbeddedResource Remove="Infrastructure\Database\Repositories\Doctor\**" />
-    <None Remove="Infrastructure\Database\Repositories\Doctor\**" />
-    <Page Remove="Infrastructure\Database\Repositories\Doctor\**" />
+    <Compile Remove="Core\UseCases\AppointmentScheduling\NewFolder\**" />
+    <EmbeddedResource Remove="Core\UseCases\AppointmentScheduling\NewFolder\**" />
+    <None Remove="Core\UseCases\AppointmentScheduling\NewFolder\**" />
+    <Page Remove="Core\UseCases\AppointmentScheduling\NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
 

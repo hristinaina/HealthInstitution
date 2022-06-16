@@ -28,6 +28,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
             try
             {
                 Operation operation = _viewModel.SelectedOperation.Operation;
+                operation.Date = DateTime.Parse(_viewModel.SelectedDate);
+                operation.Patient = _viewModel.SelectedPatient;
                 DateTime datetime = _viewModel.MergeTime(_viewModel.SelectedDate, _viewModel.SelectedTime);
                 DoctorRescheduleAppointmentService doctorRescheduleAppointmentService = new();
                 bool isRescheduled = doctorRescheduleAppointmentService.RescheduleOperation((Operation)operation, datetime);
