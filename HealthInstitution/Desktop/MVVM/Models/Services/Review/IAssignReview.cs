@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HealthInstitution.Core;
 
-namespace HealthInstitution.Desktop.MVVM.Models.Services.Review
+namespace HealthInstitution.Services
 {
-    class IAssing
+    public interface IAssignReview
     {
+        public void AssignReview(Examination examination);
+        public void AssignReview();
     }
 }

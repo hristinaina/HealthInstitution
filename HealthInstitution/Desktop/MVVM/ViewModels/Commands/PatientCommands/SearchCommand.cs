@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 {
-    class SearchCommand : BaseCommand
+    internal class SearchCommand : BaseCommand
     {
         private readonly BaseViewModel _viewModel;
-        IAnamnesisSearch _anamnesisSearch;
-        IDoctorSearch _doctorSearch;
+        private IAnamnesisSearch _anamnesisSearch;
+        private IDoctorSearch _doctorSearch;
 
         public SearchCommand(BaseViewModel viewModel)
         {
@@ -28,7 +28,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             if (_viewModel is PatientSearchViewModel searchViewModel)
             {
 
-                DoctorsSearchService _doctorSearch = new DoctorsSearchService(Institution.Instance().DoctorRepository);
+                _doctorSearch = new DoctorsSearchService(Institution.Instance().DoctorRepository);
                 Doctor search = new Doctor(searchViewModel.FirstNameKeyWord, searchViewModel.LastNameKeyWord, (Specialization)searchViewModel.SelectedSpecialization);
                 List<Doctor> doctors = _doctorSearch.SearchForDoctor(search);
                 searchViewModel.FillAllDoctorsList(doctors);

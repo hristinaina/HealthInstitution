@@ -6,18 +6,18 @@ using HealthInstitution.Stores;
 
 namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
 {
-    class SubmitCommand : BaseCommand
+    internal class SubmitSurveyCommand : BaseCommand
     {
         private readonly PatientSurveyViewModel _surveyViewModel;
         private readonly PatientRecordViewModel _recordViewModel;
         private IAssignReview _reviewService;
 
-        public SubmitCommand(PatientSurveyViewModel viewModel)
+        public SubmitSurveyCommand(PatientSurveyViewModel viewModel)
         {
             _surveyViewModel = viewModel;
         }
 
-        public SubmitCommand(PatientRecordViewModel viewModel)
+        public SubmitSurveyCommand(PatientRecordViewModel viewModel)
         {
             _recordViewModel = viewModel;
         }
@@ -34,7 +34,7 @@ namespace HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands
             }
             else
             {
-                CreateReviewService _reviewService = new CreateReviewService(_surveyViewModel.Service, _surveyViewModel.Suggestion, _surveyViewModel.Hygiene, _surveyViewModel.Satisfaction, _surveyViewModel.Comment);
+                _reviewService = new CreateReviewService(_surveyViewModel.Service, _surveyViewModel.Suggestion, _surveyViewModel.Hygiene, _surveyViewModel.Satisfaction, _surveyViewModel.Comment);
                 _reviewService.AssignReview();
                 NavigationStore.Instance().CurrentViewModel = new PatientRecordViewModel();
                 NavigationStore.Instance().CurrentViewModel.ShowMessage("Thank you for your feedback !");
