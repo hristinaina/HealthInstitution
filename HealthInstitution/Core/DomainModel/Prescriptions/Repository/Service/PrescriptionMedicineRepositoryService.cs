@@ -10,6 +10,11 @@ namespace HealthInstitution.Core.Repository
     {
         private readonly IPrescriptionMedicineRepository _prescriptionMedicineRepository;
 
+        public PrescriptionMedicineRepositoryService()
+        {
+            _prescriptionMedicineRepository = Institution.Instance().PrescriptionMedicineRepository;
+        }
+
         public void Add(PrescriptionMedicine prescriptionMedicine)
         {
             _prescriptionMedicineRepository.Add(prescriptionMedicine);

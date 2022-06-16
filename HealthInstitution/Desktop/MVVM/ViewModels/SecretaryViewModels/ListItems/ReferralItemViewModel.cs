@@ -24,6 +24,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _referral = referral;
             _doctorService = new DoctorRepositoryService();
+            _patientService = new PatientRepositoryService();
         }
     }
 }

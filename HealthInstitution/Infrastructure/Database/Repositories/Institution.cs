@@ -36,15 +36,6 @@ namespace HealthInstitution.Core
         private readonly IRoomRenovationRepository _roomRenovationRepository;
         private readonly IEquipmentOrderRepository _equipmentOrderRepository;
 
-        private readonly OperationReferencesRepository _operationReferencesRepository;
-
-        private readonly EquipmentRepository _equipmentRepository;
-        private readonly EquipmentArrangementRepository _equipmentArragmentRepository;
-        private readonly RoomRepository _roomRepository;
-        private readonly RenovationRepository _renovationRepository;
-        private readonly RoomRenovationRepository _roomRenovationRepository;
-        private readonly EquipmentOrderRepository _equipmentOrderRepository;
-
         private readonly IMedicineRepository _medicineRepository;
         private readonly IDayOffRepository _dayOffRepository;
         private readonly IReferralRepository _referralRepository;
@@ -56,7 +47,6 @@ namespace HealthInstitution.Core
 
         private readonly IDoctorDaysOffRepository _doctorDaysOffRepository;
         private readonly IPrescriptionMedicineRepository _prescriptionMedicineRepository;
-        private readonly ExaminationChangeRepository _examinationChangeRepository;
 
         private readonly INotificationRepository _notificationRepository;
         private readonly ReviewRepository _reviewRepository;

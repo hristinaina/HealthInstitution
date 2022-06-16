@@ -19,16 +19,16 @@ namespace HealthInstitution.Core.Services
         private int _newDuration;
 
         private readonly IDoctorRepositoryService _doctorService;
-        private readonly ExaminationRepository _examinationRepository;
-        private readonly OperationRepository _operationRepository;
+        private readonly IExaminationRepositoryService _examinationRepository;
+        private readonly IOperationRepositoryService _operationRepository;
         private readonly INotificationRepositoryService _notificationRepositoryService;
 
         public EmergencyAppointmentService()
         {
             _doctor = null;
             _doctorService = new DoctorRepositoryService();
-            _examinationRepository = Institution.Instance().ExaminationRepository;
-            _operationRepository = Institution.Instance().OperationRepository;
+            _examinationRepository = new ExaminationRepositoryService();
+            _operationRepository = new OperationRepositoryService();
             _notificationRepositoryService = new NotificationRepositoryService();
         }
 

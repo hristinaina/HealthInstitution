@@ -33,9 +33,9 @@ namespace HealthInstitution.Core.Services
             {
                 IExaminationRepositoryService examinations = new ExaminationRepositoryService();
                 Examination examination = (Examination) examinations.FindByID(relation.ExaminationID);
-                Doctor doctor = new DoctorRepositoryService().FindByID(reference.DoctorID);
-                Patient patient = new PatientRepositoryService().FindByID(reference.PatientID);
-                Prescription prescription = new PrescriptionRepositoryService().FindByID(reference.PerscriptionID);
+                Doctor doctor = new DoctorRepositoryService().FindByID(relation.DoctorID);
+                Patient patient = new PatientRepositoryService().FindByID(relation.PatientID);
+                Prescription prescription = new PrescriptionRepositoryService().FindByID(relation.PerscriptionID);
                  Room room = Institution.Instance().RoomRepository.FindById(relation.RoomID);
 
                 examination.Doctor = doctor;
@@ -108,7 +108,7 @@ namespace HealthInstitution.Core.Services
 
         public static void FillMedicalRecord()
         {
-            foreach (Patient patient in Institution.Instance().PatientRepository.Patients)
+            foreach (Patient patient in new PatientRepositoryService().GetPatients())
             { 
                 IOperationRepositoryService operations = new OperationRepositoryService();
                 IExaminationRepositoryService examinations = new ExaminationRepositoryService();
