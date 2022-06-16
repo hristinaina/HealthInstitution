@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories;
+using HealthInstitution.Desktop.MVVM.Models.Services.Appointment;
 
 namespace HealthInstitution.Core.Services
 {
-    public class OperationService
+    public class OperationService : AppointmentService
     {
 
         private readonly OperationRepository _operationRepository;
@@ -31,5 +32,6 @@ namespace HealthInstitution.Core.Services
             futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
             return futureAppointments;
         }
+
     }
 }

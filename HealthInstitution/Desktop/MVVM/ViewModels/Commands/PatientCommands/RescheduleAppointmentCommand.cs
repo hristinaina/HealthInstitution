@@ -3,6 +3,7 @@ using HealthInstitution.Core;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
+using HealthInstitution.Services;
 using System;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
@@ -10,10 +11,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
     class RescheduleAppointmentCommand : BaseCommand
     {
         private readonly PatientAppointmentViewModel _viewModel;
+        private IRescheduleExamination _service;
 
         public RescheduleAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel)
         {
             _viewModel = patientAppointmentViewModel;
+            _service = new PatientRescheduleExaminationService();
         }
 
         public override void Execute(object parameter)
@@ -22,12 +25,18 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             _viewModel.DialogOpen = false;
 
             Appointment examination = _viewModel.SelectedAppointment.Appointment;
+            if (examination is Operation)
+            {
+                _viewModel.ShowMessage("Cannot reschedule operation !");
+                return;
+            }
+
+
             DateTime datetime = _viewModel.MergeTime(_viewModel.SelectedDate, _viewModel.SelectedTime);
 
             try
             {
-                PatientRescheduleAppointmentService service = new PatientRescheduleAppointmentService(examination);
-                bool doneCompletely = service.RescheduleExamination(datetime);
+                bool doneCompletely = _service.RescheduleExamination((Examination)examination, datetime);
                 if (doneCompletely)
                 {
                     _viewModel.ShowMessage("Appointment successfully rescheduled !");

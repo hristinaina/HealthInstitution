@@ -1,14 +1,14 @@
 ﻿using HealthInstitution.Core;
-using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.PatientServices;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
+using HealthInstitution.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using static HealthInstitution.Core.Services.NotificationReceiveService;
+using static HealthInstitution.Services.NotificationReceiveService;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
@@ -97,6 +97,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public DateTime SuggestionEndTime { get; set; }
         public bool SuggestionPriority { get; set; }
         private ObservableCollection<AppointmentListItemViewModel> _appointmentSuggestions;
+        private readonly INotify _notifyService;
+
         public IEnumerable<AppointmentListItemViewModel> AppointmentSuggestions { get => _appointmentSuggestions; }
         public AppointmentListItemViewModel SelectedSuggestion { get; set; }
         public ICommand UseSuggestion { get; set; }
@@ -119,9 +121,9 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             InitializeSuggestionsParrameters();
 
             Del delegateMethod = showNotification;
-            NotificationReceiveService notifications = new NotificationReceiveService(_patient, delegateMethod);
-            notifications.ExecuteRealTimeNotifications();
-            notifications.AddMissedNotifications();
+            _notifyService = new NotificationReceiveService(_patient, delegateMethod);
+            _notifyService.ExecuteRealTimeNotifications();
+            _notifyService.AddMissedNotifications();
         }
 
         public PatientAppointmentViewModel(Doctor doctor) : this()

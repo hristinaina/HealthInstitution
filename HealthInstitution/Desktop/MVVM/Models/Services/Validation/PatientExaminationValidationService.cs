@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Services.ValidationServices
 {
-    class PatientAppointmentValidationService
+    class PatientExaminationValidationService
     {
         private Appointment _appointment;
         private DateTime _dateTime;
 
-        public PatientAppointmentValidationService(Appointment appointment, DateTime dateTime)
+        public PatientExaminationValidationService(Appointment appointment, DateTime dateTime)
         {
             _appointment = appointment;
             _dateTime = dateTime;

@@ -1,26 +1,29 @@
 ﻿using HealthInstitution.Core;
+using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.Notifications;
-using HealthInstitution.MVVM.ViewModels;
 using Quartz;
 using Quartz.Impl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthInstitution.Core.Services
+namespace HealthInstitution.Services
 {
-    class NotificationReceiveService
+    internal class NotificationReceiveService : INotify
     {
-        private Patient _patient;
-        private Del _method;
+        private readonly Patient _patient;
+        private readonly Del _method;
+        private readonly PatientPrescriptionsService _prescriptionsService;
+
         public delegate void Del(string message);
 
         public NotificationReceiveService(Patient patient, Del method)
         {
             _patient = patient;
             _method = method;
+            _prescriptionsService = new PatientPrescriptionsService(_patient);
+
         }
 
         public async Task ExecuteRealTimeNotifications()
@@ -28,13 +31,12 @@ namespace HealthInstitution.Core.Services
             IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler().Result;
             await scheduler.Start();
 
-            PatientPrescriptionsService prescriptionsService = new PatientPrescriptionsService(_patient);
-            List<Prescription> prescriptions = prescriptionsService.GetUpgoingPrescriptions();
+            List<Prescription> prescriptions = _prescriptionsService.GetUpgoingPrescriptions();
 
             string message;
             foreach (Prescription prescription in prescriptions)
             {
-                message = "Please take medicine " + prescription.Medicine.Name + " in " +_patient.NotificationsPreference + "h !";
+                message = "Please take medicine " + prescription.Medicine.Name + " in " + _patient.NotificationsPreference + "h !";
                 IJobDetail job = JobBuilder.Create<NotifyJob>()
                                 .WithIdentity(prescription.ID.ToString(), _patient.ID.ToString())
                                 .Build();
@@ -56,11 +58,9 @@ namespace HealthInstitution.Core.Services
                 await scheduler.ScheduleJob(job, trigger);
             }
             await scheduler.Shutdown();
-
-
         }
 
-        private string GetSchedulerPattern(Prescription prescription)
+        public string GetSchedulerPattern(Prescription prescription)
         {
             int hoursBetween = 24 / prescription.TimesADay;
             int advance = 24 + (0 - _patient.NotificationsPreference) % 24;
@@ -72,39 +72,25 @@ namespace HealthInstitution.Core.Services
 
         public void AddMissedNotifications()
         {
-            foreach (Notification notification in _patient.Notifications.ToList())
-            {
-                if ((DateTime.Now - notification.DateTime).Days > 3)
-                {
-                    _patient.Notifications.Remove(notification);
-                }
-            }
+            RemoveOutdatedNotifications();
 
-            PatientPrescriptionsService prescriptionsService = new PatientPrescriptionsService(_patient);
-            List<Prescription> prescriptions = prescriptionsService.GetAllPrescriptions();
+            List<Prescription> prescriptions = _prescriptionsService.GetAllPrescriptions();
 
             foreach (Prescription prescription in prescriptions)
             {
                 if (prescription.Medicine is null) continue;
-                DateTime lastTime = prescription.LastNotification;
-                if ((DateTime.Now - lastTime).Days > 2)
-                {
-                    lastTime = DateTime.Now - new TimeSpan(2, 0, 0, 0);
-                }
+
+                DateTime lastTime = FindLastNotificationDate(prescription);
                 string message = "Please take medicine " + prescription.Medicine.Name + " in " + _patient.NotificationsPreference + "h !";
                 int hoursBetween = 24 / prescription.TimesADay;
-                DateTime reminderTime = prescriptionsService.GetPrescriptionDate(prescription);
+                DateTime reminderTime = _prescriptionsService.GetPrescriptionDate(prescription);
                 DateTime endAt = reminderTime + new TimeSpan(prescription.LongitudeInDays, 0, 0, 0);
-                reminderTime -= new TimeSpan(_patient.NotificationsPreference, 0, 0);
-                while (reminderTime < lastTime)
-                {
-                    reminderTime += new TimeSpan(hoursBetween, 0, 0);
-                }
+                reminderTime = NextNotificationTime(lastTime, hoursBetween, reminderTime);
+
                 while (reminderTime < DateTime.Today && reminderTime < endAt)
                 {
                     Notification newNofitication = new Notification(0, message, reminderTime, _patient.ID);
-                    _patient.Notifications.Add(newNofitication);
-                    prescription.LastNotification = reminderTime;
+                    SendNotification(prescription, newNofitication);
                     reminderTime += new TimeSpan(hoursBetween, 0, 0);
                 }
             }
@@ -112,8 +98,45 @@ namespace HealthInstitution.Core.Services
             _patient.Notifications = _patient.Notifications.OrderByDescending(x => x.DateTime).ToList();
         }
 
+        public void SendNotification(Prescription prescription, Notification notification)
+        {
+            _patient.Notifications.Add(notification);
+            prescription.LastNotification = notification.DateTime;
+        }
 
+        public DateTime NextNotificationTime(DateTime lastTime, int hoursBetween, DateTime reminderTime)
+        {
+            reminderTime -= new TimeSpan(_patient.NotificationsPreference, 0, 0);
 
+            while (reminderTime < lastTime)
+            {
+                reminderTime += new TimeSpan(hoursBetween, 0, 0);
+            }
+
+            return reminderTime;
+        }
+
+        public DateTime FindLastNotificationDate(Prescription prescription)
+        {
+            DateTime lastTime = prescription.LastNotification;
+            if ((DateTime.Now - lastTime).Days > 2)
+            {
+                lastTime = DateTime.Now - new TimeSpan(2, 0, 0, 0);
+            }
+
+            return lastTime;
+        }
+
+        public void RemoveOutdatedNotifications()
+        {
+            foreach (Notification notification in _patient.Notifications.ToList())
+            {
+                if ((DateTime.Now - notification.DateTime).Days > 3)
+                {
+                    _patient.Notifications.Remove(notification);
+                }
+            }
+        }
     }
 
 

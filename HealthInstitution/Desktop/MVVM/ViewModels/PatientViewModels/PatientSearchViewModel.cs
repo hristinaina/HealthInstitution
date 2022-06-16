@@ -1,10 +1,12 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
+using HealthInstitution.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using static HealthInstitution.Services.NotificationReceiveService;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
@@ -13,7 +15,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         private readonly Institution _institution;
         protected Patient _patient;
         public PatientNavigationViewModel Navigation { get; }
-
+        private readonly INotify _notifyService;
 
         private string _firstNameKeyword;
 
@@ -78,6 +80,11 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             FillAllDoctorsList(Institution.Instance().DoctorRepository.Doctors);
             FillSpecializationList();
             FillDoctorsList(Institution.Instance().DoctorRepository.Doctors);
+
+            Del delegateMethod = showNotification;
+            _notifyService = new NotificationReceiveService(_patient, delegateMethod);
+            _notifyService.ExecuteRealTimeNotifications();
+            _notifyService.AddMissedNotifications();
 
         }
         public void FillAllDoctorsList(List<Doctor> doctors)

@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Core;
+using HealthInstitution.Desktop.MVVM.Models.Services.Appointment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,13 @@ namespace HealthInstitution.Core.Services.PatientServices
     {
         private List<Examination> _examinations;
         private List<Operation> _operations;
+        private AppointmentService _appointmentService;
 
         public PatientAppointmentsService(Patient patient)
         {
             _examinations = patient.Examinations;
             _operations = patient.Operations;
+            _appointmentService = new AppointmentService();
         }
 
         public List<Appointment> GetAllAppointments()
@@ -31,7 +34,7 @@ namespace HealthInstitution.Core.Services.PatientServices
             List<Appointment> futureAppointments = new List<Appointment>();
             foreach (Appointment appointment in GetAllAppointments())
             {
-                if (!isDone(appointment.Date))
+                if (!_appointmentService.IsDone(appointment.Date))
                 {
                     futureAppointments.Add(appointment);
                 }
@@ -45,7 +48,7 @@ namespace HealthInstitution.Core.Services.PatientServices
             List<Appointment> pastAppointments = new List<Appointment>();
             foreach (Appointment appointment in GetAllAppointments())
             {
-                if (isDone(appointment.Date))
+                if (_appointmentService.IsDone(appointment.Date))
                 {
                     pastAppointments.Add(appointment);
                 }
@@ -58,7 +61,7 @@ namespace HealthInstitution.Core.Services.PatientServices
             List<Appointment> pastExaminations = new List<Appointment>();
             foreach (Appointment appointment in GetAllAppointments())
             {
-                if (isDone(appointment.Date))
+                if (_appointmentService.IsDone(appointment.Date))
                 {
                     pastExaminations.Add(appointment);
                 }
@@ -67,9 +70,5 @@ namespace HealthInstitution.Core.Services.PatientServices
             return pastExaminations;
         }
 
-        private bool isDone(DateTime date)
-        {
-            return DateTime.Compare(date, DateTime.Now) < 0;
-        }
     }
 }

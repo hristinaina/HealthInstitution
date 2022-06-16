@@ -1,11 +1,13 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Desktop.MVVM.ViewModels.Commands.PatientCommands;
 using HealthInstitution.MVVM.Views.PatientViews;
+using HealthInstitution.Services;
 using System.Windows.Input;
+using static HealthInstitution.Services.NotificationReceiveService;
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
-    class PatientSurveyViewModel : BaseViewModel
+    internal class PatientSurveyViewModel : BaseViewModel
     {
         private readonly Institution _institution;
         private readonly Patient _patient;
@@ -16,6 +18,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         private int _satisfaction;
         private int _suggestion;
         private string _comment;
+        private readonly INotify _notifyService;
 
         public int Service { get => _service; set { _service = value; } }
         public int Hygiene { get => _hygiene; set { _hygiene = value; } }
@@ -33,7 +36,12 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             Navigation = new PatientNavigationViewModel();
             Comment = "";
             Check = new CheckCommand(this);
-            Submit = new SubmitCommand(this);
+            Submit = new SubmitSurveyCommand(this);
+
+            Del delegateMethod = showNotification;
+            _notifyService = new NotificationReceiveService(_patient, delegateMethod);
+            _notifyService.ExecuteRealTimeNotifications();
+            _notifyService.AddMissedNotifications();
         }
 
         internal void ResetReview()

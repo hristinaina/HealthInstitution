@@ -1,17 +1,12 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HealthInstitution.Core.Services.SearchingServices
+namespace HealthInstitution.Services
 {
-    class DoctorsSearchService : SearchService
+    public class DoctorsSearchService : SearchService, IDoctorSearch
     {
-        DoctorRepository _repository;
-
+        private readonly DoctorRepository _repository;
         public DoctorsSearchService(DoctorRepository repository)
         {
             _repository = repository;
@@ -23,11 +18,11 @@ namespace HealthInstitution.Core.Services.SearchingServices
             foreach (Doctor d in _repository.Doctors)
             {
                 bool add = false;
-                if (isMatching(doctor.FirstName, d.FirstName))
+                if (IsMatching(doctor.FirstName, d.FirstName))
                 {
                     add = true;
                 }
-                if (isMatching(doctor.LastName, d.LastName))
+                if (IsMatching(doctor.LastName, d.LastName))
                 {
                     add = true;
                 }

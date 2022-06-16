@@ -3,6 +3,7 @@ using HealthInstitution.Core;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
+using HealthInstitution.Services;
 using System;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
@@ -11,11 +12,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
     {
         private readonly PatientAppointmentViewModel _viewModel;
         private readonly bool _usingSuggestion;
+        private IScheduleExamination _service;
 
         public CreateAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel, bool usingSuggestion = false)
         {
             _viewModel = patientAppointmentViewModel;
             _usingSuggestion = usingSuggestion;
+            _service = new PatientScheduleExaminationService();
         }
 
         public override void Execute(object parameter)
@@ -34,8 +37,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
 
             try
             {
-                PatientScheduleAppointmentService service = new PatientScheduleAppointmentService(patient);
-                bool done = service.CreateAppointment(doctor, datetime);
+                bool done = _service.CreateExamination(patient, doctor, datetime);
                 if (done)
                 {
                     _viewModel.ShowMessage("Appointment successfully scheduled !");

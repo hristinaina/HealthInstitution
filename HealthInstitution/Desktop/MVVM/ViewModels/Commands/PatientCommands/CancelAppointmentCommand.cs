@@ -3,6 +3,7 @@ using HealthInstitution.Core;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
+using HealthInstitution.Services;
 using System;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
@@ -10,10 +11,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
     class CancelAppointmentCommand : BaseCommand
     {
         private readonly PatientAppointmentViewModel _viewModel;
+        private ICancelExamination _service;
 
         public CancelAppointmentCommand(PatientAppointmentViewModel patientAppointmentViewModel)
         {
             _viewModel = patientAppointmentViewModel;
+            _service = new PatientCancelExaminationService();
         }
 
         public override void Execute(object parameter)
@@ -28,12 +31,10 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
                 return;
             }
 
-
             try
             {
 
-                PatientCancelAppointmentService service = new PatientCancelAppointmentService((Examination)examination);
-                bool doneCompletely = service.CancelExamination();
+                bool doneCompletely = _service.CancelExamination((Examination)examination);
                 if (doneCompletely)
                 {
                     _viewModel.ShowMessage("Appointment successfully canceled !");

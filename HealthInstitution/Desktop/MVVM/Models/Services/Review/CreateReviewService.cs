@@ -1,15 +1,10 @@
 ﻿using HealthInstitution.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HealthInstitution.Desktop.MVVM.Models.Services
+namespace HealthInstitution.Services
 {
-    class CreateReviewService
+    internal class CreateReviewService : IAssignReview
     {
-        Review _review;
+        private readonly Review _review;
 
         public CreateReviewService(int service, int hygiene, int satisfaction, int suggestion, string comment)
         {

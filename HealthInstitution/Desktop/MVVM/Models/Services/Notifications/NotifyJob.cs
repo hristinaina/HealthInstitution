@@ -1,12 +1,10 @@
 ﻿using Quartz;
-using System;
 using System.Threading.Tasks;
-using System.Windows;
-using static HealthInstitution.Core.Services.NotificationReceiveService;
+using static HealthInstitution.Services.NotificationReceiveService;
 
 namespace HealthInstitution.Core.Services.Notifications
 {
-    class NotifyJob : IJob
+    internal class NotifyJob : IJob
     {
         public async Task Execute(IJobExecutionContext context)
         {
