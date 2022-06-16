@@ -4,10 +4,6 @@ using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using HealthInstitution.Stores;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Repository;
 

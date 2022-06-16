@@ -2,9 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core
@@ -27,7 +25,7 @@ namespace HealthInstitution.Core
         public List<Room> RoomsUnderRenovation { get => _roomsUnderRenovation;
             set
             {
-                RoomService roomService = new RoomService();
+                RoomRepositoryService roomService = new RoomRepositoryService();
                 foreach (Room r in value)
                 {
                     

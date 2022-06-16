@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using HealthInstitution.Core.Repository;
+using HealthInstitution.Core.UseCases.RenovationScheduling;
 
-namespace HealthInstitution.Core.Services.Renovations
+namespace HealthInstitution.Core.Services
 {
-    class EndRenovationService
+    class EndRenovationService : IEndRenovationService
     {
         private IRoomRepositoryService _rooms;
 

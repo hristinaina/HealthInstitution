@@ -130,9 +130,6 @@ namespace HealthInstitution.Core.Repositories
 
         public void DeleteRoom(Room r)
         {
-            RoomService service = new RoomService();
-            if (!service.IsChangeable(r)) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
-            service.ReturnEquipmentToWarehouse(DateTime.Today, r);
             _rooms.Remove(r);
             _deletedRooms.Add(r);
         }

@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using HealthInstitution.Commands;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using HealthInstitution.Core.Repository;
 
+
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineCommands
 {
     class CreateMedicineCommand : BaseCommand
     {
         private AdminMedicineViewModel _model;
+        private ICreateMedicineService _medicineCreator;
 
         public CreateMedicineCommand(AdminMedicineViewModel model)
         {
             _model = model;
+            _medicineCreator = new CreateMedicineService();
         }
 
         public override void Execute(object parameter)
@@ -33,7 +32,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.MedicineComma
 
             try
             {
-                CreateMedicineService service = new CreateMedicineService();
+                ICreateMedicineService service = new CreateMedicineService();
                 PendingMedicine m = service.Create(_model.NewMedicineName, ingredients);
 
                 foreach (Allergen i in ingredients)

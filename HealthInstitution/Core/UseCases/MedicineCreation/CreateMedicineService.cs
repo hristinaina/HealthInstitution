@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
-using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core
 {
-    class CreateMedicineService
+    class CreateMedicineService : ICreateMedicineService
     {
 
         private IPendingMedicineRepositoryService _repository;
@@ -21,6 +13,7 @@ namespace HealthInstitution.Core
         {
             _repository = new PendingMedicineRepositoryService();
         }
+
         public PendingMedicine Create(string name, List<Allergen> ingredients)
         {
             if (ingredients.Count == 0) throw new ZeroIngredientsException("At least one ingredient must be selected");
