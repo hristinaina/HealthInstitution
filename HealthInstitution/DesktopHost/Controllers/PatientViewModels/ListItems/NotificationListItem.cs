@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
-    class NotificationListItemViewModel : BaseViewModel
+    class NotificationListItem : BaseViewModel
     {
         readonly Notification _notification;
         public Notification Appointment { get => _notification; }
@@ -11,7 +11,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public string Date => _notification.DateTime.ToString("dd/MM/yyyy HH:mm");
         public string Text => _notification.Text;
 
-        public NotificationListItemViewModel(Notification notification)
+        public NotificationListItem(Notification notification)
         {
             _notification = notification;
         }

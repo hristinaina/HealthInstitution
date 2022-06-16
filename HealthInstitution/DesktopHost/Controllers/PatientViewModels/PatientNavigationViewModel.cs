@@ -23,7 +23,7 @@ namespace HealthInstitution.MVVM.Views.PatientViews
             Appointments = new AppointmentsContentCommand();
             Search = new SearchContentCommand();
             Survey = new SurveyContentCommand();
-            Notifications = new NotificationsCommand();
+            Notifications = new NotificationsContentCommand();
         }
     }
 }

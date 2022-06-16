@@ -15,11 +15,11 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         private readonly Patient _patient;
 
 
-        private ObservableCollection<NotificationListItemViewModel> _notifications;
-        public IEnumerable<NotificationListItemViewModel> Notifications
+        private ObservableCollection<NotificationListItem> _notifications;
+        public IEnumerable<NotificationListItem> Notifications
         {
             get { return _notifications; }
-            set { _notifications = new ObservableCollection<NotificationListItemViewModel>(value); }
+            set { _notifications = new ObservableCollection<NotificationListItem>(value); }
         }
         public IEnumerable<string> Hours { get; private set; }
         private int _selectedHour;
@@ -53,7 +53,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _institution = Institution.Instance();
             _patient = (Patient)_institution.CurrentUser;
             Navigation = new PatientNavigationViewModel();
-            _notifications = new ObservableCollection<NotificationListItemViewModel>();
+            _notifications = new ObservableCollection<NotificationListItem>();
             Hours = new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
             FillNotificationsList();
             _selectedHour = _patient.NotificationsPreference;
@@ -70,7 +70,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _notifications.Clear();
             foreach (Notification notification in _patient.Notifications)
             {
-                _notifications.Add(new NotificationListItemViewModel(notification));
+                _notifications.Add(new NotificationListItem(notification));
             }
             OnPropertyChanged(nameof(Notifications));
         }

@@ -16,6 +16,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
         public MakeSuggestionsCommand(PatientAppointmentViewModel patientAppointmentViewModel)
         {
             _viewModel = patientAppointmentViewModel;
+            _suggestionService = new SuggestionsService();
         }
 
         public override void Execute(object parameter)
@@ -27,7 +28,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             DateTime startTime = _viewModel.SuggestionStartTime;
             DateTime endTime = _viewModel.SuggestionEndTime;
             ExaminationQuery query = new ExaminationQuery(patient, doctor, startTime, endTime, deadlineDate, priority);
-            _viewModel.FillSuggestionsList(_suggestionService.MakeSuggestions(query));
+            try
+            {
+                _viewModel.FillSuggestionsList(_suggestionService.MakeSuggestions(query));
+            }
+            catch (Exception e) {
+                _viewModel.ShowMessage(e.Message);
+            }
         }
     }
 }

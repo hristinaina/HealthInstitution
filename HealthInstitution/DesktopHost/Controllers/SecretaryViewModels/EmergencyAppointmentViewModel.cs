@@ -19,14 +19,14 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         private AppointmentsViewModel _viewModel;
         public SecretaryNavigationViewModel Navigation { get; }
 
-        private readonly ObservableCollection<AppointmentListItemViewModel> _appointments;
-        public IEnumerable<AppointmentListItemViewModel> Appointments => _appointments;
-        private AppointmentListItemViewModel _selectedAppointment;
+        private readonly ObservableCollection<AppointmentListItem> _appointments;
+        public IEnumerable<AppointmentListItem> Appointments => _appointments;
+        private AppointmentListItem _selectedAppointment;
 
         private readonly EmergencyAppointmentService _service;
         private readonly ExaminationService _examinationService;
         private readonly OperationService _operationService;
-        public AppointmentListItemViewModel SelectedAppointment { get => _selectedAppointment; }
+        public AppointmentListItem SelectedAppointment { get => _selectedAppointment; }
 
         private int _selection;
         public int Selection
@@ -53,7 +53,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _viewModel = viewModel;
             Navigation = new SecretaryNavigationViewModel();
-            _appointments = new ObservableCollection<AppointmentListItemViewModel>();
+            _appointments = new ObservableCollection<AppointmentListItem>();
             _service = new EmergencyAppointmentService();
             _examinationService = new ExaminationService();
             _operationService = new OperationService();
@@ -91,7 +91,7 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
             foreach (Appointment appointment in filteredAppointments)
             {
                 if (new ExaminationService().GetDuration(appointment) >= newDuration)
-                    _appointments.Add(new AppointmentListItemViewModel(appointment));
+                    _appointments.Add(new AppointmentListItem(appointment));
                 if (_appointments.Count >= 5) break;
             }
 

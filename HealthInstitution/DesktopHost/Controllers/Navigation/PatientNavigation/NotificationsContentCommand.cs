@@ -5,12 +5,12 @@ using HealthInstitution.Stores;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands.Navigation
 {
-    class NotificationsCommand : BaseCommand
+    class NotificationsContentCommand : BaseCommand
     {
         private readonly Institution _institution;
         private readonly NavigationStore _navigationStore;
 
-        public NotificationsCommand()
+        public NotificationsContentCommand()
         {
             _institution = Institution.Instance();
             _navigationStore = NavigationStore.Instance();

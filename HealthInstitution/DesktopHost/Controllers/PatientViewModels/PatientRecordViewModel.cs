@@ -18,11 +18,11 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public PatientNavigationViewModel Navigation { get; }
         public Patient Patient => _patient;
 
-        private ObservableCollection<AppointmentListItemViewModel> _appointments;
-        public IEnumerable<AppointmentListItemViewModel> Appointments
+        private ObservableCollection<AppointmentListItem> _appointments;
+        public IEnumerable<AppointmentListItem> Appointments
         {
             get { return _appointments; }
-            set { _appointments = new ObservableCollection<AppointmentListItemViewModel>(value); }
+            set { _appointments = new ObservableCollection<AppointmentListItem>(value); }
         }
 
         private string _searchKeyWord;
@@ -35,11 +35,11 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
         public ICommand Reset { get; set; }
 
 
-        private AppointmentListItemViewModel _selectedAppointment;
+        private AppointmentListItem _selectedAppointment;
 
         public bool CanReview { get; set; }
 
-        public AppointmentListItemViewModel SelectedAppointment
+        public AppointmentListItem SelectedAppointment
         {
             get { return _selectedAppointment; }
             set
@@ -79,7 +79,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 
             _institution = Institution.Instance();
             _patient = (Patient)_institution.CurrentUser;
-            _appointments = new ObservableCollection<AppointmentListItemViewModel>();
+            _appointments = new ObservableCollection<AppointmentListItem>();
             PatientAppointmentsService service = new PatientAppointmentsService(_patient);
             FillAppointmentsList(service.GetPastAppointments());
             InitializeSearchParameters();
@@ -104,7 +104,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _appointments.Clear();
             foreach (Appointment appointment in appointments)
             {
-                _appointments.Add(new AppointmentListItemViewModel(appointment));
+                _appointments.Add(new AppointmentListItem(appointment));
             }
             OnPropertyChanged(nameof(Appointments));
         }

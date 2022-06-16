@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
 {
-    public class AppointmentListItemViewModel : BaseViewModel
+    public class AppointmentListItem : BaseViewModel
     {
         readonly Appointment _appointment;
         public Appointment Appointment { get => _appointment; }
@@ -23,13 +23,13 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             }
         }
 
-        public AppointmentListItemViewModel(Appointment appointment)
+        public AppointmentListItem(Appointment appointment)
         {
             _appointment = appointment;
         }
 
-        public static implicit operator Appointment(AppointmentListItemViewModel a) => a._appointment;
-        public static explicit operator AppointmentListItemViewModel(Appointment a) => new AppointmentListItemViewModel(a);
+        public static implicit operator Appointment(AppointmentListItem a) => a._appointment;
+        public static explicit operator AppointmentListItem(Appointment a) => new AppointmentListItem(a);
 
     }
 

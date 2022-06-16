@@ -28,7 +28,7 @@ namespace HealthInstitution.Services
                 throw new PatientBlockedException("System has blocked your account !");
             }
 
-            new PatientExaminationValidationService(examination, dateTime).ValidateAppointmentData();
+            new PatientExaminationValidationService().ValidateAppointmentData(examination, dateTime);
 
             FindAvailableRoomService service = new FindAvailableRoomService();
             service.FindAvailableRoom(examination, dateTime);
