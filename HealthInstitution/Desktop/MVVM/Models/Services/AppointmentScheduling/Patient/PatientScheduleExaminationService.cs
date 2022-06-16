@@ -32,7 +32,7 @@ namespace HealthInstitution.Services
                 throw new PatientBlockedException("System has blocked your account !");
             }
 
-            int appointmentId = _examinationRepository.GetID();
+            int appointmentId = _examinationRepository.GetNewID();
 
             Examination examination = new Examination(appointmentId, doctor, patient, dateTime,
                                       new List<Prescription>());

@@ -73,7 +73,7 @@ namespace HealthInstitution.Core.Repositories
             _operations.Add(operation);
         }
 
-        public int GetID()
+        public int GetNewID()
         {
             if (_operations.Count == 0)
             {
