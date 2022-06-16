@@ -24,6 +24,7 @@ namespace HealthInstitution.Core.Services.ValidationServices
         public void ValidateAppointmentData(Appointment appointment, DateTime dateTime)
         {
             {
+                _patientService = new PatientService(appointment.Patient);
                 int duration = _examinationService.GetDuration(appointment);
 
                 if (appointment.Doctor is null)
