@@ -10,6 +10,6 @@
 
         public void Deliver(EquipmentRepository equipments);
 
-        public string CheckIfOrdered(Equipment equipment)
+        public string CheckIfOrdered(Equipment equipment);
     }
 }
