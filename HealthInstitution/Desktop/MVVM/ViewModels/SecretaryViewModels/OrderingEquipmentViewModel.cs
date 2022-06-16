@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.EquipmentCommands;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels.ListItems;
 
@@ -46,7 +47,9 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         public void FillEquipmentList()
         {
             _equipment.Clear();
-            List<Equipment> equipment = Institution.Instance().EquipmentRepository.Equipment;
+
+            IEquipmentRepositoryService service = new EquipmentRepositoryService();
+            List<Equipment> equipment = service.GetEquipment();
             foreach (Equipment e in equipment)
             {
                 if (e.Quantity == 0)

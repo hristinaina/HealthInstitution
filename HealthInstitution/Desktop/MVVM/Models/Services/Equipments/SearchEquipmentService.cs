@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services.Equipments
 {
     public class SearchEquipmentService
     {
-        private EquipmentRepository _equipment;
+        private IEquipmentRepositoryService _equipment;
 
         public SearchEquipmentService()
         {
-            _equipment = Institution.Instance().EquipmentRepository;
+            _equipment = new EquipmentRepositoryService();
         }
 
         public Dictionary<Equipment, List<Room>> Search(string phrase)
@@ -20,7 +21,7 @@ namespace HealthInstitution.Core.Services.Equipments
 
             Dictionary<Equipment, List<Room>> matchingEquipment = new Dictionary<Equipment, List<Room>>();
 
-            foreach (Equipment e in _equipment.Equipment)
+            foreach (Equipment e in _equipment.GetEquipment())
             {
                 if (e.Name.ToLower().Contains(phrase.ToLower()))
                 {

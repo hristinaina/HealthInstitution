@@ -2,23 +2,24 @@
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services.Equipments
 {
     public class FilterEquipmentService
     {
-        private EquipmentRepository _equipment;
+        private IEquipmentRepositoryService _equipment;
 
         public FilterEquipmentService()
         {
-            _equipment = Institution.Instance().EquipmentRepository;
+            _equipment = new EquipmentRepositoryService();
         }
 
         private Dictionary<Equipment, List<Room>> FilterByRoomType(RoomType type)
         {
             Dictionary<Equipment, List<Room>> filteredEquipment = new Dictionary<Equipment, List<Room>>();
 
-            foreach (Equipment e in _equipment.Equipment)
+            foreach (Equipment e in _equipment.GetEquipment())
             {
                 foreach (Room r in e.ArrangmentByRooms.Keys)
                 {

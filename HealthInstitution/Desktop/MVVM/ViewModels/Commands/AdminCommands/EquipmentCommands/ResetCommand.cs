@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentCommands
 {
@@ -21,7 +22,9 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.EquipmentComm
         public override void Execute(object parameter)
         {
             _model.SearchPhrase = null;
-            _model.AllEquipment = Institution.Instance().EquipmentRepository.Equipment;
+
+            IEquipmentRepositoryService service = new EquipmentRepositoryService();
+            _model.AllEquipment = service.GetEquipment();
             _model.FillEquipmentList();
         }
     }

@@ -30,7 +30,7 @@ namespace HealthInstitution.Core
 
         private readonly OperationReferencesRepository _operationReferencesRepository;
 
-        private readonly EquipmentRepository _equipmentRepository;
+        private readonly IEquipmentRepository _equipmentRepository;
         private readonly EquipmentArrangementRepository _equipmentArragmentRepository;
         private readonly IRoomRepository _roomRepository;
         private readonly IRenovationRepository _renovationRepository;
@@ -197,7 +197,7 @@ namespace HealthInstitution.Core
         public OperationRepository OperationRepository { get => _operationRepository; }
         public ExaminationReferencesRepository ExaminationReferencesRepository { get => _examinationReferencesRepository; }
         public OperationReferencesRepository OperationReferencesRepository { get => _operationReferencesRepository; }
-        public EquipmentRepository EquipmentRepository { get => _equipmentRepository; }
+        public IEquipmentRepository EquipmentRepository { get => _equipmentRepository; }
         public IRoomRepository RoomRepository { get => _roomRepository; }
         public IRenovationRepository RenovationRepository { get => _renovationRepository; }
         public IRoomRenovationRepository RoomRenovationRepository { get => _roomRenovationRepository; }

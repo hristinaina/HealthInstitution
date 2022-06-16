@@ -122,7 +122,8 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _equipmentArrangement.Clear();
 
-            foreach (Equipment e in Institution.Instance().EquipmentRepository.Equipment)
+            IEquipmentRepositoryService service = new EquipmentRepositoryService();
+            foreach (Equipment e in service.GetEquipment())
             {
                 if (e.Type == EquipmentType.HALLWAY_EQUIPMENT || e.Type == EquipmentType.ROOM_FURNITURE) continue;
                 foreach (Room r in e.ArrangmentByRooms.Keys)

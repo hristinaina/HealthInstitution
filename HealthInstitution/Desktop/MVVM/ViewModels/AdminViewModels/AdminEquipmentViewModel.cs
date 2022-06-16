@@ -188,7 +188,9 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             _roomTypes = new List<string>();
             _equipmentTypes = new List<string>();
             _rooms = new List<Room>();
-            _allEquipment = _institution.EquipmentRepository.Equipment;
+
+            IEquipmentRepositoryService service = new EquipmentRepositoryService();
+            _allEquipment = service.GetEquipment();
             _newArrangementStartDate = DateTime.Now.ToString("MM/dd/yyyy");
 
             Search = new SearchCommand(this);

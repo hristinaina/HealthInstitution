@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IEquipmentRepository
+    public interface IEquipmentRepository : IRepository
     {
         public Equipment FindById(int id);
 
