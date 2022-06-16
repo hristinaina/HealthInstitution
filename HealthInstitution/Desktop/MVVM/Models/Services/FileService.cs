@@ -10,9 +10,6 @@ namespace HealthInstitution.Core.Services
 {
     class FileService
     {
-        //public static string _roomsFilename = "../../Data/rooms.json";
-        //public static string _equipmentFilename = "../../Data/equipment.json";
-        //public static string _ingredientsFilename = "../../Data/ingredients.json";
 
         public static void Serialize<T>(string _filename, List<T> items)
         {

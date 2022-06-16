@@ -26,7 +26,7 @@ namespace HealthInstitution.Core.Services
             {
                 foreach (Prescription prescription in examination.Prescriptions)
                 {
-                    if (isUpgoing(examination, prescription))
+                    if (IsUpgoing(examination, prescription))
                     {
                         upgoingPrescriptions.Add(prescription);
                     }
@@ -64,7 +64,7 @@ namespace HealthInstitution.Core.Services
             return DateTime.Now;
         }
 
-        private bool isUpgoing(Examination examination, Prescription prescription)
+        private bool IsUpgoing(Examination examination, Prescription prescription)
         {
             return examination.Date + new TimeSpan(prescription.LongitudeInDays, 0, 0, 0) > DateTime.Now && examination.Date < DateTime.Now;
         }

@@ -21,7 +21,7 @@ namespace HealthInstitution.Services
 
         public bool RescheduleExamination(Examination examination, DateTime dateTime)
         {
-            new PatientAppointmentValidationService(examination, dateTime).ValidateAppointmentData();
+            new PatientExaminationValidationService(examination, dateTime).ValidateAppointmentData();
 
             FindAvailableRoomService service = new FindAvailableRoomService();
             service.FindAvailableRoom(examination, dateTime);

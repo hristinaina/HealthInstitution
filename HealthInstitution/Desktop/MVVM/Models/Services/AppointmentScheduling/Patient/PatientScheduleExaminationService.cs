@@ -36,7 +36,7 @@ namespace HealthInstitution.Services
 
             Examination examination = new Examination(appointmentId, doctor, patient, dateTime,
                                       new List<Prescription>());
-            new PatientAppointmentValidationService(examination, dateTime).ValidateAppointmentData();
+            new PatientExaminationValidationService(examination, dateTime).ValidateAppointmentData();
             patient.Examinations.Add(examination);
             doctor.Examinations.Add(examination);
             FindAvailableRoomService service = new FindAvailableRoomService();
