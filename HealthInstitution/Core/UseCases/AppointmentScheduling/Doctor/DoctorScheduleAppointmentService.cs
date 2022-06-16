@@ -8,7 +8,7 @@ using HealthInstitution.Core;
 
 namespace HealthInstitution.Core.Services
 {
-    class DoctorScheduleAppointmentService
+    class DoctorScheduleAppointmentService : IDoctorScheduleAppointmentService
     {
         private IExaminationRepositoryService _examinationRepository;
         private IRoomRepositoryService _roomRepository;
