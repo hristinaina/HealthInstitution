@@ -7,6 +7,8 @@ using HealthInstitution.Commands;
 using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.DoctorViewModels;
 using HealthInstitution.Core.Services;
+using HealthInstitution.Services;
+using HealthInstitution.Services.Doctor;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.DoctorCommands
 {

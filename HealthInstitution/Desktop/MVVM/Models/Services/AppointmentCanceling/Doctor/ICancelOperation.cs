@@ -10,5 +10,7 @@ namespace HealthInstitution.Services
     public interface ICancelOperation
     {
         public bool CancelOperation(Operation operation);
+
+        public bool CancelAppointment(Appointment appointment);
     }
 }

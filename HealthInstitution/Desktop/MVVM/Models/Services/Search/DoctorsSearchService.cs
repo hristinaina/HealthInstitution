@@ -12,10 +12,10 @@ namespace HealthInstitution.Services
             _repository = repository;
         }
 
-        public List<Doctor> SearchForDoctor(Doctor doctor)
+        public List<Core.Doctor> SearchForDoctor(Core.Doctor doctor)
         {
-            List<Doctor> doctors = new List<Doctor>();
-            foreach (Doctor d in _repository.Doctors)
+            List<Core.Doctor> doctors = new List<Core.Doctor>();
+            foreach (Core.Doctor d in _repository.Doctors)
             {
                 bool add = false;
                 if (IsMatching(doctor.FirstName, d.FirstName))

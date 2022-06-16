@@ -5,7 +5,7 @@ namespace HealthInstitution.Services
 {
     public interface IDoctorSearch
     {
-        public List<Doctor> SearchForDoctor(Doctor doctor);
+        public List<Core.Doctor> SearchForDoctor(Core.Doctor doctor);
 
     }
 }

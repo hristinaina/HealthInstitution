@@ -5,7 +5,6 @@ using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Core;
-using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
@@ -31,43 +30,43 @@ namespace HealthInstitution.Core.Services
 
         public bool CreateAppointment(Appointment appointment, DateTime dateTime, bool validation = true)
         {
-            DoctorService doctorService = new DoctorService(appointment.Doctor);
-            ExaminationService examinationService = new ExaminationService();
-            int duration = examinationService.GetDuration(appointment);
-            
             new ValidationService().ValidateAppointmentData(appointment, dateTime, validation);
 
-            int appointmentId = 0;
+            bool isDone;
+            if (appointment is Examination) isDone = CreateExamination(appointment, dateTime);
+            else isDone = CreateOperation(appointment, dateTime);
 
-            if (appointment.GetType() == typeof(Examination))
-            {
-                appointmentId = _examinationRepository.GetNewID();
-                Examination examination = new Examination(appointmentId, appointment.Doctor, appointment.Patient, dateTime,
-                                          new List<Prescription>());
-                appointment.Patient.Examinations.Add(examination);
-                appointment.Doctor.Examinations.Add(examination);
-                FindAvailableRoomService service = new FindAvailableRoomService();
-                service.FindAvailableRoom(examination, dateTime);
-                _examinationRepository.Add(examination);
-                _examinationReferencesRepository.Add(examination);
-                _examinationChangeRepository.Add(examination, dateTime, true, AppointmentStatus.CREATED);
+            return isDone;
+        }
 
-            }
-
-            else
-            {
-                appointmentId = _operationRepository.GetNewID();
-                Operation operation = new Operation(appointmentId, appointment.Doctor, appointment.Patient, dateTime, duration);
-                appointment.Patient.Operations.Add(operation);
-                appointment.Doctor.Operations.Add(operation);
-                FindAvailableRoomService service = new FindAvailableRoomService();
-                service.FindAvailableRoom(operation, dateTime);
-                _operationRepository.Add(operation);
-                _operationReferencesRepository.Add(operation);
-
-            }
-
+        public bool CreateExamination(Appointment appointment, DateTime dateTime)
+        {
+            int appointmentId = _examinationRepository.GetNewID();
+            Examination examination = new Examination(appointmentId, appointment.Doctor, appointment.Patient, dateTime,
+                                      new List<Prescription>());
+            appointment.Patient.Examinations.Add(examination);
+            appointment.Doctor.Examinations.Add(examination);
+            FindAvailableRoomService service = new FindAvailableRoomService();
+            service.FindAvailableRoom(examination, dateTime);
+            _examinationRepository.Add(examination);
+            _examinationReferencesRepository.Add(examination);
+            _examinationChangeRepository.Add(examination, dateTime, true, AppointmentStatus.CREATED);
             return true;
         }
+
+        public bool CreateOperation(Appointment appointment, DateTime dateTime)
+        {
+            int appointmentId = _operationRepository.GetNewID();
+            int duration = new ExaminationService().GetDuration(appointment);
+            Operation operation = new Operation(appointmentId, appointment.Doctor, appointment.Patient, dateTime, duration);
+            appointment.Patient.Operations.Add(operation);
+            appointment.Doctor.Operations.Add(operation);
+            FindAvailableRoomService service = new FindAvailableRoomService();
+            service.FindAvailableRoom(operation, dateTime);
+            _operationRepository.Add(operation);
+            _operationReferencesRepository.Add(operation);
+            return true;
+        }
+    
     }
 }

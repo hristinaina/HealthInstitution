@@ -21,7 +21,7 @@ namespace HealthInstitution.Services
         public bool CancelExamination(Examination examination)
         {
             Patient patient = examination.Patient;
-            Doctor doctor = examination.Doctor;
+            Core.Doctor doctor = examination.Doctor;
             Room room = examination.Room;
             bool resolved = examination.IsEditable();
 

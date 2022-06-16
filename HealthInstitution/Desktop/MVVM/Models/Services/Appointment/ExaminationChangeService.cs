@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Repository;
+using HealthInstitution.Services;
+using HealthInstitution.Services.Doctor;
 
 namespace HealthInstitution.Core.Services
 {
@@ -27,7 +29,7 @@ namespace HealthInstitution.Core.Services
 
             if (request.ChangeStatus.ToString() == "EDITED")
             {
-                bool resolved = new DoctorRescheduleAppointmentService().RescheduleExamination(appointment, request.NewDate);
+                bool resolved = new DoctorRescheduleAppointmentService().RescheduleExamination((Examination)appointment, request.NewDate);
                 if (resolved)
                 {
                     return "The request has been successfully accepted.";

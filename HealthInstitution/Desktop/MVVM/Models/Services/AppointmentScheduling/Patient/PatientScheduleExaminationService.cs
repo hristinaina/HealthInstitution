@@ -25,7 +25,7 @@ namespace HealthInstitution.Services
             _examinationChangeRepository = new ExaminationChangeRepositoryService();
         }
 
-        public bool CreateExamination(Patient patient, Doctor doctor, DateTime dateTime)
+        public bool CreateExamination(Patient patient, Core.Doctor doctor, DateTime dateTime)
         {
             TrollingService trollingService = new TrollingService(patient);
             if (trollingService.IsTrolling())
