@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Services
 {
-    class PatientPrescriptionsService
+    class PatientPrescriptionsService : IPatientPrescriptionService
     {
         public List<Prescription> _prescriptions;
         public List<Examination> _examinations;
