@@ -47,5 +47,10 @@ namespace HealthInstitution.Core.Repository
         {
             return _repository.GetArrangements();
         }
+
+        public List<EquipmentArrangement> GetCurrentArrangements()
+        {
+            return _repository.GetCurrentArrangements();
+        }
     }
 }

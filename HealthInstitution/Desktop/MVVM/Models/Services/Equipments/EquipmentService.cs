@@ -10,12 +10,12 @@ namespace HealthInstitution.Core.Services.Equipments
 {
     public class EquipmentService
     {
-        private EquipmentArrangementRepository _arrangements;
+        private IEquipmentArrangementRepositoryService _arrangements;
         private IRoomRepositoryService _rooms;
 
         public EquipmentService()
         {
-            _arrangements = Institution.Instance().EquipmentArragmentRepository;
+            _arrangements = new EquipmentArrangementRepositoryService();
             _rooms = new RoomRepositoryService();
         }
 
@@ -44,7 +44,7 @@ namespace HealthInstitution.Core.Services.Equipments
             destinationRoomArrangement.EndDate = date;
             foreach (EquipmentArrangement a in futureArrangements)
             {
-                Institution.Instance().EquipmentArragmentRepository.ValidArrangement.Remove(a);
+                _arrangements.GetArrangements().Remove(a);
             }
 
             EquipmentArrangement warehouseArrangement = service.FindFirstBefore(warehouse, equipment, date);
@@ -70,7 +70,7 @@ namespace HealthInstitution.Core.Services.Equipments
             }
             newWarehouseQuantity += destinationRoomArrangement.Quantity;
 
-            _arrangements.ValidArrangement.Add(new EquipmentArrangement(equipment, warehouse, newWarehouseQuantity, date, newArrangementTargetEndDate));
+            _arrangements.GetArrangements().Add(new EquipmentArrangement(equipment, warehouse, newWarehouseQuantity, date, newArrangementTargetEndDate));
 
         }
 
@@ -134,7 +134,7 @@ namespace HealthInstitution.Core.Services.Equipments
 
             int newDestinationRoomQuantity = pastArrangement.Quantity - quantity;
             if (UpdateEquipmentInRoom(pastArrangement, room, newDestinationRoomQuantity, equipment)) return;
-            _arrangements.ValidArrangement.Add(new EquipmentArrangement(equipment, room, newDestinationRoomQuantity, newArrangementStartDate, newArrangementEndDate));
+            _arrangements.GetArrangements().Add(new EquipmentArrangement(equipment, room, newDestinationRoomQuantity, newArrangementStartDate, newArrangementEndDate));
         }
 
         private void MoveToNewRoom(Room room, DateTime newArrangementStartDate, int quantity, Equipment equipment)
@@ -162,7 +162,7 @@ namespace HealthInstitution.Core.Services.Equipments
             }
             newTargetRoomQuantity += quantity;
             if (UpdateEquipmentInRoom(pastArrangement, room, newTargetRoomQuantity, equipment)) return;
-            _arrangements.ValidArrangement.Add(new EquipmentArrangement(equipment, room, newTargetRoomQuantity, newArrangementStartDate, newArrangementTargetEndDate));
+            _arrangements.GetArrangements().Add(new EquipmentArrangement(equipment, room, newTargetRoomQuantity, newArrangementStartDate, newArrangementTargetEndDate));
         }
     }
 }

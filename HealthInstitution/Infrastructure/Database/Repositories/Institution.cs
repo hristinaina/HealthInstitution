@@ -31,7 +31,7 @@ namespace HealthInstitution.Core
         private readonly OperationReferencesRepository _operationReferencesRepository;
 
         private readonly IEquipmentRepository _equipmentRepository;
-        private readonly EquipmentArrangementRepository _equipmentArragmentRepository;
+        private readonly IEquipmentArrangementRepository _equipmentArragmentRepository;
         private readonly IRoomRepository _roomRepository;
         private readonly IRenovationRepository _renovationRepository;
         private readonly IRoomRenovationRepository _roomRenovationRepository;
@@ -93,7 +93,6 @@ namespace HealthInstitution.Core
             _dayOffRepository = new DayOffRepository(_appSettings.DaysOffFileName);
             _referralRepository = new ReferralRepository(_appSettings.RefferalsFileName);
 
-            _equipmentArragmentRepository = new EquipmentArrangementRepository(_appSettings.EquipmentArrangementFileName);
             _medicineRepository = new MedicineRepository(_appSettings.MedicinesFileName);
             _allergenRepository = new AllergenRepository(_appSettings.AllergensFileName);
             _patientAllergenRepository = new PatientAllergenRepository(_appSettings.PatientAllergensFileName);
@@ -211,7 +210,7 @@ namespace HealthInstitution.Core
         public DoctorDaysOffRepository DoctorDaysOffRepository { get => _doctorDaysOffRepository; }
         public PrescriptionMedicineRepository PrescriptionMedicineRepository { get => _prescriptionMedicineRepository; }
         public ExaminationChangeRepository ExaminationChangeRepository { get => _examinationChangeRepository; }
-        public EquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
+        public IEquipmentArrangementRepository EquipmentArragmentRepository { get => _equipmentArragmentRepository; }
         public IEquipmentOrderRepository EquipmentOrderRepository { get => _equipmentOrderRepository; }
         public NotificationRepository NotificationRepository { get => _notificationRepository; }
         public ReviewRepository ReviewRepository { get => _reviewRepository; }

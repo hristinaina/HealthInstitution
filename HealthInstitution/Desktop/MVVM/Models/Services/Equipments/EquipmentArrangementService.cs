@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Infrastructure.Database.Repositories;
 
 namespace HealthInstitution.Core.Services.Equipments
 {
     public class EquipmentArrangementService
     {
-        private EquipmentArrangementRepository _arrangements;
+        private IEquipmentArrangementRepositoryService _arrangements;
 
         public EquipmentArrangementService()
         {
-            _arrangements = Institution.Instance().EquipmentArragmentRepository;
+            _arrangements = new EquipmentArrangementRepositoryService();
         }
 
         public EquipmentArrangement FindCurrentArrangement(Room r, Equipment e)
         {
-            foreach (EquipmentArrangement a in _arrangements.CurrentArrangement)
+            foreach (EquipmentArrangement a in _arrangements.GetCurrentArrangements())
             {
                 if (a.RoomId == r.ID && a.EquipmentId == e.ID) return a;
             }
@@ -26,7 +27,7 @@ namespace HealthInstitution.Core.Services.Equipments
         public EquipmentArrangement FindFirstBefore(Room r, Equipment e, DateTime date)
         {
             EquipmentArrangement arrangement = null;
-            foreach (EquipmentArrangement a in _arrangements.ValidArrangement)
+            foreach (EquipmentArrangement a in _arrangements.GetArrangements())
             {
                 if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate < date)
                 {
@@ -39,7 +40,7 @@ namespace HealthInstitution.Core.Services.Equipments
         public List<EquipmentArrangement> FindAllBefore(Room r, Equipment e, DateTime date)
         {
             List<EquipmentArrangement> arrangements = new List<EquipmentArrangement>();
-            foreach (EquipmentArrangement a in _arrangements.ValidArrangement)
+            foreach (EquipmentArrangement a in _arrangements.GetArrangements())
             {
                 if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate < date)
                 {
@@ -52,7 +53,7 @@ namespace HealthInstitution.Core.Services.Equipments
         public EquipmentArrangement FindFirstAfter(Room r, Equipment e, DateTime date)
         {
             EquipmentArrangement arrangement = null;
-            foreach (EquipmentArrangement a in _arrangements.ValidArrangement)
+            foreach (EquipmentArrangement a in _arrangements.GetArrangements())
             {
                 if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate > date)
                 {
@@ -65,7 +66,7 @@ namespace HealthInstitution.Core.Services.Equipments
         public List<EquipmentArrangement> FindAllAfter(Room r, Equipment e, DateTime date)
         {
             List<EquipmentArrangement> arrangements = new List<EquipmentArrangement>();
-            foreach (EquipmentArrangement a in _arrangements.ValidArrangement)
+            foreach (EquipmentArrangement a in _arrangements.GetArrangements())
             {
                 if (a.RoomId == r.ID && a.EquipmentId == e.ID && a.StartDate > date)
                 {
@@ -77,7 +78,7 @@ namespace HealthInstitution.Core.Services.Equipments
 
         public bool UpdateEquipmentQuantityInRoom(Room room, Equipment equipment)
         {
-            foreach (EquipmentArrangement arrangement in _arrangements.CurrentArrangement)
+            foreach (EquipmentArrangement arrangement in _arrangements.GetCurrentArrangements())
             {
                 if (arrangement.RoomId == room.ID && arrangement.EquipmentId == equipment.ID)
                 {

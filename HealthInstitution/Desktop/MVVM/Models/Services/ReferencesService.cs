@@ -70,7 +70,7 @@ namespace HealthInstitution.Core.Services
         {
             EquipmentService equipmentService = new EquipmentService();
             RoomService roomService = new RoomService();
-            foreach (EquipmentArrangement a in Institution.Instance().EquipmentArragmentRepository.CurrentArrangement)
+            foreach (EquipmentArrangement a in Institution.Instance().EquipmentArragmentRepository.GetCurrentArrangements())
             {
 
                 Room r = Institution.Instance().RoomRepository.FindById(a.RoomId);
