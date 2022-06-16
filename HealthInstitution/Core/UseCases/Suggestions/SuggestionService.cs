@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.DoctorServices;
+using HealthInstitution.Core.UseCases.Validation;
 
 namespace HealthInstitution.Services
 {
@@ -10,6 +11,7 @@ namespace HealthInstitution.Services
     {
         public List<Examination> MakeSuggestions(ExaminationQuery query)
         {
+            new PatientSuggestionValidationService().ValidateSuggestionData(query);
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = DateTime.Now;
             DateTime endDateTime = DateTime.Now;
@@ -139,10 +141,12 @@ namespace HealthInstitution.Services
                 Core.Doctor doctor = (Core.Doctor)user;
                 availability = new DoctorService(doctor);
             }
-            if (availability.IsAvailable(startDateTime))
+            if (!availability.IsAvailable(startDateTime))
             {
                 Appointment interrupting = availability.FindInterruptingAppointment(startDateTime);
-                startDateTime = FixTimeInterruption(interrupting);
+                if (interrupting is not null) { 
+                    startDateTime = FixTimeInterruption(interrupting);
+                }
             }
             return startDateTime;
         }
