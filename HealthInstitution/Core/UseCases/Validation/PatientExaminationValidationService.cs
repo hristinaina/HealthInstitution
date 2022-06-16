@@ -11,40 +11,42 @@ namespace HealthInstitution.Core.Services.ValidationServices
 {
     class PatientExaminationValidationService
     {
-        private Appointment _appointment;
-        private DateTime _dateTime;
+        private ExaminationService _examinationService;
+        private PatientService _patientService;
+        private DoctorService _doctorService;
 
-        public PatientExaminationValidationService(Appointment appointment, DateTime dateTime)
+        public PatientExaminationValidationService()
         {
-            _appointment = appointment;
-            _dateTime = dateTime;
+            _examinationService = new ExaminationService();
+            _patientService = new PatientService();
         }
 
-
-        public void ValidateAppointmentData()
+        public void ValidateAppointmentData(Appointment appointment, DateTime dateTime)
         {
             {
-                if (_appointment.Doctor is null)
+                _patientService = new PatientService(appointment.Patient);
+                int duration = _examinationService.GetDuration(appointment);
+
+                if (appointment.Doctor is null)
                 {
                     throw new EmptyFieldException("Doctor not selected !");
                 }
-                ExaminationService appointmentService = new ExaminationService();
-                int duration = appointmentService.GetDuration(_appointment);
-                PatientService patientService = new PatientService(_appointment.Patient);
-                DoctorService doctorService = new DoctorService(_appointment.Doctor);
-                if (DateTime.Compare(DateTime.Now, _dateTime) > 0)
+
+                _doctorService = new DoctorService(appointment.Doctor);
+
+                if (DateTime.Compare(DateTime.Now, dateTime) > 0)
                 {
                     throw new DateException("Date must be in future !");
                 }
-                if ((_dateTime - DateTime.Now).TotalDays < 1)
+                if ((dateTime - DateTime.Now).TotalDays < 1)
                 {
                     throw new DateException("Cannot schedule in next 24 hours");
                 }
-                if (!patientService.IsAvailable(_dateTime, duration))
+                if (!_patientService.IsAvailable(dateTime, duration))
                 {
                     throw new UserNotAvailableException("Patient not available at selected time !");
                 }
-                if (!doctorService.IsAvailable(_dateTime, duration))
+                if (!_doctorService.IsAvailable(dateTime, duration))
                 {
                     throw new UserNotAvailableException("Doctor not available at selected time !");
                 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthInstitution.Core.Services.SurveyResults
 {
-    public class DoctorSurveyResultsService
+    public class DoctorSurveyResultsService : IDoctorSuvreyResultsService
     {
         private IExaminationRepositoryService _examinations;
 

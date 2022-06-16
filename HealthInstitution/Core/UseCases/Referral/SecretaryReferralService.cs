@@ -9,10 +9,11 @@ using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Repositories;
 using HealthInstitution.Repositories;
 using HealthInstitution.Core.Repository;
+using HealthInstitution.Core.UseCases;
 
 namespace HealthInstitution.Core.Services
 {
-    public class SecretaryReferralService
+    public class SecretaryReferralService : ISecretaryReferralService
     {
         private IReferralRepositoryService _referralService;
         private IDoctorRepositoryService _doctorService;

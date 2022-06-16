@@ -8,10 +8,11 @@ using HealthInstitution.Repositories;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.DoctorServices;
 using HealthInstitution.Core.Repository;
+using HealthInstitution.Core.UseCases;
 
 namespace HealthInstitution.Core.Services
 {
-    public class EmergencyAppointmentService
+    public class EmergencyAppointmentService : IEmergencyAppointmentService
     {
         private DateTime _newDate;
         private Doctor _doctor;

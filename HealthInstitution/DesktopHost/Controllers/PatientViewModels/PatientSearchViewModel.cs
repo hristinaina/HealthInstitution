@@ -46,8 +46,8 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             set { _selectedSpecialization = value; OnPropertyChanged(nameof(SelectedSpecialization)); }
         }
 
-        private readonly ObservableCollection<DoctorListItemViewModel> _allDoctors;
-        public IEnumerable<DoctorListItemViewModel> AllDoctors => _allDoctors;
+        private readonly ObservableCollection<DoctorListItem> _allDoctors;
+        public IEnumerable<DoctorListItem> AllDoctors => _allDoctors;
 
         private bool _doctorSelected;
 
@@ -57,9 +57,9 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             set { _doctorSelected = value; OnPropertyChanged(nameof(DoctorSelected)); }
         }
 
-        private DoctorListItemViewModel _doctor;
+        private DoctorListItem _doctor;
 
-        public DoctorListItemViewModel DoctorSelectedValue
+        public DoctorListItem DoctorSelectedValue
         {
             get { return _doctor; }
             set { _doctor = value; DoctorSelected = true; OnPropertyChanged(nameof(DoctorSelectedValue)); NewDoctor = value; OnPropertyChanged(nameof(NewDoctor)); }
@@ -95,7 +95,7 @@ namespace HealthInstitution.MVVM.ViewModels.PatientViewModels
             _allDoctors.Clear();
             foreach (Doctor doctor in doctors)
             {
-                _allDoctors.Add(new DoctorListItemViewModel(doctor));
+                _allDoctors.Add(new DoctorListItem(doctor));
             }
             if (_allDoctors.Count != 0)
             {

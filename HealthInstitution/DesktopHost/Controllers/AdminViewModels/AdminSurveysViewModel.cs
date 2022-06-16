@@ -13,8 +13,8 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         private IDoctorRepositoryService _doctorService;
         private readonly Admin _admin;
         private Institution _institution;
-        private HospitalSurveyResultsService _hospitalSurveyResults;
-        private DoctorSurveyResultsService _doctorSurveyResults;
+        private IHospitalSurveyResultsService _hospitalSurveyResults;
+        private IDoctorSuvreyResultsService _doctorSurveyResults;
 
 
         private readonly List<Doctor> _doctors;
@@ -87,7 +87,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             _surveyComments = _hospitalSurveyResults.GetComments();
 
 
-            DoctorRankingService service = new DoctorRankingService();
+            IDoctorRankingService service = new DoctorRankingService();
 
             _bestDoctors = new ObservableCollection<SurveyResultListItemViewModel>();
             FillBestDoctorsList();
@@ -119,7 +119,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         {
             _worstDoctors.Clear();
 
-            DoctorRankingService service = new DoctorRankingService();
+            IDoctorRankingService service = new DoctorRankingService();
             foreach (Tuple<Doctor, double> doctor in service.GetWorst())
             {
                 if (doctor is null) continue;
@@ -131,7 +131,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         {
             _bestDoctors.Clear();
 
-            DoctorRankingService service = new DoctorRankingService();
+            IDoctorRankingService service = new DoctorRankingService();
             foreach (Tuple<Doctor, double> doctor in service.GetBest())
             {
                 if (doctor is null) continue;

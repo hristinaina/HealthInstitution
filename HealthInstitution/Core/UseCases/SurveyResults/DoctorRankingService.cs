@@ -6,9 +6,9 @@ using HealthInstitution.Repositories;
 
 namespace HealthInstitution.Core
 {
-    public class DoctorRankingService
+    public class DoctorRankingService : IDoctorRankingService
     {
-        private DoctorSurveyResultsService _surveyResults;
+        private IDoctorSuvreyResultsService _surveyResults;
         private IDoctorRepositoryService _doctorService;
 
         public DoctorRankingService()
