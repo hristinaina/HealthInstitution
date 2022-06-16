@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core;
+﻿using System.Collections.Generic;
 using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Equipments;
-using HealthInstitution.Core.Services.Renovations;
-using HealthInstitution.Core.Services;
 using HealthInstitution.Desktop.MVVM.Models.Services.Equipments;
 
 namespace HealthInstitution.Core.Services
@@ -75,14 +68,14 @@ namespace HealthInstitution.Core.Services
         public static void ArrangeEquipment()
         {
             IEquipmentArrangementService equipmentService = new EquipmentArrangementService();
-            RoomService roomService = new RoomService();
+            IRoomRepositoryService roomManagerService = new RoomRepositoryService();
             foreach (EquipmentArrangement a in Institution.Instance().EquipmentArragmentRepository.GetCurrentArrangements())
             {
 
                 Room r = Institution.Instance().RoomRepository.FindById(a.RoomId);
                 Equipment e = Institution.Instance().EquipmentRepository.FindById(a.EquipmentId);
                 
-                roomService.AddEquipment(e, a.Quantity, r);
+                roomManagerService.AddEquipment(e, a.Quantity, r);
                 equipmentService.ArrangeInRoom(r, a.Quantity, e);
             }
         }
@@ -100,9 +93,9 @@ namespace HealthInstitution.Core.Services
                 else renovation.RoomsUnderRenovation.Add(room);
             }
 
-            RenovationService renovationService = new RenovationService();
-            renovationService.StartRenovations();
-            renovationService.EndRenovations();
+            IRenovationManagementService renovationManagementService = new RenovationManagementService();
+            renovationManagementService.StartRenovations();
+            renovationManagementService.EndRenovations();
 
             Institution.Instance().EquipmentOrderRepository.Deliver(new EquipmentRepositoryService());
         }

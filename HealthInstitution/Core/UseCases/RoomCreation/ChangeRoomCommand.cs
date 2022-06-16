@@ -1,25 +1,21 @@
 ﻿using HealthInstitution.Commands;
 using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
-using HealthInstitution.Core;
 using HealthInstitution.MVVM.ViewModels.AdminViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using HealthInstitution.Core.Services;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
 {
     class ChangeRoomCommand : BaseCommand
     {
         private AdminRoomViewModel _model;
+        private IRoomRepositoryService _roomManager;
 
         public ChangeRoomCommand(AdminRoomViewModel model)
         {
             _model = model;
+            _roomManager = new RoomRepositoryService();
         }
 
         private bool CheckPrerequisites()
@@ -41,8 +37,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
                 try
                 {
                     int selectedNumber = int.Parse(_model.SelectedNumber);
-                    RoomService service = new RoomService();
-                    service.Change(_model.SelectedName, selectedNumber, (RoomType)_model.SelectedTypeIndex, _model.SelectedRoom.Room);
+                    _roomManager.Change(_model.SelectedName, selectedNumber, (RoomType)_model.SelectedTypeIndex, _model.SelectedRoom.Room);
 
                     _model.DialogOpen = false;
                     _model.FillRoomList();

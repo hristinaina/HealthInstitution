@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
 {
-    class FilterRoomService
+    class FilterRoomService : IFilterRoomService
     {
         private IRoomRepositoryService _rooms;
 

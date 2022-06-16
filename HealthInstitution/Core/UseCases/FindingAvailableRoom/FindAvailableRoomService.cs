@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using HealthInstitution.Core;
-using HealthInstitution.Core.Repositories;
 using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Services
@@ -9,10 +7,12 @@ namespace HealthInstitution.Core.Services
     public class FindAvailableRoomService
     {
         private IRoomRepositoryService _rooms;
+        private IFilterRoomService _filter;
 
         public FindAvailableRoomService()
         {
             _rooms = new RoomRepositoryService();
+            _filter = new FilterRoomService();
         }
 
         public void FindAvailableRoom(Appointment a, DateTime wantedTime)
@@ -20,14 +20,13 @@ namespace HealthInstitution.Core.Services
             RoomType type = RoomType.EXAM_ROOM;
             bool changing = false;
 
-            RoomService roomService = new RoomService();
 
             if (a is Operation) type = RoomType.OPERATING_ROOM;
 
             if (a.Room != null)
             {
                 changing = true;
-                if (roomService.isAvailable(wantedTime, a, a.Room))
+                if (_rooms.isAvailable(wantedTime, a, a.Room))
                 {
                     a.Date = wantedTime;
                     return;
@@ -35,11 +34,11 @@ namespace HealthInstitution.Core.Services
                 else a.Room.Appointments.Remove(a);
             }
 
-            FilterRoomService service = new FilterRoomService();
-            List<Room> rooms = service.FilterByRoomType(type);
+            
+            List<Room> rooms = _filter.FilterByRoomType(type);
             foreach (Room r in rooms)
             {
-                if (roomService.isAvailable(wantedTime, a, r))
+                if (_rooms.isAvailable(wantedTime, a, r))
                 {
                     r.Appointments.Add(a);
                     a.Room = r;

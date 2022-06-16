@@ -1,25 +1,23 @@
-﻿using HealthInstitution.Infrastructure.Database.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HealthInstitution.Core;
 using HealthInstitution.Core.Repository;
+using HealthInstitution.Core.UseCases.RenovationScheduling;
 
-namespace HealthInstitution.Core.Services.Renovations
+namespace HealthInstitution.Core.Services
 {
-    class RenovationService
+    class RenovationManagementService : IRenovationManagementService
     {
         private IRenovationRepositoryService _renovations;
         private IRoomRenovationRepositoryService _roomsUnderRenovation;
-        private readonly EndRenovationService _endRenovationService;
+        private IEndRenovationService _endRenovationService;
+        private IStartRenovationService _startRenovationService;
 
-        public RenovationService()
+        public RenovationManagementService()
         {
             _renovations = new RenovationRepositoryService();
             _roomsUnderRenovation = new RoomRenovationRepositoryService();
             _endRenovationService = new EndRenovationService();
+            _startRenovationService = new StartRenovationService();
         }
 
 
@@ -30,8 +28,7 @@ namespace HealthInstitution.Core.Services.Renovations
             {
                 if (r.IsStarted())
                 {
-                    StartRenovationService service = new StartRenovationService(r);
-                    service.StartRenovation();
+                    _startRenovationService.StartRenovation(r);
                 }
             }
         }
