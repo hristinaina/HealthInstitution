@@ -31,5 +31,10 @@ namespace HealthInstitution.Core.Services
             futureAppointments = futureAppointments.OrderBy(x => x.Date).ToList();
             return futureAppointments;
         }
+
+        private bool IsDone(DateTime date)
+        {
+            return DateTime.Compare(date, DateTime.Now) < 0;
+        }
     }
 }

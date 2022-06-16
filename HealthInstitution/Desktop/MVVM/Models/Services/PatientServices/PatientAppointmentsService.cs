@@ -31,7 +31,7 @@ namespace HealthInstitution.Core.Services.PatientServices
             List<Appointment> futureAppointments = new List<Appointment>();
             foreach (Appointment appointment in GetAllAppointments())
             {
-                if (!isDone(appointment.Date))
+                if (!IsDone(appointment.Date))
                 {
                     futureAppointments.Add(appointment);
                 }
@@ -45,7 +45,7 @@ namespace HealthInstitution.Core.Services.PatientServices
             List<Appointment> pastAppointments = new List<Appointment>();
             foreach (Appointment appointment in GetAllAppointments())
             {
-                if (isDone(appointment.Date))
+                if (IsDone(appointment.Date))
                 {
                     pastAppointments.Add(appointment);
                 }
@@ -58,7 +58,7 @@ namespace HealthInstitution.Core.Services.PatientServices
             List<Appointment> pastExaminations = new List<Appointment>();
             foreach (Appointment appointment in GetAllAppointments())
             {
-                if (isDone(appointment.Date))
+                if (IsDone(appointment.Date))
                 {
                     pastExaminations.Add(appointment);
                 }
@@ -67,7 +67,7 @@ namespace HealthInstitution.Core.Services.PatientServices
             return pastExaminations;
         }
 
-        private bool isDone(DateTime date)
+        private bool IsDone(DateTime date)
         {
             return DateTime.Compare(date, DateTime.Now) < 0;
         }
