@@ -42,5 +42,10 @@ namespace HealthInstitution.Core.Repository
         {
             return _repository.UpdateEquipmentQuantityInRoom(room, equipment);
         }
+
+        public List<EquipmentArrangement> GetArrangements()
+        {
+            return _repository.GetArrangements();
+        }
     }
 }

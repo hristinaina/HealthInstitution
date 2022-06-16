@@ -1,4 +1,6 @@
-﻿namespace HealthInstitution.Core.Repository
+﻿using System.Collections.Generic;
+
+namespace HealthInstitution.Core.Repository
 {
     public interface IEquipmentOrderRepository
     {
@@ -11,5 +13,7 @@
         public void Deliver(IEquipmentRepositoryService equipments);
 
         public string CheckIfOrdered(Equipment equipment);
+
+        public List<EquipmentOrder> GetOrders();
     }
 }

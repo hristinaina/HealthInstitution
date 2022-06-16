@@ -1,4 +1,6 @@
-﻿namespace HealthInstitution.Core.Repository
+﻿using System.Collections.Generic;
+
+namespace HealthInstitution.Core.Repository
 {
     public class EquipmentRepositoryService : IEquipmentRepositoryService
     {
@@ -12,6 +14,11 @@
         public Equipment FindByID(int id)
         {
             return _repository.FindById(id);
+        }
+
+        public List<Equipment> GetEquipment()
+        {
+            return _repository.GetEquipment()
         }
     }
 }

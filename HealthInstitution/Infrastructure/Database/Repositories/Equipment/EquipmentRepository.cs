@@ -34,5 +34,10 @@ namespace HealthInstitution.Core
             }
             return null;
         }
+
+        public List<Equipment> GetEquipment()
+        {
+            return _equipment;
+        }
     }
 }

@@ -121,5 +121,15 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             }
             return false;
         }
+
+        public List<EquipmentArrangement> GetArrangements()
+        {
+            return _validArrangement;
+        }
+
+        public List<EquipmentArrangement> GetCurrentArrangements()
+        {
+            return CurrentArrangement;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace HealthInstitution.Core.Repository
+﻿using System.Collections.Generic;
+
+namespace HealthInstitution.Core.Repository
 {
     public class EquipmentOrderRepositoryService : IEquipmentOrderRepositoryService
     {
@@ -32,6 +34,11 @@
         public string CheckIfOrdered(Equipment equipment)
         {
             return _repository.CheckIfOrdered(equipment);
+        }
+
+        public List<EquipmentOrder> GetOrders()
+        {
+            return _repository.GetOrders();
         }
     }
 }

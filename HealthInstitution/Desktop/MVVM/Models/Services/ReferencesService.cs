@@ -67,15 +67,16 @@ namespace HealthInstitution.Core.Services
 
         public static void ArrangeEquipment()
         {
+            EquipmentService equipmentService = new EquipmentService();
+            RoomService roomService = new RoomService();
             foreach (EquipmentArrangement a in Institution.Instance().EquipmentArragmentRepository.CurrentArrangement)
             {
 
                 Room r = Institution.Instance().RoomRepository.FindById(a.RoomId);
                 Equipment e = Institution.Instance().EquipmentRepository.FindById(a.EquipmentId);
-                RoomService room = new RoomService(r);
-                room.AddEquipment(e, a.Quantity);
-                EquipmentService equipment = new EquipmentService(e);
-                equipment.ArrangeInRoom(r, a.Quantity);
+                
+                roomService.AddEquipment(e, a.Quantity, r);
+                equipmentService.ArrangeInRoom(r, a.Quantity, e);
             }
         }
 

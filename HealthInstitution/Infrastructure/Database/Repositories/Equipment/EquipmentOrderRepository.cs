@@ -99,5 +99,10 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
 
             return status;
         }
+
+        public List<EquipmentOrder> GetOrders()
+        {
+            return _orders;
+        }
     }
 }

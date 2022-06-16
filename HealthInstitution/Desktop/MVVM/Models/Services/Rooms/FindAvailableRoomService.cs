@@ -18,13 +18,15 @@ namespace HealthInstitution.Core.Services.Rooms
         {
             RoomType type = RoomType.EXAM_ROOM;
             bool changing = false;
+
+            RoomService roomService = new RoomService();
+
             if (a is Operation) type = RoomType.OPERATING_ROOM;
 
             if (a.Room != null)
             {
                 changing = true;
-                RoomService room = new RoomService(a.Room);
-                if (room.isAvailable(wantedTime, a))
+                if (roomService.isAvailable(wantedTime, a, a.Room))
                 {
                     a.Date = wantedTime;
                     return;
@@ -36,8 +38,7 @@ namespace HealthInstitution.Core.Services.Rooms
             List<Room> rooms = service.FilterByRoomType(type);
             foreach (Room r in rooms)
             {
-                RoomService room = new RoomService(r);
-                if (room.isAvailable(wantedTime, a))
+                if (roomService.isAvailable(wantedTime, a, a.Room))
                 {
                     r.Appointments.Add(a);
                     a.Room = r;

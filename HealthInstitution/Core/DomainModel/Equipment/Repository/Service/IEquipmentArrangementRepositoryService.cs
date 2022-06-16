@@ -16,5 +16,7 @@ namespace HealthInstitution.Core.Repository
         public List<EquipmentArrangement> FindAllAfter(Room r, Equipment e, DateTime date);
 
         public bool UpdateEquipmentQuantityInRoom(Room room, Equipment equipment);
+
+        public List<EquipmentArrangement> GetArrangements();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace HealthInstitution.Core.Repository
 {
-    public interface IRoomRepository
+    public interface IRoomRepositoryService
     {
         public Room FindById(int id);
 

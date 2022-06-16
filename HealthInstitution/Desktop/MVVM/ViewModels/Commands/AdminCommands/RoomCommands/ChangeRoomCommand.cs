@@ -41,8 +41,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RoomCommands
                 try
                 {
                     int selectedNumber = int.Parse(_model.SelectedNumber);
-                    RoomService room = new RoomService(_model.SelectedRoom.Room);
-                    room.Change(_model.SelectedName, selectedNumber, (RoomType)_model.SelectedTypeIndex);
+                    RoomService service = new RoomService();
+                    service.Change(_model.SelectedName, selectedNumber, (RoomType)_model.SelectedTypeIndex, _model.SelectedRoom.Room);
 
                     _model.DialogOpen = false;
                     _model.FillRoomList();
