@@ -29,10 +29,5 @@ namespace HealthInstitution.Core.Repository
         {
             return _notificationRepository.FindByID(id);
         }
-
-        public int GetNewID()
-        {
-            return _notificationRepository.GetNewID();
-        }
     }
 }

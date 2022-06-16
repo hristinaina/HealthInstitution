@@ -10,8 +10,6 @@ namespace HealthInstitution.Core.Repository
     {
         public Notification FindByID(int id);
 
-        public int GetNewID();
-
         public Notification CreateNotification(int patientID, string text);
 
         public Notification CreateNotification(int patientID, string text, DateTime time);
