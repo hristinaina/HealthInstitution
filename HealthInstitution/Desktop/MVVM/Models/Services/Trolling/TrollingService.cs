@@ -2,20 +2,13 @@
 
 namespace HealthInstitution.Core.Services.DoctorServices
 {
-    public class TrollingService
+    public class TrollingService : ITroll, IChekTroll
     {
         Patient _patient;
         private List<ExaminationChange> _changes;
-
-        public TrollingService(Patient patient)
+        public bool IsTrolling(Patient patient)
         {
-            _patient = patient;
-            _changes = patient.ExaminationChanges;
-        }
-
-        public bool IsTrolling()
-        {
-            if (GetEditingAttempts() > 5 || GetCreatingAttempts() > 8)
+            if (GetEditingAttempts(patient.ExaminationChanges) > 5 || GetCreatingAttempts(patient.ExaminationChanges) > 8)
             {
                 _patient.Block(BlockadeType.SYSTEM);
                 return true;
@@ -23,10 +16,10 @@ namespace HealthInstitution.Core.Services.DoctorServices
             return false;
         }
 
-        private int GetCreatingAttempts()
+        public int GetCreatingAttempts(List<ExaminationChange> changes)
         {
             int totalCreations = 0;
-            foreach (ExaminationChange change in _changes)
+            foreach (ExaminationChange change in changes)
             {
                 if (change.ChangeStatus == AppointmentStatus.CREATED)
                 {
@@ -37,10 +30,10 @@ namespace HealthInstitution.Core.Services.DoctorServices
             return totalCreations;
         }
 
-        private int GetEditingAttempts()
+        public int GetEditingAttempts(List<ExaminationChange> changes)
         {
             int totalChanges = 0;
-            foreach (ExaminationChange change in _changes)
+            foreach (ExaminationChange change in changes)
             {
                 if (change.ChangeStatus == AppointmentStatus.EDITED || change.ChangeStatus == AppointmentStatus.DELETED)
                 {

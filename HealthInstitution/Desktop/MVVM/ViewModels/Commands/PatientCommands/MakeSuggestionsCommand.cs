@@ -2,6 +2,7 @@
 using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.PatientViewModels;
+using HealthInstitution.Services;
 using System;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
@@ -10,6 +11,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
     {
 
         private readonly PatientAppointmentViewModel _viewModel;
+        private ISuggestAppointment _suggestionService;
 
         public MakeSuggestionsCommand(PatientAppointmentViewModel patientAppointmentViewModel)
         {
@@ -24,7 +26,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.PatientCommands
             DateTime deadlineDate = _viewModel.SuggestionDeadlineDate;
             DateTime startTime = _viewModel.SuggestionStartTime;
             DateTime endTime = _viewModel.SuggestionEndTime;
-            _viewModel.FillSuggestionsList(SuggestionsService.MakeSuggestions(patient, priority, doctor, deadlineDate, startTime, endTime));
+            ExaminationQuery query = new ExaminationQuery(patient, doctor, startTime, endTime, deadlineDate, priority);
+            _viewModel.FillSuggestionsList(_suggestionService.MakeSuggestions(query));
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using HealthInstitution.Core;
-using HealthInstitution.Core.Repositories;
-using HealthInstitution.Core.Repositories.References;
-using HealthInstitution.Core.Services;
+using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core.Repository;
+using HealthInstitution.Core.Services;
+using HealthInstitution.Core.Services.DoctorServices;
 using HealthInstitution.Core.Services.ValidationServices;
 using System;
 
@@ -12,16 +12,22 @@ namespace HealthInstitution.Services
     {
         private readonly IExaminationRelationsRepositoryService _examinationRelationsRepository;
         private readonly IExaminationChangeRepositoryService _examinationChangeRepository;
-
+        private readonly ITroll _trollingService;
 
         public PatientRescheduleExaminationService()
         {
             _examinationRelationsRepository = new ExaminationRelationsRepositoryService();
             _examinationChangeRepository = new ExaminationChangeRepositoryService();
+            _trollingService = new TrollingService();
         }
 
         public bool RescheduleExamination(Examination examination, DateTime dateTime)
         {
+            if (_trollingService.IsTrolling(examination.Patient))
+            {
+                throw new PatientBlockedException("System has blocked your account !");
+            }
+
             new PatientExaminationValidationService(examination, dateTime).ValidateAppointmentData();
 
             FindAvailableRoomService service = new FindAvailableRoomService();

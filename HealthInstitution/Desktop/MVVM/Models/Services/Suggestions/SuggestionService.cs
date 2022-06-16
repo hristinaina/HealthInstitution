@@ -1,61 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
+using HealthInstitution.Core;
+using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.DoctorServices;
 
-namespace HealthInstitution.Core.Services
+namespace HealthInstitution.Services
 {
-    public static class SuggestionsService
+    public class SuggestionsService : ISuggestAppointment, ISuggestAlternativeAppointment
     {
-
-        public static List<Examination> MakeSuggestions(Patient patient, SchedulingPriority priority, Doctor doctor, DateTime deadlineDate, DateTime startTime, DateTime endTime)
+        public List<Examination> MakeSuggestions(ExaminationQuery query)
         {
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = DateTime.Now;
             DateTime endDateTime = DateTime.Now;
-            startDateTime += ShiftDateTime(startTime, startDateTime);
-            endDateTime += ShiftDateTime(endTime, endDateTime);
-            PatientService patientService = new PatientService(patient);
-            DoctorService doctorService = new DoctorService(doctor);
+            startDateTime += ShiftDateTime(query.StartTime, startDateTime);
+            endDateTime += ShiftDateTime(query.EndTime, endDateTime);
+            PatientService patientService = new PatientService(query.Patient);
+            DoctorService doctorService = new DoctorService(query.Doctor);
 
-
-            while (startDateTime < deadlineDate)
+            while (startDateTime < query.DeadlineDate)
             {
                 if (startDateTime >= endDateTime)
                 {
-                    startDateTime += ShiftDateTime(startTime, startDateTime);
-                    endDateTime += ShiftDateTime(endTime, endDateTime);
+                    startDateTime += ShiftDateTime(query.StartTime, startDateTime);
+                    endDateTime += ShiftDateTime(query.EndTime, endDateTime);
                 }
                 while ((!patientService.IsAvailable(startDateTime) || !doctorService.IsAvailable(startDateTime)) && startDateTime < endDateTime)
                 {
-                    startDateTime = CheckInterruption(doctor, startDateTime);
-                    startDateTime = CheckInterruption(patient, startDateTime);
+                    startDateTime = CheckInterruption(query.Doctor, startDateTime);
+                    startDateTime = CheckInterruption(query.Patient, startDateTime);
                 }
 
                 if (startDateTime < endDateTime && patientService.IsAvailable(startDateTime) && doctorService.IsAvailable(startDateTime))
                 {
-                    suggestions.Add(new Examination(0, doctor, patient, startDateTime, null));
+                    suggestions.Add(new Examination(0, query.Doctor, query.Patient, startDateTime, null));
                     break;
                 }
             }
             if (suggestions.Count == 0)
             {
-                if (priority == SchedulingPriority.DOCTOR)
+                if (query.Priority == SchedulingPriority.DOCTOR)
                 {
-                    suggestions = MakeAlternativeSuggestions(patient, doctor);
+                    suggestions = MakeAlternativeSuggestions(query.Patient, query.Doctor);
                 }
                 else
                 {
                     startDateTime = DateTime.Now;
                     endDateTime = DateTime.Now;
-                    startDateTime += 2 * ShiftDateTime(startTime, startDateTime);
-                    endDateTime += 2 * ShiftDateTime(endTime, endDateTime);
-                    suggestions = MakeAlternativeSuggestions(patient, startDateTime, endDateTime, deadlineDate);
+                    startDateTime += 2 * ShiftDateTime(query.StartTime, startDateTime);
+                    endDateTime += 2 * ShiftDateTime(query.EndTime, endDateTime);
+                    suggestions = MakeAlternativeSuggestions(query.Patient, startDateTime, endDateTime, query.DeadlineDate);
                 }
             }
             return suggestions;
         }
 
-        private static List<Examination> MakeAlternativeSuggestions(Patient patient, Doctor doctor)
+        public List<Examination> MakeAlternativeSuggestions(Patient patient, Doctor doctor)
         {
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1);
@@ -75,7 +75,7 @@ namespace HealthInstitution.Core.Services
         }
 
 
-        private static List<Examination> MakeAlternativeSuggestions(Patient patient, DateTime startTime, DateTime endTime, DateTime deadlineDate)
+        public List<Examination> MakeAlternativeSuggestions(Patient patient, DateTime startTime, DateTime endTime, DateTime deadlineDate)
         {
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = DateTime.Now;
@@ -102,7 +102,7 @@ namespace HealthInstitution.Core.Services
         }
 
 
-        private static void AssignDoctor(Patient patient, DateTime startTime, List<Examination> suggestions, DateTime startDateTime)
+        public void AssignDoctor(Patient patient, DateTime startTime, List<Examination> suggestions, DateTime startDateTime)
         {
             foreach (Doctor doctor in Institution.Instance().DoctorRepository.GetGeneralPractitioners())
             {
@@ -114,7 +114,7 @@ namespace HealthInstitution.Core.Services
             }
         }
 
-        private static DateTime FixTimeInterruption(Appointment interrupting)
+        public DateTime FixTimeInterruption(Appointment interrupting)
         {
             DateTime startDateTime = interrupting.Date;
             int duration = 15;
@@ -127,7 +127,7 @@ namespace HealthInstitution.Core.Services
         }
 
 
-        private static DateTime CheckInterruption(User user, DateTime startDateTime)
+        public DateTime CheckInterruption(User user, DateTime startDateTime)
         {
             IUserAvailability availability;
             if (user is Patient patient)
@@ -147,7 +147,7 @@ namespace HealthInstitution.Core.Services
             return startDateTime;
         }
 
-        private static TimeSpan ShiftDateTime(DateTime startTime, DateTime startDateTime)
+        public TimeSpan ShiftDateTime(DateTime startTime, DateTime startDateTime)
         {
             return new TimeSpan(1, startTime.Hour - startDateTime.Hour, startTime.Minute - startDateTime.Minute, 0);
         }
