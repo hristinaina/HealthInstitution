@@ -24,6 +24,10 @@ namespace HealthInstitution.Core
             foreach (Doctor doctor in _doctors.Doctors)
             {
                 Dictionary<string, List<double>> score = _surveyResults.GetResults(doctor);
+                if (double.IsNaN(score["Service"][0]))
+                {
+                    continue;
+                }
                 for (int i = 0; i < 3; i++)
                 {
                     if (bestDoctors[i] is null)
@@ -53,6 +57,10 @@ namespace HealthInstitution.Core
             foreach (Doctor doctor in _doctors.Doctors)
             {
                 Dictionary<string, List<double>> score = _surveyResults.GetResults(doctor);
+                if (double.IsNaN(score["Service"][0]))
+                {
+                    continue;
+                }
                 for (int i = 0; i < 3; i++)
                 {
                     if (worstDoctors[i] is null)

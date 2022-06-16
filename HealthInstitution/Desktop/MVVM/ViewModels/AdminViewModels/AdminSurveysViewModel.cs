@@ -119,6 +119,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             DoctorRankingService service = new DoctorRankingService();
             foreach (Tuple<Doctor, double> doctor in service.GetWorst())
             {
+                if (doctor is null) continue;
                 _worstDoctors.Add(new SurveyResultListItemViewModel(doctor.Item1.FirstName + " " + doctor.Item1.LastName, new List<double>() { doctor.Item2 }));
             }
         }
@@ -130,6 +131,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             DoctorRankingService service = new DoctorRankingService();
             foreach (Tuple<Doctor, double> doctor in service.GetBest())
             {
+                if (doctor is null) continue;
                 _bestDoctors.Add(new SurveyResultListItemViewModel(doctor.Item1.FirstName + " " + doctor.Item1.LastName, new List<double>() {doctor.Item2}));
             }
         }
