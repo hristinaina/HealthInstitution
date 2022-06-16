@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class MedicineRepository
+    public class MedicineRepository : BaseRepository, IMedicineRepository
     {
-        private readonly string _fileName;
         private List<Medicine> _medicines;
 
         public List<Medicine> Medicines { get => _medicines; }
@@ -16,12 +15,12 @@ namespace HealthInstitution.Core.Repositories
             _medicines = new List<Medicine>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _medicines = FileService.Deserialize<Medicine>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Medicine>(_fileName, _medicines);
         }
@@ -71,6 +70,11 @@ namespace HealthInstitution.Core.Repositories
             _medicines.Add(newMedicine);
 
             return newMedicine;
+        }
+
+        public List<Medicine> GetMedicines()
+        {
+            return _medicines;
         }
     }
 }

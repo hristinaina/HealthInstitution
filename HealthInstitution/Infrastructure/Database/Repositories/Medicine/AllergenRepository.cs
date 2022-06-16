@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core;
-using HealthInstitution.Core.Services;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class AllergenRepository
+    public class AllergenRepository : BaseRepository, IAllergenRepository
     {
-        private readonly string _fileName;
         private List<Allergen> _allergens;
         public List<Allergen> Allergens { get => _allergens; }
 
@@ -22,12 +16,12 @@ namespace HealthInstitution.Core.Repositories
             _allergens = new List<Allergen>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _allergens = FileService.Deserialize<Allergen>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Allergen>(_fileName, _allergens);
         }
@@ -82,17 +76,11 @@ namespace HealthInstitution.Core.Repositories
 
         public void ChangeName(Allergen allergen, string name)
         {
-            AllergenService a = new AllergenService(allergen);
-            if (!a.IsNameAvailable(name)) throw new NameNotAvailableException("Name already taken");
-
             allergen.Name = name;
         }
 
         public Allergen AddNewAllergen(Allergen allergen)
         {
-            AllergenService a = new AllergenService(allergen);
-            if (!a.IsNameAvailable(allergen.Name)) throw new NameNotAvailableException("Name already in use!");
-            
             allergen.ID = GetID();
             _allergens.Add(allergen);
             return allergen;
@@ -100,10 +88,12 @@ namespace HealthInstitution.Core.Repositories
 
         public void DeleteAllergen(Allergen allergen)
         {
-            AllergenService a = new AllergenService(allergen);
-            if (!a.isDeletable()) throw new IngredientInUseException("Ingredient in use!");
-
             _allergens.Remove(allergen);
+        }
+
+        public List<Allergen> GetAllergens()
+        {
+            return _allergens;
         }
     }
 }

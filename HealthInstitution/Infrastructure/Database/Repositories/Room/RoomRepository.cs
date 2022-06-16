@@ -1,20 +1,15 @@
-﻿using HealthInstitution.Core;
-using HealthInstitution.Core.Services;
+﻿using HealthInstitution.Core.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HealthInstitution.Core.Exceptions;
-using HealthInstitution.Core.Services.Rooms;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class RoomRepository
+    public class RoomRepository : BaseRepository, IRoomRepository
     {
-        private readonly string _roomsfileName;
-        private readonly string _deletedRoomsfileName;
-        private readonly string _futureRoomsfileName;
+        private readonly string _deletedRoomsFileName;
+        private readonly string _futureRoomsFileName;
 
         private List<Room> _rooms;
         private List<Room> _deletedRooms;
@@ -24,26 +19,26 @@ namespace HealthInstitution.Core.Repositories
         public List<Room> DeletedRooms { get => _deletedRooms; set => _deletedRooms = value; }
         public List<Room> FutureRooms { get => _futureRooms; set => _futureRooms = value; }
 
-        public RoomRepository(string roomsFileName, string futureRoomsfileName, string deletedRoomsfileName)
+        public RoomRepository(string roomsFileName, string futureRoomsFileName, string deletedRoomsFileName)
         {
-            _roomsfileName = roomsFileName;
-            _futureRoomsfileName = futureRoomsfileName;
-            _deletedRoomsfileName = deletedRoomsfileName;
+            _fileName = roomsFileName;
+            _futureRoomsFileName = futureRoomsFileName;
+            _deletedRoomsFileName = deletedRoomsFileName;
             _rooms = new List<Room>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
-            _rooms = FileService.Deserialize<Room>(_roomsfileName);
-            _deletedRooms = FileService.Deserialize<Room>(_deletedRoomsfileName);
-            _futureRooms = FileService.Deserialize<Room>(_futureRoomsfileName);
+            _rooms = FileService.Deserialize<Room>(_fileName);
+            _deletedRooms = FileService.Deserialize<Room>(_deletedRoomsFileName);
+            _futureRooms = FileService.Deserialize<Room>(_futureRoomsFileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
-            FileService.Serialize<Room>(_roomsfileName, _rooms);
-            FileService.Serialize<Room>(_deletedRoomsfileName, _deletedRooms);
-            FileService.Serialize<Room>(_futureRoomsfileName, _futureRooms);
+            FileService.Serialize<Room>(_fileName, _rooms);
+            FileService.Serialize<Room>(_deletedRoomsFileName, _deletedRooms);
+            FileService.Serialize<Room>(_futureRoomsFileName, _futureRooms);
         }
 
         public Room FindById(int id)
@@ -96,7 +91,7 @@ namespace HealthInstitution.Core.Repositories
             return true;
         }
 
-        public int GetID()
+        public int GetNewID()
         {
             int i = 1;
             while (true)
@@ -120,7 +115,7 @@ namespace HealthInstitution.Core.Repositories
                 throw new RoomNumberAlreadyTakenException("Room number already taken");
             }
 
-            room.ID = GetID();
+            room.ID = GetNewID();
 
             if (!future) 
             { 
@@ -135,11 +130,26 @@ namespace HealthInstitution.Core.Repositories
 
         public void DeleteRoom(Room r)
         {
-            RoomService room = new RoomService(r);
-            if (!room.IsChangeable()) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
-            room.ReturnEquipmentToWarehouse(DateTime.Today);
+            RoomService service = new RoomService();
+            if (!service.IsChangeable(r)) throw new RoomCannotBeChangedException("Room cannot be deleted, because it has scheduled appointments");
+            service.ReturnEquipmentToWarehouse(DateTime.Today, r);
             _rooms.Remove(r);
             _deletedRooms.Add(r);
+        }
+
+        public List<Room> GetCurrentRooms()
+        {
+            return _rooms;
+        }
+
+        public List<Room> GetDeletedRooms()
+        {
+            return _deletedRooms;
+        }
+
+        public List<Room> GetFutureRooms()
+        {
+            return _futureRooms;
         }
     }
 }

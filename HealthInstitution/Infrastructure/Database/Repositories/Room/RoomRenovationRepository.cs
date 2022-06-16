@@ -1,20 +1,16 @@
 ﻿using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Infrastructure.Database.Repositories
 {
-    public class RoomRenovationRepository
+    public class RoomRenovationRepository : BaseRepository, IRoomRenovationRepository
     {
-        private readonly string _fileName;
-        
+
         private List<RoomRenovation> _roomsUnderRenovation;
 
-        public List<RoomRenovation> RoomsUnderRenovations { get => _roomsUnderRenovation; set => _roomsUnderRenovation = value; }
+        public List<RoomRenovation> RoomsUnderRenovation { get => _roomsUnderRenovation; set => _roomsUnderRenovation = value; }
 
         public RoomRenovationRepository(string fileName)
         {
@@ -22,15 +18,24 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             _roomsUnderRenovation = new List<RoomRenovation>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _roomsUnderRenovation = FileService.Deserialize<RoomRenovation>(_fileName);
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<RoomRenovation>(_fileName, _roomsUnderRenovation);
         }
 
+        public List<RoomRenovation> GetRooms()
+        {
+            return _roomsUnderRenovation;
+        }
+
+        public void SetRooms(List<RoomRenovation> rooms)
+        {
+            _roomsUnderRenovation = rooms;
+        }
     }
 }

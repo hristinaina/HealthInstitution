@@ -3,12 +3,12 @@ using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 using System;
 using System.Collections.Generic;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Infrastructure.Database.Repositories
 {
-    public class RenovationRepository
+    public class RenovationRepository : BaseRepository, IRenovationRepository
     {
-        private readonly string _fileName;
         private List<Renovation> _renovations;
 
         public List<Renovation> Renovations { get => _renovations; }
@@ -19,13 +19,13 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             _renovations = new List<Renovation>();
         }
 
-        public void LoadFromFile()
+        public override void LoadFromFile()
         {
             _renovations = FileService.Deserialize<Renovation>(_fileName);
 
         }
 
-        public void SaveToFile()
+        public override void SaveToFile()
         {
             FileService.Serialize<Renovation>(_fileName, _renovations);
         }
@@ -56,6 +56,10 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
             return new Renovation(GetID(), startDate, endDate);
         }
 
+        public List<Renovation> GetRenovations()
+        {
+            return _renovations;
+        }
 
         private bool CheckID(int id)
         {
@@ -75,6 +79,5 @@ namespace HealthInstitution.Infrastructure.Database.Repositories
                 i++;
             }
         }
-
     }
 }
