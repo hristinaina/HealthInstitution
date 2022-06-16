@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Equipments;
 
 namespace HealthInstitution.Core.Services
 {
     public class RoomService
     {
-
+        private IRoomRepositoryService _rooms;
         public RoomService()
         {
+            _rooms = new RoomRepositoryService();
         }
 
         public bool IsChangeable(Room room)
@@ -73,7 +75,7 @@ namespace HealthInstitution.Core.Services
         {
             if (newName is null || newName.Equals("")) throw new EmptyNameException("Room name cannot be empty");
             else if (newNumber == 0) throw new ZeroRoomNumberException("Room number cannot be 0");
-            else if (!Institution.Instance().RoomRepository.CheckNumber(newNumber, new List<int> { room.Number })) throw new RoomNumberAlreadyTakenException("Room number already taken");
+            else if (!_rooms.CheckNumber(newNumber, new List<int> { room.Number })) throw new RoomNumberAlreadyTakenException("Room number already taken");
             else if (newType != room.Type && !IsChangeable(room)) throw new RoomCannotBeChangedException("Room cannot be changed, because it has scheduled appointments");
             room.Name = newName;
             room.Number = newNumber;

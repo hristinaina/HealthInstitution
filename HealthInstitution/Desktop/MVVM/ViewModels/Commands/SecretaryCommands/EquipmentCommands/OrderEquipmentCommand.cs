@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.EquipmentCommands
@@ -26,10 +27,12 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Equipment
             bool validation = ValidateData();
             if (!validation) return;
 
-            Equipment equipment = Institution.Instance().EquipmentRepository.FindById(int.Parse(_viewModel.SelectedEquipment.Id));
+            IEquipmentRepositoryService equipmentRepository = new EquipmentRepositoryService();
+            Equipment equipment = equipmentRepository.FindByID(int.Parse(_viewModel.SelectedEquipment.Id));
             int quantity = int.Parse(_viewModel.Quantity);
 
-            Institution.Instance().EquipmentOrderRepository.CreateOrder(equipment, quantity);
+            IEquipmentOrderRepositoryService equipmentOrderRepository = new EquipmentOrderRepositoryService();
+            equipmentOrderRepository.CreateOrder(equipment, quantity);
             MessageBox.Show("Equipment has been successfully ordered!");
             _viewModel.DialogOpen = false;
 

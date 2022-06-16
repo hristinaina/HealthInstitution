@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
 {
@@ -26,7 +27,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
             {
                 _model.DialogOpen = false;
 
-                Institution.Instance().RoomRepository.DeleteRoom(_model.SelectedRoom.Room);
+                IRoomRepositoryService roomRepository = new RoomRepositoryService();
+                roomRepository.DeleteRoom(_model.SelectedRoom.Room);
 
                 _model.FillRoomList();
             } catch (RoomCannotBeChangedException e)

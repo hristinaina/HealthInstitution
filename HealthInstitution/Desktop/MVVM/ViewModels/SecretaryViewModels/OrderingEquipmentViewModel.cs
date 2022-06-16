@@ -48,13 +48,16 @@ namespace HealthInstitution.MVVM.ViewModels.SecretaryViewModels
         {
             _equipment.Clear();
 
-            IEquipmentRepositoryService service = new EquipmentRepositoryService();
-            List<Equipment> equipment = service.GetEquipment();
+            IEquipmentRepositoryService equipmentRepository = new EquipmentRepositoryService();
+            List<Equipment> equipment = equipmentRepository.GetEquipment();
+
+            IEquipmentOrderRepositoryService orderRepository = new EquipmentOrderRepositoryService();
+
             foreach (Equipment e in equipment)
             {
                 if (e.Quantity == 0)
                 {
-                    string status = Institution.Instance().EquipmentOrderRepository.CheckIfOrdered(e);
+                    string status = orderRepository.CheckIfOrdered(e);
                     _equipment.Add(new MissingEquipmentItemViewModel(e, status));
                 }
             }

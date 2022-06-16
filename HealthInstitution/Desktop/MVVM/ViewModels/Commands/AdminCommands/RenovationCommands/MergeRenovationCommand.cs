@@ -47,22 +47,24 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             {
                 try
                 {
-                    Renovation renovation = Institution.Instance().RenovationRepository.Create(_model.StartDate, _model.EndDate);
+                    IRoomRepositoryService roomRepository = new RoomRepositoryService();
+                    IRenovationRepositoryService renovationRepository = new RenovationRepositoryService();
+
+                    Renovation renovation = renovationRepository.Create(_model.StartDate, _model.EndDate);
                     
                     List<Room> roomsUnderRenovation = new List<Room> { _model.FirstSelectedRoom, _model.SecondSelectedRoom };
 
                     List<int> numbersForIgnoring = new List<int> { _model.FirstSelectedRoom.Number, _model.SecondSelectedRoom.Number };
 
                     Room room = new Room(_model.NewRoomName, _model.NewRoomNumber, (RoomType)_model.NewRoomType);
-                    Room resultingRoom = Institution.Instance().RoomRepository.AddRoom(room, true, numbersForIgnoring);
+                    Room resultingRoom = roomRepository.AddRoom(room, true, numbersForIgnoring);
                     
                     List<Room> result = new List<Room> { resultingRoom };
 
                     renovation.RoomsUnderRenovation = roomsUnderRenovation;
                     renovation.Result = result;
 
-                    IRenovationRepositoryService renovations = new RenovationRepositoryService();
-                    renovations.GetRenovations().Add(renovation);
+                    renovationRepository.GetRenovations().Add(renovation);
                 
                     _model.FirstSelectedRoom.Renovations.Add(renovation);
                     _model.SecondSelectedRoom.Renovations.Add(renovation);

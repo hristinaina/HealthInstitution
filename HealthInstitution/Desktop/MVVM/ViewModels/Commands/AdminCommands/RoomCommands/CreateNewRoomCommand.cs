@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
 {
@@ -27,7 +28,8 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands
             try
             {
                 Room r = new Room(_model.NewRoomName, _model.NewRoomNumber, (RoomType)_model.NewRoomType);
-                Institution.Instance().RoomRepository.AddRoom(r);
+                IRoomRepositoryService roomRepository = new RoomRepositoryService();
+                roomRepository.AddRoom(r);
                 _model.DialogOpen = false;
                 _model.FillRoomList();
                 _model.NewRoomNumber = 0;

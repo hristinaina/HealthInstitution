@@ -11,10 +11,12 @@ namespace HealthInstitution.Core.Services.Equipments
     public class EquipmentService
     {
         private EquipmentArrangementRepository _arrangements;
+        private IRoomRepositoryService _rooms;
 
         public EquipmentService()
         {
             _arrangements = Institution.Instance().EquipmentArragmentRepository;
+            _rooms = new RoomRepositoryService();
         }
 
         public void ArrangeInRoom(Room r, int quantity, Equipment equipment)
@@ -33,7 +35,7 @@ namespace HealthInstitution.Core.Services.Equipments
 
         public void ReturnToWarehouse(DateTime date, Room room, Equipment equipment)
         {
-            Room warehouse = Institution.Instance().RoomRepository.FindById(0);
+            Room warehouse = _rooms.FindById(0);
 
             IEquipmentArrangementRepositoryService service = new EquipmentArrangementRepositoryService();
             EquipmentArrangement destinationRoomArrangement = service.FindFirstBefore(room, equipment, date);

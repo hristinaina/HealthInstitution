@@ -45,27 +45,29 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             {
                 try
                 {
-                    Renovation renovation = Institution.Instance().RenovationRepository.Create(_model.StartDate, _model.EndDate);
+                    IRenovationRepositoryService renovationsService = new RenovationRepositoryService();
+                    Renovation renovation = renovationsService.Create(_model.StartDate, _model.EndDate);
 
-                    int id = Institution.Instance().RoomRepository.GetNewID();
+                    IRoomRepositoryService roomService = new RoomRepositoryService();
+
+                    int id = roomService.GetNewID();
                     List<Room> roomUnderRenovation = new List<Room> { _model.SelectedRoom};
 
                     Room firstRoom = new Room(_model.FirstNewRoomName, _model.FirstNewRoomNumber,
                         (RoomType)_model.FirstNewRoomType);
-                    Room firstResultingRoom = Institution.Instance().RoomRepository.AddRoom(firstRoom, true, new List<int> { _model.SelectedRoom.Number });
+                    Room firstResultingRoom = roomService.AddRoom(firstRoom, true, new List<int> { _model.SelectedRoom.Number });
 
                     Room secondRoom = new Room(_model.SecondNewRoomName, _model.SecondNewRoomNumber,
                         (RoomType)_model.SecondNewRoomType);
-                    Room secondResultingRoom = Institution.Instance().RoomRepository.AddRoom(secondRoom, true, new List<int> { _model.SelectedRoom.Number });
+                    Room secondResultingRoom = roomService.AddRoom(secondRoom, true, new List<int> { _model.SelectedRoom.Number });
                 
 
                     List<Room> result = new List<Room> { firstResultingRoom, secondResultingRoom };
 
                     renovation.Result = result;
                     renovation.RoomsUnderRenovation = roomUnderRenovation;
-                    
-                    IRenovationRepositoryService renovations = new RenovationRepositoryService();
-                    renovations.GetRenovations().Add(renovation);
+
+                    renovationsService.GetRenovations().Add(renovation);
 
                     _model.SelectedRoom.Renovations.Add(renovation);
 

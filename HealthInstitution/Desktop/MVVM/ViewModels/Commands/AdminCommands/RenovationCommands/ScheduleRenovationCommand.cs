@@ -38,17 +38,18 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCom
             {
                 try
                 {
-                
+                    IRenovationRepositoryService renovationRepository = new RenovationRepositoryService();
+
                     List<Room> roomUnderRenovation = new List<Room> { _model.NewRenovationRoom };
-                    Renovation renovation = Institution.Instance().RenovationRepository.Create(_model.NewRenovationStartDate, _model.NewRenovationEndDate);
+                    Renovation renovation = renovationRepository.Create(_model.NewRenovationStartDate, _model.NewRenovationEndDate);
 
                     renovation.RoomsUnderRenovation = roomUnderRenovation;
                     renovation.Result = roomUnderRenovation;
 
                     _model.NewRenovationRoom.Renovations.Add(renovation);
 
-                    IRenovationRepositoryService renovations = new RenovationRepositoryService();
-                    renovations.GetRenovations().Add(renovation);
+                
+                    renovationRepository.GetRenovations().Add(renovation);
 
                     IRoomRenovationRepositoryService roomRenovations = new RoomRenovationRepositoryService();
 
