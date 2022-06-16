@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using HealthInstitution.Core;
+using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Services.DoctorServices;
 
-namespace HealthInstitution.Core.Services
+namespace HealthInstitution.Services
 {
-    public class SuggestionsService : ISuggestAppointment
+    public class SuggestionsService : ISuggestAppointment, ISuggestAlternativeAppointment
     {
-
         public List<Examination> MakeSuggestions(ExaminationQuery query)
         {
             List<Examination> suggestions = new List<Examination>();
@@ -16,7 +17,6 @@ namespace HealthInstitution.Core.Services
             endDateTime += ShiftDateTime(query.EndTime, endDateTime);
             PatientService patientService = new PatientService(query.Patient);
             DoctorService doctorService = new DoctorService(query.Doctor);
-
 
             while (startDateTime < query.DeadlineDate)
             {
@@ -55,7 +55,7 @@ namespace HealthInstitution.Core.Services
             return suggestions;
         }
 
-        private List<Examination> MakeAlternativeSuggestions(Patient patient, Doctor doctor)
+        public List<Examination> MakeAlternativeSuggestions(Patient patient, Doctor doctor)
         {
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1);
@@ -75,7 +75,7 @@ namespace HealthInstitution.Core.Services
         }
 
 
-        private List<Examination> MakeAlternativeSuggestions(Patient patient, DateTime startTime, DateTime endTime, DateTime deadlineDate)
+        public List<Examination> MakeAlternativeSuggestions(Patient patient, DateTime startTime, DateTime endTime, DateTime deadlineDate)
         {
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = DateTime.Now;
@@ -102,7 +102,7 @@ namespace HealthInstitution.Core.Services
         }
 
 
-        private void AssignDoctor(Patient patient, DateTime startTime, List<Examination> suggestions, DateTime startDateTime)
+        public void AssignDoctor(Patient patient, DateTime startTime, List<Examination> suggestions, DateTime startDateTime)
         {
             foreach (Doctor doctor in Institution.Instance().DoctorRepository.GetGeneralPractitioners())
             {
@@ -114,7 +114,7 @@ namespace HealthInstitution.Core.Services
             }
         }
 
-        private DateTime FixTimeInterruption(Appointment interrupting)
+        public DateTime FixTimeInterruption(Appointment interrupting)
         {
             DateTime startDateTime = interrupting.Date;
             int duration = 15;
@@ -127,7 +127,7 @@ namespace HealthInstitution.Core.Services
         }
 
 
-        private DateTime CheckInterruption(User user, DateTime startDateTime)
+        public DateTime CheckInterruption(User user, DateTime startDateTime)
         {
             IUserAvailability availability;
             if (user is Patient patient)
@@ -147,7 +147,7 @@ namespace HealthInstitution.Core.Services
             return startDateTime;
         }
 
-        private TimeSpan ShiftDateTime(DateTime startTime, DateTime startDateTime)
+        public TimeSpan ShiftDateTime(DateTime startTime, DateTime startDateTime)
         {
             return new TimeSpan(1, startTime.Hour - startDateTime.Hour, startTime.Minute - startDateTime.Minute, 0);
         }

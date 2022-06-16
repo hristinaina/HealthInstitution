@@ -6,11 +6,10 @@ namespace HealthInstitution.Services
 {
     public interface ISuggestAppointment
     {
-        public List<Examination> MakeSuggestions(ExaminationQuery query;
-        protected DateTime FixTimeInterruption(Appointment interrupting);
-        protected DateTime CheckInterruption(User user, DateTime startDateTime);
-        protected DateTime FixTimeInterruption(Appointment interrupting);
-
+        public List<Examination> MakeSuggestions(ExaminationQuery query);
+        public DateTime FixTimeInterruption(Appointment interrupting);
+        public DateTime CheckInterruption(User user, DateTime startDateTime);
+        public TimeSpan ShiftDateTime(DateTime startTime, DateTime startDateTime);
 
     }
 }
