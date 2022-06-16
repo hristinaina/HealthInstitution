@@ -1,14 +1,10 @@
 ﻿using HealthInstitution.Core;
-using HealthInstitution.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using HealthInstitution.MVVM.ViewModels.Commands.AdminCommands.RenovationCommands;
-using HealthInstitution.Core;
 
 namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
 {

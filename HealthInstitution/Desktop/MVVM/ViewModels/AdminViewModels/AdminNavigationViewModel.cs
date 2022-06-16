@@ -16,6 +16,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
         public ICommand Equipment { get; }
         public ICommand Renovation { get; }
         public ICommand Medicine { get; }
+        public ICommand Survey { get; }
 
         public ICommand LogOut { get; }
 
@@ -25,6 +26,7 @@ namespace HealthInstitution.MVVM.ViewModels.AdminViewModels
             Equipment = new AdminEquipmentCommand();
             Renovation = new AdminRenovationCommand();
             Medicine = new AdminMedicineCommand();
+            Survey = new AdminSurveyCommand();
 
             LogOut = new LogOutCommand();
         }

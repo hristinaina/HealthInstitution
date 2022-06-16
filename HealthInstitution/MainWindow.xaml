@@ -14,6 +14,7 @@
         xmlns:viewmodelsSecretary="clr-namespace:HealthInstitution.MVVM.ViewModels.SecretaryViewModels"
         xmlns:viewsSecretary="clr-namespace:HealthInstitution.MVVM.Views.SecretaryViews"
         xmlns:viewmodelsDoctor="clr-namespace:HealthInstitution.MVVM.ViewModels.DoctorViewModels"
+        xmlns:adminViews="clr-namespace:HealthInstitution.Desktop.MVVM.Views.AdminViews"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="NMK"
@@ -107,6 +108,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminDivideComplexRenovationViewModel}">
                 <viewsadmin:AdminDivideComplexRenovation />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodelsAdmin:AdminSurveysViewModel}">
+                <adminViews:AdminSurveysView />
             </DataTemplate>
         </Grid.Resources>
         <!--<viewsadmin:Medicine></viewsadmin:Medicine>-->
