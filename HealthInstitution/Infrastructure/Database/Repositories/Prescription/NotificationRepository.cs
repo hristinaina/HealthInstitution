@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class NotificationRepository : BaseRepository
+    public class NotificationRepository : BaseRepository, INotificationRepository
     {
         private List<Notification> _notifications;
         public List<Notification> Notifications { get => _notifications; }

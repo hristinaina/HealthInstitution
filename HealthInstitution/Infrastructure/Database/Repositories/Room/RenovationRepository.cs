@@ -3,10 +3,11 @@ using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 using System;
 using System.Collections.Generic;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Infrastructure.Database.Repositories
 {
-    public class RenovationRepository : BaseRepository
+    public class RenovationRepository : BaseRepository, IRenovationRepository
     {
         private List<Renovation> _renovations;
 

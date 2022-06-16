@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class PrescriptionRepository : BaseRepository
+    public class PrescriptionRepository : BaseRepository, IPrescriptionRepository
     {
         private List<Prescription> _prescriptions;
 

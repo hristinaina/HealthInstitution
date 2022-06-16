@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories.References
 {
-    public class MedicineAllergenRepository : BaseRepository
+    public class MedicineAllergenRepository : BaseRepository, IMedicineAllergenRepository
     {
         private List<MedicineAllergen> _allergensInMedicine;
 

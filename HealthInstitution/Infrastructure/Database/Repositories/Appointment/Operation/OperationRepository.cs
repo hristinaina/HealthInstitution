@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class OperationRepository : BaseRepository
+    public class OperationRepository : BaseRepository, IOperationRepository
     {
 
         private List<Operation> _operations;

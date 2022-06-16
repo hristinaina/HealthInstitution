@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class DayOffRepository : BaseRepository
+    public class DayOffRepository : BaseRepository, IDayOffRepository
     {
         private List<DayOff> _daysOff;
 

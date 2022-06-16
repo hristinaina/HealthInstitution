@@ -1,9 +1,10 @@
 ﻿using HealthInstitution.Core.Services;
 using System.Collections.Generic;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class OperationReferencesRepository : BaseRepository
+    public class OperationReferencesRepository : BaseRepository, IOperationReferencesRepository
     {
         private List<OperationReference> _references;
 

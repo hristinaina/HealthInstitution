@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.Core.Services;
 using HealthInstitution.Core.Exceptions;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Repositories.References
 {
-    public class PatientAllergenRepository : BaseRepository
+    public class PatientAllergenRepository : BaseRepository, IPatientAllergenRepository
     {
         private List<PatientAllergen> _references;
 

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using HealthInstitution.Core.Exceptions;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class PendingMedicineRepository : BaseRepository
+    public class PendingMedicineRepository : BaseRepository, IPendingMedicineRepository
     {
         private List<PendingMedicine> _pendingMedicines;
         public List<PendingMedicine> PendingMedicines { get => _pendingMedicines; }

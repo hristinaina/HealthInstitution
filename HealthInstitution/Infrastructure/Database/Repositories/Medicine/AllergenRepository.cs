@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class AllergenRepository : BaseRepository
+    public class AllergenRepository : BaseRepository, IAllergenRepository
     {
         private List<Allergen> _allergens;
         public List<Allergen> Allergens { get => _allergens; }

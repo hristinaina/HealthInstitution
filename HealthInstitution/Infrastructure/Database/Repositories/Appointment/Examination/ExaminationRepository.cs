@@ -5,7 +5,7 @@ using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core
 {
-    public class ExaminationRepository : BaseRepository
+    public class ExaminationRepository : BaseRepository, IExaminationRepository
     {
         private List<Examination> _examinations;
 

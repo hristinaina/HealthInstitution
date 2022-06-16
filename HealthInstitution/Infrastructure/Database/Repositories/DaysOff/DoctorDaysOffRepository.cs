@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class DoctorDaysOffRepository : BaseRepository
+    public class DoctorDaysOffRepository : BaseRepository, IDoctorDaysOffRepository
     {
         private List<DoctorDaysOff> _references;
 

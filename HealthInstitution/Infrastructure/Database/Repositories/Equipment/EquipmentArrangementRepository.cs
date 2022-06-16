@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 
 
 namespace HealthInstitution.Infrastructure.Database.Repositories
 {
-    public class EquipmentArrangementRepository : BaseRepository
+    public class EquipmentArrangementRepository : BaseRepository, IEquipmentArrangementRepository
     {
         private List<EquipmentArrangement> _validArrangement;
 

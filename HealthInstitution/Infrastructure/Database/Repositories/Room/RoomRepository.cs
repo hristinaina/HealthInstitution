@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using HealthInstitution.Core.Exceptions;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.Rooms;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class RoomRepository : BaseRepository
+    public class RoomRepository : BaseRepository, IRoomRepository
     {
         private readonly string _deletedRoomsFileName;
         private readonly string _futureRoomsFileName;

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.Core;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Repositories
 {
-    public class DoctorRepository : BaseRepository
+    public class DoctorRepository : BaseRepository, IDoctorRepository
     {
         private List<Doctor> _doctors;
 
@@ -24,6 +25,7 @@ namespace HealthInstitution.Repositories
         {
             FileService.Serialize<Doctor>(_fileName, _doctors);
         }
+
         public Doctor FindByID(int id)
         {
             foreach(Doctor doctor in _doctors)
@@ -32,6 +34,7 @@ namespace HealthInstitution.Repositories
             }
             return null;
         }
+
         public List<Doctor> GetGeneralPractitioners()
         {
             List<Doctor> generalPractitioners = new();

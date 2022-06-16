@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services;
 
 namespace HealthInstitution.Core.Repositories
 {
-    public class ReviewRepository : BaseRepository
+    public class ReviewRepository : BaseRepository, IReviewRepository
     {
         private List<HospitalReview> _reviews;
         public List<HospitalReview> Reviews { get => _reviews; }

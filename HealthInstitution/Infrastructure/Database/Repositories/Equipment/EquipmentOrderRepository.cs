@@ -2,10 +2,11 @@
 using HealthInstitution.Core.Services;
 using System;
 using System.Collections.Generic;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Infrastructure.Database.Repositories
 {
-    public class EquipmentOrderRepository : BaseRepository
+    public class EquipmentOrderRepository : BaseRepository, IEquipmentOrderRepository
     {
         private List<EquipmentOrder> _orders;
 

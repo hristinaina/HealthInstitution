@@ -1,9 +1,10 @@
 ﻿using HealthInstitution.Core.Services;
 using System.Collections.Generic;
+using HealthInstitution.Core.Repository;
 
 namespace HealthInstitution.Core.Repositories.References
 {
-    public class ReferralRepository : BaseRepository
+    public class ReferralRepository : BaseRepository, IReferralRepository
     {
         private List<Referral> _references;
 

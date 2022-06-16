@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace HealthInstitution.Core.Repositories.References
 {
-    public class ExaminationChangeRepository : BaseRepository
+    public class ExaminationChangeRepository : BaseRepository, IExaminationChangeRepository
     {
         private List<ExaminationChange> _references;
 
@@ -79,16 +79,6 @@ namespace HealthInstitution.Core.Repositories.References
                 if (e.ID == id) return false;
             }
             return true;
-        }
-
-        public int NewID()
-        {
-            int i = 1;
-            while (true)
-            {
-                if (CheckID(i)) return i;
-                i++;
-            }
         }
 
         public void RemoveByAppointmentId(int appointmentId)
