@@ -1,4 +1,5 @@
 ﻿using HealthInstitution.Core;
+using HealthInstitution.Core.UseCases.PatientServices;
 using HealthInstitution.Desktop.MVVM.Models.Services.Appointment;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Core.Services.PatientServices
 {
-    public class PatientAppointmentsService
+    public class PatientAppointmentsService : IPatientAppointmentsService
     {
         private List<Examination> _examinations;
         private List<Operation> _operations;

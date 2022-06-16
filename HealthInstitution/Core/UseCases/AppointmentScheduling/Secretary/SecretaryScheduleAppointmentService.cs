@@ -7,10 +7,11 @@ using HealthInstitution.Core.Repositories.References;
 using HealthInstitution.Core.Repository;
 using HealthInstitution.Core.Services.DoctorServices;
 using HealthInstitution.Core.Services;
+using HealthInstitution.Core.UseCases.AppointmentScheduling.Secretary;
 
 namespace HealthInstitution.Core.Services
 {
-    public class SecretaryScheduleAppointmentService
+    public class SecretaryScheduleAppointmentService : ISecretaryScheduleAppointmentService
     {
         private readonly IExaminationRepositoryService _examinationRepository;
         private readonly IOperationRepositoryService _operationRepository;
