@@ -55,7 +55,7 @@ namespace HealthInstitution.Services
             return suggestions;
         }
 
-        public List<Examination> MakeAlternativeSuggestions(Patient patient, Doctor doctor)
+        public List<Examination> MakeAlternativeSuggestions(Patient patient, Core.Doctor doctor)
         {
             List<Examination> suggestions = new List<Examination>();
             DateTime startDateTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1);
@@ -104,7 +104,7 @@ namespace HealthInstitution.Services
 
         public void AssignDoctor(Patient patient, DateTime startTime, List<Examination> suggestions, DateTime startDateTime)
         {
-            foreach (Doctor doctor in Institution.Instance().DoctorRepository.GetGeneralPractitioners())
+            foreach (Core.Doctor doctor in Institution.Instance().DoctorRepository.GetGeneralPractitioners())
             {
                 DoctorService doctorService = new DoctorService(doctor);
                 if (doctorService.IsAvailable(startTime))
@@ -136,7 +136,7 @@ namespace HealthInstitution.Services
             }
             else
             {
-                Doctor doctor = (Doctor)user;
+                Core.Doctor doctor = (Core.Doctor)user;
                 availability = new DoctorService(doctor);
             }
             if (availability.IsAvailable(startDateTime))
