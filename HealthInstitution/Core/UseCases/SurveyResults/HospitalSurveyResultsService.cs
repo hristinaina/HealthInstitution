@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using HealthInstitution.Core.Reposirory;
-using HealthInstitution.Core.Repositories;
 
 namespace HealthInstitution.Core.Services.SurveyResults
 {
-    public class HospitalSurveyResultsService
+    public class HospitalSurveyResultsService : IHospitalSurveyResultsService
     {
         private IReviewRepositoryService _reviews;
 
