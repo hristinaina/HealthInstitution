@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthInstitution.Desktop.MVVM.Models.Services.Appointment
 {
-    class AppointmentService
+    public class AppointmentService
     {
         public bool IsDone(DateTime date)
         {
