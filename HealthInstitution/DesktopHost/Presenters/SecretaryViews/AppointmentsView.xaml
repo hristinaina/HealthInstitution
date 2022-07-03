@@ -147,8 +147,6 @@
                                         Width="300"
                                         ToolTip="Create emergency appointment"
                                         Content="Create emergency appointment"
-                                        Background="#CC80DEEA"
-                                        BorderBrush="#6680DEEA"
                                         Height="32"
                                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                         VerticalAlignment="Top"
