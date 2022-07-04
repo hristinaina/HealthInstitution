@@ -38,17 +38,17 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             catch (PatientBlockedException e)
             {
                 _viewModel.ShowMessage(e.Message, logOut: true);
-                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _viewModel.ShowMessage(e.Message);
                 return;
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _viewModel.ShowMessage(e.Message);
                 return;
             }
 
             _service.RemoveReferral(_viewModel.SelectedReferralId);
-            MessageBox.Show("Appointment successfully scheduled !");
+            _viewModel.ShowMessage("Appointment successfully scheduled !");
 
             _viewModel.FillReferralsList();
         }

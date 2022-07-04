@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using HealthInstitution.Commands;
-using HealthInstitution.Core.Exceptions;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Services;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 using HealthInstitution.Stores;
 using HealthInstitution.Core.Repository;
+using System.Windows;
 
 namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.AppointmentCommands
 {

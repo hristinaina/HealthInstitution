@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.Core;
 using HealthInstitution.Core.Repository;
@@ -33,7 +28,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Equipment
 
             IEquipmentOrderRepositoryService equipmentOrderRepository = new EquipmentOrderRepositoryService();
             equipmentOrderRepository.CreateOrder(equipment, quantity);
-            MessageBox.Show("Equipment has been successfully ordered!");
+            _viewModel.ShowMessage("Equipment has been successfully ordered!");
             _viewModel.DialogOpen = false;
 
             _viewModel.FillEquipmentList();
@@ -43,14 +38,14 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Equipment
         {
             if (_viewModel.SelectedEquipment == null)
             {
-                MessageBox.Show("Please select equipment!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _viewModel.ShowMessage("Please select equipment!");
                 return false;
             }
 
             bool isQuantityInt = Int32.TryParse(_viewModel.Quantity, out int quantity);
             if (!isQuantityInt)
             {
-                MessageBox.Show("Quantity must be a number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _viewModel.ShowMessage("Quantity must be a number!");
                 return false;
             }
 

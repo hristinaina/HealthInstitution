@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.Core;
@@ -37,7 +33,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
                 newHeight, newWeight);
             _viewModel.FillPatientList();
 
-            MessageBox.Show("Successfully created patient account!");
+            _viewModel.ShowMessage("Successfully created patient account!");
             _viewModel.DialogOpen = false;
         }
 

@@ -43,7 +43,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
                 bool created = _service.CreateEmergencyAppointment(_viewModel.SelectedSpecialization, _viewModel.SelectedPatient);
                 if (created)
                 {
-                    MessageBox.Show("Appointment has been successfully created!");
+                    _viewModel.ShowMessage("Appointment has been successfully created!");
                     _service.NotifyDoctor();
                     return;
                 }
@@ -51,12 +51,11 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             catch (Exception e)
             {
                 _viewModel.ShowMessage(e.Message);
-                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             // if appointment hasn't been created
-            MessageBox.Show("Please wait few seconds for the system to find appointments that could be postponed.");
+            _viewModel.ShowMessage("Please wait few seconds for the system to find appointments that could be postponed.");
             _navigationStore.CurrentViewModel = new EmergencyAppointmentViewModel(_viewModel);
         }
 
@@ -64,13 +63,13 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
         {
             if (_viewModel.SelectedPatient == null)
             {
-                MessageBox.Show("Please select a patient!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _viewModel.ShowMessage("Please select a patient!");
                 return false;
             }
             bool isDurationInt = Int32.TryParse(_viewModel.SelectedDuration, out _newDuration);
             if (!isDurationInt || _newDuration < 15)
             {
-                MessageBox.Show("Duration must be a number > 15", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _viewModel.ShowMessage("Duration must be a number > 15");
                 return false;
             }
             return true;

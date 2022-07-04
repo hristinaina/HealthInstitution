@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using HealthInstitution.Commands;
 using HealthInstitution.Core.Services;
-using HealthInstitution.Core.Services.Equipments;
 using HealthInstitution.Desktop.MVVM.Models.Services.Equipments;
 using HealthInstitution.MVVM.ViewModels.SecretaryViewModels;
 
@@ -29,7 +25,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Equipment
                 DateTime newArrangementStartDate = DateTime.Now.AddHours(-1);
                 IEquipmentRearrangementService service = new EquipmentRearrangementService();
                 service.Rearrange(_model.SelectedEquipment.Room, _model.NewArrangementTargetRoom, newArrangementStartDate, _model.NewArrangementQuantity, _model.SelectedEquipment.Equipment);
-                
+               
                 _model.DialogOpen = false;
                 _model.FillEquipmentArrangementList();
 
@@ -40,7 +36,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Equipment
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _model.ShowMessage(e.Message);
             }
         }
     }

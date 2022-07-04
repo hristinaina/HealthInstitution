@@ -28,7 +28,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
         public override void Execute(object parameter)
         {
             string message = _service.ApproveChange(_viewModel.SelectedRequestId);
-            if (message != null) MessageBox.Show(message);
+            if (message != null) _viewModel.ShowMessage(message);
             _viewModel.FillRequestsList();
         }
     }
