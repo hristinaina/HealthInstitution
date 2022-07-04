@@ -27,7 +27,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
         public override void Execute(object parameter)
         {
             _viewModel.DialogOpen = false;
-            MessageBox.Show("The request has been accepted! Notification sent to doctor.");
+            _viewModel.ShowMessage("The request has been accepted! Notification sent to doctor.");
             _service.AcceptRequest(_viewModel.SelectedRequest.ID);
             _viewModel.FillRequestsList();
         }

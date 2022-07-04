@@ -26,7 +26,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands.Appointme
             bool prerequisitesFulfilled = true;
             if (_viewModel.SearchPhrase is null)
             {
-                MessageBox.Show("You need to enter the phrase for search", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _viewModel.ShowMessage("You need to enter the phrase for search");
                 prerequisitesFulfilled = false;
             }
             return prerequisitesFulfilled;

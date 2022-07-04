@@ -23,10 +23,19 @@
         </Grid.ColumnDefinitions>
 
         <components:SecretaryNavigationRail SelectedIndex="2"></components:SecretaryNavigationRail>
+        <components:NotificationSnackbar Grid.Column="1"
+                                         Panel.ZIndex="2"
+                                         Margin="0,50,0,50"
+                                         Grid.Row="5"
+                                         NotificationHeight="20"
+                                         VerticalAlignment="Bottom"
+                                         Content="{Binding Message}"
+                                         IsActive="{Binding MessageVisibility}" />
         <materialDesign:Card Grid.Column="1">
             <materialDesign:DialogHost DialogTheme="Inherit"
                                        Grid.Column="0"
                                        Grid.Row="0">
+                
                 <materialDesign:Card>
                     <Grid>
                         <Grid.ColumnDefinitions>
