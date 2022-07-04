@@ -41,7 +41,7 @@ namespace HealthInstitution.MVVM.ViewModels.Commands.SecretaryCommands
                 height, weight);
             _viewModel.FillPatientList();
 
-            MessageBox.Show("Successfully changed patient data!");
+            _viewModel.ShowMessage("Successfully changed patient data!");
             _viewModel.DialogOpen = false;
         }
 
